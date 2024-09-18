@@ -409,7 +409,7 @@
 
 
           <h4 class="py-3 mb-4">
-            <span class="text-muted fw-light">Usuario /</span> Cuenta
+            <span class="text-muted fw-light">Usuario /</span><span class="text-muted fw-light">Mi Perfil /</span> Seguridad
           </h4>
           <div class="row">
             <!-- User Sidebar -->
@@ -419,10 +419,10 @@
                 <div class="card-body">
                   <div class="user-avatar-section">
                     <div class=" d-flex align-items-center flex-column">
-                      <img class="img-fluid rounded my-4" src="../../assets/img/avatars/10.png" height="110" width="110" alt="User avatar" />
+                      <img class="img-fluid rounded my-4" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" height="110" width="110" alt="User avatar" />
                       <div class="user-info text-center">
-                        <h4 class="mb-2">Hogar Mendoza</h4>
-                        <span class="badge bg-label-secondary">Hogar temporal</span>
+                        <h4 class="mb-2">Adolfo Contreras</h4>
+                        <span class="badge bg-label-secondary">Usuario</span>
                       </div>
                     </div>
                   </div>
@@ -430,47 +430,47 @@
                     <div class="d-flex align-items-start me-4 mt-3 gap-3">
                       <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-check bx-sm'></i></span>
                       <div>
-                        <h5 class="mb-0">1.23k</h5>
+                        <h5 class="mb-0">45</h5>
                         <span>Publicaciones</span>
                       </div>
                     </div>
                     <div class="d-flex align-items-start mt-3 gap-3">
                       <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-customize bx-sm'></i></span>
                       <div>
-                        <h5 class="mb-0">568</h5>
-                        <span>Eventos/Hogares</span>
+                        <h5 class="mb-0">12</h5>
+                        <span>Participaciones</span>
                       </div>
                     </div>
                   </div>
-                  <h5 class="pb-2 border-bottom mb-4">Detalles</h5>
+                  <h5 class="pb-2 border-bottom mb-4">Detalles de la cuenta</h5>
                   <div class="info-container">
                     <ul class="list-unstyled">
                       <li class="mb-3">
                         <span class="fw-medium me-2">Nombre de Usuario:</span>
-                        <span>violet.alberg</span>
+                        <span>adolfo.cont</span>
                       </li>
                       <li class="mb-3">
                         <span class="fw-medium me-2">Correo:</span>
-                        <span>vafgot@vultukir.org</span>
+                        <span>adolfito@gmail.com</span>
                       </li>
                       <li class="mb-3">
                         <span class="fw-medium me-2">Estado:</span>
                         <span class="badge bg-label-success">Activo</span>
                       </li>
                       <li class="mb-3">
-                        <span class="fw-medium me-2">Rol:</span>
-                        <span>Usuario final</span>
+                        <span class="fw-medium me-2">Cuenta activa desde: </span>
+                        <span>Setiembre 2019</span>
                       </li>
 
                       <li class="mb-3">
                         <span class="fw-medium me-2">Contacto:</span>
-                        <span>(123) 456-7890</span>
+                        <span>(01) 456-7890</span>
                       </li>
 
                     </ul>
 
                     <div class="d-flex justify-content-center pt-3">
-                      <a href="javascript:;" class="btn btn-label-danger suspend-user">Suspender</a>
+                      <a href="javascript:;" class="btn btn-label-instagram suspend-user">Editar</a>
                     </div>
 
                   </div>
@@ -489,23 +489,23 @@
               <!-- User Pills -->
               <!-- User Pills -->
               <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i>Cuenta</a></li>
+                <li class="nav-item"><a class="nav-link" href="ver-miperfil-usuario-detalles.html"><i class="bx bx-user me-1"></i>Cuenta</a></li>
+                <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
               </ul>
               <!--/ User Pills -->
               <!--/ User Pills -->
 
               <!-- Project table -->
               <div class="card mb-4">
-                <h5 class="card-header">Hogares Temporales: Refugio de Mendoza</h5>
                 <div class="card-body">
                   <form id="formChangePassword" method="GET" onsubmit="return false">
                     <div class="alert alert-warning" role="alert">
-                      <h6 class="alert-heading mb-1">Ensure that these requirements are met</h6>
-                      <span>Minimum 8 characters long, uppercase & symbol</span>
+                      <h6 class="alert-heading mb-1">Llene los siguientes campos</h6>
+                      <span>8 caracteres como minimo, incluya mayusculas, simbolos y numeros</span>
                     </div>
                     <div class="row">
                       <div class="mb-3 col-12 col-sm-6 form-password-toggle">
-                        <label class="form-label" for="newPassword">New Password</label>
+                        <label class="form-label" for="newPassword">Nueva Contraseña</label>
                         <div class="input-group input-group-merge">
                           <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                           <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
@@ -513,14 +513,14 @@
                       </div>
 
                       <div class="mb-3 col-12 col-sm-6 form-password-toggle">
-                        <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                        <label class="form-label" for="confirmPassword">Confirmar contraseña</label>
                         <div class="input-group input-group-merge">
                           <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                           <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                         </div>
                       </div>
                       <div>
-                        <button type="submit" class="btn btn-primary me-2">Change Password</button>
+                        <button type="submit" class="btn btn-primary me-2">Cambiar contraseña</button>
                       </div>
                     </div>
                   </form>
@@ -532,47 +532,47 @@
 
               <!-- Activity Timeline -->
               <div class="card mb-4">
-                <h5 class="card-header">Actividad del Hogar Temporal Mendoza</h5>
+                <h5 class="card-header">Actividad Reciente</h5>
                 <div class="card-body">
                   <ul class="timeline">
                     <li class="timeline-item timeline-item-transparent">
                       <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
                       <div class="timeline-event">
                         <div class="timeline-header mb-1">
-                          <h6 class="mb-0">5 animales han sido adoptados</h6>
-                          <small class="text-muted">Hace 12 min</small>
+                          <h6 class="mb-0">Rescate exitoso</h6>
+                          <small class="text-muted">Hace 15 min</small>
                         </div>
-                        <p class="mb-2">5 mascotas encontraron su hogar definitivo gracias al Hogar Mendoza.</p>
+                        <p class="mb-2">Se rescató un gatito atrapado en un árbol y se trasladó a un lugar seguro.</p>
                       </div>
                     </li>
                     <li class="timeline-item timeline-item-transparent">
                       <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
                       <div class="timeline-event">
                         <div class="timeline-header mb-1">
-                          <h6 class="mb-0">Evento caritativo</h6>
-                          <small class="text-muted">Hace 45 min</small>
+                          <h6 class="mb-0">Evento comunitario</h6>
+                          <small class="text-muted">Hace 1 hora</small>
                         </div>
-                        <p class="mb-2">Se realizó un evento para recaudar fondos destinados al bienestar de los animales.</p>
+                        <p class="mb-2">Participó en un evento de la comunidad para concientizar sobre la adopción de mascotas.</p>
                       </div>
                     </li>
                     <li class="timeline-item timeline-item-transparent">
                       <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
                       <div class="timeline-event">
                         <div class="timeline-header mb-1">
-                          <h6 class="mb-0">Ingreso de 3 nuevos animales</h6>
-                          <small class="text-muted">Hace 2 días</small>
+                          <h6 class="mb-0">Ingreso de animales rescatados</h6>
+                          <small class="text-muted">Hace 3 días</small>
                         </div>
-                        <p class="mb-2">Tres perros rescatados ingresaron al hogar temporal para recibir cuidados y encontrar un hogar permanente.</p>
+                        <p class="mb-2">Dos perros y un gato fueron rescatados y están recibiendo cuidados en el hogar temporal.</p>
                       </div>
                     </li>
                     <li class="timeline-item timeline-item-transparent">
                       <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-success"></span></span>
                       <div class="timeline-event">
                         <div class="timeline-header mb-1">
-                          <h6 class="mb-0">Revisión de salud</h6>
-                          <small class="text-muted">Hace 5 días</small>
+                          <h6 class="mb-0">Adopción confirmada</h6>
+                          <small class="text-muted">Hace 1 semana</small>
                         </div>
-                        <p class="mb-0">Se completó la revisión veterinaria semanal para garantizar el bienestar de los animales en el hogar.</p>
+                        <p class="mb-0">Se confirmó la adopción de 4 perros que encontraron un hogar amoroso.</p>
                       </div>
                     </li>
                     <li class="timeline-end-indicator">
@@ -581,8 +581,8 @@
                   </ul>
                 </div>
               </div>
-
               <!-- /Activity Timeline -->
+
 
             </div>
             <!--/ User Content -->
@@ -713,6 +713,4 @@
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-user-view-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:41 GMT -->
 </html>
-
-
 
