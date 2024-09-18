@@ -88,6 +88,7 @@
   <link rel="stylesheet" href="../..css/rtl/core.css" class="template-customizer-core-css" />
   <link rel="stylesheet" href="..css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
   <link rel="stylesheet" href="../../css/user.css" />
+  <link rel="stylesheet" href="../../assets/css/demo.css"/>
 
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
@@ -133,21 +134,18 @@
               <a class="nav-item nav-link" href="javascript:void(0)">Eventos</a>
               <a class="nav-item nav-link" href="javascript:void(0)">Servicios</a>
             </div>
+          </div>
 
+          <div class = "d-flex align-items-center" style = "position: relative; top: 0px; right: 0px" >
             <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-
-
-
-
-
               <!-- Notification -->
-              <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+              <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-2 me-xl-1">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                   <i class="bx bx-bell bx-sm"></i>
                   <span class="badge bg-danger rounded-pill badge-notifications">5</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end py-0">
+                <ul class="dropdown-menu dropdown-menu-end py-0" style = "overflow-y: auto">
+
                   <li class="dropdown-menu-header border-bottom">
                     <div class="dropdown-header d-flex align-items-center py-3">
                       <h5 class="text-body mb-0 me-auto">Notificaciones</h5>
@@ -387,8 +385,6 @@
                 </ul>
               </li>
               <!--/ User -->
-
-
             </ul>
           </div>
         </div>
@@ -530,58 +526,61 @@
 
               <!-- /Project table -->
 
-              <!-- Activity Timeline -->
+              <!-- Recent Devices -->
               <div class="card mb-4">
                 <h5 class="card-header">Actividad Reciente</h5>
-                <div class="card-body">
-                  <ul class="timeline">
-                    <li class="timeline-item timeline-item-transparent">
-                      <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
-                      <div class="timeline-event">
-                        <div class="timeline-header mb-1">
-                          <h6 class="mb-0">Rescate exitoso</h6>
-                          <small class="text-muted">Hace 15 min</small>
-                        </div>
-                        <p class="mb-2">Se rescató un gatito atrapado en un árbol y se trasladó a un lugar seguro.</p>
-                      </div>
-                    </li>
-                    <li class="timeline-item timeline-item-transparent">
-                      <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
-                      <div class="timeline-event">
-                        <div class="timeline-header mb-1">
-                          <h6 class="mb-0">Evento comunitario</h6>
-                          <small class="text-muted">Hace 1 hora</small>
-                        </div>
-                        <p class="mb-2">Participó en un evento de la comunidad para concientizar sobre la adopción de mascotas.</p>
-                      </div>
-                    </li>
-                    <li class="timeline-item timeline-item-transparent">
-                      <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
-                      <div class="timeline-event">
-                        <div class="timeline-header mb-1">
-                          <h6 class="mb-0">Ingreso de animales rescatados</h6>
-                          <small class="text-muted">Hace 3 días</small>
-                        </div>
-                        <p class="mb-2">Dos perros y un gato fueron rescatados y están recibiendo cuidados en el hogar temporal.</p>
-                      </div>
-                    </li>
-                    <li class="timeline-item timeline-item-transparent">
-                      <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-success"></span></span>
-                      <div class="timeline-event">
-                        <div class="timeline-header mb-1">
-                          <h6 class="mb-0">Adopción confirmada</h6>
-                          <small class="text-muted">Hace 1 semana</small>
-                        </div>
-                        <p class="mb-0">Se confirmó la adopción de 4 perros que encontraron un hogar amoroso.</p>
-                      </div>
-                    </li>
-                    <li class="timeline-end-indicator">
-                      <i class="bx bx-check-circle"></i>
-                    </li>
-                  </ul>
+                <div class="table-responsive">
+                  <table class="table border-top">
+                    <thead>
+                    <tr>
+                      <th class="text-truncate">Navegador</th>
+                      <th class="text-truncate">Dispositivo</th>
+                      <th class="text-truncate">Lugar</th>
+                      <th class="text-truncate">Actividad reciente</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td class="text-truncate"><i class='bx bxl-windows text-info me-3'></i> <span class="fw-medium">Chrome on Windows</span></td>
+                      <td class="text-truncate">HP Spectre 360</td>
+                      <td class="text-truncate">Suiza</td>
+                      <td class="text-truncate">10 de Julio 2021 20:07</td>
+                    </tr>
+                    <tr>
+                      <td class="text-truncate"><i class='bx bx-mobile-alt text-danger me-3'></i> <span class="fw-medium">Chrome on iPhone</span></td>
+                      <td class="text-truncate">iPhone 12x</td>
+                      <td class="text-truncate">Peru</td>
+                      <td class="text-truncate">13 de Julio 2021 10:10</td>
+                    </tr>
+                    <tr>
+                      <td class="text-truncate"><i class='bx bxl-android text-success me-3'></i> <span class="fw-medium">Chrome on Android</span></td>
+                      <td class="text-truncate">Oneplus 9 Pro</td>
+                      <td class="text-truncate">Peru</td>
+                      <td class="text-truncate">14 de Julio 2021 15:15</td>
+                    </tr>
+                    <tr>
+                      <td class="text-truncate"><i class='bx bxl-apple me-3'></i> <span class="fw-medium">Chrome on MacOS</span></td>
+                      <td class="text-truncate">Apple iMac</td>
+                      <td class="text-truncate">Peru</td>
+                      <td class="text-truncate">16 de Julio 2021 16:17</td>
+                    </tr>
+                    <tr>
+                      <td class="text-truncate"><i class='bx bxl-windows text-info me-3'></i> <span class="fw-medium">Chrome on Windows</span></td>
+                      <td class="text-truncate">HP Spectre 360</td>
+                      <td class="text-truncate">Peru</td>
+                      <td class="text-truncate">20 de Julio 2021 21:01</td>
+                    </tr>
+                    <tr class="border-transparent">
+                      <td class="text-truncate"><i class='bx bxl-android text-success me-3'></i> <span class="fw-medium">Chrome on Android</span></td>
+                      <td class="text-truncate">Oneplus 9 Pro</td>
+                      <td class="text-truncate">Peru</td>
+                      <td class="text-truncate">21 de Julio 2021 12:22</td>
+                    </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <!-- /Activity Timeline -->
+              <!--/ Recent Devices -->
 
 
             </div>
