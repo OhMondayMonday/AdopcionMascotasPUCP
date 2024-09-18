@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 
 
+
+
+
+
+
 <!-- =========================================================
-* Sneat - Bootstrap Dashboard PRO | v1.0.0
 * Sneat - Bootstrap Dashboard PRO | v1.0.0
 ==============================================================
 
@@ -16,7 +20,7 @@
 <!-- beautify ignore:start -->
 
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
@@ -24,7 +28,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Demo : eCommerce Add Product - Apps | Sneat - Bootstrap Dashboard PRO</title>
+  <title>Detalles publicación</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -105,12 +109,6 @@
       </div>
 
       <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-
-
-
-
-
         <!-- Notification -->
         <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
           <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
@@ -357,13 +355,10 @@
           </ul>
         </li>
         <!--/ User -->
-
-
       </ul>
     </div>
   </div>
 </nav>
-
 
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -372,254 +367,334 @@
 
   <div class="container-xxl flex-grow-1 container-p-y">
 
-    <h4 class="py-2 mb-0"><span class="text-muted fw-light">Usuario/</span> Mis publicaciones</h4>
+    <!-- /Select2 -->
 
-    <div class="card mb-0"></div>
-    <div class="card-header d-flex flex-wrap justify-content-between gap-3">
 
-      <!-- Select2 -->
-      <div class="col-12">
-        <div class="card mb-0" style="height: auto; padding: 5px;">
-          <div class="card-body d-flex align-items-center justify-content-center p-1">
-            <div class="row w-100">
-              <!-- Tipo de Publicacion -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de publicación</label>
-                <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                  <option value="AK">Todas</option>
-                  <option value="Adopcion">Adopción</option>
-                  <option value="Donaciones activas">Donaciones activas</option>
-                  <option value="Donaciones de dinero">Donaciones de dinero</option>
-                </select>
-              </div>
-              <!-- Palabra clave -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
-                <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
-              </div>
-              <!-- Fecha -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
-                <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                  <option value="Todas">Todas</option>
-                  <option value="Ultimas24Horas">Últimas 24 horas</option>
-                  <option value="UltimaSemana">Esta semana</option>
-                  <option value="UltimoMes">Este mes</option>
-                  <option value="UltimoAnio">Este año</option>
-                </select>
-              </div>
+    <div class="card g-3 mt-4">
+      <div class="card-body row g-3">
+        <div class="col-lg-8">
+          <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
+            <div class="me-1">
+              <h2 class="mb-2 text-black">¡Dale una oportunidad a Claudio!</h2>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="badge bg-label-info">Adopción</span>
+              <i class='bx bx-share-alt bx-sm mx-4 cursor-pointer'></i>
+              <i class='bx bx-bookmarks bx-sm cursor-pointer'></i>
             </div>
           </div>
-        </div>
-      </div>
+          <div class="card academy-content shadow-none border">
+            <div class="p-2">
+              <div class="cursor-pointer">
+                <img src="https://i.ibb.co/6YGggYv/claudio.png" class="w-100" alt="donacion">
+              </div>
+            </div>
 
-      <!-- Card Container -->
-      <div class="card mb-2" style="padding: 0; margin: 0;">
-        <div class="card-header d-flex flex-wrap justify-content-between gap-2">
-          <div class="btn-group">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Nueva publicacion
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="javascript:void(0);">Donaciones activos</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0);">Donaciones de dinero</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0);">Actualizaciones</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0);">Adopción</a></li>
-            </ul>
+            <!--
+            <div class="card-body">
+              <h5 class="mb-2">About this course</h5>
+              <p class="mb-0 pt-1">Learn web design in 1 hour with 25+ simple-to-use rules and guidelines — tons
+                of amazing web design resources included!</p>
+              <hr class="my-4">
+              <h5>By the numbers</h5>
+              <div class="d-flex flex-wrap">
+                <div class="me-5">
+                  <p class="text-nowrap"><i class='bx bx-check-double bx-sm me-2'></i>Skill level: All Levels</p>
+                  <p class="text-nowrap"><i class='bx bx-user bx-sm me-2'></i>Students: 38,815</p>
+                  <p class="text-nowrap"><i class='bx bxs-flag-alt bx-sm me-2'></i>Languages: English</p>
+                  <p class="text-nowrap "><i class='bx bx-file bx-sm me-2'></i>Captions: Yes</p>
+                </div>
+                <div>
+                  <p class="text-nowrap"><i class='bx bx-pencil bx-sm me-2'></i>Lectures: 19</p>
+                  <p class="text-nowrap "><i class='bx bxs-watch bx-sm me-2'></i>Video: 1.5 total hours</p>
+                </div>
+              </div>
+              <hr class="mb-4 mt-2">
+              <h5>Description</h5>
+              <p class="mb-4">
+                The material of this course is also covered in my other course about web design and development
+                with HTML5 & CSS3. Scroll to the bottom of this page to check out that course, too!
+                If you're already taking my other course, you already have all it takes to start designing beautiful
+                websites today!
+              </p>
+              <p class="mb-4">
+                "Best web design course: If you're interested in web design, but want more than
+                just a "how to use WordPress" course,I highly recommend this one." — Florian Giusti
+              </p>
+              <p> "Very helpful to us left-brained people: I am familiar with HTML, CSS, JQuery,
+                and Twitter Bootstrap, but I needed instruction in web design. This course gave me practical,
+                impactful techniques for making websites more beautiful and engaging." — Susan Darlene Cain
+              </p>
+              <hr class="my-4">
+              <h5>Instructor</h5>
+              <div class="d-flex justify-content-start align-items-center user-name">
+                <div class="avatar-wrapper">
+                  <div class="avatar avatar-sm me-2"><img src="../../assets/img/avatars/11.png" alt="Avatar" class="rounded-circle"></div>
+                </div>
+                <div class="d-flex flex-column">
+                  <span class="fw-medium">Devonne Wallbridge</span>
+                  <small class="text-muted">Web Developer, Designer, and Teacher</small>
+                </div>
+              </div>
+            </div>
+            -->
           </div>
         </div>
-        <div class="card-body p-0">
-          <div class="container-fluid">
-            <div class="row gx-1 gy-2 justify-content-center m-0">
-              <!-- Card 1 -->
-              <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                  <div class="rounded-2 text-center flex-grow-1">
-                    <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img7.jpg" alt="Imagen de publicación 1" style="height: 200px; object-fit: cover;"/>
-                    </a>
-                  </div>
-                  <div class="card-body p-2 d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Adopcion</span>
-                    </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Dale una oportunidad a Claudio!</a>
-                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Luego de un harto trabajo de recolección, estamos a 100 soles de cumplir el objetivo</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+
+        <div class="col-lg-4">
+
+          <h4 class="text-primary mt-2">Descripción</h4>
+          <p class="mb-4 text-dark">
+            Claudio es un Labrador Retriever encantador con un corazón tan grande como su tamaño. Este perrito
+            amigable y lleno de energía está buscando un hogar que le ofrezca amor y atención.
+          </p>
+          <p class="mb-4 text-dark">
+            Con su pelaje brillante y su actitud juguetona, Claudio es el compañero perfecto para cualquier familia
+            que busque un amigo leal y cariñoso.
+          </p>
+
+          <!-- Para más párrafos -->
+
+          <h4 class="text-primary">Más detalles</h4>
+          <div class="d-flex flex-wrap">
+            <div class="me-5">
+              <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;">Claudio</span></p>
+              <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;">Labrador Retriever</span></p>
+            </div>
+            <div>
+              <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;">6 años</span></p>
+              <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;">Macho</span></p>
+
+            </div>
+          </div>
+          <div class="text-center mt-5">
+            <h5 class="text-primary mt-1">Inscripcion realizada!</h5>
+          </div>
+          <div class="text-center mt-2">
+            <a href="ver-publicaciones-usuario.html" class="btn btn-label-info" style="font-size: large; font-weight: 60px; border-radius: 15px;">Regresar a publicaciones</a>
+          </div>
+          <!--
+          <div class="accordion stick-top accordion-bordered" id="courseContent">
+            <div class="accordion-item shadow-none border border-bottom-0 active mb-0">
+              <div class="accordion-header" id="headingOne">
+                <button type="button" class="accordion-button bg-lighter rounded-0" data-bs-toggle="collapse" data-bs-target="#chapterOne" aria-expanded="true" aria-controls="chapterOne">
+                  <span class="d-flex flex-column">
+                    <span class="h5 mb-1">Course Content</span>
+                    <span class="fw-normal">2 / 5 | 4.4 min</span>
+                  </span>
+                </button>
               </div>
-              <!-- Card 2 -->
-              <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                  <div class="rounded-2 text-center flex-grow-1">
-                    <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img16.jpg" alt="Imagen de publicación 2" style="height: 200px; object-fit: cover;"/>
-                    </a>
+              <div id="chapterOne" class="accordion-collapse collapse show" data-bs-parent="#courseContent">
+                <div class="accordion-body py-3 border-top">
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" />
+                    <label for="defaultCheck1" class="form-check-label ms-3">
+                      <span class="mb-0 h6">1. Welcome to this course</span>
+                      <span class="text-muted d-block">2.4 min</span>
+                    </label>
                   </div>
-                  <div class="card-body p-2 d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Adopcion</span>
-                    </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¿Buscas un compañero fiel?</a>
-                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                    </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defaultCheck2" checked="" />
+                    <label for="defaultCheck2" class="form-check-label ms-3">
+                      <span class="mb-0 h6">2. Watch before you start</span>
+                      <span class="text-muted d-block">4.8 min</span>
+                    </label>
                   </div>
-                </div>
-              </div>
-              <!-- Card 3 -->
-              <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                  <div class="rounded-2 text-center flex-grow-1">
-                    <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img11.jpg" alt="Imagen de publicación 3" style="height: 200px; object-fit: cover;"/>
-                    </a>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defaultCheck3" />
+                    <label for="defaultCheck3" class="form-check-label ms-3">
+                      <span class="mb-0 h6">3. Basic design theory</span>
+                      <span class="text-muted d-block">5.9 min</span>
+                    </label>
                   </div>
-                  <div class="card-body p-2 d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Donaciones de dinero</span>
-                    </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Cada dólar cuenta!</a>
-                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                    </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defaultCheck4" />
+                    <label for="defaultCheck4" class="form-check-label ms-3">
+                      <span class="mb-0 h6">4. Basic fundamentals</span>
+                      <span class="text-muted d-block">3.6 min</span>
+                    </label>
                   </div>
-                </div>
-              </div>
-              <!-- Card 4 -->
-              <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                  <div class="rounded-2 text-center flex-grow-1">
-                    <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img12.jpg" alt="Imagen de publicación 4" style="height: 200px; object-fit: cover;"/>
-                    </a>
-                  </div>
-                  <div class="card-body p-2 d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Donaciones de activos</span>
-                    </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Ayúdanos a llegar al objetivo</a>
-                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Card 5 -->
-              <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                  <div class="rounded-2 text-center flex-grow-1">
-                    <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img15.jpg" alt="Imagen de publicación 5" style="height: 200px; object-fit: cover;"/>
-                    </a>
-                  </div>
-                  <div class="card-body p-2 d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Donaciones de dinero</span>
-                    </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Vamos por la meta!</a>
-                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Card 6 -->
-              <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                  <div class="rounded-2 text-center flex-grow-1">
-                    <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img14.jpg" alt="Imagen de publicación 6" style="height: 200px; object-fit: cover;"/>
-                    </a>
-                  </div>
-                  <div class="card-body p-2 d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Donaciones de activos</span>
-                    </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Únete a la causa!</a>
-                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                      </a>
-                    </div>
+                  <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="defaultCheck5" />
+                    <label for="defaultCheck5" class="form-check-label ms-3">
+                      <span class="mb-0 h6">5. What is ui/ux</span>
+                      <span class="text-muted d-block">10.6 min</span>
+                    </label>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="accordion-item shadow-none border border-bottom-0 mb-0">
+              <div class="accordion-header" id="headingTwo">
+                <button type="button" class="bg-lighter rounded-0 accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chapterTwo" aria-expanded="false" aria-controls="chapterTwo">
+                  <span class="d-flex flex-column">
+                    <span class="h5 mb-1">Web Design for Web Developers</span>
+                    <span class="fw-normal">1 / 4 | 4.4 min</span>
+                  </span>
+                </button>
+              </div>
+              <div id="chapterTwo" class="accordion-collapse collapse" data-bs-parent="#courseContent">
+                <div class="accordion-body py-3 border-top">
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck1" checked="" />
+                    <label for="defCheck1" class="form-check-label ms-3">
+                      <span class="mb-0 h6">1. How to use Pages in Figma</span>
+                      <span class="text-muted d-block">8:31 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck2" />
+                    <label for="defCheck2" class="form-check-label ms-3">
+                      <span class="mb-0 h6">2. What is Lo Fi Wireframe</span>
+                      <span class="text-muted d-block">2 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck3" />
+                    <label for="defCheck3" class="form-check-label ms-3">
+                      <span class="mb-0 h6">3. How to use color in Figma</span>
+                      <span class="text-muted d-block">5.9 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="defCheck4" />
+                    <label for="defCheck4" class="form-check-label ms-3">
+                      <span class="mb-0 h6">4. Frames vs Groups in Figma</span>
+                      <span class="text-muted d-block">3.6 min</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item shadow-none border border-bottom-0 mb-0">
+              <div class="accordion-header" id="headingThree">
+                <button type="button" class="bg-lighter rounded-0 accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chapterThree" aria-expanded="false" aria-controls="chapterThree">
+                  <span class="d-flex flex-column">
+                    <span class="h5 mb-1">Build Beautiful Websites!</span>
+                    <span class="fw-normal">0 / 6 | 4.4 min</span>
+                  </span>
+                </button>
+              </div>
+              <div id="chapterThree" class="accordion-collapse collapse" data-bs-parent="#courseContent">
+                <div class="accordion-body py-3 border-top">
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck-01" />
+                    <label for="defCheck-01" class="form-check-label ms-3">
+                      <span class="mb-0 h6">1. Section & Div Block</span>
+                      <span class="text-muted d-block">8:31 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck-02" />
+                    <label for="defCheck-02" class="form-check-label ms-3">
+                      <span class="mb-0 h6">2. Read-Only Version of Chat App</span>
+                      <span class="text-muted d-block">8 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck-03" />
+                    <label for="defCheck-03" class="form-check-label ms-3">
+                      <span class="mb-0 h6">3. Webflow Autosave</span>
+                      <span class="text-muted d-block">2.9 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck-04" />
+                    <label for="defCheck-04" class="form-check-label ms-3">
+                      <span class="mb-0 h6">4. Canvas Settings</span>
+                      <span class="text-muted d-block">7.6 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck-05" />
+                    <label for="defCheck-05" class="form-check-label ms-3">
+                      <span class="mb-0 h6">5. HTML Tags</span>
+                      <span class="text-muted d-block">10 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="defCheck-06" />
+                    <label for="defCheck-06" class="form-check-label ms-3">
+                      <span class="mb-0 h6">6. Footer (Chat App)</span>
+                      <span class="text-muted d-block">9.10 min</span>
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item shadow-none border mb-0">
+              <div class="accordion-header" id="headingFour">
+                <button type="button" class="bg-lighter rounded-0 accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chapterFour" aria-expanded="false" aria-controls="chapterFour">
+                  <span class="d-flex flex-column">
+                    <span class="h5 mb-1">Final Project</span>
+                    <span class="fw-normal">2 / 3 | 4.4 min</span>
+                  </span>
+                </button>
+              </div>
+              <div id="chapterFour" class="accordion-collapse collapse" data-bs-parent="#courseContent">
+                <div class="accordion-body py-3 border-top">
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck-101" checked="" />
+                    <label for="defCheck-101" class="form-check-label ms-3">
+                      <span class="mb-0 h6">1. Responsive Blog Site</span>
+                      <span class="text-muted d-block">10:0 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck-102" checked="" />
+                    <label for="defCheck-102" class="form-check-label ms-3">
+                      <span class="mb-0 h6">2. Responsive Portfolio</span>
+                      <span class="text-muted d-block">13:00 min</span>
+                    </label>
+                  </div>
+                  <div class="form-check d-flex align-items-center mb-3">
+                    <input class="form-check-input" type="checkbox" id="defCheck-103" />
+                    <label for="defCheck-103" class="form-check-label ms-3">
+                      <span class="mb-0 h6">3. Responsive eCommerce Website</span>
+                      <span class="text-muted d-block">15 min</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <!-- Pagination -->
-        <div class="card-footer d-flex justify-content-center">
-          <ul class="pagination m-0">
-            <li class="page-item disabled">
-              <span class="page-link">Anterior</span>
-            </li>
-            <li class="page-item active">
-              <span class="page-link">1</span>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">Siguiente</a>
-            </li>
-          </ul>
-        </div>
+          -->
 
-
-        <div class="content-backdrop fade"></div>
+        </div>
       </div>
-      <!-- Content wrapper -->
     </div>
-    <!-- / Layout page -->
+
+    <!-- Footer -->
+    <!--
+   <footer class="footer" style="background-color: rgba(255, 91, 91, 0.256);">
+     <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+       <div>
+         <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/" target="_blank" class="footer-text fw-bold">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+       </div>
+       <div>
+         <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+         <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+         <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+       </div>
+     </div>
+   </footer> -->
+    <!-- / Footer -->
+
+    <div class="content-backdrop fade"></div>
   </div>
+  <!-- Content wrapper -->
+</div>
+<!-- / Layout page -->
+</div>
 
 
 
-  <!-- Overlay -->
-  <div class="layout-overlay layout-menu-toggle"></div>
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
 
 
-  <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+<!-- Drag Target Area To SlideIn Menu On Small Screens -->
 
 
 </div>
@@ -653,8 +728,6 @@
 
 
 </body>
-
-<!-- Footer -->
 <footer class="footer bg-footer-theme">
   <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
     <div>
@@ -668,8 +741,6 @@
     </div>
   </div>
 </footer>
-<!-- / Footer -->
-
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
 </html>
