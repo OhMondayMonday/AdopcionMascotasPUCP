@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+
+  
+<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-ecommerce-product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:07 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Crear Nueva Publicación | Donaciones Monetarias</title>
+
+    
+    <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
+    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/">
+    
+    
+    <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5DDHKGP');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <style>
+      .fondo{
+        background-color: #FFFCF5;
+      }
+    </style>
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+    
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" /> 
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
+
+    <!-- Page CSS -->
+    
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+    
+</head>
+
+<body class="fondo">
+
+  
+  <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+  
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-navbar-theme">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-ex-5">
+      <div class="navbar-nav me-auto">
+        <a class="nav-item nav-link" href="javascript:void(0)">Publicaciones</a>
+        <a class="nav-item nav-link" href="javascript:void(0)">Eventos</a>
+        <a class="nav-item nav-link" href="javascript:void(0)">Servicios</a>
+      </div>
+
+      <ul class="navbar-nav flex-row align-items-center ms-auto">
+          <!-- Notification -->
+          <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+              <i class="bx bx-bell bx-sm"></i>
+              <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end py-0">
+              <li class="dropdown-menu-header border-bottom">
+                <div class="dropdown-header d-flex align-items-center py-3">
+                  <h5 class="text-body mb-0 me-auto">Notificaciones</h5>
+                  <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="bx fs-4 bx-envelope-open"></i></a>
+                </div>
+              </li>
+              <li class="dropdown-notifications-list scrollable-container">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Congratulation Lettie 🎉</h6>
+                        <p class="mb-0">Won the monthly best seller gold badge</p>
+                        <small class="text-muted">1h ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Charles Franklin</h6>
+                        <p class="mb-0">Accepted your connection</p>
+                        <small class="text-muted">12hr ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">New Message ✉️</h6>
+                        <p class="mb-0">You have new message from Natalie</p>
+                        <small class="text-muted">1h ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Whoo! You have new order 🛒 </h6>
+                        <p class="mb-0">ACME Inc. made new order $1,154</p>
+                        <small class="text-muted">1 day ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Application has been approved 🚀 </h6>
+                        <p class="mb-0">Your ABC project application has been approved.</p>
+                        <small class="text-muted">2 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Monthly report is generated</h6>
+                        <p class="mb-0">July monthly financial report is generated </p>
+                        <small class="text-muted">3 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Send connection request</h6>
+                        <p class="mb-0">Peter sent you connection request</p>
+                        <small class="text-muted">4 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">New message from Jane</h6>
+                        <p class="mb-0">Your have new message from Jane</p>
+                        <small class="text-muted">5 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">CPU is running high</h6>
+                        <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
+                        <small class="text-muted">5 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown-menu-footer border-top p-3">
+                <button class="btn btn-primary text-uppercase w-100">Ver todas las notificaciones</button>
+              </li>
+            </ul>
+          </li>
+          <!--/ Notification -->
+          <!-- User -->
+          <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+              <div class="avatar avatar-online">
+                <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+              </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="pages-account-settings-account.html">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0 me-3">
+                      <div class="avatar avatar-online">
+                        <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                      <span class="fw-medium d-block"> Usuario </span>
+                      <small class="text-muted">Admin</small>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="pages-profile-user.html">
+                  <i class="bx bx-user me-2"></i>
+                  <span class="align-middle">Mi perfil</span>
+                </a>
+              </li>
+    
+              
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="pages-faq.html">
+                  <i class="bx bx-help-circle me-2"></i>
+                  <span class="align-middle">Preguntas frecuentes</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="pages-pricing.html">
+                  <i class="bx bx-dollar me-2"></i>
+                  <span class="align-middle">Donaciones</span>
+                </a>
+              </li>
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+                  <i class="bx bx-power-off me-2"></i>
+                  <span class="align-middle">Salir</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--/ User -->
+        </ul>
+    </div>
+  </div>
+</nav>
+<!-- / Navbar -->
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+
+<!-- Content -->
+        
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="py-3 mb-4">
+      <span class="text-muted fw-light">Publicaciones /</span><span> Crear Nueva Publicación</span><span> | Donaciones Monetarias</span>
+    </h4>
+    <div class="app-ecommerce">
+
+      <!-- Add Product -->
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+
+        <div class="d-flex flex-column justify-content-center">
+          <h4 class="mb-1 mt-3">Crear Nueva Publicación</h4>
+          <p class="text-muted">Rellena los campos abajo</p>
+        </div>
+        <div class="d-flex align-content-center flex-wrap gap-3">
+          <button class="btn btn-danger">Descartar</button>
+          <button type="submit" class="btn btn-primary">Publicar</button>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <!-- First column-->
+        <div class="col-12 col-lg-6">
+          <!-- Product Information -->
+          <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-tile mb-0">Donaciones Monetarias</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label class="form-label" for="ecommerce-product-name">Titulo</label>
+                  <input type="text" class="form-control" id="post-title" placeholder="Título de la publicación" name="productTitle" aria-label="Product title">
+                </div>
+                <div class="row mb-3">
+                  <div class="col"><label class="form-label" for="ecommerce-product-sku">Tipo</label>
+                    <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
+                      <option value="" disabled selected>Elija el tipo de publicación</option>
+                      <option value="crear-publicacion-albergue-normal.html">Normal</option>
+                      <option value="crear-publicacion-albergue-adopcion.html">Adopción</option>
+                      <option value="crear-publicacion-albergue-donacionesactivas.html" >Donaciones Activas</option>
+                      <option value="crear-publicacion-albergue-donacionesmonetarias.html" selected>Donaciones Monetarias</option>   
+                    </select>
+                  </div>  
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Etiquetas</label>
+                    <input type="text" class="form-control" id="post-tags" placeholder="Ingrese las Etiquetas aquí" name="productBarcode" aria-label="Product barcode">
+                  </div>
+                </div>
+              <!-- Description -->
+                <div>
+                  <label class="form-label">Descripción <span class="text-muted"></span></label>
+                  <div class="form-control p-0 pt-1">
+                    <div class="comment-toolbar border-0 border-bottom">
+                      <div class="d-flex justify-content-start">
+                        <span class="ql-formats me-0">
+                            <button class="ql-bold"></button>
+                            <button class="ql-italic"></button>
+                            <button class="ql-underline"></button>
+                            <button class="ql-list" value="ordered"></button>
+                            <button class="ql-list" value="bullet"></button>
+                            <button class="ql-link"></button>
+                            <button class="ql-image"></button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="comment-editor border-0 pb-0" id="ecommerce-category-description">
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div> 
+        </div>
+        <!-- Third-->
+        <div class="col-12 col-lg-6">
+          <!-- /Second column -->
+          <div class="col-12 col-lg-12">
+            <!-- Media -->
+            <div class="card mb-1">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 card-title">Imagen</h5>
+                <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
+                </div>
+                <div class="card-body">
+                  <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                    <div class="dz-message needsclick my-5">
+                      <p class="fs-4 note needsclick my-2">Arrastra una imagen o Examinar en el dispositivo</p>
+                    </div>
+                    <div class="fallback">
+                      <input name="file" type="image" accept="image/*"/>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+        <!-- Product Information -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="card-tile mb-0">Datos del Evento</h5>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-name">Nombre del Albergue</label>
+                  <input type="text" required class="form-control" id="shelter-name" placeholder="Nombre del Albergue" name="productTitle" aria-label="Product title">
+                </div>
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-name">Fecha Programada</label>
+                  <input type="datetime-local" required class="form-control" id="date" placeholder="Indique la fecha del Evento" name="productTitle" aria-label="Product title">                  </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Tipos de Mascota</label>
+                    <input type="text" class="form-control" id="pet-type" placeholder="Indique los tipos de la mascota" name="productBarcode" aria-label="Product barcode">
+                  </div>
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Teléfono de Contacto</label>
+                    <input type="text" class="form-control" id="contact-number" placeholder="Indique el Teléfono de Contacto" name="productBarcode" aria-label="Product barcode">
+                  </div>
+              </div>
+              <div class="col-12 col-lg-12">
+                <label class="form-label" for="ecommerce-product-barcode">Monto Objetivo</label>
+                <input type="text" class="form-control" id="contact-number" placeholder="Indique el Monto Total Objetivo" name="productBarcode" aria-label="Product barcode">
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>  
+    </div>
+  </div>  
+</div>  
+  <!-- Core JS -->
+  <!-- build:js assets/vendor/js/core.js -->
+  
+  <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../../assets/vendor/js/bootstrap.js"></script>
+  <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+  <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+  <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+  <script src="../../assets/vendor/js/menu.js"></script>
+  
+  <!-- endbuild -->
+
+<!-- Vendors JS -->
+<script src="../../assets/vendor/libs/quill/katex.js"></script>
+<script src="../../assets/vendor/libs/quill/quill.js"></script>
+<script src="../../assets/vendor/libs/select2/select2.js"></script>
+<script src="../../assets/vendor/libs/dropzone/dropzone.js"></script>
+<script src="../../assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+<script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="../../assets/vendor/libs/tagify/tagify.js"></script>
+
+  <!-- Main JS -->
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    function cambiarPagina() {
+        var select = document.getElementById("opciones");
+        var opcionSeleccionada = select.value;
+
+        if (opcionSeleccionada) {
+            // Cambia la página según la opción seleccionada
+            window.location.href = opcionSeleccionada;
+        }
+    }
+  </script>
+  <!-- Footer -->
+<footer class="footer bg-footer-theme">
+  <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+    <div>
+      <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+
+    </div>
+    <div>
+      <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+      <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+      <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+    </div>
+  </div>
+</footer>
+<!-- / Footer -->
+
+  <!-- Page JS -->
+  <script src="../../assets/js/app-ecommerce-product-add.js"></script>
+  
+</body>
+
+
+<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-ecommerce-product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:10 GMT -->
+</html>
+
+<!-- beautify ignore:end -->
