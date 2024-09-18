@@ -91,7 +91,7 @@
 
 <!-- Navbar -->
 
-<nav class="navbar navbar-expand-lg" style="background-color: #cbe5ef">
+<nav class="navbar navbar-expand-lg" style="background-color: #ffc7c2">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
       <span class="navbar-toggler-icon"></span>
@@ -99,10 +99,10 @@
 
     <div class="collapse navbar-collapse" id="navbar-ex-5">
       <div class="navbar-nav me-auto">
-        <a class="nav-item nav-link" href="ver-inicio-usuario.html">Inicio</a>
-        <a class="nav-item nav-link" href="ver-publicaciones-usuario.html">Publicaciones</a>
-        <a class="nav-item nav-link" href="ver-loseventos-usuario.html">Eventos</a>
-        <a class="nav-item nav-link" href="ver-hogarestemporales-albergue.html">Hogares temporales</a>
+        <a class="nav-item nav-link" href="ver-inicio-usuario.html" style="color: black;">Inicio</a>
+        <a class="nav-item nav-link" href="ver-publicaciones-usuario.html" style="color: black;">Publicaciones</a>
+        <a class="nav-item nav-link" href="ver-loseventos-usuario.html" style="color: black;">Eventos</a>
+        <a class="nav-item nav-link" href="ver-hogarestemporales-albergue.html" style="color: black;">Hogares temporales</a>
       </div>
 
       <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -115,7 +115,7 @@
         <!-- Notification -->
         <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
           <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            <i class="bx bx-bell bx-sm"></i>
+            <i class="bx bx-bell bx-sm" style="color: black;"></i>
             <span class="badge bg-danger rounded-pill badge-notifications">5</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end py-0">
@@ -314,8 +314,8 @@
                     </div>
                   </div>
                   <div class="flex-grow-1">
-                    <span class="fw-medium d-block"> Adolfo </span>
-                    <small class="text-muted">Usuario</small>
+                    <span class="fw-medium d-block"> Huellas </span>
+                    <small class="text-muted">Albergue</small>
                   </div>
                 </div>
               </a>
@@ -366,6 +366,7 @@
 </nav>
 
 
+
 <!-- Content wrapper -->
 <div class="content-wrapper">
 
@@ -373,7 +374,7 @@
 
   <div class="container-xxl flex-grow-1 container-p-y">
 
-    <h4 class="py-2 mb-0"><span class="text-muted fw-light">Usuario/</span> Mis publicaciones</h4>
+    <h4 class="py-2 mb-0"><span class="text-muted fw-light">Usuario/</span>Ver publicaciones</h4>
 
     <div class="card mb-0"></div>
     <div class="card-header d-flex flex-wrap justify-content-between gap-3">
@@ -446,12 +447,12 @@
                     </div>
                     <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Dale una oportunidad a Claudio!</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Luego de un harto trabajo de recolección, estamos a 100 soles de cumplir el objetivo</p>
-                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
+                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
+                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -471,12 +472,12 @@
                     </div>
                     <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¿Buscas un compañero fiel?</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
+                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
+                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -496,12 +497,12 @@
                     </div>
                     <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Cada dólar cuenta!</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
+                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
+                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -521,12 +522,12 @@
                     </div>
                     <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Ayúdanos a llegar al objetivo</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
+                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
+                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -546,12 +547,12 @@
                     </div>
                     <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Vamos por la meta!</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
+                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
+                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -571,12 +572,12 @@
                     </div>
                     <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Únete a la causa!</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
+                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                        <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
+                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
