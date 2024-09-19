@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Crear Nueva Publicación</title>
+    <title>Editar Publicación | Donaciones Activas</title>
 
     
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -78,6 +78,7 @@
   <!-- End Google Tag Manager (noscript) -->
   
   
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg" style="background-color: #ffc7c2">
   <div class="container-fluid">
@@ -352,116 +353,138 @@
     </div>
   </div>
 </nav>
-    
+<!-- / Navbar -->
+
+<!-- Content wrapper -->
 <div class="content-wrapper">
 
 <!-- Content -->
-       
-<div class="container-xxl flex-grow-1 container-p-y">
-            
-            
+        
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="py-3 mb-4">
+      <span class="text-muted fw-light">Mis Publicaciones /</span><span> Editar Publicación</span><span> | Donaciones Activas</span>
+    </h4>
+    <div class="app-ecommerce">
 
-<h4 class="py-3 mb-4">
-  <span class="text-muted fw-light">Publicaciones /</span><span> Crear Nueva Publicación</span>
-</h4>
+      <!-- Add Product -->
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
-<div class="app-ecommerce">
+        <div class="d-flex flex-column justify-content-center">
+          <h4 class="mb-1 mt-3">Editar Publicación</h4>
+          <p class="text-muted">Rellena los campos abajo</p>
+        </div>
+        <div class="d-flex align-content-center flex-wrap gap-3">
+          <button class="btn btn-primary">Finalizar Evento</button>
+          <button class="btn btn-danger">Eliminar Publicación</button>
+          <button class="btn btn-secondary">Descartar Cambios</button>
+          <button type="submit" class="btn btn-primary">Confirmar Cambios</button>
+        </div>
 
-  <!-- Add Product -->
-  <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+      </div>
 
-    <div class="d-flex flex-column justify-content-center">
-      <h4 class="mb-1 mt-3">Crear Nueva Publicación</h4>
-      <p class="text-muted">Rellena los campos abajo</p>
-    </div>
-    <div class="d-flex align-content-center flex-wrap gap-3">
-      <button class="btn btn-danger">Descartar</button>
-      <button type="submit" class="btn btn-primary">Publicar</button>
-    </div>
-
-  </div>
-  <div class="container">
-  <div class="row">
-    <!-- First column-->
-    <div class="col-12 col-lg-6">
+      <div class="row">
+        <!-- First column-->
+        <div class="col-12 col-lg-6">
           <!-- Product Information -->
           <div class="card mb-4">
-            <div class="card-header">
-              <h5 class="card-tile mb-0">Publicación</h5>
-            </div>
-            <div class="card-body">
-              <div class="mb-3">
+              <div class="card-header">
+                <h5 class="card-tile mb-0">Donaciones Activas</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
                   <label class="form-label" for="ecommerce-product-name">Titulo</label>
                   <input type="text" class="form-control" id="post-title" placeholder="Título de la publicación" name="productTitle" aria-label="Product title">
-              </div>
-              <div class="row mb-3">
-                    <div class="col">
-                      <label class="form-label" for="ecommerce-product-sku">Tipo</label>
-                      <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
-                          <option value="" disabled selected>Elija el tipo de publicación</option>
-                          <option value="crear-publicacion-albergue-normal.html" selected>Normal</option>
-                          <option value="crear-publicacion-albergue-adopcion.html">Adopción</option>
-                          <option value="crear-publicacion-albergue-donacionesactivas.html">Donaciones Activas</option>
-                          <option value="crear-publicacion-albergue-donacionesmonetarias.html">Donaciones Monetarias</option>        
-                      </select>
-                    </div>
-                    <div class="col">
-                      <label class="form-label" for="ecommerce-product-barcode">Etiquetas</label>
-                      <input type="text" class="form-control" id="post-tags" placeholder="Ingrese las Etiquetas aquí" name="productBarcode" aria-label="Product barcode">
-                    </div>
-              </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col"><label class="form-label" for="ecommerce-product-sku">Tipo</label>
+                    <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
+                      <option value="" disabled selected>Elija el tipo de publicación</option>
+                      <option value="editar-publicacion-albergue-normal.html">Normal</option>
+                      <option value="editar-publicacion-albergue-adopcion.html">Adopción</option>
+                      <option value="editar-publicacion-albergue-donacionesactivas.html" selected>Donaciones Activas</option>
+                      <option value="editar-publicacion-albergue-donacionesmonetarias.html">Donaciones Monetarias</option>   
+                    </select>
+                  </div>  
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Etiquetas</label>
+                    <input type="text" class="form-control" id="post-tags" placeholder="Ingrese las Etiquetas aquí" name="productBarcode" aria-label="Product barcode">
+                  </div>
+                </div>
               <!-- Description -->
-              <div>
-                <label class="form-label">Descripción <span class="text-muted"></span></label>
-                <div class="form-control p-0 pt-1">
-                <div class="comment-toolbar border-0 border-bottom">
-                  <div class="d-flex justify-content-start">
-                    <span class="ql-formats me-0">
-                        <button class="ql-bold"></button>
-                        <button class="ql-italic"></button>
-                        <button class="ql-underline"></button>
-                        <button class="ql-list" value="ordered"></button>
-                        <button class="ql-list" value="bullet"></button>
-                        <button class="ql-link"></button>
-                        <button class="ql-image"></button>
-                    </span>
+                <div>
+                  <label class="form-label">Descripción <span class="text-muted"></span></label>
+                  <div class="form-control p-0 pt-1">
+                    <div class="comment-toolbar border-0 border-bottom">
+                      <div class="d-flex justify-content-start">
+                        <span class="ql-formats me-0">
+                            <button class="ql-bold"></button>
+                            <button class="ql-italic"></button>
+                            <button class="ql-underline"></button>
+                            <button class="ql-list" value="ordered"></button>
+                            <button class="ql-list" value="bullet"></button>
+                            <button class="ql-link"></button>
+                            <button class="ql-image"></button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="comment-editor border-0 pb-0" id="ecommerce-category-description">
+                    </div>
                   </div>
-                </div>
-                <div class="comment-editor border-0 pb-0" id="ecommerce-category-description">
                 </div>
               </div>
-            </div>
-            
-          </div>
-          </div>
-    </div>      
-    <!-- /Second column -->
-    <div class="col-12 col-lg-6">
-        <!-- Media -->
-        <div class="card mb-1">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h5 class="mb-0 card-title">Imagen</h5>
-              <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
-            </div>
-            <div class="card-body">
-              <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                  <div class="dz-message needsclick my-5">
-                  <p class="fs-4 note needsclick my-2">Arrastra una imagen o Examinar en el dispositivo</p>
-                  </div>
-                  <div class="fallback">
-                  <input name="file" type="image" accept="image/*"/>
-                  </div>
-              </form>
+          </div> 
+        </div>
+        <!-- Third-->
+        <div class="col-12 col-lg-6">
+          <!-- /Second column -->
+          <div class="col-12 col-lg-12">
+            <!-- Media -->
+            <div class="card mb-1">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 card-title">Imagen</h5>
+                <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
+                </div>
+                <div class="card-body">
+                  <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                    <div class="dz-message needsclick my-5">
+                      <p class="fs-4 note needsclick my-2">Arrastra una imagen o Examinar en el dispositivo</p>
+                    </div>
+                    <div class="fallback">
+                      <input name="file" type="image" accept="image/*"/>
+                    </div>
+                  </form>
+                </div>
             </div>
         </div>
+        <!-- Product Information -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="card-tile mb-0">Datos del Evento</h5>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-name">Nombre del Albergue</label>
+                  <input type="text" required class="form-control" id="shelter-name" placeholder="Nombre del Albergue" name="productTitle" aria-label="Product title">
+                </div>
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-name">Fecha Programada</label>
+                  <input type="datetime-local" required class="form-control" id="date" placeholder="Indique la fecha del Evento" name="productTitle" aria-label="Product title">                  </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Tipos de Mascota</label>
+                    <input type="text" class="form-control" id="pet-type" placeholder="Indique los tipos de la mascota" name="productBarcode" aria-label="Product barcode">
+                  </div>
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Teléfono de Contacto</label>
+                    <input type="text" class="form-control" id="contact-number" placeholder="Indique el Teléfono de Contacto" name="productBarcode" aria-label="Product barcode">
+                  </div>
+                </div>
+            </div>
+          </div> 
+        </div>
+      </div>  
     </div>
-</div>
-  </div>
-</div>
-</div> 
-
- 
-
+  </div>  
+</div>  
   <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
   
@@ -476,8 +499,8 @@
   
   <!-- endbuild -->
 
-  <!-- Vendors JS -->
-  <script src="../../assets/vendor/libs/quill/katex.js"></script>
+<!-- Vendors JS -->
+<script src="../../assets/vendor/libs/quill/katex.js"></script>
 <script src="../../assets/vendor/libs/quill/quill.js"></script>
 <script src="../../assets/vendor/libs/select2/select2.js"></script>
 <script src="../../assets/vendor/libs/dropzone/dropzone.js"></script>
@@ -498,8 +521,7 @@
         }
     }
   </script>
-
-<!-- Footer -->
+  <!-- Footer -->
 <footer class="footer bg-footer-theme">
   <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
     <div>
