@@ -3,7 +3,6 @@
 * File include item demo only specific css only
 ******************************************************************************/
 
-
 .menu .app-brand.demo {
   height: 64px;
   margin-top: 12px;
@@ -122,4 +121,93 @@
 .layout-demo-info {
   text-align: center;
   margin-top: 1rem;
+}
+
+
+
+.pagination {
+  display: flex;
+  justify-content: center; /* Centrar la paginación */
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+.page-item {
+  margin: 0 4px;
+}
+
+.page-link {
+  display: block;
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease; /* Animación para el cambio de color */
+}
+
+.page-item.active .page-link {
+  background-color: #6A5ACD;
+  color: white;
+  border-color: #6A5ACD;
+}
+
+.page-item.disabled .page-link {
+  color: #ccc;
+  pointer-events: none;
+  background-color: #f9f9f9;
+}
+
+.page-link:hover {
+  background-color: #6A5ACD; /* Cambia a este color al hacer hover */
+  color: white;
+  border-color: #6A5ACD;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end; /* Alinear el campo de búsqueda a la derecha */
+  margin-bottom: 20px;
+}
+
+.search-container label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 200px; /* Ajusta el tamaño del campo de búsqueda */
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #6A5ACD;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.5);
+}
+
+
+/* Limita la altura de la lista de notificaciones y activa el scroll */
+.scrollable-container {
+  max-height: 300px; /* Ajusta la altura máxima que deseas */
+  overflow-y: auto;  /* Activa el scroll vertical */
+}
+
+/* Personalización del scrollbar (opcional) */
+.scrollable-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color del scrollbar */
+  border-radius: 4px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color cuando se pasa el mouse sobre el scrollbar */
 }

@@ -95,31 +95,42 @@
  
 <!-- Navbar -->
 
-  <nav class="navbar navbar-expand-lg" style="background-color: #cbe5ef">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav class="navbar navbar-expand-lg" style="background-color: #ffe38e;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbar-ex-5">
-        <div class="navbar-nav me-auto">
-          <a class="nav-item nav-link" href="ver-inicio-usuario.html">Inicio</a>
-          <a class="nav-item nav-link" href="ver-publicaciones-usuario.html">Publicaciones</a>
-          <a class="nav-item nav-link" href="ver-loseventos-usuario.html">Eventos</a>
-          <a class="nav-item nav-link" href="postular-hogarestemporales.html">Hogares temporales</a>
-        </div>
+    <div class="collapse navbar-collapse" id="navbar-ex-5">
+      <div class="navbar-nav me-auto">
+        <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="javascript:void(0)">Publicaciones</a>
+                      <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="javascript:void(0)">Eventos</a>
+                      <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="javascript:void(0)">Servicios</a>
 
-        <ul class="navbar-nav flex-row align-items-center ms-auto">
+      </div>
+      
+      
+  
+
+      <ul class="navbar-nav flex-row align-items-center ms-auto">
+          
 
 
 
-
-
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Solicitudes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Hogares Temporales</a></li>
+            <li><a class="dropdown-item" href="#">Publicaciones</a></li>
+          </ul>
+        </li>
 
           <!-- Notification -->
           <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <i class="bx bx-bell bx-sm"></i>
+              <i class="bx bx-bell bx-sm" style="color: rgba(0, 0, 0, 0.54);"></i>
               <span class="badge bg-danger rounded-pill badge-notifications">5</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end py-0">
@@ -129,7 +140,7 @@
                   <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="bx fs-4 bx-envelope-open"></i></a>
                 </div>
               </li>
-              <li class="dropdown-notifications-list scrollable-container" style="min-width: 150px">
+              <li class="dropdown-notifications-list scrollable-container">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item list-group-item-action dropdown-notifications-item">
                     <div class="d-flex">
@@ -305,7 +316,7 @@
           <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
               <div class="avatar avatar-online">
-                <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
               </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -314,12 +325,12 @@
                   <div class="d-flex">
                     <div class="flex-shrink-0 me-3">
                       <div class="avatar avatar-online">
-                        <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                        <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
                       </div>
                     </div>
                     <div class="flex-grow-1">
-                      <span class="fw-medium d-block"> Adolfo </span>
-                      <small class="text-muted">Usuario</small>
+                      <span class="fw-medium d-block"> Usuario </span>
+                      <small class="text-muted">Coordinador</small>
                     </div>
                   </div>
                 </a>
@@ -328,33 +339,36 @@
                 <div class="dropdown-divider"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                <a class="dropdown-item" href="pages-profile-user.html">
                   <i class="bx bx-user me-2"></i>
                   <span class="align-middle">Mi perfil</span>
                 </a>
               </li>
-
-
+    
+              
+              <li>
+                <a class="dropdown-item" href="pages-profile-user.html">
+                  <i class="bx bx-edit me-2"></i>
+                  <span class="align-middle">Solicitudes</span>
+                </a>
+              </li>
+    
+              
               <li>
                 <div class="dropdown-divider"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
-                  <i class="bx bx-building-house"></i>
-                  <span class="align-middle">Mis publicaciones</span>
+                <a class="dropdown-item" href="pages-faq.html">
+                  <i class="bx bx-help-circle me-2"></i>
+                  <span class="align-middle">Preguntas frecuentes</span>
                 </a>
               </li>
-              <li>
-                <a class="dropdown-item" href="ver-miseventos-usuario.html">
-                  <i class="bx bx-bone"></i>
-                  <span class="align-middle">Mis eventos</span>
-                </a>
-              </li>
+             
               <li>
                 <div class="dropdown-divider"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="../index.html" target="_blank">
+                <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
                   <i class="bx bx-power-off me-2"></i>
                   <span class="align-middle">Salir</span>
                 </a>
@@ -362,12 +376,14 @@
             </ul>
           </li>
           <!--/ User -->
-
+          
 
         </ul>
-      </div>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<!-- Navbar -->
 
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -378,27 +394,25 @@
 
   <!-- /Select2 -->
 
-
   <div class="card g-3 mt-4">
     <div class="card-body row g-3">
       <div class="col-lg-8">
         <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
           <div class="me-1">
-            <h2 class="mb-2 text-black">¡Dale una oportunidad a Claudio!</h2>
+            <h3 class="mb-2 text-black mt-1">¡Cada oportunidad cuenta!</h3>
           </div>
           <div class="d-flex align-items-center">
-            <span class="badge bg-label-info">Adopción</span>
+            <span class="badge bg-label-info">Aceptado</span>
             <i class='bx bx-share-alt bx-sm mx-4 cursor-pointer'></i>
             <i class='bx bx-bookmarks bx-sm cursor-pointer'></i>
           </div>
         </div>
         <div class="card academy-content shadow-none border">
-          <div class="p-2">
+          <div class="p-2 mx-auto">
             <div class="cursor-pointer">
-              <img src="https://i.ibb.co/6YGggYv/claudio.png" class="w-100" alt="donacion">
+              <img src="https://www.animalesbog.gov.co/sites/default/files/styles/noticias_galeria/public/noticias/imagenes/WhatsApp%20Image%202020-05-28%20at%2013.31.15.jpeg?itok=KpS-rVrq" class="w-100" alt="donacion" >
             </div>  
           </div>
-          
           <!--
           <div class="card-body">
             <h5 class="mb-2">About this course</h5>
@@ -451,20 +465,21 @@
       </div>
 
       <div class="col-lg-4">
-
-            <h4 class="text-primary mt-2">Descripción</h4>
+            <h4 class="text-primary" style="margin-top: 80px">Solicitud Hogar Temporal:</h4>
+            <h5 class="mb-4 text-dark">¡Busco esta raza para hogar temporal!</h5>
             <p class="mb-4 text-dark">
-              Claudio es un Labrador Retriever encantador con un corazón tan grande como su tamaño. Este perrito 
-              amigable y lleno de energía está buscando un hogar que le ofrezca amor y atención.
+              Hola a todos, estoy buscando un kalupoh para ofrecerle un hogar temporal. Me encantan los perros de esta raza por su personalidad amigable y su tamaño, perfecto para mi apartamento. Si conoces alguno que necesite un lugar temporal donde quedarse, no dudes en contactarme. ¡Gracias! Contacto: [nombre y detalles de contacto] 
             </p>
             <p class="mb-4 text-dark">
-              Con su pelaje brillante y su actitud juguetona, Claudio es el compañero perfecto para cualquier familia 
-              que busque un amigo leal y cariñoso.
+                Cada aporte cuenta, y con tu ayuda, podremos llegar a la meta final. ¡Gracias por ser parte de esta causa 
+                tan especial!
             </p>
             
             <!-- Para más párrafos -->
           
-            <h4 class="text-primary">Más detalles</h4>
+           
+            
+            <!--
             <div class="d-flex flex-wrap">
               <div class="me-5">
                 <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;">Claudio</span></p>
@@ -476,12 +491,11 @@
                 
               </div>
             </div>
-            <div class="text-center mt-4">
-              <a href="javascript:void(0)" class="btn btn-warning" style="padding-left: 30px; padding-right: 30px; font-size: large; font-weight: 60px; border-radius: 15px;">Quiero adoptar</a>
-            </div>
-            <div class="text-center mt-4">
-              <a href="javascript:void(0)" class="btn btn-primary" style="font-size: large; font-weight: 60px; border-radius: 15px;">Ir a publicaciones</a>
-            </div>
+            -->
+
+            
+
+            
         <!--
         <div class="accordion stick-top accordion-bordered" id="courseContent">
           <div class="accordion-item shadow-none border border-bottom-0 active mb-0">
@@ -671,7 +685,37 @@
         -->
 
       </div>
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-10">
+            <h5>Comentarios:</h5>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Comentario</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>El pasado viernes se visualizó....</td>
+                        <td>2/11/2023</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Última actualización.</strong> Se pudo visualizar...</td>
+                        <td>12/12/2023</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" class="form-control" placeholder="Escribe un comentario..."style="width: 100%;">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+      
     </div>
+    
   </div>
 
 <!-- Footer -->
@@ -737,8 +781,8 @@
   
   
 </body>
-<footer class="footer bg-footer-theme">
-  <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+<footer class="footer bg-footer-theme" >
+  <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3"  style="background-color: #f2de6f;">
     <div>
       <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
 

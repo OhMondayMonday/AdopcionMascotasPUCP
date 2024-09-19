@@ -3,7 +3,6 @@
 
 <!-- =========================================================
 * Sneat - Bootstrap Dashboard PRO | v1.0.0
-* Sneat - Bootstrap Dashboard PRO | v1.0.0
 ==============================================================
 
 * Product Page: https://themeselection.com/item/sneat-dashboard-pro-bootstrap/
@@ -373,7 +372,8 @@
 
   <div class="container-xxl flex-grow-1 container-p-y">
 
-    <h4 class="py-2 mb-0"><span class="text-muted fw-light">Usuario/</span>Ver publicaciones</h4>
+
+    <h4 class="py-2 mb-0"><span class="text-muted fw-light">Usuario/</span> Hogares temporales</h4>
 
     <div class="card mb-0"></div>
     <div class="card-header d-flex flex-wrap justify-content-between gap-3">
@@ -385,12 +385,14 @@
             <div class="row w-100">
               <!-- Tipo de Publicacion -->
               <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de publicación</label>
+                <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Mascotas</label>
                 <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
                   <option value="AK">Todas</option>
-                  <option value="Adopcion">Adopción</option>
-                  <option value="Donaciones activas">Donaciones activas</option>
-                  <option value="Donaciones de dinero">Donaciones de dinero</option>
+                  <option value="Perros">Perros</option>
+                  <option value="Gatos">Gatos</option>
+                  <option value="Roedores">Roedores</option>
+                  <option value="Pajaros">Pajaros</option>
+                  <option value="Reptiles">reptiles</option>
                 </select>
               </div>
               <!-- Palabra clave -->
@@ -398,15 +400,20 @@
                 <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
                 <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
               </div>
-              <!-- Fecha -->
+              <!-- ubicacion -->
               <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
-                <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                  <option value="Todas">Todas</option>
-                  <option value="Ultimas24Horas">Últimas 24 horas</option>
-                  <option value="UltimaSemana">Esta semana</option>
-                  <option value="UltimoMes">Este mes</option>
-                  <option value="UltimoAnio">Este año</option>
+                <label for="select2Ubi" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicacion</label>
+                <select id="select2Ubi" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                  <option value="AK">Todas</option>
+                  <option value="Barranco">Barranco</option>
+                  <option value="Lima">Lima</option>
+                  <option value="Chorrillos">Chorrillos</option>
+                  <option value="Lamolina">La Molina</option>
+                  <option value="Jesusmaria">Jesus Maria</option>
+                  <option value="Sanmiguel">San Miguel</option>
+                  <option value="Losolivos">Los Olivos</option>
+                  <option value="Miraflores">Miraflores</option>
+                  <option value="Sanisidro">San isidro</option>
                 </select>
               </div>
             </div>
@@ -419,14 +426,8 @@
         <div class="card-header d-flex flex-wrap justify-content-between gap-2">
           <div class="btn-group">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Nueva publicacion
+              Postular
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="javascript:void(0);">Donaciones activos</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0);">Donaciones de dinero</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0);">Actualizaciones</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0);">Adopción</a></li>
-            </ul>
           </div>
         </div>
         <div class="card-body p-0">
@@ -437,21 +438,21 @@
                 <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img7.jpg" alt="Imagen de publicación 1" style="height: 200px; object-fit: cover;"/>
+                      <img class="img-fluid" src="../../assets/img/1.jpg" alt="Imagen de publicación 1" style="height: 200px; object-fit: cover;"/>
                     </a>
                   </div>
                   <div class="card-body p-2 d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Adopcion</span>
+                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Perros</span>
                     </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Dale una oportunidad a Claudio!</a>
+                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Refugio de Laura</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Luego de un harto trabajo de recolección, estamos a 100 soles de cumplir el objetivo</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span>Postular</span>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span class="me-1">Ver +</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -462,21 +463,21 @@
                 <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img16.jpg" alt="Imagen de publicación 2" style="height: 200px; object-fit: cover;"/>
+                      <img class="img-fluid" src="../../assets/img/2.jpg" alt="Imagen de publicación 2" style="height: 200px; object-fit: cover;"/>
                     </a>
                   </div>
                   <div class="card-body p-2 d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Adopcion</span>
+                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Gatos</span>
                     </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¿Buscas un compañero fiel?</a>
+                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Residencia de Luis</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span>Postular</span>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span class="me-1">Ver +</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -487,21 +488,21 @@
                 <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img11.jpg" alt="Imagen de publicación 3" style="height: 200px; object-fit: cover;"/>
+                      <img class="img-fluid" src="../../assets/img/3.jpg" alt="Imagen de publicación 3" style="height: 200px; object-fit: cover;"/>
                     </a>
                   </div>
                   <div class="card-body p-2 d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Donaciones de dinero</span>
+                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Gatos</span>
                     </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Cada dólar cuenta!</a>
+                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Santuario de Pedro</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span>Postular</span>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span class="me-0">Ver +</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -512,21 +513,21 @@
                 <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img12.jpg" alt="Imagen de publicación 4" style="height: 200px; object-fit: cover;"/>
+                      <img class="img-fluid" src="../../assets/img/4.jpg" alt="Imagen de publicación 4" style="height: 200px; object-fit: cover;"/>
                     </a>
                   </div>
                   <div class="card-body p-2 d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Donaciones de activos</span>
+                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Reptiles</span>
                     </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Ayúdanos a llegar al objetivo</a>
+                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Refugio de Sofia</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span>Postular</span>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span class="me-1">Ver +</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -537,21 +538,21 @@
                 <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img15.jpg" alt="Imagen de publicación 5" style="height: 200px; object-fit: cover;"/>
+                      <img class="img-fluid" src="../../assets/img/5.jpg" alt="Imagen de publicación 5" style="height: 200px; object-fit: cover;"/>
                     </a>
                   </div>
                   <div class="card-body p-2 d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Donaciones de dinero</span>
+                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Todos</span>
                     </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Vamos por la meta!</a>
+                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Casa Ana y Luis</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span>Postular</span>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span class="me-1">Ver +</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
@@ -562,21 +563,21 @@
                 <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="modificar-publicacion-usuario.html">
-                      <img class="img-fluid" src="../../assets/img/img14.jpg" alt="Imagen de publicación 6" style="height: 200px; object-fit: cover;"/>
+                      <img class="img-fluid" src="../../assets/img/6.jpg" alt="Imagen de publicación 6" style="height: 200px; object-fit: cover;"/>
                     </a>
                   </div>
                   <div class="card-body p-2 d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Donaciones de activos</span>
+                      <span class="badge bg-label-info" style="font-size: 0.75rem;">Reptiles</span>
                     </div>
-                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Únete a la causa!</a>
+                    <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Zoo Leyendas</a>
                     <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                      <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
-                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                    <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
+                      <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span>Postular</span>
                       </a>
-                      <a class="btn btn-label-primary d-flex align-items-center" href="ver-publicaciones-inscrito-usuario.html" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                      <a class="btn btn-label-primary d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
+                        <span class="me-1">Ver +</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>
                     </div>
                   </div>
