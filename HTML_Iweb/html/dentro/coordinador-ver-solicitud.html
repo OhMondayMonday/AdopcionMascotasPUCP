@@ -102,10 +102,17 @@
 
     <div class="collapse navbar-collapse" id="navbar-ex-5">
       <div class="navbar-nav me-auto">
-        <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="javascript:void(0)">Publicaciones</a>
-                      <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="javascript:void(0)">Eventos</a>
-                      <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="javascript:void(0)">Servicios</a>
-
+        <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="javascript:void(0)">Inicio</a>
+                      <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="javascript:void(0)">Gestion</a>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Solicitudes
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">Hogares Temporales</a></li>
+                          <li><a class="dropdown-item" href="#">Publicaciones</a></li>
+                        </ul>
+                      </li>
       </div>
       
       
@@ -116,15 +123,7 @@
 
 
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Solicitudes
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Hogares Temporales</a></li>
-            <li><a class="dropdown-item" href="#">Publicaciones</a></li>
-          </ul>
-        </li>
+        
 
           <!-- Notification -->
           <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
@@ -497,6 +496,7 @@
               <button id="acceptButton" class="btn btn-success">Aceptar</button>
               <button id="rejectButton" class="btn btn-danger">Rechazar</button>
             </div>
+            
 
             <!-- Agrega SweetAlert2 -->
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
