@@ -391,26 +391,26 @@
         <div class="d-flex justify-content-between flex-column mb-2 mb-md-0">
           <ul class="nav nav-align-left nav-pills flex-column">
             <li class="nav-item">
-              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#publicaciones">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#donaciones">
                 <i class="bx bx-credit-card faq-nav-icon me-1"></i>
                 <span class="align-middle">Donaciones</span>
               </button>
             </li>
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#delivery">
-                <i class='bx bx-shopping-bag faq-nav-icon me-1'></i>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#publicaciones">
+                <i class="bx bx-shopping-bag faq-nav-icon me-1"></i>
                 <span class="align-middle">Publicaciones</span>
               </button>
             </li>
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#cancellation">
-                <i class='bx bx-rotate-left faq-nav-icon me-1'></i>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#cuentas">
+                <i class="bx bx-rotate-left faq-nav-icon me-1"></i>
                 <span class="align-middle">Cuenta</span>
               </button>
             </li>
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#orders">
-                <i class='bx bx-cube faq-nav-icon me-1'></i>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#seguridad">
+                <i class="bx bx-cube faq-nav-icon me-1"></i>
                 <span class="align-middle">Seguridad</span>
               </button>
             </li>
@@ -427,340 +427,260 @@
       <!-- FAQ's -->
       <div class="col-lg-9 col-md-8 col-12">
         <div class="tab-content py-0">
-          <div class="tab-pane fade show active" id="publicaciones" role="tabpanel">
+          <!-- Donaciones -->
+          <div class="tab-pane fade show active" id="donaciones" role="tabpanel">
             <div class="d-flex mb-3 gap-3">
               <div>
-            <span class="badge bg-label-primary rounded-2">
-              <i class="bx bx-credit-card bx-md"></i>
-            </span>
+          <span class="badge bg-label-primary rounded-2">
+            <i class="bx bx-credit-card bx-md"></i>
+          </span>
               </div>
               <div>
-                <h4 class="mb-0">
-                  <span class="align-middle">Donaciones</span>
-                </h4>
-                <span>Dudas sobre publicaciones</span>
+                <h4 class="mb-0"><span class="align-middle">Donaciones</span></h4>
+                <span>Dudas sobre donaciones</span>
               </div>
             </div>
-            <div id="accordionPayment" class="accordion">
+            <div id="accordionDonaciones" class="accordion">
               <div class="card accordion-item active">
                 <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionPayment-1" aria-controls="accordionPayment-1">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionDonaciones-1" aria-controls="accordionDonaciones-1">
                     ¿Se cobran comisiones por cada donación hecha?
                   </button>
                 </h2>
-
-                <div id="accordionPayment-1" class="accordion-collapse collapse show">
+                <div id="accordionDonaciones-1" class="accordion-collapse collapse show">
                   <div class="accordion-body">
-                    Alianza Animal tiene como unico fin ser medio entre albergues y usuarios, por lo que
-                    las donaciones serán realizadas directamente hacia los propios albergues.
+                    Alianza Animal actúa como intermediario entre albergues y usuarios, por lo que las donaciones se realizan directamente a los albergues.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPayment-2" aria-controls="accordionPayment-2">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDonaciones-2" aria-controls="accordionDonaciones-2">
                     ¿Cómo realizo una donación?
                   </button>
                 </h2>
-                <div id="accordionPayment-2" class="accordion-collapse collapse">
+                <div id="accordionDonaciones-2" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    Las donaciones se hacen a través de medios de pago como Plin y Yape.
-                    Actualmente, solo se permite la opción de pago mediante QR y no con tarjeta.
+                    Las donaciones se realizan a través de medios de pago como Plin y Yape, usando solo opciones de pago mediante QR.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPayment-3" aria-controls="accordionPayment-3">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDonaciones-3" aria-controls="accordionDonaciones-3">
                     ¿Puedo cancelar una donación equivocada?
                   </button>
                 </h2>
-                <div id="accordionPayment-3" class="accordion-collapse collapse">
+                <div id="accordionDonaciones-3" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    Si ha cometido un error, comuníquese directamente con el número del albergue.
-                    En caso haya problemas, puede llamar al siguiente número
-                    <span class="fw-medium"> 947 834 213</span>
+                    Si cometiste un error, contacta directamente al albergue. Para problemas, llama al <span class="fw-medium">947 834 213</span>.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPayment-4" aria-controls="accordionPayment-4">
-                    En caso quiera aceptar donaciones como albergue, ¿qué medios puedo utilizar?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDonaciones-4" aria-controls="accordionDonaciones-4">
+                    ¿Qué medios puedo utilizar como albergue para aceptar donaciones?
                   </button>
                 </h2>
-                <div id="accordionPayment-4" class="accordion-collapse collapse">
+                <div id="accordionDonaciones-4" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    Los únicos medios disponibles por el momento son PLIN/YAPE. El código QR debe ser incluido en
-                    el momento de la publicación.
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="tab-pane fade" id="delivery" role="tabpanel">
-            <div class="d-flex mb-3 gap-3">
-              <div>
-            <span class="badge bg-label-primary rounded-2">
-              <i class="bx bx-cart bx-md"></i>
-            </span>
-              </div>
-              <div>
-                <h4 class="mb-0">
-                  <span class="align-middle">Delivery</span>
-                </h4>
-                <span>Get help with delivery</span>
-              </div>
-            </div>
-            <div id="accordionDelivery" class="accordion">
-              <div class="card accordion-item active">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionDelivery-1" aria-controls="accordionDelivery-1">
-                    How would you ship my order?
-                  </button>
-                </h2>
-
-                <div id="accordionDelivery-1" class="accordion-collapse collapse show">
-                  <div class="accordion-body">
-                    For large products, we deliver your product via a third party
-                    logistics company offering you the “room of choice” scheduled
-                    delivery service. For small products, we offer free parcel
-                    delivery.
-                  </div>
-                </div>
-              </div>
-
-              <div class="card accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDelivery-2" aria-controls="accordionDelivery-2">
-                    What is the delivery cost of my order?
-                  </button>
-                </h2>
-                <div id="accordionDelivery-2" class="accordion-collapse collapse">
-                  <div class="accordion-body">The cost of scheduled delivery is $69 or $99 per order, depending on the destination postal code. The parcel delivery is free.
-                  </div>
-                </div>
-              </div>
-
-              <div class="card accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDelivery-4" aria-controls="accordionDelivery-4">
-                    What to do if my product arrives damaged?
-                  </button>
-                </h2>
-                <div id="accordionDelivery-4" class="accordion-collapse collapse">
-                  <div class="accordion-body">
-                    We will promptly replace any product that is damaged in transit.
-                    Just contact our
-                    <a href="javascript:void(0);">support team</a>, to notify us of the situation
-                    within 48 hours of product arrival.
+                    Los únicos medios disponibles son PLIN y YAPE, y el código QR debe incluirse en la publicación.
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="cancellation" role="tabpanel">
+
+          <!-- Publicaciones -->
+          <div class="tab-pane fade" id="publicaciones" role="tabpanel">
             <div class="d-flex mb-3 gap-3">
               <div>
-            <span class="badge bg-label-primary rounded-2">
-              <i class="bx bx-revision bx-md"></i>
-            </span>
+          <span class="badge bg-label-primary rounded-2">
+            <i class="bx bx-shopping-bag bx-md"></i>
+          </span>
               </div>
               <div>
-                <h4 class="mb-0"><span class="align-middle">Cancellation & Return</span></h4>
-                <span>Get help with cancellation & return</span>
+                <h4 class="mb-0"><span class="align-middle">Publicaciones</span></h4>
+                <span>Dudas sobre publicaciones</span>
               </div>
             </div>
-            <div id="accordionCancellation" class="accordion">
+            <div id="accordionPublicaciones" class="accordion">
               <div class="card accordion-item active">
                 <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionCancellation-1" aria-controls="accordionCancellation-1">
-                    Can I cancel my order?
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionPublicaciones-1" aria-controls="accordionPublicaciones-1">
+                    ¿Cómo puedo crear una publicación?
                   </button>
                 </h2>
-
-                <div id="accordionCancellation-1" class="accordion-collapse collapse show">
+                <div id="accordionPublicaciones-1" class="accordion-collapse collapse show">
                   <div class="accordion-body">
-                    <p>
-                      Scheduled delivery orders can be cancelled 72 hours prior to
-                      your selected delivery date for full refund.
-                    </p>
-                    <p class="mb-0">
-                      Parcel delivery orders cannot be cancelled, however a free
-                      return label can be provided upon request.
-                    </p>
+                    Para crear una publicación, dirígete a la sección correspondiente en tu cuenta y completa los detalles solicitados.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCancellation-2" aria-controls="accordionCancellation-2">
-                    Can I return my product?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPublicaciones-2" aria-controls="accordionPublicaciones-2">
+                    ¿Puedo editar mi publicación después de haberla creado?
                   </button>
                 </h2>
-                <div id="accordionCancellation-2" class="accordion-collapse collapse">
+                <div id="accordionPublicaciones-2" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    You can return your product within 15 days of delivery, by
-                    contacting our
-                    <a href="javascript:void(0);">support team</a>, All merchandise returned must be
-                    in the original packaging with all original items.
+                    Sí, puedes editar tu publicación en cualquier momento desde la sección de publicaciones de tu cuenta.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" aria-controls="accordionCancellation-3" data-bs-target="#accordionCancellation-3">
-                    Where can I view status of return?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPublicaciones-3" aria-controls="accordionPublicaciones-3">
+                    ¿Qué tipo de publicaciones puedo hacer?
                   </button>
                 </h2>
-                <div id="accordionCancellation-3" class="accordion-collapse collapse">
+                <div id="accordionPublicaciones-3" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    <p>Locate the item from Your <a href="javascript:void(0);">Orders</a></p>
-                    <p class="mb-0">Select <span class="fw-medium">Return/Refund</span> status</p>
+                    Puedes hacer publicaciones sobre mascotas perdidas, solicitudes de adopción, y donaciones.
+                  </div>
+                </div>
+              </div>
+              <div class="card accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPublicaciones-4" aria-controls="accordionPublicaciones-4">
+                    ¿Cómo puedo eliminar una publicación?
+                  </button>
+                </h2>
+                <div id="accordionPublicaciones-4" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    Para eliminar una publicación, ve a tu perfil, selecciona la publicación y elige la opción de eliminar.
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="orders" role="tabpanel">
+
+          <!-- Cuentas -->
+          <div class="tab-pane fade" id="cuentas" role="tabpanel">
             <div class="d-flex mb-3 gap-3">
               <div>
-            <span class="badge bg-label-primary rounded-2">
-              <i class="bx bx-box bx-md"></i>
-            </span>
+          <span class="badge bg-label-primary rounded-2">
+            <i class="bx bx-user bx-md"></i>
+          </span>
               </div>
               <div>
-                <h4 class="mb-0">
-                  <span class="align-middle">My Orders</span>
-                </h4>
-                <span>Order details</span>
+                <h4 class="mb-0"><span class="align-middle">Cuentas</span></h4>
+                <span>Gestiona tu cuenta</span>
               </div>
             </div>
-            <div id="accordionOrders" class="accordion">
+            <div id="accordionCuentas" class="accordion">
               <div class="card accordion-item active">
                 <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionOrders-1" aria-controls="accordionOrders-1">
-                    Has my order been successful?
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionCuentas-1" aria-controls="accordionCuentas-1">
+                    ¿Cómo creo una cuenta?
                   </button>
                 </h2>
-
-                <div id="accordionOrders-1" class="accordion-collapse collapse show">
+                <div id="accordionCuentas-1" class="accordion-collapse collapse show">
                   <div class="accordion-body">
-                    <p>
-                      All successful order transactions will receive an order
-                      confirmation email once the order has been processed. If you
-                      have not received your order confirmation email within 24
-                      hours, check your junk email or spam folder.
-                    </p>
-                    <p class="mb-0">
-                      Alternatively, log in to your account to check your order
-                      summary. If you do not have a account, you can contact our
-                      Customer Care Team on <span class="fw-medium">1-000-000-000</span>.
-                    </p>
+                    Puedes crear una cuenta desde la página de inicio haciendo clic en "Registrarse" y llenando el formulario.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionOrders-2" aria-controls="accordionOrders-2">
-                    My Promotion Code is not working, what can I do?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCuentas-2" aria-controls="accordionCuentas-2">
+                    ¿Qué hago si olvidé mi contraseña?
                   </button>
                 </h2>
-                <div id="accordionOrders-2" class="accordion-collapse collapse">
+                <div id="accordionCuentas-2" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    If you are having issues with a promotion code, please contact
-                    us at <span class="fw-medium">1 000 000 000</span> for assistance.
+                    Si olvidaste tu contraseña, usa la opción "Olvidé mi contraseña" en la página de inicio de sesión para recuperarla.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionOrders-3" aria-controls="accordionOrders-3">
-                    How do I track my Orders?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCuentas-3" aria-controls="accordionCuentas-3">
+                    ¿Puedo cambiar mi dirección de correo electrónico?
                   </button>
                 </h2>
-                <div id="accordionOrders-3" class="accordion-collapse collapse">
+                <div id="accordionCuentas-3" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    <p>
-                      If you have an account just sign into your account from
-                      <a href="javascript:void(0);">here</a> and select <span class="fw-medium">“My Orders”</span>.
-                    </p>
-                    <p class="mb-0">
-                      If you have a a guest account track your order from
-                      <a href="javascript:void(0);">here</a> using the order number and the email
-                      address.
-                    </p>
+                    Sí, puedes cambiar tu dirección de correo electrónico desde la configuración de tu cuenta.
+                  </div>
+                </div>
+              </div>
+              <div class="card accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCuentas-4" aria-controls="accordionCuentas-4">
+                    ¿Qué hago si quiero eliminar mi cuenta?
+                  </button>
+                </h2>
+                <div id="accordionCuentas-4" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    Para eliminar tu cuenta, contacta a nuestro servicio al cliente y solicita la eliminación.
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="product" role="tabpanel">
+
+          <!-- Seguridad -->
+          <div class="tab-pane fade" id="seguridad" role="tabpanel">
             <div class="d-flex mb-3 gap-3">
               <div>
-            <span class="badge bg-label-primary rounded-2">
-              <i class="bx bx-camera bx-md"></i>
-            </span>
+          <span class="badge bg-label-primary rounded-2">
+            <i class="bx bx-lock bx-md"></i>
+          </span>
               </div>
               <div>
-                <h4 class="mb-0">
-                  <span class="align-middle">Product & Services</span>
-                </h4>
-                <span>Get help with product & services</span>
+                <h4 class="mb-0"><span class="align-middle">Seguridad</span></h4>
+                <span>Consejos de seguridad</span>
               </div>
             </div>
-            <div id="accordionProduct" class="accordion">
+            <div id="accordionSeguridad" class="accordion">
               <div class="card accordion-item active">
                 <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionProduct-1" aria-controls="accordionProduct-1">
-                    Will I be notified once my order has shipped?
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionSeguridad-1" aria-controls="accordionSeguridad-1">
+                    ¿Es seguro usar la plataforma?
                   </button>
                 </h2>
-
-                <div id="accordionProduct-1" class="accordion-collapse collapse show">
+                <div id="accordionSeguridad-1" class="accordion-collapse collapse show">
                   <div class="accordion-body">
-                    Yes, We will send you an email once your order has been shipped.
-                    This email will contain tracking and order information.
+                    Sí, nuestra plataforma tiene medidas de seguridad para proteger la información de los usuarios.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionProduct-2" aria-controls="accordionProduct-2">
-                    Where can I find warranty information?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionSeguridad-2" aria-controls="accordionSeguridad-2">
+                    ¿Cómo protejo mi información personal?
                   </button>
                 </h2>
-                <div id="accordionProduct-2" class="accordion-collapse collapse">
+                <div id="accordionSeguridad-2" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    We are committed to quality products. For information on
-                    warranty period and warranty services, visit our Warranty
-                    section <a href="javascript:void(0);">here</a>.
+                    No compartas tu contraseña con nadie y usa contraseñas fuertes para proteger tu cuenta.
                   </div>
                 </div>
               </div>
-
               <div class="card accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionProduct-3" aria-controls="accordionProduct-3">
-                    How can I purchase additional warranty coverage?
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionSeguridad-3" aria-controls="accordionSeguridad-3">
+                    ¿Qué hago si sospecho de un fraude?
                   </button>
                 </h2>
-                <div id="accordionProduct-3" class="accordion-collapse collapse">
+                <div id="accordionSeguridad-3" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    For the peace of your mind, we offer extended warranty plans
-                    that add additional year(s) of protection to the standard
-                    manufacturer’s warranty provided by us. To purchase or find out
-                    more about the extended warranty program, visit Extended
-                    Warranty section <a href="javascript:void(0);">here</a>.
+                    Si sospechas de un fraude, contacta a nuestro servicio al cliente de inmediato.
+                  </div>
+                </div>
+              </div>
+              <div class="card accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionSeguridad-4" aria-controls="accordionSeguridad-4">
+                    ¿Qué medidas de seguridad debo seguir al hacer donaciones?
+                  </button>
+                </h2>
+                <div id="accordionSeguridad-4" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    Asegúrate de usar métodos de pago seguros y verifica la legitimidad de los albergues antes de donar.
                   </div>
                 </div>
               </div>
@@ -768,40 +688,42 @@
           </div>
         </div>
       </div>
-      <!-- /FAQ's -->
-    </div>
 
-    <!-- Contact -->
-    <div class="row mt-5">
-      <div class="col-12 text-center mb-4">
-        <div class="badge bg-label-primary">Question?</div>
-        <h4 class="my-2">You still have a question?</h4>
-        <p>If you can't find question in our FAQ, you can contact us. We'll answer you shortly!</p>
+
+
+
+      <!-- Contact -->
+      <div class="row mt-5">
+        <div class="col-12 text-center mb-4">
+          <div class="badge bg-label-primary">¿Tienes una pregunta?</div>
+          <h4 class="my-2">¿Aún tienes una pregunta?</h4>
+          <p>Si no encuentras tu pregunta en nuestras FAQ, puedes contactarnos. ¡Te responderemos pronto!</p>
+        </div>
       </div>
-    </div>
-    <div class="row text-center justify-content-center gap-sm-0 gap-3">
-      <div class="col-sm-6">
-        <div class=" py-3 rounded bg-faq-section text-center">
+      <div class="row text-center justify-content-center gap-sm-0 gap-3">
+        <div class="col-sm-6">
+          <div class="py-3 rounded bg-faq-section text-center">
       <span class="badge bg-label-primary rounded-2 my-3">
         <i class="bx bx-phone bx-sm"></i>
       </span>
-          <h4 class="mb-2"><a class="h4" href="tel:+(810)25482568">+ (810) 2548 2568</a></h4>
-          <p>We are always happy to help</p>
+            <h4 class="mb-2"><a class="h4" href="tel:+(01)2456789">01 245 6789</a></h4>
+            <p>Siempre estamos felices de ayudar</p>
+          </div>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class=" py-3 rounded bg-faq-section text-center">
+        <div class="col-sm-6">
+          <div class="py-3 rounded bg-faq-section text-center">
       <span class="badge bg-label-primary rounded-2 my-3">
         <i class="bx bx-envelope bx-sm"></i>
       </span>
-          <h4 class="mb-2"><a class="h4" href="mailto:help@help.com">help@help.com</a></h4>
-          <p>Best way to get a quick answer</p>
+            <h4 class="mb-2"><a class="h4" href="mailto:AlianzaAnimal@pucp.edu.pe">AlianzaAnimal@pucp.edu.pe</a></h4>
+            <p>La mejor manera de obtener una respuesta rápida</p>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- /Contact -->
+      <!-- /Contact -->
 
-  </div>
+
+    </div>
   <!-- / Content -->
 
 </div>
