@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =========================================================
+* Sneat - Bootstrap Dashboard PRO | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/item/sneat-dashboard-pro-bootstrap/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+
+
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+
+  
+<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-calendar.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:00 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Mi Calendario</title>
+
+    
+    <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
+    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/">
+    
+    
+    <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5DDHKGP');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
+    
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" /> 
+    <link rel="stylesheet" href="../../assets/vendor/libs/fullcalendar/fullcalendar.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
+<link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+
+    <!-- Page CSS -->
+    
+<link rel="stylesheet" href="../../assets/vendor/css/pages/app-calendar.css" />
+
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+    
+</head>
+
+<body>
+
+  
+  <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+ 
+      
+      
+
+
+
+<!-- Navbar -->
+
+
+
+
+<nav class="navbar navbar-expand-lg" style="background-color: #cbe5ef">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar-ex-5">
+        <div class="navbar-nav me-auto">
+          <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="ver-inicio-usuario.html">Inicio</a>
+          <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="ver-publicaciones-usuario.html">Publicaciones</a>
+          <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="ver-loseventos-usuario.html">Eventos</a>
+          <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="postular-hogarestemporales.html">Hogares temporales</a>
+        </div>
+
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+
+
+
+
+
+          <!-- Notification -->
+          <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+              <i class="bx bx-bell bx-sm" style="color: rgba(0, 0, 0, 0.54);"></i>
+              <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end py-0">
+              <li class="dropdown-menu-header border-bottom">
+                <div class="dropdown-header d-flex align-items-center py-3">
+                  <h5 class="text-body mb-0 me-auto">Notificaciones</h5>
+                  <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="bx fs-4 bx-envelope-open"></i></a>
+                </div>
+              </li>
+              <li class="dropdown-notifications-list scrollable-container" style="min-width: 150px">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Congratulation Lettie 🎉</h6>
+                        <p class="mb-0">Won the monthly best seller gold badge</p>
+                        <small class="text-muted">1h ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Charles Franklin</h6>
+                        <p class="mb-0">Accepted your connection</p>
+                        <small class="text-muted">12hr ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">New Message ✉️</h6>
+                        <p class="mb-0">You have new message from Natalie</p>
+                        <small class="text-muted">1h ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Whoo! You have new order 🛒 </h6>
+                        <p class="mb-0">ACME Inc. made new order $1,154</p>
+                        <small class="text-muted">1 day ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Application has been approved 🚀 </h6>
+                        <p class="mb-0">Your ABC project application has been approved.</p>
+                        <small class="text-muted">2 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Monthly report is generated</h6>
+                        <p class="mb-0">July monthly financial report is generated </p>
+                        <small class="text-muted">3 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">Send connection request</h6>
+                        <p class="mb-0">Peter sent you connection request</p>
+                        <small class="text-muted">4 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <img src="../../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">New message from Jane</h6>
+                        <p class="mb-0">Your have new message from Jane</p>
+                        <small class="text-muted">5 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar">
+                          <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-1">CPU is running high</h6>
+                        <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
+                        <small class="text-muted">5 days ago</small>
+                      </div>
+                      <div class="flex-shrink-0 dropdown-notifications-actions">
+                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown-menu-footer border-top p-3">
+                <button class="btn btn-primary text-uppercase w-100">Ver todas las notificaciones</button>
+              </li>
+            </ul>
+          </li>
+          <!--/ Notification -->
+          <!-- User -->
+          <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+              <div class="avatar avatar-online">
+                <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+              </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="pages-account-settings-account.html">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0 me-3">
+                      <div class="avatar avatar-online">
+                        <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                      <span class="fw-medium d-block"> Adolfo </span>
+                      <small class="text-muted">Usuario</small>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                  <i class="bx bx-user me-2"></i>
+                  <span class="align-middle">Mi perfil</span>
+                </a>
+              </li>
+
+
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+                  <i class="bx bx-building-house"></i>
+                  <span class="align-middle">Mis publicaciones</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                  <i class="bx bx-bone"></i>
+                  <span class="align-middle">Mis eventos</span>
+                </a>
+              </li>
+            
+              <li>
+                <a class="dropdown-item" href="ver-calendario-usuario.html">
+                  <i class="bx bx-calendar"></i>
+                  <span class="align-middle">Mi Calendario</span>
+                </a>
+              </li>  
+
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="../index.html" target="_blank">
+                  <i class="bx bx-power-off me-2"></i>
+                  <span class="align-middle">Salir</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--/ User -->
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+
+  
+<!-- / Navbar -->
+
+      
+
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+
+        <!-- Content -->
+        
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="py-3 mb-4">
+                <span class="text-muted fw-light">Usuario /</span><span class="text-muted fw-light"> Mi Perfil /</span> Mi Calendario
+              </h4>
+
+            
+            
+<div class="card app-calendar-wrapper">
+  <div class="row g-0">
+    <!-- Calendar Sidebar -->
+    <div class="col app-calendar-sidebar" id="app-calendar-sidebar">
+      <div class="border-bottom p-4 my-sm-0 mb-3">
+        <div class="d-grid">
+          <button class="btn btn-primary btn-toggle-sidebar" data-bs-toggle="offcanvas" data-bs-target="#addEventSidebar" aria-controls="addEventSidebar">
+            <i class="bx bx-plus me-1"></i>
+            <span class="align-middle">Nuevo Evento</span>
+          </button>
+        </div>
+      </div>
+      <div class="p-4">
+        <!-- inline calendar (flatpicker) -->
+        <div class="ms-n2">
+          <div class="inline-calendar"></div>
+        </div>
+
+        <hr class="container-m-nx my-4">
+
+        <!-- Filter -->
+        <div class="mb-4">
+          <small class="text-small text-muted text-uppercase align-middle">Filtros</small>
+        </div>
+
+        <div class="form-check mb-2 mx-4">
+          <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all" checked>
+          <label class="form-check-label" for="selectAll">Seleccionar todo</label>
+        </div>
+
+        <div class="app-calendar-events-filter mx-4">
+          <div class="form-check form-check-danger mb-2">
+            <input class="form-check-input input-filter" type="checkbox" id="select-personal" data-value="personal" checked>
+            <label class="form-check-label" for="select-personal">Personal</label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input input-filter" type="checkbox" id="select-business" data-value="business" checked>
+            <label class="form-check-label" for="select-business">Benéfico</label>
+          </div>
+          <div class="form-check form-check-warning mb-2">
+            <input class="form-check-input input-filter" type="checkbox" id="select-family" data-value="family" checked>
+            <label class="form-check-label" for="select-family">Donación</label>
+          </div>
+          <div class="form-check form-check-success mb-2">
+            <input class="form-check-input input-filter" type="checkbox" id="select-holiday" data-value="holiday" checked>
+            <label class="form-check-label" for="select-holiday">Celebración</label>
+          </div>
+          <div class="form-check form-check-info">
+            <input class="form-check-input input-filter" type="checkbox" id="select-etc" data-value="etc" checked>
+            <label class="form-check-label" for="select-etc">Otros</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Calendar Sidebar -->
+
+    <!-- Calendar & Modal -->
+    <div class="col app-calendar-content">
+      <div class="card shadow-none border-0">
+        <div class="card-body pb-0">
+          <!-- FullCalendar -->
+          <div id="calendar"></div>
+        </div>
+      </div>
+      <div class="app-overlay"></div>
+      <!-- FullCalendar Offcanvas -->
+      <div class="offcanvas offcanvas-end event-sidebar" tabindex="-1" id="addEventSidebar" aria-labelledby="addEventSidebarLabel">
+        <div class="offcanvas-header border-bottom">
+          <h5 class="offcanvas-titel mb-2" id="addEventSidebarLabel">Añadir Evento</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <form class="event-form pt-0" id="eventForm" onsubmit="return false">
+            <div class="mb-3">
+              <label class="form-label" for="eventTitle">Título</label>
+              <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Título del Evento" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="eventLabel">Tipo</label>
+              <select class="select2 select-event-label form-select" id="eventLabel" name="eventLabel">
+                <option data-label="primary" value="Business" selected>Benéfico</option>
+                <option data-label="danger" value="Personal">Personal</option>
+                <option data-label="warning" value="Family">Donación</option>
+                <option data-label="success" value="Holiday">Celebración</option>
+                <option data-label="info" value="ETC">Otro</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="eventStartDate">Fecha Inicio</label>
+              <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" placeholder="Start Date" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="eventEndDate">Fecha fin</label>
+              <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" placeholder="End Date" />
+            </div>
+            <div class="mb-3">
+              <label class="switch">
+                <input type="checkbox" class="switch-input allDay-switch" />
+                <span class="switch-toggle-slider">
+                  <span class="switch-on"></span>
+                  <span class="switch-off"></span>
+                </span>
+                <span class="switch-label">Todo el día</span>
+              </label>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="eventURL">Enlace del Evento</label>
+              <input type="url" class="form-control" id="eventURL" name="eventURL" placeholder="https://www.alianzaanimal.com/" />
+            </div>
+            <div class="mb-3 select2-primary">
+              <label class="form-label" for="eventGuests">Añadir Invitados</label>
+              <select class="select2 select-event-guests form-select" id="eventGuests" name="eventGuests" multiple>
+                <option data-avatar="1.png" value="Jane Foster">Adolfo Contreras</option>
+                <option data-avatar="3.png" value="Donna Frank">Cesar Acuña</option>
+                <option data-avatar="5.png" value="Gabrielle Robertson">Martin Vizcarra</option>
+                <option data-avatar="7.png" value="Lori Spears">Pedro Torres</option>
+                <option data-avatar="9.png" value="Sandy Vega">Adriana</option>
+                <option data-avatar="11.png" value="Cheryl May">Ernesto</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="eventLocation">Lugar</label>
+              <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Ingresa la ubicación" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="eventDescription">Descripción</label>
+              <textarea class="form-control" name="eventDescription" id="eventDescription" placeholder="Descripción del evento"></textarea>
+            </div>
+            <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
+              <div>
+                <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Add</button>
+                <button type="reset" class="btn btn-label-secondary btn-cancel me-sm-0 me-1" data-bs-dismiss="offcanvas">Cancelar</button>
+              </div>
+              <div><button class="btn btn-label-danger btn-delete-event d-none">Delete</button></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- /Calendar & Modal -->
+  </div>
+</div>
+
+          </div>
+          <!-- / Content -->
+
+          
+          
+
+<!-- Footer -->
+<footer class="footer bg-footer-theme">
+    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+      <div>
+        <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+        <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+        <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+      </div>
+    </div>
+  </footer>
+<!-- / Footer -->
+
+          
+          <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+      </div>
+      <!-- / Layout page -->
+    </div>
+
+    
+    
+    
+  </div>
+
+  
+
+  <!-- Core JS -->
+  <!-- build:js assets/vendor/js/core.js -->
+  
+  <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../../assets/vendor/js/bootstrap.js"></script>
+  <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+  <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+  <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+  <script src="../../assets/vendor/js/menu.js"></script>
+  
+  <!-- endbuild -->
+
+  <!-- Vendors JS -->
+  <script src="../../assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
+<script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+<script src="../../assets/vendor/libs/select2/select2.js"></script>
+<script src="../../assets/vendor/libs/moment/moment.js"></script>
+<script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+
+  <!-- Main JS -->
+  <script src="../../assets/js/main.js"></script>
+  
+
+  <!-- Page JS -->
+  <script src="../../assets/js/app-calendar-events.js"></script>
+<script src="../../assets/js/app-calendar.js"></script>
+  
+</body>
+
+
+<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-calendar.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:04 GMT -->
+</html>
+
+<!-- beautify ignore:end -->
+

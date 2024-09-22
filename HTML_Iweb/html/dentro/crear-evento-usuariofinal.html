@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Crear Nueva Publicación | Donaciones Activas</title>
+    <title>Crear Nuevo Evento</title>
 
     
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -80,7 +80,7 @@
   
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg" style="background-color: #ffc7c2">
+<nav class="navbar navbar-expand-lg" style="background-color: #cbe5ef">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
       <span class="navbar-toggler-icon"></span>
@@ -88,10 +88,10 @@
 
     <div class="collapse navbar-collapse" id="navbar-ex-5">
       <div class="navbar-nav me-auto">
-        <a class="nav-item nav-link" href="" style="color: black;">Inicio</a>
-        <a class="nav-item nav-link" href="ver-publicaciones-albergue.html" style="color: black;">Publicaciones</a>
-        <a class="nav-item nav-link" href="ver-eventos-albergue.html" style="color: black;">Eventos</a>
-        <a class="nav-item nav-link" href="ver-hogarestemporales-albergue.html" style="color: black;">Hogares temporales</a>
+        <a class="nav-item nav-link" href="ver-inicio-usuario.html">Inicio</a>
+        <a class="nav-item nav-link" href="ver-publicaciones-usuario.html">Publicaciones</a>
+        <a class="nav-item nav-link" href="ver-loseventos-usuario.html">Eventos</a>
+        <a class="nav-item nav-link" href="postular-hogarestemporales.html">Hogares temporales</a>
       </div>
 
       <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -104,7 +104,7 @@
         <!-- Notification -->
         <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
           <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            <i class="bx bx-bell bx-sm" style="color: black;"></i>
+            <i class="bx bx-bell bx-sm"></i>
             <span class="badge bg-danger rounded-pill badge-notifications">5</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end py-0">
@@ -290,7 +290,7 @@
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
           <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
             <div class="avatar avatar-online">
-              <img src="../../assets/img/huella.jpg" alt class="w-px-40 h-auto rounded-circle">
+              <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
@@ -303,8 +303,8 @@
                     </div>
                   </div>
                   <div class="flex-grow-1">
-                    <span class="fw-medium d-block"> Huellas </span>
-                    <small class="text-muted">Albergue</small>
+                    <span class="fw-medium d-block"> Adolfo </span>
+                    <small class="text-muted">Usuario</small>
                   </div>
                 </div>
               </a>
@@ -313,7 +313,7 @@
               <div class="dropdown-divider"></div>
             </li>
             <li>
-              <a class="dropdown-item" href="ver-miperfil-albergue-detalles.html">
+              <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
                 <i class="bx bx-user me-2"></i>
                 <span class="align-middle">Mi perfil</span>
               </a>
@@ -324,13 +324,13 @@
               <div class="dropdown-divider"></div>
             </li>
             <li>
-              <a class="dropdown-item" href="">
+              <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
                 <i class="bx bx-building-house"></i>
                 <span class="align-middle">Mis publicaciones</span>
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="">
+              <a class="dropdown-item" href="ver-miseventos-usuario.html">
                 <i class="bx bx-bone"></i>
                 <span class="align-middle">Mis eventos</span>
               </a>
@@ -362,7 +362,7 @@
         
   <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="py-3 mb-4">
-      <span class="text-muted fw-light">Publicaciones /</span><span> Crear Nueva Publicación</span><span> | Donaciones Activas</span>
+      <span class="text-muted fw-light">Eventos /</span><span> Crear Nuevo Evento</span>
     </h4>
     <div class="app-ecommerce">
 
@@ -370,7 +370,7 @@
       <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
         <div class="d-flex flex-column justify-content-center">
-          <h4 class="mb-1 mt-3">Crear Nueva Publicación</h4>
+          <h4 class="mb-1 mt-3">Crear Nuevo Evento</h4>
           <p class="text-muted">Rellena los campos abajo</p>
         </div>
         <div class="d-flex align-content-center flex-wrap gap-3">
@@ -386,30 +386,25 @@
           <!-- Product Information -->
           <div class="card mb-4">
               <div class="card-header">
-                <h5 class="card-tile mb-0">Donaciones Activas</h5>
+                <h5 class="card-tile mb-0">Evento</h5>
               </div>
               <div class="card-body">
                 <div class="mb-3">
                   <label class="form-label" for="ecommerce-product-name">Titulo</label>
-                  <input type="text" class="form-control" id="post-title" placeholder="Título de la publicación" name="productTitle" aria-label="Product title">
+                  <input type="text" class="form-control" id="event-title" placeholder="Título del Evento" name="productTitle" aria-label="Product title">
                 </div>
                 <div class="row mb-3">
                   <div class="col"><label class="form-label" for="ecommerce-product-sku">Tipo</label>
-                    <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
-                      <option value="" disabled selected>Elija el tipo de publicación</option>
-                      <option value="crear-publicacion-albergue-normal.html">Normal</option>
-                      <option value="crear-publicacion-albergue-adopcion.html">Adopción</option>
-                      <option value="crear-publicacion-albergue-donacionesactivas.html" selected>Donaciones Activas</option>
-                      <option value="crear-publicacion-albergue-donacionesmonetarias.html">Donaciones Monetarias</option>   
-                    </select>
+                    <label class="form-label" for="ecommerce-product-name">Fecha del Evento</label>
+                    <input type="datetime" class="form-control" id="event-datetime" placeholder="Título del Evento" name="productTitle" aria-label="Product title">  
                   </div>  
-                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Etiquetas</label>
-                    <input type="text" class="form-control" id="post-tags" placeholder="Ingrese las Etiquetas aquí" name="productBarcode" aria-label="Product barcode">
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Lugar del Evento</label>
+                    <input type="text" class="form-control" id="post-tags" placeholder="Indique el Lugar del Evento" name="productBarcode" aria-label="Product barcode">
                   </div>
                 </div>
               <!-- Description -->
                 <div>
-                  <label class="form-label">Descripción <span class="text-muted"></span></label>
+                  <label class="form-label">Descripción del Evento <span class="text-muted"></span></label>
                   <div class="form-control p-0 pt-1">
                     <div class="comment-toolbar border-0 border-bottom">
                       <div class="d-flex justify-content-start">
@@ -456,7 +451,7 @@
         <!-- Product Information -->
           <div class="card mb-4">
             <div class="card-header">
-              <h5 class="card-tile mb-0">Datos del Evento</h5>
+              <h5 class="card-tile mb-0">Datos del Albergue</h5>
             </div>
             <div class="card-body">
               <div class="row mb-3">
@@ -465,24 +460,18 @@
                   <input type="text" required class="form-control" id="shelter-name" placeholder="Nombre del Albergue" name="productTitle" aria-label="Product title">
                 </div>
                 <div class="col">
-                  <label class="form-label" for="ecommerce-product-name">Fecha Programada</label>
-                  <input type="datetime-local" required class="form-control" id="date" placeholder="Indique la fecha del Evento" name="productTitle" aria-label="Product title">                  </div>
+                  <label class="form-label" for="ecommerce-product-name">Invitados</label>
+                  <input type="text" required class="form-control" id="event-guests" placeholder="Indique la Edad de la Mascota" name="productTitle" aria-label="Product title">                  </div>
               </div>
               <div class="row mb-3">
-                <div class="col"><label class="form-label" for="ecommerce-product-barcode">Tipos de Mascota</label>
-                  <input type="text" class="form-control" id="pet-type" placeholder="Indique los tipos de la mascota" name="productBarcode" aria-label="Product barcode">
-                </div>
-                <div class="col"><label class="form-label" for="ecommerce-product-barcode">Teléfono de Contacto</label>
-                  <input type="text" class="form-control" id="contact-number" placeholder="Indique el Teléfono de Contacto" name="productBarcode" aria-label="Product barcode">
-                </div>
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Entrada</label>
+                    <input type="text" class="form-control" id="entrance" placeholder="Indique alguna donación que se pueda llevar" name="productBarcode" aria-label="Product barcode">
+                  </div>
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Razón</label>
+                    <input type="text" class="form-control" id="event-reason" placeholder="Indique la Razón del Evento" name="productBarcode" aria-label="Product barcode">
+                  </div>
               </div>
-              <div class="row mb-3">
-                <div class="col"><label class="form-label" for="ecommerce-product-barcode">Lugar de Acopio</label>
-                  <input type="text" class="form-control" id="collection-place" placeholder="Indique el Lugar de Acopio" name="productBarcode" aria-label="Product barcode">
-                </div>
-              </div>
-            </div>
-          </div> 
+            </div> 
         </div>
       </div>  
     </div>
