@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Crear Nueva Publicación | Donaciones Activas</title>
+    <title>Editar Evento</title>
 
     
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -362,7 +362,7 @@
         
   <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="py-3 mb-4">
-      <span class="text-muted fw-light">Publicaciones /</span><span> Crear Nueva Publicación</span><span> | Donaciones Activas</span>
+      <span class="text-muted fw-light">Mis Eventos /</span><span> Editar Evento</span>
     </h4>
     <div class="app-ecommerce">
 
@@ -370,12 +370,13 @@
       <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
         <div class="d-flex flex-column justify-content-center">
-          <h4 class="mb-1 mt-3">Crear Nueva Publicación</h4>
+          <h4 class="mb-1 mt-3">Editar Evento</h4>
           <p class="text-muted">Rellena los campos abajo</p>
         </div>
         <div class="d-flex align-content-center flex-wrap gap-3">
-          <button class="btn btn-danger">Descartar</button>
-          <button type="submit" class="btn btn-primary">Publicar</button>
+          <button class="btn btn-danger">Eliminar Evento</button>
+          <button class="btn btn-secondary">Descartar Cambios</button>
+          <button type="submit" class="btn btn-primary">Confirmar Cambios</button>
         </div>
 
       </div>
@@ -386,30 +387,25 @@
           <!-- Product Information -->
           <div class="card mb-4">
               <div class="card-header">
-                <h5 class="card-tile mb-0">Donaciones Activas</h5>
+                <h5 class="card-tile mb-0">Evento</h5>
               </div>
               <div class="card-body">
                 <div class="mb-3">
                   <label class="form-label" for="ecommerce-product-name">Titulo</label>
-                  <input type="text" class="form-control" id="post-title" placeholder="Título de la publicación" name="productTitle" aria-label="Product title">
+                  <input type="text" class="form-control" id="event-title" placeholder="Título del Evento" name="productTitle" aria-label="Product title">
                 </div>
                 <div class="row mb-3">
                   <div class="col"><label class="form-label" for="ecommerce-product-sku">Tipo</label>
-                    <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
-                      <option value="" disabled selected>Elija el tipo de publicación</option>
-                      <option value="crear-publicacion-albergue-normal.html">Normal</option>
-                      <option value="crear-publicacion-albergue-adopcion.html">Adopción</option>
-                      <option value="crear-publicacion-albergue-donacionesactivas.html" selected>Donaciones Activas</option>
-                      <option value="crear-publicacion-albergue-donacionesmonetarias.html">Donaciones Monetarias</option>   
-                    </select>
+                    <label class="form-label" for="ecommerce-product-name">Fecha del Evento</label>
+                    <input type="datetime" class="form-control" id="event-datetime" placeholder="Título del Evento" name="productTitle" aria-label="Product title">  
                   </div>  
-                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Etiquetas</label>
-                    <input type="text" class="form-control" id="post-tags" placeholder="Ingrese las Etiquetas aquí" name="productBarcode" aria-label="Product barcode">
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Lugar del Evento</label>
+                    <input type="text" class="form-control" id="post-tags" placeholder="Indique el Lugar del Evento" name="productBarcode" aria-label="Product barcode">
                   </div>
                 </div>
               <!-- Description -->
                 <div>
-                  <label class="form-label">Descripción <span class="text-muted"></span></label>
+                  <label class="form-label">Descripción del Evento <span class="text-muted"></span></label>
                   <div class="form-control p-0 pt-1">
                     <div class="comment-toolbar border-0 border-bottom">
                       <div class="d-flex justify-content-start">
@@ -456,7 +452,7 @@
         <!-- Product Information -->
           <div class="card mb-4">
             <div class="card-header">
-              <h5 class="card-tile mb-0">Datos del Evento</h5>
+              <h5 class="card-tile mb-0">Datos del Albergue</h5>
             </div>
             <div class="card-body">
               <div class="row mb-3">
@@ -465,24 +461,18 @@
                   <input type="text" required class="form-control" id="shelter-name" placeholder="Nombre del Albergue" name="productTitle" aria-label="Product title">
                 </div>
                 <div class="col">
-                  <label class="form-label" for="ecommerce-product-name">Fecha Programada</label>
-                  <input type="datetime-local" required class="form-control" id="date" placeholder="Indique la fecha del Evento" name="productTitle" aria-label="Product title">                  </div>
+                  <label class="form-label" for="ecommerce-product-name">Invitados</label>
+                  <input type="text" required class="form-control" id="event-guests" placeholder="Indique la Edad de la Mascota" name="productTitle" aria-label="Product title">                  </div>
               </div>
               <div class="row mb-3">
-                <div class="col"><label class="form-label" for="ecommerce-product-barcode">Tipos de Mascota</label>
-                  <input type="text" class="form-control" id="pet-type" placeholder="Indique los tipos de la mascota" name="productBarcode" aria-label="Product barcode">
-                </div>
-                <div class="col"><label class="form-label" for="ecommerce-product-barcode">Teléfono de Contacto</label>
-                  <input type="text" class="form-control" id="contact-number" placeholder="Indique el Teléfono de Contacto" name="productBarcode" aria-label="Product barcode">
-                </div>
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Entrada</label>
+                    <input type="text" class="form-control" id="entrance" placeholder="Indique alguna donación que se pueda llevar" name="productBarcode" aria-label="Product barcode">
+                  </div>
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Razón</label>
+                    <input type="text" class="form-control" id="event-reason" placeholder="Indique la Razón del Evento" name="productBarcode" aria-label="Product barcode">
+                  </div>
               </div>
-              <div class="row mb-3">
-                <div class="col"><label class="form-label" for="ecommerce-product-barcode">Lugar de Acopio</label>
-                  <input type="text" class="form-control" id="collection-place" placeholder="Indique el Lugar de Acopio" name="productBarcode" aria-label="Product barcode">
-                </div>
-              </div>
-            </div>
-          </div> 
+            </div> 
         </div>
       </div>  
     </div>
