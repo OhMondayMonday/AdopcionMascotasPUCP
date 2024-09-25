@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/EstilosIndex.css">
-    <title>Login</title>
+    <title>Alianza Animal || Login</title>
+    <link rel="icon" type="image/x-icon" href="C:\IWEB clon\Repo404\HTML_Iweb\assets\img\logo_Alianza_Animal_-removebg-preview.png" />
 </head>
 <body>
     <div class="container">
@@ -15,7 +16,7 @@
             <img src="../../assets/img/logo Alianza Animal .png" alt="Logo" class="logo">
             <h2>Bienvenido!</h2>
             <p>Crea tu cuenta y apoya al cuidado de las mascotas</p>
-            <form>
+            <form id="loginForm">
                 <label for="email">Correo o usuario:</label>
                 <input type="email" id="email" placeholder="Ingrese su correo o usuario" required>
                 
@@ -26,6 +27,12 @@
                 
                 <button type="submit">Ingresar</button>
             </form>
+            <script>
+                document.getElementById('loginForm').addEventListener('submit', function(event) {
+                    event.preventDefault(); // Evita que se envíe el formulario de forma predeterminada
+                    window.location.href ="file:///C:/IWEB%20clon/Repo404/HTML_Iweb/html/dentro/Principal_Administrador.html"; // Redirige a la nueva página
+                });
+            </script>
             <p></p>
             <p>Nuevo en la plataforma? <a href="registro.html">Crea una cuenta</a></p>
         </div>
