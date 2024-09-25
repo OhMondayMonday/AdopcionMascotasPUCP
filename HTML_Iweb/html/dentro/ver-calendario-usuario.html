@@ -108,6 +108,9 @@
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/l10n/es.js"></script>
+
     
 </head>
 
@@ -545,7 +548,7 @@
         <div class="d-grid">
           <button class="btn btn-primary btn-toggle-sidebar" data-bs-toggle="offcanvas" data-bs-target="#addEventSidebar" aria-controls="addEventSidebar">
             <i class="bx bx-plus me-1"></i>
-            <span class="align-middle">Añadir Evento</span>
+            <span class="align-middle">Agregar Evento</span>
           </button>
         </div>
       </div>
@@ -605,31 +608,31 @@
       <!-- FullCalendar Offcanvas -->
       <div class="offcanvas offcanvas-end event-sidebar" tabindex="-1" id="addEventSidebar" aria-labelledby="addEventSidebarLabel">
         <div class="offcanvas-header border-bottom">
-          <h5 class="offcanvas-title mb-2" id="addEventSidebarLabel">Add Event</h5>
+          <h5 class="offcanvas-titel mb-2" id="addEventSidebarLabel">Añadir Evento</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <form class="event-form pt-0" id="eventForm" onsubmit="return false">
             <div class="mb-3">
-              <label class="form-label" for="eventTitle">Title</label>
-              <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Event Title" />
+              <label class="form-label" for="eventTitle">Título</label>
+              <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Título del Evento" />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventLabel">Label</label>
+              <label class="form-label" for="eventLabel">Tipo</label>
               <select class="select2 select-event-label form-select" id="eventLabel" name="eventLabel">
-                <option data-label="primary" value="Business" selected>Business</option>
+                <option data-label="primary" value="Business" selected>Benéfico</option>
                 <option data-label="danger" value="Personal">Personal</option>
-                <option data-label="warning" value="Family">Family</option>
-                <option data-label="success" value="Holiday">Holiday</option>
-                <option data-label="info" value="ETC">ETC</option>
+                <option data-label="warning" value="Family">Donación</option>
+                <option data-label="success" value="Holiday">Celebración</option>
+                <option data-label="info" value="ETC">Otro</option>
               </select>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventStartDate">Start Date</label>
+              <label class="form-label" for="eventStartDate">Fecha Inicio</label>
               <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" placeholder="Start Date" />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventEndDate">End Date</label>
+              <label class="form-label" for="eventEndDate">Fecha fin</label>
               <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" placeholder="End Date" />
             </div>
             <div class="mb-3">
@@ -639,38 +642,38 @@
                   <span class="switch-on"></span>
                   <span class="switch-off"></span>
                 </span>
-                <span class="switch-label">All Day</span>
+                <span class="switch-label">Todo el día</span>
               </label>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventURL">Event URL</label>
-              <input type="url" class="form-control" id="eventURL" name="eventURL" placeholder="https://www.google.com/" />
+              <label class="form-label" for="eventURL">Enlace del Evento</label>
+              <input type="url" class="form-control" id="eventURL" name="eventURL" placeholder="https://www.alianzaanimal.com/" />
             </div>
             <div class="mb-3 select2-primary">
-              <label class="form-label" for="eventGuests">Add Guests</label>
+              <label class="form-label" for="eventGuests">Añadir Invitados</label>
               <select class="select2 select-event-guests form-select" id="eventGuests" name="eventGuests" multiple>
-                <option data-avatar="1.png" value="Jane Foster">Jane Foster</option>
-                <option data-avatar="3.png" value="Donna Frank">Donna Frank</option>
-                <option data-avatar="5.png" value="Gabrielle Robertson">Gabrielle Robertson</option>
-                <option data-avatar="7.png" value="Lori Spears">Lori Spears</option>
-                <option data-avatar="9.png" value="Sandy Vega">Sandy Vega</option>
-                <option data-avatar="11.png" value="Cheryl May">Cheryl May</option>
+                <option data-avatar="1.png" value="Jane Foster">Adolfo Contreras</option>
+                <option data-avatar="3.png" value="Donna Frank">Cesar Acuña</option>
+                <option data-avatar="5.png" value="Gabrielle Robertson">Martin Vizcarra</option>
+                <option data-avatar="7.png" value="Lori Spears">Pedro Torres</option>
+                <option data-avatar="9.png" value="Sandy Vega">Adriana</option>
+                <option data-avatar="11.png" value="Cheryl May">Ernesto</option>
               </select>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventLocation">Location</label>
-              <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Enter Location" />
+              <label class="form-label" for="eventLocation">Lugar</label>
+              <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Ingresa la ubicación" />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventDescription">Description</label>
-              <textarea class="form-control" name="eventDescription" id="eventDescription"></textarea>
+              <label class="form-label" for="eventDescription">Descripción</label>
+              <textarea class="form-control" name="eventDescription" id="eventDescription" placeholder="Descripción del evento"></textarea>
             </div>
             <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
               <div>
-                <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Add</button>
-                <button type="reset" class="btn btn-label-secondary btn-cancel me-sm-0 me-1" data-bs-dismiss="offcanvas">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Agregar</button>
+                <button type="reset" class="btn btn-label-secondary btn-cancel me-sm-0 me-1" data-bs-dismiss="offcanvas">Cancelar</button>
               </div>
-              <div><button class="btn btn-label-danger btn-delete-event d-none">Delete</button></div>
+              <div><button class="btn btn-label-danger btn-delete-event d-none">Eliminar</button></div>
             </div>
           </form>
         </div>
