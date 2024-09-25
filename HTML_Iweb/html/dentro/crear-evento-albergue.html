@@ -97,7 +97,7 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar" style="background-color: #ffc7c277;">
+<div class="layout-wrapper layout-content-navbar" style="background-color: #fff1ef;">
   <div class="layout-container">
 
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -197,6 +197,8 @@
 
           <div class="w-75 align-items-center me-auto">
             <div class="nav-item navbar-search-wrapper mb-0">
+              <img class = "h-px-50" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png">
+
               <span class="d-inline-block justify-content-center">
               <p class="mb-0 fst-normal fw-semibold ff-">Crea un Nuevo Evento </p>
             </span>
@@ -206,6 +208,8 @@
           <ul class="navbar-nav flex-row align-items-center ms-0">
 
             <!-- Notification -->
+            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
               <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 <i class="bx bx-bell bx-sm"></i>
@@ -440,6 +444,12 @@
                   </a>
                 </li>
                 <li>
+                  <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                    <i class="bx bx-calendar"></i>
+                    <span class="align-middle">Mi Calendario</span>
+                  </a>
+                </li>
+                <li>
                   <a class="dropdown-item" href="pages-faq.html">
                     <i class="bx bx-help-circle me-2"></i>
                     <span class="align-middle">FAQ</span>
@@ -479,9 +489,6 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="py-3 mb-4">
-            <span class="text-muted fw-light">Eventos /</span><span> Crear Nuevo Evento</span>
-          </h4>
           <div class="app-ecommerce">
       
             <!-- Add Product -->
@@ -489,7 +496,7 @@
       
               <div class="d-flex flex-column justify-content-center">
                 <h4 class="mb-1 mt-3">Crear Nuevo Evento</h4>
-                <p class="text-muted">Rellena los campos abajo</p>
+                <p class="text-muted mt-1">Rellena los siguientes campos</p>
               </div>
               <div class="d-flex align-content-center flex-wrap gap-3">
                 <button class="btn btn-danger">Descartar</button>
@@ -556,8 +563,11 @@
                       </div>
                       <div class="card-body">
                         <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                          <div class="dz-message needsclick my-5">
-                            <p class="fs-4 note needsclick my-2">Arrastra una imagen o Examinar en el dispositivo</p>
+                          <div class="dz-message needsclick my-3">
+                            <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
+                            <p class="text-muted fs-4 note needsclick my-0">o</p>
+                            <p class="text-muted fs-4 note needsclick my-0">Examinar en el Dispositivo</p>
+
                           </div>
                           <div class="fallback">
                             <input name="file" type="image" accept="image/*"/>
@@ -572,22 +582,22 @@
                     <h5 class="card-tile mb-0">Datos del Albergue</h5>
                   </div>
                   <div class="card-body">
-                    <div class="row mb-3">
+                    <div class="row">
                       <div class="col">
                         <label class="form-label" for="ecommerce-product-name">Nombre del Albergue</label>
                         <input type="text" required class="form-control" id="shelter-name" placeholder="Nombre del Albergue" name="productTitle" aria-label="Product title">
                       </div>
                       <div class="col">
-                        <label class="form-label" for="ecommerce-product-name">Invitados</label>
-                        <input type="text" required class="form-control" id="event-guests" placeholder="Indique la Edad de la Mascota" name="productTitle" aria-label="Product title">                  </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Entrada</label>
-                          <input type="text" class="form-control" id="entrance" placeholder="Indique alguna donación que se pueda llevar" name="productBarcode" aria-label="Product barcode">
-                        </div>
-                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Razón</label>
-                          <input type="text" class="form-control" id="event-reason" placeholder="Indique la Razón del Evento" name="productBarcode" aria-label="Product barcode">
-                        </div>
+                        <label class="form-label" for="ecommerce-product-name">Edad</label>
+                        <input type="number" required class="form-control" style="width: 240px;" placeholder="Indique la edad de la mascota">
+                      </div>
+                    <div class="row mt-3 mb-3">
+                      <div class="col"><label class="form-label" for="ecommerce-product-barcode">Entrada</label>
+                        <input type="text" class="form-control" id="entrance" placeholder="Indique alguna donación que se pueda llevar" name="productBarcode" aria-label="Product barcode">
+                      </div>
+                      <div class="col"><label class="form-label" for="ecommerce-product-barcode">Razón</label>
+                        <input type="text" class="form-control" id="event-reason" placeholder="Indique la Razón del Evento" name="productBarcode" aria-label="Product barcode">
+                      </div>
                     </div>
                   </div> 
               </div>

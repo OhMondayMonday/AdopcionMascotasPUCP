@@ -1,4 +1,4 @@
-"use strict";!function(){var e=document.querySelector(".comment-editor"),e=(e&&new Quill(e,{modules:{toolbar:".comment-toolbar"},placeholder:"Product Description",theme:"snow"}),document.querySelector("#dropzone-basic")),e=(e&&new Dropzone(e,{previewTemplate:`<div class="dz-preview dz-file-preview">
+"use strict";!function(){var e=document.querySelector(".comment-editor"),e=(e&&new Quill(e,{modules:{toolbar:".comment-toolbar"},placeholder:"Agrega una descripción...",theme:"snow"}),document.querySelector("#dropzone-basic")),e=(e&&new Dropzone(e,{previewTemplate:`<div class="dz-preview dz-file-preview">
 <div class="dz-details">
   <div class="dz-thumbnail">
     <img data-dz-thumbnail>
