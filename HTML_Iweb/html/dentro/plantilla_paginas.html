@@ -24,7 +24,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Preguntas Frecuentes</title>
+  <title>Crear Nuevo Evento</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -191,9 +191,8 @@
 
           <div class="w-75 align-items-center me-auto">
             <div class="nav-item navbar-search-wrapper mb-0">
-              <img class = "h-px-50" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png">
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-">Preguntas frecuentes</p>
+              <p class="mb-0 fst-normal fw-semibold ff-">Crea un Nuevo Evento </p>
             </span>
             </div>
           </div>
@@ -474,359 +473,122 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-
-
-          <div class="faq-header d-flex flex-column justify-content-center align-items-center h-px-300 position-relative">
-            <img src="../../assets/img/pages/header.png" class="scaleX-n1-rtl faq-banner-img" alt="background image" />
-            <h3 class="text-center"> Hola, ¿cómo podemos ayudarte hoy? </h3>
-            <div class="input-wrapper my-3 input-group input-group-merge">
-              <span class="input-group-text" id="basic-addon1"><i class="bx bx-search-alt bx-xs text-muted"></i></span>
-              <input type="text" class="form-control form-control-lg" placeholder="Busca una pregunta..." aria-label="Search" aria-describedby="basic-addon1" />
+          <h4 class="py-3 mb-4">
+            <span class="text-muted fw-light">Eventos /</span><span> Crear Nuevo Evento</span>
+          </h4>
+          <div class="app-ecommerce">
+      
+            <!-- Add Product -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+      
+              <div class="d-flex flex-column justify-content-center">
+                <h4 class="mb-1 mt-3">Crear Nuevo Evento</h4>
+                <p class="text-muted">Rellena los campos abajo</p>
+              </div>
+              <div class="d-flex align-content-center flex-wrap gap-3">
+                <button class="btn btn-danger">Descartar</button>
+                <button type="submit" class="btn btn-primary">Publicar</button>
+              </div>
+      
             </div>
-            <p class="text-center mb-0 px-3">o puedes buscar tu consulta a continuación</p>
+      
+            <div class="row">
+              <!-- First column-->
+              <div class="col-12 col-lg-6">
+                <!-- Product Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                      <h5 class="card-tile mb-0">Evento</h5>
+                    </div>
+                    <div class="card-body">
+                      <div class="mb-3">
+                        <label class="form-label" for="ecommerce-product-name">Titulo</label>
+                        <input type="text" class="form-control" id="event-title" placeholder="Título del Evento" name="productTitle" aria-label="Product title">
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col"><label class="form-label" for="ecommerce-product-sku">Tipo</label>
+                          <label class="form-label" for="ecommerce-product-name">Fecha del Evento</label>
+                          <input type="datetime" class="form-control" id="event-datetime" placeholder="Título del Evento" name="productTitle" aria-label="Product title">  
+                        </div>  
+                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Lugar del Evento</label>
+                          <input type="text" class="form-control" id="post-tags" placeholder="Indique el Lugar del Evento" name="productBarcode" aria-label="Product barcode">
+                        </div>
+                      </div>
+                    <!-- Description -->
+                      <div>
+                        <label class="form-label">Descripción del Evento <span class="text-muted"></span></label>
+                        <div class="form-control p-0 pt-1">
+                          <div class="comment-toolbar border-0 border-bottom">
+                            <div class="d-flex justify-content-start">
+                              <span class="ql-formats me-0">
+                                  <button class="ql-bold"></button>
+                                  <button class="ql-italic"></button>
+                                  <button class="ql-underline"></button>
+                                  <button class="ql-list" value="ordered"></button>
+                                  <button class="ql-list" value="bullet"></button>
+                                  <button class="ql-link"></button>
+                                  <button class="ql-image"></button>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="comment-editor border-0 pb-0" id="ecommerce-category-description">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div> 
+              </div>
+              <!-- Third-->
+              <div class="col-12 col-lg-6">
+                <!-- /Second column -->
+                <div class="col-12 col-lg-12">
+                  <!-- Media -->
+                  <div class="card mb-1">
+                      <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0 card-title">Imagen</h5>
+                      <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
+                      </div>
+                      <div class="card-body">
+                        <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                          <div class="dz-message needsclick my-5">
+                            <p class="fs-4 note needsclick my-2">Arrastra una imagen o Examinar en el dispositivo</p>
+                          </div>
+                          <div class="fallback">
+                            <input name="file" type="image" accept="image/*"/>
+                          </div>
+                        </form>
+                      </div>
+                  </div>
+              </div>
+              <!-- Product Information -->
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5 class="card-tile mb-0">Datos del Albergue</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row mb-3">
+                      <div class="col">
+                        <label class="form-label" for="ecommerce-product-name">Nombre del Albergue</label>
+                        <input type="text" required class="form-control" id="shelter-name" placeholder="Nombre del Albergue" name="productTitle" aria-label="Product title">
+                      </div>
+                      <div class="col">
+                        <label class="form-label" for="ecommerce-product-name">Invitados</label>
+                        <input type="text" required class="form-control" id="event-guests" placeholder="Indique la Edad de la Mascota" name="productTitle" aria-label="Product title">                  </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Entrada</label>
+                          <input type="text" class="form-control" id="entrance" placeholder="Indique alguna donación que se pueda llevar" name="productBarcode" aria-label="Product barcode">
+                        </div>
+                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Razón</label>
+                          <input type="text" class="form-control" id="event-reason" placeholder="Indique la Razón del Evento" name="productBarcode" aria-label="Product barcode">
+                        </div>
+                    </div>
+                  </div> 
+              </div>
+            </div>  
           </div>
-
-          <div class="row mt-4">
-            <!-- Navigation -->
-            <div class="col-lg-3 col-md-4 col-12 mb-md-0 mb-3">
-              <div class="d-flex justify-content-between flex-column mb-2 mb-md-0">
-                <ul class="nav nav-align-left nav-pills flex-column">
-                  <li class="nav-item">
-                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#donaciones">
-                      <i class="bx bx-credit-card faq-nav-icon me-1"></i>
-                      <span class="align-middle">Donaciones</span>
-                    </button>
-                  </li>
-                  <li class="nav-item">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#publicaciones">
-                      <i class="bx bx-shopping-bag faq-nav-icon me-1"></i>
-                      <span class="align-middle">Publicaciones</span>
-                    </button>
-                  </li>
-                  <li class="nav-item">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#cuentas">
-                      <i class="bx bx-rotate-left faq-nav-icon me-1"></i>
-                      <span class="align-middle">Cuenta</span>
-                    </button>
-                  </li>
-                  <li class="nav-item">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#seguridad">
-                      <i class="bx bx-cube faq-nav-icon me-1"></i>
-                      <span class="align-middle">Seguridad</span>
-                    </button>
-                  </li>
-                </ul>
-                <div class="d-none d-md-block">
-                  <div class="mt-5">
-                    <img src="../../assets/img/illustrations/sitting-girl-with-laptop-light.png" class="img-fluid w-px-200" alt="FAQ Image" data-app-light-img="illustrations/sitting-girl-with-laptop-light.png" data-app-dark-img="illustrations/sitting-girl-with-laptop-dark.html">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /Navigation -->
-
-            <!-- FAQ's -->
-            <div class="col-lg-9 col-md-8 col-12">
-              <div class="tab-content py-0">
-                <!-- Donaciones -->
-                <div class="tab-pane fade show active" id="donaciones" role="tabpanel">
-                  <div class="d-flex mb-3 gap-3">
-                    <div>
-          <span class="badge bg-label-primary rounded-2">
-            <i class="bx bx-credit-card bx-md"></i>
-          </span>
-                    </div>
-                    <div>
-                      <h4 class="mb-0"><span class="align-middle">Donaciones</span></h4>
-                      <span>Dudas sobre donaciones</span>
-                    </div>
-                  </div>
-                  <div id="accordionDonaciones" class="accordion">
-                    <div class="card accordion-item active">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionDonaciones-1" aria-controls="accordionDonaciones-1">
-                          ¿Se cobran comisiones por cada donación hecha?
-                        </button>
-                      </h2>
-                      <div id="accordionDonaciones-1" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                          Alianza Animal actúa como intermediario entre albergues y usuarios, por lo que las donaciones se realizan directamente a los albergues.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDonaciones-2" aria-controls="accordionDonaciones-2">
-                          ¿Cómo realizo una donación?
-                        </button>
-                      </h2>
-                      <div id="accordionDonaciones-2" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Las donaciones se realizan a través de medios de pago como Plin y Yape, usando solo opciones de pago mediante QR.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDonaciones-3" aria-controls="accordionDonaciones-3">
-                          ¿Puedo cancelar una donación equivocada?
-                        </button>
-                      </h2>
-                      <div id="accordionDonaciones-3" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Si cometiste un error, contacta directamente al albergue. Para problemas, llama al <span class="fw-medium">947 834 213</span>.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionDonaciones-4" aria-controls="accordionDonaciones-4">
-                          ¿Qué medios puedo utilizar como albergue para aceptar donaciones?
-                        </button>
-                      </h2>
-                      <div id="accordionDonaciones-4" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Los únicos medios disponibles son PLIN y YAPE, y el código QR debe incluirse en la publicación.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Publicaciones -->
-                <div class="tab-pane fade" id="publicaciones" role="tabpanel">
-                  <div class="d-flex mb-3 gap-3">
-                    <div>
-          <span class="badge bg-label-primary rounded-2">
-            <i class="bx bx-shopping-bag bx-md"></i>
-          </span>
-                    </div>
-                    <div>
-                      <h4 class="mb-0"><span class="align-middle">Publicaciones</span></h4>
-                      <span>Dudas sobre publicaciones</span>
-                    </div>
-                  </div>
-                  <div id="accordionPublicaciones" class="accordion">
-                    <div class="card accordion-item active">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionPublicaciones-1" aria-controls="accordionPublicaciones-1">
-                          ¿Cómo puedo crear una publicación?
-                        </button>
-                      </h2>
-                      <div id="accordionPublicaciones-1" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                          Para crear una publicación, dirígete a la sección correspondiente en tu cuenta y completa los detalles solicitados.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPublicaciones-2" aria-controls="accordionPublicaciones-2">
-                          ¿Puedo editar mi publicación después de haberla creado?
-                        </button>
-                      </h2>
-                      <div id="accordionPublicaciones-2" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Sí, puedes editar tu publicación en cualquier momento desde la sección de publicaciones de tu cuenta.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPublicaciones-3" aria-controls="accordionPublicaciones-3">
-                          ¿Qué tipo de publicaciones puedo hacer?
-                        </button>
-                      </h2>
-                      <div id="accordionPublicaciones-3" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Puedes hacer publicaciones sobre mascotas perdidas, solicitudes de adopción, y donaciones.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionPublicaciones-4" aria-controls="accordionPublicaciones-4">
-                          ¿Cómo puedo eliminar una publicación?
-                        </button>
-                      </h2>
-                      <div id="accordionPublicaciones-4" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Para eliminar una publicación, ve a tu perfil, selecciona la publicación y elige la opción de eliminar.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cuentas -->
-                <div class="tab-pane fade" id="cuentas" role="tabpanel">
-                  <div class="d-flex mb-3 gap-3">
-                    <div>
-          <span class="badge bg-label-primary rounded-2">
-            <i class="bx bx-user bx-md"></i>
-          </span>
-                    </div>
-                    <div>
-                      <h4 class="mb-0"><span class="align-middle">Cuentas</span></h4>
-                      <span>Gestiona tu cuenta</span>
-                    </div>
-                  </div>
-                  <div id="accordionCuentas" class="accordion">
-                    <div class="card accordion-item active">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionCuentas-1" aria-controls="accordionCuentas-1">
-                          ¿Cómo creo una cuenta?
-                        </button>
-                      </h2>
-                      <div id="accordionCuentas-1" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                          Puedes crear una cuenta desde la página de inicio haciendo clic en "Registrarse" y llenando el formulario.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCuentas-2" aria-controls="accordionCuentas-2">
-                          ¿Qué hago si olvidé mi contraseña?
-                        </button>
-                      </h2>
-                      <div id="accordionCuentas-2" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Si olvidaste tu contraseña, usa la opción "Olvidé mi contraseña" en la página de inicio de sesión para recuperarla.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCuentas-3" aria-controls="accordionCuentas-3">
-                          ¿Puedo cambiar mi dirección de correo electrónico?
-                        </button>
-                      </h2>
-                      <div id="accordionCuentas-3" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Sí, puedes cambiar tu dirección de correo electrónico desde la configuración de tu cuenta.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCuentas-4" aria-controls="accordionCuentas-4">
-                          ¿Qué hago si quiero eliminar mi cuenta?
-                        </button>
-                      </h2>
-                      <div id="accordionCuentas-4" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Para eliminar tu cuenta, contacta a nuestro servicio al cliente y solicita la eliminación.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Seguridad -->
-                <div class="tab-pane fade" id="seguridad" role="tabpanel">
-                  <div class="d-flex mb-3 gap-3">
-                    <div>
-          <span class="badge bg-label-primary rounded-2">
-            <i class="bx bx-lock bx-md"></i>
-          </span>
-                    </div>
-                    <div>
-                      <h4 class="mb-0"><span class="align-middle">Seguridad</span></h4>
-                      <span>Consejos de seguridad</span>
-                    </div>
-                  </div>
-                  <div id="accordionSeguridad" class="accordion">
-                    <div class="card accordion-item active">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#accordionSeguridad-1" aria-controls="accordionSeguridad-1">
-                          ¿Es seguro usar la plataforma?
-                        </button>
-                      </h2>
-                      <div id="accordionSeguridad-1" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                          Sí, nuestra plataforma tiene medidas de seguridad para proteger la información de los usuarios.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionSeguridad-2" aria-controls="accordionSeguridad-2">
-                          ¿Cómo protejo mi información personal?
-                        </button>
-                      </h2>
-                      <div id="accordionSeguridad-2" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          No compartas tu contraseña con nadie y usa contraseñas fuertes para proteger tu cuenta.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionSeguridad-3" aria-controls="accordionSeguridad-3">
-                          ¿Qué hago si sospecho de un fraude?
-                        </button>
-                      </h2>
-                      <div id="accordionSeguridad-3" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Si sospechas de un fraude, contacta a nuestro servicio al cliente de inmediato.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card accordion-item">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionSeguridad-4" aria-controls="accordionSeguridad-4">
-                          ¿Qué medidas de seguridad debo seguir al hacer donaciones?
-                        </button>
-                      </h2>
-                      <div id="accordionSeguridad-4" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                          Asegúrate de usar métodos de pago seguros y verifica la legitimidad de los albergues antes de donar.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
-            <!-- Contact -->
-            <div class="row mt-5">
-              <div class="col-12 text-center mb-4">
-                <div class="badge bg-label-primary">¿Tienes una pregunta?</div>
-                <h4 class="my-2">¿Aún tienes una pregunta?</h4>
-                <p>Si no encuentras tu pregunta en nuestras FAQ, puedes contactarnos. ¡Te responderemos pronto!</p>
-              </div>
-            </div>
-            <div class="row text-center justify-content-center gap-sm-0 gap-3">
-              <div class="col-sm-6">
-                <div class="py-3 rounded bg-faq-section text-center">
-      <span class="badge bg-label-primary rounded-2 my-3">
-        <i class="bx bx-phone bx-sm"></i>
-      </span>
-                  <h4 class="mb-2"><a class="h4" href="tel:+(01)2456789">01 245 6789</a></h4>
-                  <p>Siempre estamos felices de ayudar</p>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="py-3 rounded bg-faq-section text-center">
-      <span class="badge bg-label-primary rounded-2 my-3">
-        <i class="bx bx-envelope bx-sm"></i>
-      </span>
-                  <h4 class="mb-2"><a class="h4" href="mailto:AlianzaAnimal@pucp.edu.pe">AlianzaAnimal@pucp.edu.pe</a></h4>
-                  <p>La mejor manera de obtener una respuesta rápida</p>
-                </div>
-              </div>
-            </div>
-            <!-- /Contact -->
-
-
-          </div>
-          <!-- / Content -->
-        </div>
+        </div>  
+      </div>  
       </div>
       <!-- / Layout wrapper -->
     </div>
