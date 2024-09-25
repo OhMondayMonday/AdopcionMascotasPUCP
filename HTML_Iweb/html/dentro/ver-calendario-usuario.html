@@ -46,7 +46,7 @@
 <!-- beautify ignore:start -->
 
 
-<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
   
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-calendar.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:00 GMT -->
@@ -118,7 +118,105 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   
- 
+  <!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar  ">
+  <div class="layout-container">
+
+    
+    
+
+
+
+
+<!-- Menu -->
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+  
+  <div class="app-brand demo px-3">
+    <a href="javascript:void(0);" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img class = "h-px-50 tf-icon" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+      </span>
+    </a>
+
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+    </a>
+  </div>
+
+  <div class="menu-inner-shadow"></div>
+
+  
+  
+  <ul class="menu-inner py-1">
+
+    <li class="menu-item">
+      <a href="" target="_blank" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-home"></i>
+        <div class="text-truncate" data-i18n="Inicio">Inicio</div>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a href="ver-publicaciones-usuario.html" target="_blank" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-building-house"></i>
+        <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a href="ver-eventos-usuario.html" target="_blank" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+        <div class="text-truncate" data-i18n="Eventos">Eventos</div>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a href="postular-hogarestemporales.html" target="_blank" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-building-house"></i>
+        <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
+      </a>
+    </li>
+    <!-- Gestion -->
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
+    </li>
+    <li class="menu-item">
+      <a href="ver-mispublicaciones-usuario.html" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-building-house"></i>
+        <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a href="ver-miseventos-usuario.html" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+        <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link">
+        <i class="menu-icon tf-icons bx bxs-building-house"></i>
+        <div class="text-truncate" data-i18n="Mis hogares temporales">Mis hogares temporales</div>
+      </a>
+    </li>
+
+    <!-- Misc -->
+    <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
+    <li class="menu-item">
+      <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-help-circle"></i>
+        <div class="text-truncate" data-i18n="Preguntas frecuentes">Mi Calendario</div>
+      </a>
+    </li>
+  </ul>
+  
+  
+
+</aside>
+<!-- / Menu -->
+
+    
+
+    <!-- Layout container -->
+    <div class="layout-page">
       
       
 
@@ -129,287 +227,301 @@
 
 
 
-<nav class="navbar navbar-expand-lg" style="background-color: #cbe5ef">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-ex-5">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbar-ex-5">
-        <div class="navbar-nav me-auto">
-          <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="ver-inicio-usuario.html">Inicio</a>
-          <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="ver-publicaciones-usuario.html">Publicaciones</a>
-          <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="ver-eventos-usuario.html">Eventos</a>
-          <a class="nav-item nav-link" style="color: rgba(31, 31, 31, 0.647); font-weight:500;" href="postular-hogarestemporales.html">Hogares temporales</a>
-        </div>
-
-        <ul class="navbar-nav flex-row align-items-center ms-auto">
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
 
 
+  <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0   d-xl-none ">
+    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+      <i class="bx bx-menu bx-sm"></i>
+    </a>
+  </div>
 
 
+  <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
-
-          <!-- Notification -->
-          <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-              <i class="bx bx-bell bx-sm" style="color: rgba(0, 0, 0, 0.54);"></i>
-              <span class="badge bg-danger rounded-pill badge-notifications">5</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end py-0">
-              <li class="dropdown-menu-header border-bottom">
-                <div class="dropdown-header d-flex align-items-center py-3">
-                  <h5 class="text-body mb-0 me-auto">Notificaciones</h5>
-                  <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="bx fs-4 bx-envelope-open"></i></a>
-                </div>
-              </li>
-              <li class="dropdown-notifications-list scrollable-container" style="min-width: 150px">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">Congratulation Lettie 🎉</h6>
-                        <p class="mb-0">Won the monthly best seller gold badge</p>
-                        <small class="text-muted">1h ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">Charles Franklin</h6>
-                        <p class="mb-0">Accepted your connection</p>
-                        <small class="text-muted">12hr ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <img src="../../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle">
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">New Message ✉️</h6>
-                        <p class="mb-0">You have new message from Natalie</p>
-                        <small class="text-muted">1h ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">Whoo! You have new order 🛒 </h6>
-                        <p class="mb-0">ACME Inc. made new order $1,154</p>
-                        <small class="text-muted">1 day ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <img src="../../assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle">
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">Application has been approved 🚀 </h6>
-                        <p class="mb-0">Your ABC project application has been approved.</p>
-                        <small class="text-muted">2 days ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">Monthly report is generated</h6>
-                        <p class="mb-0">July monthly financial report is generated </p>
-                        <small class="text-muted">3 days ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <img src="../../assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle">
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">Send connection request</h6>
-                        <p class="mb-0">Peter sent you connection request</p>
-                        <small class="text-muted">4 days ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <img src="../../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle">
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">New message from Jane</h6>
-                        <p class="mb-0">Your have new message from Jane</p>
-                        <small class="text-muted">5 days ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar">
-                          <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
-                        </div>
-                      </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mb-1">CPU is running high</h6>
-                        <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
-                        <small class="text-muted">5 days ago</small>
-                      </div>
-                      <div class="flex-shrink-0 dropdown-notifications-actions">
-                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li class="dropdown-menu-footer border-top p-3">
-                <button class="btn btn-primary text-uppercase w-100">Ver todas las notificaciones</button>
-              </li>
-            </ul>
-          </li>
-          <!--/ Notification -->
-          <!-- User -->
-          <li class="nav-item navbar-dropdown dropdown-user dropdown">
-            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-              <div class="avatar avatar-online">
-                <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
-              </div>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a class="dropdown-item" href="pages-account-settings-account.html">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar avatar-online">
-                        <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <span class="fw-medium d-block"> Adolfo </span>
-                      <small class="text-muted">Usuario</small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              <li>
-                <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
-                  <i class="bx bx-user me-2"></i>
-                  <span class="align-middle">Mi perfil</span>
-                </a>
-              </li>
-
-
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              <li>
-                <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
-                  <i class="bx bx-building-house"></i>
-                  <span class="align-middle">Mis publicaciones</span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="ver-miseventos-usuario.html">
-                  <i class="bx bx-bone"></i>
-                  <span class="align-middle">Mis eventos</span>
-                </a>
-              </li>
-            
-              <li>
-                <a class="dropdown-item" href="ver-calendario-usuario.html">
-                  <i class="bx bx-calendar"></i>
-                  <span class="align-middle">Mi Calendario</span>
-                </a>
-              </li>  
-
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              <li>
-                <a class="dropdown-item" href="../index.html" target="_blank">
-                  <i class="bx bx-power-off me-2"></i>
-                  <span class="align-middle">Salir</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <!--/ User -->
-
-
-        </ul>
+    <div class="w-75 align-items-center me-auto">
+      <div class="nav-item navbar-search-wrapper mb-0">
+        <img class = "h-px-50" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png">
+        <span class="d-inline-block justify-content-center">
+        <p class="mb-0 fst-normal fw-semibold ff-">Mi Calendario</p>
+      </span>
       </div>
     </div>
-  </nav>
+
+    <ul class="navbar-nav flex-row align-items-center ms-0">
+
+      <!-- Notification -->
+      <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+          <i class="bx bx-bell bx-sm"></i>
+          <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end py-0">
+          <li class="dropdown-menu-header border-bottom">
+            <div class="dropdown-header d-flex align-items-center py-3">
+              <h5 class="text-body mb-0 me-auto">Notificaciones</h5>
+              <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="bx fs-4 bx-envelope-open"></i></a>
+            </div>
+          </li>
+          <li class="dropdown-notifications-list scrollable-container">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">Congratulation Lettie 🎉</h6>
+                    <p class="mb-0">Won the monthly best seller gold badge</p>
+                    <small class="text-muted">1h ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">Charles Franklin</h6>
+                    <p class="mb-0">Accepted your connection</p>
+                    <small class="text-muted">12hr ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <img src="../../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle">
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">New Message ✉️</h6>
+                    <p class="mb-0">You have new message from Natalie</p>
+                    <small class="text-muted">1h ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">Whoo! You have new order 🛒 </h6>
+                    <p class="mb-0">ACME Inc. made new order $1,154</p>
+                    <small class="text-muted">1 day ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <img src="../../assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle">
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">Application has been approved 🚀 </h6>
+                    <p class="mb-0">Your ABC project application has been approved.</p>
+                    <small class="text-muted">2 days ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">Monthly report is generated</h6>
+                    <p class="mb-0">July monthly financial report is generated </p>
+                    <small class="text-muted">3 days ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <img src="../../assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle">
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">Send connection request</h6>
+                    <p class="mb-0">Peter sent you connection request</p>
+                    <small class="text-muted">4 days ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <img src="../../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle">
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">New message from Jane</h6>
+                    <p class="mb-0">Your have new message from Jane</p>
+                    <small class="text-muted">5 days ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3">
+                    <div class="avatar">
+                      <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h6 class="mb-1">CPU is running high</h6>
+                    <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
+                    <small class="text-muted">5 days ago</small>
+                  </div>
+                  <div class="flex-shrink-0 dropdown-notifications-actions">
+                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-menu-footer border-top p-3">
+            <button class="btn btn-primary text-uppercase w-100">Ver mis notificaciones</button>
+          </li>
+        </ul>
+      </li>
+      <!--/ Notification -->
+      <!-- User -->
+      <li class="nav-item navbar-dropdown dropdown-user dropdown">
+        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+          <div class="avatar avatar-online">
+            <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+          </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+              <div class="d-flex">
+                <div class="flex-shrink-0 me-3">
+                  <div class="avatar avatar-online">
+                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                  </div>
+                </div>
+                <div class="flex-grow-1">
+                  <span class="fw-medium d-block"> Adolfo </span>
+                  <small class="text-muted">Usuario</small>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+              <i class="bx bx-lock me-2"></i>
+              <span class="align-middle">Seguridad</span>
+            </a>
+          </li>
+
+
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+              <i class="bx bx-building-house"></i>
+              <span class="align-middle">Mis publicaciones</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="ver-miseventos-usuario.html">
+              <i class="bx bx-bone"></i>
+              <span class="align-middle">Mis eventos</span>
+            </a>
+          </li>
+          <li></li>
+            <a class="dropdown-item" href="ver-miseventos-usuario.html">
+              <i class="bx bx-calendar"></i>
+              <span class="align-middle">Mi Calendario</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="pages-faq.html">
+              <i class="bx bx-help-circle "></i>
+              <span class="align-middle">FAQ</span>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="../index.html" target="_blank">
+              <i class="bx bx-power-off me-2"></i>
+              <span class="align-middle">Salir</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!--/ User -->
+
+
+    </ul>
+  </div>
+
+
+  <!-- Search Small Screens -->
+  <div class="navbar-search-wrapper search-input-wrapper  d-none">
+    <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
+    <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
+  </div>
+
+
+</nav>
   
 
   
@@ -423,10 +535,6 @@
         <!-- Content -->
         
           <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="py-3 mb-4">
-                <span class="text-muted fw-light">Usuario /</span><span class="text-muted fw-light"> Mi Perfil /</span> Mi Calendario
-              </h4>
-
             
             
 <div class="card app-calendar-wrapper">
@@ -437,7 +545,7 @@
         <div class="d-grid">
           <button class="btn btn-primary btn-toggle-sidebar" data-bs-toggle="offcanvas" data-bs-target="#addEventSidebar" aria-controls="addEventSidebar">
             <i class="bx bx-plus me-1"></i>
-            <span class="align-middle">Nuevo Evento</span>
+            <span class="align-middle">Añadir Evento</span>
           </button>
         </div>
       </div>
@@ -497,31 +605,31 @@
       <!-- FullCalendar Offcanvas -->
       <div class="offcanvas offcanvas-end event-sidebar" tabindex="-1" id="addEventSidebar" aria-labelledby="addEventSidebarLabel">
         <div class="offcanvas-header border-bottom">
-          <h5 class="offcanvas-titel mb-2" id="addEventSidebarLabel">Añadir Evento</h5>
+          <h5 class="offcanvas-title mb-2" id="addEventSidebarLabel">Add Event</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <form class="event-form pt-0" id="eventForm" onsubmit="return false">
             <div class="mb-3">
-              <label class="form-label" for="eventTitle">Título</label>
-              <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Título del Evento" />
+              <label class="form-label" for="eventTitle">Title</label>
+              <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Event Title" />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventLabel">Tipo</label>
+              <label class="form-label" for="eventLabel">Label</label>
               <select class="select2 select-event-label form-select" id="eventLabel" name="eventLabel">
-                <option data-label="primary" value="Business" selected>Benéfico</option>
+                <option data-label="primary" value="Business" selected>Business</option>
                 <option data-label="danger" value="Personal">Personal</option>
-                <option data-label="warning" value="Family">Donación</option>
-                <option data-label="success" value="Holiday">Celebración</option>
-                <option data-label="info" value="ETC">Otro</option>
+                <option data-label="warning" value="Family">Family</option>
+                <option data-label="success" value="Holiday">Holiday</option>
+                <option data-label="info" value="ETC">ETC</option>
               </select>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventStartDate">Fecha Inicio</label>
+              <label class="form-label" for="eventStartDate">Start Date</label>
               <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" placeholder="Start Date" />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventEndDate">Fecha fin</label>
+              <label class="form-label" for="eventEndDate">End Date</label>
               <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" placeholder="End Date" />
             </div>
             <div class="mb-3">
@@ -531,36 +639,36 @@
                   <span class="switch-on"></span>
                   <span class="switch-off"></span>
                 </span>
-                <span class="switch-label">Todo el día</span>
+                <span class="switch-label">All Day</span>
               </label>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventURL">Enlace del Evento</label>
-              <input type="url" class="form-control" id="eventURL" name="eventURL" placeholder="https://www.alianzaanimal.com/" />
+              <label class="form-label" for="eventURL">Event URL</label>
+              <input type="url" class="form-control" id="eventURL" name="eventURL" placeholder="https://www.google.com/" />
             </div>
             <div class="mb-3 select2-primary">
-              <label class="form-label" for="eventGuests">Añadir Invitados</label>
+              <label class="form-label" for="eventGuests">Add Guests</label>
               <select class="select2 select-event-guests form-select" id="eventGuests" name="eventGuests" multiple>
-                <option data-avatar="1.png" value="Jane Foster">Adolfo Contreras</option>
-                <option data-avatar="3.png" value="Donna Frank">Cesar Acuña</option>
-                <option data-avatar="5.png" value="Gabrielle Robertson">Martin Vizcarra</option>
-                <option data-avatar="7.png" value="Lori Spears">Pedro Torres</option>
-                <option data-avatar="9.png" value="Sandy Vega">Adriana</option>
-                <option data-avatar="11.png" value="Cheryl May">Ernesto</option>
+                <option data-avatar="1.png" value="Jane Foster">Jane Foster</option>
+                <option data-avatar="3.png" value="Donna Frank">Donna Frank</option>
+                <option data-avatar="5.png" value="Gabrielle Robertson">Gabrielle Robertson</option>
+                <option data-avatar="7.png" value="Lori Spears">Lori Spears</option>
+                <option data-avatar="9.png" value="Sandy Vega">Sandy Vega</option>
+                <option data-avatar="11.png" value="Cheryl May">Cheryl May</option>
               </select>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventLocation">Lugar</label>
-              <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Ingresa la ubicación" />
+              <label class="form-label" for="eventLocation">Location</label>
+              <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Enter Location" />
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventDescription">Descripción</label>
-              <textarea class="form-control" name="eventDescription" id="eventDescription" placeholder="Descripción del evento"></textarea>
+              <label class="form-label" for="eventDescription">Description</label>
+              <textarea class="form-control" name="eventDescription" id="eventDescription"></textarea>
             </div>
             <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
               <div>
                 <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Add</button>
-                <button type="reset" class="btn btn-label-secondary btn-cancel me-sm-0 me-1" data-bs-dismiss="offcanvas">Cancelar</button>
+                <button type="reset" class="btn btn-label-secondary btn-cancel me-sm-0 me-1" data-bs-dismiss="offcanvas">Cancel</button>
               </div>
               <div><button class="btn btn-label-danger btn-delete-event d-none">Delete</button></div>
             </div>
@@ -576,23 +684,7 @@
           <!-- / Content -->
 
           
-          
-
-<!-- Footer -->
-<footer class="footer bg-footer-theme">
-    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-      <div>
-        <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-
-      </div>
-      <div>
-        <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-        <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-        <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-      </div>
-    </div>
-  </footer>
-<!-- / Footer -->
+        
 
           
           <div class="content-backdrop fade"></div>
@@ -604,14 +696,21 @@
 
     
     
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    
+    
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <div class="drag-target"></div>
     
   </div>
-
+  <!-- / Layout wrapper -->
   
-
   <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
-  
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/l10n/es.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/locales/es.min.js"></script>
   <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
   <script src="../../assets/vendor/libs/popper/popper.js"></script>
   <script src="../../assets/vendor/js/bootstrap.js"></script>
@@ -624,6 +723,7 @@
   <!-- endbuild -->
 
   <!-- Vendors JS -->
+   
   <script src="../../assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
 <script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
 <script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
