@@ -3,7 +3,7 @@
 
 <!-- =========================================================
 * Sneat - Bootstrap Dashboard PRO | v1.0.0
-.* Sneat - Bootstrap Dashboard PRO | v1.0.0
+* Sneat - Bootstrap Dashboard PRO | v1.0.0
 ==============================================================
 
 * Product Page: https://themeselection.com/item/sneat-dashboard-pro-bootstrap/
@@ -24,7 +24,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Demo : eCommerce Add Product - Apps | Sneat - Bootstrap Dashboard PRO</title>
+  <title>Alianza Animal || Admin Perfil</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -42,7 +42,7 @@
   <!-- End Google Tag Manager -->
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/favicon/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="C:\IWEB clon\Repo404\HTML_Iweb\assets\img\logo_Alianza_Animal_-removebg-preview.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -81,6 +81,7 @@
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../../assets/js/config.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -116,60 +117,44 @@
       <ul class="menu-inner py-1">
 
         <li class="menu-item">
-          <a href="ver-inicio-usuario.html"  class="menu-link">
+          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Principal_Administrador.html"  class="menu-link">
             <i class="menu-icon tf-icons bx bx-home"></i>
             <div class="text-truncate" data-i18n="Inicio">Inicio</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="ver-publicaciones-usuario.html"  class="menu-link">
+          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Publicaciones_Admin.html" class="menu-link">
             <i class="menu-icon tf-icons bx bx-building-house"></i>
             <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="ver-eventos-usuario.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-            <div class="text-truncate" data-i18n="Eventos">Eventos</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="postular-hogarestemporales.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-building-house"></i>
-            <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
-          </a>
-        </li>
+        
         <!-- Gestion -->
         <li class="menu-header small text-uppercase">
           <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
         </li>
         <li class="menu-item">
-          <a href="ver-mispublicaciones-usuario.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-building-house"></i>
-            <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="ver-miseventos-usuario.html" class="menu-link">
+          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\GestionarUsua_Admin.html" class="menu-link">
             <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-            <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
+            <div class="text-truncate" data-i18n="Gestionar Cuentas">Gestionar Cuentas</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="javascript:void(0);" class="menu-link">
-            <i class="menu-icon tf-icons bx bxs-building-house"></i>
-            <div class="text-truncate" data-i18n="Mis hogares temporales">Mis hogares temporales</div>
+          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Donacion_Admin.html" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-building-house"></i>
+            <div class="text-truncate" data-i18n="Donaciones">Donaciones</div>
           </a>
         </li>
+        <li class="menu-item">
+          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Solicitud_Admin.html" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+            <div class="text-truncate" data-i18n="Solicitudes">Solicitudes</div>
+          </a>
+        </li>
+        
 
         <!-- Misc -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
-        <li class="menu-item">
-          <a href="Preguntas-frecuentes.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-help-circle"></i>
-            <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
-          </a>
-        </li>
+        
       </ul>
 
 
@@ -191,8 +176,9 @@
 
           <div class="w-75 align-items-center me-auto">
             <div class="nav-item navbar-search-wrapper mb-0">
+              
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-">Mis publicaciones</p>
+              <p class="mb-0 fst-normal fw-semibold ff-">Perfil Administrador</p>
             </span>
             </div>
           </div>
@@ -393,7 +379,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                  <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                  <a class="dropdown-item">
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
@@ -401,8 +387,8 @@
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <span class="fw-medium d-block"> Adolfo </span>
-                        <small class="text-muted">Usuario</small>
+                        <span class="fw-medium d-block"> Luis Joaquin </span>
+                        <small class="text-muted">Administrador</small>
                       </div>
                     </div>
                   </a>
@@ -411,9 +397,9 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                  <a class="dropdown-item" href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Admin_MiPerfil.html">
                     <i class="bx bx-lock me-2"></i>
-                    <span class="align-middle">Seguridad</span>
+                    <span class="align-middle">Mi perfil</span>
                   </a>
                 </li>
 
@@ -423,31 +409,11 @@
                 </li>
                 <li>
                   <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
-                    <i class="bx bx-building-house"></i>
-                    <span class="align-middle">Mis publicaciones</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="ver-miseventos-usuario.html">
-                    <i class="bx bx-bone"></i>
-                    <span class="align-middle">Mis eventos</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="Preguntas-frecuentes.html">
-                    <i class="bx bx-help-circle me-2"></i>
-                    <span class="align-middle">FAQ</span>
-                  </a>
-                </li>
-                <li>
-                  <div class="dropdown-divider"></div>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="../index.html" >
                     <i class="bx bx-power-off me-2"></i>
-                    <span class="align-middle">Salir</span>
+                    <span class="align-middle">Cerrar sesión</span>
                   </a>
                 </li>
+                
               </ul>
             </li>
             <!--/ User -->
@@ -465,8 +431,6 @@
 
 
       </nav>
-      <!-- / Navbar -->
-
 
 
       <!-- Content wrapper -->
@@ -474,279 +438,288 @@
 
         <!-- Content -->
 
+        
         <div class="container-xxl flex-grow-1 container-p-y">
 
 
-          <h4 class="py-3 mb-4">
-            <span class="text-muted fw-light">Usuario /</span><span class="text-muted fw-light">Mi Perfil /</span> Seguridad
-          </h4>
-          <div class="row">
-            <!-- User Sidebar -->
-            <div class="col-xl-4 col-lg-5 col-md-5 order-0 order-md-0">
-              <!-- User Card -->
-              <div class="card mb-4">
-                <div class="card-body">
-                  <div class="user-avatar-section">
-                    <div class=" d-flex align-items-center flex-column">
-                      <img class="img-fluid rounded my-4" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" height="110" width="110" alt="User avatar" />
-                      <div class="user-info text-center">
-                        <h4 class="mb-2">Adolfo Contreras</h4>
-                        <span class="badge bg-label-secondary">Usuario</span>
+            <h4 class="py-3 mb-4">
+              <span class="text-muted fw-light">Administrador /</span><span class="text-muted fw-light"></span> Cuenta
+            </h4>
+            <div class="row">
+              <!-- User Sidebar -->
+              <div class="col-xl-4 col-lg-5 col-md-5 order-0 order-md-0">
+                <!-- User Card -->
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <div class="user-avatar-section">
+                      <div class=" d-flex align-items-center flex-column">
+                        <img class="img-fluid rounded my-4" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" height="110" width="110" alt="User avatar" />
+                        <div class="user-info text-center">
+                          <h4 class="mb-2">Luis Joaquin Pozo Gavidia</h4>
+                          <span class="badge bg-label-secondary">Administrador</span>
+                        </div>
                       </div>
+                    </div>
+                    <div class="d-flex justify-content-around flex-wrap my-4 py-3">
+                      <div class="d-flex align-items-start me-4 mt-3 gap-3">
+                        <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-check bx-sm'></i></span>
+                        <div>
+                          <h5 class="mb-0">500</h5>
+                          <span>Usuarios aceptados</span>
+                        </div>
+                      </div>
+                    </div>
+                    <h5 class="pb-2 border-bottom mb-4">Detalles de la cuenta</h5>
+                    <div class="info-container">
+                      <ul class="list-unstyled">
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Nombre de Usuario:</span>
+                          <span>Admin</span>
+                        </li>
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Correo:</span>
+                          <span>ljpoga.18@gmail.com</span>
+                        </li>
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Estado:</span>
+                          <span class="badge bg-label-success">Activo</span>
+                        </li>
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Cuenta activa desde: </span>
+                          <span>Setiembre 2019</span>
+                        </li>
+  
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Contacto:</span>
+                          <span>(+51) 921-942-145</span>
+                        </li>
+  
+                      </ul>
+  
+                      <div class="d-flex justify-content-center pt-3">
+                        <a href="javascript:;" class="btn btn-label-instagram suspend-user">Editar</a>
+                      </div>
+  
                     </div>
                   </div>
-                  <div class="d-flex justify-content-around flex-wrap my-4 py-3">
-                    <div class="d-flex align-items-start me-4 mt-3 gap-3">
-                      <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-check bx-sm'></i></span>
-                      <div>
-                        <h5 class="mb-0">45</h5>
-                        <span>Publicaciones</span>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-start mt-3 gap-3">
-                      <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-customize bx-sm'></i></span>
-                      <div>
-                        <h5 class="mb-0">12</h5>
-                        <span>Participaciones</span>
-                      </div>
-                    </div>
-                  </div>
-                  <h5 class="pb-2 border-bottom mb-4">Detalles de la cuenta</h5>
-                  <div class="info-container">
-                    <ul class="list-unstyled">
-                      <li class="mb-3">
-                        <span class="fw-medium me-2">Nombre de Usuario:</span>
-                        <span>adolfo.cont</span>
+                </div>
+                <!-- /User Card -->
+                <!-- Plan Card -->
+  
+                <!-- /Plan Card -->
+              </div>
+              <!--/ User Sidebar -->
+  
+  
+              <!-- User Content -->
+              <div class="col-xl-8 col-lg-7 col-md-7 order-1 order-md-1">
+                <!-- User Pills -->
+                <!-- User Pills -->
+                
+                <!--/ User Pills -->
+                <!--/ User Pills -->
+  
+                <!-- Project table -->
+                
+  
+  
+                <!-- /Project table -->
+  
+                <!-- Activity Timeline -->
+                <div class="card mb-4">
+                  <h5 class="card-header">Actividad Reciente</h5>
+                  <div class="card-body">
+                    <ul class="timeline">
+                      <li class="timeline-item timeline-item-transparent">
+                        <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
+                        <div class="timeline-event">
+                          <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Vacunación de animales</h6>
+                            <small class="text-muted">Hace 15 min</small>
+                          </div>
+                          <p class="mb-2">Se completó la vacunación de perritos en el refugio temporal.</p>
+                        </div>
                       </li>
-                      <li class="mb-3">
-                        <span class="fw-medium me-2">Correo:</span>
-                        <span>adolfito@gmail.com</span>
+                      <li class="timeline-item timeline-item-transparent">
+                        <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
+                        <div class="timeline-event">
+                          <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Evento comunitario</h6>
+                            <small class="text-muted">Hace 1 hora</small>
+                          </div>
+                          <p class="mb-2">Participó en un evento de la comunidad para concientizar sobre la adopción de mascotas.</p>
+                        </div>
                       </li>
-                      <li class="mb-3">
-                        <span class="fw-medium me-2">Estado:</span>
-                        <span class="badge bg-label-success">Activo</span>
+                      <li class="timeline-item timeline-item-transparent">
+                        <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
+                        <div class="timeline-event">
+                          <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Ingreso de animales rescatados</h6>
+                            <small class="text-muted">Hace 3 días</small>
+                          </div>
+                          <p class="mb-2">Dos perros y un gato fueron rescatados y están recibiendo cuidados en el hogar temporal.</p>
+                        </div>
                       </li>
-                      <li class="mb-3">
-                        <span class="fw-medium me-2">Cuenta activa desde: </span>
-                        <span>Setiembre 2019</span>
+                      <li class="timeline-item timeline-item-transparent">
+                        <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-success"></span></span>
+                        <div class="timeline-event">
+                          <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Adopción confirmada</h6>
+                            <small class="text-muted">Hace 1 semana</small>
+                          </div>
+                          <p class="mb-0">Se confirmó la adopción de 4 perros que encontraron un hogar amoroso.</p>
+                        </div>
                       </li>
-
-                      <li class="mb-3">
-                        <span class="fw-medium me-2">Contacto:</span>
-                        <span>(01) 456-7890</span>
+                      
+                      <li class="timeline-item timeline-item-transparent">
+                        <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-danger"></span></span>
+                        <div class="timeline-event">
+                          <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Donación Realizada</h6>
+                            <small class="text-muted">Hace 30 min</small>
+                          </div>
+                          <p class="mb-2">Se realizo la donación al albergue Huellitas Felices.</p>
+                        </div>
                       </li>
-
+  
+                      <li class="timeline-item timeline-item-transparent">
+                        <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-success"></span></span>
+                        <div class="timeline-event">
+                          <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Adopción confirmada</h6>
+                            <small class="text-muted">Hace 2 días</small>
+                          </div>
+                          <p class="mb-2">Se confirmó la adopción de 5 perros que encontraron un hogar amoroso</p>
+                        </div>
+                      </li>
+              
+                      <!-- Nuevo punto 3 -->
+                      <li class="timeline-item timeline-item-transparent">
+                        <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
+                        <div class="timeline-event">
+                          <div class="timeline-header mb-1">
+                            <h6 class="mb-0">Reunión con voluntarios</h6>
+                            <small class="text-muted">Hace 5 días</small>
+                          </div>
+                          <p class="mb-2">Se realizó una reunión para organizar el próximo evento de adopción.</p>
+                        </div>
+                      </li>
+            
+  
+                      <li class="timeline-end-indicator">
+                        <i class="bx bx-check-circle"></i>
+                      </li>
+                      
                     </ul>
-
-                    <div class="d-flex justify-content-center pt-3">
-                      <a href="javascript:;" class="btn btn-label-instagram suspend-user">Editar</a>
-                    </div>
-
                   </div>
                 </div>
+                <!-- /Activity Timeline -->
+  
+  
               </div>
-              <!-- /User Card -->
-              <!-- Plan Card -->
-
-              <!-- /Plan Card -->
+              <!--/ User Content -->
             </div>
-            <!--/ User Sidebar -->
-
-
-            <!-- User Content -->
-            <div class="col-xl-8 col-lg-7 col-md-7 order-1 order-md-1">
-              <!-- User Pills -->
-              <!-- User Pills -->
-              <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                <li class="nav-item"><a class="nav-link" href="ver-miperfil-usuario-detalles.html"><i class="bx bx-user me-1"></i>Cuenta</a></li>
-                <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
-              </ul>
-              <!--/ User Pills -->
-              <!--/ User Pills -->
-
-              <!-- Project table -->
-              <div class="card mb-4">
-                <div class="card-body">
-                  <form id="formChangePassword" method="GET" onsubmit="return false">
-                    <div class="alert alert-warning" role="alert">
-                      <h6 class="alert-heading mb-1">Llene los siguientes campos</h6>
-                      <span>8 caracteres como minimo, incluya mayusculas, simbolos y numeros</span>
+  
+            <!-- Modal -->
+  
+            <!-- Add New Credit Card Modal -->
+            <div class="modal fade" id="upgradePlanModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-simple modal-upgrade-plan">
+                <div class="modal-content p-3 p-md-5">
+                  <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="text-center mb-4">
+                      <h3>Upgrade Plan</h3>
+                      <p>Choose the best plan for user.</p>
                     </div>
-                    <div class="row">
-                      <div class="mb-3 col-12 col-sm-6 form-password-toggle">
-                        <label class="form-label" for="newPassword">Nueva Contraseña</label>
-                        <div class="input-group input-group-merge">
-                          <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                          <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                        </div>
+                    <form id="upgradePlanForm" class="row g-3" onsubmit="return false">
+                      <div class="col-sm-9">
+                        <label class="form-label" for="choosePlan">Choose Plan</label>
+                        <select id="choosePlan" name="choosePlan" class="form-select" aria-label="Choose Plan">
+                          <option selected>Choose Plan</option>
+                          <option value="standard">Standard - $99/month</option>
+                          <option value="exclusive">Exclusive - $249/month</option>
+                          <option value="Enterprise">Enterprise - $499/month</option>
+                        </select>
                       </div>
-
-                      <div class="mb-3 col-12 col-sm-6 form-password-toggle">
-                        <label class="form-label" for="confirmPassword">Confirmar contraseña</label>
-                        <div class="input-group input-group-merge">
-                          <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                          <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                        </div>
+                      <div class="col-sm-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary">Upgrade</button>
                       </div>
-                      <div>
-                        <button type="submit" class="btn btn-primary me-2">Cambiar contraseña</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-
-              <!-- /Project table -->
-
-              <!-- Recent Devices -->
-              <div class="card mb-4">
-                <h5 class="card-header">Actividad Reciente</h5>
-                <div class="table-responsive">
-                  <table class="table border-top">
-                    <thead>
-                    <tr>
-                      <th class="text-truncate">Navegador</th>
-                      <th class="text-truncate">Dispositivo</th>
-                      <th class="text-truncate">Lugar</th>
-                      <th class="text-truncate">Actividad reciente</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td class="text-truncate"><i class='bx bxl-windows text-info me-3'></i> <span class="fw-medium">Chrome on Windows</span></td>
-                      <td class="text-truncate">HP Spectre 360</td>
-                      <td class="text-truncate">Suiza</td>
-                      <td class="text-truncate">10 de Julio 2021 20:07</td>
-                    </tr>
-                    <tr>
-                      <td class="text-truncate"><i class='bx bx-mobile-alt text-danger me-3'></i> <span class="fw-medium">Chrome on iPhone</span></td>
-                      <td class="text-truncate">iPhone 12x</td>
-                      <td class="text-truncate">Peru</td>
-                      <td class="text-truncate">13 de Julio 2021 10:10</td>
-                    </tr>
-                    <tr>
-                      <td class="text-truncate"><i class='bx bxl-android text-success me-3'></i> <span class="fw-medium">Chrome on Android</span></td>
-                      <td class="text-truncate">Oneplus 9 Pro</td>
-                      <td class="text-truncate">Peru</td>
-                      <td class="text-truncate">14 de Julio 2021 15:15</td>
-                    </tr>
-                    <tr>
-                      <td class="text-truncate"><i class='bx bxl-apple me-3'></i> <span class="fw-medium">Chrome on MacOS</span></td>
-                      <td class="text-truncate">Apple iMac</td>
-                      <td class="text-truncate">Peru</td>
-                      <td class="text-truncate">16 de Julio 2021 16:17</td>
-                    </tr>
-                    <tr>
-                      <td class="text-truncate"><i class='bx bxl-windows text-info me-3'></i> <span class="fw-medium">Chrome on Windows</span></td>
-                      <td class="text-truncate">HP Spectre 360</td>
-                      <td class="text-truncate">Peru</td>
-                      <td class="text-truncate">20 de Julio 2021 21:01</td>
-                    </tr>
-                    <tr class="border-transparent">
-                      <td class="text-truncate"><i class='bx bxl-android text-success me-3'></i> <span class="fw-medium">Chrome on Android</span></td>
-                      <td class="text-truncate">Oneplus 9 Pro</td>
-                      <td class="text-truncate">Peru</td>
-                      <td class="text-truncate">21 de Julio 2021 12:22</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!--/ Recent Devices -->
-
-
-            </div>
-            <!--/ User Content -->
-          </div>
-
-          <!-- Modal -->
-
-          <!-- Add New Credit Card Modal -->
-          <div class="modal fade" id="upgradePlanModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-simple modal-upgrade-plan">
-              <div class="modal-content p-3 p-md-5">
-                <div class="modal-body">
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  <div class="text-center mb-4">
-                    <h3>Upgrade Plan</h3>
-                    <p>Choose the best plan for user.</p>
+                    </form>
                   </div>
-                  <form id="upgradePlanForm" class="row g-3" onsubmit="return false">
-                    <div class="col-sm-9">
-                      <label class="form-label" for="choosePlan">Choose Plan</label>
-                      <select id="choosePlan" name="choosePlan" class="form-select" aria-label="Choose Plan">
-                        <option selected>Choose Plan</option>
-                        <option value="standard">Standard - $99/month</option>
-                        <option value="exclusive">Exclusive - $249/month</option>
-                        <option value="Enterprise">Enterprise - $499/month</option>
-                      </select>
+                  <hr class="mx-md-n5 mx-n3">
+                  <div class="modal-body">
+                    <h6 class="mb-0">User current plan is standard plan</h6>
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+  
+                      <button class="btn btn-label-danger cancel-subscription mt-3">Cancel Subscription</button>
                     </div>
-                    <div class="col-sm-3 d-flex align-items-end">
-                      <button type="submit" class="btn btn-primary">Upgrade</button>
-                    </div>
-                  </form>
-                </div>
-                <hr class="mx-md-n5 mx-n3">
-                <div class="modal-body">
-                  <h6 class="mb-0">User current plan is standard plan</h6>
-                  <div class="d-flex justify-content-between align-items-center flex-wrap">
-
-                    <button class="btn btn-label-danger cancel-subscription mt-3">Cancel Subscription</button>
                   </div>
                 </div>
               </div>
             </div>
+            <!--/ Add New Credit Card Modal -->
+  
+            <!-- /Modal -->
           </div>
-          <!--/ Add New Credit Card Modal -->
-
-          <!-- /Modal -->
-        </div>
-        <!-- / Content -->
-
-
-
-
-        <!-- Footer -->
-        <footer class="footer bg-footer-theme">
-          <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-            <div>
-              <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-
-            </div>
-            <div>
-              <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-              <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-              <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-            </div>
-          </div>
-        </footer>
-        <!-- / Footer -->
-
-
-        <div class="content-backdrop fade"></div>
-      </div>
-      <!-- Content wrapper -->
-    </div>
-    <!-- / Layout page -->
-  </div>
-
-
-
-  <!-- Overlay -->
-  <div class="layout-overlay layout-menu-toggle"></div>
-
-
-  <!-- Drag Target Area To SlideIn Menu On Small Screens -->
 
 </div>
-<!-- / Layout wrapper -->
-
-
-
-
-
+<!-- /Layout wrapper -->
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+  
+    const data = {
+      labels: ['AGO', 'JUL', 'JUN', 'MAY', 'ABR', 'MAR', 'FEB', 'ENE'], // Meses en mayúsculas
+      datasets: [{
+        data: [40, 35, 30, 28, 31, 32, 27, 29], // Valores para cada mes
+        backgroundColor: 'rgba(54, 162, 235, 0.5)', // Color de las barras
+        borderColor: 'rgba(54, 162, 235, 1)', // Borde de las barras
+        borderWidth: 1
+      }]
+    };
+  
+    const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return 'Valor: ' + tooltipItem.raw; // Mostrar valor al pasar el mouse
+              }
+            }
+          },
+          legend: {
+            display: false // Ocultar la leyenda
+          }
+        }
+      };
+  
+    const myChart = new Chart(ctx, {
+      type: 'bar', // Tipo de gráfico
+      data: data,
+      options: options
+    });
+  </script>
 <!-- Core JS -->
+  <footer class="footer bg-footer-theme">
+    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+      <div>
+        <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+  
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+        <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+        <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+      </div>
+    </div>    
+  </footer>
 <!-- build:js assets/vendor/js/core.js -->
 
 <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
@@ -761,28 +734,22 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="../../assets/vendor/libs/moment/moment.js"></script>
-<script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-<script src="../../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
-<script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
-<script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-<script src="../../assets/vendor/libs/select2/select2.js"></script>
-<script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
-<script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-<script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+
+<script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
 <script src="../../assets/js/main.js"></script>
 
-
+<script src="../../assets/js/dashboards-analytics.js"></script>
 <!-- Page JS -->
-<script src="../../assets/js/modal-edit-user.js"></script>
-<script src="../../assets/js/app-user-view.js"></script>
-<script src="../../assets/js/app-user-view-account.js"></script>
+
+
 
 </body>
 
 
-<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-user-view-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:41 GMT -->
+
+<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
 </html>
 
+<!-- beautify ignore:end -->
