@@ -1,41 +1,42 @@
 "use strict";
 !function () {
+    var quill = new Quill('#ecommerce-category-description', {
+        theme: 'snow'
+    });
     var e = $(".select2"), a = $(".selectpicker"), i = document.querySelector("#wizard-validation");
     if (null !== i) {
         var t = i.querySelector("#wizard-validation-form");
-        const s = t.querySelector("#account-details-validation");
-        var o = t.querySelector("#personal-info-validation"), n = t.querySelector("#social-links-validation"),
+        const s = t.querySelector("#datos-publicacion");
+        var o = t.querySelector("#datos-mascota"), n = t.querySelector("#datos-recepcion"),
             r = [].slice.call(t.querySelectorAll(".btn-next")), t = [].slice.call(t.querySelectorAll(".btn-prev"));
-        const l = new Stepper(i, {linear: !0}), d = FormValidation.formValidation(s, {
+        const l = new Stepper(i, {linear: !0}),
+            d = FormValidation.formValidation(s, {
             fields: {
-                formValidationUsername: {
+                formValidationTitulo: {
                     validators: {
-                        notEmpty: {message: "The name is required"},
+                        notEmpty: {message: "Se requiere un título"},
                         stringLength: {
                             min: 6,
                             max: 30,
-                            message: "The name must be more than 6 and less than 30 characters long"
+                            message: "El titulo debe tener entre 6 y 30 caracteres de largo"
                         },
                         regexp: {
                             regexp: /^[a-zA-Z0-9 ]+$/,
-                            message: "The name can only consist of alphabetical, number and space"
+                            message: "El nombre solo puede contener letras, números y espacios"
                         }
                     }
                 },
-                formValidationEmail: {
+                formValidationDescripcion: {
                     validators: {
-                        notEmpty: {message: "The Email is required"},
-                        emailAddress: {message: "The value is not a valid email address"}
-                    }
-                },
-                formValidationPass: {validators: {notEmpty: {message: "The password is required"}}},
-                formValidationConfirmPass: {
-                    validators: {
-                        notEmpty: {message: "The Confirm Password is required"},
-                        identical: {
-                            compare: function () {
-                                return s.querySelector('[name="formValidationPass"]').value
-                            }, message: "The password and its confirm are not the same"
+                        notEmpty: {
+                            message: 'La descripción es obligatoria'
+                        },
+                        callback: {
+                            message: 'La descripción no puede estar vacía',
+                            callback: function(value, validator, $field) {
+                                var descripcion = quill.getText().trim();
+                                return descripcion.length > 0;
+                            }
                         }
                     }
                 }
@@ -44,13 +45,15 @@
                 trigger: new FormValidation.plugins.Trigger,
                 bootstrap5: new FormValidation.plugins.Bootstrap5({eleValidClass: "", rowSelector: ".col-sm-6"}),
                 autoFocus: new FormValidation.plugins.AutoFocus,
-                submitButton: new FormValidation.plugins.SubmitButton
+                submitButton: new FormValidation.plugins.SubmitButton,
+                bootstrap: new FormValidation.plugins.Bootstrap()
             },
             init: e => {
                 e.on("plugins.message.placed", function (e) {
                     e.element.parentElement.classList.contains("input-group") && e.element.parentElement.insertAdjacentElement("afterend", e.messageElement)
                 })
             }
+
         }).on("core.form.valid", function () {
             l.next()
         }), m = FormValidation.formValidation(o, {
