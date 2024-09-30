@@ -200,7 +200,7 @@
               <img class = "h-px-50" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png">
 
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-">Edita tu perfil aquí</p>
+              <p class="mb-0 fst-normal fw-semibold ff-" style="color: #5b8af7c2;">Edita tu perfil aquí</p>
             </span>
             </div>
           </div>
@@ -208,7 +208,8 @@
           <ul class="navbar-nav flex-row align-items-center ms-0">
 
             <!-- Notification -->
-            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+                 <!--class="text-body"-->
+            <span style="margin-left: 10px; margin-right: 2px; font-weight: bold; color: #5b8af7bf;">¡Hola, Adolfo!</span>
 
             
             <!--/ Notification -->
@@ -321,46 +322,53 @@
                 <div class="card mb-4">
                   <div class="card-body">
                     <div class="user-avatar-section">
-                      <h4 class="mt-2">Vista Previa</h4>
 
-                      <div class="mt-4 d-flex align-items-center flex-column">
+                      <div class="mt-3 d-flex align-items-center flex-column">
                         
-                        <img class="img-fluid rounded my-4" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" height="120" width="120" alt="User avatar" />
+                        <img class="img-fluid rounded my-3" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" height="120" width="120" alt="User avatar" />
 
                         <div class="user-info text-center">
-                          <h4 class="mt-3">Adolfo Contreras</h4>
-                          <span class="badge bg-label-secondary">Usuario</span>
+                          <h4 class="mt-3" style="color: #1f4397;">Adolfo Contreras</h4>
+                          <span class="badge bg-label-success">Activo</span>
                         </div>
 
                       </div>
                     </div>
-                    <!--
-                    <h5 class="pb-2 border-bottom mb-4">Detalles de la cuenta</h5>
-                    -->
+                    
+                    <h5 class="pb-2 border-bottom mt-4 mb-4">Algunos Detalles</h5>
+                  
                     <div class="info-container justify-content-center">
-                      
-                      <div class="d-flex justify-content-center pt-3">
-                        <ul class="list-unstyled">
-                          <li class="mt-4 mb-4">
-                            <a href="javascript:;" class="btn btn-primary" style="padding-left: 98px; padding-right: 98px;">Tu Cuenta</a>
-                          </li>
-                          <li class="mb-1">
-                            <a href="javascript:;" class="btn btn-label-primary" style="padding-left: 92px; padding-right: 92px;">Editar Perfil</a>
-                          </li>
-                          <li class="mb-1">
-                            <a href="javascript:;" class="btn btn-label-primary" style="padding-left: 63px; padding-right: 63px;">Cambiar Contraseña</a>
-                          </li>
-                          <li class="mb-1">
-                            <a href="javascript:;" class="btn btn-label-primary" style="padding-left: 99px; padding-right: 99px;">Tu Cuenta</a>
-                          </li>
-                          
-                        </ul>
-                      </div>
-          
-                      <div class="d-flex justify-content-center pt-3">
-                        <a href="javascript:;" class="btn btn-label-instagram suspend-user">Salir</a>
-                      </div>
-          
+                      <ul class="list-unstyled">
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Nombre Completo:</span>
+                          <span>Adolfo Contreras</span>
+                        </li>
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Nombre de Usuario:</span>
+                          <span>adolfo.cont</span>
+                        </li>
+                        <li class="mb-3">
+                          <span class="fw-medium me-2 bold">Descripción:</span>
+                          <span>Soy Adolfo Contreras, rescatista de corazón. Paso mis días ayudando a animales en situaciones difíciles, ya sea rescatando gatitos de los árboles o asegurándome de que los perros callejeros encuentren un hogar amoroso.
+                            <br>
+                            Si deseas ofrecer un hogar temporal, permanente, o unirte como voluntario, contáctame y juntos haremos la diferencia.</span>
+                        </li>
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Correo:</span>
+                          <span>adolfito@gmail.com</span>
+                        </li>
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Teléfono:</span>
+                          <span>999 999 999</span>
+                        </li>
+                        <li class="mb-3">
+                          <span class="fw-medium me-2">Fecha de Nacimiento: </span>
+                          <span>17 de febrero de 1992</span>
+                        </li>
+  
+                      </ul>
+  
+  
                     </div>
                   </div>
                 </div>
@@ -499,9 +507,8 @@
                           </div>
                         </div>
                         <div class="pt-4">
-                          
-                          <button type="submit" class="btn btn-primary me-sm-3 me-1">Confirmar</button>
-                          <button type="reset" class="btn btn-label-secondary">Cancelar</button>
+                          <button type="submit" class="btn btn-success me-sm-3 me-1"><span style="font-weight: bold;">Confirmar</span></button>
+                          <button type="reset" class="btn btn-label-danger">Cancelar</button>
                         </div>
                       </form>
                       
@@ -540,8 +547,8 @@
                           </div>
                         </div>
                         <div class="pt-4">
-                          <button type="submit" class="btn btn-primary me-sm-3 me-1">Confirmar</button>
-                          <button type="reset" class="btn btn-label-secondary">Cancelar</button>
+                          <button type="submit" class="btn btn-success me-sm-3 me-1"><span style="font-weight: bold;">Confirmar</span></button>
+                          <button type="reset" class="btn btn-label-danger">Cancelar</button>
                         </div>
                       </form>
                     </div>
@@ -582,8 +589,8 @@
                         </div>
 
                         <div class="pt-4">
-                          <button type="submit" class="btn btn-primary me-sm-3 me-1">Confirmar</button>
-                          <button type="reset" class="btn btn-label-secondary">Cancelar</button>
+                          <button type="submit" class="btn btn-success me-sm-3 me-1"><span style="font-weight: bold;">Confirmar</span></button>
+                          <button type="reset" class="btn btn-label-danger">Cancelar</button>
                         </div>
                       </form>
                     </div>
