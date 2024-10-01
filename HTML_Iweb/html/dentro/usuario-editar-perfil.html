@@ -97,7 +97,7 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar">
+<div class="layout-wrapper layout-content-navbar" style="background-color: #d4e1ffa9;">
   <div class="layout-container">
 
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -200,7 +200,7 @@
               <img class = "h-px-50" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png">
 
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-" style="color: #5b8af7c2;">Edita tu perfil aquí</p>
+              <p class="mb-0 fst-normal fw-semibold ff-" style="color: #3258b2c2;">Edita tu perfil aquí</p>
             </span>
             </div>
           </div>
@@ -209,7 +209,7 @@
 
             <!-- Notification -->
                  <!--class="text-body"-->
-            <span style="margin-left: 10px; margin-right: 2px; font-weight: bold; color: #5b8af7bf;">¡Hola, Adolfo!</span>
+            <span style="margin-left: 10px; margin-right: 2px; font-weight: bold; color: #3258b2c2;">¡Hola, Adolfo!</span>
 
             
             <!--/ Notification -->
@@ -384,9 +384,7 @@
                     <li class="nav-item">
                       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#form-tabs-personal" role="tab" aria-selected="true">Información Básica</button>
                     </li>
-                    <li class="nav-item">
-                      <button class="nav-link " data-bs-toggle="tab" data-bs-target="#form-tabs-account" role="tab" aria-selected="false">Detalles Cuenta</button>
-                    </li>
+                    
                     <li class="nav-item">
                       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#form-tabs-social" role="tab" aria-selected="false">Redes Sociales</button>
                     </li>
@@ -402,6 +400,17 @@
                           <div class="col-md-6">
                             <label class="form-label" for="formtabs-last-name">Apellidos</label>
                             <input type="text" id="formtabs-last-name" class="form-control" placeholder="Apellidos" />
+                          </div>
+                          <div class="col-md-6">
+                            <label class="form-label" for="formtabs-last-name">Nombre de Usuario</label>
+                            <input type="text" id="formtabs-last-name" class="form-control" placeholder="adolf.cont" />
+                          </div>
+                          <div class="col-md-6">
+                            <label class="form-label" for="formtabs-email">Correo electrónico</label>
+                            <div class="input-group input-group-merge">
+                              <input type="text" id="formtabs-email" class="form-control" placeholder="alianzaanimal" aria-label="john.doe" aria-describedby="formtabs-email2" />
+                              <span class="input-group-text" id="formtabs-email2">@ejemplo.com</span>
+                            </div>
                           </div>
                           <div class="col-md-6">
                             <label class="form-label" for="ecommerce-product-name">Distrito</label>
@@ -462,7 +471,7 @@
                           </div>
                           <div class="col-md-6">
                             <label class="form-label" for="ecommerce-product-name">Fecha de Nacimiento</label>
-                            <input class="form-control" type="date" value="2024-06-18" id="html5-date-input" />  
+                            <input class="form-control" type="date" value="1999-06-18" id="html5-date-input" />  
                           </div>
                           <div class="col-md-6">
                             <label class="form-label" for="basic-icon-default-phone">Teléfono Contacto</label>
@@ -513,45 +522,7 @@
                       </form>
                       
                     </div>
-                    <div class="tab-pane fade" id="form-tabs-account" role="tabpanel">
-                      <form>
-                        <div class="row g-3">
-                          <div class="col-md-6">
-                            <label class="form-label" for="formtabs-username">Nombre de Usuario</label>
-                            <input type="text" id="formtabs-username" class="form-control" placeholder="Nombre Usuario" />
-                          </div>
-                          <div class="col-md-6">
-                            <label class="form-label" for="formtabs-email">Correo electrónico</label>
-                            <div class="input-group input-group-merge">
-                              <input type="text" id="formtabs-email" class="form-control" placeholder="alianzaanimal" aria-label="john.doe" aria-describedby="formtabs-email2" />
-                              <span class="input-group-text" id="formtabs-email2">@ejemplo.com</span>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-password-toggle">
-                              <label class="form-label" for="formtabs-password">Nueva contraseña</label>
-                              <div class="input-group input-group-merge">
-                                <input type="password" id="formtabs-password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="formtabs-password2" />
-                                <span class="input-group-text cursor-pointer" id="formtabs-password2"><i class="bx bx-hide"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-password-toggle">
-                              <label class="form-label" for="formtabs-confirm-password">Confirmar Contraseña</label>
-                              <div class="input-group input-group-merge">
-                                <input type="password" id="formtabs-confirm-password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="formtabs-confirm-password2" />
-                                <span class="input-group-text cursor-pointer" id="formtabs-confirm-password2"><i class="bx bx-hide"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="pt-4">
-                          <button type="submit" class="btn btn-success me-sm-3 me-1"><span style="font-weight: bold;">Confirmar</span></button>
-                          <button type="reset" class="btn btn-label-danger">Cancelar</button>
-                        </div>
-                      </form>
-                    </div>
+                    
                     <div class="tab-pane fade" id="form-tabs-social" role="tabpanel">
                       <form>
                         <div class="row g-3">
