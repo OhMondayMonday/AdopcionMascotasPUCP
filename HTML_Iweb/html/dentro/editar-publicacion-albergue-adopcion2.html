@@ -539,8 +539,9 @@
                                                         <input type="text" class="form-control" id="formValidationTitulo" required name="formValidationTitulo" placeholder="Título de la publicación" aria-label="Titulo publicacion">
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <div class="col"><label class="form-label">Tipo</label>
-                                                            <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
+                                                        <div class="col">
+                                                            <label class="form-label" for="opciones">Tipo</label>
+                                                            <select class="form-control" name="opciones" id="opciones" onchange="cambiarPagina()" required>
                                                                 <option value="" disabled selected>Elija el tipo de publicación</option>
                                                                 <option value="editar-publicacion-albergue-adopcion.html" selected>Adopción</option>
                                                                 <option value="editar-publicacion-albergue-donacionesactivas.html" >Donaciones Activas</option>
@@ -549,25 +550,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <label class="form-label">Descripción <span class="text-muted"></span></label>
-                                                    <div class="form-control p-0 pt-1">
-                                                        <div class="comment-toolbar border-0 border-bottom">
-                                                            <div class="d-flex justify-content-start">
-                                                          <span class="ql-formats me-0">
-                                                              <button class="ql-bold"></button>
-                                                              <button class="ql-italic"></button>
-                                                              <button class="ql-underline"></button>
-                                                              <button class="ql-list" value="ordered"></button>
-                                                              <button class="ql-list" value="bullet"></button>
-                                                              <button class="ql-link"></button>
-                                                              <button class="ql-image"></button>
-                                                          </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="comment-editor border-0 pb-0" id="ecommerce-category-description">
-
-                                                        </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="formValidationDescripcion">Descripcion</label>
+                                                        <textarea class="form-control" id="formValidationDescripcion" name="formValidationDescripcion" rows="5" required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -607,9 +593,9 @@
                                                 <div class="col">
                                                     <label class="form-label" for="formValidationGenero">Genero</label>
                                                     <select class="form-control" name="formValidationGenero" id="formValidationGenero" required>
-                                                        <option value="" disabled selected>Indique</option>
-                                                        <option value="">Macho</option>
-                                                        <option value="">Hembra</option>
+                                                        <option value="" selected>Indicar genero</option>
+                                                        <option value="macho">Macho</option>
+                                                        <option value="hembra">Hembra</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -645,7 +631,7 @@
                                                 <div class="col">
                                                     <label class="form-label" for="formValidationTemporal">¿Se encuentra en algún temporal?</label>
                                                     <select class="form-control" name="formValidationTemporal" id="formValidationTemporal" required>
-                                                        <option value="" disabled selected>Indique</option>
+                                                        <option value="" selected>Indicar opción</option>
                                                         <option value="">Sí</option>
                                                         <option value="">No</option>
                                                     </select>
@@ -654,8 +640,8 @@
 
                                             <div class = "row-mb-3">
                                                 <div class="col">
-                                                    <label class="form-label" for="formValidationEtiquetas">Etiquetas</label>
-                                                    <input id="formValidationEtiquetas" class="form-control" name="formValidationEtiquetas" value="Visitas previas, Contrato previo, Prueba de fidelidad "/>
+                                                    <label class="form-label" for="TagifyBasic">Etiquetas</label>
+                                                    <input id="TagifyBasic" class="form-control" name="TagifyBasic" value="Etiqueta"/>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mt-1">

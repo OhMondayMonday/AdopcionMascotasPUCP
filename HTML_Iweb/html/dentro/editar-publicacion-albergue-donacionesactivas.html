@@ -62,22 +62,16 @@
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
   <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
   <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
   <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
   <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
   <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
   <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" /> 
-    <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css" />
-<link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css" />
-<link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
-
-  <!-- Page CSS -->
-
-  <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />>
 
   <!-- Helpers -->
   <script src="../../assets/vendor/js/helpers.js"></script>
@@ -284,11 +278,6 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="py-3 mb-4">
-            <span class="text-muted fw-light">Mis Publicaciones / Editar Publicación /</span><span> Donaciones Activas</span>
-          </h4>
-          <div class="app-ecommerce">
-      
             <!-- Add Product -->
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
       
@@ -306,119 +295,187 @@
             </div>
       
             <div class="row">
-              <!-- First column-->
-              <div class="col-12 col-lg-6">
-                <!-- Product Information -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                      <h5 class="card-tile mb-0">Donaciones Activas</h5>
+              <!-- Default Wizard -->
+              <div class="col-12 mb-2">
+                <div id = "wizard-validation" class="bs-stepper mt-2">
+                  <div class="bs-stepper-header">
+                    <div class="step" data-target="#datos-publicacion">
+                      <button type="button" class="step-trigger">
+                        <span class="bs-stepper-circle">1</span>
+                        <span class="bs-stepper-label mt-1">
+                                              <span class="bs-stepper-title">Publicacion</span>
+                                              <span class="bs-stepper-subtitle">Datos de la publicacion</span>
+                                            </span>
+                      </button>
                     </div>
-                    <div class="card-body">
-                      <div class="mb-3">
-                        <label class="form-label" for="ecommerce-product-name">Titulo</label>
-                        <input type="text" class="form-control" id="post-title" placeholder="Título de la publicación" name="productTitle" aria-label="Product title">
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col"><label class="form-label" for="ecommerce-product-sku">Tipo</label>
-                          <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
-                            <option value="" disabled selected>Elija el tipo de publicación</option>
-                            <option value="editar-publicacion-albergue-normal.html">Normal</option>
-                            <option value="editar-publicacion-albergue-adopcion.html">Adopción</option>
-                            <option value="editar-publicacion-albergue-donacionesactivas.html" selected>Donaciones Activas</option>
-                            <option value="editar-publicacion-albergue-donacionesmonetarias.html">Donaciones Monetarias</option>   
-                          </select>
-                        </div>  
-                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Etiquetas</label>
-                          <input id="TagifyBasic" class="form-control" name="TagifyBasic" value="Etiqueta"/>      
+                    <div class="line">
+                      <i class="bx bx-chevron-right"></i>
+                    </div>
+                    <div class="step" data-target="#datos-mascota">
+                      <button type="button" class="step-trigger">
+                        <span class="bs-stepper-circle">2</span>
+                        <span class="bs-stepper-label mt-1">
+                                              <span class="bs-stepper-title">Datos de la mascota</span>
+                                              <span class="bs-stepper-subtitle">Añada información sobre la mascota</span>
+                                            </span>
+                      </button>
+                    </div>
+                    <div class="line">
+                      <i class="bx bx-chevron-right"></i>
+                    </div>
+                    <div class="step" data-target="#datos-recepcion">
+                      <button type="button" class="step-trigger">
+                        <span class="bs-stepper-circle">3</span>
+                        <span class="bs-stepper-label mt-1">
+                                              <span class="bs-stepper-title">Datos de recepcion</span>
+                                              <span class="bs-stepper-subtitle">Especifique datos de recepción</span>
+                                            </span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="bs-stepper-content pt-3">
+                    <form id="wizard-validation-form" onSubmit="return false">
+                      <!-- Account Details -->
+                      <div id="datos-publicacion" class="content">
+                        <div class="content-header mb-2">
+                          <h6 class="mb-0">Publicacion</h6>
+                          <small>Ingrese datos de la publicacion</small>
                         </div>
-                      </div>
-                    <!-- Description -->
-                      <div>
-                        <label class="form-label">Descripción <span class="text-muted"></span></label>
-                        <div class="form-control p-0 pt-1">
-                          <div class="comment-toolbar border-0 border-bottom">
-                            <div class="d-flex justify-content-start">
-                              <span class="ql-formats me-0">
-                                  <button class="ql-bold"></button>
-                                  <button class="ql-italic"></button>
-                                  <button class="ql-underline"></button>
-                                  <button class="ql-list" value="ordered"></button>
-                                  <button class="ql-list" value="bullet"></button>
-                                  <button class="ql-link"></button>
-                                  <button class="ql-image"></button>
-                              </span>
+                        <div class="row">
+                          <div class="col-12 col-lg-6">
+                            <div class="mb-3">
+                              <label class="form-label" for="formValidationTitulo">Titulo</label>
+                              <input type="text" class="form-control" id="formValidationTitulo" required name="formValidationTitulo" placeholder="Título de la publicación" aria-label="Titulo publicacion">
+                            </div>
+                            <div class="row mb-3">
+                              <div class="col">
+                                <label class="form-label" for="opciones">Tipo</label>
+                                <select class="form-control" name="opciones" id="opciones" onchange="cambiarPagina()" required>
+                                  <option value="" disabled selected>Elija el tipo de publicación</option>
+                                  <option value="editar-publicacion-albergue-adopcion2.html">Adopción</option>
+                                  <option value="editar-publicacion-albergue-donacionesactivas.html" selected>Donaciones Activas</option>
+                                  <option value="editar-publicacion-albergue-donacionesmonetarias.html">Donaciones Monetarias</option>
+                                </select>
+                              </div>
                             </div>
                           </div>
-                          <div class="comment-editor border-0 pb-0" id="ecommerce-category-description">
+                          <div class="col-12 col-lg-6 mb-3">
+                            <div class="mb-3">
+                              <label class="form-label" for="formValidationDescripcion">Descripcion</label>
+                              <textarea class="form-control" id="formValidationDescripcion" name="formValidationDescripcion" rows="5" required></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row g-3 mt-1">
+                          <div class="col-12 d-flex justify-content-between">
+                            <button class="btn btn-label-secondary btn-prev" disabled>
+                              <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                              <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+                            </button>
+                            <button class="btn btn-primary btn-next">
+                              <span class="align-middle d-sm-inline-block d-none me-sm-1">Siguiente</span>
+                              <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
+                            </button>
                           </div>
                         </div>
                       </div>
-                    </div>
-                </div> 
-              </div>
-              <!-- Third-->
-              <div class="col-12 col-lg-6">
-                <!-- /Second column -->
-                <div class="col-12 col-lg-12">
-                  <!-- Media -->
-                  <div class="card mb-1">
-                      <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0 card-title">Imagen</h5>
-                      <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
-                      </div>
-                      <div class="card-body">
-                        <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                          <div class="dz-message needsclick my-5">
-                            <p class="fs-4 note needsclick my-2">Arrastra una imagen o Examinar en el dispositivo</p>
+                      <!-- Personal Info -->
+                      <div id="datos-donacion" class="content">
+                        <div class="content-header mb-2">
+                          <h6 class="mb-0">Datos de la mascota</h6>
+                          <small>Ingrese datos sobre la mascota</small>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col">
+                            <label class="form-label" for="formValidationNombre">Nombre</label>
+                            <input type="text" required class="form-control" id="formValidationNombre" placeholder="Nombre de la Mascota" name="formValidationNombre" aria-label="Product title">
                           </div>
-                          <div class="fallback">
-                            <input name="file" type="image" accept="image/*"/>
+                          <div class="col">
+                            <label class="form-label" for="formValidationEdad">Edad aproximada</label>
+                            <input type="text" required class="form-control" id="formValidationEdad" placeholder="Indique la Edad de la Mascota" name="formValidationEdad" aria-label="Product title">                  </div>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col">
+                            <label class="form-label" for="formValidationRaza">Raza</label>
+                            <input type="text" class="form-control" id="formValidationRaza" placeholder="Indique la Raza de la Mascota" name="formValidationRaza" aria-label="Product barcode">
                           </div>
-                        </form>
+                          <div class="col">
+                            <label class="form-label" for="formValidationGenero">Genero</label>
+                            <select class="form-control" name="formValidationGenero" id="formValidationGenero" required>
+                              <option value="" selected>Indicar genero</option>
+                              <option value="macho">Macho</option>
+                              <option value="hembra">Hembra</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col">
+                            <label class="form-label" for="formValidationDistintivo">Distintivo</label>
+                            <input type="text" required class="form-control" id="formValidationDistintivo" placeholder="Algún Distintivo" name="formValidationDistintivo" aria-label="Product title">
+                          </div>
+                          <div class="col">
+                            <label class="form-label" for="formValidationLugar">Lugar de Hallazgo</label>
+                            <input type="text" required class="form-control" id="formValidationLugar" placeholder="Indique el Lugar de Hallazgo" name="formValidationLugar" aria-label="Product title">                  </div>
+                        </div>
+                        <div class="row g-3">
+                          <div class="col-12 d-flex justify-content-between">
+                            <button class="btn btn-primary btn-prev">
+                              <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                              <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+                            </button>
+                            <button class="btn btn-primary btn-next">
+                              <span class="align-middle d-sm-inline-block d-none me-sm-1">Siguiente</span>
+                              <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
+                            </button>
+                          </div>
+                        </div>
                       </div>
+                      <!-- Datos para la rececpion -->
+                      <div id="datos-recepcion" class="content">
+                        <div class="content-header mb-3">
+                          <h6 class="mb-0">Datos de recepcion</h6>
+                          <small>Especifique datos para la recepcion</small>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col">
+                            <label class="form-label" for="formValidationTemporal">¿Se encuentra en algún temporal?</label>
+                            <select class="form-control" name="formValidationTemporal" id="formValidationTemporal" required>
+                              <option value="" selected>Indicar opción</option>
+                              <option value="">Sí</option>
+                              <option value="">No</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class = "row-mb-3">
+                          <div class="col">
+                            <label class="form-label" for="TagifyBasic">Etiquetas</label>
+                            <input id="TagifyBasic" class="form-control" name="TagifyBasic" value="Etiqueta"/>
+                          </div>
+                        </div>
+                        <div class="row g-3 mt-1">
+                          <div class="col-12 d-flex justify-content-between">
+                            <button class="btn btn-primary btn-prev">
+                              <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                              <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                   </div>
+                </div>
               </div>
-              <!-- Product Information -->
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h5 class="card-tile mb-0">Datos del Evento</h5>
-                  </div>
-                  <div class="card-body">
-                    <div class="row mb-3">
-                      <div class="col">
-                        <label class="form-label" for="ecommerce-product-name">Nombre del Albergue</label>
-                        <input type="text" required class="form-control" id="shelter-name" placeholder="Nombre del Albergue" name="productTitle" aria-label="Product title">
-                      </div>
-                      <div class="col">
-                        <label class="form-label" for="ecommerce-product-name">Fecha Programada</label>
-                        <input type="datetime-local" required class="form-control" id="date" placeholder="Indique la fecha del Evento" name="productTitle" aria-label="Product title">                  </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Tipos de Mascota</label>
-                          <input type="text" class="form-control" id="pet-type" placeholder="Indique los tipos de la mascota" name="productBarcode" aria-label="Product barcode">
-                        </div>
-                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Teléfono de Contacto</label>
-                          <input type="text" class="form-control" id="contact-number" placeholder="Indique el Teléfono de Contacto" name="productBarcode" aria-label="Product barcode">
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col"><label class="form-label" for="ecommerce-product-barcode">Lugar de Acopio</label>
-                          <input type="text" class="form-control" id="collection-place" placeholder="Indique el Lugar de Acopio" name="productBarcode" aria-label="Product barcode">
-                        </div>
-                      </div>
-                  </div>
-                </div> 
-              </div>
+              <!-- /Default Wizard -->
             </div>  
           </div>
         </div>  
       </div>   
-      <!-- / Layout wrapper -->
+      <!-- / Content wrapper -->
     </div>
     <!-- / Layout page -->
   </div>
 
-</div>
 <!-- /Layout wrapper -->
 
 <!-- Core JS -->
@@ -433,42 +490,43 @@
 <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
 <script src="../../assets/vendor/js/menu.js"></script>
 
-<!-- endbuild -->
 
 <!-- Vendors JS -->
-
+<script src="../../assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+<script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+<script src="../../assets/vendor/libs/select2/select2.js"></script>
+<script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
 <script src="../../assets/vendor/libs/quill/katex.js"></script>
 <script src="../../assets/vendor/libs/quill/quill.js"></script>
 <script src="../../assets/vendor/libs/select2/select2.js"></script>
-<script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-<script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
 <script src="../../assets/vendor/libs/bloodhound/bloodhound.js"></script>
 <script src="../../assets/vendor/libs/dropzone/dropzone.js"></script>
 <script src="../../assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
 <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
 <script src="../../assets/vendor/libs/tagify/tagify.js"></script>
 
-<!-- Main JS -->
-<script src="../../assets/js/main.js"></script>
-<script>
-  function cambiarPagina() {
-      var select = document.getElementById("opciones");
-      var opcionSeleccionada = select.value;
-
-      if (opcionSeleccionada) {
-          // Cambia la página según la opción seleccionada
-          window.location.href = opcionSeleccionada;
-      }
-  }
-</script>
-
-<!-- Page JS -->
-
+<script src="../../assets/js/form-wizard-numbered.js"></script>
+<script src="../../assets/js/form-wizard-validation-adopcion.js"></script>
 <script src="../../assets/js/app-ecommerce-product-add.js"></script>
 <script src="../../assets/js/forms-selects.js"></script>
 <script src="../../assets/js/forms-tagify.js"></script>
 <script src="../../assets/js/forms-typeahead.js"></script>
 
+<!-- Main JS -->
+<script src="../../assets/js/main.js"></script>
+<script>
+  function cambiarPagina() {
+    var select = document.getElementById("opciones");
+    var opcionSeleccionada = select.value;
+
+    if (opcionSeleccionada) {
+      // Cambia la página según la opción seleccionada
+      window.location.href = opcionSeleccionada;
+    }
+  }
+</script>
 
 </body>
 
