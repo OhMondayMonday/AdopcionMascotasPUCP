@@ -106,28 +106,43 @@
 
   <style>
     .pagination {
-    display: flex;
-    justify-content: center; /* Esto centra el contenido horizontalmente */
-    padding-left: 0;
-    list-style: none;
-    border-radius: 0.25rem;
-    margin-top: 20px;
-    }
-    .page-item {
-    margin: 0 5px; /* Ajusta el espaciado entre los elementos si es necesario */
-    }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      padding-bottom: 20px; /* Añade un espacio inferior para evitar el solapamiento con el footer */
+      }
 
     .page-link {
-        padding: 0.5rem 0.75rem;
-        margin-left: -1px;
-        position: relative;
-        display: block;
-        color: #0e0e0f;
-        text-decoration: none;
-        background-color: #fff;
-        border: 1px solid #dee2e6;
-        border-radius: 0.25rem;
-    }
+      display: inline-block;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      color: #191a1c;
+      text-align: center;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      }
+
+        .page-link:hover {
+            background-color: #a4afb5;
+            color: white;
+        }
+
+        .page-link.active {
+            background-color: #2e3031;
+            color: white;
+            cursor: default;
+        }
+
+        .page-link:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    
   </style>
 </head>
 
@@ -362,12 +377,11 @@
                 </div>
               </div>
               <!-- Basic Bootstrap Table -->
+               
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-6 d-flex align-items-center">
-                      <h5 class="card-title mb-0">Registro de Donaciones:</h5>
-                    </div>
+                    
                     <P></P>
                     
               
@@ -612,38 +626,15 @@
                     </tbody>
                   </table>
               
-                  <ul class="pagination">
-                    <li class="paginate_button page-item previous disabled">
-                      <a href="#" class="page-link">&laquo;</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">1</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">2</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">3</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">4</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">5</a>
-                    </li>
-                    <li class="paginate_button page-item disabled">
-                      <a href="#" class="page-link">...</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">15</a>
-                    </li>
-                    <li class="paginate_button page-item next">
-                      <a href="#" class="page-link">&raquo;</a>
-                    </li>
-                  </ul>
+                  
                   
               
                   
+                </div>
+                <div class="pagination">
+                  <button id="prevBtn" class="page-link" onclick="prevPage()">«</button>
+                  <div id="pageNumbers"></div>
+                  <button id="nextBtn" class="page-link" onclick="nextPage()">»</button>
                 </div>
               
             </div>
@@ -694,7 +685,71 @@
 <script src="../../assets/js/dashboards-analytics.js"></script>
 <!-- Page JS -->
 
+<script>
+  const rows = document.querySelectorAll('.perritoRow');
+  const itemsPerPage = 3;
+  let currentPage = 0;
+  const totalPages = Math.ceil(rows.length / itemsPerPage);
 
+  function renderPage() {
+    rows.forEach((row, index) => {
+      if (index >= currentPage * itemsPerPage && index < (currentPage + 1) * itemsPerPage) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+    renderPageNumbers();
+  }
+
+  function renderPageNumbers() {
+    const pageNumbersDiv = document.getElementById('pageNumbers');
+    pageNumbersDiv.innerHTML = '';
+
+    // Add first pages and ellipsis if needed
+    for (let i = 0; i < totalPages; i++) {
+      if (i < 2 || i === totalPages - 1 || (i >= currentPage - 1 && i <= currentPage + 1)) {
+        const pageButton = document.createElement('button');
+        pageButton.classList.add('page-link');
+        pageButton.textContent = i + 1;
+        pageButton.onclick = () => goToPage(i);
+        if (i === currentPage) {
+          pageButton.classList.add('active');
+        }
+        pageNumbersDiv.appendChild(pageButton);
+      } else if (i === currentPage - 2 || i === currentPage + 2) {
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '...';
+        pageNumbersDiv.appendChild(ellipsis);
+      }
+    }
+
+    document.getElementById('prevBtn').disabled = currentPage === 0;
+    document.getElementById('nextBtn').disabled = currentPage === totalPages - 1;
+  }
+
+  function goToPage(page) {
+    currentPage = page;
+    renderPage();
+  }
+
+  function nextPage() {
+    if (currentPage < totalPages - 1) {
+      currentPage++;
+      renderPage();
+    }
+  }
+
+  function prevPage() {
+    if (currentPage > 0) {
+      currentPage--;
+      renderPage();
+    }
+  }
+
+  // Inicializar la primera página
+  renderPage();
+</script>
 
 </body>
 
