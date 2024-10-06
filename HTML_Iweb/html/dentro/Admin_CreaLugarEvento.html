@@ -24,7 +24,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Alianza Animal || Admin Gestionar</title>
+  <title>Alianza Animal || Lugar Para Eventos</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -82,32 +82,97 @@
   <script src="../../assets/js/config.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
   <style>
-    .pagination {
-    display: flex;
-    justify-content: center; /* Esto centra el contenido horizontalmente */
-    padding-left: 0;
-    list-style: none;
-    border-radius: 0.25rem;
-    margin-top: 20px;
-    }
-    .page-item {
-    margin: 0 5px; /* Ajusta el espaciado entre los elementos si es necesario */
+    .btn-group {
+      display: flex;
+      gap: 10px; /* Espacio entre los botones */
     }
 
-    .page-link {
-        padding: 0.5rem 0.75rem;
-        margin-left: -1px;
-        position: relative;
-        display: block;
-        color: #0e0e0f;
-        text-decoration: none;
-        background-color: #fff;
-        border: 1px solid #dee2e6;
-        border-radius: 0.25rem;
+    .btn {
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+    
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      
+    }
+
+    .btn-ver-mas {
+      background-color: #d29b24; /* Naranja suave */
+      color: white; /* Texto blanco */
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-ver-mas:hover {
+      background-color: #181817; /* Un poco más oscuro al pasar el cursor */
+      color: aliceblue;
     }
   </style>
+  
+  
+
+  <style >  
+    .card {           
+      margin-top: 10px; /* Ajusta esto según lo necesites */
+      }
+  </style>
+
+  <style>
+    .form-control-sm, .form-select-sm {
+      width: 100%; /* Hace que los campos usen el 100% del ancho disponible */
+      height: 50%;  
+    }
+
+    @media (max-width: 768px) {
+  /* Ajuste para pantallas pequeñas, si es necesario */
+    .col-md-4 {
+      width: 100%;  
+    }
+
+    }
+  </style>
+
+<style>
+    .image-preview {
+        width: 100%;
+        height: 255px;
+        border: 1px solid #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        color: #ccc;
+        background-color: #f8f9fa;
+    }
+
+    .image-preview img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+</style>
 
 </head>
 
@@ -191,7 +256,7 @@
           </li>
 
           <li class="menu-item">
-            <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Admin_CreaLugarEvento.html" class="menu-link">
+            <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Admin_CreaCoordinador.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
               <div class="text-truncate" data-i18n="Crear Lugar">Lugar Para Eventos</div>
             </a>
@@ -221,7 +286,7 @@
             <div class="nav-item navbar-search-wrapper mb-0">
               
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-">Gestionar usuarios</p>
+              <p class="mb-0 fst-normal fw-semibold ff-">Crear Lugar Para Eventos</p>
             </span>
             </div>
           </div>
@@ -302,282 +367,74 @@
 
 
       <!-- Content wrapper -->
-      <div class="content-wrapper" >
+      <div class="content-wrapper">
 
         <!-- Content -->
-        
-          <div class="container-xxl flex-grow-1 container-p-y">
-            
-
-<!-- Basic Bootstrap Table -->
-<div class="card-header d-flex flex-wrap justify-content-between gap-3">
-  <div class="col-12">
-    <div class="card mb-0" style="height: auto; padding: 5px;">
-      <div class="card-body d-flex align-items-center justify-content-center p-1">
-        <div class="row w-100">
-          <!-- Tipo de Publicacion -->
-          <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-            <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Usuario</label>
-            <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
-                <option value="Todas" data-href="coordinador-gestion.html">Todas</option>
-                <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.html">Personal</option>
-                <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Coordinador</option>
-                <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Albergue</option>
-            </select>
-        </div>
-        
-        <script>
-            function navigate() {
-                var select = document.getElementById("select2Basic"); // Use the correct select ID
-                var selectedOption = select.options[select.selectedIndex];
-                var url = selectedOption.getAttribute("data-href");
-        
-                if (url) {
-                    window.location.href = url; // Redirects to the URL of the selected option
-                }
-            }
-        </script>
-        
-          <!-- Palabra clave -->
-          <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-            <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
-            <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
-          </div>
-          <!-- Fecha -->
-          <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-            <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
-            <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-              <option value="Todas">Todas</option>
-              <option value="Ultimas24Horas">Últimas 24 horas</option>
-              <option value="UltimaSemana">Esta semana</option>
-              <option value="UltimoMes">Este mes</option>
-              <option value="UltimoAnio">Este año</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card mb-2" style="padding: 10px; margin: 0;">
-    <div class="card-body">
-      
-      <div class="row">
-        <div class="col-md-6 d-flex align-items-center mt-n1" >
-          <h4 class="card-title">Registro de usuarios</h4>
-      </div>
-    <!-- Columna para el campo de búsqueda alineado a la derecha -->
-        
-
-    <div class="table-responsive text-nowrap">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo Usuario</th>
-            <th>Correo Electrónico</th>
-            <th>Celular / Tel. Fijo</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody class="table-border-bottom-0">
-          <tr>
-            <td>
-              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                  <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                </li> <span class="fw-medium">   Huellitas Felices</span> 
-              </ul>
-            </td>
-            <td><span class="fw-medium">Albergue</span></td>
-            <td>
-                <span class="fw-medium">HuellitasFelices2013@gmail.com</span>
-            </td>
-            
-            <td class="titulo-rosado"> (+51) 921-942-145 / (+51) 54 234 567 </td>
-            <td> 10/09/2024 </td>
-            <td>
-              
-              <div class="card-body p-0">
-                <div class="d-inline-flex">
-                  <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                  <button type="button" class="btn btn-sm btn-warning">Editar</button>
-                </div>
-              </div>
-              
-            
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                  <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                </li> <span class="fw-medium"> Adriana</span> 
-              </ul>
-            </td>
-            <td>Personal</td>
-            <td>
-              <span class="fw-medium">Adriana2004@gmail.com</span>
-            </td>
-            <td class="titulo-rosado"> (+51) 965 432 109 / (+51) 1 234 5678</td>
-            <td> 10/08/2024 </td>
-              <td>
-                <div class="card-body p-0">
-                  <div class="d-inline-flex">
-                    <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                    <button type="button" class="btn btn-sm btn-warning">Editar</button>
-                  </div>
-                </div>
-                
     
-              </td>
-          </tr>
-
-          <tr>
+        <div class="container-xxl flex-grow-1 container-p-y">
             
-          </tr>
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-              </li> <span class="fw-medium"> Jorge</span> 
-            </ul>
-          </td>
-            <td>Coordinador</td>
-            <td><span class="fw-medium">Jorge_Miguel@gmail.com</span></td>
-            <td class="titulo-rosado"> (+51) 912 345 678 / (+51) 44 234 567</td>
-            <td>
-              15/09/2024
-              <td>
-                <div class="card-body p-0">
-                  <div class="d-inline-flex">
-                    <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                    <button type="button" class="btn btn-sm btn-warning">Editar</button>
-                  </div>
+            
+            <div class="row">
+                <!-- FormValidation -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Formulario para los datos del lugar -->
+                                <div class="col-md-6">
+                                    <form id="venueForm">
+                                        <div class="form-group mb-3">
+                                            <label for="venueName">Nombre del Lugar</label>
+                                            <input type="text" id="venueName" class="form-control" placeholder="Nombre del Lugar" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="venueLocation">Ubicación</label>
+                                            <input type="text" id="venueLocation" class="form-control" placeholder="Ubicación" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="venueCapacity">Capacidad Máxima</label>
+                                            <input type="number" id="venueCapacity" class="form-control" placeholder="Capacidad Máxima" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="venueDescription">Descripción</label>
+                                            <textarea id="venueDescription" class="form-control" placeholder="Descripción del Lugar" rows="3" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Crear Lugar</button>
+                                    </form>
+                                </div>
+            
+                                <!-- Subida y previsualización de imagen -->
+                                <div class="col-md-6 d-flex flex-column align-items-center">
+                                    <h4>Imagen de Referencia</h4>
+                                    <input type="file" id="imageInput" accept="image/*" class="mb-3" required>
+                                    <div class="image-preview" id="imagePreview">Previsualización de la imagen</div>
+                                </div>
+                            </div>
+            
+                            <!-- Tabla de Lugares Habilitados -->
+                            <h3 class="mt-5">Lugares Habilitados</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Ubicación</th>
+                                        <th>Capacidad Máxima</th>
+                                        <th>Imagen</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="venueTableBody">
+                                    <!-- Los lugares agregados aparecerán aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                
-              </td>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                  <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                </li> <span class="fw-medium">   Kiara</span> 
-              </ul>
-            </td>
-            <td>Coordinador</td>
+            </div>
             
-            <td><span class="fw-medium">Kiara2003@gmail.com</span></td>
-            
-            <td class="titulo-rosado"> (+51) 999 888 777 / (+51) 84 234 567</td>
-            <td>
-              15/09/2024
-              <td>
-                <div class="card-body p-0">
-                  <div class="d-inline-flex">
-                    <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                    <button type="button" class="btn btn-sm btn-warning">Editar</button>
-                  </div>
-                </div>
-                
-              </td>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                  <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                </li> <span class="fw-medium"> P&G   </span> 
-              </ul>
-            </td>
-            <td>Albergue</td>
-            <td>
-                <span class="fw-medium">P&G_Albergue@gmail.com</span>
-            </td>
-            <td class="titulo-rosado"> (+51) 912 678 345 / (+51) 84 543 210</td>
-
-            <td>
-              20/09/2024
-              <td>
-                <div class="card-body p-0">
-                  <div class="d-inline-flex">
-                    <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                    <button type="button" class="btn btn-sm btn-warning">Editar</button>
-                  </div>
-                </div>
-                
-              </td>
-            </td>
-
-            
-        </tbody>
+                      </div>
         
-      </table>
-      <ul class="pagination">
-        <li class="paginate_button page-item previous disabled">
-          <a href="#" class="page-link">&laquo;</a>
-        </li>
-        <li class="paginate_button page-item">
-          <a href="#" class="page-link">1</a>
-        </li>
-        <li class="paginate_button page-item">
-          <a href="#" class="page-link">2</a>
-        </li>
-        <li class="paginate_button page-item">
-          <a href="#" class="page-link">3</a>
-        </li>
-        <li class="paginate_button page-item">
-          <a href="#" class="page-link">4</a>
-        </li>
-        <li class="paginate_button page-item">
-          <a href="#" class="page-link">5</a>
-        </li>
-        <li class="paginate_button page-item disabled">
-          <a href="#" class="page-link">...</a>
-        </li>
-        <li class="paginate_button page-item">
-          <a href="#" class="page-link">15</a>
-        </li>
-        <li class="paginate_button page-item next">
-          <a href="#" class="page-link">&raquo;</a>
-        </li>
-      </ul>
-
-      </div>
-    </div>
-  </div>
-  
-
-<!--/ Basic Bootstrap Table -->
-
-</div>
-          <!-- / Content -->
-
-          
-          
-
-<!-- Footer -->
-
-</div>
-<!-- / Content -->
-
-
-
-
-<!-- Footer -->
-
-<!-- / Footer -->
-
-<div class="content-backdrop fade"></div>
-</div>
-<!-- / Layout page -->
-  <div class="layout-overlay layout-menu-toggle"></div>
-
-</div>
+        
 <!-- /Layout wrapper -->
 
 <!-- Core JS -->
@@ -617,55 +474,63 @@
 <script src="../../assets/js/dashboards-analytics.js"></script>
 <!-- Page JS -->
 
-    <script>
-        // Función para mostrar el modal
-        function showModal(action) {
-        // Cambiar el mensaje del modal dinámicamente según la acción (Aceptar o Rechazar)
-        const modalMessage = document.getElementById('modalMessage');
-        const confirmActionBtn = document.getElementById('confirmActionBtn');
-        
-        // Configurar el mensaje del modal y la acción del botón de confirmar
-        if (action === 'Aceptar') {
-            modalMessage.textContent = '¿Estás seguro de aceptar la creación de esta cuenta?';
-            confirmActionBtn.onclick = function() {
-            cambiarEstado('estado-1', 'Aceptado');
-            closeModal();
-            };
-        } else if (action === 'Rechazar') {
-            modalMessage.textContent = '¿Estás seguro de rechazar la creación de esta cuenta?';
-            confirmActionBtn.onclick = function() {
-            cambiarEstado('estado-1', 'Rechazado');
-            closeModal();
-            };
-        }
     
-        // Mostrar el modal
-        const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-        modal.show();
-        }
-    
-        // Función para cambiar el estado dinámicamente
-        function cambiarEstado(elementId, nuevoEstado) {
-        const estadoElement = document.getElementById(elementId);
-        estadoElement.textContent = nuevoEstado;
-        
-        // Cambia el color de la etiqueta según el estado
-        if (nuevoEstado === 'Aceptado') {
-            estadoElement.className = 'badge bg-label-success me-1'; // Cambia el color a verde
-        } else if (nuevoEstado === 'Rechazado') {
-            estadoElement.className = 'badge bg-label-danger me-1'; // Cambia el color a rojo
-        } else {
-            estadoElement.className = 'badge bg-label-primary me-1'; // Mantén el color original
-        }
-        }
-    
-        // Función para cerrar el modal
-        function closeModal() {
-        const modal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
-        modal.hide();
-        }
-    </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<!-- Activa los tooltips -->
+
+<script>
+    const form = document.getElementById('venueForm');
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const tableBody = document.getElementById('venueTableBody');
+
+    // Previsualizar la imagen
+    imageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.innerHTML = `<img src="${e.target.result}" alt="Imagen de referencia">`;
+            }
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.innerHTML = 'Previsualización de la imagen';
+        }
+    });
+
+    // Agregar nuevo lugar a la tabla
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const venueName = document.getElementById('venueName').value;
+        const venueLocation = document.getElementById('venueLocation').value;
+        const venueCapacity = document.getElementById('venueCapacity').value;
+        const venueDescription = document.getElementById('venueDescription').value;
+        const imageSrc = imagePreview.querySelector('img') ? imagePreview.querySelector('img').src : '';
+
+        const newRow = document.createElement('tr');
+
+        newRow.innerHTML = `
+            <td>${venueName}</td>
+            <td>${venueLocation}</td>
+            <td>${venueCapacity}</td>
+            <td><img src="${imageSrc}" alt="Imagen de lugar" style="width: 100px; height: 100px; object-fit: cover;"></td>
+            <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Eliminar</button>
+            </td>
+        `;
+
+        tableBody.appendChild(newRow);
+
+        // Limpiar el formulario y la previsualización
+        form.reset();
+        imagePreview.innerHTML = 'Previsualización de la imagen';
+    });
+</script>
 </body>
 
 
