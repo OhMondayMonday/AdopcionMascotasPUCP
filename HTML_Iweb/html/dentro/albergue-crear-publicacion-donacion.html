@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-  <title>Editar Publicación | Donaciones Activas</title>
+  <title>Crear Publicación | Donaciones</title>
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
   <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -147,7 +148,7 @@
             <div class="nav-item navbar-search-wrapper mb-0">
 
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-">Editar Publicación </p>
+              <p class="mb-0 fst-normal fw-semibold ff-">Crear Publicación </p>
             </span>
             </div>
           </div>
@@ -236,13 +237,12 @@
         <div class="container-xxl flex-grow-1 container-p-y">
           <div class="d-flex flex-wrap justify-content-between align-items-center mb-0">
             <div class="d-flex flex-column justify-content-center">
-              <h4 class="mb-1 mt-3">Editar Publicación</h4>
+              <h4 class="mb-1 mt-3">Crear Publicación</h4>
               <p class="text-muted">Rellena los campos abajo</p>
             </div>
             <div class="d-flex align-content-center flex-wrap gap-3">
-              <button class="btn btn-danger">Eliminar Publicación</button>
-              <button class="btn btn-secondary">Descartar Cambios</button>
-              <button type="submit" class="btn btn-primary" id="btn-confirmar">Confirmar Cambios</button>
+              <button class="btn btn-danger">Descartar</button>
+              <button type="submit" class="btn btn-primary" id="btn-confirmar">Publicar</button>
             </div>
           </div>
 
@@ -255,9 +255,9 @@
                     <button type="button" class="step-trigger">
                       <span class="bs-stepper-circle">1</span>
                       <span class="bs-stepper-label mt-1">
-                          <span class="bs-stepper-title">Publicación</span>
-                          <span class="bs-stepper-subtitle">Datos de la publicación</span>
-                        </span>
+                  <span class="bs-stepper-title">Publicación</span>
+                  <span class="bs-stepper-subtitle">Datos de la publicación</span>
+                </span>
                     </button>
                   </div>
                   <div class="line">
@@ -267,9 +267,9 @@
                     <button type="button" class="step-trigger">
                       <span class="bs-stepper-circle">2</span>
                       <span class="bs-stepper-label mt-1">
-                          <span class="bs-stepper-title">Datos de la Donación</span>
-                          <span class="bs-stepper-subtitle">Especificar detalles de la donación</span>
-                        </span>
+                  <span class="bs-stepper-title">Datos de la Donación</span>
+                  <span class="bs-stepper-subtitle">Especificar detalles de la donación</span>
+                </span>
                     </button>
                   </div>
                 </div>
@@ -287,6 +287,14 @@
                           <div class="mb-3">
                             <label class="form-label" for="formValidationTitulo">Título</label>
                             <input type="text" class="form-control" id="formValidationTitulo" required name="formValidationTitulo" placeholder="Título de la publicación">
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label" for="opciones">Tipo</label>
+                            <select class="form-control" name="opciones" id="opciones" onchange="cambiarPagina()" required>
+                              <option value="" disabled selected>Elija el tipo de publicación</option>
+                              <option value="albergue-crear-publicacion-adopcion.html">Adopción</option>
+                              <option value="albergue-crear-publicacion-donacion.html" selected>Donaciones</option>
+                            </select>
                           </div>
                         </div>
                         <div class="col-12 col-lg-6 mb-3">
@@ -329,39 +337,40 @@
                         </div>
                       </div>
 
+                      <!-- Campos adicionales según el tipo de donación (en dos columnas) -->
                       <div id="especieFields" style="display:none;">
                         <div class="row">
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <div class="mb-3">
                               <label class="form-label" for="puntoAcopio">Punto de Acopio</label>
                               <input type="text" class="form-control" id="puntoAcopio" placeholder="Indique el punto de acopio">
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <div class="mb-3">
                               <label class="form-label" for="cantidadDonacion">Cantidad de Donaciones</label>
                               <input type="number" class="form-control" id="cantidadDonacion" placeholder="Cantidad">
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <div class="mb-3">
                               <label class="form-label" for="marcaDonacion">Marca (Opcional)</label>
                               <input type="text" class="form-control" id="marcaDonacion" placeholder="Especifique la marca (opcional)">
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <label class="form-label" for="fechaRecepcion">Fechas Programadas</label>
                             <input type="date" class="form-control" id="fechaRecepcion">
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <label class="form-label" for="horaRecepcion">Horas Programadas</label>
                             <input type="time" class="form-control" id="horaRecepcion">
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <label class="form-label" for="telefonoContacto">Teléfono de Contacto</label>
                             <input type="tel" class="form-control" id="telefonoContacto" placeholder="Teléfono del albergue">
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <label class="form-label" for="nombreContacto">Nombre de Contacto</label>
                             <input type="text" class="form-control" id="nombreContacto" placeholder="Nombre del contacto">
                           </div>
@@ -370,31 +379,31 @@
 
                       <div id="dineroFields" style="display:none;">
                         <div class="row">
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <div class="mb-3">
                               <label class="form-label" for="puntoAcopioDinero">Punto de Acopio</label>
                               <input type="text" class="form-control" id="puntoAcopioDinero" placeholder="Indique el punto de acopio">
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <div class="mb-3">
                               <label class="form-label" for="cantidadDinero">Cantidad de Donaciones</label>
                               <input type="number" class="form-control" id="cantidadDinero" placeholder="Cantidad">
                             </div>
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <label class="form-label" for="fechaRecepcionDinero">Fechas Programadas</label>
                             <input type="date" class="form-control" id="fechaRecepcionDinero">
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <label class="form-label" for="horaRecepcionDinero">Horas Programadas</label>
                             <input type="time" class="form-control" id="horaRecepcionDinero">
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <label class="form-label" for="telefonoContactoDinero">Teléfono de Contacto</label>
                             <input type="tel" class="form-control" id="telefonoContactoDinero" placeholder="Teléfono del albergue">
                           </div>
-                          <div class="col-12">
+                          <div class="col-12 col-lg-6">
                             <label class="form-label" for="nombreContactoDinero">Nombre de Contacto</label>
                             <input type="text" class="form-control" id="nombreContactoDinero" placeholder="Nombre del contacto">
                           </div>
@@ -414,6 +423,30 @@
                           <button type="submit" class="btn btn-primary" id="btn-donacion">Confirmar Donación</button>
                         </div>
                       </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- /Default Wizard -->
+            <div class="row"></div>
+            <div class="col-12">
+              <!-- Media -->
+              <div class="card mb-1">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0 card-title">Imagen</h5>
+                  <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
+                </div>
+                <div class="card-body">
+                  <form action="https://demos.themeselection.com/upload" class="dropzone" id="dropzone-basic">
+                    <div class="dz-message needsclick my-3">
+                      <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
+                      <p class="text-muted fs-4 note needsclick my-0">o</p>
+                      <p class="text-muted fs-4 note needsclick my-0">Examinar en el Dispositivo</p>
+
+                    </div>
+                    <div class="fallback">
+                      <input name="file" type="image" accept="image/*" alt=""/>
                     </div>
                   </form>
                 </div>
@@ -492,6 +525,20 @@
       alert("¡Donación registrada exitosamente!");
     });
   });
+</script>
+
+<!-- Main JS -->
+<script src="../../assets/js/main.js"></script>
+<script>
+  function cambiarPagina() {
+    var select = document.getElementById("opciones");
+    var opcionSeleccionada = select.value;
+
+    if (opcionSeleccionada) {
+      // Cambia la página según la opción seleccionada
+      window.location.href = opcionSeleccionada;
+    }
+  }
 </script>
 
 </body>
