@@ -539,4 +539,101 @@
                     });
             });
         });
+        // Espera a que el documento esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function () {
+            // Selecciona todos los botones de eliminar en caso de que haya múltiples
+            var deleteButtons = document.querySelectorAll('.btn-delete');
+            
+            deleteButtons.forEach(function(button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita que el botón recargue la página si es un enlace
+        
+                    // Alerta de confirmación con SweetAlert2
+                    Swal.fire({
+                        title: "¿Estás seguro de eliminar esta solicitud?",
+                        text: "Esta acción es irreversible. La solicitud será eliminada permanentemente.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, eliminar",
+                        cancelButtonText: "Cancelar",
+                        customClass: {
+                            confirmButton: "btn btn-primary me-3",
+                            cancelButton: "btn btn-label-secondary",
+                        },
+                        buttonsStyling: false,
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                            // Acción cuando el usuario confirma
+                            Swal.fire({
+                                icon: "success",
+                                title: "¡Eliminado!",
+                                text: "La solicitud ha sido eliminada.",
+                                customClass: { confirmButton: "btn btn-success" },
+                            });
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            // Acción cuando el usuario cancela
+                            Swal.fire({
+                                title: "Cancelado",
+                                text: "La solicitud no ha sido eliminada.",
+                                icon: "error",
+                                customClass: { confirmButton: "btn btn-success" },
+                            });
+                        }
+                    });
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Selecciona todos los botones de aceptar con la clase 'btn-accept'
+            var acceptButtons = document.querySelectorAll('.btn-accept');
+            
+            // Recorre cada botón de aceptar y agrega el evento de clic
+            acceptButtons.forEach(function(button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita que el enlace haga su comportamiento predeterminado
+        
+                    // Alerta de confirmación con SweetAlert2 para aceptar la solicitud
+                    Swal.fire({
+                        title: "¿Quieres aceptar esta solicitud?",
+                        text: "La solicitud será aprobada.",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, aceptarla",
+                        cancelButtonText: "Cancelar",
+                        customClass: {
+                            confirmButton: "btn btn-primary me-3",
+                            cancelButton: "btn btn-label-secondary",
+                        },
+                        buttonsStyling: false,
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                            // Si el usuario confirma, muestra la alerta de éxito
+                            Swal.fire({
+                                icon: "success",
+                                title: "¡Solicitud aceptada!",
+                                text: "La solicitud ha sido aprobada.",
+                                customClass: { confirmButton: "btn btn-success" },
+                            });
+        
+                            // Aquí puedes agregar la lógica para hacer la acción real de aceptación
+                            // Por ejemplo, una solicitud AJAX para actualizar el estado de la solicitud en el servidor
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            // Si el usuario cancela, muestra una alerta opcional o simplemente no hacer nada
+                            Swal.fire({
+                                title: "Acción cancelada",
+                                text: "La solicitud no fue aprobada.",
+                                icon: "info",
+                                customClass: { confirmButton: "btn btn-info" },
+                            });
+                        }
+                    });
+                });
+            });
+        });
+        
+
+
+        
+
 })();
