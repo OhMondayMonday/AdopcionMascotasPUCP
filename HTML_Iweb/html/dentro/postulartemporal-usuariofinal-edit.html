@@ -38,11 +38,7 @@
     <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <style>
-      .fondo{
-        background-color: #FFFCF5;
-      }
-    </style>
+
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../../assets/css/demo.css" />
@@ -70,7 +66,7 @@
     
 </head>
 
-<body class="fondo">
+<body style="background-color: #d4e1ffa9;">
 
   
   <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
@@ -178,9 +174,8 @@
 
       <div class="w-75 align-items-center me-auto">
         <div class="nav-item navbar-search-wrapper mb-0">
-          <img class = "h-px-50" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png">
           <span class="d-inline-block justify-content-center">
-          <p class="mb-0 fst-normal fw-semibold ff-">Editar Postulación a Temporal</p>
+          <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario / Hogares Temporales /</span> Postular</p>
         </span>
         </div>
       </div>
@@ -188,189 +183,8 @@
       <ul class="navbar-nav flex-row align-items-center ms-0">
 
         <!-- Notification -->
-        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-          <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            <i class="bx bx-bell bx-sm"></i>
-            <span class="badge bg-danger rounded-pill badge-notifications">5</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end py-0">
-            <li class="dropdown-menu-header border-bottom">
-              <div class="dropdown-header d-flex align-items-center py-3">
-                <h5 class="text-body mb-0 me-auto">Notification</h5>
-                <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="bx fs-4 bx-envelope-open"></i></a>
-              </div>
-            </li>
-            <li class="dropdown-notifications-list scrollable-container">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">Congratulation Lettie 🎉</h6>
-                      <p class="mb-0">Won the monthly best seller gold badge</p>
-                      <small class="text-muted">1h ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">Charles Franklin</h6>
-                      <p class="mb-0">Accepted your connection</p>
-                      <small class="text-muted">12hr ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="../../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">New Message ✉️</h6>
-                      <p class="mb-0">You have new message from Natalie</p>
-                      <small class="text-muted">1h ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">Whoo! You have new order 🛒 </h6>
-                      <p class="mb-0">ACME Inc. made new order $1,154</p>
-                      <small class="text-muted">1 day ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="../../assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">Application has been approved 🚀 </h6>
-                      <p class="mb-0">Your ABC project application has been approved.</p>
-                      <small class="text-muted">2 days ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">Monthly report is generated</h6>
-                      <p class="mb-0">July monthly financial report is generated </p>
-                      <small class="text-muted">3 days ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="../../assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">Send connection request</h6>
-                      <p class="mb-0">Peter sent you connection request</p>
-                      <small class="text-muted">4 days ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <img src="../../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle">
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">New message from Jane</h6>
-                      <p class="mb-0">Your have new message from Jane</p>
-                      <small class="text-muted">5 days ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                  <div class="d-flex">
-                    <div class="flex-shrink-0 me-3">
-                      <div class="avatar">
-                        <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
-                      </div>
-                    </div>
-                    <div class="flex-grow-1">
-                      <h6 class="mb-1">CPU is running high</h6>
-                      <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
-                      <small class="text-muted">5 days ago</small>
-                    </div>
-                    <div class="flex-shrink-0 dropdown-notifications-actions">
-                      <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                      <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <li class="dropdown-menu-footer border-top p-3">
-              <button class="btn btn-primary text-uppercase w-100">view all notifications</button>
-            </li>
-          </ul>
-        </li>
+        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+
         <!--/ Notification -->
         <!-- User -->
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -389,7 +203,7 @@
                     </div>
                   </div>
                   <div class="flex-grow-1">
-                    <span class="fw-medium d-block"> Adolfo </span>
+                    <span class="fw-medium d-block"> Adolfo Contreras</span>
                     <small class="text-muted">Usuario</small>
                   </div>
                 </div>
@@ -419,6 +233,12 @@
               <a class="dropdown-item" href="ver-miseventos-usuario.html">
                 <i class="bx bx-bone"></i>
                 <span class="align-middle">Mis eventos</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="ver-calendario-usuario.html">
+                <i class="bx bx-calendar"></i>
+                <span class="align-middle">Mi Calendario</span>
               </a>
             </li>
             <li>
@@ -460,15 +280,10 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
 
-<!-- Content -->
+  <!-- Content -->
         
   <div class="container-xxl flex-grow-1 container-p-y">
               
-              
-
-  <h4 class="py-3 mb-4">
-    <span class="text-muted fw-light">Hogares Temporales /</span><span> Editar Postulación a Temporal</span>
-  </h4>
 
   <div class="app-ecommerce">
 
@@ -476,172 +291,240 @@
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
       <div class="d-flex flex-column justify-content-center">
-        <h4 class="mb-1 mt-3">Editar Postulación a Temporal</h4>
+        <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Postularse Como Temporal</h4>
         <p class="text-muted">Rellena los campos abajo</p>
       </div>
       <div class="d-flex align-content-center flex-wrap gap-3">
         <button class="btn btn-danger">Eliminar Postulación</button>
-        <button class="btn btn-danger">Descartar Cambios</button>
-        <button type="submit" class="btn btn-primary">Confirmar Cambios</button>
+        <button class="btn btn-secondary">Descartar Cambios</button>
+        <button type="submit" class="btn btn-primary">Enviar Postulación</button>
       </div>
 
     </div>
 
       <!-- First column-->
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-6">
-      <!-- Product Information -->
-        <div class="card mb-4">
-          <div class="card-header">
-            <h5 class="card-tile mb-0">Datos del Postulante</h5>
-          </div>
-          <div class="card-body">
-            <div class="row mb-3">
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Nombre</label>
-                <input type="text" class="form-control" id="postulant-name" placeholder="Indique su Nombre" name="productBarcode" aria-label="Product barcode">
-              </div>
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Apellido</label>
-                <input type="text" class="form-control" id="postulant-lastname" placeholder="Indique su Apellido" name="productBarcode" aria-label="Product barcode">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Edad</label>
-                <input type="text" class="form-control" id="postulant-age" placeholder="Indique su Edad" name="productBarcode" aria-label="Product barcode">
-              </div>
-              <div class="col"><label class="form-label" for="ecommerce-product-sku">Género</label>
-                <select class="form-control" id="postulant-gender" required>
-                  <option value="" disabled selected>Elija</option>
-                  <option value="">Masculino</option>
-                  <option value="">Femenino</option>
-                  <option value="">Otro</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Celular</label>
-                <input type="text" class="form-control" id="postulant-number" placeholder="Indique su Número de Celular" name="productBarcode" aria-label="Product barcode">
-              </div>
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Dirección</label>
-                <input type="text" class="form-control" id="postulant-address" placeholder="Indique su Dirección" name="productBarcode" aria-label="Product barcode">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Distrito</label>
-                <input type="text" class="form-control" id="postulant-district" placeholder="Indique su Distrito" name="productBarcode" aria-label="Product barcode">
-              </div>
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Cantidad de Cuartos</label>
-                <input type="text" class="form-control" id="house-roomnumber" placeholder="Indique la Cantidad de Cuartos" name="productBarcode" aria-label="Product barcode">
-              </div>
-            </div>
-          </div>
-        </div> 
-      <!-- /Second column -->
-      <div class="col-12 col-lg-12">
-          <!-- Media -->
+      <div class="row">
+        <div class="col-12 col-lg-6">
+        <!-- Product Information -->
           <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="card-tile mb-0" style="color: #3318ca;">Datos del Postulante</h5>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Nombre</label>
+                  <input type="text" class="form-control" id="postulant-name" placeholder="Indique su Nombre" name="productBarcode" aria-label="Product barcode">
+                </div>
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Apellido</label>
+                  <input type="text" class="form-control" id="postulant-lastname" placeholder="Indique su Apellido" name="productBarcode" aria-label="Product barcode">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Edad</label>
+                  <input type="text" class="form-control" id="postulant-age" placeholder="Indique su Edad" name="productBarcode" aria-label="Product barcode">
+                </div>
+                <div class="col"><label class="form-label" for="ecommerce-product-sku">Género</label>
+                  <select class="form-control" id="postulant-gender" required>
+                    <option value="" disabled selected>Elija</option>
+                    <option value="">Masculino</option>
+                    <option value="">Femenino</option>
+                    <option value="">Otro</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Celular</label>
+                  <input type="text" class="form-control" id="postulant-number" placeholder="Indique su Número de Celular" name="productBarcode" aria-label="Product barcode">
+                </div>
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Dirección</label>
+                  <input type="text" class="form-control" id="postulant-address" placeholder="Indique su Dirección" name="productBarcode" aria-label="Product barcode">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-name">Distrito</label>
+                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
+                              <option value="AK">Ancón</option>
+                              <option value="HI">Ate</option>
+                              <option value="CA">Barranco</option>
+                              <option value="NV">Breña</option>
+                              <option value="OR">Carabayllo</option>
+                              <option value="WA">Chaclacayo</option>
+                              <option value="AZ">Chorrillos</option>
+                              <option value="CO">Cineguilla</option>
+                              <option value="ID">Comas</option>
+                              <option value="MT">El Agustino</option>
+                              <option value="NE">Independencia</option>
+                              <option value="NM">Jesús María</option>
+                              <option value="ND">La Molina</option>
+                              <option value="UT">La Victoria</option>
+                              <option value="WY">Lima</option>
+                              <option value="AL">Lince</option>
+                              <option value="AR">Los Olivos</option>
+                              <option value="IL">Lurigancho</option>
+                              <option value="IA">Lurín</option>
+                              <option value="KS">Magdalena del Mar</option>
+                              <option value="KY">Miraflores</option>
+                              <option value="LA">Pachacámac</option>
+                              <option value="MN">Pucusana</option>
+                              <option value="MS">Pueblo Libre</option>
+                              <option value="MO">Puente Piedra</option>
+                              <option value="OK">Punta Hermosa</option>
+                              <option value="SD">Punta Negra</option>
+                              <option value="TX">Rímac</option>
+                              <option value="TN">San Bartolo</option>
+                              <option value="WI">San Borja</option>
+                              <option value="CT">San Isidro</option>
+                              <option value="DE">San Juan de Lurigancho</option>
+                              <option value="FL">San Juan de Miraflores</option>
+                              <option value="GA">San Luis</option>
+                              <option value="IN">San Martín de Porres</option>
+                              <option value="ME">San Miguel</option>
+                              <option value="MD">Santa Anita</option>
+                              <option value="MA">Santa María del Mar</option>
+                              <option value="MI">Santa Rosa</option>
+                              <option value="NH">Santiago de Surco</option>
+                              <option value="NJ">Surquillo</option>
+                              <option value="NY">Villa El Salvador</option>
+                              <option value="NC">Villa María del Triunfo</option>
+                            </select>  
+                </div>
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Cantidad de Cuartos</label>
+                  <input type="text" class="form-control" id="house-roomnumber" placeholder="Indique la Cantidad de Cuartos" name="productBarcode" aria-label="Product barcode">
+                </div>
+              </div>
+            </div>
+          </div> 
+        <!-- /Second column -->
+        <div class="col-12 col-lg-12">
+            <!-- Media -->
+            <div class="card mb-1">
               <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0 card-title">Fotos del Lugar del Temporal</h5>
-                <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
+              <h5 class="mb-0 card-title" style="color: #3318ca;">Nueva Imagen</h5>
+              <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
               </div>
               <div class="card-body">
                 <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                    <div class="dz-message needsclick my-5">
-                    <p class="fs-4 note needsclick my-2">Arrastra una imagen o Examinar en el dispositivo</p>
-                    </div>
-                    <div class="fallback">
+                  <div class="dz-message needsclick my-3">
+                    <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
+                    <p class="text-muted fs-4 note needsclick my-0">o</p>
+                    <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
+    
+                  </div>
+                  <div class="fallback">
                     <input name="file" type="image" accept="image/*"/>
-                    </div>
+                  </div>
                 </form>
               </div>
           </div>
+        </div>
+      </div>
+        <!-- Third-->
+        <div class="col-12 col-lg-6">
+        <!-- Product Information -->
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="card-tile mb-0" style="color: #3318ca;">Otros Datos</h5>
+            </div>
+            <div class="card-body">
+              
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Metraje de Vivienda</label>
+                  <input type="text" class="form-control" id="house-size" placeholder="Indique el Metraje" name="productBarcode" aria-label="Product barcode">
+                </div>
+                <div class="col"><label class="form-label" for="ecommerce-product-sku">¿Tiene Mascotas?</label>
+                  <select class="form-control" id="pets" required>
+                    <option value="" disabled selected>Indique</option>
+                    <option value="">Sí</option>
+                    <option value="">No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Tipo de Mascotas</label>
+                  <input type="text" class="form-control" id="pets-type" placeholder="Indique qué Tipo de Mascotas tiene" name="productBarcode" aria-label="Product barcode">
+                </div>
+                <div class="col"><label class="form-label" for="ecommerce-product-sku">¿Tiene Hijos?</label>
+                  <select class="form-control" id="children" required>
+                    <option value="" disabled selected>Indique</option>
+                    <option value="">Sí</option>
+                    <option value="">No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col"><label class="form-label" for="ecommerce-product-sku">¿Vive Solo o con Dependientes?</label>
+                  <select class="form-control" id="postulant-partner" required>
+                    <option value="" disabled selected>Indique</option>
+                    <option value="">Solo</option>
+                    <option value="">Con Dependientes</option>
+                  </select>
+                </div>
+                <div class="col"><label class="form-label" for="ecommerce-product-sku">¿Trabaja Remoto o Presencial?</label>
+                  <select class="form-control" id="job-type" required>
+                    <option value="" disabled selected>Indique</option>
+                    <option value="">Remoto</option>
+                    <option value="">Presencial</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Persona de Referencia</label>
+                  <input type="text" class="form-control" id="alternate-person" placeholder="Indique la Persona de Referencia" name="productBarcode" aria-label="Product barcode">
+                </div>
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Número de Contacto Referencia</label>
+                  <input type="text" class="form-control" id="alternate-numner" placeholder="Indique el Número de Referencia" name="productBarcode" aria-label="Product barcode">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Fecha Inicial de Temporal</label>
+                  <input type="date" class="form-control" id="time-range-start" placeholder="Indique la Fecha de Inicio del Temporal" name="productBarcode" aria-label="Product barcode">
+                </div>
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-barcode">Fecha Final de Temporal</label>
+                  <input type="date" class="form-control" id="time-range-end" placeholder="Indique la Fecha de Cúlmen del Temporal" name="productBarcode" aria-label="Product barcode">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="ecommerce-product-name">Tiempo de Temporal</label>
+                <input type="text" class="form-control" id="temporal-time" placeholder="Indique el Tiempo de Temporal" name="productTitle" aria-label="Product title">
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>   
+  </div>
+  </div>
+
+  <!-- Content -->
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+      <div>
+        <a href="javascript:void(0)" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+
+      </div>
+      <div>
+        <a href="javascript:void(0)" class="footer-link me-4 text-muted">Ayuda</a>
+        <a href="javascript:void(0)" class="footer-link me-4 text-muted">Contactos</a>
+        <a href="javascript:void(0)" class="footer-link text-muted">Terminos &amp; Condiciones</a>
       </div>
     </div>
-      <!-- Third-->
-      <div class="col-12 col-lg-6">
-      <!-- Product Information -->
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="row mb-3">
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Metraje de Vivienda</label>
-                <input type="text" class="form-control" id="house-size" placeholder="Indique el Metraje" name="productBarcode" aria-label="Product barcode">
-              </div>
-              <div class="col"><label class="form-label" for="ecommerce-product-sku">¿Tiene Mascotas?</label>
-                <select class="form-control" id="pets" required>
-                  <option value="" disabled selected>Indique</option>
-                  <option value="">Sí</option>
-                  <option value="">No</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Tipo de Mascotas</label>
-                <input type="text" class="form-control" id="pets-type" placeholder="Indique qué Tipo de Mascotas tiene" name="productBarcode" aria-label="Product barcode">
-              </div>
-              <div class="col"><label class="form-label" for="ecommerce-product-sku">¿Tiene Hijos?</label>
-                <select class="form-control" id="children" required>
-                  <option value="" disabled selected>Indique</option>
-                  <option value="">Sí</option>
-                  <option value="">No</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col"><label class="form-label" for="ecommerce-product-sku">¿Vive Solo o con Dependientes?</label>
-                <select class="form-control" id="postulant-partner" required>
-                  <option value="" disabled selected>Indique</option>
-                  <option value="">Solo</option>
-                  <option value="">Con Dependientes</option>
-                </select>
-              </div>
-              <div class="col"><label class="form-label" for="ecommerce-product-sku">¿Trabaja Remoto o Presencial?</label>
-                <select class="form-control" id="job-type" required>
-                  <option value="" disabled selected>Indique</option>
-                  <option value="">Remoto</option>
-                  <option value="">Presencial</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Persona de Referencia</label>
-                <input type="text" class="form-control" id="alternate-person" placeholder="Indique la Persona de Referencia" name="productBarcode" aria-label="Product barcode">
-              </div>
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Número de Contacto Referencia</label>
-                <input type="text" class="form-control" id="alternate-numner" placeholder="Indique el Número de Referencia" name="productBarcode" aria-label="Product barcode">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Fecha Inicial de Temporal</label>
-                <input type="date" class="form-control" id="time-range-start" placeholder="Indique la Fecha de Inicio del Temporal" name="productBarcode" aria-label="Product barcode">
-              </div>
-              <div class="col">
-                <label class="form-label" for="ecommerce-product-barcode">Fecha Final de Temporal</label>
-                <input type="date" class="form-control" id="time-range-end" placeholder="Indique la Fecha de Cúlmen del Temporal" name="productBarcode" aria-label="Product barcode">
-              </div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="ecommerce-product-name">Tiempo de Temporal</label>
-              <input type="text" class="form-control" id="temporal-time" placeholder="Indique el Tiempo de Temporal" name="productTitle" aria-label="Product title">
-            </div>
-          </div>
-        </div> 
-      </div>
-    </div>  
-  </div>    
-  </div>
-  </div>
+  </footer>
+  <!-- / Footer -->
+
 </div>
 </div>
 </div>
@@ -683,21 +566,7 @@
         }
     }
   </script>
-  <!-- Footer -->
-<footer class="footer bg-footer-theme">
-  <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-    <div>
-      <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
 
-    </div>
-    <div>
-      <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-      <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-      <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-    </div>
-  </div>
-</footer>
-<!-- / Footer -->
 
   <!-- Page JS -->
   <script src="../../assets/js/app-ecommerce-product-add.js"></script>

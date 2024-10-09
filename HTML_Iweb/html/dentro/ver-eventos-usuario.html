@@ -85,11 +85,7 @@
  <head>
 
 
-<<<<<<< Updated upstream
-<body style="background-color: #e7f6ff42;">
-=======
-<body style="background-color: #acdfff42;">
->>>>>>> Stashed changes
+<body style="background-color: #d4e1ffa9;">
 
 
 <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
@@ -122,25 +118,25 @@
       <ul class="menu-inner py-1">
 
         <li class="menu-item">
-          <a href="ver-inicio-usuario.html"  class="menu-link">
+          <a href="ver-inicio-usuario.html" target="_blank" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home"></i>
             <div class="text-truncate" data-i18n="Inicio">Inicio</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="ver-publicaciones-usuario.html" class="menu-link">
+          <a href="ver-publicaciones-usuario.html" target="_blank" class="menu-link">
             <i class="menu-icon tf-icons bx bx-building-house"></i>
             <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="ver-eventos-usuario.html" class="menu-link">
+          <a href="ver-eventos-usuario.html" target="_blank" class="menu-link">
             <i class="menu-icon tf-icons bx bx-calendar-event"></i>
             <div class="text-truncate" data-i18n="Eventos">Eventos</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="postular-hogarestemporales.html" class="menu-link">
+          <a href="postular-hogarestemporales.html" target="_blank" class="menu-link">
             <i class="menu-icon tf-icons bx bx-building-house"></i>
             <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
           </a>
@@ -162,15 +158,16 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="usuario-mi-hogar-temporal.html" class="menu-link">
+          <a href="javascript:void(0);" class="menu-link">
             <i class="menu-icon tf-icons bx bxs-building-house"></i>
-            <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
+            <div class="text-truncate" data-i18n="Mis hogares temporales">Mis hogares temporales</div>
           </a>
         </li>
+
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
         <li class="menu-item">
-          <a href="Preguntas-frecuentes.html"  class="menu-link">
+          <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="menu-link">
             <i class="menu-icon tf-icons bx bx-help-circle"></i>
             <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
           </a>
@@ -225,7 +222,7 @@
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <span class="fw-medium d-block"> Adolfo </span>
+                        <span class="fw-medium d-block"> Adolfo Contreras</span>
                         <small class="text-muted">Usuario</small>
                       </div>
                     </div>
@@ -236,8 +233,8 @@
                 </li>
                 <li>
                   <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
-                    <i class="bx bx-lock me-2"></i>
-                    <span class="align-middle">Seguridad</span>
+                    <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
+                    <span class="align-middle" style="color: #1f4397;">Seguridad</span>
                   </a>
                 </li>
 
@@ -265,17 +262,17 @@
                 </li>
                 <li>
                   <a class="dropdown-item" href="Preguntas-frecuentes.html">
-                    <i class="bx bx-help-circle me-2"></i>
-                    <span class="align-middle">FAQ</span>
+                    <i class="bx bx-help-circle"></i>
+                    <span class="align-middle">Preguntas frecuentes</span>
                   </a>
                 </li>
                 <li>
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../index.html">
-                    <i class="bx bx-power-off me-2"></i>
-                    <span class="align-middle">Salir</span>
+                  <a class="dropdown-item" href="../index.html" >
+                    <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
+                    <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                   </a>
                 </li>
               </ul>
@@ -357,7 +354,7 @@
             <div class="row gx-1 gy-2 justify-content-center m-0">
               <!-- Card 1 -->
               <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a data-bs-toggle="modal" href="#evento1">
                       <img class="img-fluid" src="../../assets/img/i2.jpg" alt="Imagen de publicación 1" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
@@ -375,7 +372,7 @@
                       </a>
 
                       <button type="button" class="btn btn-label-primary d-flex align-items-center" id="inscripcion-confirm-text" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </button>
                     </div>
                   </div>
@@ -383,7 +380,7 @@
               </div>
               <!-- Card 2 -->
               <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="#">
                       <img class="img-fluid" src="../../assets/img/img2.jpg" alt="Imagen de publicación 2" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
@@ -401,7 +398,7 @@
                       </a> 
 
                       <button type="button" class="btn btn-label-primary d-flex align-items-center" id="inscripcion-2" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </button>
                     </div>
                   </div>
@@ -409,7 +406,7 @@
               </div>
               <!-- Card 3 -->
               <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="#">
                       <img class="img-fluid" src="../../assets/img/i3.jpg" alt="Imagen de publicación 3" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
@@ -426,7 +423,7 @@
                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>  
                       <button type="button" class="btn btn-label-primary d-flex align-items-center" id="inscripcion-3" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </button>
                     </div>
                   </div>
@@ -434,7 +431,7 @@
               </div>
               <!-- Card 4 -->
               <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="#">
                       <img class="img-fluid" src="../../assets/img/i5.jpg" alt="Imagen de publicación 4" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
@@ -451,7 +448,7 @@
                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>  
                       <button type="button" class="btn btn-label-primary d-flex align-items-center" id="inscripcion-4" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </button>
                     </div>
                   </div>
@@ -459,7 +456,7 @@
               </div>
               <!-- Card 5 -->
               <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="#">
                       <img class="img-fluid" src="../../assets/img/i6.jpg" alt="Imagen de publicación 5" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
@@ -476,7 +473,7 @@
                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>  
                       <button type="button" class="btn btn-label-primary d-flex align-items-center" id="inscripcion-5" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </button>
                     </div>
                   </div>
@@ -484,7 +481,7 @@
               </div>
               <!-- Card 6 -->
               <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
                   <div class="rounded-2 text-center flex-grow-1">
                     <a href="#">
                       <img class="img-fluid" src="../../assets/img/i4.jpg" alt="Imagen de publicación 6" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
@@ -501,7 +498,7 @@
                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </a>  
                       <button type="button" class="btn btn-label-primary d-flex align-items-center" id="inscripcion-6" style="font-size: 0.75rem;">
-                        <span>Inscripcion</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                       </button>
                     </div>
                   </div>
@@ -811,6 +808,23 @@
   </div>
 
 
+          <!-- Footer -->
+          <footer class="footer">
+            <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+              <div>
+                <a href="javascript:void(0)" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+
+              </div>
+              <div>
+                <a href="javascript:void(0)" class="footer-link me-4 text-muted">Ayuda</a>
+                <a href="javascript:void(0)" class="footer-link me-4 text-muted">Contactos</a>
+                <a href="javascript:void(0)" class="footer-link text-muted">Terminos &amp; Condiciones</a>
+              </div>
+            </div>
+          </footer>
+          <!-- / Footer -->
+  
+
 
   <!-- Overlay -->
   <div class="layout-overlay layout-menu-toggle"></div>
@@ -864,21 +878,7 @@
 
 </body>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-    <div>
-      <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
 
-    </div>
-    <div>
-      <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-      <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-      <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-    </div>
-  </div>
-</footer>
-<!-- / Footer -->
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
 </html>

@@ -39,11 +39,7 @@
   <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
   <!-- Core CSS -->
-  <style>
-    .fondo{
-      background-color: #acdfff42;
-    }
-  </style>
+
   <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
   <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
   <link rel="stylesheet" href="../../assets/css/demo.css" />
@@ -58,6 +54,10 @@
   <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
   <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
   <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/animate-css/animate.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
+
 
   <!-- Page CSS -->
 
@@ -71,11 +71,10 @@
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../../assets/js/config.js"></script>
 
-  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
 
 </head>
 
-<body class="fondo">
+<body style="background-color: #d4e1ffa9;">
 
 
 <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
@@ -193,185 +192,6 @@
 
             <!-- Notification -->
             <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
-            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-              <ul class="dropdown-menu dropdown-menu-end py-0">
-                <li class="dropdown-menu-header border-bottom">
-                  <div class="dropdown-header d-flex align-items-center py-3">
-                    <h5 class="text-body mb-0 me-auto">Notification</h5>
-                    <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="bx fs-4 bx-envelope-open"></i></a>
-                  </div>
-                </li>
-                <li class="dropdown-notifications-list scrollable-container">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">Congratulation Lettie 🎉</h6>
-                          <p class="mb-0">Won the monthly best seller gold badge</p>
-                          <small class="text-muted">1h ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">Charles Franklin</h6>
-                          <p class="mb-0">Accepted your connection</p>
-                          <small class="text-muted">12hr ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <img src="../../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle">
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">New Message ✉️</h6>
-                          <p class="mb-0">You have new message from Natalie</p>
-                          <small class="text-muted">1h ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">Whoo! You have new order 🛒 </h6>
-                          <p class="mb-0">ACME Inc. made new order $1,154</p>
-                          <small class="text-muted">1 day ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <img src="../../assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle">
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">Application has been approved 🚀 </h6>
-                          <p class="mb-0">Your ABC project application has been approved.</p>
-                          <small class="text-muted">2 days ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">Monthly report is generated</h6>
-                          <p class="mb-0">July monthly financial report is generated </p>
-                          <small class="text-muted">3 days ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <img src="../../assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle">
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">Send connection request</h6>
-                          <p class="mb-0">Peter sent you connection request</p>
-                          <small class="text-muted">4 days ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <img src="../../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle">
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">New message from Jane</h6>
-                          <p class="mb-0">Your have new message from Jane</p>
-                          <small class="text-muted">5 days ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar">
-                            <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <h6 class="mb-1">CPU is running high</h6>
-                          <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
-                          <small class="text-muted">5 days ago</small>
-                        </div>
-                        <div class="flex-shrink-0 dropdown-notifications-actions">
-                          <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                          <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                <li class="dropdown-menu-footer border-top p-3">
-                  <button class="btn btn-primary text-uppercase w-100">view all notifications</button>
-                </li>
-              </ul>
-            </li>
             <!--/ Notification -->
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -390,7 +210,7 @@
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <span class="fw-medium d-block"> Adolfo </span>
+                        <span class="fw-medium d-block"> Adolfo Contreras</span>
                         <small class="text-muted">Usuario</small>
                       </div>
                     </div>
@@ -470,12 +290,12 @@
         <div class="container-xxl flex-grow-1 container-p-y">
           <div class="d-flex flex-wrap justify-content-between align-items-center mb-0">
             <div class="d-flex flex-column justify-content-center">
-              <h4 class="mb-1 mt-3">Publicar Aviso - Mascota Perdida</h4>
+              <h4 class="mb-2 mt-2">Publicar Aviso - Mascota Perdida</h4>
               <p class="text-muted">Rellena los campos abajo</p>
             </div>
             <div class="d-flex align-content-center flex-wrap gap-3">
               <button class="btn btn-danger">Eliminar Publicación</button>
-              <button class="btn btn-secondary">Descartar Cambios</button>
+              <button class="btn btn-secondary cancel-subscription">Descartar cambios</button>
               <button type="submit" class="btn btn-primary" id="btn-confirmar">Confirmar Publicación</button>
             </div>
           </div>
@@ -530,7 +350,10 @@
                             <label class="form-label" for="formValidationFoto">Foto de la Mascota</label>
                             <div class="dropzone needsclick" id="dropzone-fotos">
                               <div class="dz-message needsclick">
-                                Arrastra una imagen o haz clic para seleccionar archivos
+                                <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
+                                <p class="text-muted fs-4 note needsclick my-0">o</p>
+                                <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
+
                               </div>
                             </div>
                           </div>
@@ -693,6 +516,21 @@
     dictDefaultMessage: "Arrastra una imagen o haz clic para seleccionar archivos"
   });
 </script>
+
+  <!-- Main JS -->
+  <script src="../../assets/js/main.js"></script>
+
+  <!-- Page JS -->
+  <script src="../../assets/js/app-ecommerce-product-add.js"></script>
+  <script src="../../assets/js/extended-ui-sweetalert2.js"></script>
+  <script src="../../assets/js/forms-selects.js"></script>
+  <script src="../../assets/js/forms-tagify.js"></script>
+  <script src="../../assets/js/forms-typeahead.js"></script>
+  <script src="../../assets/js/modal-edit-user.js"></script>
+  <script src="../../assets/js/modal-enable-otp.js"></script>
+  <script src="../../assets/js/app-user-view.js"></script>
+  <script src="../../assets/js/app-user-view-security.js"></script>
+  
 
 </body>
 </html>

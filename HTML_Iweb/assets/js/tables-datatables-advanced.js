@@ -70,7 +70,7 @@ $(function () {
       $(".dt-column-search thead tr:eq(1) th").each(function (t) {
         var a = $(this).text(),
           a = $(
-            '<input type="text" class="form-control" placeholder="Search ' +
+            '<input type="text" class="form-control" placeholder="Buscar ' +
               a +
               '" />'
           );

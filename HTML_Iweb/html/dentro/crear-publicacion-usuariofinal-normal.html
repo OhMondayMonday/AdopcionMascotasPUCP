@@ -38,11 +38,7 @@
     <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <style>
-      .fondo{
-        background-color: #acdfff42;
-      }
-    </style>
+
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../../assets/css/demo.css" />
@@ -84,7 +80,7 @@
     
 </head>
 
-<body class="fondo">
+<body style="background-color: #d4e1ffa9;">
 
   
   <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
@@ -220,7 +216,7 @@
                     </div>
                   </div>
                   <div class="flex-grow-1">
-                    <span class="fw-medium d-block"> Adolfo </span>
+                    <span class="fw-medium d-block"> Adolfo Contreras</span>
                     <small class="text-muted">Usuario</small>
                   </div>
                 </div>
@@ -293,120 +289,124 @@
     
 <div class="content-wrapper">
 
-<!-- Content -->
+  <!-- Content -->
        
-<div class="container-xxl flex-grow-1 container-p-y">
+  <div class="container-xxl flex-grow-1 container-p-y">
 
-<div class="app-ecommerce">
+  <div class="app-ecommerce">
 
-  <!-- Add Product -->
-  <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+    <!-- Add Product -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
-    <div class="d-flex flex-column justify-content-center">
-      <h4 class="mb-1 mt-1" style="font-size: 24px;">Nueva Publicación</h4>
-      <p class="text-muted">Rellena los campos abajo</p>
+      <div class="d-flex flex-column justify-content-center">
+        <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+        <p class="text-muted">Rellena los campos abajo</p>
+      </div>
+      <div class="d-flex align-content-center flex-wrap gap-3">
+        <button class="btn btn-danger cancel-subscription">Descartar</button>
+        <button type="submit" class="btn btn-primary">Publicar</button>
+      </div>
+
     </div>
-    <div class="d-flex align-content-center flex-wrap gap-3">
-      <button class="btn btn-danger cancel-subscription">Descartar</button>
-      <button type="submit" class="btn btn-primary">Publicar</button>
-    </div>
-
-  </div>
-  <div class="row">
-    <!-- First column-->
-    <div class="col-12 col-lg-6">
-          <!-- Product Information -->
-          <div class="card mb-4">
-            <div class="card-header">
-              <h5 class="card-tile mb-0">Publicación</h5>
-            </div>
-            <div class="card-body">
-              <div class="mb-3">
-                  <label class="form-label" for="ecommerce-product-name">Titulo</label>
-                  <input type="text" class="form-control" id="post-title" placeholder="Título de la publicación" name="productTitle" aria-label="Product title">
+    <div class="row">
+      <!-- First column-->
+      <div class="col-12 col-lg-6">
+            <!-- Product Information -->
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-tile mb-0" style="color: #3318ca;">Publicación</h5>
               </div>
-              <div class="row mb-3">
-                    <div class="col">
-                      <label class="form-label" for="ecommerce-product-sku">Tipo</label>
-                      <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
-                          <option value="" disabled selected>Elija el tipo de publicación</option>
-                          <option value="crear-publicacion-usuariofinal-normal.html" selected>Normal</option>
-                          <option value="crear-publicacion-usuariofinal-mascotaperdida.html">Mascota Perdida</option>
-                          <option value="crear-publicacion-usuariofinal-denunciamaltrato.html">Denuncia por Maltrato Animal</option>        
-                      </select>
+              <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label" for="ecommerce-product-name">Titulo</label>
+                    <input type="text" class="form-control" id="post-title" placeholder="Título de la publicación" name="productTitle" aria-label="Product title">
+                </div>
+                <div class="row mb-3">
+                      <div class="col">
+                        <label class="form-label" for="ecommerce-product-sku">Tipo</label>
+                        <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
+                            <option value="" disabled selected>Elija el tipo de publicación</option>
+                            <option value="crear-publicacion-usuariofinal-normal.html" selected>Normal</option>
+                            <option value="crear-publicacion-usuariofinal-mascotaperdida.html">Mascota Perdida</option>
+                            <option value="crear-publicacion-usuariofinal-denunciamaltrato.html">Denuncia por Maltrato Animal</option>        
+                        </select>
+                      </div>
+                      <div class="col">
+                        <label class="form-label" for="ecommerce-product-barcode">Etiquetas</label>
+                        <input id="TagifyBasic" class="form-control" name="TagifyBasic" value="Etiqueta"/>                        
+                      </div>
+                </div>
+                <!-- Description -->
+                <div>
+                  <label class="form-label">Descripción <span class="text-muted"></span></label>
+                  <div class="form-control p-0 pt-1">
+                  <div class="comment-toolbar border-0 border-bottom">
+                    <div class="d-flex justify-content-start">
+                      <span class="ql-formats me-0">
+                          <button class="ql-bold"></button>
+                          <button class="ql-italic"></button>
+                          <button class="ql-underline"></button>
+                          <button class="ql-list" value="ordered"></button>
+                          <button class="ql-list" value="bullet"></button>
+                          <button class="ql-link"></button>
+                          <button class="ql-image"></button>
+                      </span>
                     </div>
-                    <div class="col">
-                      <label class="form-label" for="ecommerce-product-barcode">Etiquetas</label>
-                      <input type="text" class="form-control" id="post-tags" placeholder="Ingrese las Etiquetas aquí" name="productBarcode" aria-label="Product barcode">
-                    </div>
-              </div>
-              <!-- Description -->
-              <div>
-                <label class="form-label">Descripción <span class="text-muted"></span></label>
-                <div class="form-control p-0 pt-1">
-                <div class="comment-toolbar border-0 border-bottom">
-                  <div class="d-flex justify-content-start">
-                    <span class="ql-formats me-0">
-                        <button class="ql-bold"></button>
-                        <button class="ql-italic"></button>
-                        <button class="ql-underline"></button>
-                        <button class="ql-list" value="ordered"></button>
-                        <button class="ql-list" value="bullet"></button>
-                        <button class="ql-link"></button>
-                        <button class="ql-image"></button>
-                    </span>
+                  </div>
+                  <div class="comment-editor border-0 pb-0" id="ecommerce-category-description">
                   </div>
                 </div>
-                <div class="comment-editor border-0 pb-0" id="ecommerce-category-description">
-                </div>
               </div>
+              
             </div>
-            
-          </div>
-          </div>
-    </div>      
-    <!-- /Second column -->
-    <div class="col-12 col-lg-6">
-        <!-- Media -->
-        <div class="card mb-1">
-          <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0 card-title">Imagen</h5>
-          <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
-          </div>
-          <div class="card-body">
-            <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-              <div class="dz-message needsclick my-3">
-                <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
-                <p class="text-muted fs-4 note needsclick my-0">o</p>
-                <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Buscar imagen</span>
+            </div>
+      </div>      
+      <!-- /Second column -->
+      <div class="col-12 col-lg-6">
+          <!-- Media -->
+          <div class="card mb-1">
+            <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
+            <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
+            </div>
+            <div class="card-body">
+              <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                <div class="dz-message needsclick my-3">
+                  <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
+                  <p class="text-muted fs-4 note needsclick my-0">o</p>
+                  <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
 
-              </div>
-              <div class="fallback">
-                <input name="file" type="image" accept="image/*"/>
-              </div>
-            </form>
-          </div>
+                </div>
+                <div class="fallback">
+                  <input name="file" type="image" accept="image/*"/>
+                </div>
+              </form>
+            </div>
+        </div>
       </div>
-    </div>
-</div>
-</div>
-</div> 
-</div>
+  </div>
+  </div>
+  </div> 
+
+  <!-- Content -->
+
   <!-- Footer -->
-  <footer class="footer" style="background-color: #e7f6ff42;">
+  <footer class="footer">
     <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
       <div>
-        <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-  
+        <a href="javascript:void(0)" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+
       </div>
       <div>
-        <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-        <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-        <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+        <a href="javascript:void(0)" class="footer-link me-4 text-muted">Ayuda</a>
+        <a href="javascript:void(0)" class="footer-link me-4 text-muted">Contactos</a>
+        <a href="javascript:void(0)" class="footer-link text-muted">Terminos &amp; Condiciones</a>
       </div>
     </div>
   </footer>
   <!-- / Footer -->
+</div>
+
 </div>
 </div>
 </div>
