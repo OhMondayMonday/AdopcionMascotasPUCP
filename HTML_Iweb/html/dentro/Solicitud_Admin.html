@@ -61,19 +61,17 @@
 
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
-
-  <!-- Page CSS -->
-
-  <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
-
+  <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" /> 
+  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
+  <!-- Row Group CSS -->
+  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css">
+  <!-- Form Validation -->
+  <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+  
   <!-- Helpers -->
   <script src="../../assets/vendor/js/helpers.js"></script>
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -189,8 +187,6 @@
   <div class="layout-container">
 
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-
       <div class="app-brand demo px-3">
         <a href="javascript:void(0);" class="app-brand-link">
           <span class="app-brand-logo demo">
@@ -202,21 +198,16 @@
           <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
       </div>
-
-      <div class="menu-inner-shadow"></div>
-
-
-
       <ul class="menu-inner py-1">
 
         <li class="menu-item">
-          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Principal_Administrador.html"  class="menu-link">
+          <a href="Principal_Administrador.html"  class="menu-link">
             <i class="menu-icon tf-icons bx bx-home"></i>
             <div class="text-truncate" data-i18n="Inicio">Inicio</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Publicaciones_Admin.html"  class="menu-link">
+          <a href="Publicaciones_Admin.html"  class="menu-link">
             <i class="menu-icon tf-icons bx bx-carousel"></i>
             <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
           </a>
@@ -227,19 +218,19 @@
           <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
         </li>
         <li class="menu-item">
-          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\GestionarUsua_Admin.html" class="menu-link">
+          <a href="GestionarUsua_Admin.html" class="menu-link">
             <i class="menu-icon tf-icons bx bx-calendar-event"></i>
             <div class="text-truncate" data-i18n="Gestionar Cuentas">Gestionar Cuentas</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Donacion_Admin.html" class="menu-link">
+          <a href="Donacion_Admin.html" class="menu-link">
             <i class="menu-icon tf-icons bx bx-building-house"></i>
             <div class="text-truncate" data-i18n="Donaciones">Donaciones</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Solicitud_Admin.html" class="menu-link">
+          <a href="Solicitud_Admin.html" class="menu-link">
             <i class="menu-icon tf-icons bx bx-list-check"></i>
             <div class="text-truncate" data-i18n="Solicitudes">Solicitudes</div>
           </a>
@@ -250,14 +241,14 @@
           </li>
         
           <li class="menu-item">
-            <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Admin_CreaCoordinador.html" class="menu-link">
+            <a href="Admin_CreaCoordinador.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
               <div class="text-truncate" data-i18n="Crear Coordinador">Crear Coordinador</div>
             </a>
           </li>
 
           <li class="menu-item">
-            <a href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Admin_CreaLugarEvento.html" class="menu-link">
+            <a href="Admin_CreaLugarEvento.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
               <div class="text-truncate" data-i18n="Crear Lugar">Lugar Para Eventos</div>
             </a>
@@ -265,9 +256,6 @@
         <!-- Misc -->
         
       </ul>
-
-
-
     </aside>
 
     <div class="layout-page">
@@ -301,40 +289,32 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
               <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                  <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                  <img src="..\..\assets\img\AvatarAdmin.webp" alt class="w-px-40 h-auto rounded-circle">
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
                   <a class="dropdown-item">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0 me-3">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0 me-2">
                         <div class="avatar avatar-online">
-                          <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                          <img src="..\..\assets\img\AvatarAdmin.webp" alt class="w-px-40 h-auto rounded-circle">
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <span class="fw-medium d-block"> Luis Joaquin </span>
-                        <small class="text-muted">Administrador</small>
+                        <span class="fw-medium d-block" style="position: center;"> Administrador </span>
+                
                       </div>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <div class="dropdown-divider"></div>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Admin_MiPerfil.html">
-                    <i class="bx bx-lock me-2"></i>
-                    <span class="align-middle">Mi perfil</span>
-                  </a>
-                </li>
 
+                
                 <li>
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="C:\IWEB clon\Repo404\HTML_Iweb\html\dentro\Admin_Calendario.html">
+                    <a class="dropdown-item" href="Admin_Calendario.html">
                         <i class="menu-icon tf-icons bx bx-calendar-event"></i> 
                         <span class="align-middle">Calendario</span>
                     </a>
@@ -343,7 +323,7 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="C:\IWEB clon\Repo404\HTML_Iweb\index.html">
+                  <a class="dropdown-item" href="..\..\index.html">
                     <i class="bx bx-power-off me-2"></i>
                     <span class="align-middle">Cerrar sesión</span>
                   </a>
@@ -366,414 +346,399 @@
 
       </nav>
 
-
       <!-- Content wrapper -->
       <div class="content-wrapper">
 
         <!-- Content -->
-
         
         <div class="container-xxl flex-grow-1 container-p-y">
+          <!-- Basic Bootstrap Table -->
+          
+          <div class="col-12" style="margin-top: -20px;">
+            <div class="card mb-0" style="height: auto; padding: 5px;">
+              <div class="card-body d-flex align-items-center justify-content-center p-1">
+                <div class="row w-100">
+                  <!-- Tipo de Publicacion -->
+                  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                    <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Usuario</label>
+                    <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
+                        <option value="Todas" data-href="coordinador-gestion.html">Todas</option>
+                        <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.html">Personal</option>
+                        <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Albergue</option>
+                        <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Coordinador</option>
+                    </select>
+                  </div>
+                
+                  <script>
+                      function navigate() {
+                          var select = document.getElementById("select2Basic"); // Use the correct select ID
+                          var selectedOption = select.options[select.selectedIndex];
+                          var url = selectedOption.getAttribute("data-href");
+                  
+                          if (url) {
+                              window.location.href = url; // Redirects to the URL of the selected option
+                          }
+                      }
+                  </script>
+                
+                  <!-- Palabra clave -->
+                  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                    <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
+                    <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
+                  </div>
+                  <!-- Fecha -->
+                  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                    <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
+                    <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                      <option value="Todas">Todas</option>
+                      <option value="Ultimas24Horas">Últimas 24 horas</option>
+                      <option value="UltimaSemana">Esta semana</option>
+                      <option value="UltimoMes">Este mes</option>
+                      <option value="UltimoAnio">Este año</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 d-flex align-items-center">
+                  <h5 class="card-title mb-0">Registro de Solicitudes</h5>
+                </div>
+                <p></p>
 
-            
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Avatar</th>
+                        <th>Usuario</th>
+                        <th>Tipo</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <tr>
+                        
+                        
+                        <td>
+                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
+                              <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
+                              
+                            
+                            </li>
+                            
+                          </ul>
+                        </td>
+                        <td>Luis Joaquin</td>
+                        <td><i class='bx bxs-donate-heart'></i> <span class="fw-medium">Coordinador</span></td>
+                        <td><span class="badge bg-label-primary me-1" id="estado-1">Pendiente</span></td>
+                        <td>10/09/2024</td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-1')">
+                              <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-1')">
+                              <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                            </button>
+                            <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
+                              <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
+                            </a>
+                          </div>
+                        </td>
+                        
+                        <!-- Modal de Confirmación -->
+                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body" id="modalMessage">
+                                <!-- Aquí se insertará el mensaje dinámico -->
+                              </div>
+                              <div class="modal-footer">
+                                <!-- Botón de Cancelar en una esquina -->
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <!-- Botón de Confirmar en el otro extremo -->
+                                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </tr>
+                      <tr>
+                        
+                        <td>
+                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Coordinador">
+                              <img src="C:\IWEB clon\404\HTML_Iweb\assets\img\Albergue avatar.jpg" alt="Avatar" class="rounded-circle">
+                            </li>
+                          </ul>
+                        </td>
+                        <td>Huellitas sanas</td>
+                        <td><i class="bx bx-home-heart mb-2"></i> <span class="fw-medium">Albergue</span></td>
+                        <td><span class="badge bg-label-primary me-1" id="estado-2">Pendiente</span></td>
+                        <td>28/08/2024</td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-2')">
+                              <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-2')">
+                              <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                            </button>
+                            <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\HuellitasSanas-Info.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
+                              <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
+                            </a>
+                          </div>
+                        </td>
+                        
+                        <!-- Modal de Confirmación -->
+                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body" id="modalMessage">
+                                <!-- Aquí se insertará el mensaje dinámico -->
+                              </div>
+                              <div class="modal-footer">
+                                <!-- Botón de Cancelar en una esquina -->
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <!-- Botón de Confirmar en el otro extremo -->
+                                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </tr>
+                      <tr></tr>
+                        
+                        <td>
+                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
+                              <img src="C:\IWEB clon\404\HTML_Iweb\assets\img\Albergue avatar.jpg" alt="Avatar" class="rounded-circle">
+                            </li>
+                            
+                          </ul>
+                        </td>
+                        <td>Hogar Esmeralda</td>
+                        <td><i class="bx bx-home-heart mb-2"></i> <span class="fw-medium">Albergue</span></td>
+                        
+                        <td><span class="badge bg-label-primary me-1" id="estado-3">Pendiente</span></td>
+                        <td>18/06/2024</td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-3')">
+                              <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-3')">
+                              <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                            </button>
+                            <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\HuellitasSanas-Info.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
+                              <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
+                            </a>
+                          </div>
+                        </td>
+                        
+                        <!-- Modal de Confirmación -->
+                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body" id="modalMessage">
+                                <!-- Aquí se insertará el mensaje dinámico -->
+                              </div>
+                              <div class="modal-footer">
+                                <!-- Botón de Cancelar en una esquina -->
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <!-- Botón de Confirmar en el otro extremo -->
+                                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </tr>
+                      <tr>
+                        
+                        <td>
+                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
+                              <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
+                            </li>
+                            
+                          </ul>
+                        </td>
+                        <td>Ariana Grande</td>
+                        <td><i class="bx bxl-baidu mb-2"></i> <span class="fw-medium">Personal</span></td>
+                        
+                        <td><span class="badge bg-label-primary me-1" id="estado-4">Pendiente</span></td>
+                        <td>07/06/2024</td>
+                        <td>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-4')">
+                              <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-4')">
+                              <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                            </button>
+                            <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
+                              <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
+                            </a>
+                          </div>
+                        </td>
+                        
+                        <!-- Modal de Confirmación -->
+                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body" id="modalMessage">
+                                <!-- Aquí se insertará el mensaje dinámico -->
+                              </div>
+                              <div class="modal-footer">
+                                <!-- Botón de Cancelar en una esquina -->
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <!-- Botón de Confirmar en el otro extremo -->
+                                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </tr>
+                      <tr>
+                        
+                        <td>
+                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
+                              <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
+                            </li>
+                            
+                          </ul>
+                        </td>
+                        <td>José Martin</td>
+                        <td><i class="bx bxs-donate-heart"></i> <span class="fw-medium">Coordinador</span></td>
+                        
+                        <td><span class="badge bg-label-primary me-1" id="estado-5">Pendiente</span></td>
+                    <td>25/07/2024</td>
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-5')">
+                          <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-5')">
+                          <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                        </button>
+                        <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
+                          <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
+                        </a>
+                      </div>
+                    </td>
+                    
+                    <!-- Modal de Confirmación -->
+                    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body" id="modalMessage">
+                            <!-- Aquí se insertará el mensaje dinámico -->
+                          </div>
+                          <div class="modal-footer">
+                            <!-- Botón de Cancelar en una esquina -->
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <!-- Botón de Confirmar en el otro extremo -->
+                            <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </tbody>
+                  </table>
+
+                  <ul class="pagination">
+                    <li class="paginate_button page-item previous disabled">
+                      <a href="#" class="page-link">&laquo;</a>
+                    </li>
+                    <li class="paginate_button page-item">
+                      <a href="#" class="page-link">1</a>
+                    </li>
+                    <li class="paginate_button page-item">
+                      <a href="#" class="page-link">2</a>
+                    </li>
+                    <li class="paginate_button page-item">
+                      <a href="#" class="page-link">3</a>
+                    </li>
+                    <li class="paginate_button page-item">
+                      <a href="#" class="page-link">4</a>
+                    </li>
+                    <li class="paginate_button page-item">
+                      <a href="#" class="page-link">5</a>
+                    </li>
+                    <li class="paginate_button page-item disabled">
+                      <a href="#" class="page-link">...</a>
+                    </li>
+                    <li class="paginate_button page-item">
+                      <a href="#" class="page-link">15</a>
+                    </li>
+                    <li class="paginate_button page-item next">
+                      <a href="#" class="page-link">&raquo;</a>
+                    </li>
+                  </ul>
+                  
+
+                  
+                </div>
+              </div>
+            </div>     
+          </div>
+          
+          
+        </div>
+        <footer class="footer bg-footer-theme">
+          <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+            <div>
+              <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
         
-
-<!-- Basic Bootstrap Table -->
-
-<div class="col-12" style="margin-top: -20px;">
-  <div class="card mb-0" style="height: auto; padding: 5px;">
-    <div class="card-body d-flex align-items-center justify-content-center p-1">
-      <div class="row w-100">
-        <!-- Tipo de Publicacion -->
-        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-          <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Usuario</label>
-          <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
-              <option value="Todas" data-href="coordinador-gestion.html">Todas</option>
-              <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.html">Personal</option>
-              <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Albergue</option>
-              <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Coordinador</option>
-          </select>
-      </div>
-      
-      <script>
-          function navigate() {
-              var select = document.getElementById("select2Basic"); // Use the correct select ID
-              var selectedOption = select.options[select.selectedIndex];
-              var url = selectedOption.getAttribute("data-href");
-      
-              if (url) {
-                  window.location.href = url; // Redirects to the URL of the selected option
-              }
-          }
-      </script>
-      
-        <!-- Palabra clave -->
-        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-          <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
-          <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
-        </div>
-        <!-- Fecha -->
-        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-          <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
-          <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-            <option value="Todas">Todas</option>
-            <option value="Ultimas24Horas">Últimas 24 horas</option>
-            <option value="UltimaSemana">Esta semana</option>
-            <option value="UltimoMes">Este mes</option>
-            <option value="UltimoAnio">Este año</option>
-          </select>
-        </div>
+            </div>
+            <div>
+              <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+              <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+              <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+            </div>
+          </div>    
+        </footer>
       </div>
     </div>
   </div>
 </div>
-<div class="card">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-6 d-flex align-items-center">
-        <h5 class="card-title mb-0">Registro de Solicitudes</h5>
-      </div>
-      <p></p>
-
-  <div class="table-responsive text-nowrap">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Avatar</th>
-          <th>Usuario</th>
-          <th>Tipo</th>
-          <th>Estado</th>
-          <th>Fecha</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody class="table-border-bottom-0">
-        <tr>
-          
-          
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                
-              
-              </li>
-              
-            </ul>
-          </td>
-          <td>Luis Joaquin</td>
-          <td><i class='bx bxs-donate-heart'></i> <span class="fw-medium">Coordinador</span></td>
-          <td><span class="badge bg-label-primary me-1" id="estado-1">Pendiente</span></td>
-          <td>10/09/2024</td>
-          <td>
-            <div class="btn-group">
-              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-1')">
-                <i class="fas fa-check"></i> <!-- Icono de check verde -->
-              </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-1')">
-                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-              </button>
-              <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
-              </a>
-            </div>
-          </td>
-          
-          <!-- Modal de Confirmación -->
-          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalMessage">
-                  <!-- Aquí se insertará el mensaje dinámico -->
-                </div>
-                <div class="modal-footer">
-                  <!-- Botón de Cancelar en una esquina -->
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <!-- Botón de Confirmar en el otro extremo -->
-                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        </tr>
-        <tr>
-          
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Coordinador">
-                <img src="C:\IWEB clon\404\HTML_Iweb\assets\img\Albergue avatar.jpg" alt="Avatar" class="rounded-circle">
-              </li>
-            </ul>
-          </td>
-          <td>Huellitas sanas</td>
-          <td><i class="bx bx-home-heart mb-2"></i> <span class="fw-medium">Albergue</span></td>
-          <td><span class="badge bg-label-primary me-1" id="estado-2">Pendiente</span></td>
-          <td>28/08/2024</td>
-          <td>
-            <div class="btn-group">
-              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-2')">
-                <i class="fas fa-check"></i> <!-- Icono de check verde -->
-              </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-2')">
-                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-              </button>
-              <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\HuellitasSanas-Info.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
-              </a>
-            </div>
-          </td>
-          
-          <!-- Modal de Confirmación -->
-          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalMessage">
-                  <!-- Aquí se insertará el mensaje dinámico -->
-                </div>
-                <div class="modal-footer">
-                  <!-- Botón de Cancelar en una esquina -->
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <!-- Botón de Confirmar en el otro extremo -->
-                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </tr>
-        <tr></tr>
-          
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                <img src="C:\IWEB clon\404\HTML_Iweb\assets\img\Albergue avatar.jpg" alt="Avatar" class="rounded-circle">
-              </li>
-              
-            </ul>
-          </td>
-          <td>Hogar Esmeralda</td>
-          <td><i class="bx bx-home-heart mb-2"></i> <span class="fw-medium">Albergue</span></td>
-          
-          <td><span class="badge bg-label-primary me-1" id="estado-3">Pendiente</span></td>
-          <td>18/06/2024</td>
-          <td>
-            <div class="btn-group">
-              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-3')">
-                <i class="fas fa-check"></i> <!-- Icono de check verde -->
-              </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-3')">
-                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-              </button>
-              <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\HuellitasSanas-Info.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
-              </a>
-            </div>
-          </td>
-          
-          <!-- Modal de Confirmación -->
-          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalMessage">
-                  <!-- Aquí se insertará el mensaje dinámico -->
-                </div>
-                <div class="modal-footer">
-                  <!-- Botón de Cancelar en una esquina -->
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <!-- Botón de Confirmar en el otro extremo -->
-                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </tr>
-        <tr>
-          
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-              </li>
-              
-            </ul>
-          </td>
-          <td>Ariana Grande</td>
-          <td><i class="bx bxl-baidu mb-2"></i> <span class="fw-medium">Personal</span></td>
-          
-          <td><span class="badge bg-label-primary me-1" id="estado-4">Pendiente</span></td>
-          <td>07/06/2024</td>
-          <td>
-            <div class="btn-group">
-              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-4')">
-                <i class="fas fa-check"></i> <!-- Icono de check verde -->
-              </button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-4')">
-                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-              </button>
-              <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
-              </a>
-            </div>
-          </td>
-          
-          <!-- Modal de Confirmación -->
-          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalMessage">
-                  <!-- Aquí se insertará el mensaje dinámico -->
-                </div>
-                <div class="modal-footer">
-                  <!-- Botón de Cancelar en una esquina -->
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <!-- Botón de Confirmar en el otro extremo -->
-                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </tr>
-        <tr>
-          
-          <td>
-            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-              
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-              </li>
-              
-            </ul>
-          </td>
-          <td>José Martin</td>
-          <td><i class="bx bxs-donate-heart"></i> <span class="fw-medium">Coordinador</span></td>
-          
-          <td><span class="badge bg-label-primary me-1" id="estado-5">Pendiente</span></td>
-      <td>25/07/2024</td>
-      <td>
-        <div class="btn-group">
-          <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-5')">
-            <i class="fas fa-check"></i> <!-- Icono de check verde -->
-          </button>
-          <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-5')">
-            <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-          </button>
-          <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-            <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
-          </a>
-        </div>
-      </td>
-      
-      <!-- Modal de Confirmación -->
-      <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="modalMessage">
-              <!-- Aquí se insertará el mensaje dinámico -->
-            </div>
-            <div class="modal-footer">
-              <!-- Botón de Cancelar en una esquina -->
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <!-- Botón de Confirmar en el otro extremo -->
-              <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      </tbody>
-    </table>
-
-    <ul class="pagination">
-      <li class="paginate_button page-item previous disabled">
-        <a href="#" class="page-link">&laquo;</a>
-      </li>
-      <li class="paginate_button page-item">
-        <a href="#" class="page-link">1</a>
-      </li>
-      <li class="paginate_button page-item">
-        <a href="#" class="page-link">2</a>
-      </li>
-      <li class="paginate_button page-item">
-        <a href="#" class="page-link">3</a>
-      </li>
-      <li class="paginate_button page-item">
-        <a href="#" class="page-link">4</a>
-      </li>
-      <li class="paginate_button page-item">
-        <a href="#" class="page-link">5</a>
-      </li>
-      <li class="paginate_button page-item disabled">
-        <a href="#" class="page-link">...</a>
-      </li>
-      <li class="paginate_button page-item">
-        <a href="#" class="page-link">15</a>
-      </li>
-      <li class="paginate_button page-item next">
-        <a href="#" class="page-link">&raquo;</a>
-      </li>
-    </ul>
-    
-
-    
-  </div>
-</div>
-
-<!--/ Basic Bootstrap Table -->
-
-          </div>
-          <!-- / Content -->
-
-          
-          
-
-<!-- Footer -->
-
-<!-- / Footer -->
-          
-          <div class="content-backdrop fade"></div>
-</div>
-    <!-- / Layout page -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-
-</div>
 <!-- /Layout wrapper -->
 
 <!-- Core JS -->
-  <footer class="footer bg-footer-theme">
-    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-      <div>
-        <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
   
-      </div>
-      <div>
-        <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-        <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-        <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-      </div>
-    </div>    
-  </footer>
 <!-- build:js assets/vendor/js/core.js -->
 
 <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
@@ -790,64 +755,22 @@
 <!-- Vendors JS -->
 
 <script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<!-- Flat Picker -->
+<script src="../../assets/vendor/libs/moment/moment.js"></script>
+<script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+<!-- Form Validation -->
+<script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
 
 <!-- Main JS -->
 <script src="../../assets/js/main.js"></script>
 
 <script src="../../assets/js/dashboards-analytics.js"></script>
+<script src="../../assets/js/tables-datatables-basic.js"></script>
 <!-- Page JS -->
 
-    <script>
-        function showModal(action, elementId) {
-          const modalMessage = document.getElementById('modalMessage');
-          const confirmActionBtn = document.getElementById('confirmActionBtn');
-
-          // Configurar el mensaje del modal y la acción del botón de confirmar
-          if (action === 'Aceptar') {
-              modalMessage.textContent = '¿Estás seguro de aceptar la creación de esta cuenta?';
-              // Asegúrate de eliminar el evento anterior antes de agregar uno nuevo
-              confirmActionBtn.onclick = function() {
-                  cambiarEstado(elementId, 'Aceptado');
-                  closeModal();
-              };
-          } else if (action === 'Rechazar') {
-              modalMessage.textContent = '¿Estás seguro de rechazar la creación de esta cuenta?';
-              // Eliminar el evento anterior antes de agregar uno nuevo
-              confirmActionBtn.onclick = function() {
-                  cambiarEstado(elementId, 'Rechazado');
-                  closeModal();
-              };
-          }
-
-          // Mostrar el modal (asegúrate de que Bootstrap JS esté funcionando correctamente)
-          const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-          modal.show();
-      }
-
-      // Función para cambiar el estado dinámicamente
-      function cambiarEstado(elementId, nuevoEstado) {
-          const estadoElement = document.getElementById(elementId);
-          estadoElement.textContent = nuevoEstado;
-          
-          // Cambia el color de la etiqueta según el estado
-          if (nuevoEstado === 'Aceptado') {
-              estadoElement.className = 'badge bg-label-success me-1'; // Cambia el color a verde
-          } else if (nuevoEstado === 'Rechazado') {
-              estadoElement.className = 'badge bg-label-danger me-1'; // Cambia el color a rojo
-          } else {
-              estadoElement.className = 'badge bg-label-primary me-1'; // Mantén el color original
-          }
-      }
-
-      // Función para cerrar el modal
-      function closeModal() {
-          const modal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
-          if (modal) {
-              modal.hide(); // Cerrar el modal
-          }
-      }
-        
-    </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
@@ -858,6 +781,60 @@
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl);
   });
+</script>
+
+
+
+<script>
+  function showModal(action, elementId) {
+    const modalMessage = document.getElementById('modalMessage');
+    const confirmActionBtn = document.getElementById('confirmActionBtn');
+
+    // Configurar el mensaje del modal y la acción del botón de confirmar
+    if (action === 'Aceptar') {
+        modalMessage.textContent = '¿Estás seguro de aceptar la creación de esta cuenta?';
+        // Asegúrate de eliminar el evento anterior antes de agregar uno nuevo
+        confirmActionBtn.onclick = function() {
+            cambiarEstado(elementId, 'Aceptado');
+            closeModal();
+        };
+    } else if (action === 'Rechazar') {
+        modalMessage.textContent = '¿Estás seguro de rechazar la creación de esta cuenta?';
+        // Eliminar el evento anterior antes de agregar uno nuevo
+        confirmActionBtn.onclick = function() {
+            cambiarEstado(elementId, 'Rechazado');
+            closeModal();
+        };
+    }
+
+    // Mostrar el modal (asegúrate de que Bootstrap JS esté funcionando correctamente)
+    const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+    modal.show();
+}
+
+// Función para cambiar el estado dinámicamente
+function cambiarEstado(elementId, nuevoEstado) {
+    const estadoElement = document.getElementById(elementId);
+    estadoElement.textContent = nuevoEstado;
+    
+    // Cambia el color de la etiqueta según el estado
+    if (nuevoEstado === 'Aceptado') {
+        estadoElement.className = 'badge bg-label-success me-1'; // Cambia el color a verde
+    } else if (nuevoEstado === 'Rechazado') {
+        estadoElement.className = 'badge bg-label-danger me-1'; // Cambia el color a rojo
+    } else {
+        estadoElement.className = 'badge bg-label-primary me-1'; // Mantén el color original
+    }
+}
+
+// Función para cerrar el modal
+function closeModal() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
+    if (modal) {
+        modal.hide(); // Cerrar el modal
+    }
+}
+  
 </script>
 </body>
 
