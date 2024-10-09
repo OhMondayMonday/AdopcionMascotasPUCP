@@ -245,6 +245,9 @@
                   </a>
                 </li>
                 <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
                   <a class="dropdown-item" href="Preguntas-frecuentes.html">
                     <i class="bx bx-help-circle"></i>
                     <span class="align-middle">Preguntas frecuentes</span>
@@ -295,8 +298,8 @@
           <p class="text-muted">Rellena los campos abajo</p>
         </div>
         <div class="d-flex align-content-center flex-wrap gap-3">
+          <button id="publish-button" class="btn btn-success" style="font-weight: bold;">Publicar</button>
           <button class="btn btn-danger cancel-subscription">Descartar</button>
-          <button type="submit" class="btn btn-primary">Publicar</button>
         </div>
 
       </div>
@@ -352,7 +355,26 @@
               </div>
           </div> 
         <!-- /Second column -->
-
+                    <!-- Media -->
+                    <div class="card mb-1">
+                      <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
+                      <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
+                      </div>
+                      <div class="card-body">
+                        <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                          <div class="dz-message needsclick my-3">
+                            <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
+                            <p class="text-muted fs-4 note needsclick my-0">o</p>
+                            <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
+            
+                          </div>
+                          <div class="fallback">
+                            <input name="file" type="image" accept="image/*"/>
+                          </div>
+                        </form>
+                      </div>
+                  </div>
         </div>
         <!-- Third-->
         <div class="col-12 col-lg-6">
@@ -375,14 +397,37 @@
                   <div class="col"><label class="form-label" for="ecommerce-product-sku">Tamaño</label>
                     <select class="form-control" id="pet-size" required>
                       <option value="" disabled selected>Elija el tamaño</option>
-                      <option value="">Pequeño</option>
-                      <option value="">Normal</option>
-                      <option value="">Grande</option>
-                      <option value="">Muy Grande</option>
+                      <option value="P">Pequeño</option>
+                      <option value="N">Normal</option>
+                      <option value="G">Grande</option>
+                      <option value="MG">Muy Grande</option>
                     </select>
                   </div>
-                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Raza</label>
-                    <input type="text" class="form-control" id="pet-race" placeholder="Indique la Raza de la mascota" name="productBarcode" aria-label="Product barcode">
+                  <div class="col"><label class="form-label" for="pet-breed">Raza</label>
+                    <div class="col">
+                      <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
+                        <option value="Labrador">Labrador</option>
+                        <option value="Golden Retriever">Golden Retriever</option>
+                        <option value="Pastor Alemán">Pastor Alemán</option>
+                        <option value="Bulldog">Bulldog</option>
+                        <option value="Beagle">Beagle</option>
+                        <option value="Poodle">Poodle</option>
+                        <option value="Rottweiler">Rottweiler</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="Dálmata">Dálmata</option>
+                        <option value="Pitbull">Pitbull</option>
+                        <option value="Shih Tzu">Shih Tzu</option>
+                        <option value="Border Collie">Border Collie</option>
+                        <option value="Boxer">Boxer</option>
+                        <option value="Doberman">Doberman</option>
+                        <option value="Husky Siberiano">Husky Siberiano</option>
+                        <option value="Cocker Spaniel">Cocker Spaniel</option>
+                        <option value="Schnauzer">Schnauzer</option>
+                        <option value="Bulldog Francés">Bulldog Francés</option>
+                        <option value="Samoyedo">Samoyedo</option>
+                        <option value="Akita">Akita</option>
+                    </select>
+                    </div>
                   </div>
               </div>
               <div class="row mb-3">
@@ -390,11 +435,13 @@
                     <label class="form-label" for="ecommerce-product-name">Distintivo</label>
                     <input type="text" required class="form-control" id="pet-distintive" placeholder="Indique algún distintivo de la mascota" name="productTitle" aria-label="Product title">
                   </div>
-                  <div class="col">
-                    <label class="form-label" for="ecommerce-product-name">Información Adicional</label>
-                    <input type="text" required class="form-control" id="pet-info" placeholder="Indique alguna información adicional" name="productTitle" aria-label="Product title">
-                  </div>
               </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label" for="ecommerce-product-name">Información Adicional</label>
+                  <input type="text" required class="form-control" id="pet-info" placeholder="Indique alguna información adicional" name="productTitle" aria-label="Product title">
+                </div>
+            </div>
                 
             </div>
           </div> 
@@ -435,30 +482,7 @@
         </div>
         
       </div>
-      <div class="row">
-        <div class="col-12">
-          <!-- Media -->
-          <div class="card mb-1">
-            <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
-            <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
-            </div>
-            <div class="card-body">
-              <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                <div class="dz-message needsclick my-3">
-                  <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
-                  <p class="text-muted fs-4 note needsclick my-0">o</p>
-                  <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
-  
-                </div>
-                <div class="fallback">
-                  <input name="file" type="image" accept="image/*"/>
-                </div>
-              </form>
-            </div>
-        </div>
-        </div>
-      </div>  
+
     </div>
   </div>  
 
