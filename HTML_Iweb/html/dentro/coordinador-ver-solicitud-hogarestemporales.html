@@ -79,6 +79,11 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -181,7 +186,7 @@
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
         <li class="menu-item">
-          <a href="coordinador-Preguntas-frecuentes.html" target="_blank" class="menu-link">
+          <a href="coordinador-Preguntas-frecuentes.html" class="menu-link">
             <i class="menu-icon tf-icons bx bx-help-circle"></i>
             <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas Frecuentes</div>
           </a>
@@ -216,7 +221,7 @@
             
             <!--/ Notification -->
 
-            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">Coordinador Andy</span>
+            <span style="margin-left: 10px; margin-right: 2px; font-weight: bold; color: rgba(163, 108, 20, 0.83);">Coordinador Andy</span>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
               <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -226,7 +231,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                  <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                  <a class="dropdown-item" href="coordinador-editar-perfil.html">
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
@@ -234,7 +239,7 @@
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <span class="fw-medium d-block"> Adolfo </span>
+                        <span class="fw-medium d-block"> Andy </span>
                         <small class="text-muted">Coordinador</small>
                       </div>
                     </div>
@@ -282,7 +287,7 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../index.html" target="_blank">
+                  <a class="dropdown-item" href="../index.html">
                     <i class="bx bx-power-off me-2"></i>
                     <span class="align-middle">Salir</span>
                   </a>
@@ -380,6 +385,9 @@
                                             <a class="btn btn-label-info d-flex align-items-center" href="ver-hogar-temporal-detalles.html" style="font-size: 0.75rem;">
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
+                                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -401,6 +409,9 @@
                                         <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
                                             <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -424,6 +435,9 @@
                                             <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
+                                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -445,6 +459,9 @@
                                         <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
                                             <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -468,6 +485,9 @@
                                             <a class="btn btn-label-info d-flex align-items-center" href="ver-publicaciones-detalles-usuario.html" style="font-size: 0.75rem;">
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
+                                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -490,10 +510,49 @@
                                             <a class="btn btn-label-info d-flex align-items-center" href="crear-solicitud-temporal.html" style="font-size: 0.75rem;">
                                                 <span>Ver detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
+                                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"></script>
+
+          <!-- Script de SweetAlert2 para aplicar a todos los botones de la clase "btn-accept" -->
+                                <script>
+                                    // Seleccionar todos los botones con la clase "btn-accept"
+                                    document.querySelectorAll('.btn-accept').forEach(function(button) {
+                                        button.addEventListener('click', function(event) {
+                                            event.preventDefault(); // Evita que el enlace recargue la página
+
+                                            // Mostrar la alerta SweetAlert2
+                                            Swal.fire({
+                                                title: "¿Estás seguro?",
+                                                text: "Aceptarás esta solicitud",
+                                                icon: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonText: "Sí, aceptar solicitud",
+                                                cancelButtonText: "Cancelar",
+                                                customClass: {
+                                                    confirmButton: "btn btn-primary me-3",
+                                                    cancelButton: "btn btn-label-secondary",
+                                                },
+                                                buttonsStyling: false,
+                                            }).then(function (t) {
+                                                if (t.isConfirmed) {
+                                                    Swal.fire({
+                                                        icon: "success",
+                                                        title: "¡Hecho!",
+                                                        text: "La solicitud fue aceptada.",
+                                                        customClass: { confirmButton: "btn btn-success" },
+                                                    });
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
                         </div>
                     </div>
                 </div>
