@@ -80,6 +80,8 @@
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../../assets/js/config.js"></script>
 
+ <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
+
 </head>
 
 <body style="background-color: #FFFCF5;">
@@ -180,7 +182,7 @@
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
         <li class="menu-item">
-          <a href="coordinador-Preguntas-frecuentes.html" target="_blank" class="menu-link">
+          <a href="coordinador-Preguntas-frecuentes.html" class="menu-link">
             <i class="menu-icon tf-icons bx bx-help-circle"></i>
             <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas Frecuentes</div>
           </a>
@@ -215,7 +217,7 @@
             
             <!--/ Notification -->
 
-            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">Coordinador Andy</span>
+            <span style="margin-left: 10px; margin-right: 2px; font-weight: bold; color: rgba(163, 108, 20, 0.83);">Coordinador Andy</span>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
               <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -264,7 +266,7 @@
                     <i class="bx bx-task me-2"></i>
                     <span class="align-middle">Gestion</span>
                   </a>
-                </li>
+                </li> 
                 <li>
                   <a class="dropdown-item" href="coordinador-solicitudes.html">
                     <i class="bx bx-envelope me-2"></i>
@@ -281,7 +283,7 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../index.html" target="_blank">
+                  <a class="dropdown-item" href="../index.html">
                     <i class="bx bx-power-off me-2"></i>
                     <span class="align-middle">Salir</span>
                   </a>
@@ -370,14 +372,14 @@
                           </div>
                           <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Dale una oportunidad a Claudio!</a>
                           <p class="mt-1 mb-0" style="font-size: 0.75rem;">Luego de un harto trabajo de recolección, estamos a 100 soles de cumplir el objetivo</p>
-                          <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                            <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                              <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                          <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                            <a class="btn btn-label-info d-flex align-items-center" href="ver-hogar-temporal-detalles.html" style="font-size: 0.75rem;">
+                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
-                            <a class="btn btn-label-primary d-flex align-items-center" href="coordinador-ver-solicitud.html" style="font-size: 0.75rem;">
-                              <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
-                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -395,14 +397,14 @@
                           </div>
                           <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¿Buscas un compañero fiel?</a>
                           <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                          <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                            <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                              <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                          <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                            <a class="btn btn-label-info d-flex align-items-center" href="ver-hogar-temporal-detalles.html" style="font-size: 0.75rem;">
+                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
-                            <a class="btn btn-label-primary d-flex align-items-center" href="coordinador-ver-solicitud.html" style="font-size: 0.75rem;">
-                              <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
-                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -420,14 +422,14 @@
                           </div>
                           <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Cada dólar cuenta!</a>
                           <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                          <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                            <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                              <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                          <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                            <a class="btn btn-label-info d-flex align-items-center" href="ver-hogar-temporal-detalles.html" style="font-size: 0.75rem;">
+                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
-                            <a class="btn btn-label-primary d-flex align-items-center" href="coordinador-ver-solicitud.html" style="font-size: 0.75rem;">
-                              <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
-                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -445,14 +447,14 @@
                           </div>
                           <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">Ayúdanos a llegar al objetivo</a>
                           <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                          <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                            <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                              <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                          <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                            <a class="btn btn-label-info d-flex align-items-center" href="ver-hogar-temporal-detalles.html" style="font-size: 0.75rem;">
+                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
-                            <a class="btn btn-label-primary d-flex align-items-center" href="coordinador-ver-solicitud.html" style="font-size: 0.75rem;">
-                              <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
-                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -470,14 +472,14 @@
                           </div>
                           <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Vamos por la meta!</a>
                           <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                          <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                            <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                              <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                          <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                            <a class="btn btn-label-info d-flex align-items-center" href="ver-hogar-temporal-detalles.html" style="font-size: 0.75rem;">
+                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
-                            <a class="btn btn-label-primary d-flex align-items-center" href="coordinador-ver-solicitud.html" style="font-size: 0.75rem;">
-                              <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
-                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>
@@ -495,15 +497,19 @@
                           </div>
                           <a class="h6" href="modificar-publicacion-usuario.html" style="font-size: 0.875rem;">¡Únete a la causa!</a>
                           <p class="mt-1 mb-0" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                          <div class="d-flex flex-column flex-md-row gap-1 text-nowrap mt-auto">
-                            <a class="btn btn-label-secondary me-md-1 d-flex align-items-center" href="modificar-publicacion-usuario.html" style="font-size: 0.75rem;">
-                              <i class="bx bx-sync align-middle me-1"></i><span>Borrar</span>
+                          <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                            <a class="btn btn-label-info d-flex align-items-center" href="ver-hogar-temporal-detalles.html" style="font-size: 0.75rem;">
+                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
-                            <a class="btn btn-label-primary d-flex align-items-center" href="coordinador-ver-solicitud.html" style="font-size: 0.75rem;">
-                              <span class="me-0">Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                            <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
-                          </div>
                         </div>
+                        </div>
+                        
+                  
+                        
+                       
                       </div>
                     </div>
                   </div>
@@ -532,6 +538,43 @@
 
 
               <div class="content-backdrop fade"></div>
+
+              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+              <script>
+                // Selecciona todos los botones con la clase 'btn-accept'
+                document.querySelectorAll('.btn-accept').forEach(function(button) {
+                  button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita que el enlace recargue la página
+              
+                    // Lógica de SweetAlert2 para mostrar el popup de confirmación
+                    Swal.fire({
+                      title: "¿Estás seguro?",
+                      text: "Aceptaras la solicitud",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonText: "Sí, aceptar",
+                      customClass: {
+                        confirmButton: "btn btn-primary me-3",
+                        cancelButton: "btn btn-label-secondary",
+                      },
+                      buttonsStyling: false,
+                    }).then(function(result) {
+                      if (result.isConfirmed) {
+                        // Mostrar un segundo popup si el usuario confirma
+                        Swal.fire({
+                          icon: "success",
+                          title: "¡Hecho!",
+                          text: "La solicitud ha sido aceptada.",
+                          customClass: { confirmButton: "btn btn-success" },
+                        });
+                      }
+                    });
+                  });
+                });
+              </script>
+
+
             </div>
             <!-- Content wrapper -->
           </div>
