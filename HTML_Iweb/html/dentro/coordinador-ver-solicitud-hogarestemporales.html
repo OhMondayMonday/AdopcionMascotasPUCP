@@ -80,10 +80,6 @@
     <script src="../../assets/js/config.js"></script>
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
-
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </head>
 
 <body>
@@ -386,8 +382,9 @@
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
                                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
-                                            </a>
+                                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
+                                          </a>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -411,8 +408,9 @@
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
                                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
-                                            </a>
+                                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
+                                          </a>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -436,8 +434,9 @@
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
                                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
-                                            </a>
+                                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
+                                          </a>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -461,8 +460,9 @@
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
                                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
-                                            </a>
+                                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
+                                          </a>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -486,8 +486,9 @@
                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
                                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
-                                            </a>
+                                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
+                                          </a>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -511,48 +512,53 @@
                                                 <span>Ver detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                             </a>
                                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
-                                            </a>
+                                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
+                                          </a>
+                                          
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"></script>
 
-          <!-- Script de SweetAlert2 para aplicar a todos los botones de la clase "btn-accept" -->
-                                <script>
-                                    // Seleccionar todos los botones con la clase "btn-accept"
-                                    document.querySelectorAll('.btn-accept').forEach(function(button) {
-                                        button.addEventListener('click', function(event) {
-                                            event.preventDefault(); // Evita que el enlace recargue la página
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                                            // Mostrar la alerta SweetAlert2
-                                            Swal.fire({
-                                                title: "¿Estás seguro?",
-                                                text: "Aceptarás esta solicitud",
-                                                icon: "warning",
-                                                showCancelButton: true,
-                                                confirmButtonText: "Sí, aceptar solicitud",
-                                                cancelButtonText: "Cancelar",
-                                                customClass: {
-                                                    confirmButton: "btn btn-primary me-3",
-                                                    cancelButton: "btn btn-label-secondary",
-                                                },
-                                                buttonsStyling: false,
-                                            }).then(function (t) {
-                                                if (t.isConfirmed) {
-                                                    Swal.fire({
-                                                        icon: "success",
-                                                        title: "¡Hecho!",
-                                                        text: "La solicitud fue aceptada.",
-                                                        customClass: { confirmButton: "btn btn-success" },
-                                                    });
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
+              <script>
+                // Selecciona todos los botones con la clase 'btn-accept'
+                document.querySelectorAll('.btn-accept').forEach(function(button) {
+                  button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita que el enlace recargue la página
+              
+                    // Lógica de SweetAlert2 para mostrar el popup de confirmación
+                    Swal.fire({
+                      title: "¿Estás seguro?",
+                      text: "Aceptaras la solicitud",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonText: "Sí, aceptar",
+                      customClass: {
+                        confirmButton: "btn btn-primary me-3",
+                        cancelButton: "btn btn-label-secondary",
+                      },
+                      buttonsStyling: false,
+                    }).then(function(result) {
+                      if (result.isConfirmed) {
+                        // Mostrar un segundo popup si el usuario confirma
+                        Swal.fire({
+                          icon: "success",
+                          title: "¡Hecho!",
+                          text: "La solicitud ha sido aceptada.",
+                          customClass: { confirmButton: "btn btn-success" },
+                        });
+                      }
+                    });
+                  });
+                });
+              </script>
+
+                          
+
+          
                         </div>
                     </div>
                 </div>

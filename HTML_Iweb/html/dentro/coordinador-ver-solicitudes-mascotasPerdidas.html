@@ -80,6 +80,8 @@
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../../assets/js/config.js"></script>
 
+ <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
+
 </head>
 
 <body style="background-color: #FFFCF5;">
@@ -264,7 +266,7 @@
                     <i class="bx bx-task me-2"></i>
                     <span class="align-middle">Gestion</span>
                   </a>
-                </li>
+                </li> 
                 <li>
                   <a class="dropdown-item" href="coordinador-solicitudes.html">
                     <i class="bx bx-envelope me-2"></i>
@@ -375,7 +377,7 @@
                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
                         </div>
                         </div>
@@ -400,7 +402,7 @@
                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
                         </div>
                         </div>
@@ -425,7 +427,7 @@
                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
                         </div>
                         </div>
@@ -450,7 +452,7 @@
                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
                         </div>
                         </div>
@@ -475,7 +477,7 @@
                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
                         </div>
                         </div>
@@ -500,10 +502,14 @@
                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                             </a>
                             <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;">
-                              <span>Aceptar </span><i class="bi bi-check2-circle"></i>
+                              <span>Aceptar </span><i class="bx bx-check-circle"></i>
                             </a>
                         </div>
                         </div>
+                        
+                  
+                        
+                       
                       </div>
                     </div>
                   </div>
@@ -532,6 +538,43 @@
 
 
               <div class="content-backdrop fade"></div>
+
+              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+              <script>
+                // Selecciona todos los botones con la clase 'btn-accept'
+                document.querySelectorAll('.btn-accept').forEach(function(button) {
+                  button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita que el enlace recargue la página
+              
+                    // Lógica de SweetAlert2 para mostrar el popup de confirmación
+                    Swal.fire({
+                      title: "¿Estás seguro?",
+                      text: "Aceptaras la solicitud",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonText: "Sí, aceptar",
+                      customClass: {
+                        confirmButton: "btn btn-primary me-3",
+                        cancelButton: "btn btn-label-secondary",
+                      },
+                      buttonsStyling: false,
+                    }).then(function(result) {
+                      if (result.isConfirmed) {
+                        // Mostrar un segundo popup si el usuario confirma
+                        Swal.fire({
+                          icon: "success",
+                          title: "¡Hecho!",
+                          text: "La solicitud ha sido aceptada.",
+                          customClass: { confirmButton: "btn btn-success" },
+                        });
+                      }
+                    });
+                  });
+                });
+              </script>
+
+
             </div>
             <!-- Content wrapper -->
           </div>
