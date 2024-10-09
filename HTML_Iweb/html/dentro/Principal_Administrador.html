@@ -82,6 +82,27 @@
   <script src="../../assets/js/config.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body, footer {
+            background-color: #d4edda; /* Verde suave */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Footer específico */
+        .bg-footer-theme {
+            background-color: #d4edda !important; /* Verde suave con !important para sobrescribir */
+        }
+
+        /* Estilo del footer */
+        footer {
+            padding: 10px 0;
+            text-align: center;
+            background-color: #d4edda; /* Fondo verde suave para el footer */
+        }
+  </style>
+
 </head>
 
 <body>
@@ -122,12 +143,7 @@
             <div class="text-truncate" data-i18n="Inicio">Inicio</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="Publicaciones_Admin.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-carousel"></i>
-            <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
-          </a>
-        </li>
+        
         
         <!-- Gestion -->
         <li class="menu-header small text-uppercase">
@@ -151,6 +167,12 @@
             <div class="text-truncate" data-i18n="Solicitudes">Solicitudes</div>
           </a>
         </li>
+        <li class="menu-item">
+            <a href="AdminVerCoordinadores.html" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-food-menu'></i>
+              <div class="text-truncate" data-i18n="Coordinadores de zona">Coordinadores De Zona</div>
+            </a>
+          </li>
         
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text" data-i18n="Crear">Crear</span>
@@ -166,7 +188,7 @@
           <li class="menu-item">
             <a href="Admin_CreaLugarEvento.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div class="text-truncate" data-i18n="Crear Lugar">Lugar Para Eventos</div>
+              <div class="text-truncate" data-i18n="Lugar Para Eventos">Lugar Para Eventos</div>
             </a>
           </li>
         <!-- Misc -->
@@ -200,10 +222,6 @@
           </div>
 
           <ul class="navbar-nav flex-row align-items-center ms-0">
-
-            <!-- Notification -->
-            
-            <!--/ Notification -->
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
               <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -250,8 +268,6 @@
               </ul>
             </li>
             <!--/ User -->
-
-
           </ul>
         </div>
 
@@ -264,8 +280,6 @@
 
 
       </nav>
-
-
       <!-- Content wrapper -->
       <div class="content-wrapper">
 
@@ -275,7 +289,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
             
-            <div class="row">
+          <div class="row">
               <div class="col-lg-8 mb-4 order-0">
                 
               
@@ -343,8 +357,8 @@
                   
                 </div>
               </div>
-            </div>
-            <div class="row">
+          </div>
+          <div class="row">
               <!-- Order Statistics -->
               <div class="col-xl-6 col-md-5 col-lg-4 col-xl-4 order-0 mb-4">
                 <div class="card h-100">
@@ -905,10 +919,24 @@
                 </div>
               </div>
       <!-- / Layout wrapper -->
+          </div>
+        </div>
+      </div>
+      <footer class="footer bg-footer-theme">
+        <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+          <div>
+            <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+      
+          </div>
+          <div>
+            <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+            <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+            <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+          </div>
+        </div>    
+      </footer>
     </div>
-    <!-- / Layout page -->
   </div>
-
 </div>
 <!-- /Layout wrapper -->
 <script>
@@ -952,20 +980,6 @@
       options: options
     });
   </script>
-<!-- Core JS -->
-  <footer class="footer bg-footer-theme">
-    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-      <div>
-        <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-  
-      </div>
-      <div>
-        <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-        <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-        <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-      </div>
-    </div>    
-  </footer>
 <!-- build:js assets/vendor/js/core.js -->
 
 <script src="../../assets/vendor/libs/jquery/jquery.js"></script>

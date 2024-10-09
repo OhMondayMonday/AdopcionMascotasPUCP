@@ -172,6 +172,24 @@
     .form-group {
         margin-bottom: 1rem;
     }
+
+    body, footer {
+            background-color: #d4edda; /* Verde suave */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Footer específico */
+        .bg-footer-theme {
+            background-color: #d4edda !important; /* Verde suave con !important para sobrescribir */
+        }
+
+        /* Estilo del footer */
+        footer {
+            padding: 10px 0;
+            text-align: center;
+            background-color: #d4edda; /* Fondo verde suave para el footer */
+        }
 </style>
 
 </head>
@@ -214,12 +232,7 @@
             <div class="text-truncate" data-i18n="Inicio">Inicio</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="Publicaciones_Admin.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-carousel"></i>
-            <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
-          </a>
-        </li>
+        
         
         <!-- Gestion -->
         <li class="menu-header small text-uppercase">
@@ -243,6 +256,12 @@
             <div class="text-truncate" data-i18n="Solicitudes">Solicitudes</div>
           </a>
         </li>
+        <li class="menu-item">
+            <a href="AdminVerCoordinadores.html" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-food-menu'></i>
+              <div class="text-truncate" data-i18n="Coordinadores de zona">Coordinadores De Zona</div>
+            </a>
+          </li>
         
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text" data-i18n="Crear">Crear</span>
@@ -258,7 +277,7 @@
           <li class="menu-item">
             <a href="Admin_CreaLugarEvento.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div class="text-truncate" data-i18n="Crear Lugar">Lugar Para Eventos</div>
+              <div class="text-truncate" data-i18n="Lugar Para Eventos">Lugar Para Eventos</div>
             </a>
           </li>
         <!-- Misc -->
