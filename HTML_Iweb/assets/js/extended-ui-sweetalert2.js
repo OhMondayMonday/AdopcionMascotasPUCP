@@ -24,14 +24,9 @@
         C = document.querySelector("#progress-steps"),
         B = document.querySelector("#ajax-request"),
         k = document.querySelector("#confirm-text"),
-        x = document.querySelector("#confirm-color"),
-        A = document.querySelector("#inscripcion-confirm-text"),
-        D_2 = document.querySelector("#inscripcion-2"),
-        D_3 = document.querySelector("#inscripcion-3"),
-        D_4 = document.querySelector("#inscripcion-4"),
-        D_5 = document.querySelector("#inscripcion-5"),
-        D_6 = document.querySelector("#inscripcion-6");
-    t &&
+        x = document.querySelector("#confirm-color");
+
+        t &&
         (t.onclick = function () {
             Swal.fire({
                 title: "Any fool can use a computer",
@@ -77,162 +72,6 @@
                     cancelButton: "btn btn-label-secondary",
                 },
                 buttonsStyling: !1,
-            });
-        }),
-        A &&
-        (A.onclick = function () {
-            Swal.fire({
-                title: "Te inscribirás a la actividad",
-                icon: "warning",
-                html: 'Puedes ver más detalles de la actividad <a data-bs-toggle="modal" href="#evento1">aquí</a>',
-                showCloseButton: !0,
-                showCancelButton: !0,
-                focusConfirm: !1,
-                confirmButtonText: "¡Sí, inscribirme!",
-                cancelButtonText: "Cancelar",
-                customClass: {
-                    confirmButton: "btn btn-primary me-3",
-                    cancelButton: "btn btn-label-secondary",
-                },
-                buttonsStyling: !1,
-            }).then(function (A) {
-                A.value &&
-                    Swal.fire({
-                        icon: "success",
-                        title: "¡Inscrito!",
-                        text: "Usted está participando de la actividad.",
-                        customClass: { confirmButton: "btn btn-success" },
-                    });
-            });
-        }),
-        D_2 &&
-        (D_2.onclick = function () {
-            Swal.fire({
-                title: "Te inscribirás a la actividad",
-                icon: "warning",
-                html: 'Puedes ver más detalles de la actividad <a href="ver-donacion-detalles-usuario.html">aquí</a>',
-                showCloseButton: !0,
-                showCancelButton: !0,
-                focusConfirm: !1,
-                confirmButtonText: "¡Sí, inscribirme!",
-                cancelButtonText: "Cancelar",
-                customClass: {
-                    confirmButton: "btn btn-primary me-3",
-                    cancelButton: "btn btn-label-secondary",
-                },
-                buttonsStyling: !1,
-            }).then(function (D_2) {
-                D_2.value &&
-                    Swal.fire({
-                        icon: "success",
-                        title: "¡Inscrito!",
-                        text: "Usted está participando de la actividad.",
-                        customClass: { confirmButton: "btn btn-success" },
-                    });
-            });
-        }),
-        D_3 &&
-        (D_3.onclick = function () {
-            Swal.fire({
-                title: "Te inscribirás a la actividad",
-                icon: "warning",
-                html: 'Puedes ver más detalles de la actividad <a href="ver-donacion-detalles-usuario.html">aquí</a>',
-                showCloseButton: !0,
-                showCancelButton: !0,
-                focusConfirm: !1,
-                confirmButtonText: "¡Sí, inscribirme!",
-                cancelButtonText: "Cancelar",
-                customClass: {
-                    confirmButton: "btn btn-primary me-3",
-                    cancelButton: "btn btn-label-secondary",
-                },
-                buttonsStyling: !1,
-            }).then(function (D_3) {
-                D_3.value &&
-                    Swal.fire({
-                        icon: "success",
-                        title: "¡Inscrito!",
-                        text: "Usted está participando de la actividad.",
-                        customClass: { confirmButton: "btn btn-success" },
-                    });
-            });
-        }),
-        D_4 &&
-        (D_4.onclick = function () {
-            Swal.fire({
-                title: "Te inscribirás a la actividad",
-                icon: "warning",
-                html: 'Puedes ver más detalles de la actividad <a href="ver-donacion-detalles-usuario.html">aquí</a>',
-                showCloseButton: !0,
-                showCancelButton: !0,
-                focusConfirm: !1,
-                confirmButtonText: "¡Sí, inscribirme!",
-                cancelButtonText: "Cancelar",
-                customClass: {
-                    confirmButton: "btn btn-primary me-3",
-                    cancelButton: "btn btn-label-secondary",
-                },
-                buttonsStyling: !1,
-            }).then(function (D_4) {
-                D_4.value &&
-                    Swal.fire({
-                        icon: "success",
-                        title: "¡Inscrito!",
-                        text: "Usted está participando de la actividad.",
-                        customClass: { confirmButton: "btn btn-success" },
-                    });
-            });
-        }),
-        D_5 &&
-        (D_5.onclick = function () {
-            Swal.fire({
-                title: "Te inscribirás a la actividad",
-                icon: "warning",
-                html: 'Puedes ver más detalles de la actividad <a href="ver-donacion-detalles-usuario.html">aquí</a>',
-                showCloseButton: !0,
-                showCancelButton: !0,
-                focusConfirm: !1,
-                confirmButtonText: "¡Sí, inscribirme!",
-                cancelButtonText: "Cancelar",
-                customClass: {
-                    confirmButton: "btn btn-primary me-3",
-                    cancelButton: "btn btn-label-secondary",
-                },
-                buttonsStyling: !1,
-            }).then(function (D_5) {
-                D_5.value &&
-                    Swal.fire({
-                        icon: "success",
-                        title: "¡Inscrito!",
-                        text: "Usted está participando de la actividad.",
-                        customClass: { confirmButton: "btn btn-success" },
-                    });
-            });
-        }),
-        D_6 &&
-        (D_6.onclick = function () {
-            Swal.fire({
-                title: "Te inscribirás a la actividad",
-                icon: "warning",
-                html: 'Puedes ver más detalles de la actividad <a href="ver-donacion-detalles-usuario.html">aquí</a>',
-                showCloseButton: !0,
-                showCancelButton: !0,
-                focusConfirm: !1,
-                confirmButtonText: "¡Sí, inscribirme!",
-                cancelButtonText: "Cancelar",
-                customClass: {
-                    confirmButton: "btn btn-primary me-3",
-                    cancelButton: "btn btn-label-secondary",
-                },
-                buttonsStyling: !1,
-            }).then(function (D_6) {
-                D_6.value &&
-                    Swal.fire({
-                        icon: "success",
-                        title: "¡Inscrito!",
-                        text: "Usted está participando de la actividad.",
-                        customClass: { confirmButton: "btn btn-success" },
-                    });
             });
         }),
         i &&
@@ -539,4 +378,158 @@
                     });
             });
         });
+        // Espera a que el documento esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function () {
+            // Selecciona todos los botones de eliminar en caso de que haya múltiples
+            var deleteButtons = document.querySelectorAll('.btn-delete');
+            
+            deleteButtons.forEach(function(button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita que el botón recargue la página si es un enlace
+        
+                    // Alerta de confirmación con SweetAlert2
+                    Swal.fire({
+                        title: "¿Estás seguro de eliminar esta solicitud?",
+                        text: "Esta acción es irreversible. La solicitud será eliminada permanentemente.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, eliminar",
+                        cancelButtonText: "Cancelar",
+                        customClass: {
+                            confirmButton: "btn btn-primary me-3",
+                            cancelButton: "btn btn-label-secondary",
+                        },
+                        buttonsStyling: false,
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                            // Acción cuando el usuario confirma
+                            Swal.fire({
+                                icon: "success",
+                                title: "¡Eliminado!",
+                                text: "La solicitud ha sido eliminada.",
+                                customClass: { confirmButton: "btn btn-success" },
+                            });
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            // Acción cuando el usuario cancela
+                            Swal.fire({
+                                title: "Cancelado",
+                                text: "La solicitud no ha sido eliminada.",
+                                icon: "error",
+                                customClass: { confirmButton: "btn btn-success" },
+                            });
+                        }
+                    });
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Selecciona todos los botones de aceptar con la clase 'btn-accept'
+            var acceptButtons = document.querySelectorAll('.btn-accept');
+            
+            // Recorre cada botón de aceptar y agrega el evento de clic
+            acceptButtons.forEach(function(button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita que el enlace haga su comportamiento predeterminado
+        
+                    // Alerta de confirmación con SweetAlert2 para aceptar la solicitud
+                    Swal.fire({
+                        title: "¿Quieres aceptar esta solicitud?",
+                        text: "La solicitud será aprobada.",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, aceptarla",
+                        cancelButtonText: "Cancelar",
+                        customClass: {
+                            confirmButton: "btn btn-primary me-3",
+                            cancelButton: "btn btn-label-secondary",
+                        },
+                        buttonsStyling: false,
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                            // Si el usuario confirma, muestra la alerta de éxito
+                            Swal.fire({
+                                icon: "success",
+                                title: "¡Solicitud aceptada!",
+                                text: "La solicitud ha sido aprobada.",
+                                customClass: { confirmButton: "btn btn-success" },
+                            });
+        
+                            // Aquí puedes agregar la lógica para hacer la acción real de aceptación
+                            // Por ejemplo, una solicitud AJAX para actualizar el estado de la solicitud en el servidor
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            // Si el usuario cancela, muestra una alerta opcional o simplemente no hacer nada
+                            Swal.fire({
+                                title: "Acción cancelada",
+                                text: "La solicitud no fue aprobada.",
+                                icon: "info",
+                                customClass: { confirmButton: "btn btn-info" },
+                            });
+                        }
+                    });
+                });
+            });
+        });
+        
+
+
+        
+
+        document.querySelectorAll('.btn-inscripcion').forEach(button => {
+            button.addEventListener('click', function () {
+              const eventId = this.getAttribute('data-event-id');
+              let eventLink = ''; 
+          
+              // Configura el enlace de detalles basado en el ID del evento
+              switch (eventId) {
+                case '1':
+                  eventLink = 'ver-evento-detalles-usuario.html'; // Cambia esto por el enlace real
+                  break;
+                case '2':
+                  eventLink = 'ver-evento-detalles-usuario.html';
+                  break;
+                case '3':
+                  eventLink = 'ver-evento-detalles-usuario.html';
+                  break;
+                case '4':
+                  eventLink = 'ver-evento-detalles-usuario.html';
+                  break;
+                case '5':
+                  eventLink = 'ver-evento-detalles-usuario.html';
+                  break;
+                case '6':
+                  eventLink = 'ver-evento-detalles-usuario.html';
+                  break;
+                default:
+                  eventLink = '#'; // O enlace por defecto
+              }
+          
+              Swal.fire({
+                title: "¿Te quieres inscribir?",
+                icon: "warning",
+                html: `Puedes ver más detalles de la actividad <a href="${eventLink}" target="_blank">aquí</a>`,
+                showCancelButton: true,
+                confirmButtonText: "Sí, inscribirme",
+                cancelButtonText: "Cancelar",
+                customClass: {
+                  confirmButton: "btn btn-primary me-2",
+                  cancelButton: "btn btn-label-secondary",
+                },
+                buttonsStyling: false
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire({
+                    icon: "success",
+                    title: "¡Inscrito!",
+                    text: "Te has inscrito al evento exitosamente.",
+                    confirmButtonText: "Hecho", 
+                    customClass: {confirmButton: "btn btn-success" },
+                  });
+                }
+              });
+            });
+          });
+
+          
+          
 })();
