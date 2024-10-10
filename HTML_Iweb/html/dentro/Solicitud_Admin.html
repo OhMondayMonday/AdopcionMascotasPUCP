@@ -35,19 +35,20 @@
 
   <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-5DDHKGP');</script>
   <!-- End Google Tag Manager -->
 
+
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="C:\IWEB clon\Repo404\HTML_Iweb\assets\img\logo_Alianza_Animal_-removebg-preview.png" />
+  <link rel="icon" type="image/x-icon" href="..\..\assets\img\logo_Alianza_Animal_-removebg-preview.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Icons -->
   <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
@@ -59,31 +60,36 @@
   <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
   <link rel="stylesheet" href="../../assets/css/demo.css" />
 
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap5.min.css">
+
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" /> 
-  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
-  <!-- Row Group CSS -->
-  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css">
-  <!-- Form Validation -->
-  <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
-  
+  <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
+  <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
+
+
   <!-- Helpers -->
   <script src="../../assets/vendor/js/helpers.js"></script>
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../../assets/js/config.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  
-  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/js/helpers.js"></script>
+  <script src="../../assets/js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     .btn-group {
@@ -127,51 +133,11 @@
   
   
 
-  <style >  
-    .card {           
-      margin-top: 10px; /* Ajusta esto según lo necesites */
-      }
-  </style>
+  
+
+  
 
   <style>
-    .form-control-sm, .form-select-sm {
-      width: 100%; /* Hace que los campos usen el 100% del ancho disponible */
-      height: 50%;  
-    }
-
-    @media (max-width: 768px) {
-  /* Ajuste para pantallas pequeñas, si es necesario */
-    .col-md-4 {
-      width: 100%;  
-    }
-
-    }
-  </style>
-
-<style>
-    .pagination {
-    display: flex;
-    justify-content: center; /* Esto centra el contenido horizontalmente */
-    padding-left: 0;
-    list-style: none;
-    border-radius: 0.25rem;
-    margin-top: 20px;
-    }
-    .page-item {
-    margin: 0 5px; /* Ajusta el espaciado entre los elementos si es necesario */
-    }
-
-    .page-link {
-        padding: 0.5rem 0.75rem;
-        margin-left: -1px;
-        position: relative;
-        display: block;
-        color: #0e0e0f;
-        text-decoration: none;
-        background-color: #fff;
-        border: 1px solid #dee2e6;
-        border-radius: 0.25rem;
-    }
 
     body, footer {
             background-color: #d4edda; /* Verde suave */
@@ -192,6 +158,33 @@
         }
   </style>
 
+<style>
+  .modal-body {
+    padding: 20px;
+  }
+
+  .modal-header {
+    border-bottom: none;
+  }
+
+  .modal-footer {
+    border-top: none;
+  }
+
+  .img-fluid {
+    max-width: 150px;
+    height: auto;
+  }
+
+  .badge {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .text-primary {
+    color: #5a5cda;
+  }
+</style>
 </head>
 
 <body>
@@ -365,30 +358,27 @@
 
 
       </nav>
-
       <!-- Content wrapper -->
-      <div class="content-wrapper">
-
+      <div class="content-wrapper" >
         <!-- Content -->
-        
         <div class="container-xxl flex-grow-1 container-p-y">
-          <!-- Basic Bootstrap Table -->
-          
-          <div class="col-12" style="margin-top: -20px;">
-            <div class="card mb-0" style="height: auto; padding: 5px;">
-              <div class="card-body d-flex align-items-center justify-content-center p-1">
-                <div class="row w-100">
-                  <!-- Tipo de Publicacion -->
-                  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                    <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Usuario</label>
-                    <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
-                        <option value="Todas" data-href="coordinador-gestion.html">Todas</option>
-                        <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.html">Personal</option>
-                        <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Albergue</option>
-                        <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Coordinador</option>
-                    </select>
+
+          <div class="card-header d-flex flex-wrap justify-content-between gap-3">
+            <div class="col-12">
+              <div class="card mb-0" style="height: auto; padding: 5px;">
+                <div class="card-body d-flex align-items-center justify-content-center p-1">
+                  <div class="row w-100">
+                    <!-- Tipo de Publicacion -->
+                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                      <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Usuario</label>
+                      <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
+                          <option value="Todas" data-href="coordinador-gestion.html">Todas</option>
+                          <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.html">Personal</option>
+                          <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Coordinador</option>
+                          <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Albergue</option>
+                      </select>
                   </div>
-                
+                  
                   <script>
                       function navigate() {
                           var select = document.getElementById("select2Basic"); // Use the correct select ID
@@ -400,349 +390,502 @@
                           }
                       }
                   </script>
-                
-                  <!-- Palabra clave -->
-                  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                    <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
-                    <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
-                  </div>
-                  <!-- Fecha -->
-                  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                    <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
-                    <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                      <option value="Todas">Todas</option>
-                      <option value="Ultimas24Horas">Últimas 24 horas</option>
-                      <option value="UltimaSemana">Esta semana</option>
-                      <option value="UltimoMes">Este mes</option>
-                      <option value="UltimoAnio">Este año</option>
-                    </select>
+                  
+                    <!-- Palabra clave -->
+                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                      <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
+                      <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
+                    </div>
+                    <!-- Fecha -->
+                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                      <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
+                      <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                        <option value="Todas">Todas</option>
+                        <option value="Ultimas24Horas">Últimas 24 horas</option>
+                        <option value="UltimaSemana">Esta semana</option>
+                        <option value="UltimoMes">Este mes</option>
+                        <option value="UltimoAnio">Este año</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-6 d-flex align-items-center">
-                  <h5 class="card-title mb-0">Registro de Solicitudes</h5>
-                </div>
-                <p></p>
-
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Avatar</th>
-                        <th>Usuario</th>
-                        <th>Tipo</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
-                        <th>Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      <tr>
-                        
-                        
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                              <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
+            <div class="card mb-2" style="padding: 10px; margin: 0;">
+              <div class="card-body">
+                <div class="card-datatable table-responsive">
+                  
+                  <table class="table table-striped table-bordered" id="solicitudesTable">
+                      <thead>
+                        <tr>
+                          <th>Avatar</th>
+                          <th style="width: 170px;">Usuario</th>
+                          <th style="width: 140px;">Tipo</th>
+                          <th style="width: 350px;">Correo Electrónico</th>
+                          <th>Estado</th>
+                          <th style="width: 140px;">Fecha</th>
+                          <th style="width: 250px;">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          
+                          
+                          <td>
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Personal">
+                                    <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" style="width: 25px;">
+                                </li>  
+                            </ul>
+                        </td>
+                          <td>Luis Joaquin</td>
+                          <td><i class="bx bxl-baidu mb-2"></i> <span class="fw-medium">Personal</span></td>
+                          <td><span class="fw-medium">ljpoga.18@gmail.com</span></td>
+                          <td><span class="badge bg-label-primary me-1" id="estado-1">Pendiente</span></td>
+                          <td>10/09/2024</td>
+                          <td>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-1')">
+                                <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                              </button>
+                              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-1')">
+                                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                              </button>
+                              <a href="javascript:void(0);" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#solicitudModal3" title="Ver detalles">
+                                <i class="fas fa-file-alt"></i> 
+                            </a>
+                            </div>
+                          </td>
+                          <div class="modal fade" id="solicitudModal3" tabindex="-1" aria-labelledby="solicitudModalLabel3" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="solicitudModalLabel3">Datos de la Solicitud</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="row">
+                                      <!-- Avatar y título de solicitud -->
+                                      <div class="col-md-4 text-center">
+                                        <img src="../../assets/img/avatars/7.png" alt="Avatar" class="img-fluid rounded-circle" style="max-width: 150px;">
+                                        <h6 class="badge bg-primary mt-3">SOLICITUD</h6>
+                                      </div>
+                          
+                                      <!-- Datos de la solicitud -->
+                                      <div class="col-md-8">
+                                        <h5 class="text-primary">Solicitud Crear Cuenta:</h5>
+                                        <p><strong>Nombre:</strong> Luis Joaquin</p>
+                                        <p><strong>Tipo de Cuenta:</strong> Personal</p>
+                                        <p><strong>Fecha Solicitud:</strong> 10/09/2024</p>
+                                        <p><strong>Hora Solicitud:</strong> 5:45 PM</p>
+                                        <p><strong>Correo:</strong> ljpoga.18@gmail.com</p>
+                                        <p><strong>Instagram:</strong> lujopoga.18</p>
+                                        <p><strong>Dirección:</strong> Jr. San Juan 200</p>
+                                        <p><strong>Contacto:</strong> +51 942-145-678</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Modal de Confirmación -->
+                          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalMessage">
+                                  <!-- Aquí se insertará el mensaje dinámico -->
+                                </div>
+                                <div class="modal-footer">
+                                  <!-- Botón de Cancelar en una esquina -->
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                  <!-- Botón de Confirmar en el otro extremo -->
+                                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </tr>
+                        <tr>
+                          
+                          <td>
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
+                                <img src="..\..\assets\img\Albergue avatar.jpg" alt="Avatar" class="rounded-circle">
+                              </li>
+                            </ul>
+                          </td>
+                          <td>Huellitas sanas</td>
+                          <td><i class="bx bx-home-heart mb-2"></i> <span class="fw-medium">Albergue</span></td>
+                          <td><span class="fw-medium">HuellitasSanas@gmail.com</span></td>
+                          <td><span class="badge bg-label-primary me-1" id="estado-2">Pendiente</span></td>
+                          <td>28/08/2024</td>
+                          <td>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-2')">
+                                <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                              </button>
+                              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-2')">
+                                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                              </button>
+                              <a href="javascript:void(0);" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#solicitudModal" title="Ver detalles">
+                                <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
+                              </a>
+                            </div>
+                          </td>
+                          
+                          <div class="modal fade" id="solicitudModal" tabindex="-1" aria-labelledby="solicitudModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="solicitudModalLabel">Datos de la Solicitud</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="row">
+                                      <!-- Avatar y título de solicitud -->
+                                      <div class="col-md-4 text-center">
+                                        <img src="..\..\assets\img\Albergue avatar.jpg" alt="Avatar" class="img-fluid rounded-circle" style="max-width: 150px;">
+                                        <h6 class="badge bg-primary mt-3">SOLICITUD</h6>
+                                      </div>
+                          
+                                      <!-- Datos de la solicitud -->
+                                      <div class="col-md-8">
+                                        <h5 class="text-primary">Solicitud Crear Cuenta:</h5>
+                                        <p><strong>Nombre:</strong> Huellitas Sanas</p>
+                                        <p><strong>Tipo de Cuenta:</strong> Albergue</p>
+                                        <p><strong>Fecha Solicitud:</strong> 28/08/2024</p>
+                                        <p><strong>Hora Solicitud:</strong> 7:00 PM</p>
+                                        <p><strong>Correo:</strong> HuellitasSanas@gmail.com</p>
+                                        <p><strong>Instagram:</strong> HuellitasSanas2024</p>
+                                        <p><strong>Dirección:</strong> Jr Leonardo Arrieta 825</p>
+                                        <p><strong>Contacto:</strong> +51 942-145-678</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Modal de Confirmación -->
+                          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalMessage">
+                                  <!-- Aquí se insertará el mensaje dinámico -->
+                                </div>
+                                <div class="modal-footer">
+                                  <!-- Botón de Cancelar en una esquina -->
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                  <!-- Botón de Confirmar en el otro extremo -->
+                                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </tr>
+                        <tr>
+                          
+                          <td>
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                               
-                            
-                            </li>
-                            
-                          </ul>
-                        </td>
-                        <td>Luis Joaquin</td>
-                        <td><i class='bx bxs-donate-heart'></i> <span class="fw-medium">Coordinador</span></td>
-                        <td><span class="badge bg-label-primary me-1" id="estado-1">Pendiente</span></td>
-                        <td>10/09/2024</td>
-                        <td>
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-1')">
-                              <i class="fas fa-check"></i> <!-- Icono de check verde -->
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-1')">
-                              <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-                            </button>
-                            <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                              <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
+                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
+                                <img src="..\..\assets\img\Albergue avatar.jpg" alt="Avatar" class="rounded-circle">
+                              </li>
+                              
+                            </ul>
+                          </td>
+                          <td>Hogar Esmeralda</td>
+                          <td><i class="bx bx-home-heart mb-2"></i> <span class="fw-medium">Albergue</span></td>
+                          <td><span class="fw-medium">esmeralda@gmail.com</span></td>
+                          <td><span class="badge bg-label-primary me-1" id="estado-3">Pendiente</span></td>
+                          <td>15/07/2024</td>
+                          <td>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-3')">
+                                <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                              </button>
+                              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-3')">
+                                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                              </button>
+                              <a href="javascript:void(0);" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#solicitudModal1" title="Ver detalles">
+                                <i class="fas fa-file-alt"></i> 
                             </a>
-                          </div>
-                        </td>
-                        
-                        <!-- Modal de Confirmación -->
-                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body" id="modalMessage">
-                                <!-- Aquí se insertará el mensaje dinámico -->
-                              </div>
-                              <div class="modal-footer">
-                                <!-- Botón de Cancelar en una esquina -->
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <!-- Botón de Confirmar en el otro extremo -->
-                                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                            </div>
+                          </td>
+                          
+                          <div class="modal fade" id="solicitudModal1" tabindex="-1" aria-labelledby="solicitudModalLabel1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="solicitudModalLabel1">Datos de la Solicitud</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="row">
+                                      <!-- Avatar y título de solicitud -->
+                                      <div class="col-md-4 text-center">
+                                        <img src="..\..\assets\img\Albergue avatar.jpg" alt="Avatar" class="img-fluid rounded-circle" style="max-width: 150px;">
+                                        <h6 class="badge bg-primary mt-3">SOLICITUD</h6>
+                                      </div>
+                          
+                                      <!-- Datos de la solicitud -->
+                                      <div class="col-md-8">
+                                        <h5 class="text-primary">Solicitud Crear Cuenta:</h5>
+                                        <p><strong>Nombre:</strong> Hogar Esmeralda</p>
+                                        <p><strong>Tipo de Cuenta:</strong> Albergue</p>
+                                        <p><strong>Fecha Solicitud:</strong> 15/07/2024</p>
+                                        <p><strong>Hora Solicitud:</strong> 3:30 PM</p>
+                                        <p><strong>Correo:</strong> esmeralda@gmail.com</p>
+                                        <p><strong>Instagram:</strong> EsmeraldaHogar2024</p>
+                                        <p><strong>Dirección:</strong> Av. Los Pinos 125</p>
+                                        <p><strong>Contacto:</strong> +51 987-654-321</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        
-                      </tr>
-                      <tr>
-                        
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Coordinador">
-                              <img src="C:\IWEB clon\404\HTML_Iweb\assets\img\Albergue avatar.jpg" alt="Avatar" class="rounded-circle">
-                            </li>
-                          </ul>
-                        </td>
-                        <td>Huellitas sanas</td>
-                        <td><i class="bx bx-home-heart mb-2"></i> <span class="fw-medium">Albergue</span></td>
-                        <td><span class="badge bg-label-primary me-1" id="estado-2">Pendiente</span></td>
-                        <td>28/08/2024</td>
-                        <td>
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-2')">
-                              <i class="fas fa-check"></i> <!-- Icono de check verde -->
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-2')">
-                              <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-                            </button>
-                            <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\HuellitasSanas-Info.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                              <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
-                            </a>
-                          </div>
-                        </td>
-                        
-                        <!-- Modal de Confirmación -->
-                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body" id="modalMessage">
-                                <!-- Aquí se insertará el mensaje dinámico -->
-                              </div>
-                              <div class="modal-footer">
-                                <!-- Botón de Cancelar en una esquina -->
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <!-- Botón de Confirmar en el otro extremo -->
-                                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+
+                          <!-- Modal de Confirmación -->
+                          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalMessage">
+                                  <!-- Aquí se insertará el mensaje dinámico -->
+                                </div>
+                                <div class="modal-footer">
+                                  <!-- Botón de Cancelar en una esquina -->
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                  <!-- Botón de Confirmar en el otro extremo -->
+                                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </tr>
-                      <tr></tr>
-                        
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                              <img src="C:\IWEB clon\404\HTML_Iweb\assets\img\Albergue avatar.jpg" alt="Avatar" class="rounded-circle">
-                            </li>
-                            
-                          </ul>
-                        </td>
-                        <td>Hogar Esmeralda</td>
-                        <td><i class="bx bx-home-heart mb-2"></i> <span class="fw-medium">Albergue</span></td>
-                        
-                        <td><span class="badge bg-label-primary me-1" id="estado-3">Pendiente</span></td>
-                        <td>18/06/2024</td>
-                        <td>
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-3')">
-                              <i class="fas fa-check"></i> <!-- Icono de check verde -->
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-3')">
-                              <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-                            </button>
-                            <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\HuellitasSanas-Info.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                              <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
+                        </tr>
+                        <tr>
+                          
+                          <td>
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                              
+                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Personal">
+                                <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
+                              </li>
+                              
+                            </ul>
+                          </td>
+                          <td>Ariana Grande</td>
+                          <td><i class="bx bxl-baidu mb-2"></i> <span class="fw-medium">Personal</span></td>
+                          <td><span class="fw-medium">ariana.grande@gmail.com</span></td>
+                          <td><span class="badge bg-label-primary me-1" id="estado-4">Pendiente</span></td>
+                          <td>22/07/2024</td>
+                          <td>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-4')">
+                                <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                              </button>
+                              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-4')">
+                                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                              </button>
+                              <a href="javascript:void(0);" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#solicitudModal4" title="Ver detalles">
+                                <i class="fas fa-file-alt"></i>
                             </a>
-                          </div>
-                        </td>
-                        
-                        <!-- Modal de Confirmación -->
-                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body" id="modalMessage">
-                                <!-- Aquí se insertará el mensaje dinámico -->
-                              </div>
-                              <div class="modal-footer">
-                                <!-- Botón de Cancelar en una esquina -->
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <!-- Botón de Confirmar en el otro extremo -->
-                                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                            </div>
+                          </td>
+                          <div class="modal fade" id="solicitudModal4" tabindex="-1" aria-labelledby="solicitudModalLabel4" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="solicitudModalLabel4">Datos de la Solicitud</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="row">
+                                      <!-- Avatar y título de solicitud -->
+                                      <div class="col-md-4 text-center">
+                                        <img src="../../assets/img/avatars/6.png" alt="Avatar" class="img-fluid rounded-circle" style="max-width: 150px;">
+                                        <h6 class="badge bg-primary mt-3">SOLICITUD</h6>
+                                      </div>
+                          
+                                      <!-- Datos de la solicitud -->
+                                      <div class="col-md-8">
+                                        <h5 class="text-primary">Solicitud Crear Cuenta:</h5>
+                                        <p><strong>Nombre:</strong> Ariana Grande</p>
+                                        <p><strong>Tipo de Cuenta:</strong> Personal</p>
+                                        <p><strong>Fecha Solicitud:</strong> 22/07/2024</p>
+                                        <p><strong>Hora Solicitud:</strong> 2:00 PM</p>
+                                        <p><strong>Correo:</strong> ariana.grande@gmail.com</p>
+                                        <p><strong>Instagram:</strong> AG_Volunteer</p>
+                                        <p><strong>Dirección:</strong> Av. Artistas 1020</p>
+                                        <p><strong>Contacto:</strong> +51 999-555-123</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </tr>
-                      <tr>
-                        
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                              <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                            </li>
-                            
-                          </ul>
-                        </td>
-                        <td>Ariana Grande</td>
-                        <td><i class="bx bxl-baidu mb-2"></i> <span class="fw-medium">Personal</span></td>
-                        
-                        <td><span class="badge bg-label-primary me-1" id="estado-4">Pendiente</span></td>
-                        <td>07/06/2024</td>
-                        <td>
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-4')">
-                              <i class="fas fa-check"></i> <!-- Icono de check verde -->
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-4')">
-                              <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-                            </button>
-                            <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                              <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
-                            </a>
-                          </div>
-                        </td>
-                        
-                        <!-- Modal de Confirmación -->
-                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body" id="modalMessage">
-                                <!-- Aquí se insertará el mensaje dinámico -->
-                              </div>
-                              <div class="modal-footer">
-                                <!-- Botón de Cancelar en una esquina -->
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <!-- Botón de Confirmar en el otro extremo -->
-                                <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                          <!-- Modal de Confirmación -->
+                          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalMessage">
+                                  <!-- Aquí se insertará el mensaje dinámico -->
+                                </div>
+                                <div class="modal-footer">
+                                  <!-- Botón de Cancelar en una esquina -->
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                  <!-- Botón de Confirmar en el otro extremo -->
+                                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </tr>
-                      <tr>
-                        
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                              <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                            </li>
-                            
-                          </ul>
-                        </td>
-                        <td>José Martin</td>
-                        <td><i class="bx bxs-donate-heart"></i> <span class="fw-medium">Coordinador</span></td>
-                        
-                        <td><span class="badge bg-label-primary me-1" id="estado-5">Pendiente</span></td>
-                    <td>25/07/2024</td>
-                    <td>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-5')">
-                          <i class="fas fa-check"></i> <!-- Icono de check verde -->
-                        </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-5')">
-                          <i class="fas fa-times"></i> <!-- Icono de X rojo -->
-                        </button>
-                        <a href="C:\IWEB clon\404\Vistas-TemplateSneat\html\vertical-menu-template-semi-dark\ver-donacion-detalles-usuario.html" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
-                          <i class="fas fa-file-alt"></i> <!-- Icono de documento naranja -->
-                        </a>
-                      </div>
-                    </td>
-                    
-                    <!-- Modal de Confirmación -->
-                    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </tr>
+                        <tr>
+                          
+                          <td>
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                              
+                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Personal">
+                                <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle">
+                              </li>
+                              
+                            </ul>
+                          </td>
+                          <td>José Martin</td>
+                          <td><i class="bx bxl-baidu mb-2"></i> <span class="fw-medium">Personal</span></td>
+                          <td><span class="fw-medium">jose.martin@gmail.com</span></td>
+                          <td><span class="badge bg-label-primary me-1" id="estado-5">Pendiente</span></td>
+                          <td>25/07/2024</td>
+                          <td>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar" onclick="showModal('Aceptar', 'estado-5')">
+                                <i class="fas fa-check"></i> <!-- Icono de check verde -->
+                              </button>
+                              <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Rechazar" onclick="showModal('Rechazar', 'estado-5')">
+                                <i class="fas fa-times"></i> <!-- Icono de X rojo -->
+                              </button>
+                              <a href="javascript:void(0);" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#solicitudModal2" title="Ver detalles">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                            </div>
+                          </td>
+                          <div class="modal fade" id="solicitudModal2" tabindex="-1" aria-labelledby="solicitudModalLabel2" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="solicitudModalLabel2">Datos de la Solicitud</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="row">
+                                      <!-- Avatar y título de solicitud -->
+                                      <div class="col-md-4 text-center">
+                                        <img src="../../assets/img/avatars/7.png" alt="Avatar" class="img-fluid rounded-circle" style="max-width: 150px;">
+                                        <h6 class="badge bg-primary mt-3">SOLICITUD</h6>
+                                      </div>
+                          
+                                      <!-- Datos de la solicitud -->
+                                      <div class="col-md-8">
+                                        <h5 class="text-primary">Solicitud Crear Cuenta:</h5>
+                                        <p><strong>Nombre:</strong> Jose Martin</p>
+                                        <p><strong>Tipo de Cuenta:</strong> Personal</p>
+                                        <p><strong>Fecha Solicitud:</strong> 25/07/2024</p>
+                                        <p><strong>Hora Solicitud:</strong> 11:00 AM</p>
+                                        <p><strong>Correo:</strong> jose.martin@gmail.com</p>
+                                        <p><strong>Instagram:</strong> JM_Coord2024</p>
+                                        <p><strong>Dirección:</strong> Calle Lima 458</p>
+                                        <p><strong>Contacto:</strong> +51 955-123-456</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div class="modal-body" id="modalMessage">
-                            <!-- Aquí se insertará el mensaje dinámico -->
+                          <!-- Modal de Confirmación -->
+                          <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="confirmationModalLabel">Confirmar acción</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalMessage">
+                                  <!-- Aquí se insertará el mensaje dinámico -->
+                                </div>
+                                <div class="modal-footer">
+                                  <!-- Botón de Cancelar en una esquina -->
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                  <!-- Botón de Confirmar en el otro extremo -->
+                                  <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div class="modal-footer">
-                            <!-- Botón de Cancelar en una esquina -->
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <!-- Botón de Confirmar en el otro extremo -->
-                            <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirmar</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    </tbody>
+                        </tr>
+                      </tbody>
                   </table>
-
-                  <ul class="pagination">
-                    <li class="paginate_button page-item previous disabled">
-                      <a href="#" class="page-link">&laquo;</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">1</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">2</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">3</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">4</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">5</a>
-                    </li>
-                    <li class="paginate_button page-item disabled">
-                      <a href="#" class="page-link">...</a>
-                    </li>
-                    <li class="paginate_button page-item">
-                      <a href="#" class="page-link">15</a>
-                    </li>
-                    <li class="paginate_button page-item next">
-                      <a href="#" class="page-link">&raquo;</a>
-                    </li>
-                  </ul>
-                  
-
-                  
+                    
+            
+                    
+                  </div>
                 </div>
-              </div>
-            </div>     
+            </div>
+            <!--/ Basic Bootstrap Table -->
+            </div>
+            <!-- / Content -->
+
+          <!-- Footer -->
+
           </div>
-          
           
         </div>
         <footer class="footer bg-footer-theme">
           <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
             <div>
               <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-        
+      
             </div>
             <div>
               <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
@@ -751,50 +894,52 @@
             </div>
           </div>    
         </footer>
+        
       </div>
-    </div>
+        
   </div>
 </div>
+  
 <!-- /Layout wrapper -->
 
 <!-- Core JS -->
   
 <!-- build:js assets/vendor/js/core.js -->
 
+
+<!-- endbuild -->
+
+
+
 <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../../assets/vendor/libs/popper/popper.js"></script>
-<script src="../../assets/vendor/js/bootstrap.js"></script>
-<script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-<script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-<script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-<script src="../../assets/vendor/js/menu.js"></script>
+  <script src="../../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../../assets/vendor/js/bootstrap.js"></script>
+  <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+  <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+  <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+  <script src="../../assets/vendor/js/menu.js"></script>
 
 <!-- endbuild -->
 
 <!-- Vendors JS -->
 
-<script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
-<script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-<!-- Flat Picker -->
-<script src="../../assets/vendor/libs/moment/moment.js"></script>
-<script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-<!-- Form Validation -->
-<script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
-<script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-<script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+  <script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
 <!-- Main JS -->
-<script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/main.js"></script>
 
-<script src="../../assets/js/dashboards-analytics.js"></script>
-<script src="../../assets/js/tables-datatables-basic.js"></script>
+  <script src="../../assets/js/dashboards-analytics.js"></script>
 <!-- Page JS -->
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap5.min.js"></script>
 <!-- Activa los tooltips -->
 <script>
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -855,6 +1000,33 @@ function closeModal() {
     }
 }
   
+</script>
+<script>
+  $(document).ready(function () {
+    $('#solicitudesTable').DataTable({
+      paging: true,
+      pagingType: "full_numbers",
+      pageLength: 10,
+      lengthChange: true,
+      buttons: ['copy', 'excel', 'pdf'],
+      dom: 'Bfrtip',
+
+      // Personalización del idioma
+      language: {
+        search: "Buscar:",
+        lengthMenu: "Mostrar MENU entradas",
+        info: "",
+        infoEmpty: "Mostrando 0 a 0 de 0 entradas",
+        infoFiltered: "(filtrado de MAX entradas totales)",
+        paginate: {
+          first: "Primero",
+          last: "Último",
+          next: "Siguiente",
+          previous: "Anterior"
+        }
+      }
+    });
+  });
 </script>
 </body>
 
