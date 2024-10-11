@@ -393,26 +393,90 @@
                             <div class="row">
                                 <!-- Formulario para los datos del lugar -->
                                 <div class="col-md-6">
-                                    <form id="venueForm">
-                                        <div class="form-group mb-3">
-                                            <label for="venueName">Nombre del Lugar</label>
-                                            <input type="text" id="venueName" class="form-control" placeholder="Nombre del Lugar" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="venueLocation">Ubicación</label>
-                                            <input type="text" id="venueLocation" class="form-control" placeholder="Ubicación" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="venueCapacity">Capacidad Máxima</label>
-                                            <input type="number" id="venueCapacity" class="form-control" placeholder="Capacidad Máxima" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="venueDescription">Descripción</label>
-                                            <textarea id="venueDescription" class="form-control" placeholder="Descripción del Lugar" rows="3" required></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Crear Lugar</button>
-                                    </form>
-                                </div>
+                                  <form id="venueForm">
+                                      <!-- Campo de Nombre del Lugar -->
+                                      <div class="form-group mb-3">
+                                          <label for="venueName">Nombre del Lugar</label>
+                                          <input type="text" id="venueName" class="form-control" placeholder="Nombre del Lugar" required>
+                                      </div>
+                                      
+                                      <!-- Campo para Dirección y Distrito -->
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <div class="form-group mb-3">
+                                                  <label for="venueAddress">Dirección</label>
+                                                  <input type="text" id="venueAddress" class="form-control" placeholder="Ingresa la dirección" required>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group mb-3">
+                                                  <label for="districtSelect">Distrito</label>
+                                                  <select id="districtSelect" class="form-control" required>
+                                                      <option value="">Selecciona un distrito</option>
+                                                      <option value="Ate">Ate</option>
+                                                      <option value="Barranco">Barranco</option>
+                                                      <option value="Breña">Breña</option>
+                                                      <option value="Carabayllo">Carabayllo</option>
+                                                      <option value="Chaclacayo">Chaclacayo</option>
+                                                      <option value="Chorrillos">Chorrillos</option>
+                                                      <option value="Cieneguilla">Cieneguilla</option>
+                                                      <option value="Comas">Comas</option>
+                                                      <option value="El Agustino">El Agustino</option>
+                                                      <option value="Independencia">Independencia</option>
+                                                      <option value="Jesús María">Jesús María</option>
+                                                      <option value="La Molina">La Molina</option>
+                                                      <option value="La Victoria">La Victoria</option>
+                                                      <option value="Lima">Lima</option>
+                                                      <option value="Lince">Lince</option>
+                                                      <option value="Los Olivos">Los Olivos</option>
+                                                      <option value="Lurigancho">Lurigancho</option>
+                                                      <option value="Lurín">Lurín</option>
+                                                      <option value="Magdalena del Mar">Magdalena del Mar</option>
+                                                      <option value="Miraflores">Miraflores</option>
+                                                      <option value="Pachacámac">Pachacámac</option>
+                                                      <option value="Pucusana">Pucusana</option>
+                                                      <option value="Pueblo Libre">Pueblo Libre</option>
+                                                      <option value="Puente Piedra">Puente Piedra</option>
+                                                      <option value="Punta Hermosa">Punta Hermosa</option>
+                                                      <option value="Punta Negra">Punta Negra</option>
+                                                      <option value="Rímac">Rímac</option>
+                                                      <option value="San Bartolo">San Bartolo</option>
+                                                      <option value="San Borja">San Borja</option>
+                                                      <option value="San Isidro">San Isidro</option>
+                                                      <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                                                      <option value="San Juan de Miraflores">San Juan de Miraflores</option>
+                                                      <option value="San Luis">San Luis</option>
+                                                      <option value="San Martín de Porres">San Martín de Porres</option>
+                                                      <option value="San Miguel">San Miguel</option>
+                                                      <option value="Santa Anita">Santa Anita</option>
+                                                      <option value="Santa María del Mar">Santa María del Mar</option>
+                                                      <option value="Santa Rosa">Santa Rosa</option>
+                                                      <option value="Santiago de Surco">Santiago de Surco</option>
+                                                      <option value="Surquillo">Surquillo</option>
+                                                      <option value="Villa El Salvador">Villa El Salvador</option>
+                                                      <option value="Villa María del Triunfo">Villa María del Triunfo</option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      
+                                      <!-- Campo para la Capacidad Máxima -->
+                                      <div class="form-group mb-3">
+                                          <label for="venueCapacity">Capacidad Máxima</label>
+                                          <input type="number" id="venueCapacity" class="form-control" placeholder="Capacidad Máxima" required>
+                                      </div>
+                                      
+                                      <!-- Campo para la Descripción -->
+                                      <div class="form-group mb-3">
+                                          <label for="venueDescription">Descripción</label>
+                                          <textarea id="venueDescription" class="form-control" placeholder="Descripción del Lugar" rows="3" required></textarea>
+                                      </div>
+                                      
+                                      <!-- Botón para Crear el Lugar -->
+                                      <button type="submit" class="btn btn-primary">Crear Lugar</button>
+                                  </form>
+                              </div>
+                              
             
                                 <!-- Subida y previsualización de imagen -->
                                 <div class="col-md-6 d-flex flex-column align-items-center">
@@ -422,22 +486,7 @@
                                 </div>
                             </div>
             
-                            <!-- Tabla de Lugares Habilitados -->
-                            <h3 class="mt-5">Lugares Habilitados</h3>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Ubicación</th>
-                                        <th>Capacidad Máxima</th>
-                                        <th>Imagen</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="venueTableBody">
-                                    <!-- Los lugares agregados aparecerán aquí -->
-                                </tbody>
-                            </table>
+                            
                         </div>
                     </div>
                 </div>

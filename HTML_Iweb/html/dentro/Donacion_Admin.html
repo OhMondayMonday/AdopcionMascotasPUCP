@@ -53,35 +53,29 @@
   <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
   <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
 
-  <!-- Page CSS -->
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
 
-  <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
 
-  <!-- Helpers -->
-  <script src="../../assets/vendor/js/helpers.js"></script>
+    <!-- Helpers -->
+    <script src="../../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../../assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/js/helpers.js"></script>
   <script src="../../assets/js/config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
 
   <!-- Custom Table Styles -->
   <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: 'Public Sans', sans-serif;
-      background-color: #f9fafb;
-    }
+    
 
-    th {
-      background-color: #007bff;
-      color: white;
-      padding: 12px;
-      text-align: center;
-      border-bottom: 2px solid #dee2e6;
-      font-weight: 600;
-    }
 
     td {
       padding: 12px;
@@ -98,10 +92,6 @@
       background-color: #fdfdfd;
     }
 
-    tr:hover {
-      background-color: #d0e1ff;
-      color: #000;
-    }
 
     table tbody tr td:last-child {
       font-weight: bold;
@@ -296,31 +286,71 @@
 
       <!-- Content wrapper -->
       <div class="content-wrapper">
+        
         <div class="container-xxl flex-grow-1 container-p-y">
           <!-- Basic Bootstrap Table -->
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
+          <div class="card-header d-flex flex-wrap justify-content-between gap-3">
+            <div class="col-12">
+              <div class="card mb-0" style="height: auto; padding: 5px;">
+                <div class="card-body d-flex align-items-center justify-content-center p-1">
+                  <div class="row w-100">
+                    <!-- Tipo de Usuario -->
+                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                      <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Transferencia</label>
+                      <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                        <option value="Todas">Todas</option>
+                        <option value="Yape">Yape</option>
+                        <option value="Mastercard">Mastercard</option>
+                        <option value="BBVA">BBVA</option>
+                        <option value="Banco de la Nación">Banco de la Nación</option>
+                      </select>
+                    </div>
+            
+                    <!-- Palabra clave -->
+                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                      <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
+                      <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
+                    </div>
+            
+                    <!-- Fecha -->
+                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                      <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
+                      <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                        <option value="Todas">Todas</option>
+                        <option value="Ultimas24Horas">Últimas 24 horas</option>
+                        <option value="UltimaSemana">Esta semana</option>
+                        <option value="UltimoMes">Este mes</option>
+                        <option value="UltimoAnio">Este año</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-2" style="padding: 10px; margin: 0;">
+              <div class="card-body">
                 <div class="card-datatable table-responsive">
-                  <table class="table table-bordered" id="solicitudesTable">
+                  <table class="table table-bordered" id="solicitudesTable" style="width: 1320px;">
                     <thead>
                     <tr>
-                      <th>Tipo Trans.</th>
-                      <th>Usuario</th>
-                      <th>Destino</th>
-                      <th>Estado</th>
-                      <th>Fecha</th>
+                      <th style="width: 40px;"></th>
+                      <th style="width: 220px;">Tipo Transferencia</th>
+                      <th style="width: 120px;">Usuario</th>
+                      <th style="width: 150px;">Destino</th>
+                      <th style="width: 100px;">Estado</th>
+                      <th style="width: 120px;">Fecha</th>
                       <th>Hora</th>
-                      <th>Monto Donado</th>
+                      <th style="width: 150px;">Monto Donado</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                       <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
+                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>Yape</td>
                       <td>Maria Gomez</td>
-                      <td>Caridad XYZ</td>
+                      <td>Albergue Patitas</td>
                       <td>Pendiente</td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
@@ -328,8 +358,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> BCP
+                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>BCP</td>
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
                       <td>Completado</td>
@@ -339,8 +370,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> Mastercard
+                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>Mastercard</td>
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
                       <td>Completado</td>
@@ -350,8 +382,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> BBVA
+                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>BBVA</td>
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
                       <td>Pendiente</td>
@@ -361,8 +394,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> Banco de la Nación
+                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>Banco de la Nación</td>
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
                       <td>Completado</td>
@@ -372,8 +406,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
+                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>Yape</td>
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
                       <td>Completado</td>
@@ -383,8 +418,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
+                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;">
                       </td>
+                      <td>Yape</td>
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
                       <td>Pendiente</td>
@@ -394,8 +430,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> BCP
+                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>BCP</td>
                       <td>Gonzalo Alvarez</td>
                       <td>Fundación Vida</td>
                       <td>Completado</td>
@@ -405,8 +442,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> Mastercard
+                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>Mastercard</td>
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
                       <td>Completado</td>
@@ -414,120 +452,12 @@
                       <td>14:32</td>
                       <td>$100</td>
                     </tr>
+                    
                     <tr>
                       <td>
-                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> BBVA
+                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> 
                       </td>
-                      <td>Maria Gomez</td>
-                      <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
-                      <td>2024-09-12</td>
-                      <td>10:50</td>
-                      <td>$250</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BN_Logo.jpg" alt="Banco de la Nación" style="width: 20px; height: 20px;"> Banco de la Nación
-                      </td>
-                      <td>Kiara Ccala</td>
-                      <td>Fundación Vida</td>
-                      <td>Completado</td>
-                      <td>2024-09-11</td>
-                      <td>16:45</td>
-                      <td>$300</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Juan Perez</td>
-                      <td>Caridad ABC</td>
-                      <td>Completado</td>
-                      <td>2024-09-12</td>
-                      <td>14:32</td>
-                      <td>$100</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Maria Gomez</td>
-                      <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
-                      <td>2024-09-12</td>
-                      <td>10:50</td>
-                      <td>$250</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> BCP
-                      </td>
-                      <td>Alexi sanchez</td>
-                      <td>Fundación Vida</td>
-                      <td>Completado</td>
-                      <td>2024-09-11</td>
-                      <td>16:45</td>
-                      <td>$300</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> Mastercard
-                      </td>
-                      <td>Alejandro Toledo</td>
-                      <td>Caridad ABC</td>
-                      <td>Completado</td>
-                      <td>2024-09-12</td>
-                      <td>14:32</td>
-                      <td>$100</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> BBVA
-                      </td>
-                      <td>Maria Gomez</td>
-                      <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
-                      <td>2024-09-12</td>
-                      <td>10:50</td>
-                      <td>$250</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BN_Logo.jpg" alt="Banco de la Nación" style="width: 20px; height: 20px;"> Banco de la Nación
-                      </td>
-                      <td>Bad Bunny</td>
-                      <td>Fundación Vida</td>
-                      <td>Completado</td>
-                      <td>2024-09-11</td>
-                      <td>16:45</td>
-                      <td>$300</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Juan Perez</td>
-                      <td>Caridad ABC</td>
-                      <td>Completado</td>
-                      <td>2024-09-12</td>
-                      <td>14:32</td>
-                      <td>$100</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Anthony Prime</td>
-                      <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
-                      <td>2024-09-12</td>
-                      <td>10:50</td>
-                      <td>$250</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> BCP
-                      </td>
+                      <td>BCP</td>
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
                       <td>Completado</td>
@@ -537,8 +467,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> Mastercard
+                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>Mastercard</td>
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
                       <td>Completado</td>
@@ -548,8 +479,9 @@
                     </tr>
                     <tr>
                       <td>
-                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> BBVA
+                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> 
                       </td>
+                      <td>BBVA</td>
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
                       <td>Pendiente</td>
@@ -557,160 +489,8 @@
                       <td>10:50</td>
                       <td>$250</td>
                     </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BN_Logo.jpg" alt="Banco de la Nación" style="width: 20px; height: 20px;"> Banco de la Nación
-                      </td>
-                      <td>Zonia Baltazar</td>
-                      <td>Fundación Vida</td>
-                      <td>Completado</td>
-                      <td>2024-09-11</td>
-                      <td>16:45</td>
-                      <td>$300</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Juan Perez</td>
-                      <td>Caridad ABC</td>
-                      <td>Completado</td>
-                      <td>2024-09-12</td>
-                      <td>14:32</td>
-                      <td>$100</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Maria Gomez</td>
-                      <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
-                      <td>2024-09-12</td>
-                      <td>10:50</td>
-                      <td>$250</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> BCP
-                      </td>
-                      <td>Barbara barrabaz</td>
-                      <td>Fundación Vida</td>
-                      <td>Completado</td>
-                      <td>2024-09-11</td>
-                      <td>16:45</td>
-                      <td>$300</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> Mastercard
-                      </td>
-                      <td>Juan Perez</td>
-                      <td>Caridad ABC</td>
-                      <td>Completado</td>
-                      <td>2024-09-12</td>
-                      <td>14:32</td>
-                      <td>$100</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> BBVA
-                      </td>
-                      <td>Maria Gomez</td>
-                      <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
-                      <td>2024-09-12</td>
-                      <td>10:50</td>
-                      <td>$250</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BN_Logo.jpg" alt="Banco de la Nación" style="width: 20px; height: 20px;"> Banco de la Nación
-                      </td>
-                      <td>Carlos Lopez</td>
-                      <td>Fundación Vida</td>
-                      <td>Completado</td>
-                      <td>2024-09-11</td>
-                      <td>16:45</td>
-                      <td>$300</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Bernoully albitrez</td>
-                      <td>Caridad ABC</td>
-                      <td>Completado</td>
-                      <td>2024-09-12</td>
-                      <td>14:32</td>
-                      <td>$100</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Maria Gomez</td>
-                      <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
-                      <td>2024-09-12</td>
-                      <td>10:50</td>
-                      <td>$250</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> BCP
-                      </td>
-                      <td>Carlos Lopez</td>
-                      <td>Fundación Vida</td>
-                      <td>Completado</td>
-                      <td>2024-09-11</td>
-                      <td>16:45</td>
-                      <td>$300</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> Mastercard
-                      </td>
-                      <td>Juan Perez</td>
-                      <td>Caridad ABC</td>
-                      <td>Completado</td>
-                      <td>2024-09-12</td>
-                      <td>14:32</td>
-                      <td>$100</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> BBVA
-                      </td>
-                      <td>Maria Gomez</td>
-                      <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
-                      <td>2024-09-12</td>
-                      <td>10:50</td>
-                      <td>$250</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/BN_Logo.jpg" alt="Banco de la Nación" style="width: 20px; height: 20px;"> Banco de la Nación
-                      </td>
-                      <td>Carlos Lopez</td>
-                      <td>Fundación Vida</td>
-                      <td>Completado</td>
-                      <td>2024-09-11</td>
-                      <td>16:45</td>
-                      <td>$300</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> Yape
-                      </td>
-                      <td>Aladino Cueva</td>
-                      <td>Caridad ABC</td>
-                      <td>Completado</td>
-                      <td>2024-09-12</td>
-                      <td>14:32</td>
-                      <td>$100</td>
-                    </tr>
+                    
+                    
                     <!-- Aquí puedes agregar más registros -->
                     </tbody>
                   </table>
@@ -718,7 +498,6 @@
               </div>
             </div>
           </div>
-
           <!--/ Basic Bootstrap Table -->
 
         </div>
@@ -792,7 +571,7 @@
       $('#solicitudesTable').DataTable({
         paging: true,
         pagingType: "full_numbers", // Para mostrar la paginación con números
-        pageLength: 10, // Número de registros por página
+        pageLength: 4, // Número de registros por página
         lengthChange: true, // Permite cambiar la cantidad de registros por página
         buttons: ['copy', 'excel', 'pdf'], // Añadir botones de exportación
         dom: 'Bfrtip', // Posiciona los botones en la tabla
@@ -805,10 +584,10 @@
           infoEmpty: "Mostrando 0 a 0 de 0 entradas",
           infoFiltered: "(filtrado de _MAX_ entradas totales)",
           paginate: {
-            first: "Primero",
-            last: "Último",
-            next: "Siguiente",
-            previous: "Anterior"
+            first: '<i class="bx bx-chevrons-left"></i>',  // Ícono de "Primero"
+            last: '<i class="bx bx-chevrons-right"></i>',  // Ícono de "Último"
+            next: '<i class="bx bx-chevron-right"></i>',  // Ícono de "Siguiente"
+            previous: '<i class="bx bx-chevron-left"></i>'
           }
         }
       });

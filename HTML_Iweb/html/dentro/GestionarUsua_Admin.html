@@ -88,6 +88,38 @@
   <script src="../../assets/js/config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+  
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Public Sans', sans-serif;
+      background-color: #f9fafb;
+    }
+
+    
+
+    
+
+    tr:nth-child(even) {
+      background-color: #eef2f3;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #fdfdfd;
+    }
+
+
+    table tbody tr td:last-child {
+      font-weight: bold;
+      color: #28a745;
+    }
+    
+    
+  </style>
+  
   <style>
     
 
@@ -110,6 +142,33 @@
         }
   </style>
 
+<style>
+  /* Ajustar el margen entre la tabla y la paginación */
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Alinea el texto de 'Mostrando entradas' y la paginación en la misma línea */
+.dataTables_wrapper .dataTables_info {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  display: inline-block;
+  float: right;
+}
+
+/* Reduce el espacio entre la tabla y la parte inferior de la tabla (paginación y info) */
+.table-responsive {
+  margin-bottom: 15px;
+}
+</style>
+  
+  
+  
  
 </head>
 
@@ -304,34 +363,23 @@
                 <div class="card mb-0" style="height: auto; padding: 5px;">
                   <div class="card-body d-flex align-items-center justify-content-center p-1">
                     <div class="row w-100">
-                      <!-- Tipo de Publicacion -->
+                      <!-- Tipo de Usuario -->
                       <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                         <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Usuario</label>
-                        <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
-                            <option value="Todas" data-href="coordinador-gestion.html">Todas</option>
-                            <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.html">Personal</option>
-                            <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Coordinador</option>
-                            <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Albergue</option>
+                        <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                          <option value="Todas">Todas</option>
+                          <option value="Personal">Personal</option>
+                          <option value="Coordinador">Coordinador</option>
+                          <option value="Albergue">Albergue</option>
                         </select>
-                    </div>
-                    
-                    <script>
-                        function navigate() {
-                            var select = document.getElementById("select2Basic"); // Use the correct select ID
-                            var selectedOption = select.options[select.selectedIndex];
-                            var url = selectedOption.getAttribute("data-href");
-                    
-                            if (url) {
-                                window.location.href = url; // Redirects to the URL of the selected option
-                            }
-                        }
-                    </script>
-                    
+                      </div>
+              
                       <!-- Palabra clave -->
                       <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                         <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
                         <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
                       </div>
+              
                       <!-- Fecha -->
                       <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                         <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
@@ -347,30 +395,29 @@
                   </div>
                 </div>
               </div>
+              
                 <div class="card mb-2" style="padding: 10px; margin: 0;">
                   <div class="card-body">
                     <div class="card-datatable table-responsive">
-                      <table class="table table-striped table-bordered" id="solicitudesTable">
+                      <table class="table table-bordered" id="solicitudesTable" >
                           
                         <thead>
-                          <th>Nombre</th>
-                          <th>Tipo Usuario</th>
-                          <th style="width: 350px;">Correo Electrónico</th>
-                          <th style="width: 140px;">Celular</th>
-                          <th>Fecha de Creación</th>
+                          <th></th>
+                          <th style="width: 150px;">Nombre</th>
+                          <th style="width: 120px;">Tipo Usuario</th>
+                          <th style="width: 220px;">Correo Electrónico</th>
+                          <th style="width: 90px;">Celular</th>
+                          <th style="width: 140px;">Fecha Creación</th>
                           <th>Redes</th>
                           <th style="width: 100px;">Acciones</th>
-                        </tr>
+                        
                         </thead>
                         <tbody>
                         
                           <tr>
+                            <td><img src="../../assets/img/Albergue avatar.jpg" alt="Avatar" class="rounded-circle" style="width: 25px;"></td>
                             <td>
-                                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                                        <img src="../../assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" style="width: 25px;">
-                                    </li> <span class="fw-medium">Albergue Patitas</span> 
-                                </ul>
+                              <span class="fw-medium" style="margin-left: 0;">Albergue Patitas</span>
                             </td>
                             <td><span class="fw-medium">Albergue</span></td>
                             <td><span class="fw-medium">patitasrescate@gmail.com</span></td>
@@ -378,21 +425,24 @@
                             <td> 15/08/2023 </td>
                             <td>PatitasRescate</td>
                             <td>
-                                <div class="card-body p-0">
-                                    <div class="d-inline-flex">
-                                        <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                                        <button type="button" class="btn btn-sm btn-warning">Editar</button>
-                                    </div>
-                                </div>
+                              <div class="card-body p-0">
+                                  <div class="d-inline-flex">
+                                      <!-- Botón de eliminar con icono de tachito -->
+                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar">
+                                          <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
+                                      </button>
+                                      <!-- Botón de editar con icono de lápiz -->
+                                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar">
+                                          <i class="bx bxs-pencil"></i> <!-- Ícono de lápiz -->
+                                      </button>
+                                  </div>
+                              </div>
                             </td>
                           </tr>
                           <tr>
+                            <td><img src="../../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" style="width: 25px;"></td>
                             <td>
-                                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Personal">
-                                        <img src="../../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" style="width: 25px;">
-                                    </li> <span class="fw-medium">Carlos López</span> 
-                                </ul>
+                              <span class="fw-medium" style="margin-left: 0;">Carlos López</span>
                             </td>
                             <td><span class="fw-medium">Personal</span></td>
                             <td><span class="fw-medium">carlos.lopez@coordinador.com</span></td>
@@ -400,21 +450,24 @@
                             <td> 22/01/2024 </td>
                             <td>CarlosLopez</td>
                             <td>
-                                <div class="card-body p-0">
-                                    <div class="d-inline-flex">
-                                        <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                                        <button type="button" class="btn btn-sm btn-warning">Editar</button>
-                                    </div>
-                                </div>
+                              <div class="card-body p-0">
+                                  <div class="d-inline-flex">
+                                      <!-- Botón de eliminar con icono de tachito -->
+                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar">
+                                          <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
+                                      </button>
+                                      <!-- Botón de editar con icono de lápiz -->
+                                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar">
+                                          <i class="bx bxs-pencil"></i> <!-- Ícono de lápiz -->
+                                      </button>
+                                  </div>
+                              </div>
                             </td>
                         </tr>
                           <tr>
+                            <td><img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" style="width: 25px;"></td>
                             <td>
-                              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Personal">
-                                  <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" style="width: 25px;">
-                                </li> <span class="fw-medium"> Adriana</span> 
-                              </ul>
+                              <span class="fw-medium" style="margin-left: 0;">Adriana Rocio</span>
                             </td>
                             <td>Personal</td>
                             <td>
@@ -423,24 +476,25 @@
                             <td class="titulo-rosado"> 965 432 109 </td>
                             <td> 10/08/2024 </td>
                             <td>Adriana180690</td>
-                              <td>
-                                <div class="card-body p-0">
+                            <td>
+                              <div class="card-body p-0">
                                   <div class="d-inline-flex">
-                                    <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                                    <button type="button" class="btn btn-sm btn-warning">Editar</button>
+                                      <!-- Botón de eliminar con icono de tachito -->
+                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar">
+                                          <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
+                                      </button>
+                                      <!-- Botón de editar con icono de lápiz -->
+                                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar">
+                                          <i class="bx bxs-pencil"></i> <!-- Ícono de lápiz -->
+                                      </button>
                                   </div>
-                                </div>
-                                
-                    
-                              </td>
+                              </div>
+                            </td>
                           </tr>
                           <tr>
+                            <td><img src="../../assets/img/Albergue avatar.jpg" alt="Avatar" class="rounded-circle" style="width: 25px;"></td>
                             <td>
-                              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albergue">
-                                  <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" style="width: 25px;">
-                                </li> <span class="fw-medium">   Huellitas Felices</span> 
-                              </ul>
+                              <span class="fw-medium" style="margin-left: 0;">Huellitas Felices</span>
                             </td>
                             <td><span class="fw-medium">Albergue</span></td>
                             <td>
@@ -449,19 +503,23 @@
                             
                             <td class="titulo-rosado"> 921 942 145 </td>
                             <td> 10/09/2024 </td>
-                            <td>Hellitas_2004</td>
+                            <td>Huellitas_2004</td>
                             <td>
-                              
                               <div class="card-body p-0">
-                                <div class="d-inline-flex">
-                                  <button type="button" class="btn btn-sm btn-danger me-1">Eliminar</button>
-                                  <button type="button" class="btn btn-sm btn-warning">Editar</button>
-                                </div>
+                                  <div class="d-inline-flex">
+                                      <!-- Botón de eliminar con icono de tachito -->
+                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar">
+                                          <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
+                                      </button>
+                                      <!-- Botón de editar con icono de lápiz -->
+                                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar">
+                                          <i class="bx bxs-pencil"></i> <!-- Ícono de lápiz -->
+                                      </button>
+                                  </div>
                               </div>
-                              
-                            
                             </td>
                           </tr>
+                          
                       
             
             
@@ -533,32 +591,87 @@
   
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+  
+
   <script>
     $(document).ready(function () {
+    // Verifica si la tabla ya ha sido inicializada
+    if (!$.fn.DataTable.isDataTable('#solicitudesTable')) {
       $('#solicitudesTable').DataTable({
         paging: true,
-        pagingType: "full_numbers",
-        pageLength: 10,
-        lengthChange: true,
-        buttons: ['copy', 'excel', 'pdf'],
-        dom: 'Bfrtip',
-  
+        pagingType: "full_numbers", // Para mostrar la paginación con números
+        pageLength: 4, // Número de registros por página
+        lengthChange: true, // Permite cambiar la cantidad de registros por página
+        buttons: ['copy', 'excel', 'pdf'], // Añadir botones de exportación
+        dom: 'Bfrtip', // Posiciona los botones en la tabla
+
         // Personalización del idioma
         language: {
           search: "Buscar:",
-          lengthMenu: "Mostrar MENU entradas",
-          info: "",
+          lengthMenu: "Mostrar _MENU_ entradas",
+          info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
           infoEmpty: "Mostrando 0 a 0 de 0 entradas",
-          infoFiltered: "(filtrado de MAX entradas totales)",
+          infoFiltered: "(filtrado de _MAX_ entradas totales)",
           paginate: {
-            first: "Primero",
-            last: "Último",
-            next: "Siguiente",
-            previous: "Anterior"
+            first: '<i class="bx bx-chevrons-left"></i>',  // Ícono de "Primero"
+            last: '<i class="bx bx-chevrons-right"></i>',  // Ícono de "Último"
+            next: '<i class="bx bx-chevron-right"></i>',  // Ícono de "Siguiente"
+            previous: '<i class="bx bx-chevron-left"></i>'
           }
         }
       });
+    }
+
+
+    // Filtro por Tipo de Usuario
+    $('#select2Basic').on('change', function () {
+        var tipoUsuario = $(this).val(); // Obtiene el valor seleccionado
+        if (tipoUsuario === "Todas") {
+            table.column(1).search('').draw(); // Limpia el filtro en la columna 1 (Tipo de Usuario)
+        } else {
+            table.column(1).search(tipoUsuario).draw(); // Filtra por el valor seleccionado en la columna 1
+        }
     });
+
+    // Filtro por Palabra Clave
+    $('#inputPalabraClave').on('keyup', function () {
+        table.search(this.value).draw(); // Filtra en todas las columnas basado en la palabra clave
+    });
+
+    // Filtro por Fecha
+    $('#select2Fecha').on('change', function () {
+        var fechaSeleccionada = $(this).val(); // Obtiene el valor seleccionado
+        var now = moment(); // Fecha actual
+        var startDate;
+
+        // Lógica para filtrar por fecha
+        if (fechaSeleccionada === "Ultimas24Horas") {
+            startDate = moment().subtract(24, 'hours');
+        } else if (fechaSeleccionada === "UltimaSemana") {
+            startDate = moment().subtract(7, 'days');
+        } else if (fechaSeleccionada === "UltimoMes") {
+            startDate = moment().subtract(1, 'months');
+        } else if (fechaSeleccionada === "UltimoAnio") {
+            startDate = moment().subtract(1, 'years');
+        }
+
+        // Si se selecciona "Todas", no aplicar filtro
+        if (fechaSeleccionada === "Todas") {
+            table.column(5).search('').draw(); // Limpia el filtro en la columna de fechas (columna 5)
+        } else {
+            table.rows().every(function () {
+                var date = moment(this.data()[5], 'DD/MM/YYYY'); // Asume que la fecha está en la columna 5 en formato DD/MM/YYYY
+                if (date.isAfter(startDate)) {
+                    $(this.node()).show();
+                } else {
+                    $(this.node()).hide();
+                }
+            });
+        }
+    });
+});
+
   </script>
 </body>
 
