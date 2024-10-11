@@ -89,7 +89,9 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-
+    
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
   <style>
     table {
@@ -184,26 +186,19 @@
     <div class="layout-container">
 
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-
         <div class="app-brand demo px-3">
           <a href="javascript:void(0);" class="app-brand-link">
             <span class="app-brand-logo demo">
               <img class = "h-px-50 tf-icon" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
             </span>
           </a>
-
+  
           <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
           </a>
         </div>
-
-        <div class="menu-inner-shadow"></div>
-
-
-
         <ul class="menu-inner py-1">
-
+  
           <li class="menu-item">
             <a href="Principal_Administrador.html"  class="menu-link">
               <i class="menu-icon tf-icons bx bx-home"></i>
@@ -236,8 +231,15 @@
           </li>
           <li class="menu-item">
               <a href="AdminVerCoordinadores.html" class="menu-link">
-                  <i class='menu-icon tf-icons bx bx-food-menu'></i>
+                  <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div class="text-truncate" data-i18n="Coordinadores de zona">Coordinadores De Zona</div>
+              </a>
+            </li>
+  
+            <li class="menu-item">
+              <a href="Admin_VerLugares.html" class="menu-link">
+                  <i class='menu-icon tf-icons bx bx-food-menu'></i>
+                <div class="text-truncate" data-i18n="Lugares Registrados"> Lugares Registrados</div>
               </a>
             </li>
           
@@ -261,9 +263,6 @@
           <!-- Misc -->
           
         </ul>
-
-
-
       </aside>
 
       <div class="layout-page">
@@ -428,12 +427,13 @@
                               <div class="card-body p-0">
                                   <div class="d-inline-flex">
                                       <!-- Botón de eliminar con icono de tachito -->
-                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar">
-                                          <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
+                                      <button type="button" class="btn btn-sm btn-danger me-1" title="Eliminar" onclick="confirmarEliminacion()">
+                                        <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
                                       </button>
+                                      
                                       <!-- Botón de editar con icono de lápiz -->
-                                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar">
-                                          <i class="bx bxs-pencil"></i> <!-- Ícono de lápiz -->
+                                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar" onclick="abrirVista()">
+                                        <i class="bx bxs-pencil"></i> <!-- Ícono de lápiz -->
                                       </button>
                                   </div>
                               </div>
@@ -453,8 +453,8 @@
                               <div class="card-body p-0">
                                   <div class="d-inline-flex">
                                       <!-- Botón de eliminar con icono de tachito -->
-                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar">
-                                          <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
+                                      <button type="button" class="btn btn-sm btn-danger me-1" title="Eliminar" onclick="confirmarEliminacion()">
+                                        <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
                                       </button>
                                       <!-- Botón de editar con icono de lápiz -->
                                       <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar">
@@ -480,8 +480,8 @@
                               <div class="card-body p-0">
                                   <div class="d-inline-flex">
                                       <!-- Botón de eliminar con icono de tachito -->
-                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar">
-                                          <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
+                                      <button type="button" class="btn btn-sm btn-danger me-1" title="Eliminar" onclick="confirmarEliminacion()">
+                                        <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
                                       </button>
                                       <!-- Botón de editar con icono de lápiz -->
                                       <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar">
@@ -508,8 +508,8 @@
                               <div class="card-body p-0">
                                   <div class="d-inline-flex">
                                       <!-- Botón de eliminar con icono de tachito -->
-                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar">
-                                          <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
+                                      <button type="button" class="btn btn-sm btn-danger me-1" title="Eliminar" onclick="confirmarEliminacion()">
+                                        <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
                                       </button>
                                       <!-- Botón de editar con icono de lápiz -->
                                       <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Editar">
@@ -673,6 +673,36 @@
 });
 
   </script>
+
+<script>
+  function confirmarEliminacion() {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esta acción",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Aquí puedes agregar la lógica de eliminación, por ejemplo, enviar un formulario o hacer una petición AJAX
+        Swal.fire(
+          'Eliminado',
+          'El registro ha sido eliminado.',
+          'success'
+        )
+      }
+    })
+  }
+</script>
+<script>
+  function abrirVista() {
+      window.location.href = 'Admin_EditaPerfil.html'; // Reemplaza con la URL de la vista a la que deseas redirigir
+  }
+  </script>
+
 </body>
 
 
