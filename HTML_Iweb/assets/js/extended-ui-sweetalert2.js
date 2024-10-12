@@ -597,7 +597,7 @@
                                     eventLink = 'albergue-ver-eventos-detalles.html';
                                     break;
                                 default:
-                                eventLink = '#'; // O enlace por defecto
+                                    eventLink = '#'; // O enlace por defecto
                             }
                             break;
 
