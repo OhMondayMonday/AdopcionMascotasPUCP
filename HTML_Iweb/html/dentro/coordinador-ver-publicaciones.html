@@ -24,7 +24,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Publicaciones</title>
+  <title>Mis Publicaciones</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -69,9 +69,11 @@
   <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
   <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
   <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
-
+  <link rel="stylesheet" href="../../assets/vendor/libs/animate-css/animate.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/sweetalert2/sweetalert2.css" />
   <!-- Page CSS -->
 
+  <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
 
   <!-- Helpers -->
   <script src="../../assets/vendor/js/helpers.js"></script>
@@ -834,6 +836,7 @@
 
 
 <!-- Core JS -->
+<!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 
 <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
@@ -849,10 +852,33 @@
 
 <!-- Vendors JS -->
 
+<script src="../../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
 
 <!-- Main JS -->
 <script src="../../assets/js/main.js"></script>
+
+
+<!-- Page JS -->
+<script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="../../assets/js/app-user-view.js"></script>
+<script src="../../assets/js/app-user-view-security.js"></script>
+
+
+
+<!-- Main JS -->
+<script>
+  // Inicializa flatpickr para el rango de fechas
+  flatpickr("#dateRange", {
+    mode: "range",
+    dateFormat: "Y-m-d", // Ajusta el formato de la fecha según tus necesidades
+    locale: {
+      firstDayOfWeek: 1 // Inicia la semana en lunes
+    }
+  });
+</script>
+
+<script src="../../assets/js/extended-ui-sweetalert2.js"></script>
 
 
 <!-- Page JS -->
