@@ -478,31 +478,141 @@
         document.querySelectorAll('.btn-inscripcion').forEach(button => {
             button.addEventListener('click', function () {
               const eventId = this.getAttribute('data-event-id');
+              const userType = this.getAttribute('user-type');
+              const postType = this.getAttribute('post-type');
               let eventLink = ''; 
-          
-              // Configura el enlace de detalles basado en el ID del evento
-              switch (eventId) {
-                case '1':
-                  eventLink = 'ver-evento-detalles-usuario.html'; // Cambia esto por el enlace real
-                  break;
-                case '2':
-                  eventLink = 'ver-evento-detalles-usuario.html';
-                  break;
-                case '3':
-                  eventLink = 'ver-evento-detalles-usuario.html';
-                  break;
-                case '4':
-                  eventLink = 'ver-evento-detalles-usuario.html';
-                  break;
-                case '5':
-                  eventLink = 'ver-evento-detalles-usuario.html';
-                  break;
-                case '6':
-                  eventLink = 'ver-evento-detalles-usuario.html';
-                  break;
+
+              // Configura el enlace basado en el tipo de usuario
+
+              switch (userType) {
+
+                case 'usuario':
+
+                    switch (postType) {
+
+                        case 'publi':
+                            // Configura el enlace de detalles basado en el ID del evento
+                            switch (eventId) {
+                                case '1':
+                                eventLink = 'ver-publicaciones-detalles-usuario.html'; // Cambia esto por el enlace real
+                                break;
+                                case '2':
+                                eventLink = 'ver-publicaciones-detalles-usuario.html';
+                                break;
+                                case '3':
+                                eventLink = 'ver-publicaciones-detalles-usuario.html';
+                                break;
+                                case '4':
+                                eventLink = 'ver-publicaciones-detalles-usuario.html';
+                                break;
+                                case '5':
+                                eventLink = 'ver-publicaciones-detalles-usuario.html';
+                                break;
+                                case '6':
+                                eventLink = 'ver-publicaciones-detalles-usuario.html';
+                                break;
+                                default:
+                                eventLink = '#'; // O enlace por defecto
+                            }
+                        break;
+
+                        case 'event':
+                            // Configura el enlace de detalles basado en el ID del evento
+                            switch (eventId) {
+                                case '1':
+                                eventLink = 'ver-evento-detalles-usuario.html'; // Cambia esto por el enlace real
+                                break;
+                                case '2':
+                                eventLink = 'ver-evento-detalles-usuario.html';
+                                break;
+                                case '3':
+                                eventLink = 'ver-evento-detalles-usuario.html';
+                                break;
+                                case '4':
+                                eventLink = 'ver-evento-detalles-usuario.html';
+                                break;
+                                case '5':
+                                eventLink = 'ver-evento-detalles-usuario.html';
+                                break;
+                                case '6':
+                                eventLink = 'ver-evento-detalles-usuario.html';
+                                break;
+                                default:
+                                eventLink = '#'; // O enlace por defecto
+                            }
+                        break;
+
+                    }
+                    break;
+
+                case 'albergue':
+                    
+                    switch (postType) {
+
+                        case 'publi':
+                            // Configura el enlace de detalles basado en el ID del evento
+                            switch (eventId) {
+                                case '1':
+                                    eventLink = 'albergue-ver-publicaciones-detalles.html'; // Cambia esto por el enlace real
+                                    break;
+                                case '2':
+                                    eventLink = 'albergue-ver-publicaciones-detalles.html';
+                                    break;
+                                case '3':
+                                    eventLink = 'albergue-ver-publicaciones-detalles.html';
+                                    break;
+                                case '4':
+                                    eventLink = 'albergue-ver-publicaciones-detalles.html';
+                                    break;
+                                case '5':
+                                    eventLink = 'albergue-ver-publicaciones-detalles.html';
+                                    break;
+                                case '6':
+                                    eventLink = 'albergue-ver-publicaciones-detalles.html';
+                                    break;
+                                default:
+                                    eventLink = '#'; // O enlace por defecto
+                            }
+                            break;
+
+                        case 'event':
+                            // Configura el enlace de detalles basado en el ID del evento
+                            switch (eventId) {
+                                case '1':
+                                    eventLink = 'albergue-ver-eventos-detalles.html'; // Cambia esto por el enlace real
+                                    break;
+                                case '2':
+                                    eventLink = 'albergue-ver-eventos-detalles.html';
+                                    break;
+                                case '3':
+                                    eventLink = 'albergue-ver-eventos-detalles.html';
+                                    break;
+                                case '4':
+                                    eventLink = 'albergue-ver-eventos-detalles.html';
+                                    break;
+                                case '5':
+                                    eventLink = 'albergue-ver-eventos-detalles.html';
+                                    break;
+                                case '6':
+                                    eventLink = 'albergue-ver-eventos-detalles.html';
+                                    break;
+                                default:
+                                    eventLink = '#'; // O enlace por defecto
+                            }
+                            break;
+
+                    }
+                    break;
+
+                case 'coordinador':
+                    eventLink = 'coordinador-ver-publicaciones.html';
+                    break;
                 default:
-                  eventLink = '#'; // O enlace por defecto
+                    eventLink = '#'; // O enlace por defecto
+
+
               }
+          
           
               Swal.fire({
                 title: "¿Te quieres inscribir?",
