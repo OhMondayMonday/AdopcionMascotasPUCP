@@ -19,6 +19,27 @@
     })(window,document,'script','dataLayer','GTM-5DDHKGP');</script>
     <!-- End Google Tag Manager -->
     <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+    <style>
+        /* Estilos para el botón "Volver al Inicio" */
+        .back-link {
+            position: relative;  /* Mantiene el botón fijo al desplazarse */
+            top: -30px;
+            left: -160px;
+            padding: 10px 20px;
+            background-color: #6C63FF;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            z-index: 1000; /* Asegura que el botón siempre esté encima */
+        }
+
+        .back-link:hover {
+            background-color: #594BF2;
+        }
+    </style>
+
 </head>
 <body>
     <div class="container">
@@ -26,6 +47,9 @@
             <img src="../../assets/img/FotoPerroDuena.avif" alt="Imagen de mascota">
         </div>
         <div class="form-section">
+            <div class="form-container">
+                <a href="../index.html" class="back-link">Volver al inicio</a>
+            </div>
             <img src="../../assets/img/logo Alianza Animal .png" alt="Logo" class="logo">
             <h2>Bienvenido!</h2>
             <p>Crea tu cuenta y apoya al cuidado de las mascotas</p>
