@@ -11158,12 +11158,12 @@ body {
 
 .signup-section {
   padding: 10rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000 100%), url("../assets/img/bg-signup.jpg");
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000 100%), url("../assets/img/depositphotos_85929920-stock-photo-black-and-white-doggy-tile.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  margin-top: 1rem;
+  margin-top: 0;
 }
 .signup-section .form-signup input {
   box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
@@ -11219,6 +11219,6 @@ body {
 }
 
 #FunFacts{
-  margin-bottom: 3rem;
+  padding-bottom: 3rem;
   margin-top: 3rem;
 }
