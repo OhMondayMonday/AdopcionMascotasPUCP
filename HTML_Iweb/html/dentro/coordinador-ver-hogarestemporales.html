@@ -298,49 +298,36 @@
       <div class="card-header d-flex flex-wrap justify-content-between gap-3">
 
           <!-- Select2 -->
-          <div class="col-12 d-flex justify-content-between align-items-center">
-            
-            <div class="col-12 card">
+        <div class="col-12">
+          <div class="card mb-0" style="height: auto; padding: 5px;">
               <div class="card-body d-flex align-items-center justify-content-center p-1">
                 <div class="row w-100">
                   <!-- Tipo de Publicacion -->
-                  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                  <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                     <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de gestion</label>
                     <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
-                        <option value="Todas" data-href="coordinador-gestion.html">Todas</option>
-                        <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.html">Mascotas Perdidas</option>
-                        <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Hogares Temporales</option>
+                        <option value="AK">Todas</option>
+                        <option value="MascotasPerdidas">Mascotas Perdidas</option>
+                        <option value="HogaresTemporales">Hogares Temporales</option>
                     </select>
                 </div>
-                
-                <script>
-                    function navigate() {
-                        var select = document.getElementById("select2Basic"); // Use the correct select ID
-                        var selectedOption = select.options[select.selectedIndex];
-                        var url = selectedOption.getAttribute("data-href");
-                
-                        if (url) {
-                            window.location.href = url; // Redirects to the URL of the selected option
-                        }
-                    }
-                </script>
-                
-                
+
                   <!-- Palabra clave -->
-                  <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                  <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                     <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
                     <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
                   </div>
+
                   <!-- Fecha -->
                   <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                    <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
-                    <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                      <option value="Todas">Todas</option>
-                      <option value="Ultimas24Horas">Últimas 24 horas</option>
-                      <option value="UltimaSemana">Esta semana</option>
-                      <option value="UltimoMes">Este mes</option>
-                      <option value="UltimoAnio">Este año</option>
-                    </select>
+                    <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
+                    <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas" />
+                  </div>
+
+                  <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
+                    <button class="btn btn-facebook" type="button">
+                      Aplicar filtros
+                    </button>
                   </div>
                 </div>
               </div>
@@ -844,6 +831,18 @@
 
 
 <!-- Page JS -->
+
+<script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+<script>
+  // Inicializa flatpickr para el rango de fechas
+  flatpickr("#dateRange", {
+    mode: "range",
+    dateFormat: "Y-m-d", // Ajusta el formato de la fecha según tus necesidades
+    locale: {
+      firstDayOfWeek: 1 // Inicia la semana en lunes
+    }
+  });
+</script>
 
 
 
