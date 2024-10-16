@@ -480,7 +480,7 @@
           <div class="card-body d-flex align-items-center justify-content-center p-1">
             <div class="row w-100">
               <!-- Tipo de Publicacion -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+              <div class="col-md-3 d-flex flex-column justify-content-center align-items-start mb-1 mt-0">
                 <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento</label>
                 <select id="select2Basic" class="form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
                   <option value="AK">Todas</option>
@@ -491,7 +491,7 @@
                 </select>
               </div>
               <!-- ubicacion -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+              <div class="col-md-3 d-flex flex-column justify-content-center align-items-start mb-1 mt-0">
                 <label for="select2Ubi" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicacion</label>
                 <select id="select2Ubi" class="form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
                   <option value="AK">Todas</option>
@@ -507,13 +507,21 @@
                 </select>
               </div>
               <!-- Fecha -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+              <div class="col-md-4 d-flex flex-column justify-content-center align-items-start mb-1 mt-0">
                 <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
                 <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas" />
               </div>
+
+              <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
+                <button class="btn btn-facebook" type="button">
+                  Aplicar filtros
+                </button>
+              </div>
             </div>
           </div>
+
         </div>
+
       </div>
 
       <!-- Card Container -->
