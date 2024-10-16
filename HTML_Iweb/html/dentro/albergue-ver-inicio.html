@@ -257,12 +257,10 @@
   <!-- Content -->
 
   <div class="container-xxl flex-grow-1 container-p-y">
-
-
-    <div class="card bg-transparent shadow-none border-0 my-4">
+    <div class="card border-0 mb-4 p-3">
       <div class="card-body row p-0 pb-3">
         <div class="col-12 col-md-8 card-separator">
-          <h3>Bienvenido, Albergue Caritas! 👋🏻 </h3>
+          <h3 class="text-dark">¡Bienvenido, Albergue Huellas! 👋🏻 </h3>
           <div class="col-12 col-lg-7">
             <p>Reporte semanal</p>
           </div>
@@ -304,7 +302,7 @@
                 <p class="mb-4">Reporte semanal</p>
               </div>
               <div class="time-spending-chart">
-                <h3 class="mb-2">5h<span class="text-muted">h</span> 14<span class="text-muted">m</span> </h3>
+                <h3 class="mb-2">5<span class="text-muted">h</span> 14<span class="text-muted">m</span> </h3>
                 <span class="badge bg-label-success">+10%</span>
               </div>
             </div>
@@ -315,57 +313,15 @@
     <!-- Hour chart End  -->
 
     <!-- Topic and Instructors -->
-    <div class="row mb-4 g-4">
-      <div class="col-12 col-xl-8">
-        <div class="card h-100" >
+    <div class="row mb-4 g-3">
+      <div class="col-sm-12 col-xl-4 col-md-6">
+        <div class="card h-100">
           <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="card-title m-0 me-2">Principal actividad</h5>
+            <h5 class="card-title m-0 me-2">Albergue Huellas</h5>
           </div>
           <div class="card-body row g-3">
-            <div class="col-md-6">
-              <img class = "img-fluid" src = "https://img.freepik.com/vector-gratis/fondo-bonito-cara-sonriente-animales-felices-decorativos_23-2147590101.jpg?t=st=1726640655~exp=1726644255~hmac=810a73c0148e1c4d1ecb3b4af4a0d1b18f8dfe3d48ec5d695b0282ec0570e8d0&w=826" alt = "fotoperfil">
-            </div>
-            <div class="col-md-6 d-flex justify-content-around align-items-center">
-              <div>
-                <div class="d-flex align-items-baseline">
-                  <span class="text-primary me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Donaciones activos</p>
-                    <h5>35%</h5>
-                  </div>
-                </div>
-                <div class="d-flex align-items-baseline my-3">
-                  <span class="text-success me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Donaciones de dinero</p>
-                    <h5>14%</h5>
-                  </div>
-                </div>
-                <div class="d-flex align-items-baseline">
-                  <span class="text-danger me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Adopciones</p>
-                    <h5>10%</h5>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div class="d-flex align-items-baseline">
-                  <span class="text-info me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Eventos</p>
-                    <h5>20%</h5>
-                  </div>
-                </div>
-                <div class="d-flex align-items-baseline my-3">
-                  <span class="text-secondary me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Hogares temporales</p>
-                    <h5>12%</h5>
-                  </div>
-                </div>
-              </div>
+            <div class="col-md-12">
+              <img class = "img-fluid h-100" src="../../assets/img/huella.jpg" alt = "fotoperfil">
             </div>
           </div>
         </div>
@@ -407,17 +363,101 @@
             <div class="row mb-1 align-items-center justify-content-center">
               <small>Deseas crear una nueva publicacion?</small>
             </div>
-            <a href="albergue-crear-publicacion-normal.html" class="btn btn-facebook w-100">Nueva publicacion</a>
+            <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicacion</a>
           </div>
         </div>
       </div>
 
+      <div class="col-xl-4 col-lg-4 col-md-12 col-12 order-md-2">
+        <div class="card h-100">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="card-title m-0 me-2">Ultimas actualizaciones:</h5>
+            <div class="dropdown">
+              <button class="btn p-0" type="button" id="timelineWapper" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="timelineWapper">
+                <a class="dropdown-item" href="javascript:void(0)">Recargar</a>
+
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Activity Timeline -->
+            <ul class="timeline">
+              <li class="timeline-item timeline-item-transparent">
+                <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
+                <div class="timeline-event">
+                  <div class="timeline-header mb-1">
+                    <h6 class="mb-0">Albergue Huellas realizo una actualizacion</h6>
+                    <small class="text-muted">Hace 1 min</small>
+                  </div>
+                  <p class="mb-2">"Actualización: Roco ha sido encontrado el día 12/08/2024"</p>
+
+                </div>
+              </li>
+              <li class="timeline-item timeline-item-transparent">
+                <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
+                <div class="timeline-event">
+                  <div class="timeline-header mb-1">
+                    <h6 class="mb-0">Se realizo una solicitud a Luis Pozo</h6>
+                    <small class="text-muted">Hace 4 min</small>
+                  </div>
+                  <p class="mb-2">Solicitud: Hogar temporal</p>
+                  <div class="d-flex flex-wrap">
+                    <div class="avatar me-1">
+                      <img src="../../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
+                    </div>
+                    <div>
+                      <h6 class="mb-0">Solicitud a Luis Pozo</h6>
+                      <span>Se realizo la solicitud para hogar temporal</span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-item timeline-item-transparent">
+                <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
+                <div class="timeline-event pb-0">
+                  <div class="timeline-header mb-1">
+                    <h6 class="mb-0">Se registraron nuevos hogares temporales</h6>
+                    <small class="text-muted">Hace 1 hora</small>
+                  </div>
+                  <p class="mb-2">Se registraron 5 cuentas tipo: personas</p>
+                  <div class="d-flex align-items-center avatar-group">
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Vinnie Mostowy">
+                      <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Marrie Patty">
+                      <img src="../../assets/img/avatars/12.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Jimmy Jackson">
+                      <img src="../../assets/img/avatars/9.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Kristine Gill">
+                      <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Nelson Wilson">
+                      <img src="../../assets/img/avatars/14.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-end-indicator">
+                <i class="bx bx-check-circle"></i>
+              </li>
+            </ul>
+            <!-- /Activity Timeline -->
+          </div>
+        </div>
+      </div>
+
+
+
+
+
     </div>
     <!--  Topic and Instructors  End-->
-
-
-      <!-- Content wrapper -->
-    </div>
+  </div>
     <!-- / Layout page -->
   </div>
 <footer class="footer bg-footer-theme" >
