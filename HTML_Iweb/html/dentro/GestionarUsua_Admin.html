@@ -145,10 +145,10 @@
   </style>
 
 <style>
-  /* Ajustar el margen entre la tabla y la paginación */
+ /* Controla el margen entre la tabla y la paginación */
 .dataTables_wrapper .dataTables_info,
 .dataTables_wrapper .dataTables_paginate {
-  margin-top: 0;
+  margin-top: 5px; /* Ajusta este valor para cambiar el espacio */
   padding-top: 0;
 }
 
@@ -163,9 +163,9 @@
   float: right;
 }
 
-/* Reduce el espacio entre la tabla y la parte inferior de la tabla (paginación y info) */
+/* Ajusta el margen inferior entre la tabla y la sección de paginación */
 .table-responsive {
-  margin-bottom: 15px;
+  margin-bottom: 5px; /* Reduce el valor para menos espacio o ajusta según prefieras */
 }
 </style>
   
@@ -368,7 +368,6 @@
                         <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
                           <option value="Todas">Todas</option>
                           <option value="Personal">Personal</option>
-                          <option value="Coordinador">Coordinador</option>
                           <option value="Albergue">Albergue</option>
                         </select>
                       </div>
@@ -401,22 +400,25 @@
                       <table class="table table-bordered" id="solicitudesTable" >
                           
                         <thead>
-                          <th></th>
-                          <th style="width: 150px;">Nombre</th>
+                          
+                          <th style="width: 180px;">Nombre</th>
                           <th style="width: 120px;">Tipo Usuario</th>
-                          <th style="width: 220px;">Correo Electrónico</th>
-                          <th style="width: 90px;">Celular</th>
+                          <th style="width: 240px;">Correo Electrónico</th>
+                          <th style="width: 120px;">Contacto</th>
                           <th style="width: 140px;">Fecha Creación</th>
-                          <th>Redes</th>
+                          <th style="width: 130px;">Facebook</th>
                           <th style="width: 100px;">Acciones</th>
                         
                         </thead>
                         <tbody>
                         
                           <tr>
-                            <td><img src="../../assets/img/Albergue avatar.jpg" alt="Avatar" class="rounded-circle" style="width: 25px;"></td>
-                            <td>
-                              <span class="fw-medium" style="margin-left: 0;">Albergue Patitas</span>
+                            <td style="display: flex; align-items: center;">
+                              <img src="../../assets/img/Albergue avatar.jpg" 
+                                   alt="Avatar" 
+                                   class="rounded-circle" 
+                                   style="width: 35px; margin-right: 10px;">
+                              <span class="fw-medium">Albergue Patitas</span>
                             </td>
                             <td><span class="fw-medium">Albergue</span></td>
                             <td><span class="fw-medium">patitasrescate@gmail.com</span></td>
@@ -427,7 +429,7 @@
                               <div class="card-body p-0">
                                   <div class="d-inline-flex">
                                       <!-- Botón de eliminar con icono de tachito -->
-                                      <button type="button" class="btn btn-sm btn-danger me-1" title="Eliminar" onclick="confirmarEliminacion()">
+                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar" onclick="confirmarEliminacion()">
                                         <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
                                       </button>
                                       
@@ -440,9 +442,12 @@
                             </td>
                           </tr>
                           <tr>
-                            <td><img src="../../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" style="width: 25px;"></td>
-                            <td>
-                              <span class="fw-medium" style="margin-left: 0;">Carlos López</span>
+                            <td style="display: flex; align-items: center;">
+                              <img src="../../assets/img/avatars/3.png" 
+                                   alt="Avatar" 
+                                   class="rounded-circle" 
+                                   style="width: 35px; margin-right: 10px;">
+                              <span class="fw-medium">Carlos López</span>
                             </td>
                             <td><span class="fw-medium">Personal</span></td>
                             <td><span class="fw-medium">carlos.lopez@coordinador.com</span></td>
@@ -453,7 +458,7 @@
                               <div class="card-body p-0">
                                   <div class="d-inline-flex">
                                       <!-- Botón de eliminar con icono de tachito -->
-                                      <button type="button" class="btn btn-sm btn-danger me-1" title="Eliminar" onclick="confirmarEliminacion()">
+                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar" onclick="confirmarEliminacion()">
                                         <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
                                       </button>
                                       <!-- Botón de editar con icono de lápiz -->
@@ -465,10 +470,14 @@
                             </td>
                         </tr>
                           <tr>
-                            <td><img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" style="width: 25px;"></td>
-                            <td>
-                              <span class="fw-medium" style="margin-left: 0;">Adriana Rocio</span>
+                            <td style="display: flex; align-items: center;">
+                              <img src="../../assets/img/avatars/6.png" 
+                                   alt="Avatar" 
+                                   class="rounded-circle" 
+                                   style="width: 35px; margin-right: 10px;">
+                              <span class="fw-medium">Adriana Rocio</span>
                             </td>
+                            
                             <td>Personal</td>
                             <td>
                               <span class="fw-medium">Adriana2004@gmail.com</span>
@@ -480,7 +489,7 @@
                               <div class="card-body p-0">
                                   <div class="d-inline-flex">
                                       <!-- Botón de eliminar con icono de tachito -->
-                                      <button type="button" class="btn btn-sm btn-danger me-1" title="Eliminar" onclick="confirmarEliminacion()">
+                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar" onclick="confirmarEliminacion()">
                                         <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
                                       </button>
                                       <!-- Botón de editar con icono de lápiz -->
@@ -492,13 +501,16 @@
                             </td>
                           </tr>
                           <tr>
-                            <td><img src="../../assets/img/Albergue avatar.jpg" alt="Avatar" class="rounded-circle" style="width: 25px;"></td>
-                            <td>
-                              <span class="fw-medium" style="margin-left: 0;">Huellitas Felices</span>
+                            <td style="display: flex; align-items: center;">
+                              <img src="../../assets/img/Albergue avatar.jpg" 
+                                   alt="Avatar" 
+                                   class="rounded-circle" 
+                                   style="width: 35px; margin-right: 10px;">
+                              <span class="fw-medium">Huellitas Felices</span>
                             </td>
                             <td><span class="fw-medium">Albergue</span></td>
                             <td>
-                                <span class="fw-medium">HuellitasFelices2013@gmail.com</span>
+                                <span class="fw-medium">HuellitasFelices@gmail.com</span>
                             </td>
                             
                             <td class="titulo-rosado"> 921 942 145 </td>
@@ -508,7 +520,7 @@
                               <div class="card-body p-0">
                                   <div class="d-inline-flex">
                                       <!-- Botón de eliminar con icono de tachito -->
-                                      <button type="button" class="btn btn-sm btn-danger me-1" title="Eliminar" onclick="confirmarEliminacion()">
+                                      <button type="button" class="btn btn-sm btn-danger me-1" data-bs-toggle="tooltip" title="Eliminar" onclick="confirmarEliminacion()">
                                         <i class="bx bxs-trash"></i> <!-- Ícono de tachito de basura -->
                                       </button>
                                       <!-- Botón de editar con icono de lápiz -->
@@ -596,82 +608,35 @@
 
   <script>
     $(document).ready(function () {
-    // Verifica si la tabla ya ha sido inicializada
-    if (!$.fn.DataTable.isDataTable('#solicitudesTable')) {
-      $('#solicitudesTable').DataTable({
-        paging: true,
-        pagingType: "full_numbers", // Para mostrar la paginación con números
-        pageLength: 4, // Número de registros por página
-        lengthChange: true, // Permite cambiar la cantidad de registros por página
-        buttons: ['copy', 'excel', 'pdf'], // Añadir botones de exportación
-        dom: 'Bfrtip', // Posiciona los botones en la tabla
-
-        // Personalización del idioma
-        language: {
-          search: "Buscar:",
-          lengthMenu: "Mostrar _MENU_ entradas",
-          info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-          infoEmpty: "Mostrando 0 a 0 de 0 entradas",
-          infoFiltered: "(filtrado de _MAX_ entradas totales)",
-          paginate: {
-            first: '<i class="bx bx-chevrons-left"></i>',  // Ícono de "Primero"
-            last: '<i class="bx bx-chevrons-right"></i>',  // Ícono de "Último"
-            next: '<i class="bx bx-chevron-right"></i>',  // Ícono de "Siguiente"
-            previous: '<i class="bx bx-chevron-left"></i>'
+      if (!$.fn.DataTable.isDataTable('#solicitudesTable')) {
+        var table = $('#solicitudesTable').DataTable({
+          paging: true,
+          pagingType: "full_numbers",
+          pageLength: 4,
+          lengthChange: true,
+          buttons: ['copy', 'excel', 'pdf'],
+          dom: 'Bfrtip', // Con buscador y mostrando información
+          language: {
+            lengthMenu: "Mostrar _MENU_ entradas",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+            infoEmpty: "Mostrando 0 a 0 de 0 entradas",
+            infoFiltered: "(filtrado de _MAX_ entradas totales)",
+            paginate: {
+              first: '<i class="bx bx-chevrons-left"></i>',
+              last: '<i class="bx bx-chevrons-right"></i>',
+              next: '<i class="bx bx-chevron-right"></i>',
+              previous: '<i class="bx bx-chevron-left"></i>'
+            }
           }
-        }
-      });
-    }
-
-
-    // Filtro por Tipo de Usuario
-    $('#select2Basic').on('change', function () {
-        var tipoUsuario = $(this).val(); // Obtiene el valor seleccionado
-        if (tipoUsuario === "Todas") {
-            table.column(1).search('').draw(); // Limpia el filtro en la columna 1 (Tipo de Usuario)
-        } else {
-            table.column(1).search(tipoUsuario).draw(); // Filtra por el valor seleccionado en la columna 1
-        }
+        });
+  
+        // Ocultar manualmente el buscador
+        $('#solicitudesTable_filter').hide();
+  
+        // Función para filtrar en tiempo real
+        configurarFiltros(table);
+      }
     });
-
-    // Filtro por Palabra Clave
-    $('#inputPalabraClave').on('keyup', function () {
-        table.search(this.value).draw(); // Filtra en todas las columnas basado en la palabra clave
-    });
-
-    // Filtro por Fecha
-    $('#select2Fecha').on('change', function () {
-        var fechaSeleccionada = $(this).val(); // Obtiene el valor seleccionado
-        var now = moment(); // Fecha actual
-        var startDate;
-
-        // Lógica para filtrar por fecha
-        if (fechaSeleccionada === "Ultimas24Horas") {
-            startDate = moment().subtract(24, 'hours');
-        } else if (fechaSeleccionada === "UltimaSemana") {
-            startDate = moment().subtract(7, 'days');
-        } else if (fechaSeleccionada === "UltimoMes") {
-            startDate = moment().subtract(1, 'months');
-        } else if (fechaSeleccionada === "UltimoAnio") {
-            startDate = moment().subtract(1, 'years');
-        }
-
-        // Si se selecciona "Todas", no aplicar filtro
-        if (fechaSeleccionada === "Todas") {
-            table.column(5).search('').draw(); // Limpia el filtro en la columna de fechas (columna 5)
-        } else {
-            table.rows().every(function () {
-                var date = moment(this.data()[5], 'DD/MM/YYYY'); // Asume que la fecha está en la columna 5 en formato DD/MM/YYYY
-                if (date.isAfter(startDate)) {
-                    $(this.node()).show();
-                } else {
-                    $(this.node()).hide();
-                }
-            });
-        }
-    });
-});
-
   </script>
 
 <script>
@@ -700,6 +665,57 @@
 <script>
   function abrirVista() {
       window.location.href = 'Admin_EditaPerfil.html'; // Reemplaza con la URL de la vista a la que deseas redirigir
+  }
+  </script>
+  <script>
+    function configurarFiltros(table) {
+    // Filtro de Tipo de Usuario
+    $('#select2Basic').on('change', function () {
+      var valor = $(this).val(); // Capturamos el valor del select
+      if (valor === "Todas") valor = ''; // Si es "Todas", no filtramos nada
+      table.column(1).search(valor).draw(); // Filtramos por la columna 1 (Tipo de Usuario)
+    });
+
+    // Filtro de Palabra Clave (en cualquier columna)
+    $('#inputPalabraClave').on('keyup', function () {
+      table.search(this.value).draw(); // Realizamos la búsqueda global
+    });
+
+    // Filtro de Fecha
+    $('#select2Fecha').on('change', function () {
+      var valor = $(this).val();
+      var fechaActual = new Date();
+      var filtroFecha;
+
+      // Filtrar según la opción seleccionada
+      switch (valor) {
+        case "Ultimas24Horas":
+          filtroFecha = new Date(fechaActual);
+          filtroFecha.setDate(fechaActual.getDate() - 1);
+          break;
+        case "UltimaSemana":
+          filtroFecha = new Date(fechaActual);
+          filtroFecha.setDate(fechaActual.getDate() - 7);
+          break;
+        case "UltimoMes":
+          filtroFecha = new Date(fechaActual);
+          filtroFecha.setMonth(fechaActual.getMonth() - 1);
+          break;
+        case "UltimoAnio":
+          filtroFecha = new Date(fechaActual);
+          filtroFecha.setFullYear(fechaActual.getFullYear() - 1);
+          break;
+        default:
+          filtroFecha = ''; // No filtrar si es "Todas"
+      }
+
+      // Aplica el filtro de fecha en la columna correspondiente (columna 5 en este caso)
+      if (filtroFecha) {
+        table.column(5).search(filtroFecha.toISOString().split('T')[0]).draw();
+      } else {
+        table.column(5).search('').draw(); // Sin filtro
+      }
+    });
   }
   </script>
 
