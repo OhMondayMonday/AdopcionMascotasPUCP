@@ -324,13 +324,13 @@
                   <div class="row w-100">
                     <!-- Tipo de Usuario -->
                     <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                      <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Transferencia</label>
+                      <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Entidad Financiera</label>
                       <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
                         <option value="Todas">Todas</option>
                         <option value="Yape">Yape</option>
                         <option value="Mastercard">Mastercard</option>
                         <option value="BBVA">BBVA</option>
-                        <option value="Banco de la Nación">Banco de la Nación</option>
+                        <option value="Interbank">Interbank</option>
                       </select>
                     </div>
             
@@ -362,7 +362,7 @@
                     <thead>
                     <tr>
                       
-                      <th style="width: 200px;">Tipo Transferencia</th>
+                      <th style="width: 200px;">Entidad Financiera</th>
                       <th style="width: 120px;">Usuario</th>
                       <th style="width: 130px;">Destino</th>
                       <th style="width: 100px;">Estado</th>
@@ -383,7 +383,7 @@
                       
                       <td>Maria Gomez</td>
                       <td>Albergue Patitas</td>
-                      <td>Pendiente</td>
+                      <td><span class="badge bg-label-warning">Pendiente</span></td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
                       <td>$250</td>
@@ -399,7 +399,10 @@
                       
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-11</td>
                       <td>16:45</td>
                       <td>$300</td>
@@ -416,7 +419,10 @@
                       
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-12</td>
                       <td>14:32</td>
                       <td>$100</td>
@@ -432,23 +438,26 @@
                       
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
+                      <td><span class="badge bg-label-warning">Pendiente</span></td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
                       <td>$250</td>
                     </tr>
                     <tr>
                       <td style="display: flex; align-items: center;">
-                        <img src="../../assets/img/BN_Logo.jpg"   
+                        <img src="../../assets/img/Interbank_Logo.png"   
                              alt="Avatar" 
                              class="rounded-circle" 
                              style="width: 38px; margin-right: 10px;">
-                        <span class="fw-medium">Banco de la Nación</span>
+                        <span class="fw-medium">Interbank</span>
                       </td>
                       
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-11</td>
                       <td>16:45</td>
                       <td>$300</td>
@@ -464,7 +473,10 @@
                       
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-12</td>
                       <td>14:32</td>
                       <td>$100</td>
@@ -479,22 +491,25 @@
                       </td>
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
+                      <td><span class="badge bg-label-warning">Pendiente</span></td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
                       <td>$250</td>
                     </tr>
                     <tr>
                       <td style="display: flex; align-items: center;">
-                        <img src="../../assets/img/BCP_logo.png"   
+                        <img src="../../assets/img/Interbank_Logo.png"   
                              alt="Avatar" 
                              class="rounded-circle" 
                              style="width: 38px; margin-right: 10px;">
-                        <span class="fw-medium">BCP</span>
+                        <span class="fw-medium">Interbank</span>
                       </td>
                       <td>Gonzalo Alvarez</td>
                       <td>Fundación Vida</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-11</td>
                       <td>16:45</td>
                       <td>$300</td>
@@ -509,7 +524,10 @@
                       </td>
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-12</td>
                       <td>14:32</td>
                       <td>$100</td>
@@ -525,7 +543,10 @@
                       </td>
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-11</td>
                       <td>16:45</td>
                       <td>$300</td>
@@ -540,7 +561,10 @@
                       </td>
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-12</td>
                       <td>14:32</td>
                       <td>$100</td>
@@ -555,7 +579,7 @@
                       </td>
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
+                      <td><span class="badge bg-label-warning">Pendiente</span></td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
                       <td>$250</td>

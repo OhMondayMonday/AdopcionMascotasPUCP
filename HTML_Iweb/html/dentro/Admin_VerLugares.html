@@ -437,7 +437,7 @@
                         
                           <th style="width: 300px;">Nombre Lugar</th>
                           <th style="width: 230px;">Dirección</th>
-                          <th style="width: 180px;">Distrito</th>
+                          <th style="width: 160px;">Distrito</th>
                           <th>Contacto</th>
                           <th style="width: 140px;">Cap. Máxima</th>
                           <th>Estado</th>
@@ -536,6 +536,23 @@
                             <td>400</td>
                             <td><span class="badge bg-label-success">Disponible</span></td>
                             
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <div style="display: flex; align-items: center; gap: 10px;">
+                                <img src="../../assets/img/SalonesSanIsidro.jpg" 
+                                     alt="Salones San Isidro" 
+                                     width="90px" 
+                                     height="80px">
+                                <span>Salones San Isidro</span>
+                              </div>
+                            </td>
+                            <td>Av. Javier Prado Oeste 123</td>
+                            <td>San Isidro</td>
+                            <td><span class="fw-medium">contacto@salonessanisidro.pe</span></td>
+                            <td>350</td>
+                            <td><span class="badge bg-label-success">Disponible</span></td>
                           </tr>
                           
                         
@@ -794,7 +811,7 @@ function closeModal() {
         var table = $('#solicitudesTable').DataTable({
           paging: true,
           pagingType: "full_numbers",
-          pageLength: 4,
+          pageLength: 5,
           lengthChange: true,
           buttons: ['copy', 'excel', 'pdf'],
           dom: 'Bfrtip', // Con buscador y mostrando información

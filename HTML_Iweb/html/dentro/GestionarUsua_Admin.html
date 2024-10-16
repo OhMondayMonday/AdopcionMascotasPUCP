@@ -443,7 +443,7 @@
                           </tr>
                           <tr>
                             <td style="display: flex; align-items: center;">
-                              <img src="../../assets/img/avatars/3.png" 
+                              <img src="../../assets/img/avatars/7.png" 
                                    alt="Avatar" 
                                    class="rounded-circle" 
                                    style="width: 35px; margin-right: 10px;">
@@ -531,7 +531,39 @@
                               </div>
                             </td>
                           </tr>
-                          
+                          <tr>
+                            <td style="display: flex; align-items: center;">
+                              <img src="../../assets/img/Albergue avatar.jpg" 
+                                   alt="Avatar" 
+                                   class="rounded-circle" 
+                                   style="width: 35px; margin-right: 10px;">
+                              <span class="fw-medium">Patas Unidas</span>
+                            </td>
+                            <td><span class="fw-medium">Albergue</span></td>
+                            <td>
+                              <span class="fw-medium">patasunidas@gmail.com</span>
+                            </td>
+                            <td class="titulo-rosado">987 654 321</td>
+                            <td>15/10/2024</td>
+                            <td>Patas_2022</td>
+                            <td>
+                              <div class="card-body p-0">
+                                <div class="d-inline-flex">
+                                  <!-- Botón de eliminar con icono de tachito -->
+                                  <button type="button" class="btn btn-sm btn-danger me-1" 
+                                          data-bs-toggle="tooltip" title="Eliminar" 
+                                          onclick="confirmarEliminacion()">
+                                    <i class="bx bxs-trash"></i>
+                                  </button>
+                                  <!-- Botón de editar con icono de lápiz -->
+                                  <button type="button" class="btn btn-sm btn-warning" 
+                                          data-bs-toggle="tooltip" title="Editar">
+                                    <i class="bx bxs-pencil"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
                       
             
             
@@ -612,7 +644,7 @@
         var table = $('#solicitudesTable').DataTable({
           paging: true,
           pagingType: "full_numbers",
-          pageLength: 4,
+          pageLength: 5,
           lengthChange: true,
           buttons: ['copy', 'excel', 'pdf'],
           dom: 'Bfrtip', // Con buscador y mostrando información
