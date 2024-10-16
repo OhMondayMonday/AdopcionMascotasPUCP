@@ -390,7 +390,7 @@
                     // Alerta de confirmación con SweetAlert2
                     Swal.fire({
                         title: "¿Estás seguro de eliminar esta solicitud?",
-                        text: "Esta acción es irreversible. La solicitud será eliminada permanentemente.",
+                        text: "Esta acción es irreversible. La solicitud será eliminada.",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonText: "Sí, eliminar",
