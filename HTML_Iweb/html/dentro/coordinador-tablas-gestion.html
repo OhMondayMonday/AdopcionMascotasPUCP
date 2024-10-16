@@ -44,8 +44,7 @@
 
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/favicon/favicon.ico" />
-
+  <link rel="icon" type="image/x-icon" href="..\..\assets\img\logo_Alianza_Animal_-removebg-preview.png" />
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -96,7 +95,31 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
- 
+    <style>
+      /* Controla el margen entre la tabla y la paginación */
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+      margin-top: 5px; /* Ajusta este valor para cambiar el espacio */
+      padding-top: 0;
+    }
+    
+    /* Alinea el texto de 'Mostrando entradas' y la paginación en la misma línea */
+    .dataTables_wrapper .dataTables_info {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    .dataTables_wrapper .dataTables_paginate {
+      display: inline-block;
+      float: right;
+    }
+    
+    /* Ajusta el margen inferior entre la tabla y la sección de paginación */
+    .table-responsive {
+      margin-bottom: 5px; /* Reduce el valor para menos espacio o ajusta según prefieras */
+    }
+    </style>
+
 </head>
 
 <body>
@@ -422,11 +445,11 @@
                               <td>
                                 <div class="d-flex gap-2">
                                   <!-- Botón Ver Detalles -->
-                                  <a href="#">
-                                    <button type="button" class="btn btn-label-info">
-                                      <i class='bx bx-show'></i>
-                                    </button>
-                                  </a>
+                                  <a href="coordinador-ver-solicitud-aceptado.html" class="btn btn-label-info">
+                                    <i class='bx bx-show'></i>
+                                </a>
+                                
+                                
                                   
                                   <!-- Botón Aceptar -->
                                   <a href="#" class="btn-accept">
@@ -463,12 +486,10 @@
                               <td>
                                 <div class="d-flex gap-2">
                                   <!-- Botón Ver Detalles -->
-                                  <a href="#">
-
-                                    <button type="button" class="btn btn-label-info">
-                                      <i class='bx bx-show'></i>
-                                    </button>
-                                  </a>
+                                  <a href="coordinador-ver-solicitud-aceptado.html" class="btn btn-label-info">
+                                    <i class='bx bx-show'></i>
+                                </a>
+                                
                                   
                                   <!-- Botón Aceptar -->
                                   <a href="#" class="btn-accept">
@@ -506,12 +527,10 @@
                               <td>
                                 <div class="d-flex gap-2">
                                   <!-- Botón Ver Detalles -->
-                                  <a href="#">
-
-                                    <button type="button" class="btn btn-label-info">
-                                      <i class='bx bx-show'></i>
-                                    </button>
-                                  </a>
+                                  <a href="coordinador-ver-solicitud-aceptado.html" class="btn btn-label-info">
+                                    <i class='bx bx-show'></i>
+                                </a>
+                                
                                   
                                   <!-- Botón Aceptar -->
                                   <a href="#" class="btn-accept">
@@ -550,12 +569,10 @@
                               <td>
                                 <div class="d-flex gap-2">
                                   <!-- Botón Ver Detalles -->
-                                  <a href="#">
-
-                                    <button type="button" class="btn btn-label-info">
-                                      <i class='bx bx-show'></i>
-                                    </button>
-                                  </a>
+                                  <a href="coordinador-ver-solicitud-aceptado.html" class="btn btn-label-info">
+                                    <i class='bx bx-show'></i>
+                                </a>
+                                
                                   
                                   <!-- Botón Aceptar -->
                                   <a href="#" class="btn-accept">
@@ -592,12 +609,10 @@
                               <td>
                                 <div class="d-flex gap-2">
                                   <!-- Botón Ver Detalles -->
-                                  <a href="#">
-
-                                    <button type="button" class="btn btn-label-info">
-                                      <i class='bx bx-show'></i>
-                                    </button>
-                                  </a>
+                                  <a href="coordinador-ver-solicitud-aceptado.html" class="btn btn-label-info">
+                                    <i class='bx bx-show'></i>
+                                </a>
+                                
                                   
                                   <!-- Botón Aceptar -->
                                   <a href="#" class="btn-accept">
@@ -700,30 +715,115 @@
 
 <script>
   $(document).ready(function () {
-    $('#solicitudesTable').DataTable({
-      paging: true,
-      pagingType: "full_numbers",
-      pageLength: 10,
-      lengthChange: true,
-      buttons: ['copy', 'excel', 'pdf'],
-      dom: 'Bfrtip',
-
-      // Personalización del idioma
-      language: {
-        search: "Buscar:",
-        lengthMenu: "Mostrar MENU entradas",
-        info: "",
-        infoEmpty: "Mostrando 0 a 0 de 0 entradas",
-        infoFiltered: "(filtrado de MAX entradas totales)",
-        paginate: {
-          first: "Primero",
-          last: "Último",
-          next: "Siguiente",
-          previous: "Anterior"
+    if (!$.fn.DataTable.isDataTable('#solicitudesTable')) {
+      var table = $('#solicitudesTable').DataTable({
+        paging: true,
+        pagingType: "full_numbers",
+        pageLength: 5,
+        lengthChange: true,
+        buttons: ['copy', 'excel', 'pdf'],
+        dom: 'Bfrtip', // Con buscador y mostrando información
+        language: {
+          lengthMenu: "Mostrar _MENU_ entradas",
+          info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+          infoEmpty: "Mostrando 0 a 0 de 0 entradas",
+          infoFiltered: "(filtrado de _MAX_ entradas totales)",
+          paginate: {
+            first: '<i class="bx bx-chevrons-left"></i>',
+            last: '<i class="bx bx-chevrons-right"></i>',
+            next: '<i class="bx bx-chevron-right"></i>',
+            previous: '<i class="bx bx-chevron-left"></i>'
+          }
         }
-      }
-    });
+      });
+
+      // Ocultar manualmente el buscador
+      $('#solicitudesTable_filter').hide();
+
+      // Función para filtrar en tiempo real
+      configurarFiltros(table);
+    }
   });
+</script>
+
+<script>
+function confirmarEliminacion() {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: "No podrás revertir esta acción",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Aquí puedes agregar la lógica de eliminación, por ejemplo, enviar un formulario o hacer una petición AJAX
+      Swal.fire(
+        'Eliminado',
+        'El registro ha sido eliminado.',
+        'success'
+      )
+    }
+  })
+}
+</script>
+<script>
+function abrirVista() {
+    window.location.href = 'Admin_EditaPerfil.html'; // Reemplaza con la URL de la vista a la que deseas redirigir
+}
+</script>
+<script>
+  function configurarFiltros(table) {
+  // Filtro de Tipo de Usuario
+  $('#select2Basic').on('change', function () {
+    var valor = $(this).val(); // Capturamos el valor del select
+    if (valor === "Todas") valor = ''; // Si es "Todas", no filtramos nada
+    table.column(1).search(valor).draw(); // Filtramos por la columna 1 (Tipo de Usuario)
+  });
+
+  // Filtro de Palabra Clave (en cualquier columna)
+  $('#inputPalabraClave').on('keyup', function () {
+    table.search(this.value).draw(); // Realizamos la búsqueda global
+  });
+
+  // Filtro de Fecha
+  $('#select2Fecha').on('change', function () {
+    var valor = $(this).val();
+    var fechaActual = new Date();
+    var filtroFecha;
+
+    // Filtrar según la opción seleccionada
+    switch (valor) {
+      case "Ultimas24Horas":
+        filtroFecha = new Date(fechaActual);
+        filtroFecha.setDate(fechaActual.getDate() - 1);
+        break;
+      case "UltimaSemana":
+        filtroFecha = new Date(fechaActual);
+        filtroFecha.setDate(fechaActual.getDate() - 7);
+        break;
+      case "UltimoMes":
+        filtroFecha = new Date(fechaActual);
+        filtroFecha.setMonth(fechaActual.getMonth() - 1);
+        break;
+      case "UltimoAnio":
+        filtroFecha = new Date(fechaActual);
+        filtroFecha.setFullYear(fechaActual.getFullYear() - 1);
+        break;
+      default:
+        filtroFecha = ''; // No filtrar si es "Todas"
+    }
+
+    // Aplica el filtro de fecha en la columna correspondiente (columna 5 en este caso)
+    if (filtroFecha) {
+      table.column(5).search(filtroFecha.toISOString().split('T')[0]).draw();
+    } else {
+      table.column(5).search('').draw(); // Sin filtro
+    }
+  });
+}
 </script>
 <!-- Vendors JS -->
 

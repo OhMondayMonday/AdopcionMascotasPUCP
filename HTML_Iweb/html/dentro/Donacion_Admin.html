@@ -74,7 +74,12 @@
 
   <!-- Custom Table Styles -->
   <style>
-    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Public Sans', sans-serif;
+      background-color: #f9fafb;
+    }
 
 
     td {
@@ -102,6 +107,32 @@
     text-decoration: none; /* Elimina el subrayado */
 }
   </style>
+
+<style>
+  /* Controla el margen entre la tabla y la paginación */
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+  margin-top: 5px; /* Ajusta este valor para cambiar el espacio */
+  padding-top: 0;
+}
+
+/* Alinea el texto de 'Mostrando entradas' y la paginación en la misma línea */
+.dataTables_wrapper .dataTables_info {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  display: inline-block;
+  float: right;
+}
+
+/* Ajusta el margen inferior entre la tabla y la sección de paginación */
+.table-responsive {
+  margin-bottom: 5px; /* Reduce el valor para menos espacio o ajusta según prefieras */
+}
+</style>
+
 </head>
 
 <body>
@@ -293,13 +324,13 @@
                   <div class="row w-100">
                     <!-- Tipo de Usuario -->
                     <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                      <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Transferencia</label>
+                      <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Entidad Financiera</label>
                       <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
                         <option value="Todas">Todas</option>
                         <option value="Yape">Yape</option>
                         <option value="Mastercard">Mastercard</option>
                         <option value="BBVA">BBVA</option>
-                        <option value="Banco de la Nación">Banco de la Nación</option>
+                        <option value="Interbank">Interbank</option>
                       </select>
                     </div>
             
@@ -327,161 +358,228 @@
             <div class="card mb-2" style="padding: 10px; margin: 0;">
               <div class="card-body">
                 <div class="card-datatable table-responsive">
-                  <table class="table table-bordered" id="solicitudesTable" style="width: 1320px;">
+                  <table class="table table-bordered" id="solicitudesTable" style="width: 1315px;">
                     <thead>
                     <tr>
-                      <th style="width: 40px;"></th>
-                      <th style="width: 220px;">Tipo Transferencia</th>
+                      
+                      <th style="width: 200px;">Entidad Financiera</th>
                       <th style="width: 120px;">Usuario</th>
-                      <th style="width: 150px;">Destino</th>
+                      <th style="width: 130px;">Destino</th>
                       <th style="width: 100px;">Estado</th>
-                      <th style="width: 120px;">Fecha</th>
-                      <th>Hora</th>
-                      <th style="width: 150px;">Monto Donado</th>
+                      <th style="width: 100px;">Fecha</th>
+                      <th style="width: 100px;">Hora</th>
+                      <th style="width: 130px;">Monto Donado</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/YapeAppLogo.png"  
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">Yape</span>
                       </td>
-                      <td>Yape</td>
+                      
                       <td>Maria Gomez</td>
                       <td>Albergue Patitas</td>
-                      <td>Pendiente</td>
+                      <td><span class="badge bg-label-warning">Pendiente</span></td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
                       <td>$250</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/BCP_logo.png"    
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">BCP</span>
                       </td>
-                      <td>BCP</td>
+                      
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-11</td>
                       <td>16:45</td>
                       <td>$300</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/Master_Logo.jpg"  
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">Mastercard</span>
                       </td>
-                      <td>Mastercard</td>
+                      
+                      
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-12</td>
                       <td>14:32</td>
                       <td>$100</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/BBVA-Logo.jpg"   
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">BBVA</span>
                       </td>
-                      <td>BBVA</td>
+                      
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
+                      <td><span class="badge bg-label-warning">Pendiente</span></td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
                       <td>$250</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/Interbank_Logo.png"   
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">Interbank</span>
                       </td>
-                      <td>Banco de la Nación</td>
+                      
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-11</td>
                       <td>16:45</td>
                       <td>$300</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/YapeAppLogo.png"   
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">Yape</span>
                       </td>
-                      <td>Yape</td>
+                      
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-12</td>
                       <td>14:32</td>
                       <td>$100</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/YapeAppLogo.png" alt="Yape" style="width: 20px; height: 20px;">
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/YapeAppLogo.png"   
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">Yape</span>
                       </td>
-                      <td>Yape</td>
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
+                      <td><span class="badge bg-label-warning">Pendiente</span></td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
                       <td>$250</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/Interbank_Logo.png"   
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">Interbank</span>
                       </td>
-                      <td>BCP</td>
                       <td>Gonzalo Alvarez</td>
                       <td>Fundación Vida</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-11</td>
                       <td>16:45</td>
                       <td>$300</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/Master_Logo.jpg"  
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">Mastercard</span>
                       </td>
-                      <td>Mastercard</td>
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-12</td>
                       <td>14:32</td>
                       <td>$100</td>
                     </tr>
                     
                     <tr>
-                      <td>
-                        <img src="../../assets/img/BCP_logo.jpg" alt="BCP" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/BCP_logo.png"    
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">BCP</span>
                       </td>
-                      <td>BCP</td>
                       <td>Carlos Lopez</td>
                       <td>Fundación Vida</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-11</td>
                       <td>16:45</td>
                       <td>$300</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/MastercardLogo.png" alt="Mastercard" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/Master_Logo.jpg"  
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">Mastercard</span>
                       </td>
-                      <td>Mastercard</td>
                       <td>Juan Perez</td>
                       <td>Caridad ABC</td>
-                      <td>Completado</td>
+                      <td>
+                        <span class="badge bg-label-success">Exitoso</span>
+      
+                      </td>
                       <td>2024-09-12</td>
                       <td>14:32</td>
                       <td>$100</td>
                     </tr>
                     <tr>
-                      <td>
-                        <img src="../../assets/img/BBVA_Logo.png" alt="BBVA" style="width: 20px; height: 20px;"> 
+                      <td style="display: flex; align-items: center;">
+                        <img src="../../assets/img/BBVA-Logo.jpg"    
+                             alt="Avatar" 
+                             class="rounded-circle" 
+                             style="width: 38px; margin-right: 10px;">
+                        <span class="fw-medium">BBVA</span>
                       </td>
-                      <td>BBVA</td>
                       <td>Maria Gomez</td>
                       <td>Caridad XYZ</td>
-                      <td>Pendiente</td>
+                      <td><span class="badge bg-label-warning">Pendiente</span></td>
                       <td>2024-09-12</td>
                       <td>10:50</td>
                       <td>$250</td>
@@ -563,35 +661,89 @@
 <!-- Activa los tooltips -->
 <script>
   $(document).ready(function () {
-    // Verifica si la tabla ya ha sido inicializada
     if (!$.fn.DataTable.isDataTable('#solicitudesTable')) {
-      $('#solicitudesTable').DataTable({
+      var table = $('#solicitudesTable').DataTable({
         paging: true,
-        pagingType: "full_numbers", // Para mostrar la paginación con números
-        pageLength: 4, // Número de registros por página
-        lengthChange: true, // Permite cambiar la cantidad de registros por página
-        buttons: ['copy', 'excel', 'pdf'], // Añadir botones de exportación
-        dom: 'Bfrtip', // Posiciona los botones en la tabla
-
-        // Personalización del idioma
+        pagingType: "full_numbers",
+        pageLength: 5,
+        lengthChange: true,
+        buttons: ['copy', 'excel', 'pdf'],
+        dom: 'Bfrtip', // Con buscador y mostrando información
         language: {
-          search: "Buscar:",
           lengthMenu: "Mostrar _MENU_ entradas",
           info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
           infoEmpty: "Mostrando 0 a 0 de 0 entradas",
           infoFiltered: "(filtrado de _MAX_ entradas totales)",
           paginate: {
-            first: '<i class="bx bx-chevrons-left"></i>',  // Ícono de "Primero"
-            last: '<i class="bx bx-chevrons-right"></i>',  // Ícono de "Último"
-            next: '<i class="bx bx-chevron-right"></i>',  // Ícono de "Siguiente"
+            first: '<i class="bx bx-chevrons-left"></i>',
+            last: '<i class="bx bx-chevrons-right"></i>',
+            next: '<i class="bx bx-chevron-right"></i>',
             previous: '<i class="bx bx-chevron-left"></i>'
           }
         }
       });
+
+      // Ocultar manualmente el buscador
+      $('#solicitudesTable_filter').hide();
+
+      // Función para filtrar en tiempo real
+      configurarFiltros(table);
     }
   });
-
 </script>
+
+
+  <script>
+    function configurarFiltros(table) {
+    // Filtro de Tipo de Usuario
+    $('#select2Basic').on('change', function () {
+      var valor = $(this).val(); // Capturamos el valor del select
+      if (valor === "Todas") valor = ''; // Si es "Todas", no filtramos nada
+      table.column(1).search(valor).draw(); // Filtramos por la columna 1 (Tipo de Usuario)
+    });
+
+    // Filtro de Palabra Clave (en cualquier columna)
+    $('#inputPalabraClave').on('keyup', function () {
+      table.search(this.value).draw(); // Realizamos la búsqueda global
+    });
+
+    // Filtro de Fecha
+    $('#select2Fecha').on('change', function () {
+      var valor = $(this).val();
+      var fechaActual = new Date();
+      var filtroFecha;
+
+      // Filtrar según la opción seleccionada
+      switch (valor) {
+        case "Ultimas24Horas":
+          filtroFecha = new Date(fechaActual);
+          filtroFecha.setDate(fechaActual.getDate() - 1);
+          break;
+        case "UltimaSemana":
+          filtroFecha = new Date(fechaActual);
+          filtroFecha.setDate(fechaActual.getDate() - 7);
+          break;
+        case "UltimoMes":
+          filtroFecha = new Date(fechaActual);
+          filtroFecha.setMonth(fechaActual.getMonth() - 1);
+          break;
+        case "UltimoAnio":
+          filtroFecha = new Date(fechaActual);
+          filtroFecha.setFullYear(fechaActual.getFullYear() - 1);
+          break;
+        default:
+          filtroFecha = ''; // No filtrar si es "Todas"
+      }
+
+      // Aplica el filtro de fecha en la columna correspondiente (columna 5 en este caso)
+      if (filtroFecha) {
+        table.column(5).search(filtroFecha.toISOString().split('T')[0]).draw();
+      } else {
+        table.column(5).search('').draw(); // Sin filtro
+      }
+    });
+  }
+  </script>
 
 </body>
 </html>

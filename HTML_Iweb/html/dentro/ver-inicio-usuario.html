@@ -174,7 +174,7 @@
           <div class="w-75 align-items-center me-auto">
             <div class="nav-item navbar-search-wrapper mb-0">
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario /</span> Inicio</p>
+              <p class="mb-0 fst-normal fw-semibold ff-">Inicio</p>
             </span>
             </div>
           </div>
@@ -279,9 +279,7 @@
   <!-- Content -->
 
   <div class="container-xxl flex-grow-1 container-p-y">
-
-
-    <div class="card bg-transparent shadow-none border-0 my-4">
+    <div class="card border-0 mb-4 p-3">
       <div class="card-body row p-0 pb-3">
         <div class="col-12 col-md-8 card-separator">
           <h3 class="text-dark">¡Bienvenido, Adolfo! 👋🏻 </h3>
@@ -337,57 +335,15 @@
     <!-- Hour chart End  -->
 
     <!-- Topic and Instructors -->
-    <div class="row mb-4 g-4">
-      <div class="col-12 col-xl-8">
+    <div class="row mb-4 g-3">
+      <div class="col-sm-12 col-xl-4 col-md-6">
         <div class="card h-100">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h5 class="card-title m-0 me-2">Principal actividad</h5>
           </div>
           <div class="card-body row g-3">
-            <div class="col-md-6">
-              <img class = "img-fluid" src = "https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt = "fotoperfil">
-            </div>
-            <div class="col-md-6 d-flex justify-content-around align-items-center">
-              <div>
-                <div class="d-flex align-items-baseline">
-                  <span class="text-primary me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Donaciones activos</p>
-                    <h5>35%</h5>
-                  </div>
-                </div>
-                <div class="d-flex align-items-baseline my-3">
-                  <span class="text-success me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Donaciones de dinero</p>
-                    <h5>14%</h5>
-                  </div>
-                </div>
-                <div class="d-flex align-items-baseline">
-                  <span class="text-danger me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Adopciones</p>
-                    <h5>10%</h5>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div class="d-flex align-items-baseline">
-                  <span class="text-info me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Eventos</p>
-                    <h5>20%</h5>
-                  </div>
-                </div>
-                <div class="d-flex align-items-baseline my-3">
-                  <span class="text-secondary me-2"><i class='bx bxs-circle'></i></span>
-                  <div>
-                    <p class="mb-2">Hogares temporales</p>
-                    <h5>12%</h5>
-                  </div>
-                </div>
-              </div>
+            <div class="col-md-12">
+              <img class = "img-fluid h-100" src = "https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt = "fotoperfil">
             </div>
           </div>
         </div>
@@ -429,16 +385,100 @@
             <div class="row mb-1 align-items-center justify-content-center">
               <small>Deseas crear una nueva publicacion?</small>
             </div>
-            <a href="crear-publicacion-usuariofinal-normal.html"" class="btn btn-facebook w-100">Nueva publicacion</a>
+            <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicacion</a>
           </div>
         </div>
       </div>
 
+      <div class="col-xl-4 col-lg-4 col-md-12 col-12 order-md-2">
+        <div class="card h-100">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="card-title m-0 me-2">Ultimas actualizaciones:</h5>
+            <div class="dropdown">
+              <button class="btn p-0" type="button" id="timelineWapper" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="timelineWapper">
+                <a class="dropdown-item" href="javascript:void(0)">Recargar</a>
+
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Activity Timeline -->
+            <ul class="timeline">
+              <li class="timeline-item timeline-item-transparent">
+                <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
+                <div class="timeline-event">
+                  <div class="timeline-header mb-1">
+                    <h6 class="mb-0">Jorge Muñoz realizó un comentario en la publicacion #33 de MascotasPerdidas</h6>
+                    <small class="text-muted">Hace 12 min</small>
+                  </div>
+                  <p class="mb-2">"Actualización: Roco ha sido encontrado el día 12/08/2024"</p>
+
+                </div>
+              </li>
+              <li class="timeline-item timeline-item-transparent">
+                <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
+                <div class="timeline-event">
+                  <div class="timeline-header mb-1">
+                    <h6 class="mb-0">Luis Pozo realizo una solicitud</h6>
+                    <small class="text-muted">Hace 45 min</small>
+                  </div>
+                  <p class="mb-2">Solicitud: Hogar temporal</p>
+                  <div class="d-flex flex-wrap">
+                    <div class="avatar me-3">
+                      <img src="../../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
+                    </div>
+                    <div>
+                      <h6 class="mb-0">Usuario: Luis Joaquin</h6>
+                      <span>Realizó una solicitud para ser hogar tempora.</span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-item timeline-item-transparent">
+                <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
+                <div class="timeline-event pb-0">
+                  <div class="timeline-header mb-1">
+                    <h6 class="mb-0">Se registraron nuevos hogares temporales</h6>
+                    <small class="text-muted">Hace 1 hora</small>
+                  </div>
+                  <p class="mb-2">Se registraron 5 cuentas tipo: personas</p>
+                  <div class="d-flex align-items-center avatar-group">
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Vinnie Mostowy">
+                      <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Marrie Patty">
+                      <img src="../../assets/img/avatars/12.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Jimmy Jackson">
+                      <img src="../../assets/img/avatars/9.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Kristine Gill">
+                      <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Nelson Wilson">
+                      <img src="../../assets/img/avatars/14.png" alt="Avatar" class="rounded-circle">
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-end-indicator">
+                <i class="bx bx-check-circle"></i>
+              </li>
+            </ul>
+            <!-- /Activity Timeline -->
+          </div>
+        </div>
+      </div>
+
+
+
+
+
     </div>
     <!--  Topic and Instructors  End-->
-
-
-      <!-- Content wrapper -->
   </div>
 
           <!-- Footer -->
