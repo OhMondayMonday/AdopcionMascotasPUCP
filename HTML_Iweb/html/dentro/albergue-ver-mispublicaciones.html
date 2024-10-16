@@ -64,6 +64,7 @@
   <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../../assets/js/config.js"></script>
+  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
 
 </head>
 
@@ -263,35 +264,53 @@
 
     <div class="card-header d-flex flex-wrap justify-content-between gap-3">
       <!-- Select2 -->
-      <div class="col-12">
-        <div class="card mb-0" style="height: auto; padding: 5px">
-          <div class="card-body d-flex align-items-center justify-content-center p-1">
-            <div class="row w-100">
-              <!-- Tipo de Publicacion -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de publicación</label>
+      <!-- Filtros -->
+      <div class="col-12 d-flex justify-content-between align-items-center">
+
+        <div class="col-12 card">
+          <div class="card-body p-2">
+            <div class="row w-100 align-items-end"> <!-- Alineación inferior para coincidir con los campos -->
+
+
+              <!-- Tipo de Publicación -->
+              <div class="col-lg-3 col-md-6 col-sm-12 mb-1">
+                <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem;">Tipo de publicación</label>
                 <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                  <option value="AK">Todas</option>
+                  <option value="All">Todas</option>
                   <option value="Adopcion">Adopción</option>
                   <option value="Donaciones activas">Donaciones activas</option>
                   <option value="Donaciones de dinero">Donaciones de dinero</option>
                 </select>
               </div>
+
               <!-- Palabra clave -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
+              <div class="col-lg-3 col-md-6 col-sm-12 mb-1">
+                <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem;">Palabra clave</label>
                 <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
               </div>
-              <!-- Fecha -->
-              <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
-                <select id="select2Fecha" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                  <option value="Todas">Todas</option>
-                  <option value="Ultimas24Horas">Últimas 24 horas</option>
-                  <option value="UltimaSemana">Esta semana</option>
-                  <option value="UltimoMes">Este mes</option>
-                  <option value="UltimoAnio">Este año</option>
-                </select>
+
+              <!-- Rango de Fechas -->
+              <div class="col-lg-3 col-md-6 col-sm-12 mb-1">
+                <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem;">Rango de fechas</label>
+                <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas" style="font-size: 0.75rem;">
+              </div>
+
+              <!-- Aplicar Filtro y Nueva Publicación -->
+              <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-between mb-1 mt-md-0 mt-3"> <!-- Flex para mantener los botones juntos -->
+                <!-- Botón Aplicar Filtro -->
+                <button class="btn btn-facebook btn-sm" style="width: 48%;">Aplicar filtro</button>
+
+
+                <!-- Botón Nueva Publicación -->
+                <div class="btn-group" style="width: 48%;">
+                  <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Nueva publicación
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="albergue-crear-publicacion-donacion.html">Donaciones</a></li>
+                    <li><a class="dropdown-item" href="albergue-crear-publicacion-adopcion.html">Adopción</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -540,6 +559,18 @@
 
 
 <!-- Page JS -->
+<script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+<script>
+  // Inicializa flatpickr para el rango de fechas
+  flatpickr("#dateRange", {
+    mode: "range",
+    dateFormat: "Y-m-d", // Ajusta el formato de la fecha según tus necesidades
+    locale: {
+      firstDayOfWeek: 1 // Inicia la semana en lunes
+    }
+  });
+</script>
+<script src="../../assets/js/extended-ui-sweetalert2.js"></script>
 
 
 
