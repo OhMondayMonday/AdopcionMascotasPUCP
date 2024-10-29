@@ -488,11 +488,21 @@
             window.location.href = opcionSeleccionada;
         }
     }
+
 </script>
+
 
 
 <!-- Page JS -->
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr("#formValidationFecha", {
+            dateFormat: "d-m-Y", // Formato deseado
+            locale: "es", // Idioma español
+        });
+    });
+</script>
 
 
 </body>

@@ -325,7 +325,7 @@
                         </li>
                         <li class="mb-3">
                           <span class="fw-medium me-2">Fecha de Creación: </span>
-                          <span>17 de febrero de 2023</span>
+                          <span>17-02-2023</span>
                         </li>
   
                       </ul>
@@ -588,6 +588,7 @@
   }
 </script>
 
+
 <!-- Page JS -->
 
 <script src="../../assets/js/extended-ui-sweetalert2.js"></script>
@@ -600,6 +601,14 @@
 <script src="../../assets/js/app-user-view.js"></script>
 <script src="../../assets/js/app-user-view-security.js"></script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    flatpickr("#html5-date-input", {
+      dateFormat: "d-m-Y", // Cambia al formato deseado
+      locale: "es" // Ajuste de idioma a español
+    });
+  });
+</script>
 </body>
 
 
