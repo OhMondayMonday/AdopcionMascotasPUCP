@@ -30,6 +30,11 @@ public class Usuarios {
     private String fechaNacimiento;
     private String fechaContratacion;
 
+    // Constructor vacío
+    public Usuarios() {
+        // Este constructor no hace nada, solo permite crear objetos sin parámetros
+    }
+
     public int getUserId() {
         return userId;
     }
