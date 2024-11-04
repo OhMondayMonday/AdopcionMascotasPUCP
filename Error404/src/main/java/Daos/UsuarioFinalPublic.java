@@ -1,11 +1,11 @@
-package daos;
+package Daos;
 
-import beans.Publicaciones;
+import Beans.Publicaciones;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioFinalPublicDAO extends DaoBase {
+public class UsuarioFinalPublic extends BaseDao {
 
     // Método para obtener todas las publicaciones
     public List<Publicaciones> obtenerPublicaciones() {
