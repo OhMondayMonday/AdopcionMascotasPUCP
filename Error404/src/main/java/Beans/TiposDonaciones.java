@@ -19,5 +19,10 @@ public class TiposDonaciones {
     public void setTipoDonacion(String tipoDonacion) {
         this.tipoDonacion = tipoDonacion;
     }
+
+    public TiposDonaciones(int tipoDonacionId, String tipoDonacion) {
+        this.tipoDonacionId = tipoDonacionId;
+        this.tipoDonacion = tipoDonacion;
+    }
 }
 

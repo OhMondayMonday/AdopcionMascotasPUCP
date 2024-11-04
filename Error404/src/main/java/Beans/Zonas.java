@@ -18,4 +18,9 @@ public class Zonas {
     public void setNombreZona(String nombreZona) {
         this.nombreZona = nombreZona;
     }
+
+    public Zonas(int zonaId, String nombreZona) {
+        this.zonaId = zonaId;
+        this.nombreZona = nombreZona;
+    }
 }

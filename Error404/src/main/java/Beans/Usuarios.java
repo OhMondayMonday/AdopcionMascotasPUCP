@@ -254,8 +254,13 @@ public class Usuarios {
         this.fechaContratacion = fechaContratacion;
     }
 
-    public Usuarios(){
-
+    public Usuarios(int userId, String username, String contrasena, String estadoCuenta, int rolId, String fechaRegistro) {
+        this.userId = userId;
+        this.username = username;
+        this.contrasena = contrasena;
+        this.estadoCuenta = estadoCuenta;
+        this.rolId = rolId;
+        this.fechaRegistro = fechaRegistro;
     }
 }
 

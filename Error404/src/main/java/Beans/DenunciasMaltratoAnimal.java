@@ -101,5 +101,8 @@ public class DenunciasMaltratoAnimal {
         this.fechaDenuncia = fechaDenuncia;
     }
 // Getters y Setters para todos los campos
+
+    public DenunciasMaltratoAnimal(int reportId, int userId, String descripcion, String tipoMaltrato, String ) {}
+
 }
 
