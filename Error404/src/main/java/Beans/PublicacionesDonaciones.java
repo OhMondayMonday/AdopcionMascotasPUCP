@@ -1,4 +1,4 @@
-package beans;
+package Beans;
 
 public class PublicacionesDonaciones {
     private int publicacionId;

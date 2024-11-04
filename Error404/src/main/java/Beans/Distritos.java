@@ -1,4 +1,4 @@
-package beans;
+package Beans;
 
 public class Distritos {
     private int distritoId;

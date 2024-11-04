@@ -1,4 +1,4 @@
-package beans;
+package Beans;
 
 public class Solicitudes {
     private int solicitudId;
