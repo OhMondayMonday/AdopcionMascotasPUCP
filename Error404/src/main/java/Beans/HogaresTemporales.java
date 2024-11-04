@@ -1,4 +1,4 @@
-package beans;
+package Beans;
 
 public class HogaresTemporales {
     private int temporalId;

@@ -1,4 +1,4 @@
-package beans;
+package Beans;
 
 public class Usuarios {
     private int userId;
@@ -252,6 +252,10 @@ public class Usuarios {
 
     public void setFechaContratacion(String fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
+    }
+
+    public Usuarios(){
+
     }
 }
 

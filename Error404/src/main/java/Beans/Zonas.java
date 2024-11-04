@@ -1,4 +1,4 @@
-package beans;
+package Beans;
 public class Zonas {
     private int zonaId;
     private String nombreZona;

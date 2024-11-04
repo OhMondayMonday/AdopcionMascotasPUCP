@@ -1,4 +1,4 @@
-package beans;
+package Beans;
 
 public class InscripcionesEventos {
     private int inscripcionId;
