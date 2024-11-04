@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    position: relative;
+    text-align: center;
+    color: white;
+    height: 500px;
+    background-image: url('https://img.freepik.com/free-photo/young-woman-with-her-dog-park_23-2147902263.jpg?t=st=1725857188~exp=1725860788~hmac=e5c797e1b01c69bde47475782fa17db665bf26f97f2eafcc2aa9491b38a2b72b&w=996');
+    background-size: contain;
+    border: none;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+header h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-weight: bold;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.seccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: rgb(241, 232, 219);
+}
+.texto {
+    max-width: 50%;
+}
+.texto h2 {
+    color: rgb(14, 14, 16);
+    font-size: 60px;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+.texto p {
+    font-size: 2.3em;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+.contenido-carrusel {
+    width: 400px;
+    position: relative;
+}
+.imagenes img {
+    width: 100%;
+    height: auto;
+    display: none;
+    border: 3px solid #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.imagenes img.active {
+    display: block;
+}
+.button {
+    background-color: rgb(247, 163, 8);
+    border-radius: 5px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.button:hover{
+    background-color: #2e281d;
+}
