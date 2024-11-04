@@ -6,6 +6,9 @@ public class PublicacionesAdopcion {
     private String lugarEncontrado;
     private String condicionesAdopcion;
 
+    public PublicacionesAdopcion() {
+    }
+
     public PublicacionesAdopcion(int publicacionId, int mascotaId, String lugarEncontrado, String condicionesAdopcion) {
         this.publicacionId = publicacionId;
         this.mascotaId = mascotaId;
