@@ -91,5 +91,11 @@ public class Fotos {
     public void setTemporalId(Integer temporalId) {
         this.temporalId = temporalId;
     }
+
+    public Fotos(int fotoId, String urlFoto, String fechaSubida){
+        this.fotoId = fotoId;
+        this.urlFoto = urlFoto;
+        this.fechaSubida = fechaSubida;
+    }
 }
 

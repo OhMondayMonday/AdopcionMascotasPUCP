@@ -28,5 +28,11 @@ public class Distritos {
     public void setZonaDistritoId(int zonaDistritoId) {
         this.zonaDistritoId = zonaDistritoId;
     }
+
+    public Distritos(int distritoId, String nombreDistrito, int zonaDistrito) {
+        this.distritoId = distritoId;
+        this.nombreDistrito = nombreDistrito;
+        this.zonaDistritoId = zonaDistrito;
+    }
 }
 

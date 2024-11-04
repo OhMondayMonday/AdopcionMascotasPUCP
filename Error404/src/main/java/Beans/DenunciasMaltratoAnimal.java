@@ -101,5 +101,20 @@ public class DenunciasMaltratoAnimal {
         this.fechaDenuncia = fechaDenuncia;
     }
 // Getters y Setters para todos los campos
+
+    public DenunciasMaltratoAnimal(int reportId, int userId, String descripcion, String tipoMaltrato, String nombreMaltratador, String direccionMaltrato, String tamanio, String animal, String tipoRaza, boolean denunciaPolicial, String fechaDenuncia) {
+        this.reportId = reportId;
+        this.userId = userId;
+        this.descripcion = descripcion;
+        this.tipoMaltrato = tipoMaltrato;
+        this.nombreMaltratador = nombreMaltratador;
+        this.direccionMaltrato = direccionMaltrato;
+        this.tamanio = tamanio;
+        this.animal = animal;
+        this.tipoRaza = tipoRaza;
+        this.denunciaPolicial = denunciaPolicial;
+        this.fechaDenuncia = fechaDenuncia;
+    }
+
 }
 
