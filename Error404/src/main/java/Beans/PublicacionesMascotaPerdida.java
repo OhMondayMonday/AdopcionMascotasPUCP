@@ -6,7 +6,7 @@ public class PublicacionesMascotaPerdida {
     private String lugarPerdida;
     private String fechaPerdida;
     private String descripcionAdicional;
-    private String telefonoContacto;
+    private timestamp telefonoContacto;
     private String nombreContacto;
     private String recompensa;
     private boolean mascotaEncontrada;
