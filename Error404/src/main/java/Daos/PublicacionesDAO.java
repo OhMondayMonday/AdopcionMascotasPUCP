@@ -285,6 +285,44 @@ public class PublicacionesDAO extends BaseDao {
         return publicaciones;
     }
 
+    // Método para obtener publicaciones filtradas por tipo de publicación
+    public List<Publicaciones> obtenerPublicacionesPorTipo(String tipo) {
+        List<Publicaciones> publicaciones = new ArrayList<>();
+        String query = "";
+
+        // Construir la consulta en función del tipo de publicación
+        if (tipo.equalsIgnoreCase("Adopción")) {
+            query = "SELECT * FROM publicaciones_adopcion INNER JOIN publicaciones ON publicaciones_adopcion.publicacion_id = publicaciones.publicacion_id";
+        } else if (tipo.equalsIgnoreCase("Donaciones activas")) {
+            query = "SELECT * FROM publicaciones_donaciones INNER JOIN publicaciones ON publicaciones_donaciones.publicacion_id = publicaciones.publicacion_id WHERE estado_publicacion = 'activa'";
+        } else if (tipo.equalsIgnoreCase("Donaciones de dinero")) {
+            query = "SELECT * FROM publicaciones_donaciones INNER JOIN publicaciones ON publicaciones_donaciones.publicacion_id = publicaciones.publicacion_id AND tipo_donacion_id = '1'"; // Supongamos que '1' es el ID para dinero
+        } else {
+            // Si es "Todas", obtenemos todas las publicaciones
+            query = "SELECT * FROM publicaciones";
+        }
+
+        try (Connection connection = getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Publicaciones publicacion = new Publicaciones();
+                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
+                publicacion.setUserId(rs.getInt("user_id"));
+                publicacion.setTitulo(rs.getString("titulo"));
+                publicacion.setDescripcion(rs.getString("descripcion"));
+                publicacion.setComentario(rs.getString("comentario"));
+                publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
+                publicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
+                publicaciones.add(publicacion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return publicaciones;
+    }
 
 
 
