@@ -8,6 +8,7 @@ public class Usuarios {
     private String apellido;
     private String email;
     private String dni;
+    private String descripcion;
     private String direccion;
     private int distritoId;
     private String estadoCuenta;
@@ -90,6 +91,12 @@ public class Usuarios {
     public void setDni(String dni) {
         this.dni = dni;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
     public String getDireccion() {
         return direccion;

@@ -48,6 +48,7 @@ CREATE TABLE usuarios (
     apellido VARCHAR(100),
     email VARCHAR(100) UNIQUE,
     DNI VARCHAR(8) UNIQUE,
+    descripcion TEXT,
     direccion VARCHAR(255),
     distrito_id INT,
     estado_cuenta ENUM('pendiente', 'rechazada', 'activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
