@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MascotaPerdidaDAO extends BaseDao {
 
-    // Método para agregar una nueva publicación de Mascota Perdida
+    // Metodo para agregar una nueva publicación de Mascota Perdida
     public void agregarPublicacionMascotaPerdida(PublicacionesMascotaPerdida publicacion) {
         String query = "INSERT INTO publicaciones_mascota_perdida (publicacion_id, mascota_id, lugar_perdida, fecha_perdida, descripcion_adicional, mascota_encontrada) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = getConnection();
@@ -25,14 +25,15 @@ public class MascotaPerdidaDAO extends BaseDao {
         }
     }
 
-    // Método para descartar la publicación de Mascota Perdida
+    // Metodo para descartar la publicación de Mascota Perdida
     public void descartarPublicacionMascotaPerdida(int publicacionId) {
-        String query = "DELETE FROM publicaciones_mascota_perdida WHERE publicacion_id = ?";
+        String query = "UPDATE publicaciones SET estado_publicacion ? WHERE publicacion_id = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setInt(1, publicacionId);
+            pstmt.setString(1, "eliminada");
+            pstmt.setInt(2, publicacionId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

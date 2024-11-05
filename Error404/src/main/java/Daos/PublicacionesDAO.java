@@ -9,12 +9,12 @@ import java.util.List;
 
 public class PublicacionesDAO extends BaseDao {
 
-    // Método para obtener todas las publicaciones
+    // Metodo para obtener todas las publicaciones
     public List<Publicaciones> obtenerPublicaciones() {
         List<Publicaciones> publicaciones = new ArrayList<>();
         String query = "SELECT * FROM publicaciones";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -36,12 +36,12 @@ public class PublicacionesDAO extends BaseDao {
         return publicaciones;
     }
 
-    // Método en UsuarioFinalPublicDAO para obtener publicaciones de adopción
+    // Metodo en UsuarioFinalPublicDAO para obtener publicaciones de adopción
     public List<PublicacionesAdopcion> obtenerPublicacionesAdopcion() {
         List<PublicacionesAdopcion> publicaciones = new ArrayList<>();
         String query = "SELECT * FROM publicaciones_adopcion INNER JOIN publicaciones ON publicaciones_adopcion.publicacion_id = publicaciones.publicacion_id";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -60,12 +60,12 @@ public class PublicacionesDAO extends BaseDao {
         return publicaciones;
     }
 
-    // Método en UsuarioFinalPublicDAO para obtener publicaciones de donaciones
+    // Metodo en UsuarioFinalPublicDAO para obtener publicaciones de donaciones
     public List<PublicacionesDonaciones> obtenerPublicacionesDonaciones() {
         List<PublicacionesDonaciones> publicaciones = new ArrayList<>();
         String query = "SELECT * FROM publicaciones_donaciones INNER JOIN publicaciones ON publicaciones_donaciones.publicacion_id = publicaciones.publicacion_id";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -91,7 +91,7 @@ public class PublicacionesDAO extends BaseDao {
         return publicaciones;
     }
 
-    // Método para obtener todas las publicaciones visibles para el usuario final
+    // Metodo para obtener todas las publicaciones visibles para el usuario final
     public List<Object> obtenerTodasLasPublicacionesVisibles() {
         List<Object> todasLasPublicaciones = new ArrayList<>();
 
@@ -109,10 +109,10 @@ public class PublicacionesDAO extends BaseDao {
     }
 
 
-    // Método para agregar una nueva publicación
+    // Metodo para agregar una nueva publicación
     public void agregarPublicacion(Publicaciones publicacion) {
         String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, comentario, tipo_publicacion_id, estado_publicacion) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection connection = getConnection();
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setInt(1, publicacion.getUserId());
@@ -127,10 +127,10 @@ public class PublicacionesDAO extends BaseDao {
         }
     }
 
-    // Método para actualizar una publicación
+    // Metodo para actualizar una publicación sin verificacion
     public void actualizarPublicacion(Publicaciones publicacion) {
         String query = "UPDATE publicaciones SET titulo = ?, descripcion = ?, comentario = ?, tipo_publicacion_id = ?, estado_publicacion = ? WHERE publicacion_id = ?";
-        try (Connection connection = getConnection();
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setString(1, publicacion.getTitulo());
@@ -145,25 +145,60 @@ public class PublicacionesDAO extends BaseDao {
         }
     }
 
-    // Método para eliminar una publicación
+    // Metodo para eliminar una publicación sin verificacion
     public void eliminarPublicacion(int id) {
-        String query = "DELETE FROM publicaciones WHERE publicacion_id = ?";
-        try (Connection connection = getConnection();
+        String query = "UPDATE publicaciones SET estado_publicacion = ? WHERE publicacion_id = ?";
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setInt(1, id);
+            pstmt.setString(1, "eliminada");
+            pstmt.setInt(2, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Método para obtener detalles de una publicación por su ID
+    // Metodo para actualizar una publicación con verificacion
+    public void actualizarPublicacionVerificacion(Publicaciones publicacion, int userID) {
+        String query = "UPDATE publicaciones SET titulo = ?, descripcion = ?, comentario = ?, tipo_publicacion_id = ?, estado_publicacion = ? WHERE publicacion_id = ? AND user_id = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+            pstmt.setString(1, publicacion.getTitulo());
+            pstmt.setString(2, publicacion.getDescripcion());
+            pstmt.setString(3, publicacion.getComentario());
+            pstmt.setInt(4, publicacion.getTipoPublicacionId());
+            pstmt.setString(5, publicacion.getEstadoPublicacion());
+            pstmt.setInt(6, publicacion.getPublicacionId());
+            pstmt.setInt(7, userID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Metodo para eliminar una publicación con verificacion
+    public void eliminarPublicacionVerificacion(int id, int userID) {
+        String query = "UPDATE publicaciones SET estado_publicacion = ? WHERE publicacion_id = ? AND user_id = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+            pstmt.setString(1, "eliminada");
+            pstmt.setInt(2, id);
+            pstmt.setInt(3, userID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Metodo para obtener detalles de una publicación por su ID
     public Publicaciones obtenerDetallePublicacion(int publicacionId) {
         Publicaciones publicacion = null;
         String query = "SELECT * FROM publicaciones WHERE publicacion_id = ?";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setInt(1, publicacionId);
@@ -188,12 +223,12 @@ public class PublicacionesDAO extends BaseDao {
 
     //FILTROS
 
-    // Método para obtener publicaciones filtradas por palabra clave
+    // Metodo para obtener publicaciones filtradas por palabra clave
     public List<Publicaciones> obtenerPublicacionesPorPalabraClave(String palabraClave) {
         List<Publicaciones> publicaciones = new ArrayList<>();
         String query = "SELECT * FROM publicaciones WHERE titulo LIKE ? OR descripcion LIKE ?";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             // Usar '%' para realizar una búsqueda parcial
@@ -220,12 +255,12 @@ public class PublicacionesDAO extends BaseDao {
     }
 
 
-    // Método para obtener publicaciones filtradas por rango de fechas
+    // Metodo para obtener publicaciones filtradas por rango de fechas
     public List<Publicaciones> obtenerPublicacionesPorRangoDeFechas(String fechaInicio, String fechaFin) {
         List<Publicaciones> publicaciones = new ArrayList<>();
         String query = "SELECT * FROM publicaciones WHERE fecha_creacion BETWEEN ? AND ?";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setString(1, fechaInicio);

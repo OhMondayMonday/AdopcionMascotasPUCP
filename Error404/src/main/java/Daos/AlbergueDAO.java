@@ -19,7 +19,7 @@ public class AlbergueDAO extends BaseDao {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
-        try (Connection conn = getConnection();
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, albergue.getUsername());
@@ -59,11 +59,11 @@ public class AlbergueDAO extends BaseDao {
         String sql = "SELECT userId, username, nombre, apellido, email, direccion, distritoId, estadoCuenta, nombreAlbergue, capacidadNuevosAnimales, animalesAlbergados, anioCreacion, urlFacebook, urlInstagram, urlTwitter, puntoAcopio, direccionDonaciones, nombreContactoDonaciones, numeroContactoDonaciones, numeroYapePlin, zonaId " +
                 "FROM usuario WHERE userId = ? AND rolId = ?";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, albergueId);
-            stmt.setInt(2, 3); // Suponiendo que rolId de albergues es 3
+            stmt.setInt(2, 2);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -102,7 +102,7 @@ public class AlbergueDAO extends BaseDao {
     public boolean actualizarInformacionAlbergue(Usuarios albergue) {
         String sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, direccion = ?, distritoId = ?, capacidadNuevosAnimales = ?, animalesAlbergados = ?, urlFacebook = ?, urlInstagram = ?, urlTwitter = ?, puntoAcopio = ?, direccionDonaciones = ?, nombreContactoDonaciones = ?, numeroContactoDonaciones = ?, numeroYapePlin = ? WHERE userId = ? AND rolId = ?";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, albergue.getNombre());
@@ -121,7 +121,7 @@ public class AlbergueDAO extends BaseDao {
             stmt.setString(14, albergue.getNumeroContactoDonaciones());
             stmt.setString(15, albergue.getNumeroYapePlin());
             stmt.setInt(16, albergue.getUserId());
-            stmt.setInt(17, 3); // Suponiendo rolId de albergues es 3
+            stmt.setInt(17, 2); // Suponiendo rolId de albergues es 3
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {

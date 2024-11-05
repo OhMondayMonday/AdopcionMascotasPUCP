@@ -110,19 +110,5 @@ public class Eventos {
         this.estadoEvento = estadoEvento;
     }
 // Getters y Setters para todos los campos
-
-    public Eventos(int eventId, int userId, String nombreEvento, String fechaEvento, String horaEvento, int lugarEventoId, String entrada, String descripcionEvento, String razonEvento, String fechaCreacion, String estadoEvento) {
-        this.eventId = eventId;
-        this.userId = userId;
-        this.nombreEvento = nombreEvento;
-        this.fechaEvento = fechaEvento;
-        this.horaEvento = horaEvento;
-        this.lugarEventoId = lugarEventoId;
-        this.entrada = entrada;
-        this.descripcionEvento = descripcionEvento;
-        this.razonEvento = razonEvento;
-        this.fechaCreacion = fechaCreacion;
-        this.estadoEvento = estadoEvento;
-    }
 }
 
