@@ -56,7 +56,10 @@ public class AlbergueDAO extends BaseDao {
 
     // 2. Obtener Información del Albergue
     public Usuarios obtenerInformacionAlbergue(int albergueId) {
-        String sql = "SELECT userId, username, nombre, apellido, email, direccion, distritoId, estadoCuenta, nombreAlbergue, capacidadNuevosAnimales, animalesAlbergados, anioCreacion, urlFacebook, urlInstagram, urlTwitter, puntoAcopio, direccionDonaciones, nombreContactoDonaciones, numeroContactoDonaciones, numeroYapePlin, zonaId " +
+        String sql = "SELECT userId, username, nombre, apellido, email, direccion, distritoId" +
+                "estadoCuenta, nombreAlbergue, capacidadNuevosAnimales, animalesAlbergados" +
+                "anioCreacion, urlFacebook, urlInstagram, urlTwitter, puntoAcopio, direccionDonaciones" +
+                "nombreContactoDonaciones, numeroContactoDonaciones, numeroYapePlin, zonaId " +
                 "FROM usuario WHERE userId = ? AND rolId = ?";
 
         try (Connection conn = this.getConnection();
