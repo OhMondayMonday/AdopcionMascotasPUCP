@@ -3,7 +3,7 @@ package Beans;
 public class Usuarios {
     private int userId;
     private String username;
-    private String contrasena;
+    private String contrasenia;
     private String nombre;
     private String apellido;
     private String email;
@@ -52,12 +52,12 @@ public class Usuarios {
         this.username = username;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public String getNombre() {
@@ -152,6 +152,14 @@ public class Usuarios {
 
     public void setCapacidadNuevosAnimales(int capacidadNuevosAnimales) {
         this.capacidadNuevosAnimales = capacidadNuevosAnimales;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public int getAnimalesAlbergados() {
@@ -266,10 +274,10 @@ public class Usuarios {
         this.fechaContratacion = fechaContratacion;
     }
 
-    public Usuarios(int userId, String username, String contrasena, String estadoCuenta, int rolId, String fechaRegistro) {
+    public Usuarios(int userId, String username, String contrasenia, String estadoCuenta, int rolId, String fechaRegistro) {
         this.userId = userId;
         this.username = username;
-        this.contrasena = contrasena;
+        this.contrasenia = contrasenia;
         this.estadoCuenta = estadoCuenta;
         this.rolId = rolId;
         this.fechaRegistro = fechaRegistro;
