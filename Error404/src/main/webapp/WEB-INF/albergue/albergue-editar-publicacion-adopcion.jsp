@@ -21,7 +21,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-        <title>Editar Evento</title>
+        <title>Editar Publicación | Adopción</title>
 
 
         <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -39,7 +39,6 @@
 
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
-
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com/">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -79,6 +78,7 @@
         <script src="../../assets/js/config.js"></script>
 
     </head>
+
     <body>
 
 
@@ -102,11 +102,13 @@
                             <div class="d-flex flex-wrap justify-content-between align-items-center mb-0">
 
                                 <div class="d-flex flex-column justify-content-center">
-                                    <h4 class="mb-1 mt-3">Editar Evento</h4>
+                                    <h4 class="mb-1 mt-3">Editar Publicación</h4>
                                     <p class="text-muted">Rellena los campos abajo</p>
                                 </div>
                                 <div class="d-flex align-content-center flex-wrap gap-3">
-                                    <button class="btn btn-danger">Descartar Cambios</button>
+                                    <button class="btn btn-info">¡Mascota Adoptada!</button>
+                                    <button class="btn btn-danger">Eliminar Publicación</button>
+                                    <button class="btn btn-secondary">Descartar Cambios</button>
                                     <button type="submit" class="btn btn-primary">Confirmar Cambios</button>
                                 </div>
 
@@ -120,8 +122,8 @@
                                                 <button type="button" class="step-trigger">
                                                     <span class="bs-stepper-circle">1</span>
                                                     <span class="bs-stepper-label mt-1">
-                                              <span class="bs-stepper-title">Evento</span>
-                                              <span class="bs-stepper-subtitle">Datos del Evento</span>
+                                              <span class="bs-stepper-title">Publicacion</span>
+                                              <span class="bs-stepper-subtitle">Datos de la publicacion</span>
                                             </span>
                                                 </button>
                                             </div>
@@ -132,8 +134,20 @@
                                                 <button type="button" class="step-trigger">
                                                     <span class="bs-stepper-circle">2</span>
                                                     <span class="bs-stepper-label mt-1">
-                                              <span class="bs-stepper-title">Datos del Albergue</span>
-                                              <span class="bs-stepper-subtitle">Añada información sobre el Albergue</span>
+                                              <span class="bs-stepper-title">Datos de la mascota</span>
+                                              <span class="bs-stepper-subtitle">Añada información sobre la mascota</span>
+                                            </span>
+                                                </button>
+                                            </div>
+                                            <div class="line">
+                                                <i class="bx bx-chevron-right"></i>
+                                            </div>
+                                            <div class="step" data-target="#datos-recepcion">
+                                                <button type="button" class="step-trigger">
+                                                    <span class="bs-stepper-circle">3</span>
+                                                    <span class="bs-stepper-label mt-1">
+                                              <span class="bs-stepper-title">Datos de recepcion</span>
+                                              <span class="bs-stepper-subtitle">Especifique datos de recepción</span>
                                             </span>
                                                 </button>
                                             </div>
@@ -143,28 +157,30 @@
                                                 <!-- Account Details -->
                                                 <div id="datos-publicacion" class="content">
                                                     <div class="content-header mb-2">
-                                                        <h6 class="mb-0">Evento</h6>
-                                                        <small>Ingrese datos del Evento</small>
+                                                        <h6 class="mb-0">Publicacion</h6>
+                                                        <small>Ingrese datos de la publicacion</small>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-12 col-lg-6">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="formValidationTitulo">Titulo</label>
-                                                                <input type="text" class="form-control" id="formValidationTitulo" required name="formValidationTitulo" placeholder="Título del Evento" aria-label="Titulo publicacion">
+                                                                <input type="text" class="form-control" id="formValidationTitulo" required name="formValidationTitulo" placeholder="Título de la publicación" aria-label="Titulo publicacion">
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label" for="formValidationFecha">Fecha del Evento</label>
-                                                                <input type="date" class="form-control" id="formValidationFecha" required name="formValidationFecha" placeholder="Fecha del Evento">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label" for="formValidationLugar">Lugar del Evento</label>
-                                                                <input type="text" class="form-control" id="formValidationLugar" required name="formValidationLugar" placeholder="Lugar del Evento">
+                                                            <div class="row mb-3">
+                                                                <div class="col">
+                                                                    <label class="form-label" for="opciones">Tipo</label>
+                                                                    <select class="form-control" name="opciones" id="opciones" onchange="cambiarPagina()" required>
+                                                                        <option value="" disabled selected>Elija el tipo de publicación</option>
+                                                                        <option value="albergue-editar-publicacion-adopcion.html" selected>Adopción</option>
+                                                                        <option value="albergue-editar-publicacion-donacion.html" >Donaciones</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-lg-6 mb-3">
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="formValidationDescripcion">Descripcion</label>
-                                                                <textarea class="form-control" id="formValidationDescripcion" name="formValidationDescripcion" rows="8" required></textarea>
+                                                                <textarea class="form-control" id="formValidationDescripcion" name="formValidationDescripcion" rows="5" required></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -184,40 +200,83 @@
                                                 <!-- Personal Info -->
                                                 <div id="datos-mascota" class="content">
                                                     <div class="content-header mb-2">
-                                                        <h6 class="mb-0">Datos del Albergue</h6>
-                                                        <small>Ingrese datos sobre el Albergue</small>
+                                                        <h6 class="mb-0">Datos de la mascota</h6>
+                                                        <small>Ingrese datos sobre la mascota</small>
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col">
                                                             <label class="form-label" for="formValidationNombre">Nombre</label>
-                                                            <input type="text" required class="form-control" id="formValidationNombre" placeholder="Nombre del Albergue" name="formValidationNombre" aria-label="Product title">
+                                                            <input type="text" required class="form-control" id="formValidationNombre" placeholder="Nombre de la Mascota" name="formValidationNombre" aria-label="Product title">
                                                         </div>
                                                         <div class="col">
-                                                            <label class="form-label" for="formValidationAforo">Aforo</label>
-                                                            <input type="number" required class="form-control" id="formValidationAforo" placeholder="Indique el Aforo" name="formValidationAforo" aria-label="Product title">                  </div>
+                                                            <label class="form-label" for="formValidationEdad">Edad aproximada</label>
+                                                            <input type="text" required class="form-control" id="formValidationEdad" placeholder="Indique la Edad de la Mascota" name="formValidationEdad" aria-label="Product title">                  </div>
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col">
-                                                            <label class="form-label">Entrada</label>
-                                                            <input type="text" class="form-control" id="entrada" placeholder="Indique algún Donativo a llevar" aria-label="Product barcode">
+                                                            <label class="form-label" for="formValidationRaza">Raza</label>
+                                                            <input type="text" class="form-control" id="formValidationRaza" placeholder="Indique la Raza de la Mascota" name="formValidationRaza" aria-label="Product barcode">
                                                         </div>
                                                         <div class="col">
-                                                            <label class="form-label">Artistas Invitados</label>
-                                                            <input type="text" class="form-control" id="artistas" placeholder="Indique algún Artista Invitado" aria-label="Product title">
+                                                            <label class="form-label" for="formValidationGenero">Genero</label>
+                                                            <select class="form-control" name="formValidationGenero" id="formValidationGenero" required>
+                                                                <option value="" selected>Indicar genero</option>
+                                                                <option value="macho">Macho</option>
+                                                                <option value="hembra">Hembra</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col">
-                                                            <label class="form-label" for="formValidationRazon">Razón</label>
-                                                            <input type="text" class="form-control" id="formValidationRazon" placeholder="Indique la Razón del Evento" name="formValidationRazon" aria-label="Product barcode">
+                                                            <label class="form-label" for="formValidationDistintivo">Distintivo</label>
+                                                            <input type="text" required class="form-control" id="formValidationDistintivo" placeholder="Algún Distintivo" name="formValidationDistintivo" aria-label="Product title">
                                                         </div>
-                                                        <div class="row g-3">
-                                                            <div class="col-12 d-flex justify-content-between">
-                                                                <button class="btn btn-primary btn-prev">
-                                                                    <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
-                                                                    <span class="align-middle d-sm-inline-block d-none">Anterior</span>
-                                                                </button>
-                                                            </div>
+                                                        <div class="col">
+                                                            <label class="form-label" for="formValidationLugar">Lugar de Hallazgo</label>
+                                                            <input type="text" required class="form-control" id="formValidationLugar" placeholder="Indique el Lugar de Hallazgo" name="formValidationLugar" aria-label="Product title">                  </div>
+                                                    </div>
+                                                    <div class="row g-3">
+                                                        <div class="col-12 d-flex justify-content-between">
+                                                            <button class="btn btn-primary btn-prev">
+                                                                <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                                                                <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+                                                            </button>
+                                                            <button class="btn btn-primary btn-next">
+                                                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Siguiente</span>
+                                                                <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Datos para la rececpion -->
+                                                <div id="datos-recepcion" class="content">
+                                                    <div class="content-header mb-3">
+                                                        <h6 class="mb-0">Datos de recepcion</h6>
+                                                        <small>Especifique datos para la recepcion</small>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col">
+                                                            <label class="form-label" for="formValidationTemporal">¿Se encuentra en algún temporal?</label>
+                                                            <select class="form-control" name="formValidationTemporal" id="formValidationTemporal" required>
+                                                                <option value="" selected>Indicar opción</option>
+                                                                <option value="">Sí</option>
+                                                                <option value="">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class = "row-mb-3">
+                                                        <div class="col">
+                                                            <label class="form-label" for="TagifyBasic">Etiquetas</label>
+                                                            <input id="TagifyBasic" class="form-control" name="TagifyBasic" value="Etiqueta"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row g-3 mt-1">
+                                                        <div class="col-12 d-flex justify-content-between">
+                                                            <button class="btn btn-primary btn-prev">
+                                                                <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                                                                <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -226,7 +285,8 @@
                                     </div>
                                 </div>
                                 <!-- /Default Wizard -->
-                                <div class="col-12 mt-4">
+                                <div class="row"></div>
+                                <div class="col-12">
                                     <!-- Media -->
                                     <div class="card mb-1">
                                         <div class="card-header d-flex justify-content-between align-items-center">
@@ -250,29 +310,24 @@
                                 </div>
                             </div>
                         </div>
+                        <footer class="footer bg-footer-theme" >
+                            <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3" style="background-color: #fff1ef">
+                                <div>
+                                    <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+                                </div>
+                                <div>
+                                    <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+                                    <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+                                    <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+                                </div>
+                            </div>
+                        </footer>
                         <div class="content-backdrop fade"></div>
                     </div>
                 </div>
-                <!-- Footer -->
-                <footer class="footer">
-                    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-                        <div>
-                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-
-                        </div>
-                        <div>
-                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">Ayuda</a>
-                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">Contactos</a>
-                            <a href="javascript:void(0)" class="footer-link text-muted">Terminos &amp; Condiciones</a>
-                        </div>
-                    </div>
-                </footer>
-                <!-- / Footer -->
             </div>
-
             <!-- / Layout wrapper -->
             <!-- / Layout page -->
-
         </div>
         <!-- /Layout wrapper -->
 
@@ -306,7 +361,7 @@
         <script src="../../assets/vendor/libs/tagify/tagify.js"></script>
 
         <script src="../../assets/js/form-wizard-numbered.js"></script>
-        <script src="../../assets/js/form-wizard-validation-event.js"></script>
+        <script src="../../assets/js/form-wizard-validation-adopcion.js"></script>
         <script src="../../assets/js/app-ecommerce-product-add.js"></script>
         <script src="../../assets/js/forms-selects.js"></script>
         <script src="../../assets/js/forms-tagify.js"></script>
@@ -332,3 +387,10 @@
 
 
     </body>
+
+
+
+    <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
+</html>
+
+<!-- beautify ignore:end -->
