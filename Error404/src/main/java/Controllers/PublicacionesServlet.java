@@ -80,6 +80,6 @@ public class PublicacionesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Aquí puedes manejar el método POST para agregar o actualizar publicaciones
+        // Aquí puedes manejar el metodo POST para agregar o actualizar publicaciones
     }
 }

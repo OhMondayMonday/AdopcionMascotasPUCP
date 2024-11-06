@@ -189,4 +189,32 @@ public class EventosDAO extends BaseDao {
         }
         return eventos;
     }
+
+    public Eventos obtenerDetalleEvento(int event_id) {
+        Eventos evento = new Eventos();
+        String query = "SELECT * FROM eventos WHERE event_id = ?";
+
+        try (Connection connection = this.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(query)){
+            pstmt.setInt(1, event_id);
+            ResultSet rs = pstmt.executeQuery();
+
+                evento.setEventId(rs.getInt("event_id"));
+                evento.setUserId(rs.getInt("user_id"));
+                evento.setNombreEvento(rs.getString("nombre_evento"));
+                evento.setFechaEvento(rs.getString("fecha_evento"));
+                evento.setHoraEvento(rs.getString("hora_evento"));
+                evento.setLugarEventoId(rs.getInt("lugar_evento_id"));
+                evento.setEntrada(rs.getString("entrada"));
+                evento.setDescripcionEvento(rs.getString("descripcion_evento"));
+                evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
+                evento.setRazonEvento(rs.getString("razon_evento"));
+                evento.setFechaCreacion(rs.getString("fecha_creacion"));
+                evento.setEstadoEvento(rs.getString("estado_evento"));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return evento;
+    }
 }

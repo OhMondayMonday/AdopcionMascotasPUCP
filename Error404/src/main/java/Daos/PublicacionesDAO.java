@@ -204,7 +204,6 @@ public class PublicacionesDAO extends BaseDao {
             pstmt.setInt(1, publicacionId);
             ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
                 publicacion = new Publicaciones();
                 publicacion.setPublicacionId(rs.getInt("publicacion_id"));
                 publicacion.setUserId(rs.getInt("user_id"));
@@ -214,7 +213,7 @@ public class PublicacionesDAO extends BaseDao {
                 publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
                 publicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
                 publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
-            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
