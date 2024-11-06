@@ -154,13 +154,6 @@ public class Usuarios {
         this.capacidadNuevosAnimales = capacidadNuevosAnimales;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     public int getAnimalesAlbergados() {
         return animalesAlbergados;
