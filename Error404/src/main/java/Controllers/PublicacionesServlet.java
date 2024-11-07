@@ -46,14 +46,14 @@ public class PublicacionesServlet extends HttpServlet {
     private void listarPublicaciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Publicaciones> publicaciones = publicacionesDAO.obtenerPublicaciones();
         request.setAttribute("publicaciones", publicaciones);
-        request.getRequestDispatcher("/path/a/tu/vista.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ver-publicaciones-usuario.jsp").forward(request, response);
     }
 
     private void mostrarDetallesPublicacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Publicaciones publicacion = publicacionesDAO.obtenerDetallePublicacion(id);
         request.setAttribute("publicacion", publicacion);
-        request.getRequestDispatcher("/path/a/tu/detalles.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ver-miperfil-usuario-detalles.jsp").forward(request, response);
     }
 
     private void filtrarPublicaciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -75,7 +75,7 @@ public class PublicacionesServlet extends HttpServlet {
         }
 
         request.setAttribute("publicaciones", publicaciones);
-        request.getRequestDispatcher("/path/a/tu/vista.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ver-publicaciones-usuario.jsp").forward(request, response);
     }
 
     @Override

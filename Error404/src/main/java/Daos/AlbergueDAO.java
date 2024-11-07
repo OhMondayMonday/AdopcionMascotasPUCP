@@ -23,7 +23,7 @@ public class AlbergueDAO extends BaseDao {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, albergue.getUsername());
-            stmt.setString(2, albergue.getContrasena());
+            stmt.setString(2, albergue.getContrasenia());
             stmt.setString(3, albergue.getNombre());
             stmt.setString(4, albergue.getApellido());
             stmt.setString(5, albergue.getEmail());

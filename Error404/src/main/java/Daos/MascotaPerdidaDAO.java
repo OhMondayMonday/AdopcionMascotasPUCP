@@ -27,7 +27,7 @@ public class MascotaPerdidaDAO extends BaseDao {
 
     // Metodo para descartar la publicación de Mascota Perdida
     public void descartarPublicacionMascotaPerdida(int publicacionId) {
-        String query = "UPDATE publicaciones SET estado_publicacion ? WHERE publicacion_id = ?";
+        String query = "UPDATE publicaciones SET estado_publicacion = ? WHERE publicacion_id = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
