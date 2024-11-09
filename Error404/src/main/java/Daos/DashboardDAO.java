@@ -1,15 +1,13 @@
 package Daos;
 
-import Beans.Usuarios;
-import Beans.Eventos; // Importa correctamente el Bean "Eventos"
+import Beans.Eventos;
+import Beans.LugaresEventos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.SimpleDateFormat; // Importa para formatear las fechas
-import java.util.Date;
 
 public class DashboardDAO extends BaseDao {
 
@@ -74,10 +72,10 @@ public class DashboardDAO extends BaseDao {
     }
 
     // Obtener el próximo evento
-    public Eventos obtenerProximoEvento(int userId)
-    {
-        String sql = "SELECT e.event_id, e.nombre_evento, e.fecha_evento, le.nombre_lugar " +
-                "FROM Eventos e JOIN Lugares_Eventos le ON e.lugar_evento_id = le.lugar_id " +
+    public Eventos obtenerProximoEvento(int userId) {
+        String sql = "SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.hora_evento, le.lugar_id, le.nombre_lugar " +
+                "FROM Eventos e " +
+                "JOIN Lugares_Eventos le ON e.lugar_evento_id = le.lugar_id " +
                 "WHERE e.user_id = ? AND e.fecha_evento > NOW() ORDER BY e.fecha_evento ASC LIMIT 1";
         try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
@@ -86,13 +84,15 @@ public class DashboardDAO extends BaseDao {
                 Eventos evento = new Eventos();
                 evento.setEventId(rs.getInt("event_id"));
                 evento.setNombreEvento(rs.getString("nombre_evento"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
 
-                // Convertir java.sql.Date a String
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String fechaEventoStr = sdf.format(rs.getDate("fecha_evento"));
-                evento.setFechaEvento(fechaEventoStr); // Ajuste: Usa el String en lugar de Date
+                // Configurar el lugar del evento
+                LugaresEventos lugarEvento = new LugaresEventos();
+                lugarEvento.setLugarId(rs.getInt("lugar_id"));
+                lugarEvento.setNombreLugar(rs.getString("nombre_lugar"));
+                evento.setLugarEvento(lugarEvento);
 
-                evento.setLugarEventoId(rs.getInt("lugarEventoId")); // Asegúrate de usar el método correcto
                 return evento;
             }
         } catch (SQLException e) {
