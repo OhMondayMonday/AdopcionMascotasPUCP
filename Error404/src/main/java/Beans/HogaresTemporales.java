@@ -1,5 +1,9 @@
 package Beans;
 
+import javax.xml.crypto.Data;
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class HogaresTemporales {
     private int temporalId;
     private Usuarios usuario;
@@ -12,7 +16,7 @@ public class HogaresTemporales {
     private int cantidadCuartos;
     private double metrajeVivienda;
     private boolean tieneMascotas;
-    private Integer cantidadMascotas;
+    private int cantidadMascotas;
     private String tipoMascotas;
     private boolean tieneHijos;
     private boolean viveSolo;
@@ -20,10 +24,10 @@ public class HogaresTemporales {
     private String personaReferencia;
     private String contactoReferencia;
     private int tiempoTemporal;
-    private String rangoFechaInicio;
-    private String rangoFechaFin;
+    private Date rangoFechaInicio;
+    private Date rangoFechaFin;
     private String estadoTemporal;
-    private String fechaAprobacion;
+    private Timestamp fechaAprobacion;
 
     public int getTemporalId() {
         return temporalId;
@@ -165,19 +169,19 @@ public class HogaresTemporales {
         this.tiempoTemporal = tiempoTemporal;
     }
 
-    public String getRangoFechaInicio() {
+    public Date getRangoFechaInicio() {
         return rangoFechaInicio;
     }
 
-    public void setRangoFechaInicio(String rangoFechaInicio) {
+    public void setRangoFechaInicio(Date rangoFechaInicio) {
         this.rangoFechaInicio = rangoFechaInicio;
     }
 
-    public String getRangoFechaFin() {
+    public Date getRangoFechaFin() {
         return rangoFechaFin;
     }
 
-    public void setRangoFechaFin(String rangoFechaFin) {
+    public void setRangoFechaFin(Date rangoFechaFin) {
         this.rangoFechaFin = rangoFechaFin;
     }
 
@@ -189,11 +193,11 @@ public class HogaresTemporales {
         this.estadoTemporal = estadoTemporal;
     }
 
-    public String getFechaAprobacion() {
+    public Timestamp getFechaAprobacion() {
         return fechaAprobacion;
     }
 
-    public void setFechaAprobacion(String fechaAprobacion) {
+    public void setFechaAprobacion(Timestamp fechaAprobacion) {
         this.fechaAprobacion = fechaAprobacion;
     }
 

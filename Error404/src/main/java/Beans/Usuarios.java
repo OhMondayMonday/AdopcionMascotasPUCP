@@ -28,7 +28,7 @@ public class Usuarios {
     private String numeroContactoDonaciones;
     private String numeroYapePlin;
     private byte[] codigoQr;
-    private int zonaId;
+    private Zonas zona;
     private String fechaNacimiento;
     private String fechaContratacion;
 
@@ -229,13 +229,9 @@ public class Usuarios {
         this.codigoQr = codigoQr;
     }
 
-    public int getZonaId() {
-        return zonaId;
-    }
+    public Zonas getZona() {return zona; }
 
-    public void setZonaId(int zonaId) {
-        this.zonaId = zonaId;
-    }
+    public void setZona(Zonas zona) {this.zona = zona; }
 
     public String getFechaNacimiento() {
         return fechaNacimiento;

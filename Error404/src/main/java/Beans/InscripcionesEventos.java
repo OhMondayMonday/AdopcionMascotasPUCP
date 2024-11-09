@@ -1,10 +1,12 @@
 package Beans;
 
+import java.sql.Timestamp;
+
 public class InscripcionesEventos {
     private int inscripcionId;
     private Eventos evento;
     private Usuarios usuario;
-    private String fechaInscripcion;
+    private Timestamp fechaInscripcion;
     private boolean activa;
 
     public int getInscripcionId() {
@@ -23,11 +25,11 @@ public class InscripcionesEventos {
 
     public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
 
-    public String getFechaInscripcion() {
+    public Timestamp getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(String fechaInscripcion) {
+    public void setFechaInscripcion(Timestamp fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 

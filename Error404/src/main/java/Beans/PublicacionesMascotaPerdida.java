@@ -1,10 +1,12 @@
 package Beans;
 
+import java.util.Date;
+
 public class PublicacionesMascotaPerdida {
     private Publicaciones publicacion;
     private Mascotas mascota;
     private String lugarPerdida;
-    private String fechaPerdida;
+    private Date fechaPerdida;
     private String descripcionAdicional;
     private String telefonoContacto;
     private String nombreContacto;
@@ -27,11 +29,11 @@ public class PublicacionesMascotaPerdida {
         this.lugarPerdida = lugarPerdida;
     }
 
-    public String getFechaPerdida() {
+    public Date getFechaPerdida() {
         return fechaPerdida;
     }
 
-    public void setFechaPerdida(String fechaPerdida) {
+    public void setFechaPerdida(Date fechaPerdida) {
         this.fechaPerdida = fechaPerdida;
     }
 

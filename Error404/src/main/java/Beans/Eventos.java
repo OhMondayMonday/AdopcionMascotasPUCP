@@ -1,18 +1,22 @@
 package Beans;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class Eventos {
     private int eventId;
     private Usuarios usuario;
     private String nombreEvento;
-    private String fechaEvento;
-    private String horaEvento;
+    private Date fechaEvento;
+    private Time horaEvento;
     private Fotos foto;
     private LugaresEventos lugarEvento;
     private String entrada;
     private String descripcionEvento;
     private String artistasProveedores;
     private String razonEvento;
-    private String fechaCreacion;
+    private Timestamp fechaCreacion;
     private String estadoEvento;
 
     public int getEventId() {
@@ -35,19 +39,19 @@ public class Eventos {
         this.nombreEvento = nombreEvento;
     }
 
-    public String getFechaEvento() {
+    public Date getFechaEvento() {
         return fechaEvento;
     }
 
-    public void setFechaEvento(String fechaEvento) {
+    public void setFechaEvento(Date fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
-    public String getHoraEvento() {
+    public Time getHoraEvento() {
         return horaEvento;
     }
 
-    public void setHoraEvento(String horaEvento) {
+    public void setHoraEvento(Time horaEvento) {
         this.horaEvento = horaEvento;
     }
 
@@ -91,11 +95,11 @@ public class Eventos {
         this.razonEvento = razonEvento;
     }
 
-    public String getFechaCreacion() {
+    public Timestamp getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Timestamp fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
@@ -108,6 +112,5 @@ public class Eventos {
     }
 
 
-// Getters y Setters para todos los campos
 }
 

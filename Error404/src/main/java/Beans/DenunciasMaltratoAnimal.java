@@ -1,5 +1,8 @@
 package Beans;
 
+import java.sql.Timestamp;
+import java.util.Timer;
+
 public class DenunciasMaltratoAnimal {
     private int reportId;
     private int userId;
@@ -12,7 +15,7 @@ public class DenunciasMaltratoAnimal {
     private String animal;
     private String tipoRaza;
     private boolean denunciaPolicial;
-    private String fechaDenuncia;
+    private Timestamp fechaDenuncia;
 
     public int getReportId() {
         return reportId;
@@ -98,15 +101,13 @@ public class DenunciasMaltratoAnimal {
         this.denunciaPolicial = denunciaPolicial;
     }
 
-    public String getFechaDenuncia() {
+    public Timestamp getFechaDenuncia() {
         return fechaDenuncia;
     }
 
-    public void setFechaDenuncia(String fechaDenuncia) {
+    public void setFechaDenuncia(Timestamp fechaDenuncia) {
         this.fechaDenuncia = fechaDenuncia;
     }
-
-// Getters y Setters para todos los campos
 
 }
 
