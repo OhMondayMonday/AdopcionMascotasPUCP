@@ -1,9 +1,9 @@
 package Beans;
 
 public class PublicacionesDonaciones {
-    private int publicacionId;
+    private Publicaciones publicacion;
     private String puntoAcopio;
-    private int tipoDonacionId;
+    private TiposDonaciones tipoDonacion;
     private double cantidad;
     private String marca;
     private String fechaRecepcionInicio;
@@ -13,13 +13,9 @@ public class PublicacionesDonaciones {
     private String nombreContacto;
     private String motivoDonacion;
 
-    public int getPublicacionId() {
-        return publicacionId;
-    }
+    public Publicaciones getPublicacion() { return publicacion; }
 
-    public void setPublicacionId(int publicacionId) {
-        this.publicacionId = publicacionId;
-    }
+    public void setPublicacion(Publicaciones publicacion) { this.publicacion = publicacion; }
 
     public String getPuntoAcopio() {
         return puntoAcopio;
@@ -29,13 +25,9 @@ public class PublicacionesDonaciones {
         this.puntoAcopio = puntoAcopio;
     }
 
-    public int getTipoDonacionId() {
-        return tipoDonacionId;
-    }
+    public TiposDonaciones getTipoDonacion() { return tipoDonacion; }
 
-    public void setTipoDonacionId(int tipoDonacionId) {
-        this.tipoDonacionId = tipoDonacionId;
-    }
+    public void setTipoDonacion(TiposDonaciones tipoDonacion) { this.tipoDonacion = tipoDonacion; }
 
     public double getCantidad() {
         return cantidad;
@@ -57,9 +49,7 @@ public class PublicacionesDonaciones {
         return fechaRecepcionInicio;
     }
 
-    public void setFechaRecepcionInicio(String fechaRecepcionInicio) {
-        this.fechaRecepcionInicio = fechaRecepcionInicio;
-    }
+    public void setFechaRecepcionInicio(String fechaRecepcionInicio) { this.fechaRecepcionInicio = fechaRecepcionInicio; }
 
     public String getFechaRecepcionFin() {
         return fechaRecepcionFin;
@@ -100,5 +90,7 @@ public class PublicacionesDonaciones {
     public void setMotivoDonacion(String motivoDonacion) {
         this.motivoDonacion = motivoDonacion;
     }
+
+
 }
 

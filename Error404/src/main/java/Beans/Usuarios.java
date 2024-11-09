@@ -10,9 +10,10 @@ public class Usuarios {
     private String dni;
     private String descripcion;
     private String direccion;
-    private int distritoId;
+    private Fotos foto;
+    private Distritos distrito;
     private String estadoCuenta;
-    private int rolId;
+    private Roles rol;
     private String fechaRegistro;
     private String nombreAlbergue;
     private int capacidadNuevosAnimales;
@@ -31,10 +32,6 @@ public class Usuarios {
     private String fechaNacimiento;
     private String fechaContratacion;
 
-    // Constructor vacío
-    public Usuarios() {
-        // Este constructor no hace nada, solo permite crear objetos sin parámetros
-    }
 
     public int getUserId() {
         return userId;
@@ -106,13 +103,13 @@ public class Usuarios {
         this.direccion = direccion;
     }
 
-    public int getDistritoId() {
-        return distritoId;
-    }
+    public Fotos getFoto() { return foto; }
 
-    public void setDistritoId(int distritoId) {
-        this.distritoId = distritoId;
-    }
+    public void setFoto(Fotos foto) { this.foto = foto; }
+
+    public Distritos getDistrito() { return distrito; }
+
+    public void setDistrito(Distritos distrito) { this.distrito = distrito; }
 
     public String getEstadoCuenta() {
         return estadoCuenta;
@@ -122,13 +119,9 @@ public class Usuarios {
         this.estadoCuenta = estadoCuenta;
     }
 
-    public int getRolId() {
-        return rolId;
-    }
+    public Roles getRol() { return rol; }
 
-    public void setRolId(int rolId) {
-        this.rolId = rolId;
-    }
+    public void setRol(Roles rol) { this.rol = rol; }
 
     public String getFechaRegistro() {
         return fechaRegistro;
@@ -150,10 +143,7 @@ public class Usuarios {
         return capacidadNuevosAnimales;
     }
 
-    public void setCapacidadNuevosAnimales(int capacidadNuevosAnimales) {
-        this.capacidadNuevosAnimales = capacidadNuevosAnimales;
-    }
-
+    public void setCapacidadNuevosAnimales(int capacidadNuevosAnimales) { this.capacidadNuevosAnimales = capacidadNuevosAnimales; }
 
     public int getAnimalesAlbergados() {
         return animalesAlbergados;
@@ -215,17 +205,13 @@ public class Usuarios {
         return nombreContactoDonaciones;
     }
 
-    public void setNombreContactoDonaciones(String nombreContactoDonaciones) {
-        this.nombreContactoDonaciones = nombreContactoDonaciones;
-    }
+    public void setNombreContactoDonaciones(String nombreContactoDonaciones) { this.nombreContactoDonaciones = nombreContactoDonaciones; }
 
     public String getNumeroContactoDonaciones() {
         return numeroContactoDonaciones;
     }
 
-    public void setNumeroContactoDonaciones(String numeroContactoDonaciones) {
-        this.numeroContactoDonaciones = numeroContactoDonaciones;
-    }
+    public void setNumeroContactoDonaciones(String numeroContactoDonaciones) { this.numeroContactoDonaciones = numeroContactoDonaciones; }
 
     public String getNumeroYapePlin() {
         return numeroYapePlin;
@@ -265,15 +251,6 @@ public class Usuarios {
 
     public void setFechaContratacion(String fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
-    }
-
-    public Usuarios(int userId, String username, String contrasenia, String estadoCuenta, int rolId, String fechaRegistro) {
-        this.userId = userId;
-        this.username = username;
-        this.contrasenia = contrasenia;
-        this.estadoCuenta = estadoCuenta;
-        this.rolId = rolId;
-        this.fechaRegistro = fechaRegistro;
     }
 }
 

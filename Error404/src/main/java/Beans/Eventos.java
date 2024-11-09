@@ -2,11 +2,12 @@ package Beans;
 
 public class Eventos {
     private int eventId;
-    private int userId;
+    private Usuarios usuario;
     private String nombreEvento;
     private String fechaEvento;
     private String horaEvento;
-    private int lugarEventoId;
+    private Fotos foto;
+    private LugaresEventos lugarEvento;
     private String entrada;
     private String descripcionEvento;
     private String artistasProveedores;
@@ -22,13 +23,9 @@ public class Eventos {
         this.eventId = eventId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+    public Usuarios getUsuario() { return usuario; }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
 
     public String getNombreEvento() {
         return nombreEvento;
@@ -54,13 +51,13 @@ public class Eventos {
         this.horaEvento = horaEvento;
     }
 
-    public int getLugarEventoId() {
-        return lugarEventoId;
-    }
+    public Fotos getFoto() { return foto; }
 
-    public void setLugarEventoId(int lugarEventoId) {
-        this.lugarEventoId = lugarEventoId;
-    }
+    public void setFoto(Fotos foto) { this.foto = foto; }
+
+    public LugaresEventos getLugarEvento() { return lugarEvento; }
+
+    public void setLugarEvento(LugaresEventos lugarEvento) { this.lugarEvento = lugarEvento; }
 
     public String getEntrada() {
         return entrada;
@@ -109,6 +106,8 @@ public class Eventos {
     public void setEstadoEvento(String estadoEvento) {
         this.estadoEvento = estadoEvento;
     }
+
+
 // Getters y Setters para todos los campos
 }
 
