@@ -291,11 +291,102 @@ CREATE TABLE denuncias_maltrato_animal (
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
-
-
 -- Tabla de fotos
 CREATE TABLE fotos (
     foto_id INT AUTO_INCREMENT PRIMARY KEY,
     url_foto VARCHAR(255) NOT NULL,
     fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE logs (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    descripcion TEXT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Cambiamos el delimitador temporalmente para definir los triggers
+DELIMITER //
+
+-- Trigger para INSERT en eventos
+CREATE TRIGGER trg_insert_eventos
+AFTER INSERT ON eventos
+FOR EACH ROW
+BEGIN
+    INSERT INTO logs (descripcion, fecha)
+    VALUES (CONCAT('Nuevo evento creado: "', NEW.nombre_evento, '" con ID ', NEW.event_id), NEW.fecha_creacion);
+END;
+//
+
+-- Trigger para UPDATE en eventos
+CREATE TRIGGER trg_update_eventos
+AFTER UPDATE ON eventos
+FOR EACH ROW
+BEGIN
+    INSERT INTO logs (descripcion, fecha)
+    VALUES (CONCAT('Evento actualizado: "', NEW.nombre_evento, '" (ID ', NEW.event_id, ')'), NEW.fecha_creacion);
+END;
+//
+
+-- Trigger para INSERT en publicaciones
+CREATE TRIGGER trg_insert_publicaciones
+AFTER INSERT ON publicaciones
+FOR EACH ROW
+BEGIN
+    INSERT INTO logs (descripcion, fecha)
+    VALUES (CONCAT('Nueva publicación creada: "', NEW.titulo, '" con ID ', NEW.publicacion_id), NEW.fecha_creacion);
+END;
+//
+
+-- Trigger para UPDATE en publicaciones
+CREATE TRIGGER trg_update_publicaciones
+AFTER UPDATE ON publicaciones
+FOR EACH ROW
+BEGIN
+    INSERT INTO logs (descripcion, fecha)
+    VALUES (CONCAT('Publicación actualizada: "', NEW.titulo, '" (ID ', NEW.publicacion_id, ')'), NEW.fecha_creacion);
+END;
+//
+
+-- Trigger para INSERT en denuncias de maltrato
+CREATE TRIGGER trg_insert_denuncias
+AFTER INSERT ON denuncias_maltrato_animal
+FOR EACH ROW
+BEGIN
+    INSERT INTO logs (descripcion, fecha)
+    VALUES (CONCAT('Nueva denuncia de maltrato registrada con ID ', NEW.report_id, ': "', NEW.descripcion, '"'), NEW.fecha_reporte);
+END;
+//
+
+-- Trigger para UPDATE en denuncias de maltrato
+CREATE TRIGGER trg_update_denuncias
+AFTER UPDATE ON denuncias_maltrato_animal
+FOR EACH ROW
+BEGIN
+    INSERT INTO logs (descripcion, fecha)
+    VALUES (CONCAT('Denuncia de maltrato actualizada con ID ', NEW.report_id, ': "', NEW.descripcion, '"'), NEW.fecha_reporte);
+END;
+//
+
+-- Trigger para INSERT en hogares temporales
+CREATE TRIGGER trg_insert_hogares
+AFTER INSERT ON hogares_temporales
+FOR EACH ROW
+BEGIN
+    INSERT INTO logs (descripcion, fecha)
+    VALUES (CONCAT('Nuevo hogar temporal creado: "', NEW.nombre_hogar, '" con ID ', NEW.hogar_id), NEW.fecha_creacion);
+END;
+//
+
+-- Trigger para UPDATE en hogares temporales
+CREATE TRIGGER trg_update_hogares
+AFTER UPDATE ON hogares_temporales
+FOR EACH ROW
+BEGIN
+    INSERT INTO logs (descripcion, fecha)
+    VALUES (CONCAT('Hogar temporal actualizado: "', NEW.nombre_hogar, '" (ID ', NEW.hogar_id, ')'), NEW.fecha_creacion);
+END;
+//
+
+-- Restauramos el delimitador al punto y coma
+DELIMITER ;
+
