@@ -1,8 +1,7 @@
-CREATE DATABASE IF NOT EXISTS iweb_proyecto ;
-USE iweb_proyecto;
+CREATE DATABASE IF NOT EXISTS IWEB_DB ;
+USE IWEB_DB;
 
-
-DROP TABLE IF EXISTS fotos;
+DROP TABLE IF EXISTS logs;
 DROP TABLE IF EXISTS denuncias_maltrato_animal;
 DROP TABLE IF EXISTS hogares_temporales;
 DROP TABLE IF EXISTS inscripciones_eventos;
@@ -10,19 +9,20 @@ DROP TABLE IF EXISTS eventos;
 DROP TABLE IF EXISTS lugares_eventos;
 DROP TABLE IF EXISTS solicitudes;
 DROP TABLE IF EXISTS tipos_solicitudes;
-DROP TABLE IF EXISTS publicaciones_donaciones;
-DROP TABLE IF EXISTS tipos_donaciones;
-DROP TABLE IF EXISTS publicaciones_mascota_perdida;
 DROP TABLE IF EXISTS publicaciones_adopcion;
+DROP TABLE IF EXISTS publicaciones_mascota_perdida;
+DROP TABLE IF EXISTS publicaciones_donaciones;
 DROP TABLE IF EXISTS publicaciones;
 DROP TABLE IF EXISTS tipos_publicaciones;
 DROP TABLE IF EXISTS mascotas;
 DROP TABLE IF EXISTS razas;
+DROP TABLE IF EXISTS tipos_donaciones;
 DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS fotos;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS distritos;
 DROP TABLE IF EXISTS zonas;
- 
+
  -- zonas 
 CREATE TABLE zonas (
 	zona_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,6 +40,14 @@ CREATE TABLE distritos (
 CREATE TABLE roles(
     rol_id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_rol VARCHAR(50) UNIQUE NOT NULL
+);
+
+
+-- Tabla de fotos
+CREATE TABLE fotos (
+    foto_id INT AUTO_INCREMENT PRIMARY KEY,
+    url_foto VARCHAR(255) NOT NULL,
+    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabla de usuarios (incluye usuarios finales, albergues, coordinadores y administrador)
@@ -291,14 +299,6 @@ CREATE TABLE denuncias_maltrato_animal (
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
-
-
--- Tabla de fotos
-CREATE TABLE fotos (
-    foto_id INT AUTO_INCREMENT PRIMARY KEY,
-    url_foto VARCHAR(255) NOT NULL,
-    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 -- Tabla de logs
 CREATE TABLE logs (
