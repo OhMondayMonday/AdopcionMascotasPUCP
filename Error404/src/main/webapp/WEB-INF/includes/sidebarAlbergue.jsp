@@ -1,10 +1,15 @@
+<!-- Incluye Bootstrap CSS y JavaScript en tu JSP -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
 
     <div class="app-brand demo px-3">
         <a href="javascript:void(0);" class="app-brand-link">
             <span class="app-brand-logo demo">
-              <img class = "h-px-50 tf-icon" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+              <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
             </span>
         </a>
 

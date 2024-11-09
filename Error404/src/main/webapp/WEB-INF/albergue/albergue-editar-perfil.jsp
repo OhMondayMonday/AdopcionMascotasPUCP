@@ -6,6 +6,10 @@
 <jsp:setProperty name="usuario" property="*" />
 <jsp:setProperty name="rol" property="*" />
 
+<jsp:include page="../includes/navbarAlbergue.jsp"/>
+<jsp:include page="../includes/sidebarAlbergue.jsp" />
+
+
 
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
@@ -63,6 +67,8 @@
         <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
         <!-- Template customizer & Theme config files -->
         <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
+
+
     </head>
 
     <body>
@@ -73,7 +79,7 @@
         <!-- End Google Tag Manager (noscript) -->
 
         <!-- Layout wrapper -->
-        <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-wrapper layout-content-navbar" style="background-color: #fff1ef;">
             <div class="layout-container">
 
                 <div class="layout-page">

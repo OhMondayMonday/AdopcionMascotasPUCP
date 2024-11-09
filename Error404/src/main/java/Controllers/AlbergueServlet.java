@@ -35,14 +35,22 @@ public class AlbergueServlet extends HttpServlet {
                 mostrarFormularioEdicion(request, response);
                 break;
             case "editarPerfil":
-                // Revisa que esta ruta sea correcta y que el archivo JSP exista
                 request.getRequestDispatcher("/WEB-INF/albergue/albergue-editar-perfil.jsp").forward(request, response);
                 break;
+            case "verMiPerfilSeguridad":
+                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-seguridad.jsp").forward(request, response);
+                break;
+            case "verMiPerfilDetalles":
+                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
+                break;
+
+
             default:
                 listarAlbergue(request, response);
                 break;
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

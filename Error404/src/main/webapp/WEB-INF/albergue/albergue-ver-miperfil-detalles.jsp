@@ -9,9 +9,6 @@
 <jsp:include page="../includes/navbarAlbergue.jsp"/>
 <jsp:include page="../includes/sidebarAlbergue.jsp" />
 
-
-
-
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
@@ -20,16 +17,26 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-        <title>Mi Cuenta</title>
+
+        <title>Mi Perfil</title>
+
 
         <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
         <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
         <!-- Canonical SEO -->
         <link rel="canonical" href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/">
 
-        <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
 
+        <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5DDHKGP');</script>
+        <!-- End Google Tag Manager -->
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com/">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -37,9 +44,9 @@
 
         <!-- Icons -->
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
-        <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-        <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/fontawesome.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/flag-icons.css" />
 
         <!-- Core CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
@@ -58,15 +65,15 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
 
         <!-- Page CSS -->
-        <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-faq.css" />
 
         <!-- Helpers -->
-        <script src="../../assets/vendor/js/helpers.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
 
         <!-- Template Config -->
-        <script src="../../assets/js/config.js"></script>
-    </head>
+        <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 
+    </head>
     <body>
 
 
@@ -80,6 +87,7 @@
 
                 <div class="layout-page">
 
+                    <!-- Content wrapper -->
                     <div class="content-wrapper">
 
                         <!-- Content -->
@@ -145,13 +153,16 @@
                                                 </ul>
 
                                                 <div class="d-flex justify-content-center pt-3">
-                                                    <a href="albergue-editar-perfil.jsp" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
+                                                    <a href="albergue-editar-perfil.html" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
                                                 </div>
 
                                             </div>
                                         </div>
                                     </div>
                                     <!-- /User Card -->
+                                    <!-- Plan Card -->
+
+                                    <!-- /Plan Card -->
                                 </div>
                                 <!--/ User Sidebar -->
 
@@ -161,81 +172,79 @@
                                     <!-- User Pills -->
                                     <!-- User Pills -->
                                     <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                        <li class="nav-item"><a class="nav-link" href="albergue-ver-miperfil-detalles.jsp"><i class="bx bx-user me-1"></i>Cuenta</a></li>
-                                        <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
+                                        <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i>Cuenta</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="albergue-ver-miperfil-seguridad.html"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
                                     </ul>
                                     <!--/ User Pills -->
                                     <!--/ User Pills -->
 
                                     <!-- Project table -->
                                     <div class="card mb-4">
-                                        <div class="card-body">
-                                            <form id="formChangePassword" method="GET" onsubmit="return false">
-                                                <div class="alert alert-warning" role="alert">
-                                                    <h6 class="alert-heading mb-1">Llene los siguientes campos</h6>
-                                                    <span>8 caracteres como minimo, incluya mayusculas, simbolos y numeros</span>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="mb-3 col-12 col-sm-6 form-password-toggle">
-                                                        <label class="form-label" for="newPassword">Nueva Contraseña</label>
-                                                        <div class="input-group input-group-merge">
-                                                            <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3 col-12 col-sm-6 form-password-toggle">
-                                                        <label class="form-label" for="confirmPassword">Confirmar contraseña</label>
-                                                        <div class="input-group input-group-merge">
-                                                            <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <button type="submit" class="btn btn-primary me-2">Cambiar contraseña</button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                        <h5 class="card-header pb-2 pt-3 ps-3">Acerca de nosotros</h5>
+                                        <div class="p-3 p pt-0 descripcion-hogar">
+                                            <strong>Albergue amoroso</strong><br>
+                                            Albergue Caritas es un refugio dedicado al rescate y cuidado de animales en situación de abandono o maltrato. Nos esforzamos por brindarles un espacio seguro y acogedor donde puedan recuperarse y encontrar el amor que merecen.
+                                            <br><br>
+                                            Si deseas ofrecer un hogar temporal, permanente, o unirte como voluntario, contáctame y juntos haremos la diferencia.
                                         </div>
                                     </div>
+
+
                                     <!-- /Project table -->
 
+                                    <!-- Activity Timeline -->
                                     <div class="card mb-4">
-                                        <h5 class="card-header">Consejos de Seguridad</h5>
+                                        <h5 class="card-header">Actividad Reciente</h5>
                                         <div class="card-body">
-                                            <ul class="list-unstyled">
-                                                <li class="mb-3">
-                                                    <i class='bx bx-lock-alt text-success me-2'></i>
-                                                    <span class="fw-medium">Usa contraseñas complejas:</span> Incluye letras mayúsculas, números y símbolos.
+                                            <ul class="timeline">
+                                                <li class="timeline-item timeline-item-transparent">
+                                                    <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
+                                                    <div class="timeline-event">
+                                                        <div class="timeline-header mb-1">
+                                                            <h6 class="mb-0">Rescate exitoso</h6>
+                                                            <small class="text-muted">Hace 15 min</small>
+                                                        </div>
+                                                        <p class="mb-2">Se rescató un gatito atrapado en un árbol y se trasladó a un lugar seguro.</p>
+                                                    </div>
                                                 </li>
-                                                <li class="mb-3">
-                                                    <i class='bx bx-shield text-primary me-2'></i>
-                                                    <span class="fw-medium">Cambia tu contraseña periódicamente:</span> Cada 3 meses es ideal.
+                                                <li class="timeline-item timeline-item-transparent">
+                                                    <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
+                                                    <div class="timeline-event">
+                                                        <div class="timeline-header mb-1">
+                                                            <h6 class="mb-0">Evento comunitario</h6>
+                                                            <small class="text-muted">Hace 1 hora</small>
+                                                        </div>
+                                                        <p class="mb-2">Participó en un evento de la comunidad para concientizar sobre la adopción de mascotas.</p>
+                                                    </div>
                                                 </li>
-                                                <li class="mb-3">
-                                                    <i class='bx bx-user-x text-danger me-2'></i>
-                                                    <span class="fw-medium">Evita usar la misma contraseña en varios sitios:</span> Minimiza riesgos si alguna cuenta es comprometida.
+                                                <li class="timeline-item timeline-item-transparent">
+                                                    <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
+                                                    <div class="timeline-event">
+                                                        <div class="timeline-header mb-1">
+                                                            <h6 class="mb-0">Ingreso de animales rescatados</h6>
+                                                            <small class="text-muted">Hace 3 días</small>
+                                                        </div>
+                                                        <p class="mb-2">Dos perros y un gato fueron rescatados y están recibiendo cuidados en el hogar temporal.</p>
+                                                    </div>
                                                 </li>
-                                                <li class="mb-3">
-                                                    <i class='bx bx-log-in-circle text-danger me-2'></i>
-                                                    <span class="fw-medium">Cierra sesión en dispositivos compartidos:</span> Protege tu cuenta en lugares públicos o ajenos.
+                                                <li class="timeline-item timeline-item-transparent">
+                                                    <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-success"></span></span>
+                                                    <div class="timeline-event">
+                                                        <div class="timeline-header mb-1">
+                                                            <h6 class="mb-0">Adopción confirmada</h6>
+                                                            <small class="text-muted">Hace 1 semana</small>
+                                                        </div>
+                                                        <p class="mb-0">Se confirmó la adopción de 4 perros que encontraron un hogar amoroso.</p>
+                                                    </div>
                                                 </li>
-                                                <li class="mb-3">
-                                                    <i class='bx bx-mobile text-info me-2'></i>
-                                                    <span class="fw-medium">Habilita la autenticación en dos pasos (2FA):</span> Aumenta la protección de tu cuenta.
-                                                </li>
-                                                <li class="mb-3">
-                                                    <i class='bx bx-refresh text-secondary me-2'></i>
-                                                    <span class="fw-medium">Actualiza regularmente tus datos personales:</span> Asegúrate de tener siempre información vigente.
-                                                </li>
-                                                <li>
-                                                    <i class='bx bx-user-check text-success me-2'></i>
-                                                    <span class="fw-medium">No compartas tus credenciales:</span> Mantén tus datos de inicio de sesión solo para ti.
+                                                <li class="timeline-end-indicator">
+                                                    <i class="bx bx-check-circle"></i>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <!--/ Recent Devices -->
+                                    <!-- /Activity Timeline -->
+
 
                                 </div>
                                 <!--/ User Content -->
@@ -306,7 +315,6 @@
         </div>
         </div>
         <!-- /Layout wrapper -->
-
         <!-- Core JS -->
         <!-- build:js assets/vendor/js/core.js -->
 
@@ -336,17 +344,6 @@
 
         <!-- Main JS -->
         <script src="../../assets/js/main.js"></script>
-        <script>
-            function cambiarPagina() {
-                var select = document.getElementById("opciones");
-                var opcionSeleccionada = select.value;
-
-                if (opcionSeleccionada) {
-                    // Cambia la página según la opción seleccionada
-                    window.location.href = opcionSeleccionada;
-                }
-            }
-        </script>
 
         <!-- Page JS -->
 
