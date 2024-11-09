@@ -2,12 +2,13 @@ package Beans;
 
 public class HogaresTemporales {
     private int temporalId;
-    private int userId;
+    private Usuarios usuario;
+    private Fotos foto;
     private int edad;
     private String genero;
     private String celular;
     private String direccion;
-    private int distritoId;
+    private Distritos distrito;
     private int cantidadCuartos;
     private double metrajeVivienda;
     private boolean tieneMascotas;
@@ -32,13 +33,13 @@ public class HogaresTemporales {
         this.temporalId = temporalId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+    public Usuarios getUsuario() { return usuario; }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
+
+    public Fotos getFoto() { return foto; }
+
+    public void setFoto(Fotos foto) { this.foto = foto; }
 
     public int getEdad() {
         return edad;
@@ -72,13 +73,9 @@ public class HogaresTemporales {
         this.direccion = direccion;
     }
 
-    public int getDistritoId() {
-        return distritoId;
-    }
+    public Distritos getDistrito() { return distrito; }
 
-    public void setDistritoId(int distritoId) {
-        this.distritoId = distritoId;
-    }
+    public void setDistrito(Distritos distrito) { this.distrito = distrito; }
 
     public int getCantidadCuartos() {
         return cantidadCuartos;
@@ -199,5 +196,6 @@ public class HogaresTemporales {
     public void setFechaAprobacion(String fechaAprobacion) {
         this.fechaAprobacion = fechaAprobacion;
     }
+
 }
 

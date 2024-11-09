@@ -4,6 +4,7 @@ public class DenunciasMaltratoAnimal {
     private int reportId;
     private int userId;
     private String descripcion;
+    private Fotos foto;
     private String tipoMaltrato;
     private String nombreMaltratador;
     private String direccionMaltrato;
@@ -36,6 +37,10 @@ public class DenunciasMaltratoAnimal {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public Fotos getFoto() { return foto; }
+
+    public void setFoto(Fotos foto) { this.foto = foto; }
 
     public String getTipoMaltrato() {
         return tipoMaltrato;
@@ -100,21 +105,8 @@ public class DenunciasMaltratoAnimal {
     public void setFechaDenuncia(String fechaDenuncia) {
         this.fechaDenuncia = fechaDenuncia;
     }
-// Getters y Setters para todos los campos
 
-    public DenunciasMaltratoAnimal(int reportId, int userId, String descripcion, String tipoMaltrato, String nombreMaltratador, String direccionMaltrato, String tamanio, String animal, String tipoRaza, boolean denunciaPolicial, String fechaDenuncia) {
-        this.reportId = reportId;
-        this.userId = userId;
-        this.descripcion = descripcion;
-        this.tipoMaltrato = tipoMaltrato;
-        this.nombreMaltratador = nombreMaltratador;
-        this.direccionMaltrato = direccionMaltrato;
-        this.tamanio = tamanio;
-        this.animal = animal;
-        this.tipoRaza = tipoRaza;
-        this.denunciaPolicial = denunciaPolicial;
-        this.fechaDenuncia = fechaDenuncia;
-    }
+// Getters y Setters para todos los campos
 
 }
 

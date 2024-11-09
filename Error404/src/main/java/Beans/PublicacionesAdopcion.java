@@ -1,51 +1,26 @@
 package Beans;
 
 public class PublicacionesAdopcion {
-    private int publicacionId;
-    private int mascotaId;
+    private Publicaciones publicacion;
+    private Mascotas mascota;
     private String lugarEncontrado;
     private String condicionesAdopcion;
 
-    public PublicacionesAdopcion() {
-    }
+    public Publicaciones getPublicacion() { return publicacion; }
 
-    public PublicacionesAdopcion(int publicacionId, int mascotaId, String lugarEncontrado, String condicionesAdopcion) {
-        this.publicacionId = publicacionId;
-        this.mascotaId = mascotaId;
-        this.lugarEncontrado = lugarEncontrado;
-        this.condicionesAdopcion = condicionesAdopcion;
-    }
+    public void setPublicacion(Publicaciones publicacion) { this.publicacion = publicacion; }
 
-    public int getPublicacionId() {
-        return publicacionId;
-    }
+    public Mascotas getMascota() { return mascota; }
 
-    public void setPublicacionId(int publicacionId) {
-        this.publicacionId = publicacionId;
-    }
+    public void setMascota(Mascotas mascota) { this.mascota = mascota; }
 
-    public int getMascotaId() {
-        return mascotaId;
-    }
+    public String getLugarEncontrado() { return lugarEncontrado; }
 
-    public void setMascotaId(int mascotaId) {
-        this.mascotaId = mascotaId;
-    }
+    public void setLugarEncontrado(String lugarEncontrado) { this.lugarEncontrado = lugarEncontrado; }
 
-    public String getLugarEncontrado() {
-        return lugarEncontrado;
-    }
+    public String getCondicionesAdopcion() { return condicionesAdopcion; }
 
-    public void setLugarEncontrado(String lugarEncontrado) {
-        this.lugarEncontrado = lugarEncontrado;
-    }
+    public void setCondicionesAdopcion(String condicionesAdopcion) { this.condicionesAdopcion = condicionesAdopcion; }
 
-    public String getCondicionesAdopcion() {
-        return condicionesAdopcion;
-    }
-
-    public void setCondicionesAdopcion(String condicionesAdopcion) {
-        this.condicionesAdopcion = condicionesAdopcion;
-    }
 }
 
