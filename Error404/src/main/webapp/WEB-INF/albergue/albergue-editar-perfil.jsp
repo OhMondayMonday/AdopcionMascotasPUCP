@@ -1,8 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-
-<%@ page import="Beans.Usuarios"%>
-<%@ page import="Beans.Publicaciones"%>
-<%@ page import="Beans.Roles"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
 <jsp:useBean id="rol" class="Beans.Roles" scope="request" />
@@ -10,7 +6,6 @@
 <jsp:setProperty name="usuario" property="*" />
 <jsp:setProperty name="rol" property="*" />
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
@@ -196,12 +191,12 @@
                                                                 <input type="text" id="formtabs-first-name" class="form-control" placeholder="Albergue Ejemplo" />
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-last-name">Alias</label>
-                                                                <input type="text" id="formtabs-last-name" class="form-control" placeholder="Caritas" />
+                                                                <label class="form-label" for="formtabs-alias">Alias</label>
+                                                                <input type="text" id="formtabs-alias" class="form-control" placeholder="Caritas" />
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-last-name">Nombre de Usuario</label>
-                                                                <input type="text" id="formtabs-last-name" class="form-control" placeholder="Caritas" />
+                                                                <label class="form-label" for="formtabs-username">Nombre de Usuario</label>
+                                                                <input type="text" id="formtabs-username" class="form-control" placeholder="Caritas" />
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-email">Correo electrónico</label>
@@ -211,8 +206,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="ecommerce-product-name">Distrito</label>
-                                                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
+                                                                <label class="form-label" for="formtabs-district">Distrito</label>
+                                                                <select id="formtabs-district" class="select2 form-select form-select-lg" data-allow-clear="true">
                                                                     <option value="AK">Ancón</option>
                                                                     <option value="HI">Ate</option>
                                                                     <option value="CA">Barranco</option>
@@ -268,14 +263,14 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="ecommerce-product-name">Año de Creación</label>
-                                                                <input class="form-control" type="date" value="2024-06-18" id="html5-date-input" />
+                                                                <label class="form-label" for="formtabs-creation-year">Año de Creación</label>
+                                                                <input class="form-control" type="date" value="2024-06-18" id="formtabs-creation-year" />
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="basic-icon-default-phone">Teléfono Contacto</label>
+                                                                <label class="form-label" for="formtabs-contact-phone">Teléfono Contacto</label>
                                                                 <div class="input-group input-group-merge">
-                                                                    <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-phone"></i></span>
-                                                                    <input type="text" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="999 999 999" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
+                                                                    <span id="formtabs-contact-phone-icon" class="input-group-text"><i class="bx bx-phone"></i></span>
+                                                                    <input type="text" id="formtabs-contact-phone" class="form-control phone-mask" placeholder="999 999 999" aria-label="999 999 999" aria-describedby="formtabs-contact-phone-icon" />
                                                                 </div>
                                                             </div>
 
@@ -288,11 +283,14 @@
 
                                                         <div class="mb-1">
                                                             <div class="card-body">
-                                                                <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                                                                <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-photo-upload">
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                        <label class="form-label mt-2" for="collapsible-address">Nueva Foto</label>
+
+                                                        <label class="form-label mt-2" for="new-photo-upload">Nueva Foto</label>
+                                                        <input class="form-control" type="file" id="new-photo-upload">
+
 
                                                         <div class="card mb-1">
                                                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -328,8 +326,8 @@
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="basic-icon-default-phone">Twitter</label>
                                                                 <div class="input-group input-group-merge">
-                                                                    <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bxl-twitter"></i></span>
-                                                                    <input type="text" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="https://twitter.com/abc" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
+                                                                    <span id="twitter-icon" class="input-group-text"><i class="bx bxl-twitter"></i></span>
+                                                                    <input type="text" id="twitter-link" class="form-control phone-mask" placeholder="https://twitter.com/abc" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
@@ -340,8 +338,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-google">YAPE</label>
-                                                                <input type="text" class="form-control" placeholder="999 999 999" />
+                                                                <label class="form-label" for="yape-contact">YAPE</label>
+                                                                <input type="text"  id="yape-contact" class="form-control" placeholder="999 999 999" />
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-instagram">Instagram</label>
