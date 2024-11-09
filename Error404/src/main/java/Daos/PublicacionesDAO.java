@@ -1,6 +1,9 @@
 package Daos;
 
 import Beans.Publicaciones;
+import Beans.Mascotas;
+import Beans.TiposDonaciones;
+import Beans.TiposPublicaciones;
 import Beans.PublicacionesAdopcion;
 import Beans.PublicacionesDonaciones;
 import java.sql.*;
@@ -21,12 +24,18 @@ public class PublicacionesDAO extends BaseDao {
             while (rs.next()) {
                 Publicaciones publicacion = new Publicaciones();
                 publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                publicacion.setUserId(rs.getInt("user_id"));
+                Beans.Usuarios usuario = new Beans.Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                publicacion.setUsuario(usuario);
+
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
                 publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
-                publicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
+                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                publicacion.setTipoPublicacion(tipoPublicacion);
+
                 publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
                 publicaciones.add(publicacion);
             }
@@ -46,14 +55,27 @@ public class PublicacionesDAO extends BaseDao {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                PublicacionesAdopcion publicacion = new PublicacionesAdopcion();
+                PublicacionesAdopcion publicacionAdopcion = new PublicacionesAdopcion();
+
+                // Crear y asignar el objeto Publicaciones
+                Publicaciones publicacion = new Publicaciones();
                 publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                publicacion.setMascotaId(rs.getInt("mascota_id"));
-                publicacion.setLugarEncontrado(rs.getString("lugar_encontrado"));
-                publicacion.setCondicionesAdopcion(rs.getString("condiciones_adopcion"));
-                // Agrega otros atributos según sea necesario
-                publicaciones.add(publicacion);
+                // Asigna otros atributos a 'publicacion' si es necesario
+                publicacionAdopcion.setPublicacion(publicacion);
+
+                // Crear y asignar el objeto Mascotas
+                Mascotas mascota = new Mascotas();
+                mascota.setMascotaId(rs.getInt("mascota_id"));
+                // Asigna otros atributos a 'mascota' si es necesario
+                publicacionAdopcion.setMascota(mascota);
+
+                publicacionAdopcion.setLugarEncontrado(rs.getString("lugar_encontrado"));
+                publicacionAdopcion.setCondicionesAdopcion(rs.getString("condiciones_adopcion"));
+
+                // Agregar a la lista de publicaciones
+                publicaciones.add(publicacionAdopcion);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,20 +93,33 @@ public class PublicacionesDAO extends BaseDao {
 
             while (rs.next()) {
                 PublicacionesDonaciones publicacion = new PublicacionesDonaciones();
-                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
+
+                Publicaciones publicacionBase = new Publicaciones();
+                publicacionBase.setPublicacionId(rs.getInt("publicacion_id"));
+
+// Asignar el objeto Publicaciones a la PublicacionesDonaciones
+                publicacion.setPublicacion(publicacionBase);
                 publicacion.setPuntoAcopio(rs.getString("punto_acopio"));
-                publicacion.setTipoDonacionId(rs.getInt("tipo_donacion_id"));
+
+                // Manejo de tipo de donación como un objeto relacionado
+                TiposDonaciones tipoDonacion = new TiposDonaciones();
+                tipoDonacion.setTipoDonacionId(rs.getInt("tipo_donacion_id"));
+                publicacion.setTipoDonacion(tipoDonacion);
                 publicacion.setCantidad(rs.getDouble("cantidad"));
                 publicacion.setMarca(rs.getString("marca"));
+                // Manejo de fechas como objetos Date
                 publicacion.setFechaRecepcionInicio(rs.getString("fecha_recepcion_inicio"));
                 publicacion.setFechaRecepcionFin(rs.getString("fecha_recepcion_fin"));
                 publicacion.setHoraRecepcion(rs.getString("hora_recepcion"));
+
                 publicacion.setTelefonoContacto(rs.getString("telefono_contacto"));
                 publicacion.setNombreContacto(rs.getString("nombre_contacto"));
                 publicacion.setMotivoDonacion(rs.getString("motivo_donacion"));
+
                 // Agrega otros atributos según sea necesario
                 publicaciones.add(publicacion);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -115,11 +150,11 @@ public class PublicacionesDAO extends BaseDao {
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setInt(1, publicacion.getUserId());
+            pstmt.setInt(1, publicacion.getUsuario().getUserId());
             pstmt.setString(2, publicacion.getTitulo());
             pstmt.setString(3, publicacion.getDescripcion());
             pstmt.setString(4, publicacion.getComentario());
-            pstmt.setInt(5, publicacion.getTipoPublicacionId());
+            pstmt.setInt(5, publicacion.getTipoPublicacion().getTipoPublicacionId());
             pstmt.setString(6, publicacion.getEstadoPublicacion());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -136,7 +171,7 @@ public class PublicacionesDAO extends BaseDao {
             pstmt.setString(1, publicacion.getTitulo());
             pstmt.setString(2, publicacion.getDescripcion());
             pstmt.setString(3, publicacion.getComentario());
-            pstmt.setInt(4, publicacion.getTipoPublicacionId());
+            pstmt.setInt(4, publicacion.getTipoPublicacion().getTipoPublicacionId());
             pstmt.setString(5, publicacion.getEstadoPublicacion());
             pstmt.setInt(6, publicacion.getPublicacionId());
             pstmt.executeUpdate();
@@ -168,7 +203,7 @@ public class PublicacionesDAO extends BaseDao {
             pstmt.setString(1, publicacion.getTitulo());
             pstmt.setString(2, publicacion.getDescripcion());
             pstmt.setString(3, publicacion.getComentario());
-            pstmt.setInt(4, publicacion.getTipoPublicacionId());
+            pstmt.setInt(4, publicacion.getTipoPublicacion().getTipoPublicacionId());
             pstmt.setString(5, publicacion.getEstadoPublicacion());
             pstmt.setInt(6, publicacion.getPublicacionId());
             pstmt.setInt(7, userID);
@@ -206,12 +241,16 @@ public class PublicacionesDAO extends BaseDao {
 
                 publicacion = new Publicaciones();
                 publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                publicacion.setUserId(rs.getInt("user_id"));
+                Beans.Usuarios usuario = new Beans.Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                publicacion.setUsuario(usuario);
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
                 publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
-                publicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                TiposPublicaciones tipoPublicacion = new TiposPublicaciones();
+                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                publicacion.setTipoPublicacion(tipoPublicacion);
                 publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
 
         } catch (SQLException e) {
@@ -238,12 +277,17 @@ public class PublicacionesDAO extends BaseDao {
             while (rs.next()) {
                 Publicaciones publicacion = new Publicaciones();
                 publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                publicacion.setUserId(rs.getInt("user_id"));
+                Beans.Usuarios usuario = new Beans.Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                publicacion.setUsuario(usuario);
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
                 publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
-                publicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
+                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                publicacion.setTipoPublicacion(tipoPublicacion);
+
                 publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
                 publicaciones.add(publicacion);
             }
@@ -269,12 +313,17 @@ public class PublicacionesDAO extends BaseDao {
             while (rs.next()) {
                 Publicaciones publicacion = new Publicaciones();
                 publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                publicacion.setUserId(rs.getInt("user_id"));
+                Beans.Usuarios usuario = new Beans.Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                publicacion.setUsuario(usuario);
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
                 publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
-                publicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
+                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                publicacion.setTipoPublicacion(tipoPublicacion);
+
                 publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
                 publicaciones.add(publicacion);
             }
@@ -308,12 +357,18 @@ public class PublicacionesDAO extends BaseDao {
             while (rs.next()) {
                 Publicaciones publicacion = new Publicaciones();
                 publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                publicacion.setUserId(rs.getInt("user_id"));
+                Beans.Usuarios usuario = new Beans.Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                publicacion.setUsuario(usuario);
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
                 publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
-                publicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+
+                Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
+                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                publicacion.setTipoPublicacion(tipoPublicacion);
+
                 publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
                 publicaciones.add(publicacion);
             }

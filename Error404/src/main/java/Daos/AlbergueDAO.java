@@ -29,9 +29,9 @@ public class AlbergueDAO extends BaseDao {
             stmt.setString(5, albergue.getEmail());
             stmt.setString(6, albergue.getDni());
             stmt.setString(7, albergue.getDireccion());
-            stmt.setInt(8, albergue.getDistritoId());
+            stmt.setInt(8, albergue.getDistrito().getDistritoId());
             stmt.setString(9, "pendiente"); // Estado inicial de la cuenta
-            stmt.setInt(10, albergue.getRolId());
+            stmt.setInt(10, albergue.getRol().getRolId());
             stmt.setString(11, albergue.getNombreAlbergue());
             stmt.setInt(12, albergue.getCapacidadNuevosAnimales());
             stmt.setInt(13, albergue.getAnimalesAlbergados());
@@ -45,7 +45,7 @@ public class AlbergueDAO extends BaseDao {
             stmt.setString(21, albergue.getNumeroContactoDonaciones());
             stmt.setString(22, albergue.getNumeroYapePlin());
             stmt.setBytes(23, albergue.getCodigoQr());
-            stmt.setInt(24, albergue.getZonaId());
+            stmt.setInt(24, albergue.getZona().getZonaId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -77,7 +77,12 @@ public class AlbergueDAO extends BaseDao {
                 albergue.setApellido(rs.getString("apellido"));
                 albergue.setEmail(rs.getString("email"));
                 albergue.setDireccion(rs.getString("direccion"));
-                albergue.setDistritoId(rs.getInt("distritoId"));
+
+                // Crear y asignar el objeto Distritos
+                Beans.Distritos distrito = new Beans.Distritos();
+                distrito.setDistritoId(rs.getInt("distritoId"));
+                albergue.setDistrito(distrito);
+
                 albergue.setEstadoCuenta(rs.getString("estadoCuenta"));
                 albergue.setNombreAlbergue(rs.getString("nombreAlbergue"));
                 albergue.setCapacidadNuevosAnimales(rs.getInt("capacidadNuevosAnimales"));
@@ -91,7 +96,12 @@ public class AlbergueDAO extends BaseDao {
                 albergue.setNombreContactoDonaciones(rs.getString("nombreContactoDonaciones"));
                 albergue.setNumeroContactoDonaciones(rs.getString("numeroContactoDonaciones"));
                 albergue.setNumeroYapePlin(rs.getString("numeroYapePlin"));
-                albergue.setZonaId(rs.getInt("zonaId"));
+
+                // Crear y asignar el objeto Zonas
+                Beans.Zonas zona = new Beans.Zonas();
+                zona.setZonaId(rs.getInt("zonaId"));
+                albergue.setZona(zona);
+
                 return albergue;
             }
 
@@ -112,7 +122,7 @@ public class AlbergueDAO extends BaseDao {
             stmt.setString(2, albergue.getApellido());
             stmt.setString(3, albergue.getEmail());
             stmt.setString(4, albergue.getDireccion());
-            stmt.setInt(5, albergue.getDistritoId());
+            stmt.setInt(5, albergue.getDistrito().getDistritoId());
             stmt.setInt(6, albergue.getCapacidadNuevosAnimales());
             stmt.setInt(7, albergue.getAnimalesAlbergados());
             stmt.setString(8, albergue.getUrlFacebook());

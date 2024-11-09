@@ -9,6 +9,7 @@ public class Distritos {
         return distritoId;
     }
 
+
     public void setDistritoId(int distritoId) {
         this.distritoId = distritoId;
     }

@@ -7,6 +7,9 @@ public class Zonas {
         return zonaId;
     }
 
+    public Zonas() {
+    }
+
     public void setZonaId(int zonaId) {
         this.zonaId = zonaId;
     }

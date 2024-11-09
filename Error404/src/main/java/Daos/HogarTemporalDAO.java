@@ -94,12 +94,20 @@ public class HogarTemporalDAO extends BaseDao {
     private HogaresTemporales crearHogarTemporalDesdeResultSet(ResultSet rs) throws SQLException {
         HogaresTemporales hogar = new HogaresTemporales();
         hogar.setTemporalId(rs.getInt("temporal_id"));
-        hogar.setUserId(rs.getInt("user_id"));
+
+        Beans.Usuarios usuario = new Beans.Usuarios();
+        usuario.setUserId(rs.getInt("user_id"));
+        hogar.setUsuario(usuario);
+
         hogar.setEdad(rs.getInt("edad"));
         hogar.setGenero(rs.getString("genero"));
         hogar.setCelular(rs.getString("celular"));
         hogar.setDireccion(rs.getString("direccion"));
-        hogar.setDistritoId(rs.getInt("distrito"));
+
+        Beans.Distritos distrito = new Beans.Distritos();
+        distrito.setDistritoId(rs.getInt("distrito_id"));
+        hogar.setDistrito(distrito);
+
         hogar.setCantidadCuartos(rs.getInt("cantidad_cuartos"));
         hogar.setMetrajeVivienda(rs.getDouble("metraje_vivienda"));
         hogar.setTieneMascotas(rs.getBoolean("tiene_mascotas"));
@@ -111,10 +119,10 @@ public class HogarTemporalDAO extends BaseDao {
         hogar.setPersonaReferencia(rs.getString("persona_referencia"));
         hogar.setContactoReferencia(rs.getString("contacto_referencia"));
         hogar.setTiempoTemporal(rs.getInt("tiempo_temporal"));
-        hogar.setRangoFechaInicio(rs.getString("rango_fecha_inicio"));
-        hogar.setRangoFechaFin(rs.getString("rango_fecha_fin"));
+        hogar.setRangoFechaInicio(rs.getDate("rango_fecha_inicio"));
+        hogar.setRangoFechaFin(rs.getDate("rango_fecha_fin"));
         hogar.setEstadoTemporal(rs.getString("estado_temporal"));
-        hogar.setFechaAprobacion(rs.getString("fecha_aprobacion"));
+        hogar.setFechaAprobacion(rs.getTimestamp("fecha_aprobacion"));
         return hogar;
     }
 }

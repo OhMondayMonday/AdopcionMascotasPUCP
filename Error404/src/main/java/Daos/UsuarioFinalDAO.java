@@ -1,6 +1,10 @@
 package Daos;
 import Beans.Usuarios;
+
+import java.beans.Beans;
 import java.sql.Connection;
+import Beans.Distritos;
+import Beans.Roles;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,9 +32,19 @@ public class UsuarioFinalDAO extends BaseDao {
                     usuario.setEmail(rs.getString("email"));
                     usuario.setDni(rs.getString("DNI"));
                     usuario.setDireccion(rs.getString("direccion"));
-                    usuario.setDistritoId(rs.getInt("distrito_id"));
+
+
+                    // Crear y asignar el objeto Distritos
+                    Distritos distrito = new Distritos();
+                    distrito.setDistritoId(rs.getInt("distrito_id"));
+                    usuario.setDistrito(distrito);  // Asegúrate de que este método esté bien definido
+
                     usuario.setEstadoCuenta(rs.getString("estado_cuenta"));
-                    usuario.setRolId(rs.getInt("rol_id"));
+
+                    Roles roles = new Roles();
+                    roles.setRolId(rs.getInt("rol_id"));
+                    usuario.setRol(roles);
+
                     usuario.setFechaRegistro(rs.getString("fecha_registro"));
                 }
             }
@@ -55,9 +69,9 @@ public class UsuarioFinalDAO extends BaseDao {
             ps.setString(5, usuario.getEmail());
             ps.setString(6, usuario.getDni());
             ps.setString(7, usuario.getDireccion());
-            ps.setInt(8, usuario.getDistritoId());
+            ps.setInt(8, usuario.getDistrito().getDistritoId());
             ps.setString(9, usuario.getEstadoCuenta()); // Estado inicial 'pendiente'
-            ps.setInt(10, usuario.getRolId());
+            ps.setInt(10, usuario.getRol().getRolId());
             ps.setString(11, usuario.getFechaRegistro());
 
             return ps.executeUpdate() > 0;
@@ -82,9 +96,9 @@ public class UsuarioFinalDAO extends BaseDao {
             ps.setString(5, usuario.getEmail());
             ps.setString(6, usuario.getDni());
             ps.setString(7, usuario.getDireccion());
-            ps.setInt(8, usuario.getDistritoId());
+            ps.setInt(8, usuario.getDistrito().getDistritoId());
             ps.setString(9, usuario.getEstadoCuenta());
-            ps.setInt(10, usuario.getRolId());
+            ps.setInt(10, usuario.getRol().getRolId());
             ps.setInt(11, usuario.getUserId());
 
             return ps.executeUpdate() > 0;
