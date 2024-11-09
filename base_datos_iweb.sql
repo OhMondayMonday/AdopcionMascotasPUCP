@@ -92,7 +92,8 @@ CREATE TABLE mascotas (
     genero ENUM('macho', 'hembra') NOT NULL,
     tamanio ENUM('pequeño', 'mediano', 'grande', 'gigante') NOT NULL,
     distintivo VARCHAR(255),
-    en_hogar_temporal BOOLEAN DEFAULT FALSE
+    en_hogar_temporal BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (raza_id) REFERENCES razas(raza_id) ON DELETE CASCADE
 );
 
 -- Tabla de tipos de publicaciones
