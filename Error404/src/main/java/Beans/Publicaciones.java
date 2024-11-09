@@ -2,12 +2,13 @@ package Beans;
 
 public class Publicaciones {
     private int publicacionId;
-    private int userId;
+    private Usuarios usuario;
     private String titulo;
     private String descripcion;
+    private Fotos foto;
     private String comentario;
     private String fechaCreacion;
-    private int tipoPublicacionId;
+    private TiposPublicaciones tipoPublicacion;
     private String estadoPublicacion;
 
     public int getPublicacionId() {
@@ -18,13 +19,9 @@ public class Publicaciones {
         this.publicacionId = publicacionId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+    public Usuarios getUsuario() { return usuario; }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
 
     public String getTitulo() {
         return titulo;
@@ -42,6 +39,10 @@ public class Publicaciones {
         this.descripcion = descripcion;
     }
 
+    public Fotos getFoto() { return foto; }
+
+    public void setFoto(Fotos foto) { this.foto = foto; }
+
     public String getComentario() {
         return comentario;
     }
@@ -58,13 +59,9 @@ public class Publicaciones {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public int getTipoPublicacionId() {
-        return tipoPublicacionId;
-    }
+    public TiposPublicaciones getTipoPublicacion() { return tipoPublicacion; }
 
-    public void setTipoPublicacionId(int tipoPublicacionId) {
-        this.tipoPublicacionId = tipoPublicacionId;
-    }
+    public void setTipoPublicacion(TiposPublicaciones tipoPublicacion) { this.tipoPublicacion = tipoPublicacion; }
 
     public String getEstadoPublicacion() {
         return estadoPublicacion;
@@ -73,5 +70,6 @@ public class Publicaciones {
     public void setEstadoPublicacion(String estadoPublicacion) {
         this.estadoPublicacion = estadoPublicacion;
     }
+
 }
 

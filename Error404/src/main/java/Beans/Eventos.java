@@ -1,17 +1,22 @@
 package Beans;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class Eventos {
     private int eventId;
-    private int userId;
+    private Usuarios usuario;
     private String nombreEvento;
-    private String fechaEvento;
-    private String horaEvento;
-    private int lugarEventoId;
+    private Date fechaEvento;
+    private Time horaEvento;
+    private Fotos foto;
+    private LugaresEventos lugarEvento;
     private String entrada;
     private String descripcionEvento;
     private String artistasProveedores;
     private String razonEvento;
-    private String fechaCreacion;
+    private Timestamp fechaCreacion;
     private String estadoEvento;
 
     public int getEventId() {
@@ -22,13 +27,9 @@ public class Eventos {
         this.eventId = eventId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+    public Usuarios getUsuario() { return usuario; }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
 
     public String getNombreEvento() {
         return nombreEvento;
@@ -38,29 +39,29 @@ public class Eventos {
         this.nombreEvento = nombreEvento;
     }
 
-    public String getFechaEvento() {
+    public Date getFechaEvento() {
         return fechaEvento;
     }
 
-    public void setFechaEvento(String fechaEvento) {
+    public void setFechaEvento(Date fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
-    public String getHoraEvento() {
+    public Time getHoraEvento() {
         return horaEvento;
     }
 
-    public void setHoraEvento(String horaEvento) {
+    public void setHoraEvento(Time horaEvento) {
         this.horaEvento = horaEvento;
     }
 
-    public int getLugarEventoId() {
-        return lugarEventoId;
-    }
+    public Fotos getFoto() { return foto; }
 
-    public void setLugarEventoId(int lugarEventoId) {
-        this.lugarEventoId = lugarEventoId;
-    }
+    public void setFoto(Fotos foto) { this.foto = foto; }
+
+    public LugaresEventos getLugarEvento() { return lugarEvento; }
+
+    public void setLugarEvento(LugaresEventos lugarEvento) { this.lugarEvento = lugarEvento; }
 
     public String getEntrada() {
         return entrada;
@@ -94,11 +95,11 @@ public class Eventos {
         this.razonEvento = razonEvento;
     }
 
-    public String getFechaCreacion() {
+    public Timestamp getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Timestamp fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
@@ -109,6 +110,7 @@ public class Eventos {
     public void setEstadoEvento(String estadoEvento) {
         this.estadoEvento = estadoEvento;
     }
-// Getters y Setters para todos los campos
+
+
 }
 

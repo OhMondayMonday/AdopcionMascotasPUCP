@@ -1,8 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-
-<%@ page import="Beans.Usuarios"%>
-<%@ page import="Beans.Publicaciones"%>
-<%@ page import="Beans.Roles"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
 <jsp:useBean id="rol" class="Beans.Roles" scope="request" />
@@ -10,7 +6,11 @@
 <jsp:setProperty name="usuario" property="*" />
 <jsp:setProperty name="rol" property="*" />
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="../includes/navbarAlbergue.jsp"/>
+<jsp:include page="../includes/sidebarAlbergue.jsp" />
+
+
+
 
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
@@ -20,26 +20,16 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
         <title>Mi Cuenta</title>
-
 
         <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
         <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
         <!-- Canonical SEO -->
         <link rel="canonical" href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/">
 
-
-        <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-5DDHKGP');</script>
-        <!-- End Google Tag Manager -->
-
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com/">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -52,39 +42,31 @@
         <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
         <!-- Core CSS -->
-        <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-        <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
-        <link rel="stylesheet" href="../../assets/css/demo.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
 
         <!-- Vendors CSS -->
-        <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/typography.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
 
         <!-- Page CSS -->
-
         <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
 
         <!-- Helpers -->
         <script src="../../assets/vendor/js/helpers.js"></script>
-        <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-        <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
 
-        <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+        <!-- Template Config -->
         <script src="../../assets/js/config.js"></script>
-
     </head>
+
     <body>
 
 
@@ -93,7 +75,7 @@
         <!-- End Google Tag Manager (noscript) -->
 
         <!-- Layout wrapper -->
-        <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-wrapper layout-content-navbar" style="background-color: #fff1ef">
             <div class="layout-container">
 
                 <div class="layout-page">
@@ -163,7 +145,7 @@
                                                 </ul>
 
                                                 <div class="d-flex justify-content-center pt-3">
-                                                    <a href="albergue-editar-perfil.html" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
+                                                    <a href="albergue-editar-perfil.jsp" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
                                                 </div>
 
                                             </div>
@@ -179,7 +161,7 @@
                                     <!-- User Pills -->
                                     <!-- User Pills -->
                                     <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                        <li class="nav-item"><a class="nav-link" href="albergue-ver-miperfil-detalles.html"><i class="bx bx-user me-1"></i>Cuenta</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="albergue-ver-miperfil-detalles.jsp"><i class="bx bx-user me-1"></i>Cuenta</a></li>
                                         <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
                                     </ul>
                                     <!--/ User Pills -->

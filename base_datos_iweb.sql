@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS iweb_proyecto ;
+USE iweb_proyecto;
+
+
 DROP TABLE IF EXISTS fotos;
 DROP TABLE IF EXISTS denuncias_maltrato_animal;
 DROP TABLE IF EXISTS hogares_temporales;
@@ -18,9 +22,8 @@ DROP TABLE IF EXISTS usuarios;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS distritos;
 DROP TABLE IF EXISTS zonas;
-
--- zonas distrito
-
+ 
+ -- zonas 
 CREATE TABLE zonas (
 	zona_id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_zona VARCHAR(12) NOT NULL
@@ -50,6 +53,7 @@ CREATE TABLE usuarios (
     DNI VARCHAR(8) UNIQUE,
     descripcion TEXT,
     direccion VARCHAR(255),
+    foto_id INT,
     distrito_id INT,
     estado_cuenta ENUM('pendiente', 'rechazada', 'activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
     rol_id INT NOT NULL,
@@ -71,6 +75,7 @@ CREATE TABLE usuarios (
     zona_id INT,
     fecha_nacimiento DATE,
     fecha_contratacion DATE,
+    FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (zona_id) REFERENCES zonas(zona_id) ON DELETE CASCADE,
     FOREIGN KEY (rol_id) REFERENCES roles(rol_id) ON DELETE CASCADE,
     FOREIGN KEY (distrito_id) REFERENCES distritos(distrito_id) ON DELETE CASCADE
@@ -88,11 +93,14 @@ CREATE TABLE mascotas (
     nombre VARCHAR(100) NOT NULL,
     raza_id INT NOT NULL,
     descripcion TEXT NOT NULL,
+    foto_id INT NOT NULL,
     edad_aproximada INT,
     genero ENUM('macho', 'hembra') NOT NULL,
     tamanio ENUM('pequeño', 'mediano', 'grande', 'gigante') NOT NULL,
     distintivo VARCHAR(255),
-    en_hogar_temporal BOOLEAN DEFAULT FALSE
+    en_hogar_temporal BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
+    FOREIGN KEY (raza_id) REFERENCES razas(raza_id) ON DELETE CASCADE
 );
 
 -- Tabla de tipos de publicaciones
@@ -107,10 +115,12 @@ CREATE TABLE publicaciones (
     user_id INT NOT NULL,
     titulo VARCHAR(150) NOT NULL,
     descripcion TEXT NOT NULL,
+    foto_id INT NOT NULL,
     comentario TEXT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipo_publicacion_id INT NOT NULL,
     estado_publicacion ENUM('pendiente', 'activa', 'rechazada', 'baneada', 'eliminada') DEFAULT 'pendiente',
+    FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (tipo_publicacion_id) REFERENCES tipos_publicaciones(tipo_publicacion_id) ON DELETE CASCADE
 );
@@ -196,9 +206,11 @@ CREATE TABLE lugares_eventos (
     lugar_id INT AUTO_INCREMENT PRIMARY KEY,
     distrito_id INT NOT NULL,
     nombre_lugar VARCHAR(150) NOT NULL,
+    foto_id INT NOT NULL,
     aforo_maximo INT NOT NULL,
     direccion_lugar VARCHAR(200) NOT NULL,
     activo BOOLEAN NOT NULL,
+    FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (distrito_id) REFERENCES distritos(distrito_id) ON DELETE CASCADE
 );
 -- Tabla de eventos
@@ -208,6 +220,7 @@ CREATE TABLE eventos (
     nombre_evento VARCHAR(150),
     fecha_evento DATE NOT NULL,
     hora_evento TIME NOT NULL,
+    foto_id INT NOT NULL,
     lugar_evento_id INT,
     entrada VARCHAR(255),
     descripcion_evento TEXT,
@@ -215,6 +228,7 @@ CREATE TABLE eventos (
     razon_evento TEXT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     estado_evento ENUM('activa', 'baneada', 'eliminada') DEFAULT 'activa',
+    FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (lugar_evento_id) REFERENCES lugares_eventos(lugar_id) ON DELETE CASCADE
 );
@@ -234,6 +248,7 @@ CREATE TABLE inscripciones_eventos (
 CREATE TABLE hogares_temporales (
     temporal_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
+    foto_id INT NOT NULL,
     edad INT NOT NULL,
     genero ENUM('masculino', 'femenino', 'otro') NOT NULL,
     celular VARCHAR(20) NOT NULL,
@@ -254,6 +269,7 @@ CREATE TABLE hogares_temporales (
     rango_fecha_fin DATE NOT NULL,
     estado_temporal ENUM('pendiente', 'activa', 'rechazada', 'baneada', 'eliminada') DEFAULT 'pendiente',
     fecha_aprobacion TIMESTAMP,
+    FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
@@ -262,6 +278,7 @@ CREATE TABLE denuncias_maltrato_animal (
     report_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     descripcion TEXT,
+    foto_id INT,
     tipo_maltrato VARCHAR(100) NOT NULL,
     nombre_maltratador VARCHAR(100),
     direccion_maltrato VARCHAR(255) NOT NULL,
@@ -270,6 +287,7 @@ CREATE TABLE denuncias_maltrato_animal (
     tipo_raza VARCHAR(100),
     denuncia_policial BOOLEAN DEFAULT FALSE,
     fecha_denuncia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
@@ -279,17 +297,5 @@ CREATE TABLE denuncias_maltrato_animal (
 CREATE TABLE fotos (
     foto_id INT AUTO_INCREMENT PRIMARY KEY,
     url_foto VARCHAR(255) NOT NULL,
-    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    usuario_id INT,
-    publicacion_id INT,
-    evento_id INT,
-    mascota_id INT,
-    denuncia_id INT,
-    temporal_id INT,
-    CONSTRAINT fk_usuario_id FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
-    CONSTRAINT fk_publicacion_id FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
-    CONSTRAINT fk_evento_id FOREIGN KEY (evento_id) REFERENCES eventos(event_id) ON DELETE CASCADE,
-    CONSTRAINT fk_mascota_id FOREIGN KEY (mascota_id) REFERENCES mascotas(mascota_id) ON DELETE CASCADE,
-    CONSTRAINT fk_denuncia_id FOREIGN KEY (denuncia_id) REFERENCES denuncias_maltrato_animal(report_id) ON DELETE CASCADE,
-    CONSTRAINT fk_temporal_id FOREIGN KEY (temporal_id) REFERENCES hogares_temporales(temporal_id) ON DELETE CASCADE
+    fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

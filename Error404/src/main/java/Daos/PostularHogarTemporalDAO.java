@@ -19,7 +19,7 @@ public class PostularHogarTemporalDAO extends BaseDao {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, hogarTemporal.getDireccion());
-            pstmt.setInt(2, hogarTemporal.getDistritoId());
+            pstmt.setInt(2, hogarTemporal.getDistrito().getDistritoId());
             pstmt.setInt(3, hogarTemporal.getCantidadCuartos());
             pstmt.setDouble(4, hogarTemporal.getMetrajeVivienda());
             pstmt.setBoolean(5, hogarTemporal.isTieneMascotas());
@@ -31,8 +31,9 @@ public class PostularHogarTemporalDAO extends BaseDao {
             pstmt.setString(11, hogarTemporal.getPersonaReferencia());
             pstmt.setString(12, hogarTemporal.getContactoReferencia());
             pstmt.setInt(13, hogarTemporal.getTiempoTemporal());
-            pstmt.setDate(14, Date.valueOf(hogarTemporal.getRangoFechaInicio()));
-            pstmt.setDate(15, Date.valueOf(hogarTemporal.getRangoFechaFin()));
+            pstmt.setDate(14, new java.sql.Date(hogarTemporal.getRangoFechaInicio().getTime()));
+            pstmt.setDate(15, new java.sql.Date(hogarTemporal.getRangoFechaFin().getTime()));
+
             pstmt.setString(16, hogarTemporal.getEstadoTemporal());
 
             int rowsAffected = pstmt.executeUpdate();

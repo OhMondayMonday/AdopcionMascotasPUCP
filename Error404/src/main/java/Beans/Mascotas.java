@@ -3,8 +3,9 @@ package Beans;
 public class Mascotas {
     private int mascotaId;
     private String nombre;
-    private int razaId;
+    private Razas raza;
     private String descripcion;
+    private Fotos foto;
     private int edadAproximada;
     private String genero;
     private String tamanio;
@@ -27,13 +28,9 @@ public class Mascotas {
         this.nombre = nombre;
     }
 
-    public int getRazaId() {
-        return razaId;
-    }
+    public Razas getRaza() { return raza; }
 
-    public void setRazaId(int razaId) {
-        this.razaId = razaId;
-    }
+    public void setRaza(Razas raza) { this.raza = raza; }
 
     public String getDescripcion() {
         return descripcion;
@@ -42,6 +39,10 @@ public class Mascotas {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public Fotos getFoto() { return foto; }
+
+    public void setFoto(Fotos foto) { this.foto = foto; }
 
     public int getEdadAproximada() {
         return edadAproximada;
@@ -82,5 +83,6 @@ public class Mascotas {
     public void setEnHogarTemporal(boolean enHogarTemporal) {
         this.enHogarTemporal = enHogarTemporal;
     }
+
 }
 

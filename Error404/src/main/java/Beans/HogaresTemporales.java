@@ -1,17 +1,22 @@
 package Beans;
 
+import javax.xml.crypto.Data;
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class HogaresTemporales {
     private int temporalId;
-    private int userId;
+    private Usuarios usuario;
+    private Fotos foto;
     private int edad;
     private String genero;
     private String celular;
     private String direccion;
-    private int distritoId;
+    private Distritos distrito;
     private int cantidadCuartos;
     private double metrajeVivienda;
     private boolean tieneMascotas;
-    private Integer cantidadMascotas;
+    private int cantidadMascotas;
     private String tipoMascotas;
     private boolean tieneHijos;
     private boolean viveSolo;
@@ -19,10 +24,10 @@ public class HogaresTemporales {
     private String personaReferencia;
     private String contactoReferencia;
     private int tiempoTemporal;
-    private String rangoFechaInicio;
-    private String rangoFechaFin;
+    private Date rangoFechaInicio;
+    private Date rangoFechaFin;
     private String estadoTemporal;
-    private String fechaAprobacion;
+    private Timestamp fechaAprobacion;
 
     public int getTemporalId() {
         return temporalId;
@@ -32,13 +37,13 @@ public class HogaresTemporales {
         this.temporalId = temporalId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+    public Usuarios getUsuario() { return usuario; }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
+
+    public Fotos getFoto() { return foto; }
+
+    public void setFoto(Fotos foto) { this.foto = foto; }
 
     public int getEdad() {
         return edad;
@@ -72,13 +77,9 @@ public class HogaresTemporales {
         this.direccion = direccion;
     }
 
-    public int getDistritoId() {
-        return distritoId;
-    }
+    public Distritos getDistrito() { return distrito; }
 
-    public void setDistritoId(int distritoId) {
-        this.distritoId = distritoId;
-    }
+    public void setDistrito(Distritos distrito) { this.distrito = distrito; }
 
     public int getCantidadCuartos() {
         return cantidadCuartos;
@@ -168,19 +169,19 @@ public class HogaresTemporales {
         this.tiempoTemporal = tiempoTemporal;
     }
 
-    public String getRangoFechaInicio() {
+    public Date getRangoFechaInicio() {
         return rangoFechaInicio;
     }
 
-    public void setRangoFechaInicio(String rangoFechaInicio) {
+    public void setRangoFechaInicio(Date rangoFechaInicio) {
         this.rangoFechaInicio = rangoFechaInicio;
     }
 
-    public String getRangoFechaFin() {
+    public Date getRangoFechaFin() {
         return rangoFechaFin;
     }
 
-    public void setRangoFechaFin(String rangoFechaFin) {
+    public void setRangoFechaFin(Date rangoFechaFin) {
         this.rangoFechaFin = rangoFechaFin;
     }
 
@@ -192,12 +193,13 @@ public class HogaresTemporales {
         this.estadoTemporal = estadoTemporal;
     }
 
-    public String getFechaAprobacion() {
+    public Timestamp getFechaAprobacion() {
         return fechaAprobacion;
     }
 
-    public void setFechaAprobacion(String fechaAprobacion) {
+    public void setFechaAprobacion(Timestamp fechaAprobacion) {
         this.fechaAprobacion = fechaAprobacion;
     }
+
 }
 

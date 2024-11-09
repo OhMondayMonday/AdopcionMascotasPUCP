@@ -1,31 +1,25 @@
 package Beans;
 
+import java.util.Date;
+
 public class PublicacionesMascotaPerdida {
-    private int publicacionId;
-    private int mascotaId;
+    private Publicaciones publicacion;
+    private Mascotas mascota;
     private String lugarPerdida;
-    private String fechaPerdida;
+    private Date fechaPerdida;
     private String descripcionAdicional;
     private String telefonoContacto;
     private String nombreContacto;
     private String recompensa;
     private boolean mascotaEncontrada;
 
-    public int getPublicacionId() {
-        return publicacionId;
-    }
+    public Publicaciones getPublicacion() { return publicacion; }
 
-    public void setPublicacionId(int publicacionId) {
-        this.publicacionId = publicacionId;
-    }
+    public void setPublicacion(Publicaciones publicacion) { this.publicacion = publicacion; }
 
-    public int getMascotaId() {
-        return mascotaId;
-    }
+    public Mascotas getMascota() { return mascota; }
 
-    public void setMascotaId(int mascotaId) {
-        this.mascotaId = mascotaId;
-    }
+    public void setMascota(Mascotas mascota) { this.mascota = mascota; }
 
     public String getLugarPerdida() {
         return lugarPerdida;
@@ -35,11 +29,11 @@ public class PublicacionesMascotaPerdida {
         this.lugarPerdida = lugarPerdida;
     }
 
-    public String getFechaPerdida() {
+    public Date getFechaPerdida() {
         return fechaPerdida;
     }
 
-    public void setFechaPerdida(String fechaPerdida) {
+    public void setFechaPerdida(Date fechaPerdida) {
         this.fechaPerdida = fechaPerdida;
     }
 
@@ -47,9 +41,7 @@ public class PublicacionesMascotaPerdida {
         return descripcionAdicional;
     }
 
-    public void setDescripcionAdicional(String descripcionAdicional) {
-        this.descripcionAdicional = descripcionAdicional;
-    }
+    public void setDescripcionAdicional(String descripcionAdicional) { this.descripcionAdicional = descripcionAdicional; }
 
     public String getTelefonoContacto() {
         return telefonoContacto;
@@ -82,5 +74,6 @@ public class PublicacionesMascotaPerdida {
     public void setMascotaEncontrada(boolean mascotaEncontrada) {
         this.mascotaEncontrada = mascotaEncontrada;
     }
+
 }
 

@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 
-<%@ page import="Beans.Usuarios"%>
-<%@ page import="Beans.Publicaciones"%>
-<%@ page import="Beans.Roles"%>
+
 
 <jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
 <jsp:useBean id="rol" class="Beans.Roles" scope="request" />
@@ -10,7 +8,6 @@
 <jsp:setProperty name="usuario" property="*" />
 <jsp:setProperty name="rol" property="*" />
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">

@@ -3,11 +3,12 @@ package Beans;
 public class Distritos {
     private int distritoId;
     private String nombreDistrito;
-    private int zonaDistritoId;
+    private Zonas zona;
 
     public int getDistritoId() {
         return distritoId;
     }
+
 
     public void setDistritoId(int distritoId) {
         this.distritoId = distritoId;
@@ -21,18 +22,8 @@ public class Distritos {
         this.nombreDistrito = nombreDistrito;
     }
 
-    public int getZonaDistritoId() {
-        return zonaDistritoId;
-    }
+    public Zonas getZona() { return zona;}
 
-    public void setZonaDistritoId(int zonaDistritoId) {
-        this.zonaDistritoId = zonaDistritoId;
-    }
-
-    public Distritos(int distritoId, String nombreDistrito, int zonaDistrito) {
-        this.distritoId = distritoId;
-        this.nombreDistrito = nombreDistrito;
-        this.zonaDistritoId = zonaDistrito;
-    }
+    public void setZona(Zonas zona) { this.zona = zona;}
 }
 

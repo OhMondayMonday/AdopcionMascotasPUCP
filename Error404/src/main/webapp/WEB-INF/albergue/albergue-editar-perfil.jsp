@@ -1,8 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-
-<%@ page import="Beans.Usuarios"%>
-<%@ page import="Beans.Publicaciones"%>
-<%@ page import="Beans.Roles"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
 <jsp:useBean id="rol" class="Beans.Roles" scope="request" />
@@ -10,7 +6,10 @@
 <jsp:setProperty name="usuario" property="*" />
 <jsp:setProperty name="rol" property="*" />
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="../includes/navbarAlbergue.jsp"/>
+<jsp:include page="../includes/sidebarAlbergue.jsp" />
+
+
 
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
@@ -23,67 +22,55 @@
 
         <title>Editar Perfil</title>
 
-
         <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
         <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+
         <!-- Canonical SEO -->
         <link rel="canonical" href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/">
 
-
-        <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-5DDHKGP');</script>
-        <!-- End Google Tag Manager -->
-
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com/">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
 
         <!-- Icons -->
-        <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
-        <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-        <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/fontawesome.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/flag-icons.css" />
 
         <!-- Core CSS -->
-        <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-        <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
-        <link rel="stylesheet" href="../../assets/css/demo.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
 
         <!-- Vendors CSS -->
-        <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/sweetalert2/sweetalert2.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/animate-css/animate.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/typography.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/animate-css/animate.css" />
 
         <!-- Page CSS -->
-
-        <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-faq.css" />
 
         <!-- Helpers -->
-        <script src="../../assets/vendor/js/helpers.js"></script>
-        <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-        <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
+        <!-- Template customizer & Theme config files -->
+        <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 
-        <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-        <script src="../../assets/js/config.js"></script>
 
     </head>
+
     <body>
 
 
@@ -92,7 +79,7 @@
         <!-- End Google Tag Manager (noscript) -->
 
         <!-- Layout wrapper -->
-        <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-wrapper layout-content-navbar" style="background-color: #fff1ef;">
             <div class="layout-container">
 
                 <div class="layout-page">
@@ -196,12 +183,12 @@
                                                                 <input type="text" id="formtabs-first-name" class="form-control" placeholder="Albergue Ejemplo" />
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-last-name">Alias</label>
-                                                                <input type="text" id="formtabs-last-name" class="form-control" placeholder="Caritas" />
+                                                                <label class="form-label" for="formtabs-alias">Alias</label>
+                                                                <input type="text" id="formtabs-alias" class="form-control" placeholder="Caritas" />
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-last-name">Nombre de Usuario</label>
-                                                                <input type="text" id="formtabs-last-name" class="form-control" placeholder="Caritas" />
+                                                                <label class="form-label" for="formtabs-username">Nombre de Usuario</label>
+                                                                <input type="text" id="formtabs-username" class="form-control" placeholder="Caritas" />
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-email">Correo electrónico</label>
@@ -211,8 +198,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="ecommerce-product-name">Distrito</label>
-                                                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
+                                                                <label class="form-label" for="formtabs-district">Distrito</label>
+                                                                <select id="formtabs-district" class="select2 form-select form-select-lg" data-allow-clear="true">
                                                                     <option value="AK">Ancón</option>
                                                                     <option value="HI">Ate</option>
                                                                     <option value="CA">Barranco</option>
@@ -268,14 +255,14 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="ecommerce-product-name">Año de Creación</label>
-                                                                <input class="form-control" type="date" value="2024-06-18" id="html5-date-input" />
+                                                                <label class="form-label" for="formtabs-creation-year">Año de Creación</label>
+                                                                <input class="form-control" type="date" value="2024-06-18" id="formtabs-creation-year" />
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="basic-icon-default-phone">Teléfono Contacto</label>
+                                                                <label class="form-label" for="formtabs-contact-phone">Teléfono Contacto</label>
                                                                 <div class="input-group input-group-merge">
-                                                                    <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bx-phone"></i></span>
-                                                                    <input type="text" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="999 999 999" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
+                                                                    <span id="formtabs-contact-phone-icon" class="input-group-text"><i class="bx bx-phone"></i></span>
+                                                                    <input type="text" id="formtabs-contact-phone" class="form-control phone-mask" placeholder="999 999 999" aria-label="999 999 999" aria-describedby="formtabs-contact-phone-icon" />
                                                                 </div>
                                                             </div>
 
@@ -288,11 +275,14 @@
 
                                                         <div class="mb-1">
                                                             <div class="card-body">
-                                                                <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                                                                <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-photo-upload">
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                        <label class="form-label mt-2" for="collapsible-address">Nueva Foto</label>
+
+                                                        <label class="form-label mt-2" for="new-photo-upload">Nueva Foto</label>
+                                                        <input class="form-control" type="file" id="new-photo-upload">
+
 
                                                         <div class="card mb-1">
                                                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -328,8 +318,8 @@
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="basic-icon-default-phone">Twitter</label>
                                                                 <div class="input-group input-group-merge">
-                                                                    <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bxl-twitter"></i></span>
-                                                                    <input type="text" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="https://twitter.com/abc" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
+                                                                    <span id="twitter-icon" class="input-group-text"><i class="bx bxl-twitter"></i></span>
+                                                                    <input type="text" id="twitter-link" class="form-control phone-mask" placeholder="https://twitter.com/abc" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
@@ -340,8 +330,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-google">YAPE</label>
-                                                                <input type="text" class="form-control" placeholder="999 999 999" />
+                                                                <label class="form-label" for="yape-contact">YAPE</label>
+                                                                <input type="text"  id="yape-contact" class="form-control" placeholder="999 999 999" />
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-instagram">Instagram</label>

@@ -2,9 +2,9 @@ package Beans;
 
 public class Solicitudes {
     private int solicitudId;
-    private int tipoSolicitudId;
-    private int solicitanteId;
-    private Integer solicitadoId;
+    private TiposSolicitudes tipoSolicitud;
+    private Usuarios solicitante;
+    private Usuarios solicitado;
     private String nombreAlbergue;
     private String nombreEncargado;
     private String apellidoEncargado;
@@ -12,7 +12,7 @@ public class Solicitudes {
     private String fechaSolicitud;
     private String estadoSolicitud;
     private String comentarioSolicitud;
-    private Integer mascotaId;
+    private Mascotas mascota;
     private double cantidad;
     private String fechaEntrega;
     private String puntoEntregaSeleccionado;
@@ -26,29 +26,17 @@ public class Solicitudes {
         this.solicitudId = solicitudId;
     }
 
-    public int getTipoSolicitudId() {
-        return tipoSolicitudId;
-    }
+    public TiposSolicitudes getTipoSolicitud() { return tipoSolicitud; }
 
-    public void setTipoSolicitudId(int tipoSolicitudId) {
-        this.tipoSolicitudId = tipoSolicitudId;
-    }
+    public void setTipoSolicitud(TiposSolicitudes tipoSolicitud) { this.tipoSolicitud = tipoSolicitud; }
 
-    public int getSolicitanteId() {
-        return solicitanteId;
-    }
+    public Usuarios getSolicitante() { return solicitante; }
 
-    public void setSolicitanteId(int solicitanteId) {
-        this.solicitanteId = solicitanteId;
-    }
+    public void setSolicitante(Usuarios solicitante) { this.solicitante = solicitante; }
 
-    public Integer getSolicitadoId() {
-        return solicitadoId;
-    }
+    public Usuarios getSolicitado() { return solicitado; }
 
-    public void setSolicitadoId(Integer solicitadoId) {
-        this.solicitadoId = solicitadoId;
-    }
+    public void setSolicitado(Usuarios solicitado) { this.solicitado = solicitado; }
 
     public String getNombreAlbergue() {
         return nombreAlbergue;
@@ -106,13 +94,9 @@ public class Solicitudes {
         this.comentarioSolicitud = comentarioSolicitud;
     }
 
-    public Integer getMascotaId() {
-        return mascotaId;
-    }
+    public Mascotas getMascota() { return mascota; }
 
-    public void setMascotaId(Integer mascotaId) {
-        this.mascotaId = mascotaId;
-    }
+    public void setMascota(Mascotas mascota) { this.mascota = mascota; }
 
     public double getCantidad() {
         return cantidad;
@@ -134,9 +118,7 @@ public class Solicitudes {
         return puntoEntregaSeleccionado;
     }
 
-    public void setPuntoEntregaSeleccionado(String puntoEntregaSeleccionado) {
-        this.puntoEntregaSeleccionado = puntoEntregaSeleccionado;
-    }
+    public void setPuntoEntregaSeleccionado(String puntoEntregaSeleccionado) { this.puntoEntregaSeleccionado = puntoEntregaSeleccionado; }
 
     public double getDineroDonado() {
         return dineroDonado;

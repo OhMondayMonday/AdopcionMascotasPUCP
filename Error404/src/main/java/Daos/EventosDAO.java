@@ -1,6 +1,8 @@
 package Daos;
 
 import Beans.Eventos;
+import Beans.LugaresEventos;
+import Beans.Usuarios;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,16 +21,25 @@ public class EventosDAO extends BaseDao {
             while (rs.next()) {
                 Eventos evento = new Eventos();
                 evento.setEventId(rs.getInt("event_id"));
-                evento.setUserId(rs.getInt("user_id"));
+
+                Beans.Usuarios usuario = new Beans.Usuarios();
+                usuario.setUserId(rs.getInt("user_id")); // Asegúrate de que "lugar_evento_id" es el nombre correcto de la columna
+                evento.setUsuario(usuario);
+
                 evento.setNombreEvento(rs.getString("nombre_evento"));
-                evento.setFechaEvento(rs.getString("fecha_evento"));
-                evento.setHoraEvento(rs.getString("hora_evento"));
-                evento.setLugarEventoId(rs.getInt("lugar_evento_id"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
+
+                // Crear y asignar el objeto LugaresEventos
+                Beans.LugaresEventos lugarEvento = new Beans.LugaresEventos();
+                lugarEvento.setLugarId(rs.getInt("lugar_evento_id")); // Asegúrate de que "lugar_evento_id" es el nombre correcto de la columna
+                evento.setLugarEvento(lugarEvento);
+
                 evento.setEntrada(rs.getString("entrada"));
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getString("fecha_creacion"));
+                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
                 eventos.add(evento);
             }
@@ -49,16 +60,24 @@ public class EventosDAO extends BaseDao {
             while (rs.next()) {
                 Eventos evento = new Eventos();
                 evento.setEventId(rs.getInt("event_id"));
-                evento.setUserId(rs.getInt("user_id"));
+
+                Usuarios usuario = new Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                evento.setUsuario(usuario);
+
                 evento.setNombreEvento(rs.getString("nombre_evento"));
-                evento.setFechaEvento(rs.getString("fecha_evento"));
-                evento.setHoraEvento(rs.getString("hora_evento"));
-                evento.setLugarEventoId(rs.getInt("lugar_evento_id"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
+
+                LugaresEventos lugaresEventos = new LugaresEventos();
+                lugaresEventos.setLugarId(rs.getInt("lugar_evento_id"));
+                evento.setLugarEvento(lugaresEventos);
+
                 evento.setEntrada(rs.getString("entrada"));
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getString("fecha_creacion"));
+                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
                 eventos.add(evento);
             }
@@ -75,16 +94,16 @@ public class EventosDAO extends BaseDao {
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setInt(1, evento.getEventId());
-            pstmt.setInt(2, evento.getUserId());
+            pstmt.setInt(2, evento.getUsuario().getUserId());
             pstmt.setString(3, evento.getNombreEvento());
-            pstmt.setString(4, evento.getFechaEvento());
-            pstmt.setString(5, evento.getHoraEvento());
-            pstmt.setInt(6, evento.getLugarEventoId());
+            pstmt.setDate(4, evento.getFechaEvento());
+            pstmt.setTime(5, evento.getHoraEvento());
+            pstmt.setInt(6, evento.getLugarEvento().getLugarId());
             pstmt.setString(7, evento.getEntrada());
             pstmt.setString(8, evento.getDescripcionEvento());
             pstmt.setString(9, evento.getArtistasProveedores());
             pstmt.setString(10, evento.getRazonEvento());
-            pstmt.setString(11, evento.getFechaCreacion());
+            pstmt.setTimestamp(11, evento.getFechaCreacion());
             pstmt.setString(12, evento.getEstadoEvento());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -98,9 +117,9 @@ public class EventosDAO extends BaseDao {
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setString(1, evento.getNombreEvento());
-            pstmt.setString(2, evento.getFechaEvento());
-            pstmt.setString(3, evento.getHoraEvento());
-            pstmt.setInt(4, evento.getLugarEventoId());
+            pstmt.setDate(2, evento.getFechaEvento());
+            pstmt.setTime(3, evento.getHoraEvento());
+            pstmt.setInt(4, evento.getLugarEvento().getLugarId());
             pstmt.setString(5, evento.getEntrada());
             pstmt.setString(6, evento.getDescripcionEvento());
             pstmt.setString(7, evento.getArtistasProveedores());
@@ -131,9 +150,9 @@ public class EventosDAO extends BaseDao {
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setString(1, evento.getNombreEvento());
-            pstmt.setString(2, evento.getFechaEvento());
-            pstmt.setString(3, evento.getHoraEvento());
-            pstmt.setInt(4, evento.getLugarEventoId());
+            pstmt.setDate(2, evento.getFechaEvento());
+            pstmt.setTime(3, evento.getHoraEvento());
+            pstmt.setInt(4, evento.getLugarEvento().getLugarId());
             pstmt.setString(5, evento.getEntrada());
             pstmt.setString(6, evento.getDescripcionEvento());
             pstmt.setString(7, evento.getArtistasProveedores());
@@ -171,16 +190,22 @@ public class EventosDAO extends BaseDao {
             while (rs.next()) {
                 Eventos evento = new Eventos();
                 evento.setEventId(rs.getInt("event_id"));
-                evento.setUserId(rs.getInt("user_id"));
+                Beans.Usuarios usuario = new Beans.Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                evento.setUsuario(usuario); // Asignar el objeto usuario al evento
                 evento.setNombreEvento(rs.getString("nombre_evento"));
-                evento.setFechaEvento(rs.getString("fecha_evento"));
-                evento.setHoraEvento(rs.getString("hora_evento"));
-                evento.setLugarEventoId(rs.getInt("lugar_evento_id"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
+
+                Beans.LugaresEventos lugarEvento = new Beans.LugaresEventos();
+                lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
+                evento.setLugarEvento(lugarEvento);
+
                 evento.setEntrada(rs.getString("entrada"));
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getString("fecha_creacion"));
+                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
                 eventos.add(evento);
             }
@@ -200,16 +225,24 @@ public class EventosDAO extends BaseDao {
             ResultSet rs = pstmt.executeQuery();
 
                 evento.setEventId(rs.getInt("event_id"));
-                evento.setUserId(rs.getInt("user_id"));
+
+                Usuarios usuario = new Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                evento.setUsuario(usuario);
+
                 evento.setNombreEvento(rs.getString("nombre_evento"));
-                evento.setFechaEvento(rs.getString("fecha_evento"));
-                evento.setHoraEvento(rs.getString("hora_evento"));
-                evento.setLugarEventoId(rs.getInt("lugar_evento_id"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
+
+                LugaresEventos lugarEvento = new LugaresEventos();
+                lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
+                evento.setLugarEvento(lugarEvento);
+
                 evento.setEntrada(rs.getString("entrada"));
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getString("fecha_creacion"));
+                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
 
         } catch (SQLException ex) {

@@ -1,10 +1,12 @@
 package Beans;
 
+import java.sql.Timestamp;
+
 public class InscripcionesEventos {
     private int inscripcionId;
-    private int eventId;
-    private int userId;
-    private String fechaInscripcion;
+    private Eventos evento;
+    private Usuarios usuario;
+    private Timestamp fechaInscripcion;
     private boolean activa;
 
     public int getInscripcionId() {
@@ -15,27 +17,19 @@ public class InscripcionesEventos {
         this.inscripcionId = inscripcionId;
     }
 
-    public int getEventId() {
-        return eventId;
-    }
+    public Eventos getEvento() { return evento; }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
+    public void setEvento(Eventos evento) { this.evento = evento; }
 
-    public int getUserId() {
-        return userId;
-    }
+    public Usuarios getUsuario() { return usuario; }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
 
-    public String getFechaInscripcion() {
+    public Timestamp getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(String fechaInscripcion) {
+    public void setFechaInscripcion(Timestamp fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 
@@ -46,5 +40,6 @@ public class InscripcionesEventos {
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
+
 }
 

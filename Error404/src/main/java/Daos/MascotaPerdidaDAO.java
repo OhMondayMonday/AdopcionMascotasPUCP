@@ -13,10 +13,10 @@ public class MascotaPerdidaDAO extends BaseDao {
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setInt(1, publicacion.getPublicacionId());
-            pstmt.setInt(2, publicacion.getMascotaId());
+            pstmt.setInt(1, publicacion.getPublicacion().getPublicacionId());
+            pstmt.setInt(2, publicacion.getMascota().getMascotaId());
             pstmt.setString(3, publicacion.getLugarPerdida());
-            pstmt.setDate(4, Date.valueOf(publicacion.getFechaPerdida()));
+            pstmt.setDate(4, new java.sql.Date(publicacion.getFechaPerdida().getTime()));
             pstmt.setString(5, publicacion.getDescripcionAdicional());
             pstmt.setBoolean(6, publicacion.isMascotaEncontrada());
             pstmt.executeUpdate();
