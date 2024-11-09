@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS iweb_proyecto ;
+USE iweb_proyecto;
+
+
 DROP TABLE IF EXISTS fotos;
 DROP TABLE IF EXISTS denuncias_maltrato_animal;
 DROP TABLE IF EXISTS hogares_temporales;
@@ -18,9 +22,8 @@ DROP TABLE IF EXISTS usuarios;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS distritos;
 DROP TABLE IF EXISTS zonas;
-
--- zonas distrito
-
+ 
+ -- zonas 
 CREATE TABLE zonas (
 	zona_id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_zona VARCHAR(12) NOT NULL
