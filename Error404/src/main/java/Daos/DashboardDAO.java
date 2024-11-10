@@ -2,6 +2,7 @@ package Daos;
 
 import Beans.Eventos;
 import Beans.LugaresEventos;
+import Beans.Logs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -116,4 +117,31 @@ public class DashboardDAO extends BaseDao {
         }
         return actualizaciones;
     }
+
+    // Dao para actualizaciones
+    public List<Logs> getLast4LogsByUserId(int userId) {
+        List<Logs> logs = new ArrayList<>();
+        String sql = "SELECT * FROM logs WHERE user_id = ? ORDER BY fecha DESC LIMIT 4";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Logs log = new Logs();
+                log.setLogId(resultSet.getInt("log_id"));
+                log.setDescripcion(resultSet.getString("descripcion"));
+                log.setFecha(resultSet.getTimestamp("fecha"));
+                log.setUserId(resultSet.getInt("user_id"));
+                logs.add(log);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return logs;
+    }
+
 }
