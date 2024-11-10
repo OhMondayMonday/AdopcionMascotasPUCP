@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="Daos.DashboardDAO" %>
 <%@ page import="Beans.Eventos" %>
+<%@ page import="Beans.Logs" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -12,7 +13,6 @@
     int eventosInscritos = dashboardDAO.obtenerEventosInscritos(userId);
     String actividadPrincipal = dashboardDAO.obtenerActividadPrincipal(userId);
     Eventos proximoEvento = dashboardDAO.obtenerProximoEvento(userId);
-    List<String> actualizaciones = dashboardDAO.obtenerUltimasActualizaciones(userId);
 %>
 
 <!DOCTYPE html>
@@ -327,10 +327,31 @@
                         <div class="card h-100">
                             <div class="card-header"><h5>Últimas actualizaciones:</h5></div>
                             <div class="card-body">
-                                <ul>
-                                    <% for (String actualizacion : actualizaciones) { %>
-                                    <li><%= actualizacion %></li>
-                                    <% } %>
+                                <ul class="timeline">
+                                    <%
+                                        List<Logs> actualizaciones = (List<Logs>) request.getAttribute("actualizaciones");
+
+                                        if (actualizaciones != null && !actualizaciones.isEmpty()) {
+                                            for (Logs log : actualizaciones) {
+                                    %>
+                                    <li class="timeline-item timeline-item-transparent">
+        <span class="timeline-point-wrapper">
+            <span class="timeline-point timeline-point-primary"></span>
+        </span>
+                                        <div class="timeline-event">
+                                            <div class="timeline-header mb-1">
+                                                <h6 class="mb-0"><%= log.getDescripcion() %></h6> <!-- Muestra la descripción del log -->
+                                                <small class="text-muted"><%= log.getFecha() %></small> <!-- Muestra la fecha del log -->
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                    <li class="timeline-end-indicator">
+                                        <i class="bx bx-check-circle"></i>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

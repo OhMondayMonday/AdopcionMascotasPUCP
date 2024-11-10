@@ -1,6 +1,7 @@
 package Controllers;
 
 import Beans.Eventos;
+import Beans.Logs;
 import Daos.DashboardDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,11 +13,11 @@ import java.util.List;
 
 @WebServlet("/DashboardServlet")
 public class DashboardServlet extends HttpServlet {
-    private DashboardDAO dashboardDAO;
+    private DashboardDAO dashboardDAO; // Solo necesitas una instancia de DashboardDAO
 
     @Override
     public void init() throws ServletException {
-        dashboardDAO = new DashboardDAO();
+        dashboardDAO = new DashboardDAO(); // Inicializa el DashboardDAO
     }
 
     @Override
@@ -48,7 +49,9 @@ public class DashboardServlet extends HttpServlet {
             int eventosInscritos = dashboardDAO.obtenerEventosInscritos(userId);
             String actividadPrincipal = dashboardDAO.obtenerActividadPrincipal(userId);
             Eventos proximoEvento = dashboardDAO.obtenerProximoEvento(userId);
-            List<String> actualizaciones = dashboardDAO.obtenerUltimasActualizaciones(userId);
+
+            // Obtener las últimas 4 actualizaciones del registro de logs para este usuario
+            List<Logs> actualizaciones = dashboardDAO.getLast4LogsByUserId(userId);
 
             // Pasar los datos al JSP
             request.setAttribute("animalesAyudados", animalesAyudados);
@@ -66,3 +69,5 @@ public class DashboardServlet extends HttpServlet {
         }
     }
 }
+
+
