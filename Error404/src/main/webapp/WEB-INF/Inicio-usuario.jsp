@@ -17,7 +17,7 @@
 
 <!DOCTYPE html>
 
-<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
 
 <head>
     <meta charset="utf-8" />
@@ -192,7 +192,7 @@
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="${pageContext.request.contextPath}/assets/img/perfil.jpg" alt class="w-px-40 h-auto rounded-circle">
+                                    <img class="w-px-40 h-auto rounded-circle" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&amp;w=826" alt="fotoperfil">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -201,7 +201,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="${pageContext.request.contextPath}/assets/img/perfil.jpg" alt class="w-px-40 h-auto rounded-circle">
+                                                    <img class="w-px-40 h-auto rounded-circle" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&amp;w=826" alt="fotoperfil">
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
@@ -334,10 +334,8 @@
                 </div>
             </div>
         </div>
-    </div>
-            <!-- Footer -->
-            <!-- Footer -->
-            <footer class="footer">
+
+        <footer class="footer">
                 <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
                     <div>
                         <a href="<%= request.getContextPath() %>/home" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
@@ -348,8 +346,9 @@
                         <a href="<%= request.getContextPath() %>/terminos" class="footer-link text-muted">Términos &amp; Condiciones</a>
                     </div>
                 </div>
-            </footer>
-            <!-- / Footer -->
+
+        </footer>
+
 
             <!-- / Layout page -->
         </div>
@@ -364,39 +363,33 @@
 
 
     </div>
+</div>
     <!-- / Layout wrapper -->
 
 
+    <!-- / Footer -->
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
-    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../../assets/vendor/js/bootstrap.js"></script>
-    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="../../assets/vendor/js/menu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
-    <!-- endbuild -->
+<!-- Vendors JS -->
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/moment/moment.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
-    <!-- Vendors JS -->
-    <script src="../../assets/vendor/libs/moment/moment.js"></script>
-    <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-    <script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<!-- Main JS -->
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
-    <!-- Main JS -->
-    <script src="../../assets/js/main.js"></script>
-
-
-    <!-- Page JS -->
-    <script src="../../assets/js/app-academy-dashboard.js"></script>
-
-
-    <!-- Page JS -->
-
-
+<!-- Page JS -->
+<script src="${pageContext.request.contextPath}/assets/js/app-academy-dashboard.js"></script>
 
 </body>
 
