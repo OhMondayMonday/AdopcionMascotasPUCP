@@ -31,7 +31,7 @@ public class PublicacionesDAO extends BaseDao {
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
+                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
                 tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
                 publicacion.setTipoPublicacion(tipoPublicacion);
@@ -247,7 +247,7 @@ public class PublicacionesDAO extends BaseDao {
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
+                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 TiposPublicaciones tipoPublicacion = new TiposPublicaciones();
                 tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
                 publicacion.setTipoPublicacion(tipoPublicacion);
@@ -283,7 +283,7 @@ public class PublicacionesDAO extends BaseDao {
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
+                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
                 tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
                 publicacion.setTipoPublicacion(tipoPublicacion);
@@ -319,7 +319,7 @@ public class PublicacionesDAO extends BaseDao {
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
+                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
                 tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
                 publicacion.setTipoPublicacion(tipoPublicacion);
@@ -363,7 +363,7 @@ public class PublicacionesDAO extends BaseDao {
                 publicacion.setTitulo(rs.getString("titulo"));
                 publicacion.setDescripcion(rs.getString("descripcion"));
                 publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getString("fecha_creacion"));
+                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
 
                 Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
                 tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));

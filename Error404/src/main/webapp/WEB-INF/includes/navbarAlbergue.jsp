@@ -1,7 +1,6 @@
 <!-- Incluye Bootstrap CSS y JavaScript en tu JSP -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<img src="<%= request.getContextPath() %>/assets/img/huella.jpg" alt="Logo" class="w-px-40 h-auto rounded-circle">
 
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
 
