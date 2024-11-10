@@ -303,9 +303,12 @@
                     <div class="col-xl-4">
                         <div class="card h-100">
                             <div class="card-header"><h5>Principal actividad</h5></div>
-                            <div class="card-body"><p><%= actividadPrincipal %></p></div>
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3"> <!-- Añadido padding con "p-3" -->
+                                <img class="img-fluid rounded" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt="fotoperfil">
+                            </div>
                         </div>
                     </div>
+
                     <div class="col-xl-4">
                         <div class="card h-100">
                             <div class="card-body text-center">
@@ -319,6 +322,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xl-4">
                         <div class="card h-100">
                             <div class="card-header"><h5>Últimas actualizaciones:</h5></div>
@@ -332,10 +336,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <footer class="footer">
+
+                <footer class="footer">
                 <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
                     <div>
                         <a href="<%= request.getContextPath() %>/home" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
