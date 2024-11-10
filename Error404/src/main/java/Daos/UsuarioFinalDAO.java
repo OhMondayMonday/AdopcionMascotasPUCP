@@ -72,7 +72,7 @@ public class UsuarioFinalDAO extends BaseDao {
             ps.setInt(8, usuario.getDistrito().getDistritoId());
             ps.setString(9, usuario.getEstadoCuenta()); // Estado inicial 'pendiente'
             ps.setInt(10, usuario.getRol().getRolId());
-            ps.setString(11, usuario.getFechaRegistro().toString());
+            ps.setTimestamp(11, usuario.getFechaRegistro());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {

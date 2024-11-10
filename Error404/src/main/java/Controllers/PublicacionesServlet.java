@@ -31,52 +31,25 @@ public class PublicacionesServlet extends HttpServlet {
             case "listar":
                 listarPublicaciones(request, response);
                 break;
-            case "detalles":
+            case "mostrar":
                 mostrarDetallesPublicacion(request, response);
-                break;
-            case "filtrar":
-                filtrarPublicaciones(request, response);
-                break;
-            default:
-                listarPublicaciones(request, response);
                 break;
         }
     }
 
     private void listarPublicaciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Publicaciones> publicaciones = publicacionesDAO.obtenerPublicaciones();
-        request.setAttribute("publicaciones", publicaciones);
-        request.getRequestDispatcher("/WEB-INF/ver-publicaciones-usuario.jsp").forward(request, response);
+        request.setAttribute("listaPublicaciones", publicaciones);
+        request.getRequestDispatcher("/html/dentro/ver-publicaciones-usuario.jsp").forward(request, response);
     }
 
     private void mostrarDetallesPublicacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Publicaciones publicacion = publicacionesDAO.obtenerDetallePublicacion(id);
+        Publicaciones publicacion = publicacionesDAO.obtenerDetallesPublicacion(id);
         request.setAttribute("publicacion", publicacion);
-        request.getRequestDispatcher("/WEB-INF/ver-miperfil-usuario-detalles.jsp").forward(request, response);
+        request.getRequestDispatcher("/html/dentro/ver-publicaciones-detalles-usuario.jsp").forward(request, response);
     }
 
-    private void filtrarPublicaciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String palabraClave = request.getParameter("palabraClave");
-        String tipo = request.getParameter("tipo");
-        String fechaInicio = request.getParameter("fechaInicio");
-        String fechaFin = request.getParameter("fechaFin");
-
-        // Aplica filtros según los parámetros recibidos
-        List<Publicaciones> publicaciones;
-        if (palabraClave != null && !palabraClave.isEmpty()) {
-            publicaciones = publicacionesDAO.obtenerPublicacionesPorPalabraClave(palabraClave);
-        } else if (tipo != null && !tipo.isEmpty()) {
-            publicaciones = publicacionesDAO.obtenerPublicacionesPorTipo(tipo);
-        } else if (fechaInicio != null && fechaFin != null) {
-            publicaciones = publicacionesDAO.obtenerPublicacionesPorRangoDeFechas(fechaInicio, fechaFin);
-        } else {
-            publicaciones = publicacionesDAO.obtenerPublicaciones();
-        }
-
-        request.setAttribute("publicaciones", publicaciones);
-        request.getRequestDispatcher("/WEB-INF/ver-publicaciones-usuario.jsp").forward(request, response);
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

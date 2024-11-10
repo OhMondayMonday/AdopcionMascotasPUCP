@@ -1,42 +1,61 @@
 package Daos;
 
-import Beans.Publicaciones;
-import Beans.Mascotas;
-import Beans.TiposDonaciones;
-import Beans.TiposPublicaciones;
-import Beans.PublicacionesAdopcion;
-import Beans.PublicacionesDonaciones;
+import Beans.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PublicacionesDAO extends BaseDao {
 
+
+    private Publicaciones fetchPublicacionDatos(ResultSet rs) throws SQLException {
+        Publicaciones publicacion = new Publicaciones();
+        publicacion.setPublicacionId(rs.getInt(1));
+
+        Usuarios usuario = new Usuarios();
+        usuario.setUserId(rs.getInt("u.user_id"));
+        usuario.setUsername(rs.getString("u.username"));
+        usuario.setNombre(rs.getString("u.nombre"));
+        usuario.setApellido(rs.getString("u.apellido"));
+        publicacion.setUsuario(usuario);
+
+        publicacion.setTitulo(rs.getString(3));
+        publicacion.setDescripcion(rs.getString(4));
+
+        Fotos foto = new Fotos();
+        foto.setFotoId(rs.getInt("f.foto_id"));
+        foto.setUrlFoto(rs.getString("f.url_foto"));
+        publicacion.setFoto(foto);
+
+        publicacion.setComentario(rs.getString(6));
+        publicacion.setFechaCreacion(rs.getTimestamp(7));
+
+        TiposPublicaciones tipoPublicacion = null;
+        if((rs.getInt("tp.tipo_publicacion_id")) != 0){
+            tipoPublicacion.setTipoPublicacionId(rs.getInt("tp.tipo_publicacion_id"));
+            tipoPublicacion.setTipoPublicacion(rs.getString("tp.tipo_publicacion"));
+            publicacion.setTipoPublicacion(tipoPublicacion);
+        }
+        publicacion.setEstadoPublicacion(rs.getString(9));
+
+        return publicacion;
+    }
+
     // Metodo para obtener todas las publicaciones
     public List<Publicaciones> obtenerPublicaciones() {
         List<Publicaciones> publicaciones = new ArrayList<>();
-        String query = "SELECT * FROM publicaciones";
+        String query = "SELECT * FROM publicaciones p\n" +
+                "INNER JOIN usuarios u ON p.user_id = u.user_id\n" +
+                "INNER JOIN fotos f ON f.foto_id = p.foto_id\n" +
+                "INNER JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id";
 
         try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                Publicaciones publicacion = new Publicaciones();
-                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                Beans.Usuarios usuario = new Beans.Usuarios();
-                usuario.setUserId(rs.getInt("user_id"));
-                publicacion.setUsuario(usuario);
-
-                publicacion.setTitulo(rs.getString("titulo"));
-                publicacion.setDescripcion(rs.getString("descripcion"));
-                publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
-                Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
-                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
-                publicacion.setTipoPublicacion(tipoPublicacion);
-
-                publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
+                Publicaciones publicacion = fetchPublicacionDatos(rs);
                 publicaciones.add(publicacion);
             }
         } catch (SQLException e) {
@@ -46,36 +65,22 @@ public class PublicacionesDAO extends BaseDao {
     }
 
     // Metodo en UsuarioFinalPublicDAO para obtener publicaciones de adopción
-    public List<PublicacionesAdopcion> obtenerPublicacionesAdopcion() {
-        List<PublicacionesAdopcion> publicaciones = new ArrayList<>();
-        String query = "SELECT * FROM publicaciones_adopcion INNER JOIN publicaciones ON publicaciones_adopcion.publicacion_id = publicaciones.publicacion_id";
+    public List<Publicaciones> obtenerPublicacionesAdopcion() {
+        List<Publicaciones> publicaciones = new ArrayList<>();
+        String query = "SELECT * FROM publicaciones p\n" +
+                "INNER JOIN usuarios u ON p.user_id = u.user_id\n" +
+                "INNER JOIN fotos f ON f.foto_id = p.foto_id\n" +
+                "INNER JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id\n" +
+                "WHERE tp.tipo_publicacion_id = 1";
 
         try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                PublicacionesAdopcion publicacionAdopcion = new PublicacionesAdopcion();
-
-                // Crear y asignar el objeto Publicaciones
-                Publicaciones publicacion = new Publicaciones();
-                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                // Asigna otros atributos a 'publicacion' si es necesario
-                publicacionAdopcion.setPublicacion(publicacion);
-
-                // Crear y asignar el objeto Mascotas
-                Mascotas mascota = new Mascotas();
-                mascota.setMascotaId(rs.getInt("mascota_id"));
-                // Asigna otros atributos a 'mascota' si es necesario
-                publicacionAdopcion.setMascota(mascota);
-
-                publicacionAdopcion.setLugarEncontrado(rs.getString("lugar_encontrado"));
-                publicacionAdopcion.setCondicionesAdopcion(rs.getString("condiciones_adopcion"));
-
-                // Agregar a la lista de publicaciones
-                publicaciones.add(publicacionAdopcion);
+                Publicaciones publicacion = fetchPublicacionDatos(rs);
+                publicaciones.add(publicacion);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -85,7 +90,8 @@ public class PublicacionesDAO extends BaseDao {
     // Metodo en UsuarioFinalPublicDAO para obtener publicaciones de donaciones
     public List<PublicacionesDonaciones> obtenerPublicacionesDonaciones() {
         List<PublicacionesDonaciones> publicaciones = new ArrayList<>();
-        String query = "SELECT * FROM publicaciones_donaciones INNER JOIN publicaciones ON publicaciones_donaciones.publicacion_id = publicaciones.publicacion_id";
+        String query = "SELECT * FROM publicaciones_donaciones pd\n" +
+                "INNER JOIN publicaciones p ON pd.publicacion_id = p.publicacion_id";
 
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query);
@@ -127,26 +133,32 @@ public class PublicacionesDAO extends BaseDao {
     }
 
     // Metodo para obtener todas las publicaciones visibles para el usuario final
-    public List<Object> obtenerTodasLasPublicacionesVisibles() {
-        List<Object> todasLasPublicaciones = new ArrayList<>();
+    public List<Publicaciones> obtenerPublicacionesVisibles() {
+        List<Publicaciones> publicaciones = new ArrayList<>();
+        String query = "SELECT * FROM publicaciones p\n" +
+                "INNER JOIN usuarios u ON p.user_id = u.user_id\n" +
+                "INNER JOIN fotos f ON f.foto_id = p.foto_id\n" +
+                "INNER JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id" +
+                "WHERE p.estado_publicacion = 'activa'";
 
-        // Agregar publicaciones generales
-        todasLasPublicaciones.addAll(obtenerPublicaciones());
+        try (Connection connection = this.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
 
-        // Agregar publicaciones de adopción
-        todasLasPublicaciones.addAll(obtenerPublicacionesAdopcion());
-
-        // Agregar publicaciones de donaciones
-        todasLasPublicaciones.addAll(obtenerPublicacionesDonaciones());
-
-        // Puedes agregar otros tipos de publicaciones si es necesario
-        return todasLasPublicaciones;
+            while (rs.next()) {
+                Publicaciones publicacion = fetchPublicacionDatos(rs);
+                publicaciones.add(publicacion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return publicaciones;
     }
 
 
     // Metodo para agregar una nueva publicación
     public void agregarPublicacion(Publicaciones publicacion) {
-        String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, comentario, tipo_publicacion_id, estado_publicacion) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, comentario, tipo_publicacion_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
@@ -155,7 +167,6 @@ public class PublicacionesDAO extends BaseDao {
             pstmt.setString(3, publicacion.getDescripcion());
             pstmt.setString(4, publicacion.getComentario());
             pstmt.setInt(5, publicacion.getTipoPublicacion().getTipoPublicacionId());
-            pstmt.setString(6, publicacion.getEstadoPublicacion());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -196,7 +207,7 @@ public class PublicacionesDAO extends BaseDao {
 
     // Metodo para actualizar una publicación con verificacion
     public void actualizarPublicacionVerificacion(Publicaciones publicacion, int userID) {
-        String query = "UPDATE publicaciones SET titulo = ?, descripcion = ?, comentario = ?, tipo_publicacion_id = ?, estado_publicacion = ? WHERE publicacion_id = ? AND user_id = ?";
+        String query = "UPDATE publicaciones SET titulo = ?, descripcion = ?, comentario = ?, tipo_publicacion_id = ? WHERE publicacion_id = ? AND user_id = ?";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
@@ -204,7 +215,6 @@ public class PublicacionesDAO extends BaseDao {
             pstmt.setString(2, publicacion.getDescripcion());
             pstmt.setString(3, publicacion.getComentario());
             pstmt.setInt(4, publicacion.getTipoPublicacion().getTipoPublicacionId());
-            pstmt.setString(5, publicacion.getEstadoPublicacion());
             pstmt.setInt(6, publicacion.getPublicacionId());
             pstmt.setInt(7, userID);
             pstmt.executeUpdate();
@@ -229,155 +239,21 @@ public class PublicacionesDAO extends BaseDao {
     }
 
     // Metodo para obtener detalles de una publicación por su ID
-    public Publicaciones obtenerDetallePublicacion(int publicacionId) {
-        Publicaciones publicacion = null;
+    public Publicaciones obtenerDetallesPublicacion(int publicacionId) {
         String query = "SELECT * FROM publicaciones WHERE publicacion_id = ?";
-
+        Publicaciones publicacion = null;
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setInt(1, publicacionId);
             ResultSet rs = pstmt.executeQuery();
 
-                publicacion = new Publicaciones();
-                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                Beans.Usuarios usuario = new Beans.Usuarios();
-                usuario.setUserId(rs.getInt("user_id"));
-                publicacion.setUsuario(usuario);
-                publicacion.setTitulo(rs.getString("titulo"));
-                publicacion.setDescripcion(rs.getString("descripcion"));
-                publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
-                TiposPublicaciones tipoPublicacion = new TiposPublicaciones();
-                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
-                publicacion.setTipoPublicacion(tipoPublicacion);
-                publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
+            publicacion = fetchPublicacionDatos(rs);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return publicacion;
     }
-
-    //FILTROS
-
-    // Metodo para obtener publicaciones filtradas por palabra clave
-    public List<Publicaciones> obtenerPublicacionesPorPalabraClave(String palabraClave) {
-        List<Publicaciones> publicaciones = new ArrayList<>();
-        String query = "SELECT * FROM publicaciones WHERE titulo LIKE ? OR descripcion LIKE ?";
-
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-
-            // Usar '%' para realizar una búsqueda parcial
-            pstmt.setString(1, "%" + palabraClave + "%");
-            pstmt.setString(2, "%" + palabraClave + "%");
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                Publicaciones publicacion = new Publicaciones();
-                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                Beans.Usuarios usuario = new Beans.Usuarios();
-                usuario.setUserId(rs.getInt("user_id"));
-                publicacion.setUsuario(usuario);
-                publicacion.setTitulo(rs.getString("titulo"));
-                publicacion.setDescripcion(rs.getString("descripcion"));
-                publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
-                Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
-                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
-                publicacion.setTipoPublicacion(tipoPublicacion);
-
-                publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
-                publicaciones.add(publicacion);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return publicaciones;
-    }
-
-
-    // Metodo para obtener publicaciones filtradas por rango de fechas
-    public List<Publicaciones> obtenerPublicacionesPorRangoDeFechas(String fechaInicio, String fechaFin) {
-        List<Publicaciones> publicaciones = new ArrayList<>();
-        String query = "SELECT * FROM publicaciones WHERE fecha_creacion BETWEEN ? AND ?";
-
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-
-            pstmt.setString(1, fechaInicio);
-            pstmt.setString(2, fechaFin);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                Publicaciones publicacion = new Publicaciones();
-                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                Beans.Usuarios usuario = new Beans.Usuarios();
-                usuario.setUserId(rs.getInt("user_id"));
-                publicacion.setUsuario(usuario);
-                publicacion.setTitulo(rs.getString("titulo"));
-                publicacion.setDescripcion(rs.getString("descripcion"));
-                publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
-                Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
-                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
-                publicacion.setTipoPublicacion(tipoPublicacion);
-
-                publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
-                publicaciones.add(publicacion);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return publicaciones;
-    }
-
-    // Método para obtener publicaciones filtradas por tipo de publicación
-    public List<Publicaciones> obtenerPublicacionesPorTipo(String tipo) {
-        List<Publicaciones> publicaciones = new ArrayList<>();
-        String query = "";
-
-        // Construir la consulta en función del tipo de publicación
-        if (tipo.equalsIgnoreCase("Adopción")) {
-            query = "SELECT * FROM publicaciones_adopcion INNER JOIN publicaciones ON publicaciones_adopcion.publicacion_id = publicaciones.publicacion_id";
-        } else if (tipo.equalsIgnoreCase("Donaciones activas")) {
-            query = "SELECT * FROM publicaciones_donaciones INNER JOIN publicaciones ON publicaciones_donaciones.publicacion_id = publicaciones.publicacion_id WHERE estado_publicacion = 'activa'";
-        } else if (tipo.equalsIgnoreCase("Donaciones de dinero")) {
-            query = "SELECT * FROM publicaciones_donaciones INNER JOIN publicaciones ON publicaciones_donaciones.publicacion_id = publicaciones.publicacion_id AND tipo_donacion_id = '1'"; // Supongamos que '1' es el ID para dinero
-        } else {
-            // Si es "Todas", obtenemos todas las publicaciones
-            query = "SELECT * FROM publicaciones";
-        }
-
-        try (Connection connection = getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
-
-            while (rs.next()) {
-                Publicaciones publicacion = new Publicaciones();
-                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
-                Beans.Usuarios usuario = new Beans.Usuarios();
-                usuario.setUserId(rs.getInt("user_id"));
-                publicacion.setUsuario(usuario);
-                publicacion.setTitulo(rs.getString("titulo"));
-                publicacion.setDescripcion(rs.getString("descripcion"));
-                publicacion.setComentario(rs.getString("comentario"));
-                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
-
-                Beans.TiposPublicaciones tipoPublicacion = new Beans.TiposPublicaciones();
-                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
-                publicacion.setTipoPublicacion(tipoPublicacion);
-
-                publicacion.setEstadoPublicacion(rs.getString("estado_publicacion"));
-                publicaciones.add(publicacion);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return publicaciones;
-    }
-
-
 
 }
