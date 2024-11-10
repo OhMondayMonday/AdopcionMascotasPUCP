@@ -1,5 +1,7 @@
 package Beans;
 
+import java.sql.Timestamp;
+
 public class Usuarios {
     private int userId;
     private String username;
@@ -14,7 +16,7 @@ public class Usuarios {
     private Distritos distrito;
     private String estadoCuenta;
     private Roles rol;
-    private String fechaRegistro;
+    private Timestamp fechaRegistro;
     private String nombreAlbergue;
     private int capacidadNuevosAnimales;
     private int animalesAlbergados;
@@ -123,13 +125,11 @@ public class Usuarios {
 
     public void setRol(Roles rol) { this.rol = rol; }
 
-    public String getFechaRegistro() {
+    public Timestamp getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
+    public void setFechaRegistro(Timestamp fechaRegistro) { this.fechaRegistro = fechaRegistro; }
 
     public String getNombreAlbergue() {
         return nombreAlbergue;
