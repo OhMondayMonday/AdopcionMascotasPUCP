@@ -1,5 +1,7 @@
 package Beans;
 
+import java.sql.Timestamp;
+
 public class Publicaciones {
     private int publicacionId;
     private Usuarios usuario;
@@ -7,7 +9,7 @@ public class Publicaciones {
     private String descripcion;
     private Fotos foto;
     private String comentario;
-    private String fechaCreacion;
+    private Timestamp fechaCreacion;
     private TiposPublicaciones tipoPublicacion;
     private String estadoPublicacion;
 
@@ -51,11 +53,11 @@ public class Publicaciones {
         this.comentario = comentario;
     }
 
-    public String getFechaCreacion() {
+    public Timestamp getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Timestamp fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 

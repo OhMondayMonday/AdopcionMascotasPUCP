@@ -35,13 +35,13 @@ public class AlbergueServlet extends HttpServlet {
                 mostrarFormularioEdicion(request, response);
                 break;
             case "editarPerfil":
-                request.getRequestDispatcher("/WEB-INF/albergue/albergue-editar-perfil.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/Albergue/albergue-editar-perfil.jsp").forward(request, response);
                 break;
             case "verMiPerfilSeguridad":
-                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-seguridad.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/Albergue/albergue-ver-miperfil-seguridad.jsp").forward(request, response);
                 break;
             case "verMiPerfilDetalles":
-                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/Albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
                 break;
 
 
@@ -66,7 +66,7 @@ public class AlbergueServlet extends HttpServlet {
     }
 
     private void listarAlbergue(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/albergue/albergue-editar-perfil.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Albergue/albergue-editar-perfil.jsp").forward(request, response);
     }
 
     private void mostrarFormularioEdicion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,7 +74,7 @@ public class AlbergueServlet extends HttpServlet {
         Usuarios albergue = albergueDAO.obtenerInformacionAlbergue(id);
 
         request.setAttribute("albergue", albergue);
-        request.getRequestDispatcher("/WEB-INF/albergue/albergue-editar-perfil.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Albergue/albergue-editar-perfil.jsp").forward(request, response);
     }
 
     private void registrarAlbergue(HttpServletRequest request, HttpServletResponse response) throws IOException {

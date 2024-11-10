@@ -1,5 +1,7 @@
 package Beans;
 
+import java.util.Date;
+
 public class Solicitudes {
     private int solicitudId;
     private TiposSolicitudes tipoSolicitud;
@@ -14,7 +16,7 @@ public class Solicitudes {
     private String comentarioSolicitud;
     private Mascotas mascota;
     private double cantidad;
-    private String fechaEntrega;
+    private Date fechaEntrega;
     private String puntoEntregaSeleccionado;
     private double dineroDonado;
 
@@ -106,11 +108,11 @@ public class Solicitudes {
         this.cantidad = cantidad;
     }
 
-    public String getFechaEntrega() {
+    public Date getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(String fechaEntrega) {
+    public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 
