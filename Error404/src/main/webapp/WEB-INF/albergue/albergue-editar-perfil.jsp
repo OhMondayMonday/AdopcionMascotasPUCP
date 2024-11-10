@@ -6,8 +6,7 @@
 <jsp:setProperty name="usuario" property="*" />
 <jsp:setProperty name="rol" property="*" />
 
-<jsp:include page="../includes/navbarAlbergue.jsp"/>
-<jsp:include page="../includes/sidebarAlbergue.jsp" />
+
 
 
 
@@ -81,9 +80,9 @@
         <!-- Layout wrapper -->
         <div class="layout-wrapper layout-content-navbar" style="background-color: #fff1ef;">
             <div class="layout-container">
-
+                <jsp:include page="../includes/sidebarAlbergue.jsp" />
                 <div class="layout-page">
-
+                    <jsp:include page="../includes/navbarAlbergue.jsp"/>
                     <div class="content-wrapper">
 
                         <!-- Content -->

@@ -45,7 +45,7 @@ public class UsuarioFinalDAO extends BaseDao {
                     roles.setRolId(rs.getInt("rol_id"));
                     usuario.setRol(roles);
 
-                    usuario.setFechaRegistro(rs.getString("fecha_registro"));
+                    usuario.setFechaRegistro(rs.getTimestamp("fecha_registro"));
                 }
             }
         } catch (SQLException e) {
@@ -72,7 +72,7 @@ public class UsuarioFinalDAO extends BaseDao {
             ps.setInt(8, usuario.getDistrito().getDistritoId());
             ps.setString(9, usuario.getEstadoCuenta()); // Estado inicial 'pendiente'
             ps.setInt(10, usuario.getRol().getRolId());
-            ps.setString(11, usuario.getFechaRegistro());
+            ps.setString(11, usuario.getFechaRegistro().toString());
 
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
