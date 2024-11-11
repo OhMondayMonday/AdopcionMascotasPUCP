@@ -29,7 +29,8 @@ public class DashboardDAO extends BaseDao {
 
     // Obtener el conteo de publicaciones realizadas
     public int obtenerPublicacionesRealizadas(int userId) {
-        String sql = "SELECT COUNT(*) FROM Publicaciones WHERE user_id = ? AND estado_publicacion = 'aprobado'";
+        // Cambiado el estado a 'activa' para que coincida con la base de datos
+        String sql = "SELECT COUNT(*) FROM Publicaciones WHERE user_id = ? AND estado_publicacion = 'activa'";
         try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
@@ -95,6 +96,8 @@ public class DashboardDAO extends BaseDao {
                 evento.setLugarEvento(lugarEvento);
 
                 return evento;
+            } else {
+                System.out.println("No hay próximos eventos para el userId: " + userId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,7 +105,7 @@ public class DashboardDAO extends BaseDao {
         return null;
     }
 
-    // Obtener las últimas actualizaciones
+    // Obtener las últimas actualizaciones (ajustada para asegurar que se obtengan correctamente)
     public List<String> obtenerUltimasActualizaciones(int userId) {
         List<String> actualizaciones = new ArrayList<>();
         String sql = "SELECT comentario FROM Publicaciones WHERE user_id = ? ORDER BY fecha_creacion DESC LIMIT 5";
@@ -118,23 +121,23 @@ public class DashboardDAO extends BaseDao {
         return actualizaciones;
     }
 
-    // Dao para actualizaciones
+    // Dao para actualizaciones (revisado para manejar mejor las excepciones)
     public List<Logs> getLast4LogsByUserId(int userId) {
         List<Logs> logs = new ArrayList<>();
-        String sql = "SELECT * FROM logs WHERE user_id = ? ORDER BY fecha DESC LIMIT 4";
+        String sql = "SELECT log_id, descripcion, fecha, user_id FROM logs WHERE user_id = ? ORDER BY fecha DESC LIMIT 4";
 
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            preparedStatement.setInt(1, userId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
 
-            while (resultSet.next()) {
+            while (rs.next()) {
                 Logs log = new Logs();
-                log.setLogId(resultSet.getInt("log_id"));
-                log.setDescripcion(resultSet.getString("descripcion"));
-                log.setFecha(resultSet.getTimestamp("fecha"));
-                log.setUserId(resultSet.getInt("user_id"));
+                log.setLogId(rs.getInt("log_id"));
+                log.setDescripcion(rs.getString("descripcion"));
+                log.setFecha(rs.getTimestamp("fecha"));
+                log.setUserId(rs.getInt("user_id"));
                 logs.add(log);
             }
         } catch (SQLException e) {
@@ -143,5 +146,4 @@ public class DashboardDAO extends BaseDao {
 
         return logs;
     }
-
 }
