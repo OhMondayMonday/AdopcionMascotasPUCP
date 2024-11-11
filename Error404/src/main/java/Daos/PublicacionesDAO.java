@@ -31,7 +31,7 @@ public class PublicacionesDAO extends BaseDao {
         publicacion.setComentario(rs.getString(6));
         publicacion.setFechaCreacion(rs.getTimestamp(7));
 
-        TiposPublicaciones tipoPublicacion = null;
+        TiposPublicaciones tipoPublicacion = new TiposPublicaciones();
         if((rs.getInt("tp.tipo_publicacion_id")) != 0){
             tipoPublicacion.setTipoPublicacionId(rs.getInt("tp.tipo_publicacion_id"));
             tipoPublicacion.setTipoPublicacion(rs.getString("tp.tipo_publicacion"));
@@ -62,6 +62,31 @@ public class PublicacionesDAO extends BaseDao {
             e.printStackTrace();
         }
         return publicaciones;
+    }
+
+    // Metodo para obtener detalles de una publicación por su ID
+    public Publicaciones obtenerDetallesPublicacion(int publicacionId) {
+        String query = "SELECT * FROM publicaciones p\n" +
+                "INNER JOIN usuarios u ON p.user_id = u.user_id\n" +
+                "INNER JOIN fotos f ON f.foto_id = p.foto_id\n" +
+                "INNER JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id\n" +
+                "WHERE p.publicacion_id = ?";
+        Publicaciones publicacion = new Publicaciones();
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+            pstmt.setInt(1, publicacionId);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()) {
+                    publicacion = fetchPublicacionDatos(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return publicacion;
     }
 
     // Metodo en UsuarioFinalPublicDAO para obtener publicaciones de adopción
@@ -238,22 +263,6 @@ public class PublicacionesDAO extends BaseDao {
         }
     }
 
-    // Metodo para obtener detalles de una publicación por su ID
-    public Publicaciones obtenerDetallesPublicacion(int publicacionId) {
-        String query = "SELECT * FROM publicaciones WHERE publicacion_id = ?";
-        Publicaciones publicacion = null;
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setInt(1, publicacionId);
-            ResultSet rs = pstmt.executeQuery();
-
-            publicacion = fetchPublicacionDatos(rs);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return publicacion;
-    }
 
 }
