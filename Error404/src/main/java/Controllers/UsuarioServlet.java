@@ -44,7 +44,8 @@ public class UsuarioServlet extends HttpServlet {
                 mostrarFormularioPostulacion(request, response);
                 break;
             default:
-                response.sendRedirect("/WEB-INF/Inicio-usuario.jsp"); // Redirigir a una página de inicio
+                String contextPath = request.getContextPath();
+                response.sendRedirect(contextPath + "/WEB-INF/Inicio-usuario.jsp");
                 break;
         }
     }
@@ -58,7 +59,8 @@ public class UsuarioServlet extends HttpServlet {
                 registrarSolicitud(request, response);
                 break;
             default:
-                response.sendRedirect("/WEB-INF/Inicio-usuario.jsp");
+                String contextPath = request.getContextPath();
+                response.sendRedirect(contextPath + "/WEB-INF/Inicio-usuario.jsp");
                 break;
         }
     }

@@ -1,51 +1,5 @@
 <!DOCTYPE html>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- =========================================================
-* Sneat - Bootstrap Dashboard PRO | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/item/sneat-dashboard-pro-bootstrap/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
-
-
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
   
@@ -92,10 +46,32 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" /> 
     <link rel="stylesheet" href="../../assets/vendor/libs/fullcalendar/fullcalendar.css" />
-<link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
-<link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
-<link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
-<link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css" />
+
+
+    <style>
+      .calendar-contenedor::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      .calendar-contenedor::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 10px;
+      }
+
+      .calendar-contenedor::-webkit-scrollbar-thumb {
+        background: rgba(67, 60, 81, 0.79);
+        border-radius: 10px;
+        border: 2px solid #f0f0f0;
+      }
+
+      .calendar-contenedor::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    </style>
 
     <!-- Page CSS -->
     
@@ -366,10 +342,7 @@
     <div class="col app-calendar-sidebar" id="app-calendar-sidebar">
       <div class="border-bottom p-4 my-sm-0 mb-3">
         <div class="d-grid">
-          <button class="btn btn-primary btn-toggle-sidebar" data-bs-toggle="offcanvas" data-bs-target="#addEventSidebar" aria-controls="addEventSidebar">
-            <i class="bx bx-plus me-1"></i>
-            <span class="align-middle">Agregar Evento</span>
-          </button>
+          <span class="align-middle fw-semibold"><i class="bx bx-calendar-heart fs-4"></i> Mi calendario personal</span>
         </div>
       </div>
       <div class="p-4">
@@ -419,7 +392,7 @@
     <!-- Calendar & Modal -->
     <div class="col app-calendar-content">
       <div class="card shadow-none border-0">
-        <div class="card-body pb-0">
+        <div class="card-body pb-0 calendar-contenedor" style="overflow-y: auto">
           <!-- FullCalendar -->
           <div id="calendar"></div>
         </div>
@@ -427,76 +400,6 @@
       <div class="app-overlay"></div>
       <!-- FullCalendar Offcanvas -->
       <div class="offcanvas offcanvas-end event-sidebar" tabindex="-1" id="addEventSidebar" aria-labelledby="addEventSidebarLabel">
-        <div class="offcanvas-header border-bottom">
-          <h5 class="offcanvas-titel mb-2" id="addEventSidebarLabel">Añadir Evento</h5>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <form class="event-form pt-0" id="eventForm" onsubmit="return false">
-            <div class="mb-3">
-              <label class="form-label" for="eventTitle">Título</label>
-              <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Título del Evento" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="eventLabel">Tipo</label>
-              <select class="select2 select-event-label form-select" id="eventLabel" name="eventLabel">
-                <option data-label="primary" value="Business" selected>Benéfico</option>
-                <option data-label="danger" value="Personal">Personal</option>
-                <option data-label="warning" value="Family">Donación</option>
-                <option data-label="success" value="Holiday">Celebración</option>
-                <option data-label="info" value="ETC">Otro</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="eventStartDate">Fecha Inicio</label>
-              <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" placeholder="Fecha de Inicio" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="eventEndDate">Fecha fin</label>
-              <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" placeholder="Fecha Fin" />
-            </div>
-            <div class="mb-3">
-              <label class="switch">
-                <input type="checkbox" class="switch-input allDay-switch" />
-                <span class="switch-toggle-slider">
-                  <span class="switch-on"></span>
-                  <span class="switch-off"></span>
-                </span>
-                <span class="switch-label">Todo el día</span>
-              </label>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="eventURL">Enlace del Evento</label>
-              <input type="url" class="form-control" id="eventURL" name="eventURL" placeholder="https://www.alianzaanimal.com/" />
-            </div>
-            <div class="mb-3 select2-primary">
-              <label class="form-label" for="eventGuests">Añadir Invitados</label>
-              <select class="select2 select-event-guests form-select" id="eventGuests" name="eventGuests" multiple>
-                <option data-avatar="1.png" value="Jane Foster">Adolfo Contreras</option>
-                <option data-avatar="3.png" value="Donna Frank">Cesar Acuña</option>
-                <option data-avatar="5.png" value="Gabrielle Robertson">Martin Vizcarra</option>
-                <option data-avatar="7.png" value="Lori Spears">Pedro Torres</option>
-                <option data-avatar="9.png" value="Sandy Vega">Adriana</option>
-                <option data-avatar="11.png" value="Cheryl May">Ernesto</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="eventLocation">Lugar</label>
-              <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Ingresa la ubicación" />
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="eventDescription">Descripción</label>
-              <textarea class="form-control" name="eventDescription" id="eventDescription" placeholder="Descripción del evento"></textarea>
-            </div>
-            <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
-              <div>
-                <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">Agregar</button>
-                <button type="reset" class="btn btn-label-secondary btn-cancel me-sm-0 me-1" data-bs-dismiss="offcanvas">Cancelar</button>
-              </div>
-              <div><button class="btn btn-label-danger btn-delete-event d-none">Eliminar</button></div>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
     <!-- /Calendar & Modal -->
@@ -583,5 +486,4 @@
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-calendar.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:04 GMT -->
 </html>
 
-<!-- beautify ignore:end -->
 
