@@ -9,7 +9,7 @@
 <%@ page import="Beans.Publicaciones" %>
 <jsp:useBean id="listaPublicaciones" type="java.util.ArrayList<Beans.Publicaciones>" scope="request"/>
 
-<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
 
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
@@ -35,7 +35,7 @@
   <!-- End Google Tag Manager -->
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+  <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -43,40 +43,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
 
   <!-- Icons -->
-  <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
-  <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-  <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/fontawesome.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/flag-icons.css" />
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="../../assets/css/demo.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
 
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/animate-css/animate.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/sweetalert2/sweetalert2.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/typography.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/animate-css/animate.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
   <!-- Page CSS -->
 
-  <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-faq.css" />
 
   <!-- Helpers -->
-  <script src="../../assets/vendor/js/helpers.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="../../assets/js/config.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 
-  <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
 </head>
 
 <body style="background-color: #d4e1ffa9;">
@@ -96,7 +96,7 @@
       <div class="app-brand demo px-3">
         <a href="javascript:void(0);" class="app-brand-link">
           <span class="app-brand-logo demo">
-            <img class = "h-px-50 tf-icon" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+            <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
           </span>
         </a>
 
@@ -359,8 +359,8 @@
                 <div class="container-fluid">
                   <div class="row gx-1 gy-4 justify-content-center m-0">
                     <%
-                        int i = 1;
-                        for (Publicaciones p : listaPublicaciones) {
+                      int i = 1;
+                      for (Publicaciones p : listaPublicaciones) {
                     %>
                     <!-- Card 1 -->
                     <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
@@ -372,7 +372,7 @@
                         </div>
                         <div class="card-body p-2 d-flex flex-column">
                           <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge bg-label-info"><%= p.getTipoPublicacion().getTipoPublicacion() %>></span>
+                            <span class="badge bg-label-info"><%= p.getTipoPublicacion().getTipoPublicacion() %></span>
                           </div>
                           <a class="h6" data-bs-toggle="modal" href="#evento<%=i%>" style="font-size: 0.875rem;"><%= p.getTitulo() %></a>
                           <p style="font-size: 0.75rem;"><%= p.getDescripcion() %></p>
@@ -492,28 +492,28 @@
       <!-- Core JS -->
       <!-- build:js assets/vendor/js/core.js -->
 
-      <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-      <script src="../../assets/vendor/libs/popper/popper.js"></script>
-      <script src="../../assets/vendor/js/bootstrap.js"></script>
-      <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-      <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-      <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-      <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-      <script src="../../assets/vendor/js/menu.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
       <!-- endbuild -->
 
       <!-- Vendors JS -->
 
-      <script src="../../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
 
       <!-- Main JS -->
-      <script src="../../assets/js/main.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
 
       <!-- Page JS -->
-      <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
       <script>
         // Inicializa flatpickr para el rango de fechas
         flatpickr("#dateRange", {
@@ -524,7 +524,7 @@
           }
         });
       </script>
-      <script src="../../assets/js/extended-ui-sweetalert2.js"></script>
+      <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
 
 
 </body>
