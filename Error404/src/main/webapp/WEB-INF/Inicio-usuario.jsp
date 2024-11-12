@@ -311,17 +311,46 @@
 
                     <div class="col-xl-4">
                         <div class="card h-100">
-                            <div class="card-body text-center">
-                                <h4>Próximo evento</h4>
+                            <div class="card-body">
+                                <h4 class="mb-2 pb-1">Próximo evento</h4>
                                 <% if (proximoEvento != null) { %>
-                                <p>Nombre: <%= proximoEvento.getNombreEvento() %></p>
-                                <p>Fecha: <%= proximoEvento.getFechaEvento() %></p>
+                                <p class="small">Sigue compartiendo con los demás por un bien animal</p>
+                                <div class="row mb-3">
+                                    <div class="col-6 d-flex align-items-center">
+                                        <div class="avatar flex-shrink-0 me-2">
+                            <span class="avatar-initial rounded bg-label-primary">
+                                <i class="bx bx-calendar-exclamation bx-sm"></i>
+                            </span>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0 text-nowrap"><%= proximoEvento.getFechaEvento() %></h6>
+                                            <small>Nuevo evento</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 d-flex align-items-center">
+                                        <div class="avatar flex-shrink-0 me-2">
+                            <span class="avatar-initial rounded bg-label-primary">
+                                <i class="bx bx-time-five bx-sm"></i>
+                            </span>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0 text-nowrap"><%= proximoEvento.getLugarEvento().getNombreLugar() %></h6>
+                                            <small>Lugar</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-primary w-100 mb-1">Participar en el evento</a>
+                                <div class="text-center">
+                                    <small>¿Deseas crear una nueva publicación?</small>
+                                </div>
+                                <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicación</a>
                                 <% } else { %>
                                 <p>No hay próximos eventos.</p>
                                 <% } %>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="col-xl-4">
                         <div class="card h-100">

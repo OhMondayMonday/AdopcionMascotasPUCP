@@ -1,5 +1,5 @@
 package Beans;
-
+import java.util.List;
 import java.sql.Timestamp;
 
 public class Usuarios {
