@@ -87,6 +87,8 @@ public class EventosDAO extends BaseDao {
         return eventos;
     }
 
+
+
     //Metodo para agregar Evento
     public void agregarEvento(Eventos evento) {
         String query = "INSERT INTO eventos (event_id, user_id, nombre_evento, fecha_evento, hora_evento, lugar_evento_id, entrada, descripcion_evento, artistas_proveedores, razon_evento, fecha_creacion, estado_evento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";

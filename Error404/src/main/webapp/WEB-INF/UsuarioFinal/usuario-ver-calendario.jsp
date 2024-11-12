@@ -1,3 +1,13 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.GsonBuilder" %>
+<%
+    // Configura Gson para formatear las fechas correctamente
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").create();
+
+    // Convierte la lista de eventos a JSON
+    String eventosJson = gson.toJson(request.getAttribute("eventos"));
+%>
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
@@ -85,7 +95,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/l10n/es.js"></script>
 
-
 </head>
 
 <body style="background-color: #d4e1ffa9;">
@@ -100,14 +109,14 @@
     <div class="layout-container">
 
         <!-- Sidebar -->
-
+        <jsp:include page="../includes/sidebarUF.jsp" />
         <!-- / Sidebar -->
 
         <!-- Layout container -->
         <div class="layout-page">
 
             <!-- Navbar -->
-
+            <jsp:include page="../includes/navbarUF.jsp" />
             <!-- / Navbar -->
 
             <!-- Content wrapper -->
@@ -229,6 +238,10 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
+
+<script type="text/javascript">
+    window.eventosData = <%= eventosJson %>;
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/l10n/es.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/locales/es.min.js"></script>
