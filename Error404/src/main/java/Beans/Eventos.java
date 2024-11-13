@@ -134,7 +134,7 @@ public class Eventos {
         calcularDuracion();
     }
 
-    public Time getDuracionEvento() {
+    public Duration getDuracionEvento() {
         return duracionEvento;
     }
 

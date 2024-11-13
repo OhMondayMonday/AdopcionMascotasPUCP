@@ -128,9 +128,8 @@ public class EventosDAO extends BaseDao {
             pstmt.setString(10, evento.getRazonEvento());
             pstmt.setTimestamp(11, evento.getFechaCreacion());
             pstmt.setString(12, evento.getEstadoEvento());
-            pstmt.setTime(13,evento.getDuracionEvento());
-            pstmt.setTime(3, Time.valueOf(evento.getHoraInicio())); // Conversión LocalTime a Time
-            pstmt.setTime(4, Time.valueOf(evento.getHoraFin())); // Conversión LocalTime a Time
+            pstmt.setTime(13, Time.valueOf(evento.getHoraInicio())); // Conversión LocalTime a Time
+            pstmt.setTime(14, Time.valueOf(evento.getHoraFin())); // Conversión LocalTime a Time
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
