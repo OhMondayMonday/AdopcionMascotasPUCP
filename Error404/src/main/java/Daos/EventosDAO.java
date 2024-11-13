@@ -7,6 +7,8 @@ import Beans.Usuarios;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalTime;
+import java.time.Duration;
 
 public class EventosDAO extends BaseDao {
 
@@ -41,8 +43,8 @@ public class EventosDAO extends BaseDao {
                 evento.setRazonEvento(rs.getString("razon_evento"));
                 evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
-                evento.setFechaFin(rs.getDate("fecha_fin"));
-                evento.setHoraFin(rs.getTime("hora_fin"));
+                evento.setHoraInicio(rs.getTime("hora_inicio").toLocalTime()); // Conversión Time a LocalTime
+                evento.setHoraFin(rs.getTime("hora_fin").toLocalTime()); // Conversión Time a LocalTime
                 eventos.add(evento);
             }
         } catch (SQLException ex) {
@@ -81,8 +83,6 @@ public class EventosDAO extends BaseDao {
                 evento.setRazonEvento(rs.getString("razon_evento"));
                 evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
-                evento.setFechaFin(rs.getDate("fecha_fin"));
-                evento.setHoraFin(rs.getTime("hora_fin"));
                 eventos.add(evento);
             }
         } catch (SQLException ex) {
@@ -128,6 +128,9 @@ public class EventosDAO extends BaseDao {
             pstmt.setString(10, evento.getRazonEvento());
             pstmt.setTimestamp(11, evento.getFechaCreacion());
             pstmt.setString(12, evento.getEstadoEvento());
+            pstmt.setTime(13,evento.getDuracionEvento());
+            pstmt.setTime(3, Time.valueOf(evento.getHoraInicio())); // Conversión LocalTime a Time
+            pstmt.setTime(4, Time.valueOf(evento.getHoraFin())); // Conversión LocalTime a Time
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -273,4 +276,47 @@ public class EventosDAO extends BaseDao {
         }
         return evento;
     }
+
+    // Método para inscribir a un usuario en un evento específico
+    public boolean inscribirUsuarioEvento(int userId, int eventoId) {
+        String sql = "INSERT INTO inscripciones_eventos (user_id, evento_id, fecha_inscripcion, activa) VALUES (?, ?, NOW(), 1)";
+
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, eventoId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Método para obtener todos los eventos a los que un usuario está inscrito
+    public List<Eventos> obtenerEventosUsuario(int userId) {
+        String sql = "SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.hora_inicio, e.hora_fin " +
+                "FROM eventos e " +
+                "JOIN inscripciones_eventos ie ON e.event_id = ie.evento_id " +
+                "WHERE ie.user_id = ? AND ie.activa = 1";
+
+        List<Eventos> eventosUsuario = new ArrayList<>();
+
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Eventos evento = new Eventos();
+                evento.setEventId(rs.getInt("event_id"));
+                evento.setNombreEvento(rs.getString("nombre_evento"));
+                evento.setHoraInicio(rs.getTime("hora_inicio").toLocalTime());
+                evento.setHoraFin(rs.getTime("hora_fin").toLocalTime());
+                eventosUsuario.add(evento);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return eventosUsuario;
+    }
+
+
 }
