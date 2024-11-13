@@ -327,6 +327,7 @@
 
                                 <h4 class="text-primary">Más detalles</h4>
                                 <% if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
+                                <jsp:useBean id="adopcion" type="Beans.PublicacionesMascotaPerdida" scope="request"/>
                                 <div class="d-flex flex-wrap">
                                     <div class="me-5">
                                         <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;">Claudio</span></p>
@@ -347,6 +348,9 @@
 
                                 </div>
                                 <% }%>
+                                <p class="mb-4 text-secondary position-absolute bottom-0" >
+                                    Fecha de Publicación: <%= publicacion.getFechaCreacion() %>
+                                </p>
 
                             </div>
                         </div>

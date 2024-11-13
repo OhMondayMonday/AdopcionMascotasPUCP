@@ -1,14 +1,14 @@
 package Beans;
 
 public class PublicacionesAdopcion {
-    private Publicaciones publicacion;
+    private int publicacion_id;
     private Mascotas mascota;
     private String lugarEncontrado;
     private String condicionesAdopcion;
 
-    public Publicaciones getPublicacion() { return publicacion; }
+    public int getPublicacion_id() { return publicacion_id; }
 
-    public void setPublicacion(Publicaciones publicacion) { this.publicacion = publicacion; }
+    public void setPublicacion_id(int publicacion_id) { this.publicacion_id = publicacion_id; }
 
     public Mascotas getMascota() { return mascota; }
 

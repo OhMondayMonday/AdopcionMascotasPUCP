@@ -7,23 +7,7 @@ import java.util.List;
 
 public class MascotaPerdidaDAO extends BaseDao {
 
-    // Metodo para agregar una nueva publicación de Mascota Perdida
-    public void agregarPublicacionMascotaPerdida(PublicacionesMascotaPerdida publicacion) {
-        String query = "INSERT INTO publicaciones_mascota_perdida (publicacion_id, mascota_id, lugar_perdida, fecha_perdida, descripcion_adicional, mascota_encontrada) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection connection = getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setInt(1, publicacion.getPublicacion().getPublicacionId());
-            pstmt.setInt(2, publicacion.getMascota().getMascotaId());
-            pstmt.setString(3, publicacion.getLugarPerdida());
-            pstmt.setDate(4, new java.sql.Date(publicacion.getFechaPerdida().getTime()));
-            pstmt.setString(5, publicacion.getDescripcionAdicional());
-            pstmt.setBoolean(6, publicacion.isMascotaEncontrada());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     // Metodo para descartar la publicación de Mascota Perdida
     public void descartarPublicacionMascotaPerdida(int publicacionId) {
