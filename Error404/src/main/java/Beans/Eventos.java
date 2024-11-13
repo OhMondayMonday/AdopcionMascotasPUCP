@@ -10,6 +10,8 @@ public class Eventos {
     private String nombreEvento;
     private Date fechaEvento;
     private Time horaEvento;
+    private Date fechaFin;
+    private Time horaFin;
     private Fotos foto;
     private LugaresEventos lugarEvento;
     private String entrada;
@@ -53,6 +55,22 @@ public class Eventos {
 
     public void setHoraEvento(Time horaEvento) {
         this.horaEvento = horaEvento;
+    }
+
+    public Time getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Time horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public Fotos getFoto() { return foto; }

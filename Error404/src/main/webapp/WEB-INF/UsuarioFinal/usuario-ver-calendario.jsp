@@ -2,11 +2,10 @@
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.GsonBuilder" %>
 <%
-    // Configura Gson para formatear las fechas correctamente
     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").create();
 
-    // Convierte la lista de eventos a JSON
-    String eventosJson = gson.toJson(request.getAttribute("eventos"));
+    String eventosInscritosJson = gson.toJson(request.getAttribute("eventosInscritos"));
+    String eventosNoInscritosJson = gson.toJson(request.getAttribute("eventosNoInscritos"));
 %>
 <!DOCTYPE html>
 
@@ -148,31 +147,19 @@
                                         <small class="text-small text-muted text-uppercase align-middle">Filtros</small>
                                     </div>
 
-                                    <div class="form-check mb-2 mx-4">
+                                    <div class="form-check form-check-info mb-2 mx-4">
                                         <input class="form-check-input select-all" type="checkbox" id="selectAll" data-value="all" checked>
                                         <label class="form-check-label" for="selectAll">Seleccionar todo</label>
                                     </div>
 
                                     <div class="app-calendar-events-filter mx-4">
-                                        <div class="form-check form-check-danger mb-2">
-                                            <input class="form-check-input input-filter" type="checkbox" id="select-personal" data-value="personal" checked>
-                                            <label class="form-check-label" for="select-personal">Personal</label>
-                                        </div>
                                         <div class="form-check mb-2">
                                             <input class="form-check-input input-filter" type="checkbox" id="select-business" data-value="business" checked>
-                                            <label class="form-check-label" for="select-business">Benéfico</label>
-                                        </div>
-                                        <div class="form-check form-check-warning mb-2">
-                                            <input class="form-check-input input-filter" type="checkbox" id="select-family" data-value="family" checked>
-                                            <label class="form-check-label" for="select-family">Donación</label>
+                                            <label class="form-check-label" for="select-business">No inscrito</label>
                                         </div>
                                         <div class="form-check form-check-success mb-2">
                                             <input class="form-check-input input-filter" type="checkbox" id="select-holiday" data-value="holiday" checked>
-                                            <label class="form-check-label" for="select-holiday">Celebración</label>
-                                        </div>
-                                        <div class="form-check form-check-info">
-                                            <input class="form-check-input input-filter" type="checkbox" id="select-etc" data-value="etc" checked>
-                                            <label class="form-check-label" for="select-etc">Otros</label>
+                                            <label class="form-check-label" for="select-holiday">Inscrito</label>
                                         </div>
                                     </div>
                                 </div>
@@ -240,7 +227,8 @@
 <!-- build:js assets/vendor/js/core.js -->
 
 <script type="text/javascript">
-    window.eventosData = <%= eventosJson %>;
+    window.eventosNoInscritos = <%= eventosNoInscritosJson %>;
+    window.eventosInscritos = <%= eventosInscritosJson %>;
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/l10n/es.js"></script>
