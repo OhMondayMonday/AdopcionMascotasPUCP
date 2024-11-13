@@ -394,7 +394,7 @@
                           <div class="modal-body">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             <div class="text-center mb-4">
-                              <img class="img-fluid mb-4" src="<%=p.getFoto().getUrlFoto()%>>" alt="Imagen de publicación <%=i%>" style="height: 200px; object-fit: cover;"/>
+                              <img class="img-fluid mb-4" src="<%=p.getFoto().getUrlFoto()%>" alt="Imagen de publicación <%=i%>" style="height: 200px; object-fit: cover;"/>
                               <h3 class="text-primary"><%=p.getTitulo()%></h3>
                               <span class="badge bg-label-info" style="font-size: 0.75rem;"><%=p.getTipoPublicacion().getTipoPublicacion()%></span>
                             </div>
@@ -431,23 +431,23 @@
                     <% } %>
                 </div>
               </div>
+                <%
+                  int paginaActual = (Integer) request.getAttribute("paginaActual");
+                  int cantidadDePaginas = (Integer) request.getAttribute("cantidadDePaginas");
+                  int paginaAnterior = (Integer) request.getAttribute("paginaAnterior");
+                  int paginaSiguiente = (Integer) request.getAttribute("paginaSiguiente");
+                %>
               <!-- Pagination -->
               <div class="card-footer d-flex justify-content-center">
                 <ul class="pagination m-0">
                   <li class="page-item disabled">
-                    <span class="page-link">Anterior</span>
+                    <button class="page-link" onclick="location.href='ver-publicaciones-usuario.jsp?pagina=<%=paginaAnterior%>'" <%= (paginaActual == 1) ? "disabled" : ""%>>Anterior</button>
                   </li>
                   <li class="page-item active">
-                    <span class="page-link">1</span>
+                    <span class="page-link"><%=paginaActual%></span>
                   </li>
                   <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Siguiente</a>
+                    <button class="page-link" onclick="location.href='ver-publicaciones-usuario.jsp?pagina=<%=paginaSiguiente%>'" <%= (paginaActual == cantidadDePaginas) ? "disabled" : ""%>>Siguiente</button>
                   </li>
                 </ul>
               </div>

@@ -41,6 +41,8 @@ public class EventosDAO extends BaseDao {
                 evento.setRazonEvento(rs.getString("razon_evento"));
                 evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
+                evento.setFechaFin(rs.getDate("fecha_fin"));
+                evento.setHoraFin(rs.getTime("hora_fin"));
                 eventos.add(evento);
             }
         } catch (SQLException ex) {
@@ -79,6 +81,8 @@ public class EventosDAO extends BaseDao {
                 evento.setRazonEvento(rs.getString("razon_evento"));
                 evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
+                evento.setFechaFin(rs.getDate("fecha_fin"));
+                evento.setHoraFin(rs.getTime("hora_fin"));
                 eventos.add(evento);
             }
         } catch (SQLException ex) {
@@ -87,7 +91,24 @@ public class EventosDAO extends BaseDao {
         return eventos;
     }
 
+    public boolean estaInscrito(int userId, int eventId) {
+        String sql = "SELECT COUNT(*) FROM inscripciones_eventos WHERE user_id = ? AND event_id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            stmt.setInt(1, userId);
+            stmt.setInt(2, eventId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     //Metodo para agregar Evento
     public void agregarEvento(Eventos evento) {

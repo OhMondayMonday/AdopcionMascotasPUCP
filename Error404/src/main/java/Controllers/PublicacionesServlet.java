@@ -1,6 +1,7 @@
 package Controllers;
 
 import Beans.Publicaciones;
+import Beans.PublicacionesAdopcion;
 import Daos.PublicacionesDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,7 +39,22 @@ public class PublicacionesServlet extends HttpServlet {
     }
 
     private void listarPublicaciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Publicaciones> publicaciones = publicacionesDAO.obtenerPublicaciones();
+        int pagina = 1;
+        int PublisPorPagina = 6;
+        if (request.getParameter("pagina") != null) {
+            pagina = Integer.parseInt(request.getParameter("pagina"));
+        }
+
+        int inicio = (pagina - 1) * PublisPorPagina;
+        int cantidadDePublis = publicacionesDAO.obtenerCantidadDePublicaciones();
+        int cantidadDePaginas = (int) Math.ceil(cantidadDePublis*1.0/PublisPorPagina);
+
+        request.setAttribute("cantidadDePaginas", cantidadDePaginas);
+        request.setAttribute("paginaActual", pagina);
+        request.setAttribute("paginaAnterior", (pagina > 1) ? pagina -1 : 1);
+        request.setAttribute("paginaSiguiente", (pagina < cantidadDePaginas) ? pagina + 1 : cantidadDePaginas);
+
+        List<Publicaciones> publicaciones = publicacionesDAO.obtenerPublicaciones(inicio);
         request.setAttribute("listaPublicaciones", publicaciones);
         request.getRequestDispatcher("/html/dentro/ver-publicaciones-usuario.jsp").forward(request, response);
     }
@@ -55,6 +71,18 @@ public class PublicacionesServlet extends HttpServlet {
             Publicaciones publicacion = publicacionesDAO.obtenerDetallesPublicacion(id);
             if(publicacion != null) {
                 request.setAttribute("publicacion", publicacion);
+                switch (publicacion.getTipoPublicacion().getTipoPublicacionId()){
+                    case 1:
+                        PublicacionesAdopcion publicacionAdopcion = publicacionesDAO.obtenerPublicacionAdopcion(id);
+                        request.setAttribute("adopcion", publicacionAdopcion);
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
                 request.getRequestDispatcher("/html/dentro/ver-publicaciones-detalles-usuario.jsp").forward(request, response);
             }else {
                 response.sendRedirect("PublicacionesServlet");

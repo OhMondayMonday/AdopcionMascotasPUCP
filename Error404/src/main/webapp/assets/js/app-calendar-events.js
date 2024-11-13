@@ -1,25 +1,64 @@
 "use strict";
 
-// Procesa los datos de eventos y asigna a window.events
-window.events = window.eventosData.map(evento => {
-    // Usa evento.fechaEvento directamente como un objeto Date
-    let start = new Date(evento.fechaEvento);
-    let end = new Date(start); // Clona la fecha de inicio
+function convertTo24HourFormat(time) {
+    let [timePart, modifier] = time.split(" ");
+    let [hours, minutes, seconds] = timePart.split(":").map(Number);
 
-    // Ajusta la fecha de fin si el evento dura un día
-    end.setDate(end.getDate() + 1); // Suma 1 día para la fecha de fin
+    if (modifier.toLowerCase() === "p. m." && hours < 12) {
+        hours += 12;
+    }
+    if (modifier.toLowerCase() === "a. m." && hours === 12) {
+        hours = 0;
+    }
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+let eventosInscritos = window.eventosInscritos.map(evento => {
+
+    let horaFin24Horas = convertTo24HourFormat(evento.horaFin);
+    let horaEvento24Horas = convertTo24HourFormat(evento.horaEvento);
+
+    let start = new Date(`${evento.fechaEvento.split("T")[0]}T${horaEvento24Horas}`);
+    let end = new Date(`${evento.fechaFin.split("T")[0]}T${horaFin24Horas}`);
+
+    console.log("Hora de Fin:" + start);
 
     return {
         id: evento.eventId,
         title: evento.nombreEvento,
-        start: start, // Fecha de inicio en el formato adecuado
-        end: end,     // Fecha de fin en el formato adecuado
+        start: start,
+        end: end,
         allDay: false,
         extendedProps: {
-            calendar: "Inscritos"
+            calendar: "Holiday"
         }
     };
 });
+
+let eventosNoInscritos = window.eventosNoInscritos.map(evento => {
+
+    let horaFin24Horas = convertTo24HourFormat(evento.horaFin);
+    let horaEvento24Horas = convertTo24HourFormat(evento.horaEvento);
+
+    let start = new Date(`${evento.fechaEvento.split("T")[0]}T${horaEvento24Horas}`);
+    let end = new Date(`${evento.fechaFin.split("T")[0]}T${horaFin24Horas}`);
+
+    console.log("Hora de Fin:" + start);
+
+    return {
+        id: evento.eventId,
+        title: evento.nombreEvento,
+        start: start,
+        end: end,
+        allDay: false,
+        extendedProps: {
+            calendar: "Business"
+        }
+    };
+});
+
+window.events = [...eventosInscritos, ...eventosNoInscritos];
 
 console.log("Eventos formateados para el calendario:", window.events);
 
