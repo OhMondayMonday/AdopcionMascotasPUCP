@@ -1,23 +1,20 @@
 package Daos;
 
 import Beans.Usuarios;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class AlbergueDAO extends BaseDao {
 
     // 1. Registrar Albergue
     public boolean registrarAlbergue(Usuarios albergue) {
-        String sql = "INSERT INTO usuario (username, contrasena, nombre, apellido, email, dni, direccion, distritoId, " +
-                "estadoCuenta, rolId, fechaRegistro, nombreAlbergue, capacidadNuevosAnimales, animalesAlbergados, " +
-                "anioCreacion, urlFacebook, urlInstagram, urlTwitter, puntoAcopio, direccionDonaciones, " +
-                "nombreContactoDonaciones, numeroContactoDonaciones, numeroYapePlin, codigoQr, zonaId) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+        String sql = "INSERT INTO usuarios (username, contraseña, nombre, apellido, email, DNI, direccion, distrito_id, " +
+                "estado_cuenta, rol_id, fecha_registro, nombre_albergue, capacidad_nuevos_animales, animales_albergados, " +
+                "anio_creacion, url_facebook, url_instagram, punto_acopio, direccion_donaciones, " +
+                "nombre_contacto_donaciones, numero_contacto_donaciones, numero_yape_plin, codigo_qr, zona_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -38,14 +35,13 @@ public class AlbergueDAO extends BaseDao {
             stmt.setInt(14, albergue.getAnioCreacion());
             stmt.setString(15, albergue.getUrlFacebook());
             stmt.setString(16, albergue.getUrlInstagram());
-            stmt.setString(17, albergue.getUrlTwitter());
-            stmt.setString(18, albergue.getPuntoAcopio());
-            stmt.setString(19, albergue.getDireccionDonaciones());
-            stmt.setString(20, albergue.getNombreContactoDonaciones());
-            stmt.setString(21, albergue.getNumeroContactoDonaciones());
-            stmt.setString(22, albergue.getNumeroYapePlin());
-            stmt.setBytes(23, albergue.getCodigoQr());
-            stmt.setInt(24, albergue.getZona().getZonaId());
+            stmt.setString(17, albergue.getPuntoAcopio());
+            stmt.setString(18, albergue.getDireccionDonaciones());
+            stmt.setString(19, albergue.getNombreContactoDonaciones());
+            stmt.setString(20, albergue.getNumeroContactoDonaciones());
+            stmt.setString(21, albergue.getNumeroYapePlin());
+            stmt.setBytes(22, albergue.getCodigoQr());
+            stmt.setInt(23, albergue.getZona().getZonaId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -56,22 +52,22 @@ public class AlbergueDAO extends BaseDao {
 
     // 2. Obtener Información del Albergue
     public Usuarios obtenerInformacionAlbergue(int albergueId) {
-        String sql = "SELECT userId, username, nombre, apellido, email, direccion, distritoId" +
-                "estadoCuenta, nombreAlbergue, capacidadNuevosAnimales, animalesAlbergados" +
-                "anioCreacion, urlFacebook, urlInstagram, urlTwitter, puntoAcopio, direccionDonaciones" +
-                "nombreContactoDonaciones, numeroContactoDonaciones, numeroYapePlin, zonaId " +
-                "FROM usuario WHERE userId = ? AND rolId = ?";
+        String sql = "SELECT user_id, username, nombre, apellido, email, direccion, distrito_id, " +
+                "estado_cuenta, nombre_albergue, capacidad_nuevos_animales, animales_albergados, " +
+                "anio_creacion, url_facebook, url_instagram, punto_acopio, direccion_donaciones, " +
+                "nombre_contacto_donaciones, numero_contacto_donaciones, numero_yape_plin, zona_id " +
+                "FROM usuarios WHERE user_id = ? AND rol_id = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, albergueId);
-            stmt.setInt(2, 2);
+            stmt.setInt(2, 3); // Suponiendo que el rolId de albergues es 3
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 Usuarios albergue = new Usuarios();
-                albergue.setUserId(rs.getInt("userId"));
+                albergue.setUserId(rs.getInt("user_id"));
                 albergue.setUsername(rs.getString("username"));
                 albergue.setNombre(rs.getString("nombre"));
                 albergue.setApellido(rs.getString("apellido"));
@@ -80,26 +76,25 @@ public class AlbergueDAO extends BaseDao {
 
                 // Crear y asignar el objeto Distritos
                 Beans.Distritos distrito = new Beans.Distritos();
-                distrito.setDistritoId(rs.getInt("distritoId"));
+                distrito.setDistritoId(rs.getInt("distrito_id"));
                 albergue.setDistrito(distrito);
 
-                albergue.setEstadoCuenta(rs.getString("estadoCuenta"));
-                albergue.setNombreAlbergue(rs.getString("nombreAlbergue"));
-                albergue.setCapacidadNuevosAnimales(rs.getInt("capacidadNuevosAnimales"));
-                albergue.setAnimalesAlbergados(rs.getInt("animalesAlbergados"));
-                albergue.setAnioCreacion(rs.getInt("anioCreacion"));
-                albergue.setUrlFacebook(rs.getString("urlFacebook"));
-                albergue.setUrlInstagram(rs.getString("urlInstagram"));
-                albergue.setUrlTwitter(rs.getString("urlTwitter"));
-                albergue.setPuntoAcopio(rs.getString("puntoAcopio"));
-                albergue.setDireccionDonaciones(rs.getString("direccionDonaciones"));
-                albergue.setNombreContactoDonaciones(rs.getString("nombreContactoDonaciones"));
-                albergue.setNumeroContactoDonaciones(rs.getString("numeroContactoDonaciones"));
-                albergue.setNumeroYapePlin(rs.getString("numeroYapePlin"));
+                albergue.setEstadoCuenta(rs.getString("estado_cuenta"));
+                albergue.setNombreAlbergue(rs.getString("nombre_albergue"));
+                albergue.setCapacidadNuevosAnimales(rs.getInt("capacidad_nuevos_animales"));
+                albergue.setAnimalesAlbergados(rs.getInt("animales_albergados"));
+                albergue.setAnioCreacion(rs.getInt("anio_creacion"));
+                albergue.setUrlFacebook(rs.getString("url_facebook"));
+                albergue.setUrlInstagram(rs.getString("url_instagram"));
+                albergue.setPuntoAcopio(rs.getString("punto_acopio"));
+                albergue.setDireccionDonaciones(rs.getString("direccion_donaciones"));
+                albergue.setNombreContactoDonaciones(rs.getString("nombre_contacto_donaciones"));
+                albergue.setNumeroContactoDonaciones(rs.getString("numero_contacto_donaciones"));
+                albergue.setNumeroYapePlin(rs.getString("numero_yape_plin"));
 
                 // Crear y asignar el objeto Zonas
                 Beans.Zonas zona = new Beans.Zonas();
-                zona.setZonaId(rs.getInt("zonaId"));
+                zona.setZonaId(rs.getInt("zona_id"));
                 albergue.setZona(zona);
 
                 return albergue;
@@ -113,7 +108,7 @@ public class AlbergueDAO extends BaseDao {
 
     // 3. Actualizar Información del Albergue
     public boolean actualizarInformacionAlbergue(Usuarios albergue) {
-        String sql = "UPDATE usuario SET nombre = ?, apellido = ?, email = ?, direccion = ?, distritoId = ?, capacidadNuevosAnimales = ?, animalesAlbergados = ?, urlFacebook = ?, urlInstagram = ?, urlTwitter = ?, puntoAcopio = ?, direccionDonaciones = ?, nombreContactoDonaciones = ?, numeroContactoDonaciones = ?, numeroYapePlin = ? WHERE userId = ? AND rolId = ?";
+        String sql = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, direccion = ?, distrito_id = ?, capacidad_nuevos_animales = ?, animales_albergados = ?, url_facebook = ?, url_instagram = ?, punto_acopio = ?, direccion_donaciones = ?, nombre_contacto_donaciones = ?, numero_contacto_donaciones = ?, numero_yape_plin = ? WHERE user_id = ? AND rol_id = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -127,14 +122,13 @@ public class AlbergueDAO extends BaseDao {
             stmt.setInt(7, albergue.getAnimalesAlbergados());
             stmt.setString(8, albergue.getUrlFacebook());
             stmt.setString(9, albergue.getUrlInstagram());
-            stmt.setString(10, albergue.getUrlTwitter());
-            stmt.setString(11, albergue.getPuntoAcopio());
-            stmt.setString(12, albergue.getDireccionDonaciones());
-            stmt.setString(13, albergue.getNombreContactoDonaciones());
-            stmt.setString(14, albergue.getNumeroContactoDonaciones());
-            stmt.setString(15, albergue.getNumeroYapePlin());
-            stmt.setInt(16, albergue.getUserId());
-            stmt.setInt(17, 2); // Suponiendo rolId de albergues es 3
+            stmt.setString(10, albergue.getPuntoAcopio());
+            stmt.setString(11, albergue.getDireccionDonaciones());
+            stmt.setString(12, albergue.getNombreContactoDonaciones());
+            stmt.setString(13, albergue.getNumeroContactoDonaciones());
+            stmt.setString(14, albergue.getNumeroYapePlin());
+            stmt.setInt(15, albergue.getUserId());
+            stmt.setInt(16, 3); // Suponiendo que el rolId de albergues es 3
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -145,13 +139,13 @@ public class AlbergueDAO extends BaseDao {
 
     // 4. Desactivar Cuenta del Albergue
     public boolean desactivarCuentaAlbergue(int albergueId) {
-        String sql = "UPDATE usuario SET estadoCuenta = 'inactivo' WHERE userId = ? AND rolId = ?";
+        String sql = "UPDATE usuarios SET estado_cuenta = 'eliminada' WHERE user_id = ? AND rol_id = ?";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, albergueId);
-            stmt.setInt(2, 3); // Suponiendo rolId de albergues es 3
+            stmt.setInt(2, 3); // Suponiendo que el rolId de albergues es 3
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -159,4 +153,3 @@ public class AlbergueDAO extends BaseDao {
         }
     }
 }
-

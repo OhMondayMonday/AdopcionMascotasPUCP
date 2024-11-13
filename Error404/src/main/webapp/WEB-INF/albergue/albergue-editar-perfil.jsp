@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
 <jsp:useBean id="rol" class="Beans.Roles" scope="request" />
@@ -7,11 +9,8 @@
 <jsp:setProperty name="rol" property="*" />
 
 
-
-
-
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
     <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
@@ -113,8 +112,8 @@
                                                         <img class="img-fluid rounded my-3" src="https://img.freepik.com/vector-gratis/fondo-bonito-cara-sonriente-animales-felices-decorativos_23-2147590101.jpg?t=st=1726640655~exp=1726644255~hmac=810a73c0148e1c4d1ecb3b4af4a0d1b18f8dfe3d48ec5d695b0282ec0570e8d0&w=826" height="120" width="120" alt="User avatar" />
 
                                                         <div class="user-info text-center">
-                                                            <h4 class="mt-3" style="color: #8a2a92cd;">Albergue Caritas</h4>
-                                                            <span class="badge bg-label-danger">Albergue</span>
+                                                            <h4 class="mt-3" style="color: #8a2a92cd;">${usuario.nombre}</h4>
+                                                            <span class="badge bg-label-danger">${rol.nombreRol}</span>
                                                         </div>
 
                                                     </div>
@@ -124,11 +123,11 @@
                                                     <ul class="list-unstyled">
                                                         <li class="mb-3">
                                                             <span class="fw-medium me-2">Nombre Completo:</span>
-                                                            <span>Albergue</span>
+                                                            <span>${usuario.nombre} ${usuario.apellido}</span>
                                                         </li>
                                                         <li class="mb-3">
                                                             <span class="fw-medium me-2">Nombre de Usuario:</span>
-                                                            <span>Caritas</span>
+                                                            <span>${usuario.username}</span>
                                                         </li>
                                                         <li class="mb-3">
                                                             <span class="fw-medium me-2 bold">Descripción:</span>
@@ -139,15 +138,15 @@
                                                         </li>
                                                         <li class="mb-3">
                                                             <span class="fw-medium me-2">Correo:</span>
-                                                            <span>caritas123@gmail.com</span>
+                                                            <span>${usuario.email}</span>
                                                         </li>
                                                         <li class="mb-3">
                                                             <span class="fw-medium me-2">Teléfono:</span>
-                                                            <span>999 999 999</span>
+                                                            <span>${usuario.numeroContactoDonaciones}</span>
                                                         </li>
                                                         <li class="mb-3">
                                                             <span class="fw-medium me-2">Fecha de Creación: </span>
-                                                            <span>17-02-2023</span>
+                                                            <span>${usuario.fechaRegistro}</span>
                                                         </li>
 
                                                     </ul>
@@ -179,71 +178,73 @@
                                                         <div class="row g-3">
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-first-name">Nombre Albergue</label>
-                                                                <input type="text" id="formtabs-first-name" class="form-control" placeholder="Albergue Ejemplo" />
+                                                                <input type="text" id="formtabs-first-name" name="nombreAlbergue" class="form-control" value="${usuario.nombreAlbergue}"
+                                                                       placeholder="Nombre de albergue" required/>
+
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-alias">Alias</label>
-                                                                <input type="text" id="formtabs-alias" class="form-control" placeholder="Caritas" />
+                                                                <input type="text" id="formtabs-alias" name="username" class="form-control" value="${usuario.nombreAlbergue}" placeholder="Alias"/>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-username">Nombre de Usuario</label>
-                                                                <input type="text" id="formtabs-username" class="form-control" placeholder="Caritas" />
+                                                                <label class="form-label" for="formtabs-username">Nombre de usuario</label>
+                                                                <input type="text" id="formtabs-username" name="nombre" class="form-control" value="${usuario.nombre}" placeholder="Nombre de usuario" required/>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-email">Correo electrónico</label>
-                                                                <div class="input-group input-group-merge">
-                                                                    <input type="text" id="formtabs-email" class="form-control" placeholder="alianzaanimal" aria-label="john.doe" aria-describedby="formtabs-email2" />
-                                                                    <span class="input-group-text" id="formtabs-email2">@ejemplo.com</span>
-                                                                </div>
+                                                                <label class="form-label" for="formtabs-email">Correo Electrónico</label>
+                                                                <input type="email" id="formtabs-email" name="email" class="form-control"
+                                                                       value="${usuario.email}" placeholder="usuario@ejemplo.com" required />
                                                             </div>
+
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-district">Distrito</label>
-                                                                <select id="formtabs-district" class="select2 form-select form-select-lg" data-allow-clear="true">
-                                                                    <option value="AK">Ancón</option>
-                                                                    <option value="HI">Ate</option>
-                                                                    <option value="CA">Barranco</option>
-                                                                    <option value="NV">Breña</option>
-                                                                    <option value="OR">Carabayllo</option>
-                                                                    <option value="WA">Chaclacayo</option>
-                                                                    <option value="AZ">Chorrillos</option>
-                                                                    <option value="CO">Cineguilla</option>
-                                                                    <option value="ID">Comas</option>
-                                                                    <option value="MT">El Agustino</option>
-                                                                    <option value="NE">Independencia</option>
-                                                                    <option value="NM">Jesús María</option>
-                                                                    <option value="ND">La Molina</option>
-                                                                    <option value="UT">La Victoria</option>
-                                                                    <option value="WY">Lima</option>
-                                                                    <option value="AL">Lince</option>
-                                                                    <option value="AR">Los Olivos</option>
-                                                                    <option value="IL">Lurigancho</option>
-                                                                    <option value="IA">Lurín</option>
-                                                                    <option value="KS">Magdalena del Mar</option>
-                                                                    <option value="KY">Miraflores</option>
-                                                                    <option value="LA">Pachacámac</option>
-                                                                    <option value="MN">Pucusana</option>
-                                                                    <option value="MS">Pueblo Libre</option>
-                                                                    <option value="MO">Puente Piedra</option>
-                                                                    <option value="OK">Punta Hermosa</option>
-                                                                    <option value="SD">Punta Negra</option>
-                                                                    <option value="TX">Rímac</option>
-                                                                    <option value="TN">San Bartolo</option>
-                                                                    <option value="WI">San Borja</option>
-                                                                    <option value="CT">San Isidro</option>
-                                                                    <option value="DE">San Juan de Lurigancho</option>
-                                                                    <option value="FL">San Juan de Miraflores</option>
-                                                                    <option value="GA">San Luis</option>
-                                                                    <option value="IN">San Martín de Porres</option>
-                                                                    <option value="ME">San Miguel</option>
-                                                                    <option value="MD">Santa Anita</option>
-                                                                    <option value="MA">Santa María del Mar</option>
-                                                                    <option value="MI">Santa Rosa</option>
-                                                                    <option value="NH">Santiago de Surco</option>
-                                                                    <option value="NJ">Surquillo</option>
-                                                                    <option value="NY">Villa El Salvador</option>
-                                                                    <option value="NC">Villa María del Triunfo</option>
+                                                                <select id="formtabs-district" name="distritoId" class="select2 form-select form-select-lg">
+                                                                    <option value="AK" ${usuario.distrito.nombreDistrito == 'Ancón' ? 'selected' : ''}>Ancón</option>
+                                                                    <option value="HI" ${usuario.distrito.nombreDistrito == 'Ate' ? 'selected' : ''}>Ate</option>
+                                                                    <option value="CA" ${usuario.distrito.nombreDistrito == 'Barranco' ? 'selected' : ''}>Barranco</option>
+                                                                    <option value="NV" ${usuario.distrito.nombreDistrito == 'Breña' ? 'selected' : ''}>Breña</option>
+                                                                    <option value="OR" ${usuario.distrito.nombreDistrito == 'Carabayllo' ? 'selected' : ''}>Carabayllo</option>
+                                                                    <option value="WA" ${usuario.distrito.nombreDistrito == 'Chaclacayo' ? 'selected' : ''}>Chaclacayo</option>
+                                                                    <option value="AZ" ${usuario.distrito.nombreDistrito == 'Chorrillos' ? 'selected' : ''}>Chorrillos</option>
+                                                                    <option value="CO" ${usuario.distrito.nombreDistrito == 'Cineguilla' ? 'selected' : ''}>Cineguilla</option>
+                                                                    <option value="ID" ${usuario.distrito.nombreDistrito == 'Comas' ? 'selected' : ''}>Comas</option>
+                                                                    <option value="MT" ${usuario.distrito.nombreDistrito == 'El Agustino' ? 'selected' : ''}>El Agustino</option>
+                                                                    <option value="NE" ${usuario.distrito.nombreDistrito == 'Independencia' ? 'selected' : ''}>Independencia</option>
+                                                                    <option value="NM" ${usuario.distrito.nombreDistrito == 'Jesús María' ? 'selected' : ''}>Jesús María</option>
+                                                                    <option value="ND" ${usuario.distrito.nombreDistrito == 'La Molina' ? 'selected' : ''}>La Molina</option>
+                                                                    <option value="UT" ${usuario.distrito.nombreDistrito == 'La Victoria' ? 'selected' : ''}>La Victoria</option>
+                                                                    <option value="WY" ${usuario.distrito.nombreDistrito == 'Lima' ? 'selected' : ''}>Lima</option>
+                                                                    <option value="AL" ${usuario.distrito.nombreDistrito == 'Lince' ? 'selected' : ''}>Lince</option>
+                                                                    <option value="AR" ${usuario.distrito.nombreDistrito == 'Los Olivos' ? 'selected' : ''}>Los Olivos</option>
+                                                                    <option value="IL" ${usuario.distrito.nombreDistrito == 'Lurigancho' ? 'selected' : ''}>Lurigancho</option>
+                                                                    <option value="IA" ${usuario.distrito.nombreDistrito == 'Lurín' ? 'selected' : ''}>Lurín</option>
+                                                                    <option value="KS" ${usuario.distrito.nombreDistrito == 'Magdalena del Mar' ? 'selected' : ''}>Magdalena del Mar</option>
+                                                                    <option value="KY" ${usuario.distrito.nombreDistrito == 'Miraflores' ? 'selected' : ''}>Miraflores</option>
+                                                                    <option value="LA" ${usuario.distrito.nombreDistrito == 'Pachacámac' ? 'selected' : ''}>Pachacámac</option>
+                                                                    <option value="MN" ${usuario.distrito.nombreDistrito == 'Pucusana' ? 'selected' : ''}>Pucusana</option>
+                                                                    <option value="MS" ${usuario.distrito.nombreDistrito == 'Pueblo Libre' ? 'selected' : ''}>Pueblo Libre</option>
+                                                                    <option value="MO" ${usuario.distrito.nombreDistrito == 'Puente Piedra' ? 'selected' : ''}>Puente Piedra</option>
+                                                                    <option value="OK" ${usuario.distrito.nombreDistrito == 'Punta Hermosa' ? 'selected' : ''}>Punta Hermosa</option>
+                                                                    <option value="SD" ${usuario.distrito.nombreDistrito == 'Punta Negra' ? 'selected' : ''}>Punta Negra</option>
+                                                                    <option value="TX" ${usuario.distrito.nombreDistrito == 'Rímac' ? 'selected' : ''}>Rímac</option>
+                                                                    <option value="TN" ${usuario.distrito.nombreDistrito == 'San Bartolo' ? 'selected' : ''}>San Bartolo</option>
+                                                                    <option value="WI" ${usuario.distrito.nombreDistrito == 'San Borja' ? 'selected' : ''}>San Borja</option>
+                                                                    <option value="CT" ${usuario.distrito.nombreDistrito == 'San Isidro' ? 'selected' : ''}>San Isidro</option>
+                                                                    <option value="DE" ${usuario.distrito.nombreDistrito == 'San Juan de Lurigancho' ? 'selected' : ''}>San Juan de Lurigancho</option>
+                                                                    <option value="FL" ${usuario.distrito.nombreDistrito == 'San Juan de Miraflores' ? 'selected' : ''}>San Juan de Miraflores</option>
+                                                                    <option value="GA" ${usuario.distrito.nombreDistrito == 'San Luis' ? 'selected' : ''}>San Luis</option>
+                                                                    <option value="IN" ${usuario.distrito.nombreDistrito == 'San Martín de Porres' ? 'selected' : ''}>San Martín de Porres</option>
+                                                                    <option value="ME" ${usuario.distrito.nombreDistrito == 'San Miguel' ? 'selected' : ''}>San Miguel</option>
+                                                                    <option value="MD" ${usuario.distrito.nombreDistrito == 'Santa Anita' ? 'selected' : ''}>Santa Anita</option>
+                                                                    <option value="MA" ${usuario.distrito.nombreDistrito == 'Santa María del Mar' ? 'selected' : ''}>Santa María del Mar</option>
+                                                                    <option value="MI" ${usuario.distrito.nombreDistrito == 'Santa Rosa' ? 'selected' : ''}>Santa Rosa</option>
+                                                                    <option value="NH" ${usuario.distrito.nombreDistrito == 'Santiago de Surco' ? 'selected' : ''}>Santiago de Surco</option>
+                                                                    <option value="NJ" ${usuario.distrito.nombreDistrito == 'Surquillo' ? 'selected' : ''}>Surquillo</option>
+                                                                    <option value="NY" ${usuario.distrito.nombreDistrito == 'Villa El Salvador' ? 'selected' : ''}>Villa El Salvador</option>
+                                                                    <option value="NC" ${usuario.distrito.nombreDistrito == 'Villa María del Triunfo' ? 'selected' : ''}>Villa María del Triunfo</option>
                                                                 </select>
                                                             </div>
+
                                                             <div class="col-md-6 select2-primary">
                                                                 <label class="form-label" for="formtabs-language">Idiomas</label>
                                                                 <select id="formtabs-language" class="select2 form-select" multiple>
@@ -255,19 +256,24 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-creation-year">Año de Creación</label>
-                                                                <input class="form-control" type="date" value="2024-06-18" id="formtabs-creation-year" />
+                                                                <input class="form-control" type="date" id="formtabs-creation-year" name="anioCreacion" value="${usuario.anioCreacion}" min="1900" max="2099" step="1" />
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-contact-phone">Teléfono Contacto</label>
                                                                 <div class="input-group input-group-merge">
                                                                     <span id="formtabs-contact-phone-icon" class="input-group-text"><i class="bx bx-phone"></i></span>
-                                                                    <input type="text" id="formtabs-contact-phone" class="form-control phone-mask" placeholder="999 999 999" aria-label="999 999 999" aria-describedby="formtabs-contact-phone-icon" />
+                                                                    <input type="text" id="formtabs-contact-phone" name="numeroContactoDonaciones" class="form-control"
+                                                                           placeholder="999999999" aria-label="999999999" aria-describedby="formtabs-contact-phone-icon"
+                                                                           required />
+
+
                                                                 </div>
                                                             </div>
 
+
                                                             <div class="col-md">
                                                                 <label class="form-label" for="collapsible-address">Dirección completa</label>
-                                                                <textarea name="collapsible-address" class="form-control" id="collapsible-address" rows="2" placeholder="Ingresa tu dirección"></textarea>
+                                                                <textarea id="collapsible-address" name="direccion" class="form-control" rows="2" placeholder="Ingresa tu dirección">${usuario.direccion}</textarea>
                                                             </div>
 
                                                         </div>
@@ -280,7 +286,7 @@
                                                         </div>
 
                                                         <label class="form-label mt-2" for="new-photo-upload">Nueva Foto</label>
-                                                        <input class="form-control" type="file" id="new-photo-upload">
+                                                        <input class="form-control" type="file" id="new-photo-upload" name="nuevaFoto" accept="image/*">
 
 
                                                         <div class="card mb-1">
@@ -303,10 +309,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="pt-4">
-
                                                             <button type="button" class="btn btn-success me-sm-3 me-1" id="confirm-text"><span style="font-weight: bold;">Confirmar</span></button>
                                                             <button class="btn btn-danger cancel-subscription me-sm-3 me-1">Cancelar</button>
                                                         </div>
+
                                                     </form>
 
                                                 </div>
@@ -315,38 +321,39 @@
                                                     <form>
                                                         <div class="row g-3">
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="basic-icon-default-phone">Twitter</label>
+                                                                <label class="form-label" for="twitter-link">Twitter</label>
                                                                 <div class="input-group input-group-merge">
                                                                     <span id="twitter-icon" class="input-group-text"><i class="bx bxl-twitter"></i></span>
-                                                                    <input type="text" id="twitter-link" class="form-control phone-mask" placeholder="https://twitter.com/abc" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
+                                                                    <input type="text" id="twitter-link" name="urlTwitter" class="form-control" placeholder="https://twitter.com/abc" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="basic-icon-default-phone">Facebook</label>
+                                                                <label class="form-label" for="facebook-link">Facebook</label>
                                                                 <div class="input-group input-group-merge">
-                                                                    <span id="basic-icon-default-phone2" class="input-group-text"><i class="bx bxl-facebook-circle"></i></span>
-                                                                    <input type="text" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="https://facebook.com/abc" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" />
+                                                                    <span id="facebook-icon" class="input-group-text"><i class="bx bxl-facebook-circle"></i></span>
+                                                                    <input type="url" id="facebook-link" name="urlFacebook" class="form-control" placeholder="https://facebook.com/abc" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="yape-contact">YAPE</label>
-                                                                <input type="text"  id="yape-contact" class="form-control" placeholder="999 999 999" />
+                                                                <input type="text" id="yape-contact" name="numeroYapePlin" class="form-control" placeholder="999 999 999" required/>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-instagram">Instagram</label>
-                                                                <input type="text" id="formtabs-instagram" class="form-control" placeholder="https://instagram.com/abc" />
+                                                                <label class="form-label" for="instagram-link">Instagram</label>
+                                                                <input type="url" id="instagram-link" name="urlInstagram" class="form-control" placeholder="https://instagram.com/abc" />
                                                             </div>
 
                                                         </div>
 
                                                         <div class="row align-items-center mt-4">
-                                                            <label class="form-label" for="formtabs-instagram">QR Yape</label>
+                                                            <label class="form-label" for="qr-yape">QR Yape</label>
                                                             <img style="width: 40%; height: auto;" src="https://i.ibb.co/FwZZ3Xy/qr33.png" alt="qr">
                                                             <div class="col-md-6">
-                                                                <label for="formFile" class="form-label">Subir Foto</label>
-                                                                <input class="form-control" type="file" id="formFile">
+                                                                <label for="qr-yape" class="form-label">Subir Foto</label>
+                                                                <input class="form-control" type="file" id="qr-yape" name="qrYapeFoto" accept="image/*" />
                                                             </div>
                                                         </div>
+
                                                     </form>
                                                 </div>
                                             </div>
@@ -367,40 +374,40 @@
         <!-- Core JS -->
         <!-- build:js assets/vendor/js/core.js -->
 
-        <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-        <script src="../../assets/vendor/libs/popper/popper.js"></script>
-        <script src="../../assets/vendor/js/bootstrap.js"></script>
-        <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-        <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-        <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-        <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-        <script src="../../assets/vendor/js/menu.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
         <!-- endbuild -->
 
         <!-- Vendors JS -->
 
-        <script src="../../assets/vendor/libs/quill/katex.js"></script>
-        <script src="../../assets/vendor/libs/quill/quill.js"></script>
-        <script src="../../assets/vendor/libs/select2/select2.js"></script>
-        <script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-        <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-        <script src="../../assets/vendor/libs/bloodhound/bloodhound.js"></script>
-        <script src="../../assets/vendor/libs/dropzone/dropzone.js"></script>
-        <script src="../../assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
-        <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-        <script src="../../assets/vendor/libs/tagify/tagify.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/quill.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/bloodhound/bloodhound.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.js"></script>
 
-        <script src="../../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
-        <script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
-        <script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-        <script src="../../assets/vendor/libs/select2/select2.js"></script>
-        <script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
-        <script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-        <script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
 
         <!-- Main JS -->
-        <script src="../../assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
         <script>
             function cambiarPagina() {
                 var select = document.getElementById("opciones");
@@ -416,15 +423,15 @@
 
         <!-- Page JS -->
 
-        <script src="../../assets/js/extended-ui-sweetalert2.js"></script>
-        <script src="../../assets/js/app-ecommerce-product-add.js"></script>
-        <script src="../../assets/js/forms-selects.js"></script>
-        <script src="../../assets/js/forms-tagify.js"></script>
-        <script src="../../assets/js/forms-typeahead.js"></script>
-        <script src="../../assets/js/modal-edit-user.js"></script>
-        <script src="../../assets/js/modal-enable-otp.js"></script>
-        <script src="../../assets/js/app-user-view.js"></script>
-        <script src="../../assets/js/app-user-view-security.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/modal-enable-otp.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -434,6 +441,56 @@
                 });
             });
         </script>
+
+        <script>
+            // Asegúrate de que el DOM esté cargado antes de ejecutar tu script
+            document.addEventListener('DOMContentLoaded', function() {
+                // Botón "Confirmar"
+                document.getElementById('confirm-text').addEventListener('click', function() {
+                    // Mostrar cuadro de diálogo de confirmación de SweetAlert2
+                    Swal.fire({
+                        title: "¿Estás seguro?",
+                        text: "Confirmarás los cambios hechos",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, confirmar",
+                        cancelButtonText: "Cancelar",
+                        customClass: {
+                            confirmButton: "btn btn-primary",
+                            cancelButton: "btn btn-label-secondary"
+                        },
+                        buttonsStyling: false
+                    }).then(function(result) {
+                        if (result.isConfirmed) {
+                            // Si el usuario confirma, envía el formulario
+                            document.querySelector('form').submit();
+                        }
+                    });
+                });
+
+                // Botón "Cancelar"
+                document.querySelector('.cancel-subscription').addEventListener('click', function() {
+                    // Redirige al usuario a otra página o cancela la acción
+                    window.location.href = "/ruta-de-cancelacion"; // Cambia esta ruta según tu necesidad
+                });
+            });
+        </script>
+
+        <script>
+            document.getElementById("formtabs-contact-phone").addEventListener("input", function() {
+                // Solo permite números y elimina cualquier carácter que no sea un número
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+
+        </script>
+
+        <script>
+            document.getElementById("yape-contact").addEventListener("input", function() {
+                // Solo permite números y elimina cualquier otro carácter
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        </script>
+
     </body>
 
 

@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue/albergue-crear-evento.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue/albergue-editar-perfil.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue/albergue-ver-miperfil-seguridad.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/coordinador/coordinador-editar-perfil.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/coordinador" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/ver-miperfil-usuario-detalles.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/ver-publicaciones.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views" />
