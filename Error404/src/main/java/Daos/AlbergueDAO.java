@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class AlbergueDAO extends BaseDao {
 
     // 1. Registrar Albergue
+    // Método de registro mejorado
     public boolean registrarAlbergue(Usuarios albergue) {
         String sql = "INSERT INTO usuarios (username, contraseña, nombre, apellido, email, DNI, direccion, distrito_id, " +
                 "estado_cuenta, rol_id, fecha_registro, nombre_albergue, capacidad_nuevos_animales, animales_albergados, " +
@@ -26,13 +27,19 @@ public class AlbergueDAO extends BaseDao {
             stmt.setString(5, albergue.getEmail());
             stmt.setString(6, albergue.getDni());
             stmt.setString(7, albergue.getDireccion());
-            stmt.setInt(8, albergue.getDistrito().getDistritoId());
-            stmt.setString(9, "pendiente"); // Estado inicial de la cuenta
+
+            if (albergue.getDistrito() != null) {
+                stmt.setInt(8, albergue.getDistrito().getDistritoId());
+            } else {
+                stmt.setNull(8, java.sql.Types.INTEGER);
+            }
+
+            stmt.setString(9, "pendiente"); // Estado inicial
             stmt.setInt(10, albergue.getRol().getRolId());
             stmt.setString(11, albergue.getNombreAlbergue());
             stmt.setInt(12, albergue.getCapacidadNuevosAnimales());
             stmt.setInt(13, albergue.getAnimalesAlbergados());
-            stmt.setInt(14, albergue.getAnioCreacion());
+            stmt.setDate(14, albergue.getAnioCreacion());
             stmt.setString(15, albergue.getUrlFacebook());
             stmt.setString(16, albergue.getUrlInstagram());
             stmt.setString(17, albergue.getPuntoAcopio());
@@ -41,7 +48,12 @@ public class AlbergueDAO extends BaseDao {
             stmt.setString(20, albergue.getNumeroContactoDonaciones());
             stmt.setString(21, albergue.getNumeroYapePlin());
             stmt.setBytes(22, albergue.getCodigoQr());
-            stmt.setInt(23, albergue.getZona().getZonaId());
+
+            if (albergue.getZona() != null) {
+                stmt.setInt(23, albergue.getZona().getZonaId());
+            } else {
+                stmt.setNull(23, java.sql.Types.INTEGER);
+            }
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -49,6 +61,7 @@ public class AlbergueDAO extends BaseDao {
             return false;
         }
     }
+
 
     // 2. Obtener Información del Albergue
     public Usuarios obtenerInformacionAlbergue(int albergueId) {
@@ -83,7 +96,7 @@ public class AlbergueDAO extends BaseDao {
                 albergue.setNombreAlbergue(rs.getString("nombre_albergue"));
                 albergue.setCapacidadNuevosAnimales(rs.getInt("capacidad_nuevos_animales"));
                 albergue.setAnimalesAlbergados(rs.getInt("animales_albergados"));
-                albergue.setAnioCreacion(rs.getInt("anio_creacion"));
+                albergue.setAnioCreacion(rs.getDate("anio_creacion"));
                 albergue.setUrlFacebook(rs.getString("url_facebook"));
                 albergue.setUrlInstagram(rs.getString("url_instagram"));
                 albergue.setPuntoAcopio(rs.getString("punto_acopio"));

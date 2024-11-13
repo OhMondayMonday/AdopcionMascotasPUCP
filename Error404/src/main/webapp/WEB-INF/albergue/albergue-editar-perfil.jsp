@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
-<jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
-<jsp:useBean id="rol" class="Beans.Roles" scope="request" />
-
-<jsp:setProperty name="usuario" property="*" />
-<jsp:setProperty name="rol" property="*" />
+<%-- <jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" /> --%>
+<%-- <jsp:useBean id="rol" class="Beans.Roles" scope="request" /> --%>
+<%-- <jsp:setProperty name="usuario" property="*" /> --%>
+<%-- <jsp:setProperty name="rol" property="*" /> --%>
 
 
 <!DOCTYPE html>
@@ -112,8 +109,8 @@
                                                         <img class="img-fluid rounded my-3" src="https://img.freepik.com/vector-gratis/fondo-bonito-cara-sonriente-animales-felices-decorativos_23-2147590101.jpg?t=st=1726640655~exp=1726644255~hmac=810a73c0148e1c4d1ecb3b4af4a0d1b18f8dfe3d48ec5d695b0282ec0570e8d0&w=826" height="120" width="120" alt="User avatar" />
 
                                                         <div class="user-info text-center">
-                                                            <h4 class="mt-3" style="color: #8a2a92cd;">${usuario.nombre}</h4>
-                                                            <span class="badge bg-label-danger">${rol.nombreRol}</span>
+                                                            <h4 class="mt-3" style="color: #8a2a92cd;">${usuario.nombreAlbergue}</h4>
+                                                            <span class="badge bg-label-danger">Albergue</span>
                                                         </div>
 
                                                     </div>
@@ -146,7 +143,7 @@
                                                         </li>
                                                         <li class="mb-3">
                                                             <span class="fw-medium me-2">Fecha de Creación: </span>
-                                                            <span>${usuario.fechaRegistro}</span>
+                                                            <span>${usuario.anioCreacion}</span>
                                                         </li>
 
                                                     </ul>
@@ -174,17 +171,18 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
-                                                    <form>
+                                                    <form id="miFormularioPersonal" action="${pageContext.request.contextPath}/albergue?action=actualizar" method="post">
+                                                        <!-- Campo oculto para enviar el ID del usuario -->
+                                                        <input type="hidden" name="id" value="${usuario.userId}" />
                                                         <div class="row g-3">
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-first-name">Nombre Albergue</label>
-                                                                <input type="text" id="formtabs-first-name" name="nombreAlbergue" class="form-control" value="${usuario.nombreAlbergue}"
-                                                                       placeholder="Nombre de albergue" required/>
-
+                                                                <input type="text" id="formtabs-first-name" name="nombreAlbergue" class="form-control" value="${usuario.nombreAlbergue}" placeholder="Nombre de albergue" required />
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-alias">Alias</label>
-                                                                <input type="text" id="formtabs-alias" name="username" class="form-control" value="${usuario.nombreAlbergue}" placeholder="Alias"/>
+                                                                <input type="text" id="formtabs-alias" name="username" class="form-control"
+                                                                       value="${usuario.username}" placeholder="Alias" required/>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-username">Nombre de usuario</label>
@@ -248,23 +246,26 @@
                                                             <div class="col-md-6 select2-primary">
                                                                 <label class="form-label" for="formtabs-language">Idiomas</label>
                                                                 <select id="formtabs-language" class="select2 form-select" multiple>
-                                                                    <option value="en" selected>Español</option>
-                                                                    <option value="fr" selected>Inglés</option>
-                                                                    <option value="de">Portugués</option>
-                                                                    <option value="pt">Francés</option>
+                                                                    <option value="es" selected>Español</option>
+                                                                    <option value="en" selected>Inglés</option>
+                                                                    <option value="pr">Portugués</option>
+                                                                    <option value="fr">Francés</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-creation-year">Año de Creación</label>
-                                                                <input class="form-control" type="date" id="formtabs-creation-year" name="anioCreacion" value="${usuario.anioCreacion}" min="1900" max="2099" step="1" />
+                                                                <input class="form-control" type="date" id="formtabs-creation-year" name="anioCreacion"
+                                                                       value="${usuario.anioCreacion}" min="1900-01-01" max="2099-12-31" required />
+
+
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-contact-phone">Teléfono Contacto</label>
                                                                 <div class="input-group input-group-merge">
                                                                     <span id="formtabs-contact-phone-icon" class="input-group-text"><i class="bx bx-phone"></i></span>
                                                                     <input type="text" id="formtabs-contact-phone" name="numeroContactoDonaciones" class="form-control"
-                                                                           placeholder="999999999" aria-label="999999999" aria-describedby="formtabs-contact-phone-icon"
-                                                                           required />
+                                                                           placeholder="999999999" pattern="\d{9}" title="Debe contener exactamente 9 números" maxlength="9" required />
+
 
 
                                                                 </div>
@@ -273,7 +274,8 @@
 
                                                             <div class="col-md">
                                                                 <label class="form-label" for="collapsible-address">Dirección completa</label>
-                                                                <textarea id="collapsible-address" name="direccion" class="form-control" rows="2" placeholder="Ingresa tu dirección">${usuario.direccion}</textarea>
+                                                                <textarea id="collapsible-address" name="direccion" class="form-control" rows="2"
+                                                                          placeholder="Ingresa tu dirección">${usuario.direccion}</textarea>
                                                             </div>
 
                                                         </div>
@@ -445,9 +447,10 @@
         <script>
             // Asegúrate de que el DOM esté cargado antes de ejecutar tu script
             document.addEventListener('DOMContentLoaded', function() {
+                console.log("Script cargado correctamente"); // Depuración
+
                 // Botón "Confirmar"
                 document.getElementById('confirm-text').addEventListener('click', function() {
-                    // Mostrar cuadro de diálogo de confirmación de SweetAlert2
                     Swal.fire({
                         title: "¿Estás seguro?",
                         text: "Confirmarás los cambios hechos",
@@ -462,18 +465,18 @@
                         buttonsStyling: false
                     }).then(function(result) {
                         if (result.isConfirmed) {
-                            // Si el usuario confirma, envía el formulario
-                            document.querySelector('form').submit();
+                            console.log("Formulario enviado"); // Verifica que este mensaje se muestre
+                            document.getElementById('miFormularioPersonal').submit();
                         }
                     });
                 });
 
                 // Botón "Cancelar"
                 document.querySelector('.cancel-subscription').addEventListener('click', function() {
-                    // Redirige al usuario a otra página o cancela la acción
-                    window.location.href = "/ruta-de-cancelacion"; // Cambia esta ruta según tu necesidad
+                    window.location.href = "/albergue-editar-perfil.jsp"; // Cambia esta ruta según tu necesidad
                 });
             });
+
         </script>
 
         <script>
