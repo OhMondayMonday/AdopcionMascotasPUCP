@@ -298,6 +298,16 @@ CREATE TABLE denuncias_maltrato_animal (
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
+-- Tabla de sesiones de usuario para registrar el tiempo empleado
+CREATE TABLE sesiones_usuarios (
+    sesion_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    inicio_sesion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fin_sesion TIMESTAMP,
+    duracion_sesion INT, -- Duración de la sesión en segundos o minutos
+    FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
+);
+
 
 
 -- Tabla de logs

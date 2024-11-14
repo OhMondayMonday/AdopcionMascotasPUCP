@@ -121,6 +121,42 @@ public class DashboardDAO extends BaseDao {
         return actualizaciones;
     }
 
+    public void registrarSesion(int userId) {
+        String sql = "INSERT INTO sesiones_usuarios (user_id) VALUES (?)";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void finalizarSesion(int sesionId) {
+        String sql = "UPDATE sesiones_usuarios SET fin_sesion = NOW(), " +
+                "duracion_sesion = TIMESTAMPDIFF(SECOND, inicio_sesion, NOW()) WHERE sesion_id = ?";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, sesionId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int obtenerTiempoTotalEmpleado(int userId) {
+        String sql = "SELECT SUM(duracion_sesion) FROM sesiones_usuarios WHERE user_id = ?";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
     // Dao para actualizaciones (revisado para manejar mejor las excepciones)
     public List<Logs> getLast4LogsByUserId(int userId) {
         List<Logs> logs = new ArrayList<>();
