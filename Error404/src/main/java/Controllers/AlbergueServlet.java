@@ -130,6 +130,7 @@ public class AlbergueServlet extends HttpServlet {
 
             // Actualizar en la base de datos
             if (albergueDAO.actualizarInformacionAlbergue(albergue)) {
+                // Redirigir a la vista de detalles
                 response.sendRedirect("albergue?action=verMiPerfilDetalles");
             } else {
                 response.getWriter().write("Error: No se pudo actualizar la información del albergue");
@@ -139,6 +140,7 @@ public class AlbergueServlet extends HttpServlet {
             response.getWriter().write("Error: ID no válido");
         }
     }
+
 
     private void desactivarAlbergue(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {

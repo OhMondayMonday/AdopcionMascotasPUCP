@@ -172,8 +172,7 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
                                                     <form id="miFormularioPersonal" action="${pageContext.request.contextPath}/albergue?action=actualizar" method="post">
-                                                        <!-- Campo oculto para enviar el ID del usuario -->
-                                                        <input type="hidden" name="id" value="${usuario.userId}" />
+                                                        <input type="hidden" name="id" value="${usuario.userId}">
                                                         <div class="row g-3">
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-first-name">Nombre Albergue</label>
@@ -446,32 +445,29 @@
 
         <script>
             // Asegúrate de que el DOM esté cargado antes de ejecutar tu script
-            document.addEventListener('DOMContentLoaded', function() {
-                console.log("Script cargado correctamente"); // Depuración
-
-                // Botón "Confirmar"
-                document.getElementById('confirm-text').addEventListener('click', function() {
-                    Swal.fire({
-                        title: "¿Estás seguro?",
-                        text: "Confirmarás los cambios hechos",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonText: "Sí, confirmar",
-                        cancelButtonText: "Cancelar",
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                            cancelButton: "btn btn-label-secondary"
-                        },
-                        buttonsStyling: false
-                    }).then(function(result) {
-                        if (result.isConfirmed) {
-                            console.log("Formulario enviado"); // Verifica que este mensaje se muestre
-                            document.getElementById('miFormularioPersonal').submit();
-                        }
-                    });
+            document.getElementById('confirm-text').addEventListener('click', function() {
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "Confirmarás los cambios hechos",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, confirmar",
+                    cancelButtonText: "Cancelar",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-label-secondary"
+                    },
+                    buttonsStyling: false
+                }).then(function(result) {
+                    if (result.isConfirmed) {
+                        console.log("Formulario enviado"); // Depuración
+                        document.getElementById('miFormularioPersonal').submit();
+                    }
                 });
 
-                // Botón "Cancelar"
+
+
+            // Botón "Cancelar"
                 document.querySelector('.cancel-subscription').addEventListener('click', function() {
                     window.location.href = "/albergue-editar-perfil.jsp"; // Cambia esta ruta según tu necesidad
                 });
