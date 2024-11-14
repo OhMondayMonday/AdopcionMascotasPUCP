@@ -5,6 +5,8 @@ import Beans.Usuarios;
 import Beans.Roles;
 import Beans.Mascotas;
 import Beans.Razas;
+import Beans.Fotos;
+import Beans.Distritos;
 import java.sql.*;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -16,33 +18,44 @@ public class MiHogarTemporalDAO extends BaseDao{
     public Usuarios obtenerDetallesUsuarioTemporal(int userId) {
         Usuarios usuario = null;
         String query = "SELECT u.username, u.email, u.estado_cuenta, r.nombre_rol AS rol, u.user_id AS id, " +
-                "u.numero_contacto_donaciones AS contacto, d.nombre_distrito AS distrito " +
+                "u.nombre, u.apellido, u.numero_contacto_donaciones AS contacto, d.nombre_distrito AS distrito, f.url_foto " +
                 "FROM usuarios u " +
                 "JOIN roles r ON u.rol_id = r.rol_id " +
                 "JOIN distritos d ON u.distrito_id = d.distrito_id " +
+                "JOIN fotos f ON u.foto_id = f.foto_id " +
                 "WHERE u.user_id = 1";
 
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setInt(1, userId);
+
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 usuario = new Usuarios();
-                usuario.setUserId(rs.getInt("user_id"));
+                usuario.setUserId(rs.getInt("id"));
                 usuario.setUsername(rs.getString("username"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setEstadoCuenta(rs.getString("estado_cuenta"));
+                usuario.setNombre(rs.getString("nombre")); // Asignar el nombre
+                usuario.setApellido(rs.getString("apellido")); // Asignar el apellido
+                usuario.setNumeroContactoDonaciones(rs.getString("contacto"));
 
                 // Crear un objeto Roles y asignarlo al usuario
                 Roles rol = new Roles();
-                rol.setNombreRol(rs.getString("nombre_rol"));
+                rol.setNombreRol(rs.getString("rol"));
                 usuario.setRol(rol); // Asignar el objeto Roles al usuario
 
-                // Variables locales para num_solicitudes y num_mascotas
-                int numSolicitudes = rs.getInt("num_solicitudes");
-                int numMascotas = rs.getInt("num_mascotas");
+                // Crear el objeto Foto y asignarlo al usuario si existe URL de foto
+                Fotos foto = new Fotos();
+                foto.setUrlFoto(rs.getString("url_foto")); // Asegúrate de que "url_foto" esté en tu consulta SQL
+                usuario.setFoto(foto); // Asignar el objeto Foto al usuario
+
+                // Crear y asignar el objeto Distrito
+                Distritos distrito = new Distritos();
+                distrito.setNombreDistrito(rs.getString("distrito"));
+                usuario.setDistrito(distrito);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,11 +90,11 @@ public class MiHogarTemporalDAO extends BaseDao{
     public List<Solicitudes> obtenerSolicitudesPorUsuario(int userId) {
         List<Solicitudes> solicitudes  = new ArrayList<>();
         String query = "SELECT m.mascota_id, m.nombre, m.descripcion, m.edad_aproximada, " +
-                "r.nombre_raza, m.genero, m.tamanio " +
+                "r.nombre_raza, m.genero, m.tamanio, s.fecha_solicitud " +
                 "FROM solicitudes s " +
                 "JOIN mascotas m ON s.mascota_id = m.mascota_id " +
                 "JOIN razas r ON m.raza_id = r.raza_id " +
-                "WHERE s.solicitante_id = 1 " +
+                "WHERE s.solicitante_id = ? " +
                 "ORDER BY s.fecha_solicitud DESC";
 
         try (Connection connection = getConnection();
