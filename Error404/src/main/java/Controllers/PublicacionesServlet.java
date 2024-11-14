@@ -1,8 +1,8 @@
 package Controllers;
 
-import Beans.Publicaciones;
-import Beans.PublicacionesAdopcion;
+import Beans.*;
 import Daos.PublicacionesDAO;
+import Daos.UsuarioFinalDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,6 +35,23 @@ public class PublicacionesServlet extends HttpServlet {
             case "mostrar":
                 mostrarDetallesPublicacion(request, response);
                 break;
+            case "agregar":
+                if (request.getParameter("user_id") != null) {
+                    String user_idString = request.getParameter("user_id");
+                    int user_id = 0;
+                    try {
+                        user_id = Integer.parseInt(user_idString);
+                    } catch (NumberFormatException e) {
+                        response.sendRedirect("PublicacionesServlet");
+                    }
+                    UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+                    Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+                    request.setAttribute("usuario", usuario);
+                    request.getRequestDispatcher("/html/dentro/crear-publicacion-usuariofinal-normal.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("PublicacionesServlet");
+                }
+
         }
     }
 
@@ -95,6 +112,44 @@ public class PublicacionesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Aquí puedes manejar el metodo POST para agregar o actualizar publicaciones
+        String action = request.getParameter("action") == null ? "listar" : request.getParameter("action");
+
+        PublicacionesDAO publicacionesDAO = new PublicacionesDAO();
+
+        Publicaciones publicacion = new Publicaciones();
+
+        Usuarios usuario = new Usuarios();
+        usuario.setUserId(Integer.parseInt(request.getParameter("user_id")));
+
+        publicacion.setUsuario(usuario);
+        publicacion.setTitulo(request.getParameter("titulo"));
+        publicacion.setDescripcion(request.getParameter("descripcion"));
+
+        Fotos foto = new Fotos();
+        foto.setFotoId(Integer.parseInt(request.getParameter("foto_id")));
+        publicacion.setFoto(foto);
+
+        if(request.getParameter("comentario") != null) {
+            publicacion.setComentario(request.getParameter("comentario"));
+        }
+
+        TiposPublicaciones tiposPublicacion = new TiposPublicaciones();
+        tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion_id")));
+        publicacion.setTipoPublicacion(tiposPublicacion);
+
+        if(request.getParameter("estado_publicacion") != null) {
+            publicacion.setEstadoPublicacion(request.getParameter("estado_publicacion"));
+        }
+
+        switch (action) {
+            case "guardar":
+                publicacionesDAO.agregarPublicacion(publicacion);
+
+                response.sendRedirect("PublicacionesServlet");
+                break;
+            case "actualizar":
+                break;
+        }
+
     }
 }

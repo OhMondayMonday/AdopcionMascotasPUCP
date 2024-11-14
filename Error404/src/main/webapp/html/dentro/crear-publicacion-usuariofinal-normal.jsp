@@ -1,23 +1,21 @@
 <%--
   Created by IntelliJ IDEA.
   User: Sebastian
-  Date: 10/11/2024
-  Time: 19:49
+  Date: 13/11/2024
+  Time: 10:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Beans.Publicaciones" %>
-<jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
-
-<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
+<jsp:useBean id="usuario" type="Beans.Usuarios" scope="request"/>
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
-<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
+<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-ecommerce-product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:07 GMT -->
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Detalles de la publicacion</title>
+    <title>Crear Nueva Publicación</title>
 
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -36,6 +34,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -47,6 +46,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
@@ -61,10 +61,23 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/typography.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/animate-css/animate.css" />
 
     <!-- Page CSS -->
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-faq.css" />
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
@@ -82,18 +95,17 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
-
+        <!-- Navbar -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
 
             <div class="app-brand demo px-3">
                 <a href="javascript:void(0);" class="app-brand-link">
-          <span class="app-brand-logo demo">
-            <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
-          </span>
+      <span class="app-brand-logo demo">
+        <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+      </span>
                 </a>
 
                 <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -183,9 +195,9 @@
 
                     <div class="w-75 align-items-center me-auto">
                         <div class="nav-item navbar-search-wrapper mb-0">
-              <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario / Publicaciones /</span> Detalles</p>
-            </span>
+          <span class="d-inline-block justify-content-center">
+          <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Publicaciones / Crear Publicación /</span> Normal</p>
+        </span>
                         </div>
                     </div>
 
@@ -193,6 +205,7 @@
 
                         <!-- Notification -->
                         <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+
                         <!--/ Notification -->
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -271,7 +284,6 @@
                         </li>
                         <!--/ User -->
 
-
                     </ul>
                 </div>
 
@@ -285,80 +297,90 @@
 
             </nav>
 
-
-            <!-- Content wrapper -->
             <div class="content-wrapper">
 
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
 
-                    <!-- /Select2 -->
+                    <div class="app-ecommerce">
+                        <form method="post" action="PublicacionesServlet?action=guardar">
+                        <!-- Add Product -->
+                        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
-                    <div class="card g-3 mt-2">
-                        <div class="card-body row g-3">
-                            <div class="col-lg-7">
-                                <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
-                                    <div class="me-1">
-                                        <h2 class="mb-2 text-black"><%=publicacion.getTitulo()%></h2>
+                            <div class="d-flex flex-column justify-content-center">
+                                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+                                <p class="text-muted">Rellena los campos abajo</p>
+                            </div>
+
+                            <div class="d-flex align-content-center flex-wrap gap-3">
+                                <button id="publish-button" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                                <button class="btn btn-danger cancel-subscription">Descartar</button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <!-- First column-->
+                            <div class="col-12 col-lg-6">
+                                <!-- Product Information -->
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h5 class="card-tile mb-0" style="color: #3318ca;">Publicación</h5>
                                     </div>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge bg-label-info"><%=publicacion.getTipoPublicacion().getTipoPublicacion()%></span>
-                                        <i class='bx bx-share-alt bx-sm mx-4 cursor-pointer'></i>
-                                        <i class='bx bx-bookmarks bx-sm cursor-pointer'></i>
-                                    </div>
-                                </div>
-                                <div class="card academy-content shadow-none border">
-                                    <div class="p-2">
-                                        <div class="cursor-pointer">
-                                            <img src="<%=publicacion.getFoto().getUrlFoto()%>" class="w-100" alt="foto">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="titulo" >Titulo</label>
+                                            <input type="text" class="form-control" id="titulo" placeholder="Título de la publicación">
                                         </div>
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <label class="form-label" >Tipo</label>
+                                                <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
+                                                    <option value="" disabled selected>Elija el tipo de publicación</option>
+                                                    <option value="" selected>Normal</option>
+                                                    <option value="crear-publicacion-usuariofinal-mascotaperdida.jsp">Mascota Perdida</option>
+                                                    <option value="crear-publicacion-usuariofinal-denunciamaltrato.jsp">Denuncia por Maltrato Animal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Description -->
+                                        <div>
+                                            <label class="form-label" for="descripcion">Descripción <span class="text-muted"></span></label>
+                                            <textarea class="form-control" id="descripcion" rows="7">
+                                            </textarea>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-lg-5">
-                                <h4 class="text-primary mt-2">Descripción</h4>
-                                <p class="mb-4 text-dark">
-                                    <%= publicacion.getDescripcion() %>
-                                </p>
-
-                                <!-- Para más párrafos -->
-
-                                <h4 class="text-primary">Más detalles</h4>
-                                <% if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
-                                <div class="d-flex flex-wrap">
-                                    <div class="me-5">
-                                        <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;">Claudio</span></p>
-                                        <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;">Labrador Retriever</span></p>
+                            <!-- /Second column -->
+                            <div class="col-12 col-lg-6">
+                                <!-- Media -->
+                                <div class="card mb-1">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
+                                        <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
                                     </div>
-                                    <div>
-                                        <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;">6 años</span></p>
-                                        <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;">Macho</span></p>
+                                    <div class="card-body">
+                                        <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                                            <div class="dz-message needsclick my-3">
+                                                <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
+                                                <p class="text-muted fs-4 note needsclick my-0">o</p>
+                                                <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
+
+                                            </div>
+                                            <div class="fallback">
+                                                <input name="file" type="image" accept="image/*"/>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="justify-content-around mt-4 d-flex">
-                                        <a href="javascript:void(0)" class="btn btn-warning">Quiero adoptar</a>
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet?action=listar" class="btn btn-primary">Ir a publicaciones</a>
-
-                                    </div>
-
-                                </div>
-                                <% }%>
-                                <p class="mb-4 text-secondary position-absolute bottom-0" >
-                                    Fecha de Publicación: <%= publicacion.getFechaCreacion() %>
-                                </p>
-
                             </div>
                         </div>
+                        </form>
                     </div>
-
-
-
-                    <div class="content-backdrop fade"></div>
                 </div>
+
                 <!-- Content -->
 
                 <!-- Footer -->
@@ -376,23 +398,75 @@
                     </div>
                 </footer>
                 <!-- / Footer -->
-                <!-- Content wrapper -->
             </div>
 
-            <!-- / Layout wrapper -->
+        </div>
+    </div>
+</div>
 
-            <!-- Core JS -->
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
-            <!-- Main JS -->
-            <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
+
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/quill.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.js"></script>
+
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+
+<!-- Main JS -->
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<script>
+    function cambiarPagina() {
+        var select = document.getElementById("opciones");
+        var opcionSeleccionada = select.value;
+
+        if (opcionSeleccionada) {
+            // Cambia la página según la opción seleccionada
+            window.location.href = opcionSeleccionada;
+        }
+    }
+</script>
+
+<!-- Page JS -->
+<script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-enable-otp.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
+
 
 </body>
+
+
+<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-ecommerce-product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:10 GMT -->
 </html>
+
+<!-- beautify ignore:end -->

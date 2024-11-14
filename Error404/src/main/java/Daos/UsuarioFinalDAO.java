@@ -26,7 +26,6 @@ public class UsuarioFinalDAO extends BaseDao {
                     usuario = new Usuarios();
                     usuario.setUserId(rs.getInt("user_id"));
                     usuario.setUsername(rs.getString("username"));
-                    usuario.setContrasenia(rs.getString("contrasenia"));
                     usuario.setNombre(rs.getString("nombre"));
                     usuario.setApellido(rs.getString("apellido"));
                     usuario.setEmail(rs.getString("email"));

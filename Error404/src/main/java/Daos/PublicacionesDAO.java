@@ -165,14 +165,14 @@ public class PublicacionesDAO extends BaseDao {
 
     // Metodo para agregar una nueva publicación
     public void agregarPublicacion(Publicaciones publicacion) {
-        String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, comentario, tipo_publicacion_id) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, foto_id, tipo_publicacion_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setInt(1, publicacion.getUsuario().getUserId());
             pstmt.setString(2, publicacion.getTitulo());
             pstmt.setString(3, publicacion.getDescripcion());
-            pstmt.setString(4, publicacion.getComentario());
+            pstmt.setInt(4, publicacion.getFoto().getFotoId());
             pstmt.setInt(5, publicacion.getTipoPublicacion().getTipoPublicacionId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
