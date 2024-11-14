@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import Beans.Distritos;
 
 @WebServlet("/albergue")
 public class AlbergueServlet extends HttpServlet {
@@ -62,7 +63,6 @@ public class AlbergueServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
         if ("registrar".equals(action)) {
             registrarAlbergue(request, response);
         } else if ("actualizar".equals(action)) {
@@ -112,32 +112,65 @@ public class AlbergueServlet extends HttpServlet {
 
     private void actualizarAlbergue(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
+            // Configuración de caracteres
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+
+            // Obtener y verificar el ID del usuario
             String idStr = request.getParameter("id");
+            System.out.println("ID Capturado en el Servlet: " + idStr);
             if (idStr == null || idStr.isEmpty()) {
                 response.getWriter().write("Error: ID no proporcionado");
                 return;
             }
 
+            // Declarar y asignar la variable 'id'
             int id = Integer.parseInt(idStr);
 
+            // Crear el objeto Usuarios y establecer los datos del formulario
             Usuarios albergue = new Usuarios();
-            albergue.setUserId(id);
+            albergue.setUserId(id); // Usar 'id' aquí
+            System.out.println("ID Capturado en el Servlet: " + id);
             albergue.setNombre(request.getParameter("nombre"));
             albergue.setApellido(request.getParameter("apellido"));
             albergue.setEmail(request.getParameter("email"));
             albergue.setDireccion(request.getParameter("direccion"));
             albergue.setNombreAlbergue(request.getParameter("nombreAlbergue"));
 
+            // Obtener y asignar el distrito
+            String distritoIdStr = request.getParameter("distritoId");
+            System.out.println("Valor de distritoIdStr: " + distritoIdStr); // Depuración
+            if (distritoIdStr != null && !distritoIdStr.isEmpty()) {
+                try {
+                    int distritoId = Integer.parseInt(distritoIdStr);
+                    Distritos distrito = new Distritos();
+                    distrito.setDistritoId(distritoId);
+                    albergue.setDistrito(distrito);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    response.getWriter().write("Error: Distrito ID no válido");
+                    return;
+                }
+            } else {
+                response.getWriter().write("Error: Distrito ID no proporcionado o vacío");
+                return;
+            }
+
             // Actualizar en la base de datos
             if (albergueDAO.actualizarInformacionAlbergue(albergue)) {
-                // Redirigir a la vista de detalles
-                response.sendRedirect("albergue?action=verMiPerfilDetalles");
+                Usuarios albergueActualizado = albergueDAO.obtenerInformacionAlbergue(id);
+                System.out.printf(albergueActualizado.getNombreAlbergue() + "\n");
+                request.setAttribute("usuario", albergueActualizado);
+                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
             } else {
-                response.getWriter().write("Error: No se pudo actualizar la información del albergue");
+                response.getWriter().write("Error: No se pudo actualizar la información del albergue. Verifique los datos y vuelva a intentarlo.");
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
             response.getWriter().write("Error: ID no válido");
+        } catch (ServletException e) {
+            e.printStackTrace();
+            response.getWriter().write("Error: Error al cargar la vista de detalles");
         }
     }
 

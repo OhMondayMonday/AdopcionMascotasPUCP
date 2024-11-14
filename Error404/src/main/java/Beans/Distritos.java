@@ -1,16 +1,16 @@
 package Beans;
 
 public class Distritos {
-    private int distritoId;
+    private Integer distritoId;
     private String nombreDistrito;
     private Zonas zona;
 
-    public int getDistritoId() {
+    public Integer getDistritoId() {
         return distritoId;
     }
 
 
-    public void setDistritoId(int distritoId) {
+    public void setDistritoId(Integer distritoId) {
         this.distritoId = distritoId;
     }
 

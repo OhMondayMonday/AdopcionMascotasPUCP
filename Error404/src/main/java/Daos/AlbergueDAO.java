@@ -75,7 +75,7 @@ public class AlbergueDAO extends BaseDao {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, albergueId);
-            stmt.setInt(2, 3); // Suponiendo que el rolId de albergues es 3
+            stmt.setInt(2, 2); // Suponiendo que el rolId de albergues es 3
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -121,18 +121,58 @@ public class AlbergueDAO extends BaseDao {
 
     // 3. Actualizar Información del Albergue
     public boolean actualizarInformacionAlbergue(Usuarios albergue) {
-        String sql = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, direccion = ?, distrito_id = ?, capacidad_nuevos_animales = ?, animales_albergados = ?, url_facebook = ?, url_instagram = ?, punto_acopio = ?, direccion_donaciones = ?, nombre_contacto_donaciones = ?, numero_contacto_donaciones = ?, numero_yape_plin = ? WHERE user_id = ? AND rol_id = ?";
+        String sql = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, direccion = ?, distrito_id = ?, " +
+                "capacidad_nuevos_animales = ?, animales_albergados = ?, url_facebook = ?, url_instagram = ?, " +
+                "punto_acopio = ?, direccion_donaciones = ?, nombre_contacto_donaciones = ?, " +
+                "numero_contacto_donaciones = ?, numero_yape_plin = ? WHERE user_id = ? AND rol_id = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            // Agregar mensajes de depuración para verificar los valores
+            System.out.println("Nombre: " + albergue.getNombre());
+            System.out.println("Apellido: " + albergue.getApellido());
+            System.out.println("Email: " + albergue.getEmail());
+            System.out.println("Direccion: " + albergue.getDireccion());
+            System.out.println("Distrito ID: " + (albergue.getDistrito() != null ? albergue.getDistrito().getDistritoId() : "null"));
+            System.out.println("Capacidad Nuevos Animales: " + (albergue.getCapacidadNuevosAnimales() != null ? albergue.getCapacidadNuevosAnimales() : "null"));
+            System.out.println("Animales Albergados: " + (albergue.getAnimalesAlbergados() != null ? albergue.getAnimalesAlbergados() : "null"));
+            System.out.println("URL Facebook: " + albergue.getUrlFacebook());
+            System.out.println("URL Instagram: " + albergue.getUrlInstagram());
+            System.out.println("Punto Acopio: " + albergue.getPuntoAcopio());
+            System.out.println("Direccion Donaciones: " + albergue.getDireccionDonaciones());
+            System.out.println("Nombre Contacto Donaciones: " + albergue.getNombreContactoDonaciones());
+            System.out.println("Numero Contacto Donaciones: " + albergue.getNumeroContactoDonaciones());
+            System.out.println("Numero Yape/Plin: " + albergue.getNumeroYapePlin());
+            System.out.println("User ID: " + albergue.getUserId());
+
+
+            // Configurar los parámetros
             stmt.setString(1, albergue.getNombre());
             stmt.setString(2, albergue.getApellido());
             stmt.setString(3, albergue.getEmail());
             stmt.setString(4, albergue.getDireccion());
-            stmt.setInt(5, albergue.getDistrito().getDistritoId());
-            stmt.setInt(6, albergue.getCapacidadNuevosAnimales());
-            stmt.setInt(7, albergue.getAnimalesAlbergados());
+
+            // Manejar el distrito_id
+            if (albergue.getDistrito() != null) {
+                stmt.setInt(5, albergue.getDistrito().getDistritoId());
+            } else {
+                stmt.setNull(5, java.sql.Types.INTEGER);
+            }
+
+            // Manejar los campos opcionales
+            if (albergue.getCapacidadNuevosAnimales() != null) {
+                stmt.setInt(6, albergue.getCapacidadNuevosAnimales());
+            } else {
+                stmt.setNull(6, java.sql.Types.INTEGER);
+            }
+
+            if (albergue.getAnimalesAlbergados() != null) {
+                stmt.setInt(7, albergue.getAnimalesAlbergados());
+            } else {
+                stmt.setNull(7, java.sql.Types.INTEGER);
+            }
+
             stmt.setString(8, albergue.getUrlFacebook());
             stmt.setString(9, albergue.getUrlInstagram());
             stmt.setString(10, albergue.getPuntoAcopio());
@@ -141,14 +181,22 @@ public class AlbergueDAO extends BaseDao {
             stmt.setString(13, albergue.getNumeroContactoDonaciones());
             stmt.setString(14, albergue.getNumeroYapePlin());
             stmt.setInt(15, albergue.getUserId());
-            stmt.setInt(16, 3); // Suponiendo que el rolId de albergues es 3
+            stmt.setInt(16, 2); // Asumimos que el rolId para albergues es 3
 
+            // Ejecutar la actualización
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
+
+
+
+
+
+
 
     // 4. Desactivar Cuenta del Albergue
     public boolean desactivarCuentaAlbergue(int albergueId) {

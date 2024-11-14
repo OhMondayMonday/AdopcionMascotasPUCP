@@ -19,8 +19,8 @@ public class Usuarios {
     private Roles rol;
     private Timestamp fechaRegistro;
     private String nombreAlbergue;
-    private int capacidadNuevosAnimales;
-    private int animalesAlbergados;
+    private Integer capacidadNuevosAnimales;
+    private Integer animalesAlbergados;
     private Date anioCreacion;
     private String urlFacebook;
     private String urlInstagram;
@@ -140,17 +140,17 @@ public class Usuarios {
         this.nombreAlbergue = nombreAlbergue;
     }
 
-    public int getCapacidadNuevosAnimales() {
+    public Integer getCapacidadNuevosAnimales() {
         return capacidadNuevosAnimales;
     }
 
-    public void setCapacidadNuevosAnimales(int capacidadNuevosAnimales) { this.capacidadNuevosAnimales = capacidadNuevosAnimales; }
+    public void setCapacidadNuevosAnimales(Integer capacidadNuevosAnimales) { this.capacidadNuevosAnimales = capacidadNuevosAnimales; }
 
-    public int getAnimalesAlbergados() {
+    public Integer getAnimalesAlbergados() {
         return animalesAlbergados;
     }
 
-    public void setAnimalesAlbergados(int animalesAlbergados) {
+    public void setAnimalesAlbergados(Integer animalesAlbergados) {
         this.animalesAlbergados = animalesAlbergados;
     }
 
