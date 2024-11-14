@@ -3,6 +3,8 @@ package Beans;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalTime;
+import java.time.Duration;
 
 public class Eventos {
     private int eventId;
@@ -18,6 +20,9 @@ public class Eventos {
     private String razonEvento;
     private Timestamp fechaCreacion;
     private String estadoEvento;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
+    private Duration duracionEvento;
 
     public int getEventId() {
         return eventId;
@@ -111,6 +116,33 @@ public class Eventos {
         this.estadoEvento = estadoEvento;
     }
 
+    public LocalTime getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+        calcularDuracion();
+    }
+
+    public LocalTime getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(LocalTime horaFin) {
+        this.horaFin = horaFin;
+        calcularDuracion();
+    }
+
+    public Duration getDuracionEvento() {
+        return duracionEvento;
+    }
+
+    private void calcularDuracion() {
+        if (horaInicio != null && horaFin != null) {
+            duracionEvento = Duration.between(horaInicio, horaFin);
+        }
+    }
 
 }
 

@@ -15,15 +15,12 @@ public class MiHogarTemporalDAO extends BaseDao{
     // Método para obtener los detalles del usuario
     public Usuarios obtenerDetallesUsuarioTemporal(int userId) {
         Usuarios usuario = null;
-        String query = "SELECT u.user_id, u.username, u.email, u.estado_cuenta, r.nombre_rol, " +
-                "COUNT(DISTINCT s.solicitud_id) AS num_solicitudes, " +
-                "COUNT(DISTINCT m.mascota_id) AS num_mascotas " +
+        String query = "SELECT u.username, u.email, u.estado_cuenta, r.nombre_rol AS rol, u.user_id AS id, " +
+                "u.numero_contacto_donaciones AS contacto, d.nombre_distrito AS distrito " +
                 "FROM usuarios u " +
                 "JOIN roles r ON u.rol_id = r.rol_id " +
-                "LEFT JOIN solicitudes s ON s.solicitante_id = u.user_id " +
-                "LEFT JOIN mascotas m ON m.owner_id = u.user_id " +  // Cambia "owner_id" al nombre correcto de la columna que asocia mascotas con el usuario
-                "WHERE u.user_id = ? " +
-                "GROUP BY u.user_id";
+                "JOIN distritos d ON u.distrito_id = d.distrito_id " +
+                "WHERE u.user_id = 1";
 
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
@@ -77,14 +74,14 @@ public class MiHogarTemporalDAO extends BaseDao{
     }
 
     // Método para obtener la lista de mascotas solicitadas por un usuario
-    public List<Mascotas> obtenerSolicitudesPorUsuario(int userId) {
-        List<Mascotas> mascotasSolicitadas = new ArrayList<>();
+    public List<Solicitudes> obtenerSolicitudesPorUsuario(int userId) {
+        List<Solicitudes> solicitudes  = new ArrayList<>();
         String query = "SELECT m.mascota_id, m.nombre, m.descripcion, m.edad_aproximada, " +
                 "r.nombre_raza, m.genero, m.tamanio " +
                 "FROM solicitudes s " +
                 "JOIN mascotas m ON s.mascota_id = m.mascota_id " +
                 "JOIN razas r ON m.raza_id = r.raza_id " +
-                "WHERE s.solicitante_id = ? " +
+                "WHERE s.solicitante_id = 1 " +
                 "ORDER BY s.fecha_solicitud DESC";
 
         try (Connection connection = getConnection();
@@ -107,13 +104,18 @@ public class MiHogarTemporalDAO extends BaseDao{
                 raza.setNombreRaza(rs.getString("nombre_raza"));
                 mascota.setRaza(raza);
 
-                mascotasSolicitadas.add(mascota);
+                // Crear el objeto Solicitudes y asignar la fecha
+                Solicitudes solicitud = new Solicitudes();
+                solicitud.setFechaSolicitud(rs.getString("fecha_solicitud"));
+                solicitud.setMascota(mascota);  // Asignar la mascota a la solicitud
+
+                solicitudes.add(solicitud);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return mascotasSolicitadas;
+        return solicitudes;
     }
 
 }

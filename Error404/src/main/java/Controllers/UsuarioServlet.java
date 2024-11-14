@@ -3,12 +3,12 @@ package Controllers;
 import Beans.HogaresTemporales;
 import Beans.Usuarios;
 import Beans.Mascotas;
+import Beans.Solicitudes;
 import Daos.MiHogarTemporalDAO;
 import Daos.HogarTemporalDAO;
 import Daos.PostularHogarTemporalDAO;
+import java.util.ArrayList;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-    @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
+@WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
 public class UsuarioServlet extends HttpServlet {
 
     private HogarTemporalDAO hogarTemporalDAO = new HogarTemporalDAO();
@@ -26,16 +26,23 @@ public class UsuarioServlet extends HttpServlet {
     private PostularHogarTemporalDAO postularHogarTemporalDAO = new PostularHogarTemporalDAO();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-
-        if (action == null) {
-            action = "home"; // Acción predeterminada si no se pasa ninguna
-        }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action")== null ? "home" : request.getParameter("action");
+        String vista;
+        RequestDispatcher rd;
 
         switch (action) {
             case "miHogarTemporal":
-                mostrarMiHogarTemporal(request, response);
+                Usuarios usuario = miHogarTemporalDAO.obtenerDetallesUsuarioTemporal(1);
+                List<Solicitudes> solicitudesMascotas = miHogarTemporalDAO.obtenerSolicitudesPorUsuario(1);
+
+                // Asignar los objetos a los atributos de la solicitud
+                request.setAttribute("usuario", usuario);
+                request.setAttribute("solicitudesMascotas", solicitudesMascotas);
+
+                rd = request.getRequestDispatcher("/WEB-INF/UsuarioFinal/UF-MiHogarTemporal.jsp");
+                rd.forward(request, response);
                 break;
             case "hogarTemporal":
                 mostrarHogaresTemporales(request, response);
@@ -45,7 +52,7 @@ public class UsuarioServlet extends HttpServlet {
                 break;
             default:
                 String contextPath = request.getContextPath();
-                response.sendRedirect(contextPath + "/WEB-INF/Inicio-usuario.jsp");
+                request.getRequestDispatcher("/WEB-INF/Inicio-usuario.jsp").forward(request, response);
                 break;
         }
     }
@@ -60,22 +67,22 @@ public class UsuarioServlet extends HttpServlet {
                 break;
             default:
                 String contextPath = request.getContextPath();
-                response.sendRedirect(contextPath + "/WEB-INF/Inicio-usuario.jsp");
+                request.getRequestDispatcher("/WEB-INF/Inicio-usuario.jsp").forward(request, response);
                 break;
         }
     }
 
     // Método para manejar la visualización de "Mi Hogar Temporal"
-    private void mostrarMiHogarTemporal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("userId"));
+   // private void mostrarMiHogarTemporal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+     //   int userId = Integer.parseInt(request.getParameter("userId"));
 
-        Usuarios usuario = miHogarTemporalDAO.obtenerDetallesUsuarioTemporal(userId);
-        List<Mascotas> solicitudesMascotas = miHogarTemporalDAO.obtenerSolicitudesPorUsuario(userId);
+     //   Usuarios usuario = miHogarTemporalDAO.obtenerDetallesUsuarioTemporal(userId);
 
-        request.setAttribute("usuario", usuario);
-        request.setAttribute("solicitudesMascotas", solicitudesMascotas);
-        request.getRequestDispatcher("/UF-MiHogarTemporal.jsp").forward(request, response);
-    }
+
+        //request.setAttribute("usuario", usuario);
+        //request.setAttribute("solicitudesMascotas", solicitudesMascotas);
+      //  request.getRequestDispatcher("/WEB-INF/UsuarioFinal/UF-MiHogarTemporal.jsp").forward(request, response);
+    //}
 
     // Método para manejar la visualización de "Hogar Temporal" con filtros
     private void mostrarHogaresTemporales(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

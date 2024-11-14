@@ -228,6 +228,8 @@ CREATE TABLE eventos (
     nombre_evento VARCHAR(150),
     fecha_evento DATE NOT NULL,
     hora_evento TIME NOT NULL,
+    fecha_fin DATE NOT NULL,
+    hora_fin TIME NOT NULL,
     foto_id INT NOT NULL,
     lugar_evento_id INT,
     entrada VARCHAR(255),

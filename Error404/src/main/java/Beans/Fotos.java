@@ -1,9 +1,12 @@
 package Beans;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class Fotos {
     private int fotoId;
     private String urlFoto;
-    private String fechaSubida;
+    private Timestamp fechaSubida;
 
     public int getFotoId() {
         return fotoId;
@@ -21,11 +24,11 @@ public class Fotos {
         this.urlFoto = urlFoto;
     }
 
-    public String getFechaSubida() {
+    public Timestamp getFechaSubida() {
         return fechaSubida;
     }
 
-    public void setFechaSubida(String fechaSubida) {
+    public void setFechaSubida(Timestamp fechaSubida) {
         this.fechaSubida = fechaSubida;
     }
 

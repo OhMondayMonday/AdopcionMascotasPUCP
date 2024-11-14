@@ -14,7 +14,7 @@ isRtl && (direction = "rtl"), document.addEventListener("DOMContentLoaded", func
             T = document.querySelector(".allDay-switch"), A = document.querySelector(".select-all"),
             F = [].slice.call(document.querySelectorAll(".input-filter")),
             Y = document.querySelector(".inline-calendar");
-        let a, l = events, r = !1, e;
+        let a, l = window.events, r = !1, e;
         const C = new bootstrap.Offcanvas(p);
 
         function t(e) {
@@ -64,6 +64,7 @@ isRtl && (direction = "rtl"), document.addEventListener("DOMContentLoaded", func
             initialView: "dayGridMonth",
             buttonText: { month: 'Mes', week: 'Semana', day: 'Día', list: 'Lista' },
             locale: 'es',
+            height: 700,
             slotLabelFormat: {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -100,9 +101,6 @@ isRtl && (direction = "rtl"), document.addEventListener("DOMContentLoaded", func
                 e = moment(e.date).format("YYYY-MM-DD");
                 u(), C.show(), b && (b.innerHTML = "Add Event"), y.innerHTML = "Add", y.classList.remove("btn-update-event"), y.classList.add("btn-add-event"), S.classList.add("d-none"), k.value = e, w.value = e
             },
-            eventClick: function (e) {
-                e = e, (a = e.event).url && (e.jsEvent.preventDefault(), window.open(a.url, "_blank")), C.show(), b && (b.innerHTML = "Update Event"), y.innerHTML = "Update", y.classList.add("btn-update-event"), y.classList.remove("btn-add-event"), S.classList.remove("d-none"), E.value = a.title, d.setDate(a.start, !0, "Y-m-d"), !0 === a.allDay ? T.checked = !0 : T.checked = !1, null !== a.end ? o.setDate(a.end, !0, "Y-m-d") : o.setDate(a.start, !0, "Y-m-d"), q.val(a.extendedProps.calendar).trigger("change"), void 0 !== a.extendedProps.location && (P.value = a.extendedProps.location), void 0 !== a.extendedProps.guests && D.val(a.extendedProps.guests).trigger("change"), void 0 !== a.extendedProps.description && (M.value = a.extendedProps.description)
-            },
             datesSet: function () {
                 s()
             },
@@ -118,9 +116,7 @@ isRtl && (direction = "rtl"), document.addEventListener("DOMContentLoaded", func
         }
 
 
-        h.addEventListener("click", e => {
-            b && (b.innerHTML = "Add Event"), y.innerHTML = "Add", y.classList.remove("btn-update-event"), y.classList.add("btn-add-event"), S.classList.add("d-none"), m.classList.remove("show"), f.classList.remove("show")
-        }), A && A.addEventListener("click", e => {
+        A && A.addEventListener("click", e => {
             e.currentTarget.checked ? document.querySelectorAll(".input-filter").forEach(e => e.checked = 1) : document.querySelectorAll(".input-filter").forEach(e => e.checked = 0), i.refetchEvents()
         }), F && F.forEach(e => {
             e.addEventListener("click", () => {

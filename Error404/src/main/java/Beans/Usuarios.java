@@ -1,5 +1,6 @@
 package Beans;
-
+import java.util.List;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Usuarios {
@@ -20,7 +21,7 @@ public class Usuarios {
     private String nombreAlbergue;
     private int capacidadNuevosAnimales;
     private int animalesAlbergados;
-    private int anioCreacion;
+    private Date anioCreacion;
     private String urlFacebook;
     private String urlInstagram;
     private String urlTwitter;
@@ -153,11 +154,11 @@ public class Usuarios {
         this.animalesAlbergados = animalesAlbergados;
     }
 
-    public int getAnioCreacion() {
+    public Date getAnioCreacion() {
         return anioCreacion;
     }
 
-    public void setAnioCreacion(int anioCreacion) {
+    public void setAnioCreacion(Date anioCreacion) {
         this.anioCreacion = anioCreacion;
     }
 

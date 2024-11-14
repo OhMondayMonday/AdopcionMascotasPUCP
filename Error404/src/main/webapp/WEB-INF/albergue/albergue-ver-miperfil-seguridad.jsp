@@ -1,15 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
 <jsp:useBean id="rol" class="Beans.Roles" scope="request" />
 
 <jsp:setProperty name="usuario" property="*" />
 <jsp:setProperty name="rol" property="*" />
-
-<jsp:include page="../includes/navbarAlbergue.jsp"/>
-<jsp:include page="../includes/sidebarAlbergue.jsp" />
-
-
 
 
 <!DOCTYPE html>
@@ -37,9 +33,9 @@
 
         <!-- Icons -->
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
-        <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-        <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/fontawesome.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/flag-icons.css" />
 
         <!-- Core CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
@@ -58,13 +54,13 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
 
         <!-- Page CSS -->
-        <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-faq.css" />
 
         <!-- Helpers -->
-        <script src="../../assets/vendor/js/helpers.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
 
         <!-- Template Config -->
-        <script src="../../assets/js/config.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
     </head>
 
     <body>
@@ -75,11 +71,11 @@
         <!-- End Google Tag Manager (noscript) -->
 
         <!-- Layout wrapper -->
-        <div class="layout-wrapper layout-content-navbar" style="background-color: #fff1ef">
+        <div class="layout-wrapper layout-content-navbar" style="background-color: #fff1ef;">
             <div class="layout-container">
-
+                <jsp:include page="../includes/sidebarAlbergue.jsp" />
                 <div class="layout-page">
-
+                    <jsp:include page="../includes/navbarAlbergue.jsp"/>
                     <div class="content-wrapper">
 
                         <!-- Content -->
@@ -96,7 +92,7 @@
                                                 <div class=" d-flex align-items-center flex-column">
                                                     <img class="img-fluid rounded my-4" src="https://img.freepik.com/vector-gratis/fondo-bonito-cara-sonriente-animales-felices-decorativos_23-2147590101.jpg?t=st=1726640655~exp=1726644255~hmac=810a73c0148e1c4d1ecb3b4af4a0d1b18f8dfe3d48ec5d695b0282ec0570e8d0&w=826" height="110" width="110" alt="User avatar" />
                                                     <div class="user-info text-center">
-                                                        <h4 class="mb-2">Albergue Caritas</h4>
+                                                        <h4 class="mb-2">${usuario.nombreAlbergue}</h4>
                                                         <span class="badge bg-label-danger">Albergue</span>
                                                     </div>
                                                 </div>
@@ -121,31 +117,33 @@
                                             <div class="info-container">
                                                 <ul class="list-unstyled">
                                                     <li class="mb-3">
-                                                        <span class="fw-medium me-2">Nombre de Usuario:</span>
-                                                        <span>Caritas</span>
+                                                        <span class="fw-medium me-2">Nombre de usuario:</span>
+                                                        <span>${usuario.username}</span>
                                                     </li>
                                                     <li class="mb-3">
                                                         <span class="fw-medium me-2">Correo:</span>
-                                                        <span>caritas123@gmail.com</span>
+                                                        <span>${usuario.email}</span>
                                                     </li>
                                                     <li class="mb-3">
                                                         <span class="fw-medium me-2">Estado:</span>
-                                                        <span class="badge bg-label-success">Activo</span>
+                                                        <span class="badge bg-label-success">${usuario.estadoCuenta}</span>
                                                     </li>
                                                     <li class="mb-3">
                                                         <span class="fw-medium me-2">Cuenta activa desde: </span>
-                                                        <span>18-09-2023</span>
+                                                        <span>${usuario.fechaRegistro}</span>
                                                     </li>
 
                                                     <li class="mb-3">
                                                         <span class="fw-medium me-2">Contacto:</span>
-                                                        <span>(01) 456-7890</span>
+                                                        <span>${usuario.numeroContactoDonaciones}</span>
                                                     </li>
 
                                                 </ul>
 
                                                 <div class="d-flex justify-content-center pt-3">
-                                                    <a href="albergue-editar-perfil.jsp" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
+                                                    <a href="<c:url value='/albergue?action=verMiPerfilSeguridad'/>" class="btn btn-warning">
+                                                        <i class='bx bx-edit'></i>Editar
+                                                    </a>
                                                 </div>
 
                                             </div>
@@ -161,8 +159,16 @@
                                     <!-- User Pills -->
                                     <!-- User Pills -->
                                     <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                        <li class="nav-item"><a class="nav-link" href="albergue-ver-miperfil-detalles.jsp"><i class="bx bx-user me-1"></i>Cuenta</a></li>
-                                        <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
+                                        <li class="nav-item">
+                                            <a href="<c:url value='/albergue?action=verMiPerfilDetalles' />" class="nav-link">
+                                                <i class="bx bx-user me-1"></i>Cuenta
+                                            </a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="javascript:void(0);">
+                                                <i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
                                     </ul>
                                     <!--/ User Pills -->
                                     <!--/ User Pills -->
@@ -310,32 +316,32 @@
         <!-- Core JS -->
         <!-- build:js assets/vendor/js/core.js -->
 
-        <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-        <script src="../../assets/vendor/libs/popper/popper.js"></script>
-        <script src="../../assets/vendor/js/bootstrap.js"></script>
-        <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-        <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-        <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-        <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-        <script src="../../assets/vendor/js/menu.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
         <!-- endbuild -->
 
         <!-- Vendors JS -->
 
-        <script src="../../assets/vendor/libs/quill/katex.js"></script>
-        <script src="../../assets/vendor/libs/quill/quill.js"></script>
-        <script src="../../assets/vendor/libs/select2/select2.js"></script>
-        <script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-        <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-        <script src="../../assets/vendor/libs/bloodhound/bloodhound.js"></script>
-        <script src="../../assets/vendor/libs/dropzone/dropzone.js"></script>
-        <script src="../../assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
-        <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-        <script src="../../assets/vendor/libs/tagify/tagify.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/quill.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/bloodhound/bloodhound.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.js"></script>
 
         <!-- Main JS -->
-        <script src="../../assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
         <script>
             function cambiarPagina() {
                 var select = document.getElementById("opciones");
@@ -350,10 +356,10 @@
 
         <!-- Page JS -->
 
-        <script src="../../assets/js/app-ecommerce-product-add.js"></script>
-        <script src="../../assets/js/forms-selects.js"></script>
-        <script src="../../assets/js/forms-tagify.js"></script>
-        <script src="../../assets/js/forms-typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
 
 
     </body>

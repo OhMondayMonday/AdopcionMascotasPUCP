@@ -1,7 +1,7 @@
 package Beans;
 
 public class PublicacionesDonaciones {
-    private Publicaciones publicacion;
+    private int publicacion_id;
     private String puntoAcopio;
     private TiposDonaciones tipoDonacion;
     private double cantidad;
@@ -13,9 +13,9 @@ public class PublicacionesDonaciones {
     private String nombreContacto;
     private String motivoDonacion;
 
-    public Publicaciones getPublicacion() { return publicacion; }
+    public int getPublicacion_id() { return publicacion_id; }
 
-    public void setPublicacion(Publicaciones publicacion) { this.publicacion = publicacion; }
+    public void setPublicacion_id(int publicacion_id) { this.publicacion_id = publicacion_id; }
 
     public String getPuntoAcopio() {
         return puntoAcopio;
