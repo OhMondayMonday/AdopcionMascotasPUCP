@@ -273,4 +273,43 @@ public class EventosDAO extends BaseDao {
         }
         return evento;
     }
+
+    // Obtener los eventos en los que un usuario está inscrito
+    public List<Eventos> obtenerEventosInscritos(int usuarioId) {
+        List<Eventos> eventosInscritos = new ArrayList<>();
+        String query = "SELECT * FROM inscripciones_eventos JOIN eventos ON inscripciones_eventos.evento_id = eventos.id WHERE inscripciones_eventos.usuario_id = ?";
+
+        try (Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, usuarioId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Eventos evento = new Eventos();
+                evento.setEventId(rs.getInt("event_id"));
+                Beans.Usuarios usuario = new Beans.Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                evento.setUsuario(usuario); // Asignar el objeto usuario al evento
+                evento.setNombreEvento(rs.getString("nombre_evento"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
+
+                Beans.LugaresEventos lugarEvento = new Beans.LugaresEventos();
+                lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
+                evento.setLugarEvento(lugarEvento);
+
+                evento.setEntrada(rs.getString("entrada"));
+                evento.setDescripcionEvento(rs.getString("descripcion_evento"));
+                evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
+                evento.setRazonEvento(rs.getString("razon_evento"));
+                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                evento.setEstadoEvento(rs.getString("estado_evento"));
+                eventosInscritos.add(evento);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return eventosInscritos;
+    }
+
+
 }

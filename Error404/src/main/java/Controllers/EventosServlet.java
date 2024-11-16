@@ -32,6 +32,17 @@ public class EventosServlet extends HttpServlet {
                 listarEventos(request, response);
                 break;
 
+            case "verMisEventos":
+                verMisEventos(request, response);
+                break;
+
+            case "verDetalles":
+                verDetalles(request, response);
+                break;
+
+            default:
+                response.sendRedirect("index.jsp");
+                break;
         }
     }
 
@@ -47,4 +58,24 @@ public class EventosServlet extends HttpServlet {
         request.setAttribute("eventos", eventos);
         request.getRequestDispatcher("/WEB-INF/jsp/albergue-ver-eventos-detalles").forward(request, response);
     }
+
+    private void verMisEventos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        EventosDAO eventosDAO = new EventosDAO();
+        int usuarioId = Integer.parseInt(request.getParameter("usuarioId"));
+        List<Eventos> eventosInscritos = eventosDAO.obtenerEventosInscritos(usuarioId);
+
+        request.setAttribute("eventosInscritos", eventosInscritos);
+        request.getRequestDispatcher("ver-miseventos-usuario.jsp").forward(request, response);
+    }
+
+    private void verDetalles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        EventosDAO eventosDAO = new EventosDAO();
+        int eventoId = Integer.parseInt(request.getParameter("eventoId"));
+        Eventos evento = eventosDAO.obtenerDetalleEvento(eventoId);
+
+        request.setAttribute("evento", evento);
+        request.getRequestDispatcher("/WEB-INF/jsp/usuario-detalles-evento.jsp").forward(request, response);
+
+    }
+
 }
