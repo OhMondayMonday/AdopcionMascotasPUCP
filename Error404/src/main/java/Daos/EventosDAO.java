@@ -39,7 +39,7 @@ public class EventosDAO extends BaseDao {
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                evento.setFechaCreacion(rs.getDate("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
                 evento.setFechaFin(rs.getDate("fecha_fin"));
                 evento.setHoraFin(rs.getTime("hora_fin"));
@@ -79,7 +79,7 @@ public class EventosDAO extends BaseDao {
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                evento.setFechaCreacion(rs.getDate("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
                 evento.setFechaFin(rs.getDate("fecha_fin"));
                 evento.setHoraFin(rs.getTime("hora_fin"));
@@ -126,7 +126,7 @@ public class EventosDAO extends BaseDao {
             pstmt.setString(8, evento.getDescripcionEvento());
             pstmt.setString(9, evento.getArtistasProveedores());
             pstmt.setString(10, evento.getRazonEvento());
-            pstmt.setTimestamp(11, evento.getFechaCreacion());
+            pstmt.setDate(11, evento.getFechaCreacion());
             pstmt.setString(12, evento.getEstadoEvento());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -228,7 +228,7 @@ public class EventosDAO extends BaseDao {
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                evento.setFechaCreacion(rs.getDate("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
                 eventos.add(evento);
             }
@@ -265,7 +265,7 @@ public class EventosDAO extends BaseDao {
             evento.setDescripcionEvento(rs.getString("descripcion_evento"));
             evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
             evento.setRazonEvento(rs.getString("razon_evento"));
-            evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+            evento.setFechaCreacion(rs.getDate("fecha_creacion"));
             evento.setEstadoEvento(rs.getString("estado_evento"));
 
         } catch (SQLException ex) {
@@ -301,7 +301,7 @@ public class EventosDAO extends BaseDao {
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                evento.setFechaCreacion(rs.getDate("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
                 eventosInscritos.add(evento);
             }

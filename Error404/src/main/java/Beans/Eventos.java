@@ -2,7 +2,6 @@ package Beans;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
 
 public class Eventos {
     private int eventId;
@@ -20,12 +19,7 @@ public class Eventos {
     private String razonEvento;
     private Date fechaCreacion;
     private String estadoEvento;
-<<<<<<< Updated upstream
-=======
-    private Date fechaFin;
-    private Time horaFin;
 
->>>>>>> Stashed changes
 
     public int getEventId() {
         return eventId;
@@ -61,22 +55,6 @@ public class Eventos {
 
     public void setHoraEvento(Time horaEvento) {
         this.horaEvento = horaEvento;
-    }
-
-    public Time getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Time horaFin) {
-        this.horaFin = horaFin;
-    }
-
-    public Date getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
     }
 
     public Fotos getFoto() { return foto; }
@@ -131,9 +109,6 @@ public class Eventos {
         this.estadoEvento = estadoEvento;
     }
 
-<<<<<<< Updated upstream
-
-=======
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
@@ -153,6 +128,7 @@ public class Eventos {
     public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
     }
->>>>>>> Stashed changes
+
+
 }
 

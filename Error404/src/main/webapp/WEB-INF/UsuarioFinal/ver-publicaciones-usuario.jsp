@@ -32,7 +32,7 @@
     <!-- End Google Tag Manager -->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+    <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -40,40 +40,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
 
     <!-- Icons -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
-    <link rel="stylesheet" href="../assets/vendor/fonts/fontawesome.css" />
-    <link rel="stylesheet" href="../assets/vendor/fonts/flag-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/quill/typography.css">
-    <link rel="stylesheet" href="../assets/vendor/libs/quill/katex.css">
-    <link rel="stylesheet" href="../assets/vendor/libs/quill/editor.css">
-    <link rel="stylesheet" href="../assets/vendor/libs/select2/select2.css">
-    <link rel="stylesheet" href="../assets/vendor/libs/dropzone/dropzone.css">
-    <link rel="stylesheet" href="../assets/vendor/libs/flatpickr/flatpickr.css">
-    <link rel="stylesheet" href="../assets/vendor/libs/tagify/tagify.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/animate-css/animate.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/animate-css/animate.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- Page CSS -->
 
-    <link rel="stylesheet" href="../assets/vendor/css/pages/page-faq.css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
 
     <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
+    <script src="../../assets/js/config.js"></script>
 
-    <link rel="stylesheet" href="../assets/vendor/libs/flatpickr/flatpickr.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
 </head>
 
 <body style="background-color: #d4e1ffa9;">
@@ -93,7 +93,7 @@
             <div class="app-brand demo px-3">
                 <a href="javascript:void(0);" class="app-brand-link">
                   <span class="app-brand-logo demo">
-                    <img class = "h-px-50 tf-icon" src="../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+                    <img class = "h-px-50 tf-icon" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
                   </span>
                 </a>
 
@@ -115,7 +115,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-publicaciones-usuario.jsp"  class="menu-link">
+                    <a href="ver-publicaciones-usuario.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
                     </a>
@@ -264,7 +264,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../index.jsp" >
+                                    <a class="dropdown-item" href="../../index.jsp" >
                                         <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
                                         <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                                     </a>

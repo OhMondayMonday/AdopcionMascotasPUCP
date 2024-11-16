@@ -35,7 +35,7 @@
     <!-- End Google Tag Manager -->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+    <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -93,7 +93,7 @@
             <div class="app-brand demo px-3">
                 <a href="javascript:void(0);" class="app-brand-link">
           <span class="app-brand-logo demo">
-            <img class = "h-px-50 tf-icon" src="../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+            <img class = "h-px-50 tf-icon" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
           </span>
                 </a>
 
@@ -115,7 +115,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-publicaciones-usuario.jsp"  class="menu-link">
+                    <a href="ver-publicaciones-usuario.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
                     </a>
@@ -264,7 +264,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../index.jsp" >
+                                    <a class="dropdown-item" href="../../index.jsp" >
                                         <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
                                         <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                                     </a>
@@ -494,35 +494,35 @@
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 
-<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="../assets/vendor/libs/hammer/hammer.js"></script>
-<script src="../assets/vendor/libs/i18n/i18n.js"></script>
-<script src="../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-<script src="../assets/vendor/js/menu.js"></script>
+<script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+<script src="../../assets/vendor/libs/popper/popper.js"></script>
+<script src="../../assets/vendor/js/bootstrap.js"></script>
+<script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+<script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+<script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="../../assets/vendor/js/menu.js"></script>
 
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="../assets/vendor/libs/moment/moment.js"></script>
-<script src="../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-<script src="../assets/vendor/libs/cleavejs/cleave.js"></script>
-<script src="../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-<script src="../assets/vendor/libs/select2/select2.js"></script>
-<script src="../assets/vendor/libs/%40form-validation/popular.js"></script>
-<script src="../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-<script src="../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+<script src="../../assets/vendor/libs/moment/moment.js"></script>
+<script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
+<script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+<script src="../../assets/vendor/libs/select2/select2.js"></script>
+<script src="../../assets/vendor/libs/@form-validation/popular.js"></script>
+<script src="../../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+<script src="../../assets/vendor/libs/@form-validation/auto-focus.js"></script>
 
 <!-- Main JS -->
-<script src="../assets/js/main.js"></script>
+<script src="../../assets/js/main.js"></script>
 
 
 <!-- Page JS -->
-<script src="../assets/js/modal-edit-user.js"></script>
-<script src="../assets/js/app-user-view.js"></script>
-<script src="../assets/js/app-user-view-account.js"></script>
+<script src="../../assets/js/modal-edit-user.js"></script>
+<script src="../../assets/js/app-user-view.js"></script>
+<script src="../../assets/js/app-user-view-account.js"></script>
 
 </body>
 

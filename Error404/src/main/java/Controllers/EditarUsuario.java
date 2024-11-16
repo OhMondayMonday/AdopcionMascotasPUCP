@@ -1,4 +1,4 @@
-package Servlets;
+package Controllers;
 
 import Beans.Usuarios;
 import Daos.AlbergueDAO;
@@ -79,7 +79,7 @@ public class AlbergueServlet extends HttpServlet {
         albergue.setEmail(request.getParameter("email"));
         albergue.setDni(request.getParameter("dni"));
         albergue.setDireccion(request.getParameter("direccion"));
-        albergue.setDistritoId(Integer.parseInt(request.getParameter("distritoId")));
+        albergue.setDistrito(Integer.parseInt(request.getParameter("distritoId")));
         albergue.setNombreAlbergue(request.getParameter("nombreAlbergue"));
         albergue.setCapacidadNuevosAnimales(Integer.parseInt(request.getParameter("capacidadNuevosAnimales")));
         albergue.setAnimalesAlbergados(Integer.parseInt(request.getParameter("animalesAlbergados")));
