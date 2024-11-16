@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="probando">
+    <output-path>$PROJECT_DIR$/Error404/org/artifacts/probando</output-path>
+    <root id="root" />
+  </artifact>
+</component>
