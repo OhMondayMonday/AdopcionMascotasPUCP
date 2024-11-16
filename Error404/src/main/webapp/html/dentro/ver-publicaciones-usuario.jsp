@@ -442,13 +442,13 @@
               <div class="card-footer d-flex justify-content-center">
                 <ul class="pagination m-0">
                   <li class="page-item disabled">
-                    <button class="page-link" onclick="location.href='ver-publicaciones-usuario.jsp?pagina=<%=paginaAnterior%>'" <%= (paginaActual == 1) ? "disabled" : ""%>>Anterior</button>
+                    <button class="page-link" onclick="location.href='/PublicacionesServlet?action=listar&pagina=<%=paginaAnterior%>'" <%= (paginaActual == 1) ? "disabled" : ""%>>Anterior</button>
                   </li>
                   <li class="page-item active">
                     <span class="page-link"><%=paginaActual%></span>
                   </li>
                   <li class="page-item">
-                    <button class="page-link" onclick="location.href='ver-publicaciones-usuario.jsp?pagina=<%=paginaSiguiente%>'" <%= (paginaActual == cantidadDePaginas) ? "disabled" : ""%>>Siguiente</button>
+                    <button class="page-link" onclick="location.href='/PublicacionesServlet?action=listar&pagina=<%=paginaSiguiente%>'" <%= (paginaActual == cantidadDePaginas) ? "disabled" : ""%>>Siguiente</button>
                   </li>
                 </ul>
               </div>

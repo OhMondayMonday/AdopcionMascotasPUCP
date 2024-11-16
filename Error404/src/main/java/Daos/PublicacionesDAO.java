@@ -50,7 +50,7 @@ public class PublicacionesDAO extends BaseDao {
                 "INNER JOIN fotos f ON f.foto_id = p.foto_id\n" +
                 "INNER JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id\n" +
                 "WHERE p.estado_publicacion = 'activa'\n" +
-                "ORDER BY p.fecha_creacion DESC\n" +
+                "ORDER BY p.publicacion_id DESC\n" +
                 "LIMIT ? OFFSET ?";
 
         try (Connection connection = this.getConnection();
