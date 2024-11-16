@@ -18,8 +18,14 @@ public class Eventos {
     private String descripcionEvento;
     private String artistasProveedores;
     private String razonEvento;
-    private Timestamp fechaCreacion;
+    private Date fechaCreacion;
     private String estadoEvento;
+<<<<<<< Updated upstream
+=======
+    private Date fechaFin;
+    private Time horaFin;
+
+>>>>>>> Stashed changes
 
     public int getEventId() {
         return eventId;
@@ -113,12 +119,8 @@ public class Eventos {
         this.razonEvento = razonEvento;
     }
 
-    public Timestamp getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Timestamp fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
     }
 
     public String getEstadoEvento() {
@@ -129,6 +131,28 @@ public class Eventos {
         this.estadoEvento = estadoEvento;
     }
 
+<<<<<<< Updated upstream
 
+=======
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Time getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Time horaFin) {
+        this.horaFin = horaFin;
+    }
+>>>>>>> Stashed changes
 }
 
