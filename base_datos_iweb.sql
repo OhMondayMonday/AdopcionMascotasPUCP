@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS denuncias_maltrato_animal;
 DROP TABLE IF EXISTS hogares_temporales;
 DROP TABLE IF EXISTS inscripciones_eventos;
 DROP TABLE IF EXISTS eventos;
+DROP TABLE IF EXISTS tipos_eventos;
 DROP TABLE IF EXISTS lugares_eventos;
 DROP TABLE IF EXISTS solicitudes;
 DROP TABLE IF EXISTS tipos_solicitudes;
@@ -209,6 +210,12 @@ CREATE TABLE solicitudes (
     FOREIGN KEY (tipo_solicitud_id) REFERENCES tipos_solicitudes(tipo_solicitud_id) ON DELETE CASCADE
 );
 
+-- Tabla de tipos de eventos
+CREATE TABLE tipos_eventos (
+    tipo_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_tipo VARCHAR(50) NOT NULL UNIQUE
+);
+
 -- Tabla de lugares de eventos
 CREATE TABLE lugares_eventos (
     lugar_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -221,10 +228,12 @@ CREATE TABLE lugares_eventos (
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (distrito_id) REFERENCES distritos(distrito_id) ON DELETE CASCADE
 );
+
 -- Tabla de eventos
 CREATE TABLE eventos (
     event_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
+    tipo_evento_id INT NOT NULL, -- Tipo evento
     nombre_evento VARCHAR(150),
     fecha_evento DATE NOT NULL,
     hora_evento TIME NOT NULL,
@@ -240,7 +249,8 @@ CREATE TABLE eventos (
     estado_evento ENUM('activa', 'baneada', 'eliminada') DEFAULT 'activa',
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (lugar_evento_id) REFERENCES lugares_eventos(lugar_id) ON DELETE CASCADE
+    FOREIGN KEY (lugar_evento_id) REFERENCES lugares_eventos(lugar_id) ON DELETE CASCADE,
+    FOREIGN KEY (tipo_evento_id) REFERENCES tipos_eventos(tipo_id) ON DELETE SET NULL
 );
 
 -- Tabla de inscripciones a eventos
@@ -249,10 +259,11 @@ CREATE TABLE inscripciones_eventos (
     event_id INT NOT NULL,
     user_id INT NOT NULL,
     fecha_inscripcion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    activa BOOLEAN NOT NULL DEFAULT TRUE,  -- Estado por defecto
+    activa BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (event_id) REFERENCES eventos(event_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
+
 
 -- Tabla de hogares temporales
 CREATE TABLE hogares_temporales (
@@ -305,7 +316,7 @@ CREATE TABLE sesiones_usuarios (
     sesion_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     inicio_sesion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    fin_sesion TIMESTAMP,
+    fin_sesion DATETIME,
     duracion_sesion INT, -- Duración de la sesión en segundos o minutos
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
