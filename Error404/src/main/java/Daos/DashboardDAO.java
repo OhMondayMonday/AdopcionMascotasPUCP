@@ -11,10 +11,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardDAO extends BaseDao {
+    // Obtener el nombre del usuario
+    public String obtenerNombreUsuario(int userId) {
+        String sql = "SELECT nombre FROM Usuarios WHERE user_id = ?";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("nombre");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Usuario";
+    }
+
+    public String obtenerFotoPerfil(int userId) {
+        String sql = "SELECT f.url_foto FROM fotos f JOIN usuarios u ON f.foto_id = u.foto_id WHERE u.user_id = ?";
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("url_foto");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "assets/img/default-profile.jpg"; //una por defeto puem
+    }
+
 
     // Obtener el conteo de animales ayudados
     public int obtenerAnimalesAyudados(int userId) {
-        String sql = "SELECT COUNT(*) FROM Mascotas WHERE user_id = ? AND en_hogar_temporal = FALSE";
+        // Ajusta esta consulta para reflejar la relación correcta
+        String sql = "SELECT COUNT(*) FROM Mascotas m " +
+                "JOIN Hogares_Temporales ht ON m.mascota_id = ht.mascota_id " +
+                "WHERE ht.user_id = ? AND m.en_hogar_temporal = FALSE";
         try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
@@ -26,6 +58,7 @@ public class DashboardDAO extends BaseDao {
         }
         return 0;
     }
+
 
     // Obtener el conteo de publicaciones realizadas
     public int obtenerPublicacionesRealizadas(int userId) {
@@ -75,10 +108,13 @@ public class DashboardDAO extends BaseDao {
 
     // Obtener el próximo evento
     public Eventos obtenerProximoEvento(int userId) {
-        String sql = "SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.hora_evento, le.lugar_id, le.nombre_lugar " +
+        String sql = "SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.hora_evento, e.foto_id, " +
+                "le.lugar_id, le.nombre_lugar, f.url_foto " +
                 "FROM Eventos e " +
                 "JOIN Lugares_Eventos le ON e.lugar_evento_id = le.lugar_id " +
-                "WHERE e.user_id = ? AND e.fecha_evento > NOW() ORDER BY e.fecha_evento ASC LIMIT 1";
+                "LEFT JOIN Fotos f ON e.foto_id = f.foto_id " + // JOIN para obtener la URL de la imagen
+                "WHERE e.user_id = ? AND e.fecha_evento > NOW() " +
+                "ORDER BY e.fecha_evento ASC LIMIT 1";
         try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
@@ -95,15 +131,20 @@ public class DashboardDAO extends BaseDao {
                 lugarEvento.setNombreLugar(rs.getString("nombre_lugar"));
                 evento.setLugarEvento(lugarEvento);
 
+                // Configurar la URL de la imagen
+                String urlFoto = rs.getString("url_foto");
+                evento.setUrlFoto(urlFoto != null ? urlFoto : "assets/img/default-event.jpg"); // Imagen por defecto si es null
+
                 return evento;
-            } else {
-                System.out.println("No hay próximos eventos para el userId: " + userId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+
+
 
     // Obtener las últimas actualizaciones (ajustada para asegurar que se obtengan correctamente)
     public List<String> obtenerUltimasActualizaciones(int userId) {

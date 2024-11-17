@@ -19,6 +19,7 @@ public class Eventos {
     private String razonEvento;
     private Date fechaCreacion;
     private String estadoEvento;
+    private String urlFoto;
 
 
     public int getEventId() {
@@ -128,7 +129,12 @@ public class Eventos {
     public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
     }
+    public String getUrlFoto() {
+        return urlFoto;
+    }
 
-
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
+    }
 }
 

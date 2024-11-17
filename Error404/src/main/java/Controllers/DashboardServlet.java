@@ -43,6 +43,9 @@ public class DashboardServlet extends HttpServlet {
         int userId = 1; // Cambia este valor a la lógica que necesitas para obtener el userId del usuario autenticado
 
         try {
+            String nombreUsuario = dashboardDAO.obtenerNombreUsuario(userId);
+            String fotoPerfil = dashboardDAO.obtenerFotoPerfil(userId);
+
             // Obtener datos desde el DashboardDAO
             int animalesAyudados = dashboardDAO.obtenerAnimalesAyudados(userId);
             int publicacionesRealizadas = dashboardDAO.obtenerPublicacionesRealizadas(userId);
@@ -54,6 +57,8 @@ public class DashboardServlet extends HttpServlet {
             List<Logs> actualizaciones = dashboardDAO.getLast4LogsByUserId(userId);
 
             // Pasar los datos al JSP
+            request.setAttribute("nombreUsuario", nombreUsuario);
+            request.setAttribute("fotoPerfil", fotoPerfil);
             request.setAttribute("animalesAyudados", animalesAyudados);
             request.setAttribute("publicacionesRealizadas", publicacionesRealizadas);
             request.setAttribute("eventosInscritos", eventosInscritos);
@@ -62,7 +67,7 @@ public class DashboardServlet extends HttpServlet {
             request.setAttribute("actualizaciones", actualizaciones);
 
             // Redirigir al JSP del Dashboard
-            request.getRequestDispatcher("/WEB-INF/Inicio-usuario.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/Inicio-usuario.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al cargar el Dashboard");

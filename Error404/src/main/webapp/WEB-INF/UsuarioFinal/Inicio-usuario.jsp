@@ -13,6 +13,8 @@
     int eventosInscritos = dashboardDAO.obtenerEventosInscritos(userId);
     String actividadPrincipal = dashboardDAO.obtenerActividadPrincipal(userId);
     Eventos proximoEvento = dashboardDAO.obtenerProximoEvento(userId);
+    String nombreUsuario = (String) request.getAttribute("nombreUsuario");
+    String fotoPerfil = dashboardDAO.obtenerFotoPerfil(userId);
 %>
 
 <!DOCTYPE html>
@@ -272,7 +274,7 @@
                 <div class="card border-0 mb-4 p-3">
                     <div class="card-body row p-0 pb-3">
                         <div class="col-12 col-md-8 card-separator">
-                            <h3 class="text-dark">¡Bienvenido, Adolfo! 👋🏻</h3>
+                            <h3 class="text-dark">¡Bienvenido, <%= nombreUsuario %>! 👋🏻</h3>
                             <p>Reporte semanal</p>
                             <div class="d-flex justify-content-between flex-wrap gap-3 me-5">
                                 <div class="d-flex align-items-center gap-3 me-4">
@@ -304,7 +306,7 @@
                         <div class="card h-100">
                             <div class="card-header"><h5>Principal actividad</h5></div>
                             <div class="d-flex justify-content-center align-items-center h-100 p-3"> <!-- Añadido padding con "p-3" -->
-                                <img class="img-fluid rounded" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt="fotoperfil">
+                                <img class="img-fluid rounded" src="${pageContext.request.contextPath}/<%= fotoPerfil %>" alt="foto de perfil">
                             </div>
                         </div>
                     </div>
@@ -312,6 +314,11 @@
                     <div class="col-xl-4">
                         <div class="card h-100">
                             <div class="card-body">
+                                <% if (proximoEvento != null && proximoEvento.getUrlFoto() != null && !proximoEvento.getUrlFoto().isEmpty()) { %>
+                                <img src="<%= proximoEvento.getUrlFoto() %>" alt="Imagen del Evento" class="img-fluid rounded" style="max-height: 250px;">
+                                <% } else { %>
+                                <img src="assets/img/Eventos/default-event.jpg" alt="Imagen por Defecto" class="img-fluid rounded" style="max-height: 250px;">
+                                <% } %>
                                 <h4 class="mb-2 pb-1">Próximo evento</h4>
                                 <% if (proximoEvento != null) { %>
                                 <p class="small">Sigue compartiendo con los demás por un bien animal</p>
@@ -324,7 +331,7 @@
                                         </div>
                                         <div>
                                             <h6 class="mb-0 text-nowrap"><%= proximoEvento.getFechaEvento() %></h6>
-                                            <small>Nuevo evento</small>
+                                            <small><%= proximoEvento.getNombreEvento() %></small>
                                         </div>
                                     </div>
                                     <div class="col-6 d-flex align-items-center">
@@ -350,6 +357,7 @@
                             </div>
                         </div>
                     </div>
+
 
 
                     <div class="col-xl-4">
