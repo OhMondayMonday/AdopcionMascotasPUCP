@@ -55,6 +55,42 @@ public class UsuarioDAO extends BaseDao {
 
         return usuario;
     }
+
+    public boolean registrarUsuario(Usuarios usuario) {
+        boolean registrado = false;
+
+        String sql = "INSERT INTO usuarios (username, contrasenia, nombre, apellido, email, dni, descripcion, direccion, distrito_id, estadoCuenta, rol_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, usuario.getUsername());
+            stmt.setString(2, usuario.getContrasenia());
+            stmt.setString(3, usuario.getNombre());
+            stmt.setString(4, usuario.getApellido());
+            stmt.setString(5, usuario.getEmail());
+            stmt.setString(6, usuario.getDni());
+            stmt.setString(7, usuario.getDescripcion());
+            stmt.setString(8, usuario.getDireccion());
+
+            if (usuario.getDistrito() != null) {
+                stmt.setInt(9, usuario.getDistrito().getDistritoId());
+            } else {
+                stmt.setNull(9, java.sql.Types.INTEGER);
+            }
+
+            stmt.setString(10, "activa");
+            stmt.setInt(11, 1);
+
+            registrado = stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return registrado;
+    }
 }
 
 
