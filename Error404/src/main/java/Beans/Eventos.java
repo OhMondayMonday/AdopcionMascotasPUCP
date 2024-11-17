@@ -1,5 +1,4 @@
 package Beans;
-
 import java.sql.Date;
 import java.sql.Time;
 
