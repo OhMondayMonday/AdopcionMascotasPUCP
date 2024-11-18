@@ -4,7 +4,7 @@
     <div class="app-brand demo px-3">
         <a href="javascript:void(0);" class="app-brand-link">
           <span class="app-brand-logo demo">
-            <img class = "h-px-50 tf-icon" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+            <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
           </span>
         </a>
 

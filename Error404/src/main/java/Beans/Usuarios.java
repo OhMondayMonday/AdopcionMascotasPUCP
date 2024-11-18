@@ -36,6 +36,7 @@ public class Usuarios {
     private String fechaContratacion;
 
 
+
     public int getUserId() {
         return userId;
     }
