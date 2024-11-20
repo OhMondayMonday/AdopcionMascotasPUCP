@@ -2,6 +2,7 @@ package Controllers;
 
 import Beans.*;
 import Daos.PublicacionesDAO;
+import Daos.RazasDao;
 import Daos.UsuarioFinalDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/PublicacionesServlet")
@@ -51,6 +53,27 @@ public class PublicacionesServlet extends HttpServlet {
                 } else {
                     response.sendRedirect("PublicacionesServlet");
                 }
+                break;
+            case "agregarDenuncia":
+                if (request.getParameter("user_id") != null) {
+                    String user_idString = request.getParameter("user_id");
+                    int user_id = 0;
+                    try {
+                        user_id = Integer.parseInt(user_idString);
+                    } catch (NumberFormatException e) {
+                        response.sendRedirect("PublicacionesServlet");
+                    }
+                    UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+                    Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+                    request.setAttribute("usuario", usuario);
+                    RazasDao razasDao = new RazasDao();
+                    ArrayList<Razas> listaRazas = razasDao.listarRazas();
+                    request.setAttribute("listaRazas", listaRazas);
+                    request.getRequestDispatcher("/html/dentro/crear-publicacion-usuariofinal-denunciamaltrato.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("PublicacionesServlet");
+                }
+                break;
 
         }
     }
