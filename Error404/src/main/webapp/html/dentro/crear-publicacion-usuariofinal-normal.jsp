@@ -73,7 +73,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/form-validation.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/animate-css/animate.css" />
 
     <!-- Page CSS -->
@@ -345,9 +345,8 @@
                                         </div>
                                         <!-- Description -->
                                         <div>
-                                            <label class="form-label" for="descripcion">Descripción <span class="text-muted"></span></label>
-                                            <textarea class="form-control" id="descripcion" rows="7">
-                                            </textarea>
+                                            <label class="form-label" for="descripcion">Descripción<span class="text-muted"></span></label>
+                                            <textarea class="form-control" id="descripcion" rows="7"></textarea>
                                         </div>
 
                                     </div>
@@ -357,22 +356,9 @@
                             <div class="col-12 col-lg-6">
                                 <!-- Media -->
                                 <div class="card mb-1">
-                                    <div class="card-header d-flex justify-content-between align-items-center">
-                                        <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
-                                        <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
-                                    </div>
                                     <div class="card-body">
-                                        <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                                            <div class="dz-message needsclick my-3">
-                                                <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
-                                                <p class="text-muted fs-4 note needsclick my-0">o</p>
-                                                <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
-
-                                            </div>
-                                            <div class="fallback">
-                                                <input name="file" type="image" accept="image/*"/>
-                                            </div>
-                                        </form>
+                                        <label class="form-label" for="foto">Imagen</label>
+                                        <input class="form-control" id="foto" type="image">
                                     </div>
                                 </div>
                             </div>
@@ -433,9 +419,9 @@
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/popular.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/auto-focus.js"></script>
 
 <!-- Main JS -->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>

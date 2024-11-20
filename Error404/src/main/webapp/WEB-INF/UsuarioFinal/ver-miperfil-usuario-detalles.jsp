@@ -115,7 +115,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-publicaciones-usuario.jsp" class="menu-link">
+                    <a href="../../html/dentro/ver-publicaciones-usuario.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
                     </a>
