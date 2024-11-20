@@ -250,7 +250,7 @@ CREATE TABLE eventos (
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (lugar_evento_id) REFERENCES lugares_eventos(lugar_id) ON DELETE CASCADE,
-    FOREIGN KEY (tipo_evento_id) REFERENCES tipos_eventos(tipo_id) ON DELETE SET NULL
+    FOREIGN KEY (tipo_evento_id) REFERENCES tipos_eventos(tipo_id) ON DELETE CASCADE
 );
 
 -- Tabla de inscripciones a eventos

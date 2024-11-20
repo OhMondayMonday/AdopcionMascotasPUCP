@@ -3,15 +3,19 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Eventos {
+
     private int eventId;
+
     private Usuarios usuario;
+    private TiposEventos tipoEvento;
+    private LugaresEventos lugarEvento;
+    private Fotos foto;
+
     private String nombreEvento;
     private Date fechaEvento;
     private Time horaEvento;
     private Date fechaFin;
     private Time horaFin;
-    private Fotos foto;
-    private LugaresEventos lugarEvento;
     private String entrada;
     private String descripcionEvento;
     private String artistasProveedores;
@@ -20,7 +24,7 @@ public class Eventos {
     private String estadoEvento;
     private String urlFoto;
 
-
+    // eventID
     public int getEventId() {
         return eventId;
     }
@@ -29,10 +33,41 @@ public class Eventos {
         this.eventId = eventId;
     }
 
-    public Usuarios getUsuario() { return usuario; }
+    // Usuario
+    public Usuarios getUsuario() {
+        return usuario;
+    }
 
-    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
 
+    // Tipo Evento
+    public TiposEventos getTipoEvento() {
+        return tipoEvento;
+    }
+
+    public void setTipoEvento(TiposEventos tipoEvento) {
+        this.tipoEvento = tipoEvento;
+    }
+
+    // Lugar Evento
+    public LugaresEventos getLugarEvento() { return lugarEvento; }
+
+    public void setLugarEvento(LugaresEventos lugarEvento) {
+        this.lugarEvento = lugarEvento;
+    }
+
+    // Fotos
+    public Fotos getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Fotos foto) {
+        this.foto = foto;
+    }
+
+    // Nombre Evento
     public String getNombreEvento() {
         return nombreEvento;
     }
@@ -41,6 +76,7 @@ public class Eventos {
         this.nombreEvento = nombreEvento;
     }
 
+    // Fecha Evento
     public Date getFechaEvento() {
         return fechaEvento;
     }
@@ -49,6 +85,7 @@ public class Eventos {
         this.fechaEvento = fechaEvento;
     }
 
+    // Hora Inicio Evento
     public Time getHoraEvento() {
         return horaEvento;
     }
@@ -57,62 +94,7 @@ public class Eventos {
         this.horaEvento = horaEvento;
     }
 
-    public Fotos getFoto() { return foto; }
-
-    public void setFoto(Fotos foto) { this.foto = foto; }
-
-    public LugaresEventos getLugarEvento() { return lugarEvento; }
-
-    public void setLugarEvento(LugaresEventos lugarEvento) { this.lugarEvento = lugarEvento; }
-
-    public String getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(String entrada) {
-        this.entrada = entrada;
-    }
-
-    public String getDescripcionEvento() {
-        return descripcionEvento;
-    }
-
-    public void setDescripcionEvento(String descripcionEvento) {
-        this.descripcionEvento = descripcionEvento;
-    }
-
-    public String getArtistasProveedores() {
-        return artistasProveedores;
-    }
-
-    public void setArtistasProveedores(String artistasProveedores) {
-        this.artistasProveedores = artistasProveedores;
-    }
-
-    public String getRazonEvento() {
-        return razonEvento;
-    }
-
-    public void setRazonEvento(String razonEvento) {
-        this.razonEvento = razonEvento;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public String getEstadoEvento() {
-        return estadoEvento;
-    }
-
-    public void setEstadoEvento(String estadoEvento) {
-        this.estadoEvento = estadoEvento;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
+    // Fecha Fin
     public Date getFechaFin() {
         return fechaFin;
     }
@@ -121,6 +103,7 @@ public class Eventos {
         this.fechaFin = fechaFin;
     }
 
+    // Hora Fin
     public Time getHoraFin() {
         return horaFin;
     }
@@ -128,6 +111,62 @@ public class Eventos {
     public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
     }
+
+    // Entrada
+    public String getEntrada() {
+        return entrada;
+    }
+
+    public void setEntrada(String entrada) {
+        this.entrada = entrada;
+    }
+
+    // Descripción Evento
+    public String getDescripcionEvento() {
+        return descripcionEvento;
+    }
+
+    public void setDescripcionEvento(String descripcionEvento) {
+        this.descripcionEvento = descripcionEvento;
+    }
+
+    // Artistas
+    public String getArtistasProveedores() {
+        return artistasProveedores;
+    }
+
+    public void setArtistasProveedores(String artistasProveedores) {
+        this.artistasProveedores = artistasProveedores;
+    }
+
+    // Razón del Evento
+    public String getRazonEvento() {
+        return razonEvento;
+    }
+
+    public void setRazonEvento(String razonEvento) {
+        this.razonEvento = razonEvento;
+    }
+
+    // Fecha Creación Evento
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    // Estado del evento
+    public String getEstadoEvento() {
+        return estadoEvento;
+    }
+
+    public void setEstadoEvento(String estadoEvento) {
+        this.estadoEvento = estadoEvento;
+    }
+
+    // Foto del Evento
     public String getUrlFoto() {
         return urlFoto;
     }

@@ -1,23 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Daos.UsuarioFinalDAO" %>
-<%@ page import="Daos.EventosDAO" %>
-<%@ page import="Beans.Usuarios" %>
 <%@ page import="Beans.Eventos" %>
-<%@ page import="Beans.InscripcionesEventos" %>
-<%@ page import="Beans.LugaresEventos" %>
-<%@ page import="Beans.Roles" %>
-<%@ page import="Beans.Distritos" %>
-<%@page import="java.util.ArrayList" %>
-<%@page import="java.util.List" %>
+<%@ page import="Beans.Usuarios" %>
+<%@ page import="Beans.TiposEventos" %>
 <jsp:useBean id="listaEventos" type="java.util.ArrayList<Beans.Eventos>" scope="request"/>
-<%@ page import="com.google.gson.Gson"%>
-<%@ page import="com.google.gson.GsonBuilder" %>
-<%
-    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").create();
-
-    String eventosInscritosJson = gson.toJson(request.getAttribute("eventosInscritos"));
-    String eventosNoInscritosJson = gson.toJson(request.getAttribute("eventosNoInscritos"));
-%>
 
 <!DOCTYPE html>
 
@@ -47,7 +32,7 @@
     <!-- End Google Tag Manager -->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+    <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -55,40 +40,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
 
     <!-- Icons -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/fontawesome.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/flag-icons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../../assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/typography.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
 
     <!-- Page CSS -->
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-faq.css" />
+    <link rel="stylesheet" href="../../assets/vendor/css/pages/page-faq.css" />
 
 
     <!-- Helpers -->
-    <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
+    <script src="../../assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
+    <script src="../../assets/js/config.js"></script>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
 
 </head>
 
@@ -103,15 +88,386 @@
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
 
-        <!-- Sidebar -->
-        <jsp:include page="../includes/sidebarUF.jsp" />
-        <!-- / Sidebar -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+
+            <div class="app-brand demo px-3">
+                <a href="javascript:void(0);" class="app-brand-link">
+          <span class="app-brand-logo demo">
+            <img class = "h-px-50 tf-icon" src="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+          </span>
+                </a>
+
+                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                </a>
+            </div>
+
+            <div class="menu-inner-shadow"></div>
+
+
+
+            <ul class="menu-inner py-1">
+
+                <li class="menu-item">
+                    <a href="ver-inicio-usuario.html"  class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home"></i>
+                        <div class="text-truncate" data-i18n="Inicio">Inicio</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="ver-publicaciones-usuario.html"  class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-building-house"></i>
+                        <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="ver-eventos-usuario.html"  class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+                        <div class="text-truncate" data-i18n="Eventos">Eventos</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="postular-hogarestemporales.html"  class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-building-house"></i>
+                        <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
+                    </a>
+                </li>
+                <!-- Gestion -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
+                </li>
+                <li class="menu-item">
+                    <a href="ver-mispublicaciones-usuario.html" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-building-house"></i>
+                        <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="ver-miseventos-usuario.html" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+                        <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="usuario-mi-hogar-temporal.html" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-building-house"></i>
+                        <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
+                    </a>
+                </li>
+
+                <!-- Misc -->
+                <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
+                <li class="menu-item">
+                    <a href="Preguntas-frecuentes.html"  class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-help-circle"></i>
+                        <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
+                    </a>
+                </li>
+            </ul>
+
+
+
+        </aside>
 
         <div class="layout-page">
+            <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
 
-            <!-- Navbar -->
-            <jsp:include page="../includes/navbarUF.jsp" />
-            <!-- / Navbar -->
+
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0   d-xl-none ">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <i class="bx bx-menu bx-sm"></i>
+                    </a>
+                </div>
+
+
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+                    <div class="w-75 align-items-center me-auto">
+                        <div class="nav-item navbar-search-wrapper mb-0">
+              <span class="d-inline-block justify-content-center">
+              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario /</span> Mis eventos</p>
+            </span>
+                        </div>
+                    </div>
+
+                    <ul class="navbar-nav flex-row align-items-center ms-0">
+
+                        <!-- Notification -->
+                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+                        <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+                            <ul class="dropdown-menu dropdown-menu-end py-0">
+                                <li class="dropdown-menu-header border-bottom">
+                                    <div class="dropdown-header d-flex align-items-center py-3">
+                                        <h5 class="text-body mb-0 me-auto">Notification</h5>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="bx fs-4 bx-envelope-open"></i></a>
+                                    </div>
+                                </li>
+                                <li class="dropdown-notifications-list scrollable-container">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <img src="../../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">Congratulation Lettie 🎉</h6>
+                                                    <p class="mb-0">Won the monthly best seller gold badge</p>
+                                                    <small class="text-muted">1h ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">Charles Franklin</h6>
+                                                    <p class="mb-0">Accepted your connection</p>
+                                                    <small class="text-muted">12hr ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <img src="../../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">New Message ✉️</h6>
+                                                    <p class="mb-0">You have new message from Natalie</p>
+                                                    <small class="text-muted">1h ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-cart"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">Whoo! You have new order 🛒 </h6>
+                                                    <p class="mb-0">ACME Inc. made new order $1,154</p>
+                                                    <small class="text-muted">1 day ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <img src="../../assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">Application has been approved 🚀 </h6>
+                                                    <p class="mb-0">Your ABC project application has been approved.</p>
+                                                    <small class="text-muted">2 days ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-pie-chart-alt"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">Monthly report is generated</h6>
+                                                    <p class="mb-0">July monthly financial report is generated </p>
+                                                    <small class="text-muted">3 days ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <img src="../../assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">Send connection request</h6>
+                                                    <p class="mb-0">Peter sent you connection request</p>
+                                                    <small class="text-muted">4 days ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <img src="../../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">New message from Jane</h6>
+                                                    <p class="mb-0">Your have new message from Jane</p>
+                                                    <small class="text-muted">5 days ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar">
+                                                        <span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-error"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">CPU is running high</h6>
+                                                    <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
+                                                    <small class="text-muted">5 days ago</small>
+                                                </div>
+                                                <div class="flex-shrink-0 dropdown-notifications-actions">
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
+                                                    <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="bx bx-x"></span></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-menu-footer border-top p-3">
+                                    <button class="btn btn-primary text-uppercase w-100">view all notifications</button>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ Notification -->
+                        <!-- User -->
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-medium d-block"> Adolfo Contreras</span>
+                                                <small class="text-muted">Usuario</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                                        <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
+                                        <span class="align-middle" style="color: #1f4397;">Seguridad</span>
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+                                        <i class="bx bx-building-house"></i>
+                                        <span class="align-middle">Mis publicaciones</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                                        <i class="bx bx-bone"></i>
+                                        <span class="align-middle">Mis eventos</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="ver-calendario-usuario.html">
+                                        <i class="bx bx-calendar"></i>
+                                        <span class="align-middle">Mi Calendario</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="Preguntas-frecuentes.html">
+                                        <i class="bx bx-help-circle"></i>
+                                        <span class="align-middle">Preguntas frecuentes</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="../index.html" >
+                                        <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
+                                        <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ User -->
+
+
+                    </ul>
+                </div>
+
+
+                <!-- Search Small Screens -->
+                <div class="navbar-search-wrapper search-input-wrapper  d-none">
+                    <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
+                    <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
+                </div>
+
+
+            </nav>
+
+
+
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
@@ -179,23 +535,17 @@
                             <div class="card-body p-0">
                                 <div class="container-fluid mt-3">
                                     <div class="row gx-1 gy-2 justify-content-center m-0">
-
-                                        <%
-                                            int i = 1;
-                                            for (Eventos e : listaEventos) {
-                                        %>
-
                                         <!-- Card 1 -->
                                         <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
                                             <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                                                 <div class="rounded-2 text-center flex-grow-1">
-                                                    <a data-bs-toggle="modal" href="#evento<%=i%>">
-                                                        <img class="img-fluid" src="<%=e.getFoto().getUrlFoto()%>" alt="Imagen de evento <%=i%>" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
+                                                    <a href="#">
+                                                        <img class="img-fluid" src="../../assets/img/i2.jpg" alt="Imagen de publicación 1" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
                                                     </a>
                                                 </div>
                                                 <div class="card-body p-2 d-flex flex-column">
                                                     <div class="d-flex justify-content-between mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;"><%=e.getTipo%></span>
+                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Ferias</span>
                                                     </div>
                                                     <a class="h6" href="#" style="font-size: 0.875rem;">Feria de adopcion de bienestar</a>
                                                     <p class="mt-auto mb-auto" style="font-size: 0.75rem;">Luego de un harto trabajo de recolección, estamos a 100 </p>
@@ -387,256 +737,8 @@
                             </div>
                             <!--/ Evento 1 -->
 
-                            <!-- Evento 2 -->
-                            <div class="modal fade" id="evento2" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="../../assets/img/img2.jpg" alt="Imagen de publicación 2" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Protégelo contra la rabia</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Campañas</span>
-                                            </div>
-                                            <form id="editUserForm" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Protégelo para la rabia" es una campaña de vacunación gratuita dedicada a proteger a nuestras
-                                                        mascotas y a la comunidad de la rabia. Este evento tiene como objetivo concientizar sobre la
-                                                        importancia de la vacunación, asegurando que perros y gatos reciban la protección necesaria contra esta
-                                                        peligrosa enfermedad. A lo largo de la jornada, un equipo de veterinarios estará aplicando vacunas de
-                                                        manera gratuita y ofreciendo información clave sobre la prevención de la rabia y el cuidado general de
-                                                        los animales. No dejes pasar la oportunidad de proteger a tu compañero de cuatro patas y contribuir a
-                                                        un entorno más seguro para todos. ¡Te esperamos en esta campaña por la salud y el bienestar animal!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 09:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Albergue Caritas</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 2 -->
-
-                            <!-- Evento 3 -->
-                            <div class="modal fade" id="evento3" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-1" src="../../assets/img/i3.jpg" alt="Imagen de publicación 3" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Adopción para mascotas II</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Campañas</span>
-                                            </div>
-                                            <form id="editUserForm" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Adopción de Mascotas - 2da Edición" es un evento especial donde tendrás la oportunidad de brindar
-                                                        un hogar amoroso a perros y gatos que están buscando una segunda oportunidad. Después del éxito de
-                                                        la primera edición, volvemos con más amigos de cuatro patas listos para convertirse en parte de tu
-                                                        familia. Ven y conoce a estos adorables animales rescatados, cada uno con una historia única y un
-                                                        corazón lleno de esperanza. Además de la adopción, podrás disfrutar de charlas sobre cuidado
-                                                        responsable, asesoramiento para la integración de tu nueva mascota y muchas actividades pensadas
-                                                        para los amantes de los animales. ¡No te pierdas la oportunidad de cambiar una vida y llevarte a
-                                                        casa un nuevo mejor amigo!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 14:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Frente a la PUCP</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 3 -->
-
-                            <!-- Evento 4 -->
-                            <div class="modal fade" id="evento4" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="../../assets/img/i5.jpg" alt="Imagen de publicación 4" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Desfile de Patitas</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                            </div>
-                                            <form id="editUserForm" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Desfile de Patitas" es un evento único y lleno de alegría donde nuestras mascotas son las verdaderas
-                                                        protagonistas. En este desfile, perros y gatos de todas las razas y tamaños caminarán con orgullo junto
-                                                        a sus dueños, mostrando su encanto y personalidad. Además de ser una divertida celebración, el desfile
-                                                        busca promover la adopción responsable y concientizar sobre el bienestar animal. Habrá concursos,
-                                                        premios para las mejores presentaciones, y actividades interactivas para toda la familia. ¡Ven con tu
-                                                        mascota, disfruta del desfile y únete a nosotros en esta celebración de amor y respeto hacia nuestros
-                                                        amigos de cuatro patas!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 14:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Frente a la PUCP</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 4 -->
-
-                            <!-- Evento 5 -->
-                            <div class="modal fade" id="evento5" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="../../assets/img/i6.jpg" alt="Imagen de publicación 5" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Encuentra a tu Mejor Amigo</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                            </div>
-                                            <form id="editUserForm" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Encuentra a tu mejor amigo" es un emocionante evento de concurso donde las mascotas y sus dueños
-                                                        se unen para disfrutar de carreras, juegos y divertidas competencias. Diseñado para fomentar la
-                                                        conexión entre los dueños y sus compañeros de cuatro patas, este evento contará con pruebas de
-                                                        agilidad, carreras de obstáculos y desafíos interactivos que pondrán a prueba las habilidades y
-                                                        el vínculo entre mascota y dueño. Habrá premios para los ganadores en distintas categorías, desde
-                                                        el más rápido hasta el más habilidoso. No te pierdas esta oportunidad única de pasar un día lleno
-                                                        de diversión, actividad física y, por supuesto, amor incondicional. ¡Ven y participa con tu mascota
-                                                        en esta aventura llena de juegos y diversión!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 14:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Frente a la PUCP</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 5 -->
-
-                            <!-- Evento 6 -->
-                            <div class="modal fade" id="evento6" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="../../assets/img/i4.jpg" alt="Imagen de publicación 6" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Gran Concurso de Mascotas</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                            </div>
-                                            <form id="editUserForm" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Gran Concurso de Mascotas" es un evento virtual donde las estrellas son nuestras adorables
-                                                        mascotas, y el disfraz más creativo se llevará el gran premio. Desde la comodidad de tu hogar,
-                                                        podrás participar enviando fotos o videos de tu mascota luciendo su mejor disfraz. El concurso
-                                                        está abierto a todo tipo de mascotas, y un panel de jueces seleccionará a los ganadores en base a
-                                                        la originalidad y creatividad de los atuendos. ¡Así que es hora de dejar volar la imaginación y
-                                                        vestir a tu mejor amigo de manera única! Únete a este divertido evento y compite por premios
-                                                        increíbles mientras disfrutas de la creatividad de los demás participantes. ¡No te lo pierdas!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 10:00</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Medio: ¡Mediante la página web!</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 24 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 6 -->
-
-                            <!-- Footer -->
-                            <footer class="footer" style="background-color: #e7f6ff42;">
-                                <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-                                    <div>
-                                        <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-
-                                    </div>
-                                    <div>
-                                        <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-                                        <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-                                        <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-                                    </div>
-                                </div>
-                            </footer>
-                            <!-- / Footer -->
-
-
                             <div class="content-backdrop fade"></div>
-
-
                         </div>
-
-
                         <!-- Content wrapper -->
                     </div>
                     <!-- / Layout page -->
@@ -658,36 +760,33 @@
             <!-- Core JS -->
             <!-- build:js assets/vendor/js/core.js -->
 
-            <script type="text/javascript">
-                window.eventosNoInscritos = <%= eventosNoInscritosJson %>;
-                window.eventosInscritos = <%= eventosInscritosJson %>;
-            </script>
+            <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
+            <script src="../../assets/vendor/libs/popper/popper.js"></script>
+            <script src="../../assets/vendor/js/bootstrap.js"></script>
+            <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+            <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
+            <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
+            <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
+            <script src="../../assets/vendor/js/menu.js"></script>
 
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
+            <!-- endbuild -->
 
             <!-- Vendors JS -->
 
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+            <script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
+            <script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+            <script src="../../assets/vendor/libs/select2/select2.js"></script>
+            <script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
+            <script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+            <script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+            <script src="../../assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
 
             <!-- Main JS -->
-            <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+            <script src="../../assets/js/main.js"></script>
 
 
             <!-- Page JS -->
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+            <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
             <script>
                 // Inicializa flatpickr para el rango de fechas
                 flatpickr("#dateRange", {
@@ -699,12 +798,29 @@
                 });
             </script>
 
-            <script src="${pageContext.request.contextPath}/assets/js/pages-pricing.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
+            <script src="../../assets/js/pages-pricing.js"></script>
+            <script src="../../assets/js/modal-edit-user.js"></script>
 
+</div>
+    </div>
+</div>
 </body>
 
+<!-- Footer -->
+<footer class="footer" style="background-color: #e7f6ff42;">
+    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+        <div>
+            <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
 
+        </div>
+        <div>
+            <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+            <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+            <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+        </div>
+    </div>
+</footer>
+<!-- / Footer -->
 
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
