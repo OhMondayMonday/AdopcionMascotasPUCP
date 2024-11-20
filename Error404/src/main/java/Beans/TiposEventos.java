@@ -2,23 +2,23 @@ package Beans;
 
 public class TiposEventos {
 
-    private int tipoEventoId;
-    private String nombreTipoEvento;
+    private int tipo_id;
+    private String nombre_tipo;
 
     public int getTipoEventoId(){
-        return tipoEventoId;
+        return tipo_id;
     }
 
-    public void setTipoEventoId(int tipoEventoId){
-        this.tipoEventoId = tipoEventoId;
+    public void setTipoEventoId(int tipo_id){
+        this.tipo_id = tipo_id;
     }
 
-    public String getNombreTipoEvento(){
-        return nombreTipoEvento;
+    public String getNombre_tipo(){
+        return nombre_tipo;
     }
 
-    public void setNombreTipoEvento(String nombreTipoEvento){
-        this.nombreTipoEvento = nombreTipoEvento;
+    public void setNombre_tipo(String nombre_tipo){
+        this.nombre_tipo = nombre_tipo;
     }
 
 }

@@ -1,7 +1,9 @@
 package Controllers;
 
+import Beans.Distritos;
 import Beans.Eventos;
 import Beans.TiposEventos;
+import Daos.DistritosDAO;
 import Daos.EventosDAO;
 import Daos.TiposEventosDAO;
 import jakarta.servlet.ServletException;
@@ -163,11 +165,12 @@ public class EventosServlet extends HttpServlet {
             eventos = eventosDAO.obtenerEventosActivos(); // Metodo para obtener todos los eventos sin filtros
         }
 
-        // Crear una instancia de TiposEventosDAO
+        DistritosDAO distritosDAO = new DistritosDAO();
+        List<Distritos> distritos = distritosDAO.obtenerDistritos();
+        request.setAttribute("distritos", distritos);
+
         TiposEventosDAO tiposEventosDAO = new TiposEventosDAO();
         List<TiposEventos> tiposEventos = tiposEventosDAO.obtenerTiposEventos();
-
-        // Enviar la lista de tipos de eventos a la JSP
         request.setAttribute("tiposEventos", tiposEventos);
 
         // Pasar los eventos y filtros a la JSP
@@ -178,8 +181,21 @@ public class EventosServlet extends HttpServlet {
             put("fechaInicio", fechaInicioParam);
             put("fechaFin", fechaFinParam);
         }});
+        System.out.println("Tipos de eventos: " + tiposEventos.size());
+        System.out.println("Eventos activos: " + eventos.size());
+        System.out.println("Filtro de distrito ID: " + distritoId);
+        System.out.println("Fecha Inicio: " + fechaInicio);
+        System.out.println("Fecha Fin: " + fechaFin);
+        System.out.println("Cantidad de eventos: " + (eventos != null ? eventos.size() : "null"));
+        System.out.println("Cantidad de tipos de eventos: " + (tiposEventos != null ? tiposEventos.size() : "null"));
+        System.out.println("Cantidad de distritos: " + (distritos != null ? distritos.size() : "null"));
 
-        request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-eventos-usuario.jsp").forward(request, response);
+
+        try {
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-eventos-usuario.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

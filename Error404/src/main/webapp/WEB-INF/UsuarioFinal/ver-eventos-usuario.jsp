@@ -103,211 +103,104 @@
                         <div class="col-12">
                             <div class="card mb-0" style="height: auto; padding: 5px;">
                                 <div class="card-body d-flex align-items-center justify-content-center p-1">
-                                    <div class="row w-100">
+                                    <form action="EventosServlet" method="GET" class="row w-100">
+                                        <input type="hidden" name="action" value="verTodosEventos">
                                         <!-- Tipo de Publicacion -->
                                         <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                            <form action="EventosServlet" method="GET">
-                                                <label for="tipoEventoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento: </label>
-                                                <select name="tipoEventoId" id="tipoEventoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                    <option value="">Todos</option>
-                                                    <c:forEach var="tipo" items="${tiposEventos}">
-                                                        <option value="${tipo.tipoEventoId}" ${tipo.tipoEventoId == filtros.tipoEventoId ? "selected" : ""}>
-                                                                ${tipo.nombreTipoEvento}
-                                                        </option>
-                                                    </c:forEach>
-                                                </select>
-                                            </form>
+                                            <label for="tipoEventoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento </label>
+                                            <select name="tipoEventoId" id="tipoEventoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                                                <option value="">Todos</option>
+                                                <c:forEach var="tipo" items="${tiposEventos}">
+                                                    <option value="${tipo.tipo_id}" ${tipo.tipo_id == filtros.tipo_id ? "selected" : ""}>
+                                                            ${tipo.nombre_tipo}
+                                                    </option>
+                                                </c:forEach>
+                                                <c:if test="${empty tiposEventos}">
+                                                    <p>No se encontraron tipos de eventos.</p>
+                                                </c:if>
+                                                <c:if test="${empty filtros}">
+                                                    <p>No hay filtros configurados.</p>
+                                                </c:if>
+
+                                            </select>
                                         </div>
                                         <!-- ubicacion -->
                                         <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                            <label for="select2Ubi" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicacion</label>
-                                            <select id="select2Ubi" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                <option value="AK">Todas</option>
-                                                <option value="Barranco">Barranco</option>
-                                                <option value="Lima">Lima</option>
-                                                <option value="Chorrillos">Chorrillos</option>
-                                                <option value="Lamolina">La Molina</option>
-                                                <option value="Jesusmaria">Jesus Maria</option>
-                                                <option value="Sanmiguel">San Miguel</option>
-                                                <option value="Losolivos">Los Olivos</option>
-                                                <option value="Miraflores">Miraflores</option>
-                                                <option value="Sanisidro">San isidro</option>
+
+                                            <label for="distritoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicación </label>
+                                            <select name="distritoId" id="distritoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                                                <option value="">Todos</option>
+                                                <c:forEach var="distrito" items="${distritos}">
+                                                    <option value="${distrito.distritoId}" ${distrito.distritoId == filtros.distritoId ? "selected" : ""}>
+                                                            ${distrito.nombreDistrito}
+                                                    </option>
+                                                </c:forEach>
                                             </select>
+
                                         </div>
                                         <!-- Fecha -->
                                         <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                             <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
-                                            <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas" />
+                                            <input type="text" id="dateRange" placeholder="Seleccionar rango de fechas" class="form-control form-control-sm"
+                                                   value="${filtros.fechaInicio} a ${filtros.fechaFin}">
+                                            <input type="hidden" name="fechaInicio" id="fechaInicio" value="${filtros.fechaInicio}">
+                                            <input type="hidden" name="fechaFin" id="fechaFin" value="${filtros.fechaFin}">
                                         </div>
 
                                         <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
-                                            <button class="btn btn-facebook" type="button">
+                                            <button class="btn btn-facebook" type="sumbit">
                                                 Aplicar filtros
                                             </button>
                                         </div>
-                                    </div>
+                                    </form>
+                                </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Card Container -->
-                        <div class="card mb-2" style="padding: 0; margin: 0;">
+                        <div class="card mb-2 mt-3" style="padding: 0; margin: 0;">
                             <div class="card-body p-0">
                                 <div class="container-fluid mt-3">
                                     <div class="row gx-1 gy-2 justify-content-center m-0">
-                                        <!-- Card 1 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a data-bs-toggle="modal" href="#evento1">
-                                                        <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/i2.jpg" alt="Imagen de publicación 1" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Ferias</span>
-                                                    </div>
-                                                    <a class="h6" data-bs-toggle="modal" href="#evento1" style="font-size: 0.875rem;">Feria de adopcion de bienestar</a>
-                                                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Participa en nuestra feria y adopta a tu nuevo mejor amigo.</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="ver-evento-detalles-usuario.html">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
 
-                                                        <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="1" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                            <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </button>
+                                        <!-- Cards -->
+                                        <c:forEach var="evento" items="${eventos}">
+                                            <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
+                                                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
+                                                    <div class="rounded-2 text-center flex-grow-1">
+                                                        <a data-bs-toggle="modal" href="">
+                                                            <img class="img-fluid" src="${evento.foto.urlFoto}" alt="${evento.nombreEvento}" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-body p-2 d-flex flex-column">
+                                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                                            <span class="badge bg-label-info" style="font-size: 0.75rem;">${evento.tipoEvento.tipo_id != null ? evento.tipoEvento.nombre_tipo : "Sin Tipo"}</span>
+                                                        </div>
+                                                        <a class="h6" data-bs-toggle="modal" href="" style="font-size: 0.875rem;">${evento.nombreEvento}</a>
+                                                        <p class="mt-1 mb-0" style="font-size: 0.75rem;">${evento.descripcionEvento}</p>
+                                                        <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                                                            <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="EventosServlet?action=verDetalles&eventId=${evento.eventId}">
+                                                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                            </a>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 2 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a data-bs-toggle="modal" href="#evento2">
-                                                        <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/img2.jpg" alt="Imagen de publicación 2" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">CAMPAÑAS</span>
-                                                    </div>
-                                                    <a class="h6" data-bs-toggle="modal" href="#evento2" style="font-size: 0.875rem;">Protégelo contra la rabia</a>
-                                                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Ayúdanos a vacunar a más mascotas contra la rabia. ¡Tu colaboración es clave!</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="ver-evento-detalles-usuario.html">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
+                                                            <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="1" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
+                                                                <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                            </button>
 
-                                                        <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="2" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                            <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- Card 3 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a data-bs-toggle="modal" href="#evento3">
-                                                        <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/i3.jpg" alt="Imagen de publicación 3" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Campañas</span>
-                                                    </div>
-                                                    <a class="h6" data-bs-toggle="modal" href="#evento3" style="font-size: 0.875rem;">Adopción para mascotas II</a>
-                                                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Adopta y cambia una vida. Esta es tu oportunidad de darle un hogar a una mascota.</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="ver-evento-detalles-usuario.html">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                        <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="3" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                            <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 4 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a data-bs-toggle="modal" href="#evento4">
-                                                        <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/i5.jpg" alt="Imagen de publicación 4" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                                    </div>
-                                                    <a class="h6" data-bs-toggle="modal" href="#evento4" style="font-size: 0.875rem;">Desfile de patitas</a>
-                                                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Únete al evento más tierno del año y disfruta de un divertido desfile de mascotas.</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="ver-evento-detalles-usuario.html">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                        <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="4" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                            <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 5 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a data-bs-toggle="modal" href="#evento5">
-                                                        <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/i6.jpg" alt="Imagen de publicación 5" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                                    </div>
-                                                    <a class="h6" data-bs-toggle="modal" href="#evento5" style="font-size: 0.875rem;">Encuentra a tu mejor amigo</a>
-                                                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Participa en actividades con tu mascota y haz nuevos amigos. ¡Una jornada llena de diversión!</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="ver-evento-detalles-usuario.html">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                        <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="5" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                            <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 6 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a data-bs-toggle="modal" href="#evento6">
-                                                        <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/i4.jpg" alt="Imagen de publicación 6" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                                    </div>
-                                                    <a class="h6" data-bs-toggle="modal" href="#evento6" style="font-size: 0.875rem;">Gran concurso de mascotas</a>
-                                                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">Muestra la creatividad de tu mascota en este concurso virtual y gana premios.</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="ver-evento-detalles-usuario.html">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                        <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="6" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                            <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </c:forEach>
+
+                                        <c:if test="${empty eventos}">
+                                            <p>No se encontraron eventos activos.</p>
+                                        </c:if>
+                                        <c:if test="${not empty eventos}">
+                                            <p>Se encontraron eventos.</p>
+                                        </c:if>
+
                                     </div>
                                 </div>
                             </div>
@@ -670,12 +563,25 @@
             <script>
                 // Inicializa flatpickr para el rango de fechas
                 flatpickr("#dateRange", {
-                    mode: "range",
-                    dateFormat: "d-m-Y", // Ajusta el formato de la fecha según tus necesidades
+                    mode: "range", // Rango de fechas
+                    dateFormat: "Y-m-d", // Formato compatible con el backend
                     locale: {
-                        firstDayOfWeek: 1 // Inicia la semana en lunes
-                    }
+                        firstDayOfWeek: 1, // Semana inicia en lunes
+                        rangeSeparator: " a ", // Separador para rango
+                    },
+                    onChange: function (selectedDates, dateStr, instance) {
+                        // Extraer fechas de inicio y fin
+                        const fechaInicio = selectedDates[0] ? selectedDates[0].toISOString().split("T")[0] : "";
+                        const fechaFin = selectedDates[1] ? selectedDates[1].toISOString().split("T")[0] : "";
+
+                        // Asignar valores a los campos ocultos
+                        document.getElementById("fechaInicio").value = fechaInicio;
+                        document.getElementById("fechaFin").value = fechaFin;
+
+                        console.log("Fecha Inicio:", fechaInicio, "Fecha Fin:", fechaFin); // Depuración
+                    },
                 });
+
             </script>
 
             <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>

@@ -70,13 +70,14 @@ public class EventosDAO extends BaseDao {
                 usuario.setUserId(rs.getInt("user_id"));
                 evento.setUsuario(usuario);
 
+                TiposEventos tipoEvento = new TiposEventos();
+                tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
+                evento.setTipoEvento(tipoEvento);
+
                 LugaresEventos lugaresEventos = new LugaresEventos();
                 lugaresEventos.setLugarId(rs.getInt("lugar_evento_id"));
                 evento.setLugarEvento(lugaresEventos);
 
-                TiposEventos tipoEvento = new TiposEventos();
-                tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
-                evento.setTipoEvento(tipoEvento);
 
                 evento.setNombreEvento(rs.getString("nombre_evento"));
                 evento.setFechaEvento(rs.getDate("fecha_evento"));
@@ -124,7 +125,7 @@ public class EventosDAO extends BaseDao {
 
             pstmt.setInt(1, evento.getEventId());
             pstmt.setInt(2, evento.getUsuario().getUserId());
-            pstmt.setInt(3, evento.getTipoEvento().getTipoEventoId());
+                                    pstmt.setInt(3, evento.getTipoEvento().getTipoEventoId());
             pstmt.setString(4, evento.getNombreEvento());
             pstmt.setDate(5, evento.getFechaEvento());
             pstmt.setTime(6, evento.getHoraEvento());

@@ -3,23 +3,24 @@ package Daos;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.*;
+
 import Beans.TiposEventos;
 
 public class TiposEventosDAO extends BaseDao{
 
     // Metodo para obtener todos los tipos de eventos que hay
     public List<TiposEventos> obtenerTiposEventos(){
-        List<TiposEventos> tiposEventos = new ArrayList<>();
         String query = "SELECT tipo_id, nombre_tipo FROM tipos_eventos";
+        List<TiposEventos> tiposEventos = new ArrayList<>();
 
         try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()){
+
                 TiposEventos tipoEvento = new TiposEventos();
                 tipoEvento.setTipoEventoId(rs.getInt("tipo_id"));
-                tipoEvento.setNombreTipoEvento(rs.getString("nombre_tipo"));
+                tipoEvento.setNombre_tipo(rs.getString("nombre_tipo"));
                 tiposEventos.add(tipoEvento);
             }
 
@@ -36,7 +37,7 @@ public class TiposEventosDAO extends BaseDao{
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setInt(1, tipoEvento.getTipoEventoId());
-            pstmt.setString(2, tipoEvento.getNombreTipoEvento());
+            pstmt.setString(2, tipoEvento.getNombre_tipo());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -50,7 +51,7 @@ public class TiposEventosDAO extends BaseDao{
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setString(1, tipoEvento.getNombreTipoEvento());
+            pstmt.setString(1, tipoEvento.getNombre_tipo());
             pstmt.setInt(2, tipoEvento.getTipoEventoId());
             pstmt.executeUpdate();
 
