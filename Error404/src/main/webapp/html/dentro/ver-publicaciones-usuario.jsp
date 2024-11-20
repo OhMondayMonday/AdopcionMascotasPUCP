@@ -339,7 +339,7 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</a></li>
                           <li><a class="dropdown-item" href="crear-publicacion-usuariofinal-mascotaperdida.html">Mascota Perdida</a></li>
-                          <li><a class="dropdown-item" href="crear-publicacion-usuariofinal-denunciamaltrato.html">Denuncia Maltrato</a></li>
+                          <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia Maltrato</a></li>
                         </ul>
                       </div>
                     </div>
