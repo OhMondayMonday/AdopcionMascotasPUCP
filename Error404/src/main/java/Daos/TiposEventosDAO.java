@@ -10,7 +10,7 @@ public class TiposEventosDAO extends BaseDao{
 
     // Metodo para obtener todos los tipos de eventos que hay
     public List<TiposEventos> obtenerTiposEventos(){
-        String query = "SELECT tipo_id, nombre_tipo FROM tipos_eventos";
+        String query = "SELECT * FROM tipos_eventos";
         List<TiposEventos> tiposEventos = new ArrayList<>();
 
         try (Connection connection = this.getConnection();

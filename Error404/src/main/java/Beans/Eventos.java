@@ -8,14 +8,13 @@ public class Eventos {
 
     private Usuarios usuario;
     private TiposEventos tipoEvento;
-    private LugaresEventos lugarEvento;
-    private Fotos foto;
-
     private String nombreEvento;
     private Date fechaEvento;
     private Time horaEvento;
     private Date fechaFin;
     private Time horaFin;
+    private Fotos foto;
+    private LugaresEventos lugarEvento;
     private String entrada;
     private String descripcionEvento;
     private String artistasProveedores;
@@ -51,65 +50,66 @@ public class Eventos {
         this.tipoEvento = tipoEvento;
     }
 
-    // Lugar Evento
-    public LugaresEventos getLugarEvento() { return lugarEvento; }
-
-    public void setLugarEvento(LugaresEventos lugarEvento) {
-        this.lugarEvento = lugarEvento;
-    }
-
-    // Fotos
-    public Fotos getFoto() {
-        return foto;
-    }
-
-    public void setFoto(Fotos foto) {
-        this.foto = foto;
-    }
 
     // Nombre Evento
+
     public String getNombreEvento() {
         return nombreEvento;
     }
-
     public void setNombreEvento(String nombreEvento) {
         this.nombreEvento = nombreEvento;
     }
 
     // Fecha Evento
+
     public Date getFechaEvento() {
         return fechaEvento;
     }
-
     public void setFechaEvento(Date fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
     // Hora Inicio Evento
+
     public Time getHoraEvento() {
         return horaEvento;
     }
-
     public void setHoraEvento(Time horaEvento) {
         this.horaEvento = horaEvento;
     }
 
     // Fecha Fin
+
     public Date getFechaFin() {
         return fechaFin;
     }
-
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
 
     // Hora Fin
+
     public Time getHoraFin() {
         return horaFin;
     }
-
     public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
+    }
+
+    // Fotos
+
+    public Fotos getFoto() {
+        return foto;
+    }
+    public void setFoto(Fotos foto) {
+        this.foto = foto;
+    }
+
+    // Lugar Evento
+    public LugaresEventos getLugarEvento() { return lugarEvento; }
+
+    public void setLugarEvento(LugaresEventos lugarEvento) {
+        this.lugarEvento = lugarEvento;
     }
 
     // Entrada
@@ -174,5 +174,6 @@ public class Eventos {
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
     }
+
 }
 

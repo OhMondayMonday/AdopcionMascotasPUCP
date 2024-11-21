@@ -9,8 +9,9 @@ import Beans.Zonas;
 
 public class DistritosDAO extends BaseDao{
 
+    // Metodo para obtener todos los distritos existentes
     public List<Distritos> obtenerDistritos() {
-        String query = "SELECT distrito_id, nombre_distrito, zona_distrito_id FROM distritos";
+        String query = "SELECT * FROM distritos";
         List<Distritos> distritos = new ArrayList<>();
 
         try (Connection connection = this.getConnection();

@@ -133,7 +133,7 @@ public class EventosServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/jsp/ver-miseventos-usuario.jsp").forward(request, response);
     }
 
-    // Ver todos los Eventos sin ser del usuario
+    // Mostrar TODOS los eventos ACTIVOS que existan. Incluye lógica de filtros
     private void verTodosEventos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener filtros si se aplican
         String tipoEventoIdParam = request.getParameter("tipoEventoId");
@@ -157,24 +157,25 @@ public class EventosServlet extends HttpServlet {
                 ? Date.valueOf(fechaFinParam)
                 : null;
 
-        // Llamar al DAO con o sin filtros
+        // Llamar a los métodos del DAO con o sin filtros
         List<Eventos> eventos;
-        if (tipoEventoId != null || distritoId != null || fechaInicio != null || fechaFin != null) {
+        if (tipoEventoId !=null || distritoId != null || fechaInicio != null || fechaFin != null) {
             eventos = eventosDAO.verEventosActivos(tipoEventoId, distritoId, fechaInicio, fechaFin); // Metodo con filtros para obtener todos los eventos
         } else {
+            // Si no hay filtros
             eventos = eventosDAO.obtenerEventosActivos(); // Metodo para obtener todos los eventos sin filtros
         }
 
         DistritosDAO distritosDAO = new DistritosDAO();
         List<Distritos> distritos = distritosDAO.obtenerDistritos();
-        request.setAttribute("distritos", distritos);
 
         TiposEventosDAO tiposEventosDAO = new TiposEventosDAO();
         List<TiposEventos> tiposEventos = tiposEventosDAO.obtenerTiposEventos();
-        request.setAttribute("tiposEventos", tiposEventos);
 
-        // Pasar los eventos y filtros a la JSP
         request.setAttribute("eventos", eventos);
+        request.setAttribute("distritos", distritos);
+        request.setAttribute("tiposEventos", tiposEventos);
+        // Pasar los eventos y filtros a la JSP
         request.setAttribute("filtros", new HashMap<String, Object>() {{
             put("tipoEventoId", tipoEventoId);
             put("distritoId", distritoId);

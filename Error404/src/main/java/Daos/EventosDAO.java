@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EventosDAO extends BaseDao {
 
-    //Metodo para obtener todos los Eventos
+    //Metodo para obtener una lista de TODOS los Eventos existentes
     public List<Eventos> obtenerEventos() {
         List<Eventos> eventos = new ArrayList<>();
         String query = "SELECT * FROM eventos";
@@ -22,28 +22,29 @@ public class EventosDAO extends BaseDao {
 
                 // Crear y asignar el objeto Usuario
                 Beans.Usuarios usuario = new Beans.Usuarios();
-                usuario.setUserId(rs.getInt("user_id")); // Asegúrate de que "lugar_evento_id" es el nombre correcto de la columna
+                usuario.setUserId(rs.getInt("user_id"));
                 evento.setUsuario(usuario);
-
-                // Crear y asignar el objeto LugaresEventos
-                Beans.LugaresEventos lugarEvento = new Beans.LugaresEventos();
-                lugarEvento.setLugarId(rs.getInt("lugar_evento_id")); // Asegúrate de que "lugar_evento_id" es el nombre correcto de la columna
-                evento.setLugarEvento(lugarEvento);
 
                 // Crear y asignar el objeto TiposEventos
                 Beans.TiposEventos tipoEvento = new Beans.TiposEventos();
                 tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
                 evento.setTipoEvento(tipoEvento);
 
-                Fotos foto = new Fotos();
-                foto.setFotoId(rs.getInt("foto_id"));
-                evento.setFoto(foto);
-
                 evento.setNombreEvento(rs.getString("nombre_evento"));
                 evento.setFechaEvento(rs.getDate("fecha_evento"));
                 evento.setHoraEvento(rs.getTime("hora_evento"));
                 evento.setFechaFin(rs.getDate("fecha_fin"));
                 evento.setHoraFin(rs.getTime("hora_fin"));
+
+                Fotos foto = new Fotos();
+                foto.setFotoId(rs.getInt("foto_id"));
+                evento.setFoto(foto);
+
+                // Crear y asignar el objeto LugaresEventos
+                Beans.LugaresEventos lugarEvento = new Beans.LugaresEventos();
+                lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
+                evento.setLugarEvento(lugarEvento);
+
                 evento.setEntrada(rs.getString("entrada"));
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
@@ -58,7 +59,7 @@ public class EventosDAO extends BaseDao {
         return eventos;
     }
 
-    //Metodo para obtener todos los Eventos activos
+    //Metodo para una lista de todos los Eventos ACTIVOS
     public List<Eventos> obtenerEventosActivos() {
         List<Eventos> eventos = new ArrayList<>();
         String query = "SELECT e.*, te.nombre_tipo, f.foto_id, f.url_foto FROM eventos e JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id JOIN distritos d ON le.distrito_id = d.distrito_id JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id LEFT JOIN fotos f ON e.foto_id = f.foto_id WHERE e.estado_evento = 'activa'";
@@ -79,6 +80,12 @@ public class EventosDAO extends BaseDao {
                 tipoEvento.setNombreTipo(rs.getString("nombre_tipo"));
                 evento.setTipoEvento(tipoEvento);
 
+                evento.setNombreEvento(rs.getString("nombre_evento"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
+                evento.setFechaFin(rs.getDate("fecha_fin"));
+                evento.setHoraFin(rs.getTime("hora_fin"));
+
                 Fotos foto = new Fotos();
                 foto.setFotoId(rs.getInt("foto_id"));
                 foto.setUrlFoto(rs.getString("url_foto"));
@@ -88,18 +95,12 @@ public class EventosDAO extends BaseDao {
                 lugaresEventos.setLugarId(rs.getInt("lugar_evento_id"));
                 evento.setLugarEvento(lugaresEventos);
 
-
-                evento.setNombreEvento(rs.getString("nombre_evento"));
-                evento.setFechaEvento(rs.getDate("fecha_evento"));
-                evento.setHoraEvento(rs.getTime("hora_evento"));
                 evento.setEntrada(rs.getString("entrada"));
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
                 evento.setRazonEvento(rs.getString("razon_evento"));
                 evento.setFechaCreacion(rs.getDate("fecha_creacion"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
-                evento.setFechaFin(rs.getDate("fecha_fin"));
-                evento.setHoraFin(rs.getTime("hora_fin"));
                 eventos.add(evento);
             }
         } catch (SQLException ex) {
@@ -108,6 +109,7 @@ public class EventosDAO extends BaseDao {
         return eventos;
     }
 
+    // Metodo para verificar si el usuario está está inscrito en un evento específico
     public boolean estaInscrito(int userId, int eventId) {
         String sql = "SELECT COUNT(*) FROM inscripciones_eventos WHERE user_id = ? AND event_id = ?";
         try (Connection conn = getConnection();
@@ -222,7 +224,7 @@ public class EventosDAO extends BaseDao {
         }
     }
 
-    //Metodo para obtener mis eventos
+    //Metodo para obtener la lista de todos los eventos de un usuario específico sin filtros
     public List<Eventos> obtenerMisEventos(int user_id) {
         List<Eventos> eventos = new ArrayList<>();
         String query = "SELECT * FROM eventos WHERE user_id = " + user_id;
@@ -236,7 +238,7 @@ public class EventosDAO extends BaseDao {
 
                 Beans.Usuarios usuario = new Beans.Usuarios();
                 usuario.setUserId(rs.getInt("user_id"));
-                evento.setUsuario(usuario); // Asignar el objeto usuario al evento
+                evento.setUsuario(usuario);
 
                 Beans.TiposEventos tipoEvento = new Beans.TiposEventos();
                 tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
@@ -245,6 +247,12 @@ public class EventosDAO extends BaseDao {
                 evento.setNombreEvento(rs.getString("nombre_evento"));
                 evento.setFechaEvento(rs.getDate("fecha_evento"));
                 evento.setHoraEvento(rs.getTime("hora_evento"));
+                evento.setFechaFin(rs.getDate("fecha_fin"));
+                evento.setHoraFin(rs.getTime("hora_fin"));
+
+                Fotos foto = new Fotos();
+                foto.setFotoId(rs.getInt("foto_id"));
+                evento.setFoto(foto);
 
                 Beans.LugaresEventos lugarEvento = new Beans.LugaresEventos();
                 lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
@@ -264,6 +272,7 @@ public class EventosDAO extends BaseDao {
         return eventos;
     }
 
+    // Metodo para obtener todos los atributos (detalles) de un evento específico
     public Eventos obtenerDetalleEvento(int event_id) {
         Eventos evento = new Eventos();
         String query = "SELECT * FROM eventos WHERE event_id = ?";
@@ -286,6 +295,12 @@ public class EventosDAO extends BaseDao {
             evento.setNombreEvento(rs.getString("nombre_evento"));
             evento.setFechaEvento(rs.getDate("fecha_evento"));
             evento.setHoraEvento(rs.getTime("hora_evento"));
+            evento.setFechaFin(rs.getDate("fecha_fin"));
+            evento.setHoraFin(rs.getTime("hora_fin"));
+
+            Fotos foto = new Fotos();
+            foto.setFotoId(rs.getInt("foto_id"));
+            evento.setFoto(foto);
 
             LugaresEventos lugarEvento = new LugaresEventos();
             lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
@@ -304,14 +319,15 @@ public class EventosDAO extends BaseDao {
         return evento;
     }
 
-    // Metodo para mostrar Eventos inscritos del usuario con o sin filtros
-    public List<Eventos> verMisEventos(int usuarioId, Integer tipo_evento_id, Integer distritoId, Date fecha_evento, Date fecha_fin){
+    // Metodo para mostrar la lista de TODOS los Eventos que tiene un usuario específico, incluye lógica de filtros
+    public List<Eventos> verMisEventos(int usuarioId, Integer tipo_evento_id, Integer distritoId, Date fechaInicio, Date fechaFin){
+
         StringBuilder query = new StringBuilder(
-                "SELECT e.* FROM eventos e " +
-                        "JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id " +
+                "SELECT * FROM eventos " +
+                        "JOIN lugares_eventos le ON eventos.lugar_evento_id = le.lugar_id " +
                         "JOIN distritos d ON le.distrito_id = d.distrito_id " +
-                        "JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id " +
-                        "WHERE e.user_id = ?"
+                        "JOIN tipos_eventos te ON eventos.tipo_evento_id = te.tipo_id " +
+                        "WHERE eventos.user_id = ?"
         );
 
         List<Object> parametros = new ArrayList<>();
@@ -328,14 +344,10 @@ public class EventosDAO extends BaseDao {
             parametros.add(distritoId);
         }
 
-        if (fecha_evento != null) {
-            query.append(" AND e.fecha_evento >= ?");
-            parametros.add(fecha_evento);
-        }
-
-        if (fecha_fin != null) {
-            query.append(" AND e.fecha_fin <= ?");
-            parametros.add(fecha_fin);
+        if (fechaInicio != null && fechaFin != null) {
+            query.append(" AND eventos.fecha_evento BETWEEN ? AND ?");
+            parametros.add(fechaInicio);
+            parametros.add(fechaFin);
         }
 
         List<Eventos> eventos = new ArrayList<>();
@@ -353,9 +365,6 @@ public class EventosDAO extends BaseDao {
             while (rs.next()) {
                 Eventos evento = new Eventos();
                 evento.setEventId(rs.getInt("event_id"));
-                evento.setNombreEvento(rs.getString("nombre_evento"));
-                evento.setFechaEvento(rs.getDate("fecha_evento"));
-                evento.setFechaFin(rs.getDate("fecha_fin"));
 
                 Usuarios usuario = new Usuarios();
                 usuario.setUserId(rs.getInt("user_id"));
@@ -365,16 +374,20 @@ public class EventosDAO extends BaseDao {
                 tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
                 evento.setTipoEvento(tipoEvento);
 
-                LugaresEventos lugarEvento = new LugaresEventos();
-                lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
-                evento.setLugarEvento(lugarEvento);
+                evento.setNombreEvento(rs.getString("nombre_evento"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
+                evento.setFechaFin(rs.getDate("fecha_fin"));
+                evento.setHoraFin(rs.getTime("hora_fin"));
 
                 Fotos foto = new Fotos();
                 foto.setFotoId(rs.getInt("foto_id"));
                 evento.setFoto(foto);
 
-                evento.setHoraEvento(rs.getTime("hora_evento"));
-                evento.setHoraFin(rs.getTime("hora_fin"));
+                LugaresEventos lugarEvento = new LugaresEventos();
+                lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
+                evento.setLugarEvento(lugarEvento);
+
                 evento.setEntrada(rs.getString("entrada"));
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
@@ -391,38 +404,38 @@ public class EventosDAO extends BaseDao {
         return eventos;
     }
 
+    // Metodo para obtener la lista de TODOS los eventos ACTIVOS (de cualquier usuario) que existan. Incluye lógica de filtros
     public List<Eventos> verEventosActivos(Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin) {
-        StringBuilder query = new StringBuilder(
-                "SELECT e.*, te.nombre_tipo, f.foto_id, f.url_foto " +
-                        "FROM eventos e " +
-                        "JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id " +
-                        "JOIN distritos d ON le.distrito_id = d.distrito_id " +
-                        "JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id " +
-                        "LEFT JOIN fotos f ON e.foto_id = f.foto_id " +
-                        "WHERE e.estado_evento = 'activa'"
-        );
-
+        List<Eventos> eventos = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.fecha_fin, e.descripcion_evento, ");
+        query.append("te.tipo_id AS tipo_evento_id, te.nombre_tipo, f.foto_id, f.url_foto, d.distrito_id, d.nombre_distrito ");
+        query.append("FROM eventos e ");
+        query.append("JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id ");
+        query.append("JOIN distritos d ON le.distrito_id = d.distrito_id ");
+        query.append("JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id ");
+        query.append("LEFT JOIN fotos f ON e.foto_id = f.foto_id ");
+        query.append("WHERE e.estado_evento = 'activa' ");
 
         List<Object> parametros = new ArrayList<>();
 
-        // Agregar condiciones dinámicamente según los filtros
+        // Filtro por tipo de evento
         if (tipoEventoId != null) {
             query.append(" AND te.tipo_id = ?");
             parametros.add(tipoEventoId);
         }
 
+        // Filtro por distrito
         if (distritoId != null) {
             query.append(" AND d.distrito_id = ?");
             parametros.add(distritoId);
         }
 
+        // Filtro por rango de fechas
         if (fechaInicio != null && fechaFin != null) {
             query.append(" AND e.fecha_evento BETWEEN ? AND ?");
             parametros.add(fechaInicio);
             parametros.add(fechaFin);
         }
-
-        List<Eventos> eventos = new ArrayList<>();
 
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query.toString())) {
@@ -436,7 +449,6 @@ public class EventosDAO extends BaseDao {
             System.out.println("Query generada: " + query.toString());
             System.out.println("Parámetros: " + parametros);
             System.out.println("Parámetros utilizados en la query: " + parametros);
-            System.out.println("Evento cargado: " + rs.getString("nombre_evento") + ", Tipo: " + rs.getInt("tipo_evento_id"));
 
             while (rs.next()) {
                 Eventos evento = new Eventos();
@@ -444,27 +456,17 @@ public class EventosDAO extends BaseDao {
                 evento.setNombreEvento(rs.getString("nombre_evento"));
                 evento.setFechaEvento(rs.getDate("fecha_evento"));
                 evento.setFechaFin(rs.getDate("fecha_fin"));
+                evento.setDescripcionEvento(rs.getString("descripcion_evento"));
 
-                evento.setTipoEvento(new TiposEventos(rs.getInt("tipo_id"), rs.getString("nombre_tipo")));
-
-
-                LugaresEventos lugarEvento = new LugaresEventos();
-                lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
-                evento.setLugarEvento(lugarEvento);
+                TiposEventos tipoEvento = new TiposEventos();
+                tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
+                tipoEvento.setNombreTipo(rs.getString("nombre_tipo"));
+                evento.setTipoEvento(tipoEvento);
 
                 Fotos foto = new Fotos();
                 foto.setFotoId(rs.getInt("foto_id"));
                 foto.setUrlFoto(rs.getString("url_foto"));
                 evento.setFoto(foto);
-
-                evento.setHoraEvento(rs.getTime("hora_evento"));
-                evento.setHoraFin(rs.getTime("hora_fin"));
-                evento.setEntrada(rs.getString("entrada"));
-                evento.setDescripcionEvento(rs.getString("descripcion_evento"));
-                evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
-                evento.setRazonEvento(rs.getString("razon_evento"));
-                evento.setFechaCreacion(rs.getDate("fecha_creacion"));
-                evento.setEstadoEvento(rs.getString("estado_evento"));
 
                 eventos.add(evento);
 

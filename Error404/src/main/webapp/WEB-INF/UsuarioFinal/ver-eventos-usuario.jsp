@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 
-<div lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
@@ -71,8 +71,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
 </head>
 
-
-<div style="background-color: #d4e1ffa9;">
+<body style="background-color: #d4e1ffa9;">
 
 
 <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
@@ -87,7 +86,119 @@
 
 
         <div class="layout-page">
-            <jsp:include page="../includes/navbarUF.jsp"/>
+
+            <!-- Navbar -->
+            <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0   d-xl-none ">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <i class="bx bx-menu bx-sm"></i>
+                    </a>
+                </div>
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+                    <div class="w-75 align-items-center me-auto">
+                        <div class="nav-item navbar-search-wrapper mb-0">
+                            <span class="d-inline-block justify-content-center">
+                              <p class="mb-0 fst-normal fw-semibold ff-">Eventos</p>
+                            </span>
+                        </div>
+                    </div>
+
+                    <ul class="navbar-nav flex-row align-items-center ms-0">
+
+                        <!-- Notification -->
+                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+                        <!--/ Notification -->
+                        <!-- User -->
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-medium d-block"> Adolfo Contreras</span>
+                                                <small class="text-muted">Usuario</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                                        <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
+                                        <span class="align-middle" style="color: #1f4397;">Seguridad</span>
+                                    </a>
+                                </li>
+
+
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+                                        <i class="bx bx-building-house"></i>
+                                        <span class="align-middle">Mis publicaciones</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                                        <i class="bx bx-bone"></i>
+                                        <span class="align-middle">Mis eventos</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="ver-calendario-usuario.html">
+                                        <i class="bx bx-calendar"></i>
+                                        <span class="align-middle">Mi Calendario</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="Preguntas-frecuentes.html">
+                                        <i class="bx bx-help-circle"></i>
+                                        <span class="align-middle">Preguntas frecuentes</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="../index.html" >
+                                        <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
+                                        <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ User -->
+
+                    </ul>
+                </div>
+
+
+                <!-- Search Small Screens -->
+                <div class="navbar-search-wrapper search-input-wrapper  d-none">
+                    <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
+                    <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
+                </div>
+
+
+            </nav>
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
@@ -97,70 +208,98 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
 
 
-                    <div class="card mb-0"></div>
-                    <div class="card-header d-flex flex-wrap justify-content-between gap-3">
+                    <div class="d-flex flex-wrap justify-content-between gap-3">
 
-                        <!-- Select2 -->
-                        <div class="col-12">
-                            <div class="card mb-0" style="height: auto; padding: 5px;">
-                                <div class="card-body d-flex align-items-center justify-content-center p-1">
-                                    <form action="EventosServlet" method="GET" class="row w-100">
-                                        <input type="hidden" name="action" value="verTodosEventos">
-                                        <!-- Tipo de Publicacion -->
-                                        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                            <label for="tipoEventoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento </label>
-                                            <select name="tipoEventoId" id="tipoEventoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                <option value="">Todos</option>
-                                                <c:forEach var="tipo" items="${tiposEventos}">
-                                                    <option value="${tipo.tipoEventoId}" ${tipo.tipoEventoId == filtros.tipoEventoId ? "selected" : ""}>
-                                                            ${tipo.nombreTipo}
-                                                    </option>
-                                                </c:forEach>
-                                                <c:if test="${empty tiposEventos}">
-                                                    <p>No se encontraron tipos de eventos.</p>
-                                                </c:if>
-                                                <c:if test="${empty filtros}">
-                                                    <p>No hay filtros configurados.</p>
-                                                </c:if>
+                        <!-- Filtros -->
+                        <div class="card col-12 card mb-0" style="height: auto; padding: 5px;">
 
-                                            </select>
+                            <div class="card-body d-flex align-items-center justify-content-between p-1">
+
+                                <form action="EventosServlet" method="GET" id="filtrosForm" class="row w-100">
+                                    <input type="hidden" name="action" value="verTodosEventos">
+                                    <!-- Tipo de Publicacion -->
+                                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                                        <label for="tipoEventoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento </label>
+                                        <select name="tipoEventoId" id="tipoEventoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                                            <option value="">Todos</option>
+                                            <c:forEach var="tipo" items="${tiposEventos}">
+                                                <option value="${tipo.tipoEventoId}" ${tipo.tipoEventoId == filtros.tipoEventoId ? "selected" : ""}>
+                                                        ${tipo.nombreTipo}
+                                                </option>
+                                            </c:forEach>
+                                            <c:if test="${empty tiposEventos}">
+                                                <p>No se encontraron tipos de eventos.</p>
+                                            </c:if>
+                                            <c:if test="${empty filtros}">
+                                                <p>No hay filtros configurados.</p>
+                                            </c:if>
+
+                                        </select>
+                                    </div>
+                                    <!-- ubicacion -->
+                                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+
+                                        <label for="distritoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicación </label>
+                                        <select name="distritoId" id="distritoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                                            <option value="">Todos</option>
+                                            <c:forEach var="distrito" items="${distritos}">
+                                                <option value="${distrito.distritoId}" ${distrito.distritoId == filtros.distritoId ? "selected" : ""}>
+                                                        ${distrito.nombreDistrito}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+
+                                    </div>
+                                    <!-- Fecha -->
+                                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                                        <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
+                                        <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas"/>
+                                        <input type="hidden" name="fechaInicio" id="fechaInicio" value="${filtros.fechaInicio}">
+                                        <input type="hidden" name="fechaFin" id="fechaFin" value="${filtros.fechaFin}">
+                                    </div>
+
+
+                                    <!-- Botón Filtrar -->
+                                    <div class="<c:choose><c:when test='${not empty filtros.tipoEventoId or not empty filtros.distritoId or not empty filtros.fechaInicio or not empty filtros.fechaFin}'>
+                                                            col-md-1
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            col-md-2
+                                                        </c:otherwise>
+                                                    </c:choose> d-flex flex-column align-items-center btn-group p-2">
+                                        <button type="submit" class="btn btn-facebook">Filtrar</button>
+                                    </div>
+
+                                    <!--
+                                    <div class="col-md-1 d-flex flex-column align-items-center btn-group p-2">
+                                        <button type="submit" class="btn btn-facebook">Filtrar</button>
+                                    </div>
+                                    -->
+
+                                    <!--
+                                    <c:choose>
+                                        <c:when test="${not empty filtros.tipoEventoId or not empty filtros.distritoId or not empty filtros.fechaInicio or not empty filtros.fechaFin}">
+                                            <div class="col-md-1 d-flex flex-column align-items-center btn-group p-2">
+                                                <button type="button" class="btn btn-secondary" onclick="limpiarFiltros()">Limpiar</button>
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
+                                    -->
+
+                                    <!-- Botón Limpiar (solo visible cuando hay filtros aplicados) -->
+                                    <c:if test="${not empty filtros.tipoEventoId or not empty filtros.distritoId or not empty filtros.fechaInicio or not empty filtros.fechaFin}">
+                                        <div class="col-md-1 d-flex flex-column align-items-center btn-group p-2">
+                                            <button type="button" class="btn btn-secondary" onclick="limpiarFiltros()">Limpiar</button>
                                         </div>
-                                        <!-- ubicacion -->
-                                        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                                    </c:if>
 
-                                            <label for="distritoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicación </label>
-                                            <select name="distritoId" id="distritoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                <option value="">Todos</option>
-                                                <c:forEach var="distrito" items="${distritos}">
-                                                    <option value="${distrito.distritoId}" ${distrito.distritoId == filtros.distritoId ? "selected" : ""}>
-                                                            ${distrito.nombreDistrito}
-                                                    </option>
-                                                </c:forEach>
-                                            </select>
-
-                                        </div>
-                                        <!-- Fecha -->
-                                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                            <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
-                                            <input type="text" id="dateRange" placeholder="Seleccionar rango de fechas" class="form-control form-control-sm"
-                                                   value="${filtros.fechaInicio} a ${filtros.fechaFin}">
-                                            <input type="hidden" name="fechaInicio" id="fechaInicio" value="${filtros.fechaInicio}">
-                                            <input type="hidden" name="fechaFin" id="fechaFin" value="${filtros.fechaFin}">
-                                        </div>
-
-                                        <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
-                                            <button class="btn btn-facebook" type="sumbit">
-                                                Aplicar filtros
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
 
+
                         <!-- Card Container -->
-                        <div class="card mb-2 mt-3" style="padding: 0; margin: 0;">
+                        <div class="card col-12" style="padding: 0; margin: 0; height: auto;">
                             <div class="card-body p-0">
                                 <div class="container-fluid mt-3">
                                     <div class="row gx-1 gy-2 justify-content-center m-0">
@@ -168,10 +307,10 @@
                                         <!-- Cards -->
                                         <c:forEach var="evento" items="${eventos}">
                                             <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 3px;">
+                                                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 10px;">
                                                     <div class="rounded-2 text-center flex-grow-1">
                                                         <a data-bs-toggle="modal" href="">
-                                                            <img class="img-fluid" src="${evento.foto.urlFoto}" alt="${evento.nombreEvento}" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
+                                                            <img class="img-fluid" src="${evento.foto.urlFoto}" alt="${evento.nombreEvento}" style="height: 200px; object-fit: cover; border-radius: 10px;"/>
                                                         </a>
                                                     </div>
                                                     <div class="card-body p-2 d-flex flex-column">
@@ -198,10 +337,11 @@
                                         <c:if test="${empty eventos}">
                                             <p>No se encontraron eventos activos.</p>
                                         </c:if>
+                                        <!--
                                         <c:if test="${not empty eventos}">
                                             <p>Se encontraron eventos.</p>
                                         </c:if>
-
+                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -272,13 +412,13 @@
                             <!--/ Evento 1 -->
 
                             <div class="content-backdrop fade"></div>
+                            <!-- Content wrapper -->
                         </div>
-                        <!-- Content wrapper -->
+                        <!-- / Layout page -->
+
                     </div>
-                    <!-- / Layout page -->
+
                 </div>
-
-
                 <!-- Footer -->
                 <footer class="footer">
                     <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
@@ -302,9 +442,8 @@
 
 
                 <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-
-
             </div>
+        </div>
             <!-- / Layout wrapper -->
 
 
@@ -358,7 +497,18 @@
 
                 </script>
 
-            <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+                <script>
+                    function limpiarFiltros() {
+                        const baseUrl = "EventosServlet"; // Define la URL base manualmente
+                        const queryParams = "?action=verTodosEventos";
+                        window.location.href = baseUrl + queryParams; // Redirige sin filtros
+                    }
+                </script>
+
+
+        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+    </div>
+</div>
 </body>
 
 
