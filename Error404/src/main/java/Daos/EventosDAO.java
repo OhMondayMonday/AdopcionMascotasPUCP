@@ -35,6 +35,10 @@ public class EventosDAO extends BaseDao {
                 tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
                 evento.setTipoEvento(tipoEvento);
 
+                Fotos foto = new Fotos();
+                foto.setFotoId(rs.getInt("foto_id"));
+                evento.setFoto(foto);
+
                 evento.setNombreEvento(rs.getString("nombre_evento"));
                 evento.setFechaEvento(rs.getDate("fecha_evento"));
                 evento.setHoraEvento(rs.getTime("hora_evento"));
@@ -57,7 +61,7 @@ public class EventosDAO extends BaseDao {
     //Metodo para obtener todos los Eventos activos
     public List<Eventos> obtenerEventosActivos() {
         List<Eventos> eventos = new ArrayList<>();
-        String query = "SELECT * FROM eventos WHERE estado_evento = 'activa'";
+        String query = "SELECT e.*, te.nombre_tipo, f.foto_id, f.url_foto FROM eventos e JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id JOIN distritos d ON le.distrito_id = d.distrito_id JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id LEFT JOIN fotos f ON e.foto_id = f.foto_id WHERE e.estado_evento = 'activa'";
 
         try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
@@ -72,7 +76,13 @@ public class EventosDAO extends BaseDao {
 
                 TiposEventos tipoEvento = new TiposEventos();
                 tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
+                tipoEvento.setNombreTipo(rs.getString("nombre_tipo"));
                 evento.setTipoEvento(tipoEvento);
+
+                Fotos foto = new Fotos();
+                foto.setFotoId(rs.getInt("foto_id"));
+                foto.setUrlFoto(rs.getString("url_foto"));
+                evento.setFoto(foto);
 
                 LugaresEventos lugaresEventos = new LugaresEventos();
                 lugaresEventos.setLugarId(rs.getInt("lugar_evento_id"));
@@ -383,19 +393,21 @@ public class EventosDAO extends BaseDao {
 
     public List<Eventos> verEventosActivos(Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin) {
         StringBuilder query = new StringBuilder(
-                "SELECT e.* " +
+                "SELECT e.*, te.nombre_tipo, f.foto_id, f.url_foto " +
                         "FROM eventos e " +
                         "JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id " +
                         "JOIN distritos d ON le.distrito_id = d.distrito_id " +
-                        "JOIN tipos_eventos te ON e.tipo_evento_id = te.id " +
-                        "WHERE 1=1"
+                        "JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id " +
+                        "LEFT JOIN fotos f ON e.foto_id = f.foto_id " +
+                        "WHERE e.estado_evento = 'activa'"
         );
+
 
         List<Object> parametros = new ArrayList<>();
 
         // Agregar condiciones dinámicamente según los filtros
         if (tipoEventoId != null) {
-            query.append(" AND te.id = ?");
+            query.append(" AND te.tipo_id = ?");
             parametros.add(tipoEventoId);
         }
 
@@ -404,13 +416,9 @@ public class EventosDAO extends BaseDao {
             parametros.add(distritoId);
         }
 
-        if (fechaInicio != null) {
-            query.append(" AND e.fecha_evento >= ?");
+        if (fechaInicio != null && fechaFin != null) {
+            query.append(" AND e.fecha_evento BETWEEN ? AND ?");
             parametros.add(fechaInicio);
-        }
-
-        if (fechaFin != null) {
-            query.append(" AND e.fecha_fin <= ?");
             parametros.add(fechaFin);
         }
 
@@ -425,6 +433,10 @@ public class EventosDAO extends BaseDao {
             }
 
             ResultSet rs = pstmt.executeQuery();
+            System.out.println("Query generada: " + query.toString());
+            System.out.println("Parámetros: " + parametros);
+            System.out.println("Parámetros utilizados en la query: " + parametros);
+            System.out.println("Evento cargado: " + rs.getString("nombre_evento") + ", Tipo: " + rs.getInt("tipo_evento_id"));
 
             while (rs.next()) {
                 Eventos evento = new Eventos();
@@ -433,9 +445,8 @@ public class EventosDAO extends BaseDao {
                 evento.setFechaEvento(rs.getDate("fecha_evento"));
                 evento.setFechaFin(rs.getDate("fecha_fin"));
 
-                TiposEventos tipoEvento = new TiposEventos();
-                tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
-                evento.setTipoEvento(tipoEvento);
+                evento.setTipoEvento(new TiposEventos(rs.getInt("tipo_id"), rs.getString("nombre_tipo")));
+
 
                 LugaresEventos lugarEvento = new LugaresEventos();
                 lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
@@ -443,6 +454,7 @@ public class EventosDAO extends BaseDao {
 
                 Fotos foto = new Fotos();
                 foto.setFotoId(rs.getInt("foto_id"));
+                foto.setUrlFoto(rs.getString("url_foto"));
                 evento.setFoto(foto);
 
                 evento.setHoraEvento(rs.getTime("hora_evento"));
@@ -455,6 +467,9 @@ public class EventosDAO extends BaseDao {
                 evento.setEstadoEvento(rs.getString("estado_evento"));
 
                 eventos.add(evento);
+
+                System.out.println("Evento encontrado: " + rs.getString("nombre_evento"));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

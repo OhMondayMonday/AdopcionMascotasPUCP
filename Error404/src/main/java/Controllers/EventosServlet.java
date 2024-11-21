@@ -189,13 +189,13 @@ public class EventosServlet extends HttpServlet {
         System.out.println("Cantidad de eventos: " + (eventos != null ? eventos.size() : "null"));
         System.out.println("Cantidad de tipos de eventos: " + (tiposEventos != null ? tiposEventos.size() : "null"));
         System.out.println("Cantidad de distritos: " + (distritos != null ? distritos.size() : "null"));
-
-
-        try {
-            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-eventos-usuario.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (TiposEventos tipo : tiposEventos) {
+            System.out.println("Tipo Evento ID: " + tipo.getTipoEventoId() + ", Nombre: " + tipo.getNombreTipo());
         }
+
+
+        request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-eventos-usuario.jsp").forward(request, response);
+
     }
 
 

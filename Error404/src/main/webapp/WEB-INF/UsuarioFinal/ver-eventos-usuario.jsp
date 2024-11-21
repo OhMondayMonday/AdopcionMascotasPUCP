@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 
-<div lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
+<div lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
@@ -30,7 +30,7 @@
     <!-- End Google Tag Manager -->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -68,7 +68,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
 </head>
 
 
@@ -88,6 +88,7 @@
 
         <div class="layout-page">
             <jsp:include page="../includes/navbarUF.jsp"/>
+
             <!-- Content wrapper -->
             <div class="content-wrapper">
 
@@ -111,8 +112,8 @@
                                             <select name="tipoEventoId" id="tipoEventoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
                                                 <option value="">Todos</option>
                                                 <c:forEach var="tipo" items="${tiposEventos}">
-                                                    <option value="${tipo.tipo_id}" ${tipo.tipo_id == filtros.tipo_id ? "selected" : ""}>
-                                                            ${tipo.nombre_tipo}
+                                                    <option value="${tipo.tipoEventoId}" ${tipo.tipoEventoId == filtros.tipoEventoId ? "selected" : ""}>
+                                                            ${tipo.nombreTipo}
                                                     </option>
                                                 </c:forEach>
                                                 <c:if test="${empty tiposEventos}">
@@ -175,12 +176,12 @@
                                                     </div>
                                                     <div class="card-body p-2 d-flex flex-column">
                                                         <div class="d-flex justify-content-between align-items-center mb-2">
-                                                            <span class="badge bg-label-info" style="font-size: 0.75rem;">${evento.tipoEvento.tipo_id != null ? evento.tipoEvento.nombre_tipo : "Sin Tipo"}</span>
+                                                            <span class="badge bg-label-info" style="font-size: 0.75rem;">${evento.tipoEvento.nombreTipo}</span>
                                                         </div>
                                                         <a class="h6" data-bs-toggle="modal" href="" style="font-size: 0.875rem;">${evento.nombreEvento}</a>
                                                         <p class="mt-1 mb-0" style="font-size: 0.75rem;">${evento.descripcionEvento}</p>
                                                         <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                            <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="EventosServlet?action=verDetalles&eventId=${evento.eventId}">
+                                                            <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="">
                                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                             </a>
 
@@ -270,233 +271,6 @@
                             </div>
                             <!--/ Evento 1 -->
 
-                            <!-- Evento 2 -->
-                            <div class="modal fade" id="evento2" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="${pageContext.request.contextPath}/assets/img/img2.jpg" alt="Imagen de publicación 2" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Protégelo contra la rabia</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Campañas</span>
-                                            </div>
-                                            <form id="editUserForm2" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Protégelo para la rabia" es una campaña de vacunación gratuita dedicada a proteger a nuestras
-                                                        mascotas y a la comunidad de la rabia. Este evento tiene como objetivo concientizar sobre la
-                                                        importancia de la vacunación, asegurando que perros y gatos reciban la protección necesaria contra esta
-                                                        peligrosa enfermedad. A lo largo de la jornada, un equipo de veterinarios estará aplicando vacunas de
-                                                        manera gratuita y ofreciendo información clave sobre la prevención de la rabia y el cuidado general de
-                                                        los animales. No dejes pasar la oportunidad de proteger a tu compañero de cuatro patas y contribuir a
-                                                        un entorno más seguro para todos. ¡Te esperamos en esta campaña por la salud y el bienestar animal!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 09:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Albergue Caritas</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 2 -->
-
-                            <!-- Evento 3 -->
-                            <div class="modal fade" id="evento3" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-1" src="${pageContext.request.contextPath}/assets/img/i3.jpg" alt="Imagen de publicación 3" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Adopción para mascotas II</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Campañas</span>
-                                            </div>
-                                            <form id="editUserForm3" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Adopción de Mascotas - 2da Edición" es un evento especial donde tendrás la oportunidad de brindar
-                                                        un hogar amoroso a perros y gatos que están buscando una segunda oportunidad. Después del éxito de
-                                                        la primera edición, volvemos con más amigos de cuatro patas listos para convertirse en parte de tu
-                                                        familia. Ven y conoce a estos adorables animales rescatados, cada uno con una historia única y un
-                                                        corazón lleno de esperanza. Además de la adopción, podrás disfrutar de charlas sobre cuidado
-                                                        responsable, asesoramiento para la integración de tu nueva mascota y muchas actividades pensadas
-                                                        para los amantes de los animales. ¡No te pierdas la oportunidad de cambiar una vida y llevarte a
-                                                        casa un nuevo mejor amigo!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 14:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Frente a la PUCP</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 3 -->
-
-                            <!-- Evento 4 -->
-                            <div class="modal fade" id="evento4" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="${pageContext.request.contextPath}/assets/img/i5.jpg" alt="Imagen de publicación 4" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Desfile de Patitas</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                            </div>
-                                            <form id="editUserForm4" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Desfile de Patitas" es un evento único y lleno de alegría donde nuestras mascotas son las verdaderas
-                                                        protagonistas. En este desfile, perros y gatos de todas las razas y tamaños caminarán con orgullo junto
-                                                        a sus dueños, mostrando su encanto y personalidad. Además de ser una divertida celebración, el desfile
-                                                        busca promover la adopción responsable y concientizar sobre el bienestar animal. Habrá concursos,
-                                                        premios para las mejores presentaciones, y actividades interactivas para toda la familia. ¡Ven con tu
-                                                        mascota, disfruta del desfile y únete a nosotros en esta celebración de amor y respeto hacia nuestros
-                                                        amigos de cuatro patas!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 14:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Frente a la PUCP</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 4 -->
-
-                            <!-- Evento 5 -->
-                            <div class="modal fade" id="evento5" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="${pageContext.request.contextPath}/assets/img/i6.jpg" alt="Imagen de publicación 5" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Encuentra a tu Mejor Amigo</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                            </div>
-                                            <form id="editUserForm5" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Encuentra a tu mejor amigo" es un emocionante evento de concurso donde las mascotas y sus dueños
-                                                        se unen para disfrutar de carreras, juegos y divertidas competencias. Diseñado para fomentar la
-                                                        conexión entre los dueños y sus compañeros de cuatro patas, este evento contará con pruebas de
-                                                        agilidad, carreras de obstáculos y desafíos interactivos que pondrán a prueba las habilidades y
-                                                        el vínculo entre mascota y dueño. Habrá premios para los ganadores en distintas categorías, desde
-                                                        el más rápido hasta el más habilidoso. No te pierdas esta oportunidad única de pasar un día lleno
-                                                        de diversión, actividad física y, por supuesto, amor incondicional. ¡Ven y participa con tu mascota
-                                                        en esta aventura llena de juegos y diversión!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 14:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Frente a la PUCP</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 5 -->
-
-                            <!-- Evento 6 -->
-                            <div class="modal fade" id="evento6" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="${pageContext.request.contextPath}/assets/img/i4.jpg" alt="Imagen de publicación 6" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Gran Concurso de Mascotas</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                            </div>
-                                            <form id="editUserForm6" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>"Gran Concurso de Mascotas" es un evento virtual donde las estrellas son nuestras adorables
-                                                        mascotas, y el disfraz más creativo se llevará el gran premio. Desde la comodidad de tu hogar,
-                                                        podrás participar enviando fotos o videos de tu mascota luciendo su mejor disfraz. El concurso
-                                                        está abierto a todo tipo de mascotas, y un panel de jueces seleccionará a los ganadores en base a
-                                                        la originalidad y creatividad de los atuendos. ¡Así que es hora de dejar volar la imaginación y
-                                                        vestir a tu mejor amigo de manera única! Únete a este divertido evento y compite por premios
-                                                        increíbles mientras disfrutas de la creatividad de los demás participantes. ¡No te lo pierdas!</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 10:00</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Medio: ¡Mediante la página web!</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 24 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 6 -->
-
                             <div class="content-backdrop fade"></div>
                         </div>
                         <!-- Content wrapper -->
@@ -560,32 +334,31 @@
             <!-- Page JS -->
 
             <script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
-            <script>
-                // Inicializa flatpickr para el rango de fechas
-                flatpickr("#dateRange", {
-                    mode: "range", // Rango de fechas
-                    dateFormat: "Y-m-d", // Formato compatible con el backend
-                    locale: {
-                        firstDayOfWeek: 1, // Semana inicia en lunes
-                        rangeSeparator: " a ", // Separador para rango
-                    },
-                    onChange: function (selectedDates, dateStr, instance) {
-                        // Extraer fechas de inicio y fin
-                        const fechaInicio = selectedDates[0] ? selectedDates[0].toISOString().split("T")[0] : "";
-                        const fechaFin = selectedDates[1] ? selectedDates[1].toISOString().split("T")[0] : "";
+                <script>
+                    // Inicializa flatpickr para el rango de fechas
+                    flatpickr("#dateRange", {
+                        mode: "range", // Rango de fechas
+                        dateFormat: "Y-m-d", // Formato compatible con el backend
+                        locale: {
+                            firstDayOfWeek: 1, // Semana inicia en lunes
+                            rangeSeparator: " a ", // Separador para rango
+                        },
+                        onChange: function (selectedDates, dateStr, instance) {
+                            // Extraer fechas de inicio y fin
+                            const fechaInicio = selectedDates[0] ? selectedDates[0].toISOString().split("T")[0] : "";
+                            const fechaFin = selectedDates[1] ? selectedDates[1].toISOString().split("T")[0] : "";
 
-                        // Asignar valores a los campos ocultos
-                        document.getElementById("fechaInicio").value = fechaInicio;
-                        document.getElementById("fechaFin").value = fechaFin;
+                            // Asignar valores a los campos ocultos
+                            document.getElementById("fechaInicio").value = fechaInicio;
+                            document.getElementById("fechaFin").value = fechaFin;
 
-                        console.log("Fecha Inicio:", fechaInicio, "Fecha Fin:", fechaFin); // Depuración
-                    },
-                });
+                            console.log("Fecha Inicio:", fechaInicio, "Fecha Fin:", fechaFin); // Depuración
+                        },
+                    });
 
-            </script>
+                </script>
 
             <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
-
 </body>
 
 
@@ -593,4 +366,4 @@
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
 </html>
 
-            <!-- beautify ignore:end --></div>
+            <!-- beautify ignore:end -->

@@ -20,7 +20,7 @@ public class TiposEventosDAO extends BaseDao{
 
                 TiposEventos tipoEvento = new TiposEventos();
                 tipoEvento.setTipoEventoId(rs.getInt("tipo_id"));
-                tipoEvento.setNombre_tipo(rs.getString("nombre_tipo"));
+                tipoEvento.setNombreTipo(rs.getString("nombre_tipo"));
                 tiposEventos.add(tipoEvento);
             }
 
@@ -37,7 +37,7 @@ public class TiposEventosDAO extends BaseDao{
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setInt(1, tipoEvento.getTipoEventoId());
-            pstmt.setString(2, tipoEvento.getNombre_tipo());
+            pstmt.setString(2, tipoEvento.getNombreTipo());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -51,7 +51,7 @@ public class TiposEventosDAO extends BaseDao{
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setString(1, tipoEvento.getNombre_tipo());
+            pstmt.setString(1, tipoEvento.getNombreTipo());
             pstmt.setInt(2, tipoEvento.getTipoEventoId());
             pstmt.executeUpdate();
 
