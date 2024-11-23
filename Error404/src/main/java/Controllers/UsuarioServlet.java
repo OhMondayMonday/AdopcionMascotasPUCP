@@ -3,9 +3,8 @@ package Controllers;
 import Beans.HogaresTemporales;
 import Beans.Usuarios;
 import Beans.Solicitudes;
-import Daos.HogarTemporalDAO;
-import Daos.MiHogarTemporalDAO;
-import Daos.PostularHogarTemporalDAO;
+import Beans.Roles;
+import Daos.*;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,17 +19,27 @@ import java.util.List;
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
 public class UsuarioServlet extends HttpServlet {
 
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
     private HogarTemporalDAO hogarTemporalDAO = new HogarTemporalDAO();
     private MiHogarTemporalDAO miHogarTemporalDAO = new MiHogarTemporalDAO();
     private PostularHogarTemporalDAO postularHogarTemporalDAO = new PostularHogarTemporalDAO();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "home" : request.getParameter("action");
         RequestDispatcher rd;
 
         switch (action) {
+
+            case "verMiPerfil":
+                mostrarDetallesPerfil(request, response, "ver-miperfil-usuario-detalles");
+                break;
+
+            case "verMiSeguridad":
+                mostrarDetallesPerfil(request, response, "ver-miperfil-usuario-seguridad");
+                break;
+
             case "miHogarTemporal":
                 Usuarios usuario = miHogarTemporalDAO.obtenerDetallesUsuarioTemporal(1);
                 List<Solicitudes> solicitudesMascotas = miHogarTemporalDAO.obtenerSolicitudesPorUsuario(1);
@@ -65,13 +74,63 @@ public class UsuarioServlet extends HttpServlet {
             case "registrarSolicitud":
                 registrarSolicitud(request, response);
                 break;
+
+            case "actualizarContrasenia":
+                cambiarContrasenia(request, response);
+                break;
+
             default:
                 request.getRequestDispatcher("/WEB-INF/Inicio-usuario.jsp").forward(request, response);
                 break;
         }
     }
 
-    // Método para manejar la visualización de "Hogar Temporal" con filtros
+    // Metodo para obtener todos mis detalles de usuario
+    private void mostrarDetallesPerfil(HttpServletRequest request, HttpServletResponse response, String view) throws ServletException, IOException {
+        int userId = 1; // ID de usuario para simulación
+
+        // Obtener detalles del usuario desde el DAO
+        Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(userId);
+
+        if (usuario != null) {
+            // Pasar datos al JSP
+            request.setAttribute("usuario", usuario);
+        } else {
+            // Manejar el caso en que no se encuentre el usuario
+            request.setAttribute("error", "No se encontraron detalles para el usuario especificado.");
+        }
+
+        // Para redirigir a los jsps
+        String jspPath = "/WEB-INF/UsuarioFinal/" + view + ".jsp";
+        RequestDispatcher rd = request.getRequestDispatcher(jspPath);
+        rd.forward(request, response);
+        
+    }
+
+    // Metodo para enviar la contraseña del formulario en perfil seguridad usuario
+    private void cambiarContrasenia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int userId = 1; // Simulación
+        String nuevaContrasenia = request.getParameter("newPassword");
+
+        if (nuevaContrasenia == null || nuevaContrasenia.isEmpty()) {
+            request.setAttribute("error", "La contraseña no puede estar vacía.");
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-miperfil-usuario-seguridad.jsp").forward(request, response);
+            return;
+        }
+
+        boolean exito = usuarioFinalDAO.actualizarContrasenia(userId, nuevaContrasenia);
+
+        if (exito) {
+            request.setAttribute("mensaje", "Contraseña actualizada exitosamente.");
+        } else {
+            request.setAttribute("error", "Hubo un problema al actualizar la contraseña.");
+        }
+
+        response.sendRedirect("UsuarioServlet?action=verMiSeguridad");
+    }
+
+
+    // Metodo para manejar la visualización de "Hogar Temporal" con filtros
     private void mostrarHogaresTemporales(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tipoMascota = request.getParameter("tipoMascota");
         String palabraClave = request.getParameter("palabraClave");

@@ -14,7 +14,7 @@ public class UsuarioDAO extends BaseDao {
 
         try (Connection connection = getConnection();
              PreparedStatement stmt = connection.prepareStatement(
-                     "SELECT * FROM usuarios WHERE username = ? AND contrasenia = ? AND estadoCuenta = 'activa'")) {
+                     "SELECT * FROM usuarios WHERE username = ? AND contrasenia = ? AND estado_cuenta = 'activa'")) {
 
             stmt.setString(1, username);
             stmt.setString(2, contrasenia);
@@ -59,7 +59,7 @@ public class UsuarioDAO extends BaseDao {
     public boolean registrarUsuario(Usuarios usuario) {
         boolean registrado = false;
 
-        String sql = "INSERT INTO usuarios (username, contrasenia, nombre, apellido, email, dni, descripcion, direccion, distrito_id, estadoCuenta, rol_id) " +
+        String sql = "INSERT INTO usuarios (username, contrasenia, nombre, apellido, email, dni, descripcion, direccion, distrito_id, estado_cuenta, rol_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = getConnection();
@@ -91,6 +91,7 @@ public class UsuarioDAO extends BaseDao {
 
         return registrado;
     }
+
 }
 
 

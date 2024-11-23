@@ -119,7 +119,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                                    <a class="dropdown-item" href="UsuarioServlet?action=verMiPerfil">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
@@ -160,7 +160,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-calendario-usuario.html">
+                                    <a class="dropdown-item" href="CalendarioServlet">
                                         <i class="bx bx-calendar"></i>
                                         <span class="align-middle">Mi Calendario</span>
                                     </a>
@@ -299,44 +299,52 @@
 
 
                         <!-- Card Container -->
-                        <div class="card col-12" style="padding: 0; margin: 0; height: auto;">
+                        <div class="card col-12 pb-3" style="height: auto;">
                             <div class="card-body p-0">
                                 <div class="container-fluid mt-3">
                                     <div class="row gx-1 gy-2 justify-content-center m-0">
 
                                         <!-- Cards -->
-                                        <c:forEach var="evento" items="${eventos}">
-                                            <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 10px;">
-                                                    <div class="rounded-2 text-center flex-grow-1">
-                                                        <a data-bs-toggle="modal" href="">
-                                                            <img class="img-fluid" src="${evento.foto.urlFoto}" alt="${evento.nombreEvento}" style="height: 200px; object-fit: cover; border-radius: 10px;"/>
-                                                        </a>
-                                                    </div>
-                                                    <div class="card-body p-2 d-flex flex-column">
-                                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                                            <span class="badge bg-label-info" style="font-size: 0.75rem;">${evento.tipoEvento.nombreTipo}</span>
-                                                        </div>
-                                                        <a class="h6" data-bs-toggle="modal" href="" style="font-size: 0.875rem;">${evento.nombreEvento}</a>
-                                                        <p class="mt-1 mb-0" style="font-size: 0.75rem;">${evento.descripcionEvento}</p>
-                                                        <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                            <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="">
-                                                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                            </a>
-
-                                                            <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="1" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                                <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                            </button>
-
-                                                        </div>
-                                                    </div>
+                                        <c:choose>
+                                            <c:when test="${empty eventos}">
+                                                <div class="col-12 text-center col-sm-6 col-md-4 col-lg-5 px-1 mb-2 d-flex justify-content-center">
+                                                    <p class="mb-0 text-body">No hay eventos disponibles para mostrar.</p>
                                                 </div>
-                                            </div>
-                                        </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:forEach var="evento" items="${eventos}">
+                                                    <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
+                                                        <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 10px;">
+                                                            <div class="rounded-2 text-center flex-grow-1">
+                                                                <a data-bs-toggle="modal" href="">
+                                                                    <img class="img-fluid" src="${evento.foto.urlFoto}" alt="${evento.nombreEvento}" style="height: 200px; object-fit: cover; border-radius: 10px;"/>
+                                                                </a>
+                                                            </div>
+                                                            <div class="card-body p-2 d-flex flex-column">
+                                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                    <span class="badge bg-label-info" style="font-size: 0.75rem;">${evento.tipoEvento.nombreTipo}</span>
+                                                                </div>
+                                                                <a class="h6" data-bs-toggle="modal" href="" style="font-size: 0.875rem;">${evento.nombreEvento}</a>
+                                                                <p class="mt-1 mb-0" style="font-size: 0.75rem;">${evento.descripcionEvento}</p>
+                                                                <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                                                                    <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="">
+                                                                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                                    </a>
 
-                                        <c:if test="${empty eventos}">
-                                            <p>No se encontraron eventos activos.</p>
-                                        </c:if>
+                                                                    <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="1" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
+                                                                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                                    </button>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </c:forEach>
+                                            </c:otherwise>
+                                        </c:choose>
+
+
                                         <!--
                                         <c:if test="${not empty eventos}">
                                             <p>Se encontraron eventos.</p>
@@ -345,25 +353,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Pagination -->
-                            <div class="card-footer d-flex justify-content-center">
-                                <ul class="pagination m-0">
-                                    <li class="page-item disabled">
-                                        <span class="page-link">Anterior</span>
-                                    </li>
-                                    <li class="page-item active">
-                                        <span class="page-link">1</span>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Siguiente</a>
-                                    </li>
-                                </ul>
+
+
                             </div>
 
                             <!-- Evento 1 -->
@@ -416,7 +407,30 @@
                         </div>
                         <!-- / Layout page -->
 
+                        <!-- Botones de Paginación -->
+                        <div class="d-flex justify-content-center mt-3">
+
+                            <c:choose>
+                                <c:when test="${not empty eventos}">
+                                    <nav>
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item ${page == 1 ? 'disabled' : ''}">
+                                                <a class="page-link" href="?action=verTodosEventos&page=${page - 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>                                    </li>
+                                            <c:forEach var="i" begin="1" end="${totalPages}">
+                                                <li class="page-item ${i == page ? 'active' : ''}">
+                                                    <a class="page-link" href="?action=verTodosEventos&page=${i}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>                                        </li>
+                                            </c:forEach>
+                                            <li class="page-item ${page == totalPages ? 'disabled' : ''}">
+                                                <a class="page-link" href="?action=verTodosEventos&page=${page + 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>                                    </li>
+                                        </ul>
+                                    </nav>
+                                </c:when>
+
+                            </c:choose>
+                        </div>
+
                     </div>
+
 
                 </div>
                 <!-- Footer -->
@@ -499,9 +513,9 @@
 
                 <script>
                     function limpiarFiltros() {
-                        const baseUrl = "EventosServlet"; // Define la URL base manualmente
+                        const baseUrl = "EventosServlet";
                         const queryParams = "?action=verTodosEventos";
-                        window.location.href = baseUrl + queryParams; // Redirige sin filtros
+                        window.location.href = baseUrl + queryParams;
                     }
                 </script>
 

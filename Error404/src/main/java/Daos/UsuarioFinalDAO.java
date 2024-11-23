@@ -1,10 +1,10 @@
 package Daos;
 import Beans.Usuarios;
 
-import java.beans.Beans;
 import java.sql.Connection;
 import Beans.Distritos;
 import Beans.Roles;
+import Beans.Fotos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,16 +12,26 @@ import java.sql.SQLException;
 
 public class UsuarioFinalDAO extends BaseDao {
 
-    // Obtener un usuario por ID
+    // Metodo para obtener todos los detalles de un usuario específico
     public Usuarios obtenerUsuarioPorId(int userId) {
-        String query = "SELECT * FROM Usuarios WHERE user_id = ?";
+        String query = "SELECT u.user_id, u.username, u.nombre, u.apellido, u.email, u.DNI, u.descripcion, u.direccion, u.estado_cuenta, u.fecha_registro, " +
+                "       u.url_facebook, u.url_instagram, u.numero_yape_plin, u.fecha_nacimiento, " +
+                "       r.rol_id AS rol_id, r.nombre_rol, f.foto_id, f.url_foto, d.distrito_id, d.nombre_distrito " +
+                "FROM usuarios u " +
+                "LEFT JOIN fotos f ON u.foto_id = f.foto_id " +
+                "LEFT JOIN distritos d ON u.distrito_id = d.distrito_id " +
+                "LEFT JOIN roles r ON u.rol_id = r.rol_id " +
+                "WHERE u.user_id = ?";
         Usuarios usuario = null;
 
         try (Connection connection = this.getConnection();
-             PreparedStatement ps = connection.prepareStatement(query)) {
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            ps.setInt(1, userId);
-            try (ResultSet rs = ps.executeQuery()) {
+            pstmt.setInt(1, userId);
+            System.out.println("Query ejecutada: " + query);
+            System.out.println("Con parámetro: user_id = " + userId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     usuario = new Usuarios();
                     usuario.setUserId(rs.getInt("user_id"));
@@ -30,21 +40,37 @@ public class UsuarioFinalDAO extends BaseDao {
                     usuario.setApellido(rs.getString("apellido"));
                     usuario.setEmail(rs.getString("email"));
                     usuario.setDni(rs.getString("DNI"));
+                    usuario.setDescripcion(rs.getString("descripcion"));
                     usuario.setDireccion(rs.getString("direccion"));
 
+                    // Foto relacionada
+                    Fotos foto = new Fotos();
+                    if (rs.getObject("foto_id") != null) {
+                        foto.setFotoId(rs.getInt("foto_id"));
+                        foto.setUrlFoto(rs.getString("url_foto"));
+                    }
+                    usuario.setFoto(foto);
 
-                    // Crear y asignar el objeto Distritos
+                    // Distrito relacionado
                     Distritos distrito = new Distritos();
-                    distrito.setDistritoId(rs.getInt("distrito_id"));
-                    usuario.setDistrito(distrito);  // Asegúrate de que este método esté bien definido
+                    if (rs.getObject("distrito_id") != null) {
+                        distrito.setDistritoId(rs.getInt("distrito_id"));
+                        distrito.setNombreDistrito(rs.getString("nombre_distrito"));
+                    }
+                    usuario.setDistrito(distrito);
+
+                    // Rol relacionado
+                    Roles rol = new Roles();
+                    rol.setRolId(rs.getInt("rol_id"));
+                    rol.setNombreRol(rs.getString("nombre_rol"));
+                    usuario.setRol(rol);
 
                     usuario.setEstadoCuenta(rs.getString("estado_cuenta"));
-
-                    Roles roles = new Roles();
-                    roles.setRolId(rs.getInt("rol_id"));
-                    usuario.setRol(roles);
-
                     usuario.setFechaRegistro(rs.getTimestamp("fecha_registro"));
+                    usuario.setUrlFacebook(rs.getString("url_facebook"));
+                    usuario.setUrlInstagram(rs.getString("url_instagram"));
+                    usuario.setNumeroYapePlin(rs.getString("numero_yape_plin"));
+                    usuario.setFechaNacimiento(rs.getString("fecha_nacimiento"));
                 }
             }
         } catch (SQLException e) {
@@ -55,7 +81,7 @@ public class UsuarioFinalDAO extends BaseDao {
 
     // Crear un nuevo usuario
     public boolean crearUsuario(Usuarios usuario) {
-        String query = "INSERT INTO Usuarios (username, contraseña, nombre, apellido, email, DNI, direccion, distrito_id, estado_cuenta, rol_id, fecha_registro) " +
+        String query = "INSERT INTO Usuarios (username, contrasenia, nombre, apellido, email, DNI, direccion, distrito_id, estado_cuenta, rol_id, fecha_registro) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = this.getConnection();
@@ -80,9 +106,27 @@ public class UsuarioFinalDAO extends BaseDao {
         return false;
     }
 
+    // Metodo para actualizar contraseña de un usuario (seguridad perfil)
+    public boolean actualizarContrasenia(int userId, String nuevaContrasenia) {
+        String query = "UPDATE usuarios SET contrasenia = ? WHERE user_id = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+            pstmt.setString(1, nuevaContrasenia);
+            pstmt.setInt(2, userId);
+
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     // Actualizar un usuario existente
     public boolean actualizarUsuario(Usuarios usuario) {
-        String query = "UPDATE Usuarios SET username = ?, contraseña = ?, nombre = ?, apellido = ?, email = ?, DNI = ?, direccion = ?, distrito_id = ?, " +
+        String query = "UPDATE Usuarios SET username = ?, contrasenia = ?, nombre = ?, apellido = ?, email = ?, DNI = ?, direccion = ?, distrito_id = ?, " +
                 "estado_cuenta = ?, rol_id = ? WHERE user_id = ?";
 
         try (Connection connection = this.getConnection();

@@ -405,7 +405,7 @@ public class EventosDAO extends BaseDao {
     }
 
     // Metodo para obtener la lista de TODOS los eventos ACTIVOS (de cualquier usuario) que existan. Incluye lógica de filtros
-    public List<Eventos> verEventosActivos(Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin) {
+    public List<Eventos> verEventosActivos(Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin, int page, int recordsPerPage) {
         List<Eventos> eventos = new ArrayList<>();
         StringBuilder query = new StringBuilder("SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.fecha_fin, e.descripcion_evento, ");
         query.append("te.tipo_id AS tipo_evento_id, te.nombre_tipo, f.foto_id, f.url_foto, d.distrito_id, d.nombre_distrito ");
@@ -437,6 +437,10 @@ public class EventosDAO extends BaseDao {
             parametros.add(fechaFin);
         }
 
+        query.append(" ORDER BY e.fecha_creacion DESC LIMIT ? OFFSET ?");
+        parametros.add(recordsPerPage);
+        parametros.add((page - 1) * recordsPerPage);
+
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query.toString())) {
 
@@ -446,9 +450,10 @@ public class EventosDAO extends BaseDao {
             }
 
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("Query generada: " + query.toString());
-            System.out.println("Parámetros: " + parametros);
-            System.out.println("Parámetros utilizados en la query: " + parametros);
+
+            // System.out.println("Query generada: " + query.toString());
+            // System.out.println("Parámetros: " + parametros);
+            // System.out.println("Parámetros utilizados en la query: " + parametros);
 
             while (rs.next()) {
                 Eventos evento = new Eventos();
@@ -470,7 +475,7 @@ public class EventosDAO extends BaseDao {
 
                 eventos.add(evento);
 
-                System.out.println("Evento encontrado: " + rs.getString("nombre_evento"));
+                // System.out.println("Evento encontrado: " + rs.getString("nombre_evento"));
 
             }
         } catch (SQLException e) {
@@ -478,6 +483,111 @@ public class EventosDAO extends BaseDao {
         }
 
         return eventos;
+    }
+
+    //Metodo para una lista de todos los Eventos ACTIVOS
+    public List<Eventos> obtenerEventosActivosConPaginacion(int page, int recordsPerPage) {
+        List<Eventos> eventos = new ArrayList<>();
+        int offset = (page - 1) * recordsPerPage;
+
+        String query = "SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.fecha_fin, e.descripcion_evento, " +
+                "te.tipo_id AS tipo_evento_id, te.nombre_tipo, f.foto_id, f.url_foto, d.distrito_id, d.nombre_distrito " +
+                "FROM eventos e " +
+                "JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id " +
+                "JOIN distritos d ON le.distrito_id = d.distrito_id " +
+                "JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id " +
+                "LEFT JOIN fotos f ON e.foto_id = f.foto_id " +
+                "WHERE e.estado_evento = 'activa' " +
+                "ORDER BY e.fecha_creacion DESC LIMIT ? OFFSET ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, recordsPerPage);
+            pstmt.setInt(2, offset);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Eventos evento = new Eventos();
+                    evento.setEventId(rs.getInt("event_id"));
+                    evento.setNombreEvento(rs.getString("nombre_evento"));
+                    evento.setFechaEvento(rs.getDate("fecha_evento"));
+                    evento.setFechaFin(rs.getDate("fecha_fin"));
+                    evento.setDescripcionEvento(rs.getString("descripcion_evento"));
+
+                    TiposEventos tipoEvento = new TiposEventos();
+                    tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
+                    tipoEvento.setNombreTipo(rs.getString("nombre_tipo"));
+                    evento.setTipoEvento(tipoEvento);
+
+                    Fotos foto = new Fotos();
+                    foto.setFotoId(rs.getInt("foto_id"));
+                    foto.setUrlFoto(rs.getString("url_foto"));
+                    evento.setFoto(foto);
+
+                    eventos.add(evento);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return eventos;
+    }
+
+    public int contarEventosActivos() {
+        String query = "SELECT COUNT(*) FROM eventos WHERE estado_evento = 'activa'";
+        int totalRecords = 0;
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                totalRecords = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalRecords;
+    }
+
+    public int contarEventosActivosConFiltros(Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin) {
+        StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM eventos e ");
+        query.append("JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id ");
+        query.append("JOIN distritos d ON le.distrito_id = d.distrito_id ");
+        query.append("JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id ");
+        query.append("WHERE e.estado_evento = 'activa' ");
+
+        List<Object> parametros = new ArrayList<>();
+
+        if (tipoEventoId != null) {
+            query.append(" AND te.tipo_id = ?");
+            parametros.add(tipoEventoId);
+        }
+        if (distritoId != null) {
+            query.append(" AND d.distrito_id = ?");
+            parametros.add(distritoId);
+        }
+        if (fechaInicio != null && fechaFin != null) {
+            query.append(" AND e.fecha_evento BETWEEN ? AND ?");
+            parametros.add(fechaInicio);
+            parametros.add(fechaFin);
+        }
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+
+            for (int i = 0; i < parametros.size(); i++) {
+                pstmt.setObject(i + 1, parametros.get(i));
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 
