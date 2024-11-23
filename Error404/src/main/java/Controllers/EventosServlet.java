@@ -38,12 +38,12 @@ public class EventosServlet extends HttpServlet {
                 listarEventos(request, response);
                 break;
 
-            case "verMisEventos":
-                verMisEventosConSinFiltro(request, response);
-                break;
-
             case "verDetalles":
                 verDetalles(request, response);
+                break;
+
+            case "verMisEventos":
+                verTodosMisEventos(request, response);
                 break;
 
             case "verTodosEventos":
@@ -69,14 +69,7 @@ public class EventosServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/jsp/albergue-ver-eventos-detalles").forward(request, response);
     }
 
-    private void verMisEventos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EventosDAO eventosDAO = new EventosDAO();
-        int usuarioId = Integer.parseInt(request.getParameter("usuarioId"));
-        List<Eventos> eventosInscritos = eventosDAO.obtenerMisEventos(usuarioId);
-
-        request.setAttribute("eventosInscritos", eventosInscritos);
-        request.getRequestDispatcher("/WEB-INF/jsp/ver-miseventos-usuario.jsp").forward(request, response);
-    }
+    // a
 
     // Metodo para ver detalles de un evento específico
     private void verDetalles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -90,9 +83,7 @@ public class EventosServlet extends HttpServlet {
     }
 
     // Ver los eventos inscritos por el usuario, puede aplicar filtros
-    private void verMisEventosConSinFiltro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // int usuarioId = Integer.parseInt(request.getParameter("usuarioId"));
-
+    private void verTodosMisEventos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int userId = 1; // Para la simulación
 
         // Obtener filtros si se aplican
@@ -117,15 +108,38 @@ public class EventosServlet extends HttpServlet {
                 ? Date.valueOf(fechaFinParam)
                 : null;
 
-        // Llamar al DAO para obtener los eventos filtrados o sin filtrar
+        // Paginación
+        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        int recordsPerPage = 6; // Mostrar 6 eventos por página
+
         List<Eventos> eventosInscritos;
+        int totalRecords;
+
         if (tipoEventoId != null || distritoId != null || fechaInicio != null || fechaFin != null) {
-            eventosInscritos = eventosDAO.verMisEventos(userId, tipoEventoId, distritoId, fechaInicio, fechaFin);
+            totalRecords = eventosDAO.contarMisEventosActivosConFiltros(userId, tipoEventoId, distritoId, fechaInicio, fechaFin);
+            eventosInscritos = eventosDAO.verMisEventosActivos(userId, tipoEventoId, distritoId, fechaInicio, fechaFin, page, recordsPerPage);
         } else {
-            eventosInscritos = eventosDAO.obtenerMisEventos(userId);
+            // Si no hay filtros
+            totalRecords = eventosDAO.contarMisEventosActivos(userId);
+            eventosInscritos = eventosDAO.obtenerMisEventosActivosConPaginacion(userId, page, recordsPerPage);
         }
-        // Pasar los datos filtrados a la JSP
-        request.setAttribute("eventos", eventosInscritos);
+
+        int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("page", page);
+        request.setAttribute("totalRecords", totalRecords);
+        request.setAttribute("eventosInscritos", eventosInscritos);
+
+        DistritosDAO distritosDAO = new DistritosDAO();
+        List<Distritos> distritos = distritosDAO.obtenerDistritos();
+        request.setAttribute("distritos", distritos);
+
+        TiposEventosDAO tiposEventosDAO = new TiposEventosDAO();
+        List<TiposEventos> tiposEventos = tiposEventosDAO.obtenerTiposEventos();
+        request.setAttribute("tiposEventos", tiposEventos);
+
+        // Pasar los eventos y filtros a la JSP
         request.setAttribute("filtros", new HashMap<String, Object>() {{
             put("tipoEventoId", tipoEventoId);
             put("distritoId", distritoId);
@@ -133,7 +147,16 @@ public class EventosServlet extends HttpServlet {
             put("fechaFin", fechaFinParam);
         }});
 
-        request.getRequestDispatcher("/WEB-INF/jsp/ver-miseventos-usuario.jsp").forward(request, response);
+        System.out.println("Tipos de eventos: " + tiposEventos.size());
+        System.out.println("Eventos activos: " + eventosInscritos.size());
+        System.out.println("Filtro de distrito ID: " + distritoId);
+        System.out.println("Fecha Inicio: " + fechaInicio);
+        System.out.println("Fecha Fin: " + fechaFin);
+        System.out.println("Cantidad de eventos: " + (eventosInscritos != null ? eventosInscritos.size() : "null"));
+        System.out.println("Cantidad de tipos de eventos: " + (tiposEventos != null ? tiposEventos.size() : "null"));
+        System.out.println("Cantidad de distritos: " + (distritos != null ? distritos.size() : "null"));
+
+        request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-miseventos-usuario.jsp").forward(request, response);
     }
 
     // Mostrar TODOS los eventos ACTIVOS que existan. Incluye lógica de filtros

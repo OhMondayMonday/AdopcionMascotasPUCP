@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
 <!DOCTYPE html>
 
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
@@ -55,8 +56,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/animate-css/animate.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- Page CSS -->
 
@@ -65,8 +68,6 @@
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 
@@ -140,7 +141,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                                    <a class="dropdown-item" href="UsuarioServlet?action=verMiSeguridad">
                                         <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
                                         <span class="align-middle" style="color: #1f4397;">Seguridad</span>
                                     </a>
@@ -157,13 +158,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                                    <a class="dropdown-item" href="EventosServlet?action=verMisEventos">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-calendario-usuario.html">
+                                    <a class="dropdown-item" href="CalendarioServlet">
                                         <i class="bx bx-calendar"></i>
                                         <span class="align-middle">Mi Calendario</span>
                                     </a>
@@ -215,219 +216,129 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
 
 
-                    <div class="card mb-0"></div>
-                    <div class="card-header d-flex flex-wrap justify-content-between gap-3">
+                    <div class="d-flex flex-wrap justify-content-between gap-3">
 
-                        <!-- Select2 -->
-                        <div class="col-12">
-                            <div class="card mb-0" style="height: auto; padding: 5px;">
-                                <div class="card-body d-flex align-items-center justify-content-center p-1">
-                                    <div class="row w-100">
-                                        <!-- Tipo de Publicacion -->
-                                        <div class="col-md-3 d-flex flex-column justify-content-center align-items-start mb-1 mt-0">
-                                            <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento</label>
-                                            <select id="select2Basic" class="form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                <option value="AK">Todas</option>
-                                                <option value="Concursos">Concursos</option>
-                                                <option value="Diasdeadopcion">Dias de adopcion</option>
-                                                <option value="Campanas">Campañas</option>
-                                                <option value="Ferias">Ferias</option>
-                                            </select>
-                                        </div>
-                                        <!-- ubicacion -->
-                                        <div class="col-md-3 d-flex flex-column justify-content-center align-items-start mb-1 mt-0">
-                                            <label for="select2Ubi" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicacion</label>
-                                            <select id="select2Ubi" class="form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                <option value="AK">Todas</option>
-                                                <option value="Barranco">Barranco</option>
-                                                <option value="Lima">Lima</option>
-                                                <option value="Chorrillos">Chorrillos</option>
-                                                <option value="Lamolina">La Molina</option>
-                                                <option value="Jesusmaria">Jesus Maria</option>
-                                                <option value="Sanmiguel">San Miguel</option>
-                                                <option value="Losolivos">Los Olivos</option>
-                                                <option value="Miraflores">Miraflores</option>
-                                                <option value="Sanisidro">San isidro</option>
-                                            </select>
-                                        </div>
-                                        <!-- Fecha -->
-                                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-start mb-1 mt-0">
-                                            <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
-                                            <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas" />
-                                        </div>
+                        <!-- Filtros -->
+                        <div class="card col-12 mb-0" style="height: auto; padding: 5px;">
 
-                                        <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
-                                            <button class="btn btn-facebook" type="button">
-                                                Aplicar filtros
-                                            </button>
-                                        </div>
+                            <div class="card-body d-flex justify-content-center p-1">
+
+                                <form action="EventosServlet" method="GET" id="filtrosForm" class="row w-100">
+                                    <input type="hidden" name="action" value="verMisEventos">
+                                    <!-- Tipo de Publicacion -->
+                                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                                        <label for="tipoEventoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento </label>
+                                        <select name="tipoEventoId" id="tipoEventoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                                            <option value="">Todos</option>
+                                            <c:forEach var="tipo" items="${tiposEventos}">
+                                                <option value="${tipo.tipoEventoId}" ${tipo.tipoEventoId == filtros.tipoEventoId ? "selected" : ""}>
+                                                        ${tipo.nombreTipo}
+                                                </option>
+                                            </c:forEach>
+                                            <c:if test="${empty tiposEventos}">
+                                                <p>No se encontraron tipos de eventos.</p>
+                                            </c:if>
+                                            <c:if test="${empty filtros}">
+                                                <p>No hay filtros configurados.</p>
+                                            </c:if>
+
+                                        </select>
                                     </div>
-                                </div>
+                                    <!-- ubicacion -->
+                                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
 
+                                        <label for="distritoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicación </label>
+                                        <select name="distritoId" id="distritoId" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                                            <option value="">Todos</option>
+                                            <c:forEach var="distrito" items="${distritos}">
+                                                <option value="${distrito.distritoId}" ${distrito.distritoId == filtros.distritoId ? "selected" : ""}>
+                                                        ${distrito.nombreDistrito}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+
+                                    </div>
+                                    <!-- Fecha -->
+                                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                                        <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
+                                        <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas"/>
+                                        <input type="hidden" name="fechaInicio" id="fechaInicio" value="${filtros.fechaInicio}">
+                                        <input type="hidden" name="fechaFin" id="fechaFin" value="${filtros.fechaFin}">
+                                    </div>
+
+
+                                    <!-- Botón Filtrar -->
+                                    <div class="<c:choose><c:when test='${not empty filtros.tipoEventoId or not empty filtros.distritoId or not empty filtros.fechaInicio or not empty filtros.fechaFin}'>
+                                                            col-md-1
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            col-md-2
+                                                        </c:otherwise>
+                                                    </c:choose> d-flex flex-column align-items-center btn-group p-2">
+                                        <button type="submit" class="btn btn-facebook">Filtrar</button>
+                                    </div>
+
+                                    <!-- Botón Limpiar (solo visible cuando hay filtros aplicados) -->
+                                    <c:if test="${not empty filtros.tipoEventoId or not empty filtros.distritoId or not empty filtros.fechaInicio or not empty filtros.fechaFin}">
+                                        <div class="col-md-1 d-flex flex-column align-items-center btn-group p-2">
+                                            <button type="button" class="btn btn-secondary" onclick="limpiarFiltros()">Limpiar</button>
+                                        </div>
+                                    </c:if>
+
+                                </form>
                             </div>
-
                         </div>
 
+
                         <!-- Card Container -->
-                        <div class="card mb-2" style="padding: 0; margin: 0;">
+                        <div class="card col-12 pb-3" style="height: auto;">
                             <div class="card-body p-0">
                                 <div class="container-fluid mt-3">
                                     <div class="row gx-1 gy-2 justify-content-center m-0">
-                                        <!-- Card 1 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a href="#">
-                                                        <img class="img-fluid" src="../../assets/img/i2.jpg" alt="Imagen de publicación 1" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Ferias</span>
-                                                    </div>
-                                                    <a class="h6" href="#" style="font-size: 0.875rem;">Feria de adopcion de bienestar</a>
-                                                    <p class="mt-auto mb-auto" style="font-size: 0.75rem;">Luego de un harto trabajo de recolección, estamos a 100 </p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" data-bs-toggle="modal" href="#evento1">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                    </div>
 
+                                        <!-- Cards -->
+                                        <c:choose>
+                                            <c:when test="${empty eventosInscritos}">
+                                                <div class="col-12 text-center col-sm-6 col-md-4 col-lg-5 px-1 mb-2 d-flex justify-content-center">
+                                                    <p class="mb-0 text-body">No hay eventos disponibles para mostrar.</p>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 2 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a href="#">
-                                                        <img class="img-fluid" src="../../assets/img/img2.jpg" alt="Imagen de publicación 2" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Campañas</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:forEach var="eventoInscrito" items="${eventosInscritos}">
+                                                    <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
+                                                        <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 10px;">
+                                                            <div class="rounded-2 text-center flex-grow-1">
+                                                                <a data-bs-toggle="modal" href="">
+                                                                    <img class="img-fluid" src="${eventoInscrito.foto.urlFoto}" alt="${eventoInscrito.nombreEvento}" style="height: 200px; object-fit: cover; border-radius: 10px;"/>
+                                                                </a>
+                                                            </div>
+                                                            <div class="card-body p-2 d-flex flex-column">
+                                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                    <span class="badge bg-label-info" style="font-size: 0.75rem;">${eventoInscrito.tipoEvento.nombreTipo}</span>
+                                                                </div>
+                                                                <a class="h6" data-bs-toggle="modal" href="" style="font-size: 0.875rem;">${eventoInscrito.nombreEvento}</a>
+                                                                <p class="mt-1 mb-0" style="font-size: 0.75rem;">${eventoInscrito.descripcionEvento}</p>
+                                                                <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
+                                                                    <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="">
+                                                                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                                    </a>
+
+                                                                    <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="1" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
+                                                                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                                    </button>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <a class="h6" href="#" style="font-size: 0.875rem;">Protégelo contra la rabia</a>
-                                                    <p class="mt-auto mb-auto" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" data-bs-toggle="modal" href="#evento2">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 3 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a href="#">
-                                                        <img class="img-fluid" src="../../assets/img/i3.jpg" alt="Imagen de publicación 3" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Campañas</span>
-                                                    </div>
-                                                    <a class="h6" href="#" style="font-size: 0.875rem;">Adopcion para mascotas II</a>
-                                                    <p class="mt-auto mb-auto" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" data-bs-toggle="modal" href="#evento3">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 4 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a href="#">
-                                                        <img class="img-fluid" src="../../assets/img/i5.jpg" alt="Imagen de publicación 4" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                                    </div>
-                                                    <a class="h6" href="#" style="font-size: 0.875rem;">Desfile de patitas</a>
-                                                    <p class="mt-auto mb-auto" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" data-bs-toggle="modal" href="#evento4">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 5 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a href="#">
-                                                        <img class="img-fluid" src="../../assets/img/i6.jpg" alt="Imagen de publicación 5" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                                    </div>
-                                                    <a class="h6" href="#" style="font-size: 0.875rem;">Encuentra a tu mejor amigo</a>
-                                                    <p class="mt-auto mb-auto" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" data-bs-toggle="modal" href="#evento5">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Card 6 -->
-                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                                                <div class="rounded-2 text-center flex-grow-1">
-                                                    <a href="#">
-                                                        <img class="img-fluid" src="../../assets/img/i4.jpg" alt="Imagen de publicación 6" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body p-2 d-flex flex-column">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">Concursos</span>
-                                                    </div>
-                                                    <a class="h6" href="#" style="font-size: 0.875rem;">Gran concurso de mascotas</a>
-                                                    <p class="mt-auto mb-auto" style="font-size: 0.75rem;">Bobby fue operado la semana pasada y necesita otra operación de apéndice</p>
-                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" data-bs-toggle="modal" href="#evento6">
-                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                </c:forEach>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Pagination -->
-                            <div class="card-footer d-flex justify-content-center">
-                                <ul class="pagination m-0">
-                                    <li class="page-item disabled">
-                                        <span class="page-link">Anterior</span>
-                                    </li>
-                                    <li class="page-item active">
-                                        <span class="page-link">1</span>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Siguiente</a>
-                                    </li>
-                                </ul>
+
                             </div>
 
                             <!-- Evento 1 -->
@@ -476,90 +387,124 @@
                             <!--/ Evento 1 -->
 
                             <div class="content-backdrop fade"></div>
-                        </div>
-                        <!-- Content wrapper -->
+                            <!-- Content wrapper -->
                     </div>
                     <!-- / Layout page -->
+
+                    <!-- Botones de Paginación -->
+                    <div class="d-flex justify-content-center mt-3">
+
+                        <c:choose>
+                            <c:when test="${not empty eventosInscritos}">
+                                <nav>
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item ${page == 1 ? 'disabled' : ''}">
+                                            <a class="page-link" href="?action=verMisEventos&page=${page - 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>                                    </li>
+                                        <c:forEach var="i" begin="1" end="${totalPages}">
+                                            <li class="page-item ${i == page ? 'active' : ''}">
+                                                <a class="page-link" href="?action=verMisEventos&page=${i}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>                                        </li>
+                                        </c:forEach>
+                                        <li class="page-item ${page == totalPages ? 'disabled' : ''}">
+                                            <a class="page-link" href="?action=verMisEventos&page=${page + 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>                                    </li>
+                                    </ul>
+                                </nav>
+                            </c:when>
+
+                        </c:choose>
+                    </div>
+
                 </div>
 
+            </div>
 
+                <!-- Footer -->
+                <footer class="footer">
+                    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+                        <div>
+                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">Ayuda</a>
+                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">Contactos</a>
+                            <a href="javascript:void(0)" class="footer-link text-muted">Terminos &amp; Condiciones</a>
+                        </div>
+                    </div>
+                </footer>
+                <!-- / Footer -->
 
                 <!-- Overlay -->
                 <div class="layout-overlay layout-menu-toggle"></div>
 
 
                 <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-
-
             </div>
+    </div>
             <!-- / Layout wrapper -->
 
 
             <!-- Core JS -->
             <!-- build:js assets/vendor/js/core.js -->
 
-            <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-            <script src="../../assets/vendor/libs/popper/popper.js"></script>
-            <script src="../../assets/vendor/js/bootstrap.js"></script>
-            <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-            <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-            <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-            <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-            <script src="../../assets/vendor/js/menu.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
             <!-- endbuild -->
 
             <!-- Vendors JS -->
 
-            <script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
-            <script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-            <script src="../../assets/vendor/libs/select2/select2.js"></script>
-            <script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
-            <script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-            <script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
-            <script src="../../assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
             <!-- Main JS -->
-            <script src="../../assets/js/main.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
 
             <!-- Page JS -->
-            <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-            <script>
-                // Inicializa flatpickr para el rango de fechas
-                flatpickr("#dateRange", {
-                    mode: "range",
-                    dateFormat: "d-m-Y", // Ajusta el formato de la fecha según tus necesidades
-                    locale: {
-                        firstDayOfWeek: 1 // Inicia la semana en lunes
+            <script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+                <script>
+                    // Inicializa flatpickr para el rango de fechas
+                    flatpickr("#dateRange", {
+                        mode: "range", // Rango de fechas
+                        dateFormat: "Y-m-d", // Formato compatible con el backend
+                        locale: {
+                            firstDayOfWeek: 1, // Semana inicia en lunes
+                            rangeSeparator: " a ", // Separador para rango
+                        },
+                        onChange: function (selectedDates, dateStr, instance) {
+                            // Extraer fechas de inicio y fin
+                            const fechaInicio = selectedDates[0] ? selectedDates[0].toISOString().split("T")[0] : "";
+                            const fechaFin = selectedDates[1] ? selectedDates[1].toISOString().split("T")[0] : "";
+
+                            // Asignar valores a los campos ocultos
+                            document.getElementById("fechaInicio").value = fechaInicio;
+                            document.getElementById("fechaFin").value = fechaFin;
+
+                            console.log("Fecha Inicio:", fechaInicio, "Fecha Fin:", fechaFin); // Depuración
+                        },
+                    });
+
+                </script>
+
+                <script>
+                    function limpiarFiltros() {
+                        const baseUrl = "EventosServlet";
+                        const queryParams = "?action=verMisEventos";
+                        window.location.href = baseUrl + queryParams;
                     }
-                });
-            </script>
+                </script>
 
-            <script src="../../assets/js/pages-pricing.js"></script>
-            <script src="../../assets/js/modal-edit-user.js"></script>
 
-</div>
-    </div>
+        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+
+   </div>
 </div>
 </body>
-
-<!-- Footer -->
-<footer class="footer" style="background-color: #e7f6ff42;">
-    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-        <div>
-            <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-
-        </div>
-        <div>
-            <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-            <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-            <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-        </div>
-    </div>
-</footer>
-<!-- / Footer -->
-
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
 </html>

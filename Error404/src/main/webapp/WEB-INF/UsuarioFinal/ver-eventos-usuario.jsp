@@ -137,7 +137,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                                    <a class="dropdown-item" href="UsuarioServlet?action=verMiSeguridad">
                                         <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
                                         <span class="align-middle" style="color: #1f4397;">Seguridad</span>
                                     </a>
@@ -213,7 +213,7 @@
                         <!-- Filtros -->
                         <div class="card col-12 card mb-0" style="height: auto; padding: 5px;">
 
-                            <div class="card-body d-flex align-items-center justify-content-between p-1">
+                            <div class="card-body d-flex justify-content-center p-1">
 
                                 <form action="EventosServlet" method="GET" id="filtrosForm" class="row w-100">
                                     <input type="hidden" name="action" value="verTodosEventos">
@@ -343,13 +343,6 @@
                                                 </c:forEach>
                                             </c:otherwise>
                                         </c:choose>
-
-
-                                        <!--
-                                        <c:if test="${not empty eventos}">
-                                            <p>Se encontraron eventos.</p>
-                                        </c:if>
-                                        -->
                                     </div>
                                 </div>
                             </div>
