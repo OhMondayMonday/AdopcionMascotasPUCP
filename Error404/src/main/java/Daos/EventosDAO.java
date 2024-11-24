@@ -226,52 +226,66 @@ public class EventosDAO extends BaseDao {
 
     //
 
-    // Metodo para obtener todos los atributos (detalles) de un evento específico
-    public Eventos obtenerDetalleEvento(int event_id) {
-        Eventos evento = new Eventos();
-        String query = "SELECT * FROM eventos WHERE event_id = ?";
+    // Metodo para obtener todos los detalles de un evento específico
+    public Eventos obtenerDetalleEvento(int eventId) {
+        String query = "SELECT e.*, " +
+                "te.tipo_id AS tipoEventoId, te.nombre_tipo AS nombreTipo, " +
+                "le.lugar_id AS lugarId, le.direccion_lugar AS direccionLugar, le.aforo_maximo AS aforoMaximo, " +
+                "d.nombre_distrito AS nombreDistrito, " +
+                "f.foto_id AS fotoId, f.url_foto AS urlFoto " +
+                "FROM eventos e " +
+                "JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id " +
+                "JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id " +
+                "JOIN distritos d ON le.distrito_id = d.distrito_id " +
+                "LEFT JOIN fotos f ON e.foto_id = f.foto_id " +
+                "WHERE e.event_id = ?";
 
         try (Connection connection = this.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement(query)){
-            pstmt.setInt(1, event_id);
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, eventId);
             ResultSet rs = pstmt.executeQuery();
 
-            evento.setEventId(rs.getInt("event_id"));
+            if (rs.next()) {
+                Eventos evento = new Eventos();
+                evento.setEventId(rs.getInt("event_id"));
+                evento.setNombreEvento(rs.getString("nombre_evento"));
+                evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setFechaFin(rs.getDate("fecha_fin"));
+                evento.setDescripcionEvento(rs.getString("descripcion_evento"));
+                evento.setEstadoEvento(rs.getString("estado_evento"));
 
-            Usuarios usuario = new Usuarios();
-            usuario.setUserId(rs.getInt("user_id"));
-            evento.setUsuario(usuario);
+                // Asignar tipo de evento
+                TiposEventos tipoEvento = new TiposEventos();
+                tipoEvento.setTipoEventoId(rs.getInt("tipoEventoId"));
+                tipoEvento.setNombreTipo(rs.getString("nombreTipo"));
+                evento.setTipoEvento(tipoEvento);
 
-            TiposEventos tipoEvento = new TiposEventos();
-            tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
-            evento.setTipoEvento(tipoEvento);
+                // Asignar lugar del evento
+                LugaresEventos lugarEvento = new LugaresEventos();
+                lugarEvento.setLugarId(rs.getInt("lugarId"));
+                lugarEvento.setDireccionLugar(rs.getString("direccionLugar"));
+                lugarEvento.setAforoMaximo(rs.getInt("aforoMaximo"));
 
-            evento.setNombreEvento(rs.getString("nombre_evento"));
-            evento.setFechaEvento(rs.getDate("fecha_evento"));
-            evento.setHoraEvento(rs.getTime("hora_evento"));
-            evento.setFechaFin(rs.getDate("fecha_fin"));
-            evento.setHoraFin(rs.getTime("hora_fin"));
+                // Asignar distrito
+                Distritos distrito = new Distritos();
+                distrito.setNombreDistrito(rs.getString("nombreDistrito"));
+                lugarEvento.setDistrito(distrito);
+                evento.setLugarEvento(lugarEvento);
 
-            Fotos foto = new Fotos();
-            foto.setFotoId(rs.getInt("foto_id"));
-            evento.setFoto(foto);
+                // Asignar foto
+                Fotos foto = new Fotos();
+                foto.setFotoId(rs.getInt("fotoId"));
+                foto.setUrlFoto(rs.getString("urlFoto"));
+                evento.setFoto(foto);
 
-            LugaresEventos lugarEvento = new LugaresEventos();
-            lugarEvento.setLugarId(rs.getInt("lugar_evento_id"));
-            evento.setLugarEvento(lugarEvento);
-
-            evento.setEntrada(rs.getString("entrada"));
-            evento.setDescripcionEvento(rs.getString("descripcion_evento"));
-            evento.setArtistasProveedores(rs.getString("artistas_proveedores"));
-            evento.setRazonEvento(rs.getString("razon_evento"));
-            evento.setFechaCreacion(rs.getDate("fecha_creacion"));
-            evento.setEstadoEvento(rs.getString("estado_evento"));
-
+                return evento;
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return evento;
+        return null;
     }
+
 
     // Metodo para mostrar la lista de TODOS los Eventos ACTIVOS que tiene un usuario específico, incluye lógica de filtros
     public List<Eventos> verMisEventosActivos(int userId, Integer tipo_evento_id, Integer distritoId, Date fechaInicio, Date fechaFin, int page, int recordsPerPage){

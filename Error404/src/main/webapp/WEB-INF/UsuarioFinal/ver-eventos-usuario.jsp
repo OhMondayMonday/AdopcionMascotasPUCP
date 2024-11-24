@@ -154,7 +154,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                                    <a class="dropdown-item" href="EventosServlet?action=verMisEventos">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
@@ -327,7 +327,7 @@
                                                                 <a class="h6" data-bs-toggle="modal" href="" style="font-size: 0.875rem;">${evento.nombreEvento}</a>
                                                                 <p class="mt-1 mb-0" style="font-size: 0.75rem;">${evento.descripcionEvento}</p>
                                                                 <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                                    <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="">
+                                                                    <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="EventosServlet?action=verDetallesEvento&event_id=${evento.eventId}">
                                                                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                                     </a>
 

@@ -38,8 +38,8 @@ public class EventosServlet extends HttpServlet {
                 listarEventos(request, response);
                 break;
 
-            case "verDetalles":
-                verDetalles(request, response);
+            case "verDetallesEvento":
+                verDetallesEvento(request, response);
                 break;
 
             case "verMisEventos":
@@ -62,24 +62,24 @@ public class EventosServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/jsp/albergue-ver-eventos.jsp").forward(request, response);
     }
 
-    private void mostrarDetallesEvento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Eventos eventos = eventosDAO.obtenerDetalleEvento(id);
-        request.setAttribute("eventos", eventos);
-        request.getRequestDispatcher("/WEB-INF/jsp/albergue-ver-eventos-detalles").forward(request, response);
-    }
-
-    // a
+    // d
 
     // Metodo para ver detalles de un evento específico
-    private void verDetalles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EventosDAO eventosDAO = new EventosDAO();
-        int eventoId = Integer.parseInt(request.getParameter("eventoId"));
-        Eventos evento = eventosDAO.obtenerDetalleEvento(eventoId);
+    private void verDetallesEvento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            int eventoId = Integer.parseInt(request.getParameter("event_id")); // Obtener ID del evento desde la URL
+            Eventos eventoDetalles = eventosDAO.obtenerDetalleEvento(eventoId); // Obtener los detalles del evento
 
-        request.setAttribute("evento", evento);
-        request.getRequestDispatcher("/WEB-INF/jsp/usuario-detalles-evento.jsp").forward(request, response);
-
+            if (eventoDetalles != null) {
+                request.setAttribute("evento", eventoDetalles); // Pasar el evento como atributo al JSP
+                request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-evento-detalles-usuario.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("EventosServlet?action=verTodosEventos"); // Si no se encuentra el evento, redirigir
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.sendRedirect("EventosServlet?action=verTodosEventos"); // Redirigir en caso de error
+        }
     }
 
     // Ver los eventos inscritos por el usuario, puede aplicar filtros

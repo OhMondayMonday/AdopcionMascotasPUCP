@@ -55,7 +55,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="ver-miseventos-usuario.html" class="menu-link">
+            <a href="EventosServlet?action=verMisEventos" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                 <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
             </a>
