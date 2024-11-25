@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
 
-    <title>Inicio</title>
+    <title>Coordinador-inicio</title>
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -82,6 +82,7 @@
 
 
 <body style="background-color: #fef8e5;">
+
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -146,6 +147,8 @@
                                     <img src="${pageContext.request.contextPath}/<%= fotoPerfil %>" alt="fotoperfil" class="w-px-40 h-auto rounded-circle">
                                 </div>
                             </a>
+
+
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item" href="${pageContext.request.contextPath}/coordinador-miperfil-detalles.jsp">
