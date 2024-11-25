@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Cuenta</title>
+    <title>Seguridad</title>
 
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -22,8 +22,8 @@
 
     <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});let f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!=='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         '../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-5DDHKGP');</script>
     <!-- End Google Tag Manager -->
@@ -55,7 +55,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
-    <link rel="stylesheet" href=${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/animate-css/animate.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.css" />
+
 
     <!-- Page CSS -->
 
@@ -83,7 +86,6 @@
 
         <jsp:include page="../includes/sidebarUF.jsp" />
 
-
         <div class="layout-page">
             <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
 
@@ -100,8 +102,8 @@
                     <div class="w-75 align-items-center me-auto">
                         <div class="nav-item navbar-search-wrapper mb-0">
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario / Mi Perfil /</span> Cuenta</p>
-            </span>
+                <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario / Mi Perfil /</span> Seguridad</p>
+              </span>
                         </div>
                     </div>
 
@@ -109,7 +111,6 @@
 
                         <!-- Notification -->
                         <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, ${usuario.nombre}!</span>
-
                         <!--/ Notification -->
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -128,7 +129,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block"> ${usuario.nombre} ${usuario.apellido} </span>
+                                                <span class="fw-medium d-block">${usuario.nombre} ${usuario.apellido}</span>
                                                 <small class="text-muted">${usuario.rol.nombreRol}</small>
                                             </div>
                                         </div>
@@ -149,13 +150,13 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-mispublicaciones-usuario.jsp">
+                                    <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
                                         <i class="bx bx-building-house"></i>
                                         <span class="align-middle">Mis publicaciones</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miseventos-usuario.jsp">
+                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
@@ -170,7 +171,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="Preguntas-frecuentes.jsp">
+                                    <a class="dropdown-item" href="Preguntas-frecuentes.html">
                                         <i class="bx bx-help-circle"></i>
                                         <span class="align-middle">Preguntas frecuentes</span>
                                     </a>
@@ -179,7 +180,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../../index.jsp" >
+                                    <a class="dropdown-item" href="../index.html" >
                                         <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
                                         <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                                     </a>
@@ -201,6 +202,7 @@
 
 
             </nav>
+            <!-- / Navbar -->
 
 
 
@@ -270,7 +272,7 @@
                                         </ul>
 
                                         <div class="d-flex justify-content-center pt-3">
-                                            <a href="usuario-editar-perfil.jsp" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
+                                            <a href="usuario-editar-perfil.html" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
                                         </div>
 
                                     </div>
@@ -289,83 +291,154 @@
                             <!-- User Pills -->
                             <!-- User Pills -->
                             <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                <li class="nav-item"><a class="nav-link active" href="UsuarioServlet?action=verMiPerfil"><i class="bx bx-user me-1"></i>Cuenta</a></li>
-                                <li class="nav-item"><a class="nav-link" href="UsuarioServlet?action=verMiSeguridad"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
+                                <li class="nav-item"><a class="nav-link" href="UsuarioServlet?action=verMiPerfil"><i class="bx bx-user me-1"></i>Cuenta</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="UsuarioServlet?action=verMiSeguridad"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
                             </ul>
                             <!--/ User Pills -->
                             <!--/ User Pills -->
 
-                            <!-- Project table -->
+                            <!-- CAMBIAR CONTRASEÑA -->
                             <div class="card mb-4">
-                                <h5 class="card-header pt-3 ps-3">Acerca de mí</h5>
-                                <div class="p-3 pt-0 descripcion-hogar">
-                                    ${usuario.descripcion}
+                                <div class="card-body">
+                                    <form id="formChangePassword" action="UsuarioServlet?action=actualizarContrasenia" method="POST">
+                                        <div class="alert alert-warning" role="alert">
+                                            <h6 class="alert-heading mb-1">Llene los siguientes campos</h6>
+                                            <span>8 caracteres como minimo, incluya mayusculas, simbolos y numeros</span>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="mb-3 col-12 col-sm-6 form-password-toggle">
+                                                <label class="form-label" for="newPassword">Nueva Contraseña</label>
+                                                <div>
+                                                    <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" required />
+                                                    <p class="invalid-feedback">La contraseña debe contener más de 8 caracteres.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 col-12 col-sm-6 form-password-toggle">
+                                                <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
+                                                <div>
+                                                    <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" required />
+                                                    <p class="invalid-feedback">Las contraseñas no son iguales.</p>
+                                                </div>
+                                            </div>
+
+                                            <!--
+                                            <div class="mb-3 col-12 col-sm-6 form-password-toggle">
+                                                <label class="form-label" for="newPassword">Nueva Contraseña</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" required/>
+                                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 col-12 col-sm-6 form-password-toggle">
+                                                <label class="form-label" for="confirmPassword">Confirmar contraseña</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" required/>
+                                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                                </div>
+                                            </div>
+                                            -->
+                                            <div>
+                                                <button type="submit" class="btn btn-primary me-2">Cambiar contraseña</button>
+
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
 
 
                             <!-- /Project table -->
 
-                            <!-- Activity Timeline -->
                             <div class="card mb-4">
-                                <h5 class="card-header">Actividad Reciente</h5>
+                                <h5 class="card-header">Consejos de Seguridad</h5>
                                 <div class="card-body">
-                                    <ul class="timeline">
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Rescate exitoso</h6>
-                                                    <small class="text-muted">Hace 15 min</small>
-                                                </div>
-                                                <p class="mb-2">Se rescató un gatito atrapado en un árbol y se trasladó a un lugar seguro.</p>
-                                            </div>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3">
+                                            <i class='bx bx-lock-alt text-success me-2'></i>
+                                            <span class="fw-medium">Usa contraseñas complejas:</span> Incluye letras mayúsculas, números y símbolos.
                                         </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Evento comunitario</h6>
-                                                    <small class="text-muted">Hace 1 hora</small>
-                                                </div>
-                                                <p class="mb-2">Participó en un evento de la comunidad para concientizar sobre la adopción de mascotas.</p>
-                                            </div>
+                                        <li class="mb-3">
+                                            <i class='bx bx-shield text-primary me-2'></i>
+                                            <span class="fw-medium">Cambia tu contraseña periódicamente:</span> Cada 3 meses es ideal.
                                         </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Ingreso de animales rescatados</h6>
-                                                    <small class="text-muted">Hace 3 días</small>
-                                                </div>
-                                                <p class="mb-2">Dos perros y un gato fueron rescatados y están recibiendo cuidados en el hogar temporal.</p>
-                                            </div>
+                                        <li class="mb-3">
+                                            <i class='bx bx-user-x text-danger me-2'></i>
+                                            <span class="fw-medium">Evita usar la misma contraseña en varios sitios:</span> Minimiza riesgos si alguna cuenta es comprometida.
                                         </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-success"></span></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Adopción confirmada</h6>
-                                                    <small class="text-muted">Hace 1 semana</small>
-                                                </div>
-                                                <p class="mb-0">Se confirmó la adopción de 4 perros que encontraron un hogar amoroso.</p>
-                                            </div>
+                                        <li class="mb-3">
+                                            <i class='bx bx-log-in-circle text-danger me-2'></i>
+                                            <span class="fw-medium">Cierra sesión en dispositivos compartidos:</span> Protege tu cuenta en lugares públicos o ajenos.
                                         </li>
-                                        <li class="timeline-end-indicator">
-                                            <i class="bx bx-check-circle"></i>
+                                        <li class="mb-3">
+                                            <i class='bx bx-mobile text-info me-2'></i>
+                                            <span class="fw-medium">Habilita la autenticación en dos pasos (2FA):</span> Aumenta la protección de tu cuenta.
+                                        </li>
+                                        <li class="mb-3">
+                                            <i class='bx bx-refresh text-secondary me-2'></i>
+                                            <span class="fw-medium">Actualiza regularmente tus datos personales:</span> Asegúrate de tener siempre información vigente.
+                                        </li>
+                                        <li>
+                                            <i class='bx bx-user-check text-success me-2'></i>
+                                            <span class="fw-medium">No compartas tus credenciales:</span> Mantén tus datos de inicio de sesión solo para ti.
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <!-- /Activity Timeline -->
 
 
                         </div>
                         <!--/ User Content -->
                     </div>
 
+                    <!-- Modal -->
+
+                    <!-- Add New Credit Card Modal -->
+                    <div class="modal fade" id="upgradePlanModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-simple modal-upgrade-plan">
+                            <div class="modal-content p-3 p-md-5">
+                                <div class="modal-body">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="text-center mb-4">
+                                        <h3>Upgrade Plan</h3>
+                                        <p>Choose the best plan for user.</p>
+                                    </div>
+                                    <form id="upgradePlanForm" class="row g-3" onsubmit="return false">
+                                        <div class="col-sm-9">
+                                            <label class="form-label" for="choosePlan">Choose Plan</label>
+                                            <select id="choosePlan" name="choosePlan" class="form-select" aria-label="Choose Plan">
+                                                <option selected>Choose Plan</option>
+                                                <option value="standard">Standard - $99/month</option>
+                                                <option value="exclusive">Exclusive - $249/month</option>
+                                                <option value="Enterprise">Enterprise - $499/month</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3 d-flex align-items-end">
+                                            <button type="submit" class="btn btn-primary">Upgrade</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <hr class="mx-md-n5 mx-n3">
+                                <div class="modal-body">
+                                    <h6 class="mb-0">User current plan is standard plan</h6>
+                                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                                        <button class="btn btn-label-danger cancel-subscription mt-3">Cancel Subscription</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ Add New Credit Card Modal -->
+
+                    <!-- /Modal -->
                 </div>
                 <!-- / Content -->
+
+
+
 
                 <!-- Footer -->
                 <footer class="footer">
@@ -423,12 +496,14 @@
 <!-- Vendors JS -->
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/moment/moment.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/popular.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/auto-focus.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+
 
 <!-- Main JS -->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
@@ -438,11 +513,59 @@
 <script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/app-user-view-account.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-enable-otp.js"></script>
+<!--<script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>-->
+<script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const newPassword = document.getElementById('newPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const form = document.getElementById('formChangePassword');
+
+        function validatePasswords() {
+            const newPasswordValue = newPassword.value;
+            const confirmPasswordValue = confirmPassword.value;
+            let isValid = true;
+
+            // Reset errors
+            newPassword.classList.remove('is-invalid');
+            confirmPassword.classList.remove('is-invalid');
+
+            // Check password length
+            if (newPasswordValue.length < 8) {
+                isValid = false;
+                newPassword.classList.add('is-invalid');
+                newPassword.nextElementSibling.innerHTML = 'La contraseña debe contener más de 8 caracteres.';
+            }
+
+            // Check if passwords match
+            if (newPasswordValue !== confirmPasswordValue) {
+                isValid = false;
+                confirmPassword.classList.add('is-invalid');
+                confirmPassword.nextElementSibling.innerHTML = 'Las contraseñas no son iguales.';
+            }
+
+            return isValid;
+        }
+
+        // Validate on input
+        newPassword.addEventListener('input', validatePasswords);
+        confirmPassword.addEventListener('input', validatePasswords);
+
+        // Prevent form submission if invalid
+        form.addEventListener('submit', function (e) {
+            if (!validatePasswords()) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+
 
 </body>
 
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-user-view-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:41 GMT -->
 </html>
-
 

@@ -1,10 +1,13 @@
 package Beans;
 
 public class LugaresEventos {
+
     private int lugarId;
+
     private Distritos distrito;
-    private String nombreLugar;
     private Fotos foto;
+
+    private String nombreLugar;
     private int aforoMaximo;
     private String direccionLugar;
     private boolean activo;
@@ -21,6 +24,10 @@ public class LugaresEventos {
 
     public void setDistrito(Distritos distrito) { this.distrito = distrito; }
 
+    public Fotos getFoto() { return foto; }
+
+    public void setFoto(Fotos foto) { this.foto = foto; }
+
     public String getNombreLugar() {
         return nombreLugar;
     }
@@ -28,10 +35,6 @@ public class LugaresEventos {
     public void setNombreLugar(String nombreLugar) {
         this.nombreLugar = nombreLugar;
     }
-
-    public Fotos getFoto() { return foto; }
-
-    public void setFoto(Fotos foto) { this.foto = foto; }
 
     public int getAforoMaximo() {
         return aforoMaximo;

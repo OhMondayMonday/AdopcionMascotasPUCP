@@ -2,7 +2,7 @@
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.GsonBuilder" %>
 <%
-    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").create();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
     String eventosInscritosJson = gson.toJson(request.getAttribute("eventosInscritos"));
     String eventosNoInscritosJson = gson.toJson(request.getAttribute("eventosNoInscritos"));

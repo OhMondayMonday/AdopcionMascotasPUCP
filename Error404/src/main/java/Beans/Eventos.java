@@ -1,11 +1,13 @@
 package Beans;
-
 import java.sql.Date;
 import java.sql.Time;
 
 public class Eventos {
+
     private int eventId;
+
     private Usuarios usuario;
+    private TiposEventos tipoEvento;
     private String nombreEvento;
     private Date fechaEvento;
     private Time horaEvento;
@@ -21,7 +23,7 @@ public class Eventos {
     private String estadoEvento;
     private String urlFoto;
 
-
+    // eventID
     public int getEventId() {
         return eventId;
     }
@@ -30,42 +32,87 @@ public class Eventos {
         this.eventId = eventId;
     }
 
-    public Usuarios getUsuario() { return usuario; }
+    // Usuario
+    public Usuarios getUsuario() {
+        return usuario;
+    }
 
-    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    // Tipo Evento
+    public TiposEventos getTipoEvento() {
+        return tipoEvento;
+    }
+
+    public void setTipoEvento(TiposEventos tipoEvento) {
+        this.tipoEvento = tipoEvento;
+    }
+
+
+    // Nombre Evento
 
     public String getNombreEvento() {
         return nombreEvento;
     }
-
     public void setNombreEvento(String nombreEvento) {
         this.nombreEvento = nombreEvento;
     }
 
+    // Fecha Evento
+
     public Date getFechaEvento() {
         return fechaEvento;
     }
-
     public void setFechaEvento(Date fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
+    // Hora Inicio Evento
+
     public Time getHoraEvento() {
         return horaEvento;
     }
-
     public void setHoraEvento(Time horaEvento) {
         this.horaEvento = horaEvento;
     }
 
-    public Fotos getFoto() { return foto; }
+    // Fecha Fin
 
-    public void setFoto(Fotos foto) { this.foto = foto; }
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
 
+    // Hora Fin
+
+    public Time getHoraFin() {
+        return horaFin;
+    }
+    public void setHoraFin(Time horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    // Fotos
+
+    public Fotos getFoto() {
+        return foto;
+    }
+    public void setFoto(Fotos foto) {
+        this.foto = foto;
+    }
+
+    // Lugar Evento
     public LugaresEventos getLugarEvento() { return lugarEvento; }
 
-    public void setLugarEvento(LugaresEventos lugarEvento) { this.lugarEvento = lugarEvento; }
+    public void setLugarEvento(LugaresEventos lugarEvento) {
+        this.lugarEvento = lugarEvento;
+    }
 
+    // Entrada
     public String getEntrada() {
         return entrada;
     }
@@ -74,6 +121,7 @@ public class Eventos {
         this.entrada = entrada;
     }
 
+    // Descripción Evento
     public String getDescripcionEvento() {
         return descripcionEvento;
     }
@@ -82,6 +130,7 @@ public class Eventos {
         this.descripcionEvento = descripcionEvento;
     }
 
+    // Artistas
     public String getArtistasProveedores() {
         return artistasProveedores;
     }
@@ -90,6 +139,7 @@ public class Eventos {
         this.artistasProveedores = artistasProveedores;
     }
 
+    // Razón del Evento
     public String getRazonEvento() {
         return razonEvento;
     }
@@ -98,10 +148,16 @@ public class Eventos {
         this.razonEvento = razonEvento;
     }
 
+    // Fecha Creación Evento
     public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    // Estado del evento
     public String getEstadoEvento() {
         return estadoEvento;
     }
@@ -110,25 +166,7 @@ public class Eventos {
         this.estadoEvento = estadoEvento;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
-    public Time getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Time horaFin) {
-        this.horaFin = horaFin;
-    }
+    // Foto del Evento
     public String getUrlFoto() {
         return urlFoto;
     }
@@ -136,5 +174,6 @@ public class Eventos {
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
     }
+
 }
 
