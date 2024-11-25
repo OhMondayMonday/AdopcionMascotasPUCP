@@ -178,6 +178,7 @@
                     </a>
                 </div>
 
+
                 <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                     <div class="w-75 align-items-center me-auto">
                         <div class="nav-item navbar-search-wrapper mb-0">
@@ -188,13 +189,13 @@
                     </div>
 
                     <ul class="navbar-nav flex-row align-items-center ms-0">
-                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, <%= nombreUsuario %>!</span>
 
                         <!-- User Dropdown -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img class="w-px-40 h-auto rounded-circle" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&amp;w=826" alt="fotoperfil">
+                                    <img class="w-px-40 h-auto rounded-circle" src="${pageContext.request.contextPath}/<%= fotoPerfil %>" alt="fotoperfil">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -203,11 +204,11 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img class="w-px-40 h-auto rounded-circle" src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&amp;w=826" alt="fotoperfil">
+                                                    <img class="w-px-40 h-auto rounded-circle" src="${pageContext.request.contextPath}/<%= fotoPerfil %>" alt="fotoperfil">
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block">Adolfo Contreras</span>
+                                                <span class="fw-medium d-block"><%= nombreUsuario %></span>
                                                 <small class="text-muted">Usuario</small>
                                             </div>
                                         </div>
