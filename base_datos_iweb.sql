@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS IWEB_DB ;
 USE IWEB_DB;
 
+DROP TABLE IF EXISTS sesiones_usuarios;
 DROP TABLE IF EXISTS logs;
 DROP TABLE IF EXISTS denuncias_maltrato_animal;
 DROP TABLE IF EXISTS hogares_temporales;
@@ -55,7 +56,7 @@ CREATE TABLE fotos (
 CREATE TABLE usuarios (
                           user_id INT AUTO_INCREMENT PRIMARY KEY,
                           username VARCHAR(50) UNIQUE NOT NULL,
-                          contraseña VARCHAR(255) NOT NULL,
+                          contrasenia VARCHAR(255) NOT NULL,
                           nombre VARCHAR(100),
                           apellido VARCHAR(100),
                           email VARCHAR(100) UNIQUE,

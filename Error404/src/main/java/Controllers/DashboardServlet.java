@@ -13,15 +13,16 @@ import java.util.List;
 
 @WebServlet("/DashboardServlet")
 public class DashboardServlet extends HttpServlet {
-    private DashboardDAO dashboardDAO; // Solo necesitas una instancia de DashboardDAO
+    private DashboardDAO dashboardDAO;
 
     @Override
     public void init() throws ServletException {
-        dashboardDAO = new DashboardDAO(); // Inicializa el DashboardDAO
+        dashboardDAO = new DashboardDAO();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String action = request.getParameter("action");
 
         if (action == null || action.isEmpty()) {

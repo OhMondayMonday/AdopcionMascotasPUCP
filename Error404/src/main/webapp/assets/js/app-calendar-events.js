@@ -61,10 +61,3 @@ let eventosNoInscritos = window.eventosNoInscritos.map(evento => {
 window.events = [...eventosInscritos, ...eventosNoInscritos];
 
 console.log("Eventos formateados para el calendario:", window.events);
-
-//     id: 12,
-//     url: "",
-//     title: "Reunión Trabajo",
-//     start: new Date(date.getFullYear(), date.getMonth() + 1, -22),
-//     end: new Date(date.getFullYear(), date.getMonth() + 1, -21),
-//     extendedProps: {calendar: "Personal"}

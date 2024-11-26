@@ -18,7 +18,6 @@ public class DashboardServlet3 extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        // Inicializa el DAO cuando el servlet se crea
         dashboard3DAO = new Dashboard3DAO();
     }
 
@@ -27,16 +26,14 @@ public class DashboardServlet3 extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action == null || action.isEmpty()) {
-            action = "mostrarDashboard"; // Acción predeterminada
+            action = "mostrarDashboard";
         }
 
-        // Maneja las diferentes acciones
         switch (action) {
             case "mostrarDashboard":
                 mostrarDashboard(request, response);
                 break;
             default:
-                // Envía un error 404 si la acción no es válida
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Acción no válida");
                 break;
         }
@@ -44,7 +41,7 @@ public class DashboardServlet3 extends HttpServlet {
 
     // Método para mostrar el Dashboard
     private void mostrarDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int coordinadorId = 10; // Simulación: Cambia esto a la lógica real para obtener el ID del usuario autenticado
+        int coordinadorId = 10;
 
         try {
             // Obtener datos desde el Dashboard3DAO
