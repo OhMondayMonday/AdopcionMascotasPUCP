@@ -15,12 +15,22 @@ public class LoginServlet extends HttpServlet {
     private final LoginDAO loginDAO = new LoginDAO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/Login/login.jsp").forward(request, response);
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("userID") != null) {
+            String referer = request.getHeader("Referer");
+            if (referer != null) {
+                response.sendRedirect(referer);
+            }
+            return;
+        }
+        request.getRequestDispatcher("/WEB-INF/Login/login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String email = request.getParameter("email");
         String contrasenia = request.getParameter("contrasenia");
 
@@ -33,7 +43,8 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("DashboardServlet");
         } else {
             request.setAttribute("error", "Correo o contraseña incorrectos");
-            request.getRequestDispatcher("WEB-INF/Login/login.jsp").forward(request, response);
+
+            request.getRequestDispatcher("/WEB-INF/Login/login.jsp").forward(request, response);
         }
     }
 }
