@@ -3,6 +3,7 @@ package Controllers;
 import Beans.*;
 import Daos.PublicacionesDAO;
 import Daos.RazasDao;
+import Daos.TiposPublicacionesDAO;
 import Daos.UsuarioFinalDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,16 +11,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @WebServlet("/PublicacionesServlet")
 public class PublicacionesServlet extends HttpServlet {
     private PublicacionesDAO publicacionesDAO;
+    private TiposPublicacionesDAO tiposPublicacionesDAO;
 
     @Override
     public void init() throws ServletException {
         publicacionesDAO = new PublicacionesDAO();
+        tiposPublicacionesDAO = new TiposPublicacionesDAO();
     }
 
     @Override
@@ -27,12 +32,15 @@ public class PublicacionesServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action == null) {
-            action = "listar";
+            action = "verTodasPublicaciones";
         }
 
         switch (action) {
             case "listar":
                 listarPublicaciones(request, response);
+                break;
+            case "verTodasPublicaciones":
+                verTodasPublicaciones(request, response);
                 break;
             case "mostrar":
                 mostrarDetallesPublicacion(request, response);
@@ -86,7 +94,7 @@ public class PublicacionesServlet extends HttpServlet {
         }
 
         int inicio = (pagina - 1) * PublisPorPagina;
-        int cantidadDePublis = publicacionesDAO.obtenerCantidadDePublicaciones();
+        int cantidadDePublis = publicacionesDAO.contarPublicacionesActivas();
         int cantidadDePaginas = (int) Math.ceil(cantidadDePublis*1.0/PublisPorPagina);
 
         request.setAttribute("cantidadDePaginas", cantidadDePaginas);
@@ -97,6 +105,53 @@ public class PublicacionesServlet extends HttpServlet {
         List<Publicaciones> publicaciones = publicacionesDAO.obtenerPublicaciones(inicio);
         request.setAttribute("listaPublicaciones", publicaciones);
         request.getRequestDispatcher("/html/dentro/ver-publicaciones-usuario.jsp").forward(request, response);
+    }
+
+    private void verTodasPublicaciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String tipoPublicacionIdParam = request.getParameter("tipoPublicacionId");
+        String fechaInicioParam = request.getParameter("fechaInicio");
+        String fechaFinParam = request.getParameter("fechaFin");
+
+        Integer tipoPublicacionId = (tipoPublicacionIdParam != null && !tipoPublicacionIdParam.isEmpty())
+                ? Integer.parseInt(tipoPublicacionIdParam)
+                : null;
+        Date fechaInicio = (fechaInicioParam != null && !fechaInicioParam.isEmpty())
+                ? Date.valueOf(fechaInicioParam)
+                :null;
+        Date fechaFin = (fechaFinParam != null && !fechaFinParam.isEmpty())
+                ? Date.valueOf(fechaFinParam)
+                :null;
+
+        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        int recordsPerPage = 6;
+
+        int totalRecords;
+
+        List<Publicaciones> publicaciones;
+        if (tipoPublicacionId != null || fechaInicio != null || fechaFin != null) {
+            totalRecords = publicacionesDAO.contarPublicacionesActivasConFiltros(tipoPublicacionId, fechaInicio, fechaFin);
+            publicaciones = publicacionesDAO.verPublicacionesActivos(tipoPublicacionId, fechaInicio, fechaFin, page, recordsPerPage);
+        } else {
+            totalRecords = publicacionesDAO.contarPublicacionesActivas();
+            publicaciones = publicacionesDAO.obtenerPublicacionesActivasConPaginacion(page, recordsPerPage);
+        }
+
+            int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+            List<TiposPublicaciones> tiposPublicaciones = tiposPublicacionesDAO.obtenerTiposPublicaciones();
+
+            request.setAttribute("totalPages", totalPages);
+            request.setAttribute("page", page);
+            request.setAttribute("totalRecords", totalRecords);
+            request.setAttribute("publicaciones", publicaciones);
+            request.setAttribute("tiposPublicaciones", tiposPublicaciones);
+
+            request.setAttribute("filtros", new HashMap<String, Object>(){{
+                put("tipoPublicacionID", tipoPublicacionId);
+                put("fechaInicio", fechaInicioParam);
+                put("fechaFin", fechaFinParam);
+            }});
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-publicaciones-usuario.jsp").forward(request, response);
+
     }
 
     private void mostrarDetallesPublicacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -123,7 +178,7 @@ public class PublicacionesServlet extends HttpServlet {
                     default:
                         break;
                 }
-                request.getRequestDispatcher("/html/dentro/ver-publicaciones-detalles-usuario.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-publicaciones-detalles-usuario.jsp").forward(request, response);
             }else {
                 response.sendRedirect("PublicacionesServlet");
             }

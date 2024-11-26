@@ -93,19 +93,159 @@ public class PublicacionesDAO extends BaseDao {
         return publicacion;
     }
 
-    public int obtenerCantidadDePublicaciones() {
-        String query = "SELECT COUNT(*) FROM publicaciones";
-        int cantidad = 0;
+    public int contarPublicacionesActivas() {
+        String query = "SELECT COUNT(*) FROM publicaciones WHERE estado_publicacion = 'activa'";
+        int totalrecords = 0;
         try (Connection conn = this.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query)) {
             if(rs.next()){
-                cantidad = rs.getInt(1);
+                totalrecords = rs.getInt(1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return cantidad;
+        return totalrecords;
+    }
+
+    public int contarPublicacionesActivasConFiltros(Integer tipoPublicacionId, Date fechaInicio, Date fechaFin) {
+        StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM publicaciones p ");
+        query.append("JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id ");
+        query.append("WHERE p.estado_publicacion = 'activa' ");
+
+        List<Object> parametros = new ArrayList<>();
+
+        if(tipoPublicacionId != null){
+            query.append(" AND tp.tipo_publicacion_id = ?");
+            parametros.add(tipoPublicacionId);
+        }
+        if(fechaInicio != null && fechaFin != null){
+            query.append(" AND p.fecha_creacion BETWEEN ? AND ? ");
+            parametros.add(fechaInicio);
+            parametros.add(fechaFin);
+        }
+
+        try (Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query.toString())){
+
+            for (int i = 0; i < parametros.size(); i++) {
+                pstmt.setObject(i + 1, parametros.get(i));
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Publicaciones> obtenerPublicacionesActivasConPaginacion(int page, int recordsPerPage) {
+        List<Publicaciones> publicaciones = new ArrayList<>();
+        int offset = (page - 1) * recordsPerPage;
+
+        String query = "SELECT p.publicacion_id, p.titulo, p.descripcion, p.comentario, p.fecha_creacion, " +
+                "tp.tipo_publicacion_id, tp.tipo_publicacion, f.foto_id, f.url_foto " +
+                "FROM publicaciones p " +
+                "JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id " +
+                "LEFT JOIN fotos f ON p.foto_id = f.foto_id " +
+                " WHERE p.estado_publicacion= 'activa' " +
+                "ORDER BY p.fecha_creacion DESC LIMIT ? OFFSET ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, recordsPerPage);
+            pstmt.setInt(2, offset);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Publicaciones publicacion = new Publicaciones();
+                    publicacion.setPublicacionId(rs.getInt("publicacion_id"));
+                    publicacion.setTitulo(rs.getString("titulo"));
+                    publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                    publicacion.setDescripcion(rs.getString("descripcion"));
+                    publicacion.setComentario(rs.getString("comentario"));
+
+                    TiposPublicaciones tipoPublicacion = new TiposPublicaciones();
+                    tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                    tipoPublicacion.setTipoPublicacion(rs.getString("tipo_publicacion"));
+                    publicacion.setTipoPublicacion(tipoPublicacion);
+
+                    Fotos foto = new Fotos();
+                    foto.setFotoId(rs.getInt("foto_id"));
+                    foto.setUrlFoto(rs.getString("url_foto"));
+                    publicacion.setFoto(foto);
+
+                    publicaciones.add(publicacion);
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return publicaciones;
+    }
+
+    public List<Publicaciones> verPublicacionesActivos(Integer tipoPublicacionId, Date fechaInicio, Date fechaFin, int page, int recordsPerPage) {
+        List<Publicaciones> publicaciones = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT p.publicacion_id, p.titulo, p.descripcion, p.comentario, p.fecha_creacion, ");
+        query.append("tp.tipo_publicacion_id, tp.tipo_publicacion, f.foto_id, f.url_foto ");
+        query.append("FROM publicaciones p ");
+        query.append("JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id ");
+        query.append("LEFT JOIN fotos f ON p.foto_id = f.foto_id ");
+        query.append(" WHERE p.estado_publicacion= 'activa'");
+
+        List<Object> parametros = new ArrayList<>();
+
+        if(tipoPublicacionId != null){
+            query.append("AND tp.tipo_publicacion_id = ?");
+            parametros.add(tipoPublicacionId);
+        }
+        if(fechaInicio != null && fechaFin != null){
+            query.append(" AND p.fecha_creacion BETWEEN ? AND ? ");
+            parametros.add(fechaInicio);
+            parametros.add(fechaFin);
+        }
+
+        query.append(" ORDER BY p.fecha_creacion DESC LIMIT ? OFFSET ?");
+        parametros.add(recordsPerPage);
+        parametros.add((page - 1) * recordsPerPage);
+
+        try (Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+
+            for (int i = 0; i < parametros.size(); i++) {
+                pstmt.setObject(i + 1, parametros.get(i));
+            }
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Publicaciones publicacion = new Publicaciones();
+                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
+                publicacion.setTitulo(rs.getString("titulo"));
+                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                publicacion.setDescripcion(rs.getString("descripcion"));
+                publicacion.setComentario(rs.getString("comentario"));
+
+                TiposPublicaciones tipoPublicacion = new TiposPublicaciones();
+                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                tipoPublicacion.setTipoPublicacion(rs.getString("tipo_publicacion"));
+                publicacion.setTipoPublicacion(tipoPublicacion);
+
+                Fotos foto = new Fotos();
+                foto.setFotoId(rs.getInt("foto_id"));
+                foto.setUrlFoto(rs.getString("url_foto"));
+                publicacion.setFoto(foto);
+
+                publicaciones.add(publicacion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return publicaciones;
     }
 
     // Metodo en UsuarioFinalPublicDAO para obtener datos de una publicacion de adopción

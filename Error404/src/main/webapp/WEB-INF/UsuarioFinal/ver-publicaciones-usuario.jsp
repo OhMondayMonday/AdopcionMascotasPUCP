@@ -1,13 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Sebastian
-  Date: 9/11/2024
-  Time: 23:15
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Beans.Publicaciones" %>
-<jsp:useBean id="listaPublicaciones" type="java.util.ArrayList<Beans.Publicaciones>" scope="request"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
 
@@ -90,87 +82,7 @@
 <div class="layout-wrapper layout-content-navbar" >
   <div class="layout-container">
 
-    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-
-      <div class="app-brand demo px-3">
-        <a href="javascript:void(0);" class="app-brand-link">
-          <span class="app-brand-logo demo">
-            <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
-          </span>
-        </a>
-
-        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-          <i class="bx bx-chevron-left bx-sm align-middle"></i>
-        </a>
-      </div>
-
-      <div class="menu-inner-shadow"></div>
-
-
-
-      <ul class="menu-inner py-1">
-
-        <li class="menu-item">
-          <a href="ver-inicio-usuario.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home"></i>
-            <div class="text-truncate" data-i18n="Inicio">Inicio</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="ver-publicaciones-usuario.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-building-house"></i>
-            <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="ver-eventos-usuario.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-            <div class="text-truncate" data-i18n="Eventos">Eventos</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="postular-hogarestemporales.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-building-house"></i>
-            <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
-          </a>
-        </li>
-        <!-- Gestion -->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
-        </li>
-        <li class="menu-item">
-          <a href="ver-mispublicaciones-usuario.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-building-house"></i>
-            <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="ver-miseventos-usuario.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-            <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="usuario-mi-hogar-temporal.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bxs-building-house"></i>
-            <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
-          </a>
-        </li>
-
-        <!-- Misc -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
-        <li class="menu-item">
-          <a href="Preguntas-frecuentes.html"  class="menu-link">
-            <i class="menu-icon tf-icons bx bx-help-circle"></i>
-            <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
-          </a>
-        </li>
-      </ul>
-
-
-
-    </aside>
+    <jsp:include page="../includes/sidebarUF.jsp" />
 
     <div class="layout-page">
       <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
@@ -300,37 +212,66 @@
           <div class="card-header d-flex flex-wrap justify-content-between gap-3">
             <!-- Filtros -->
             <div class="col-12 d-flex justify-content-between align-items-center">
-              <div class="col-12 card">
-                <div class="card-body p-2">
-                  <div class="row w-100 align-items-end"> <!-- Alineación inferior para coincidir con los campos -->
-                    <!-- Tipo de Publicación -->
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-1">
-                      <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem;">Tipo de publicación</label>
-                      <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                        <option value="All">Todas</option>
-                        <option value="Adopcion">Adopción</option>
-                        <option value="Donaciones activas">Donaciones activas</option>
-                        <option value="Donaciones de dinero">Donaciones de dinero</option>
+
+              <div class="col-12 card m-0" style="height: auto; padding: 5px">
+
+                <div class="card-body d-flex justify-content-center p-1">
+
+                  <form action="PublicacionesServlet" method="GET" id="filtrosForm" class="row w-100">
+                    <input type="hidden" name="action" value="verTodasPublicaciones">
+                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                      <label for="tipoPublicacionId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Publicacion</label>
+                      <select name="tipoPublicacionId" id="tipoPublicacionId" class="select2 form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                        <option value="">Todos</option>
+                        <c:forEach var="tipo" items="${tiposPublicaciones}">
+                          <option value="${tipo.tipoPublicacionId}" ${tipo.tipoPublicacionId == filtros.tipoPublicacionId ? "selected" : ""}>
+                            ${tipo.tipoPublicacion}
+                          </option>
+                        </c:forEach>
+                        <c:if test="${empty tiposPublicaciones}">
+                          <p>No se encontraron tipos de publicaciones</p>
+                        </c:if>
+                        <c:if test="${empty filtros}">
+                          <p>No hay filtros configurados</p>
+                        </c:if>
                       </select>
                     </div>
-
-                    <!-- Palabra clave -->
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-1">
-                      <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem;">Palabra clave</label>
-                      <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
+                    <!-- Fecha -->
+                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                      <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
+                      <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas"/>
+                      <input type="hidden" name="fechaInicio" id="fechaInicio" value="${filtros.fechaInicio}">
+                      <input type="hidden" name="fechaFin" id="fechaFin" value="${filtros.fechaFin}">
                     </div>
 
-                    <!-- Rango de Fechas -->
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-1">
-                      <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem;">Rango de fechas</label>
-                      <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas" style="font-size: 0.75rem;">
+                    <!-- Botón Filtrar -->
+                    <div class="<c:choose><c:when test='${not empty filtros.tipoPublicacionId or not empty filtros.fechaInicio or not empty filtros.fechaFin}'>
+                                                            col-md-1
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            col-md-2
+                                                        </c:otherwise>
+                                                    </c:choose> d-flex flex-column align-items-center btn-group p-2">
+                      <button type="submit" class="btn btn-facebook">Filtrar</button>
                     </div>
+
+                    <c:choose>
+                      <c:when test="${not empty filtros.tipoPublicacionId or not empty filtros.fechaInicio or not empty filtros.fechaFin}">
+
+                      </c:when>
+                    </c:choose>
+
+                    <!-- Botón Limpiar (solo visible cuando hay filtros aplicados) -->
+                    <c:if test="${not empty filtros.tipoPublicacionId or not empty filtros.fechaInicio or not empty filtros.fechaFin}">
+                      <div class="col-md-1 d-flex flex-column align-items-center btn-group p-2">
+                        <button type="button" class="btn btn-secondary" onclick="limpiarFiltros()">Limpiar</button>
+                      </div>
+                    </c:if>
+
+                  </form>
 
                     <!-- Aplicar Filtro y Nueva Publicación -->
-                    <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-between mb-1 mt-md-0 mt-3"> <!-- Flex para mantener los botones juntos -->
-                      <!-- Botón Aplicar Filtro -->
-                      <button class="btn btn-facebook btn-sm" style="width: 48%;">Aplicar filtro</button>
-
+                    <div class="col-lg-3 col-md-3 col-sm-12 d-flex justify-content-between mb-1 mt-md-0 mt-1"> <!-- Flex para mantener los botones juntos -->
                       <!-- Botón Nueva Publicación -->
                       <div class="btn-group" style="width: 48%;">
                         <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -359,100 +300,83 @@
               <div class="card-body p-0">
                 <div class="container-fluid">
                   <div class="row gx-1 gy-4 justify-content-center m-0">
-                    <%
-                      int i = 1;
-                      for (Publicaciones p : listaPublicaciones) {
-                    %>
+
                     <!-- Card 1 -->
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                      <div class="card d-flex flex-column"  style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                        <div class="rounded-2 text-center flex-grow-2">
-                          <a data-bs-toggle="modal" href="#evento<%=i%>">
-                            <img class="img-fluid" src="<%= p.getFoto().getUrlFoto()%>" alt="Imagen de publicación <%=i%>" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                          </a>
+                    <c:choose>
+                      <c:when test="${empty publicaciones}">
+                        <div class="col-12 text-center col-sm-6 col-md-4 col-lg-5 px-1 mb-2 d-flex justify-content-center">
+                          <p class="mb-0 text-body">No hay publicaciones disponibles para mostrar.</p>
                         </div>
-                        <div class="card-body p-2 d-flex flex-column">
-                          <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge bg-label-info"><%= p.getTipoPublicacion().getTipoPublicacion() %></span>
-                          </div>
-                          <a class="h6" data-bs-toggle="modal" href="#evento<%=i%>" style="font-size: 0.875rem;"><%= p.getTitulo() %></a>
-                          <p style="font-size: 0.75rem;"><%= p.getDescripcion() %></p>
-                          <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                            <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="<%=request.getContextPath()%>/PublicacionesServlet?action=mostrar&id=<%=p.getPublicacionId()%>">
-                              <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                            </a>
-                            <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="<%=i%>" user-type="usuario" post-type="publi" style="font-size: 0.75rem;">
-                              <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="modal fade" id="evento<%=i%>" tabindex="-1" aria-hidden="true">
-                      <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                        <div class="modal-content p-3 p-md-5">
-                          <div class="modal-body">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            <div class="text-center mb-4">
-                              <img class="img-fluid mb-4" src="<%=p.getFoto().getUrlFoto()%>" alt="Imagen de publicación <%=i%>" style="height: 200px; object-fit: cover;"/>
-                              <h3 class="text-primary"><%=p.getTitulo()%></h3>
-                              <span class="badge bg-label-info" style="font-size: 0.75rem;"><%=p.getTipoPublicacion().getTipoPublicacion()%></span>
+                      </c:when>
+                      <c:otherwise>
+                        <c:forEach var="publicacion" items="${publicaciones}">
+                          <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
+                            <div class="card d-flex flex-column"  style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                              <div class="rounded-2 text-center flex-grow-1">
+                                <a data-bs-toggle="modal" href="${publicacion.publicacionId}">
+                                  <img class="img-fluid" src="${publicacion.foto.urlFoto}" alt="${publicacion.titulo}" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
+                                </a>
+                              </div>
+                              <div class="card-body p-2 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                  <span class="badge bg-label-info" style="font-size: 0.75rem;">${publicacion.tipoPublicacion.tipoPublicacion}</span>
+                                </div>
+                                <a class="h6" data-bs-toggle="modal" href="#evento${publicacion.publicacionId}" style="font-size: 0.875rem;">${publicacion.titulo}</a>
+                                <p class="mt-1 mb-0" style="font-size: 0.75rem;">${publicacion.descripcion}</p>
+                                <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
+                                  <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="<%=request.getContextPath()%>/PublicacionesServlet?action=mostrar&id=${publicacion.publicacionId}">
+                                    <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                  </a>
+                                  <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="${publicacion.publicacionId}" user-type="usuario" post-type="publi" style="font-size: 0.75rem;">
+                                    <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                  </button>
+                                </div>
+                              </div>
                             </div>
-                            <form id="editUserForm" class="row g-3" onsubmit="return false">
-                              <div class="col-12" style="text-align: justify;">
-                                <p><%=p.getDescripcion()%>
-                                </p>
-                              </div>
-                              <% if(p.getTipoPublicacion().getTipoPublicacionId() == 1){ %>
-                              <div class="col-12 col-md-6">
-                                <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre: Claudio</p>
-                              </div>
-                              <div class="col-12 col-md-6">
-                                <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxs-dog bx-sm me-2'></i>Raza: Labrador Retriever</p>
-                              </div>
-                              <div class="col-12 col-md-6">
-                                <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: 2 años</p>
-                              </div>
-                              <div class="col-12 col-md-6">
-                                <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-male-sign bx-sm me-2'></i>Género: Macho</p>
-                              </div>
-
-                              <% }%>
-
-                              <div class="col-12 text-center">
-                                <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                              </div>
-                            </form>
                           </div>
-                        </div>
-                      </div>
-                    </div>
+                          <div class="modal fade" id="evento${publicacion.publicacionId}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+                              <div class="modal-content p-3 p-md-5">
+                                <div class="modal-body">
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  <div class="text-center mb-4">
+                                    <img class="img-fluid mb-4" src="${publicacion.foto.urlFoto}" alt="Imagen de publicación ${publicacion.publicacionId}" style="height: 200px; object-fit: cover;"/>
+                                    <h3 class="text-primary">${publicacion.titulo}</h3>
+                                    <span class="badge bg-label-info" style="font-size: 0.75rem;">${publicacion.tipoPublicacion.tipoPublicacion}</span>
+                                  </div>
+                                  <form id="editUserForm" class="row g-3" onsubmit="return false">
+                                    <div class="col-12" style="text-align: justify;">
+                                      <p>${publicacion.descripcion}
+                                      </p>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                      <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre: Claudio</p>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                      <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxs-dog bx-sm me-2'></i>Raza: Labrador Retriever</p>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                      <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: 2 años</p>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                      <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-male-sign bx-sm me-2'></i>Género: Macho</p>
+                                    </div>
 
-                    <% } %>
+
+                                    <div class="col-12 text-center">
+                                      <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </c:forEach>
+                      </c:otherwise>
+                    </c:choose>
                 </div>
               </div>
-                <%
-                  int paginaActual = (Integer) request.getAttribute("paginaActual");
-                  int cantidadDePaginas = (Integer) request.getAttribute("cantidadDePaginas");
-                  int paginaAnterior = (Integer) request.getAttribute("paginaAnterior");
-                  int paginaSiguiente = (Integer) request.getAttribute("paginaSiguiente");
-                %>
               <!-- Pagination -->
-              <div class="card-footer d-flex justify-content-center">
-                <ul class="pagination m-0">
-                  <li class="page-item disabled">
-                    <button class="page-link" onclick="location.href='/PublicacionesServlet?action=listar&pagina=<%=paginaAnterior%>'" <%= (paginaActual == 1) ? "disabled" : ""%>>Anterior</button>
-                  </li>
-                  <li class="page-item active">
-                    <span class="page-link"><%=paginaActual%></span>
-                  </li>
-                  <li class="page-item">
-                    <button class="page-link" onclick="location.href='/PublicacionesServlet?action=listar&pagina=<%=paginaSiguiente%>'" <%= (paginaActual == cantidadDePaginas) ? "disabled" : ""%>>Siguiente</button>
-                  </li>
-                </ul>
-              </div>
-
 
               <div class="content-backdrop fade"></div>
             </div>
@@ -461,6 +385,26 @@
             <!-- Content wrapper -->
           </div>
           <!-- / Layout page -->
+        </div>
+
+        <!-- Botones de Paginacion -->
+        <div class="d-flex justify-content-center mt-3">
+          <c:choose>
+            <c:when test="${not empty publicaciones}">
+              <nav>
+                <ul class="pagination justify-content-center">
+                  <li class="page-item" ${page == 1 ? 'disabled' : ''}>
+                    <a class="page-link" href="?action=verTodasPublicaciones&page=${page - 1}&tipoPublicacionId=${filtros.tipoPublicacionId}"&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>
+                  <c:forEach var="i" begin="1" end="${totalPages}">
+                    <li class="page-item" ${i == page ? 'active' : ''}>
+                      <a class="page-link" href="?action=verTodasPublicaciones&page=${i}&tipoPublicacionId=${filtros.tipoPublicacionId}"&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>
+                  </c:forEach>
+                    <li class="page-item" ${page == totalpages ? 'disabled' : ''}>
+                  <a class="page-link" href="?action=verTodasPublicaciones&page=${page + 1}&tipoPublicacionId=${filtros.tipoPublicacionId}"&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>
+                </ul>
+              </nav>
+            </c:when>
+          </c:choose>
         </div>
 
         <!-- Footer -->
@@ -518,13 +462,34 @@
       <script>
         // Inicializa flatpickr para el rango de fechas
         flatpickr("#dateRange", {
-          mode: "range",
-          dateFormat: "d-m-Y", // Ajusta el formato de la fecha según tus necesidades
+          mode: "range", // Rango de fechas
+          dateFormat: "Y-m-d", // Formato compatible con el backend
           locale: {
-            firstDayOfWeek: 1 // Inicia la semana en lunes
-          }
+            firstDayOfWeek: 1, // Semana inicia en lunes
+            rangeSeparator: " a ", // Separador para rango
+          },
+          onChange: function (selectedDates, dateStr, instance) {
+            // Extraer fechas de inicio y fin
+            const fechaInicio = selectedDates[0] ? selectedDates[0].toISOString().split("T")[0] : "";
+            const fechaFin = selectedDates[1] ? selectedDates[1].toISOString().split("T")[0] : "";
+
+            // Asignar valores a los campos ocultos
+            document.getElementById("fechaInicio").value = fechaInicio;
+            document.getElementById("fechaFin").value = fechaFin;
+
+            console.log("Fecha Inicio:", fechaInicio, "Fecha Fin:", fechaFin); // Depuración
+          },
         });
       </script>
+
+      <script>
+        function limpiarFiltros() {
+          const baseUrl = "PublicacionesServlet";
+          const queryParams = "?action=verTodasPublicaciones";
+          window.location.href = baseUrl + queryParams;
+        }
+      </script>
+
       <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
 
 
