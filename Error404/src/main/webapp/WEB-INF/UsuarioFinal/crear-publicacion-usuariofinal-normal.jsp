@@ -346,7 +346,7 @@
                                         <!-- Description -->
                                         <div>
                                             <label class="form-label" for="descripcion">Descripción<span class="text-muted"></span></label>
-                                            <textarea class="form-control" id="descripcion" rows="7"></textarea>
+                                            <textarea class="form-control" rows="7" maxlength="500" id="descripcion"></textarea>
                                         </div>
 
                                     </div>

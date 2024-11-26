@@ -136,18 +136,18 @@ public class UsuarioServlet extends HttpServlet {
         String palabraClave = request.getParameter("palabraClave");
         String ubicacion = request.getParameter("ubicacion");
 
-        List<HogaresTemporales> hogares = hogarTemporalDAO.obtenerPublicacionesHogaresTemporales();
+        //List<HogaresTemporales> hogares = hogarTemporalDAO.obtenerPublicacionesHogaresTemporales();
 
-        request.setAttribute("hogares", hogares);
+       // request.setAttribute("hogares", hogares);
         request.getRequestDispatcher("/WEB-INF/UsuarioFinal/UF-HogaresTemporales.jsp").forward(request, response);
     }
 
     private void mostrarDetalleHogarTemporal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int temporalId = Integer.parseInt(request.getParameter("temporalId"));
-            HogaresTemporales hogar = hogarTemporalDAO.obtenerDetallesHogarTemporal(temporalId);
+          //  HogaresTemporales hogar = hogarTemporalDAO.obtenerDetallesHogarTemporal(temporalId);
 
-            request.setAttribute("hogar", hogar);
+          //  request.setAttribute("hogar", hogar);
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/DetalleHogarTemporal.jsp");
             rd.forward(request, response);
         } catch (NumberFormatException e) {

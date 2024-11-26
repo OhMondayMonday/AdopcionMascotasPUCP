@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Beans.Publicaciones" %>
 <jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
+<jsp:useBean id="adopcion" type="Beans.PublicacionesAdopcion" scope="request"/>
 
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
 
@@ -325,28 +325,36 @@
 
                                 <!-- Para más párrafos -->
 
-                                <h4 class="text-primary">Más detalles</h4>
+
                                 <% if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
+                                <div class="row">
+                                    <div class="justify-content-around mt-4 d-flex">
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
+                                    </div>
+                                </div>
+                                <% } else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2) {%>
+                                <h4 class="text-primary">Más detalles</h4>
                                 <div class="d-flex flex-wrap">
                                     <div class="me-5">
-                                        <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;">Claudio</span></p>
-                                        <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;">Labrador Retriever</span></p>
+                                        <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;"><%=adopcion.getMascota().getNombre()%></span></p>
+                                        <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;"><%=adopcion.getMascota().getRaza().getNombreRaza()%> </span></p>
                                     </div>
                                     <div>
-                                        <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;">6 años</span></p>
-                                        <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;">Macho</span></p>
+                                        <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;"><%=adopcion.getMascota().getEdadAproximada()%> años</span></p>
+                                        <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;"><%=adopcion.getMascota().getGenero()%> </span></p>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="justify-content-around mt-4 d-flex">
                                         <a href="javascript:void(0)" class="btn btn-warning">Quiero adoptar</a>
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet?action=listar" class="btn btn-primary">Ir a publicaciones</a>
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
 
                                     </div>
 
                                 </div>
-                                <% }%>
+                                <%}
+                                %>
                                 <p class="mb-4 text-secondary position-absolute bottom-0" >
                                     Fecha de Publicación: <%= publicacion.getFechaCreacion() %>
                                 </p>
