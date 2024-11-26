@@ -11,11 +11,6 @@
 <%@ page import="Daos.HogarTemporalDAO" %>
 <%@ page import="java.util.List" %>
 
-<%
-    // Instanciar el DAO y obtener datos necesarios
-    HogarTemporalDAO hogarTemporalDAO = new HogarTemporalDAO();
-    List<HogaresTemporales> hogares = hogarTemporalDAO.obtenerPublicacionesHogaresTemporales();
-%>
 <!DOCTYPE html>
 
 
@@ -175,7 +170,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="usuario-mi-hogar-temporal.html" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/UsuarioServlet?action=miHogarTemporal" class="menu-link">
                         <i class="menu-icon tf-icons bx bxs-building-house"></i>
                         <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
                     </a>
@@ -211,7 +206,7 @@
                     <div class="w-75 align-items-center me-auto">
                         <div class="nav-item navbar-search-wrapper mb-0">
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario /</span> Postular a Hogar Temporal</p>
+              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario /</span> Hogares Temporales</p>
             </span>
                         </div>
                     </div>
@@ -362,7 +357,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
-                                            <a href="postulartemporal-usuariofinal.html" class="btn btn-facebook" style="font-size: 0.75rem;">
+                                            <a href="${pageContext.request.contextPath}/UsuarioServlet?action=postularHogarTemporal" class="btn btn-facebook" style="font-size: 0.75rem;">
                                                 <span>Quiero postular</span><i class="bx bx-chevron-right"></i>
                                             </a>
                                         </div>
@@ -376,99 +371,126 @@
                             <div class="card-body p-0">
                                 <div class="container-fluid">
                                     <div class="row gx-1 gy-2 justify-content-center m-0">
-                                        <c:forEach var="hogar" items="${hogares}">
-                                            <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                                <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                                                    <div class="rounded-2 text-center flex-grow-1">
-                                                        <a href="#">
-                                                            <img class="img-fluid" src="${hogar.foto.urlFoto}" alt="Imagen de publicación ${hogar.temporalId}" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                        </a>
+                                        <%
+                                            List<HogaresTemporales> hogares = (List<HogaresTemporales>) request.getAttribute("hogares");
+                                            int i = 1; // Contador para identificar las publicaciones
+
+                                            for (HogaresTemporales hogar : hogares) { // Cambia `hogares` por el nombre real de tu lista
+                                        %>
+                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
+                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                                                <div class="rounded-2 text-center flex-grow-1">
+                                                    <a href="#">
+                                                        <img class="img-fluid" src="<%= hogar.getFoto().getUrlFoto() %>" alt="Imagen de publicación <%= hogar.getTemporalId() %>"
+                                                             style="height: 200px; object-fit: cover; border-radius: 3px;"/>
+                                                    </a>
+                                                </div>
+                                                <div class="card-body p-2 d-flex flex-column">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;"><%= hogar.getTipoMascotas() %></span>
                                                     </div>
-                                                    <div class="card-body p-2 d-flex flex-column">
-                                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                                            <span class="badge bg-label-info" style="font-size: 0.75rem;">${hogar.tipoMascotas}</span>
-                                                        </div>
-                                                        <a class="h6" href="UsuarioServlet?action=detalleHogarTemporal&temporalId=${hogar.temporalId}" style="font-size: 0.875rem;">${hogar.usuario.nombre}</a>
-                                                        <p class="mt-1 mb-0" style="font-size: 0.75rem;">${hogar.descripcion}</p>
-                                                        <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                                            <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" data-bs-toggle="modal" href="#evento${hogar.temporalId}">
-                                                                <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                            </a>
-                                                        </div>
+                                                    <a class="h6" href="UsuarioServlet?action=detalleHogarTemporal&temporalId=<%= hogar.getTemporalId() %>" style="font-size: 0.875rem;">
+                                                        <%= hogar.getPublicacion().getTitulo() %>
+                                                    </a>
+                                                    <p class="mt-1 mb-0" style="font-size: 0.75rem;"><%= hogar.getPublicacion().getDescripcion() %></p>
+                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
+                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" data-bs-toggle="modal" href="#evento<%= i %>">
+                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </c:forEach>
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="evento<%= i %>" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+                                                <div class="modal-content p-3 p-md-5">
+                                                    <div class="modal-body">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <div class="text-center mb-4">
+                                                            <img class="img-fluid mb-4" src="<%= hogar.getFoto().getUrlFoto() %>"
+                                                                 alt="Imagen de publicación <%= hogar.getTemporalId() %>" style="height: 200px; object-fit: cover;"/>
+                                                            <h3 class="text-primary"><%= hogar.getPublicacion().getTitulo() %></h3>
+                                                            <span class="badge bg-label-info" style="font-size: 0.75rem;"><%= hogar.getTipoMascotas() %></span>
+                                                        </div>
+                                                        <form id="editUserForm" class="row g-3" onsubmit="return false">
+                                                            <div class="col-12" style="text-align: justify;">
+                                                                <p><%= hogar.getDescripcion() %></p>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <p class="text-nowrap" style="margin-left: 20px;">
+                                                                    <i class='bx bx-calendar-event bx-sm me-2'></i>Contacto: <%= hogar.getCelular() %>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <p class="text-nowrap" style="margin-left: 20px;">
+                                                                    <i class='bx bx-time-five bx-sm me-2'></i>Dirección: <%= hogar.getDireccion() %>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <p class="text-nowrap" style="margin-left: 20px;">
+                                                                    <i class='bx bx-map bx-sm me-2'></i>Distrito: <%= hogar.getDistrito().getNombreDistrito() %>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <p class="text-nowrap" style="margin-left: 20px;">
+                                                                    <i class='bx bx-group bx-sm me-2'></i>Cantidad mascotas: <%= hogar.getCantidadMascotas() %> mascotas
+                                                                </p>
+                                                            </div>
+
+                                                            <div class="col-12 text-center">
+                                                                <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%
+                                                i++; // Incrementa el contador
+                                            }
+                                        %>
                                     </div>
                                 </div>
                             </div>
                             <!-- Pagination -->
+                            <%
+                                int currentPage = (Integer) request.getAttribute("currentPage");
+                                int totalPages = (Integer) request.getAttribute("totalPages");
+                            %>
                             <div class="card-footer d-flex justify-content-center">
                                 <ul class="pagination m-0">
+                                    <!-- Botón "Anterior" -->
+                                    <% if (currentPage > 1) { %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="UsuarioServlet?action=hogarTemporal&page=<%= currentPage - 1 %>">Anterior</a>
+                                    </li>
+                                    <% } else { %>
                                     <li class="page-item disabled">
                                         <span class="page-link">Anterior</span>
                                     </li>
-                                    <li class="page-item active">
-                                        <span class="page-link">1</span>
+                                    <% } %>
+
+                                    <!-- Números de página -->
+                                    <% for (int pageNum = 1; pageNum <= totalPages; pageNum++) { %>
+                                    <li class="page-item <%= (pageNum == currentPage) ? "active" : "" %>">
+                                        <a class="page-link" href="UsuarioServlet?action=hogarTemporal&page=<%= pageNum %>"><%= pageNum %></a>
                                     </li>
+                                    <% } %>
+
+                                    <!-- Botón "Siguiente" -->
+                                    <% if (currentPage < totalPages) { %>
                                     <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
+                                        <a class="page-link" href="UsuarioServlet?action=hogarTemporal&page=<%= currentPage + 1 %>">Siguiente</a>
                                     </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
+                                    <% } else { %>
+                                    <li class="page-item disabled">
+                                        <span class="page-link">Siguiente</span>
                                     </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Siguiente</a>
-                                    </li>
+                                    <% } %>
                                 </ul>
                             </div>
-
-                            <c:forEach var="hogar" items="${hogares}">
-                                <div class="modal fade" id="evento${hogar.temporalId}" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                        <div class="modal-content p-3 p-md-5">
-                                            <div class="modal-body">
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                <div class="text-center mb-4">
-                                                    <img class="img-fluid mb-4" src="${hogar.foto.url_foto}" alt="Imagen de ${hogar.usuario.nombre}" style="height: 200px; object-fit: cover;"/>
-                                                    <h3 class="text-primary">${hogar.usuario.nombre}</h3>
-                                                    <span class="badge bg-label-info" style="font-size: 0.75rem;">${hogar.tipoMascotas}</span>
-                                                </div>
-                                                <form id="editUserForm" class="row g-3" onsubmit="return false">
-                                                    <div class="col-12" style="text-align: justify;">
-                                                        <p>${hogar.usuario.descripcion}</p>
-                                                    </div>
-
-                                                    <div class="col-12 col-md-6">
-                                                        <p class="text-nowrap" style="margin-left: 20px;">
-                                                            <i class='bx bx-calendar-event bx-sm me-2'></i>Fecha de inicio: ${hogar.rangoFechaInicio}
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-12 col-md-6">
-                                                        <p class="text-nowrap" style="margin-left: 20px;">
-                                                            <i class='bx bx-time-five bx-sm me-2'></i>Fecha de fin: ${hogar.rangoFechaFin}
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-12 col-md-6">
-                                                        <p class="text-nowrap" style="margin-left: 20px;">
-                                                            <i class='bx bx-map bx-sm me-2'></i>Ubicación: ${hogar.distrito.nombre_distrito}
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-12 col-md-6">
-                                                        <p class="text-nowrap" style="margin-left: 20px;">
-                                                            <i class='bx bx-group bx-sm me-2'></i>Inscritos: ${hogar.cantidadMascotas} mascotas
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="col-12 text-center">
-                                                        <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
 
 
 
@@ -501,7 +523,7 @@
                 <div class="layout-overlay layout-menu-toggle"></div>
             </div>
         </div>
-    </div>
+    </div>z
 </div>
 
             <!-- Core JS -->

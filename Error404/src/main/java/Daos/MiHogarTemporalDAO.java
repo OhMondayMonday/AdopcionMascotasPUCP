@@ -94,13 +94,12 @@ public class MiHogarTemporalDAO extends BaseDao{
                 "FROM solicitudes s " +
                 "JOIN mascotas m ON s.mascota_id = m.mascota_id " +
                 "JOIN razas r ON m.raza_id = r.raza_id " +
-                "WHERE s.solicitante_id = ? " +
                 "ORDER BY s.fecha_solicitud DESC";
 
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setInt(1, userId);
+            //pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
