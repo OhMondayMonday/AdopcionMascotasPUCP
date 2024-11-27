@@ -42,6 +42,7 @@ public class AlbergueServlet extends HttpServlet {
                         response.sendError(HttpServletResponse.SC_NOT_FOUND, "Albergue no encontrado");
                         return;
                     }
+
                     request.setAttribute("usuario", albergue);
                     request.getRequestDispatcher("/WEB-INF/albergue/albergue-editar-perfil.jsp").forward(request, response);
                 } catch (NumberFormatException e) {
@@ -52,10 +53,32 @@ public class AlbergueServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-seguridad.jsp").forward(request, response);
                 break;
             case "verMiPerfilDetalles":
-                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
+                String idDetalle = request.getParameter("id");
+                if (idDetalle == null || idDetalle.isEmpty()) {
+                    System.out.println("Error: ID no proporcionado para ver detalles.");
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID no proporcionado");
+                    return;
+                }
+                try {
+                    int id = Integer.parseInt(idDetalle);
+                    Usuarios albergueDetalle = albergueDAO.obtenerInformacionAlbergue(id);
+                    if (albergueDetalle == null) {
+                        System.out.println("Error: Albergue con ID " + id + " no encontrado.");
+                        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Albergue no encontrado");
+                        return;
+                    }
+                    System.out.println("Albergue recuperado: " + albergueDetalle.getNombreAlbergue());
+                    request.setAttribute("usuario", albergueDetalle);
+                    request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
+                } catch (NumberFormatException e) {
+                    System.out.println("Error: ID en formato incorrecto.");
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de ID no válido");
+                }
                 break;
+
             default:
-                request.getRequestDispatcher("/WEB-INF/albergue/albergue-editar-perfil.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
+
                 break;
         }
     }
@@ -87,16 +110,18 @@ public class AlbergueServlet extends HttpServlet {
 
             // Manejo del año de creación
             String anioCreacionStr = request.getParameter("anioCreacion");
-            if (anioCreacionStr != null && !anioCreacionStr.isEmpty()) {
+            if (anioCreacionStr != null && !anioCreacionStr.isBlank()) { // Validar nulo o vacío
                 try {
-                    Date anioCreacion = Date.valueOf(anioCreacionStr); // Debe estar en formato yyyy-MM-dd
+                    Date anioCreacion = Date.valueOf(anioCreacionStr); // Formato yyyy-MM-dd
                     albergue.setAnioCreacion(anioCreacion);
                 } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
                     response.getWriter().write("Error: Fecha de creación inválida");
                     return;
                 }
+            } else {
+                albergue.setAnioCreacion(null); // Establecer como nulo si no se proporciona
             }
+
 
             // Guardar en la base de datos
             if (albergueDAO.registrarAlbergue(albergue)) {
@@ -118,28 +143,68 @@ public class AlbergueServlet extends HttpServlet {
 
             // Obtener y verificar el ID del usuario
             String idStr = request.getParameter("id");
-            System.out.println("ID Capturado en el Servlet: " + idStr);
             if (idStr == null || idStr.isEmpty()) {
                 response.getWriter().write("Error: ID no proporcionado");
                 return;
             }
 
-            // Declarar y asignar la variable 'id'
-            int id = Integer.parseInt(idStr);
+            int id;
+            try {
+                id = Integer.parseInt(idStr);
+            } catch (NumberFormatException e) {
+                response.getWriter().write("Error: Formato de ID no válido");
+                return;
+            }
+
+            System.out.println("ID Capturado en el Servlet: " + id);
 
             // Crear el objeto Usuarios y establecer los datos del formulario
             Usuarios albergue = new Usuarios();
-            albergue.setUserId(id); // Usar 'id' aquí
-            System.out.println("ID Capturado en el Servlet: " + id);
-            albergue.setNombre(request.getParameter("nombre"));
+            albergue.setUserId(id);
+            albergue.setUsername(request.getParameter("username")); // Username
+            albergue.setNombre(request.getParameter("nombre")); // Nombre de persona
+            albergue.setNombreAlbergue(request.getParameter("nombreAlbergue")); // Nombre de albergue
             albergue.setApellido(request.getParameter("apellido"));
             albergue.setEmail(request.getParameter("email"));
             albergue.setDireccion(request.getParameter("direccion"));
-            albergue.setNombreAlbergue(request.getParameter("nombreAlbergue"));
+            albergue.setDescripcion(request.getParameter("descripcion"));
+            albergue.setUrlTwitter(request.getParameter("urlTwitter")); // Agregar Twitter
+            albergue.setUrlFacebook(request.getParameter("urlFacebook"));
+            albergue.setUrlInstagram(request.getParameter("urlInstagram"));
+            albergue.setNumeroYapePlin(request.getParameter("numeroYapePlin"));
+            albergue.setDireccionDonaciones(request.getParameter("direccionDonaciones"));
+            albergue.setNombreContactoDonaciones(request.getParameter("nombreContactoDonaciones"));
+            albergue.setNumeroContactoDonaciones(request.getParameter("numeroContactoDonaciones"));
+            albergue.setPuntoAcopio(request.getParameter("puntoAcopio"));
 
-            // Obtener y asignar el distrito
+            String anioCreacionStr = request.getParameter("anioCreacion");
+            if (anioCreacionStr != null && !anioCreacionStr.isBlank()) { // isBlank() maneja nulos y espacios
+                try {
+                    Date anioCreacion = Date.valueOf(anioCreacionStr); // Formato yyyy-MM-dd
+                    albergue.setAnioCreacion(anioCreacion);
+                } catch (IllegalArgumentException e) {
+                    response.getWriter().write("Error: Fecha de creación inválida");
+                    return;
+                }
+            } else {
+                albergue.setAnioCreacion(null); // Manejarlo como `null` si está vacío o no proporcionado
+            }
+
+            String capacidadStr = request.getParameter("capacidad");
+            if (capacidadStr != null && !capacidadStr.isBlank()) {
+                try {
+                    albergue.setCapacidadNuevosAnimales(Integer.parseInt(capacidadStr));
+                } catch (NumberFormatException e) {
+                    System.out.println("Capacidad inválida: " + capacidadStr);
+                    response.getWriter().write("Error: Capacidad inválida");
+                    return;
+                }
+            } else {
+                albergue.setCapacidadNuevosAnimales(null);
+            }
+
+            // Asignar el distrito
             String distritoIdStr = request.getParameter("distritoId");
-            System.out.println("Valor de distritoIdStr: " + distritoIdStr); // Depuración
             if (distritoIdStr != null && !distritoIdStr.isEmpty()) {
                 try {
                     int distritoId = Integer.parseInt(distritoIdStr);
@@ -147,7 +212,6 @@ public class AlbergueServlet extends HttpServlet {
                     distrito.setDistritoId(distritoId);
                     albergue.setDistrito(distrito);
                 } catch (NumberFormatException e) {
-                    e.printStackTrace();
                     response.getWriter().write("Error: Distrito ID no válido");
                     return;
                 }
@@ -156,23 +220,20 @@ public class AlbergueServlet extends HttpServlet {
                 return;
             }
 
-            // Actualizar en la base de datos
+            // Llamar al método del DAO para actualizar la información
             if (albergueDAO.actualizarInformacionAlbergue(albergue)) {
-                Usuarios albergueActualizado = albergueDAO.obtenerInformacionAlbergue(id);
-                System.out.printf(albergueActualizado.getNombreAlbergue() + "\n");
-                request.setAttribute("usuario", albergueActualizado);
-                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
+                // Redirigir al perfil con los detalles actualizados
+                response.sendRedirect("albergue?action=verMiPerfilDetalles&id=" + id);
             } else {
                 response.getWriter().write("Error: No se pudo actualizar la información del albergue. Verifique los datos y vuelva a intentarlo.");
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
+            // Manejo general de excepciones
             e.printStackTrace();
-            response.getWriter().write("Error: ID no válido");
-        } catch (ServletException e) {
-            e.printStackTrace();
-            response.getWriter().write("Error: Error al cargar la vista de detalles");
+            response.getWriter().write("Error: Ocurrió un error al procesar la solicitud. Detalles: " + e.getMessage());
         }
     }
+
 
 
     private void desactivarAlbergue(HttpServletRequest request, HttpServletResponse response) throws IOException {

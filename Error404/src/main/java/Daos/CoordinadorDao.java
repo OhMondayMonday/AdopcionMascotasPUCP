@@ -2,14 +2,23 @@ package Daos;
 
 import Beans.*;
 
+import DTO.HogarTemporalDTO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 public class CoordinadorDao extends BaseDao {
+
+    private static final Logger logger = LoggerFactory.getLogger(CoordinadorDao.class);
+
 
     // 1. Obtener solicitudes de hogares temporales pendientes
     public List<Solicitudes> obtenerSolicitudesHogarPendientes() {
@@ -56,12 +65,14 @@ public class CoordinadorDao extends BaseDao {
     // 2. Obtener solicitudes de publicaciones de mascotas perdidas pendientes
     public List<PublicacionesMascotaPerdida> obtenerSolicitudesPublicacionesPendientes() {
         List<PublicacionesMascotaPerdida> publicaciones = new ArrayList<>();
-        String sql = "SELECT p.publicacion_id, m.nombre AS mascota, p.lugar_perdida, p.fecha_perdida, u.nombre AS usuario " +
-                "FROM publicaciones_mascota_perdida p " +
-                "JOIN mascotas m ON p.mascota_id = m.mascota_id " +
-                "JOIN usuarios u ON p.user_id = u.user_id " +
-                "WHERE p.estado_publicacion = 'pendiente' " +
-                "ORDER BY p.fecha_perdida DESC";
+        String sql = "SELECT pmp.publicacion_id, m.nombre AS mascota, pmp.lugar_perdida, pmp.fecha_perdida, " +
+                "u.nombre AS usuario, pub.estado_publicacion " +
+                "FROM publicaciones_mascota_perdida pmp " +
+                "JOIN publicaciones pub ON pmp.publicacion_id = pub.publicacion_id " +
+                "JOIN mascotas m ON pmp.mascota_id = m.mascota_id " +
+                "JOIN usuarios u ON pub.user_id = u.user_id " +
+                "WHERE pub.estado_publicacion = 'pendiente' " +
+                "ORDER BY pmp.fecha_perdida DESC";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -72,15 +83,15 @@ public class CoordinadorDao extends BaseDao {
                 publicacion.setPublicacion_id(rs.getInt("publicacion_id"));
 
                 Mascotas mascota = new Mascotas();
-                mascota.setNombre(rs.getString("nombre")); // Asume que "nombre" es el nombre de la mascota
+                mascota.setNombre(rs.getString("mascota"));
                 publicacion.setMascota(mascota);
 
                 publicacion.setLugarPerdida(rs.getString("lugar_perdida"));
                 publicacion.setFechaPerdida(rs.getDate("fecha_perdida"));
-                publicacion.setTelefonoContacto(rs.getString("telefono_contacto"));
-                publicacion.setNombreContacto(rs.getString("nombre_contacto"));
-                publicacion.setRecompensa(rs.getString("recompensa"));
-                publicacion.setMascotaEncontrada(rs.getBoolean("mascota_encontrada"));
+
+                Usuarios usuario = new Usuarios();
+                usuario.setNombre(rs.getString("usuario"));
+                publicacion.setUsuarios(usuario);
 
                 publicaciones.add(publicacion);
             }
@@ -89,6 +100,7 @@ public class CoordinadorDao extends BaseDao {
         }
         return publicaciones;
     }
+
 
     // 3. Aprobar solicitud de hogar temporal
     public boolean aprobarSolicitudHogar(int solicitudId) {
@@ -99,8 +111,10 @@ public class CoordinadorDao extends BaseDao {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, solicitudId);
-            return stmt.executeUpdate() > 0;
+            int filasAfectadas = stmt.executeUpdate();
+            return filasAfectadas > 0;
         } catch (SQLException e) {
+            System.err.println("Error al aprobar la solicitud de hogar: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -108,12 +122,11 @@ public class CoordinadorDao extends BaseDao {
 
     // 4. Rechazar solicitud de hogar temporal
     public boolean rechazarSolicitudHogar(int solicitudId) {
-        String sql = "UPDATE solicitudes SET estado_solicitud = 'rechazada', fecha_revision = NOW() " +
+        String sql = "UPDATE solicitudes SET estado_solicitud = 'rechazada' " +
                 "WHERE solicitud_id = ? AND estado_solicitud = 'pendiente'";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             stmt.setInt(1, solicitudId);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -122,9 +135,10 @@ public class CoordinadorDao extends BaseDao {
         }
     }
 
+
     // 5. Aprobar publicación de mascota perdida
     public boolean aprobarPublicacionMascota(int publicacionId) {
-        String sql = "UPDATE publicaciones_mascota_perdida SET estado_publicacion = 'activa', fecha_actualizacion = NOW() " +
+        String sql = "UPDATE publicaciones SET estado_publicacion = 'activa' " +
                 "WHERE publicacion_id = ? AND estado_publicacion = 'pendiente'";
 
         try (Connection conn = this.getConnection();
@@ -137,22 +151,28 @@ public class CoordinadorDao extends BaseDao {
             return false;
         }
     }
+
 
     // 6. Rechazar publicación de mascota perdida
     public boolean rechazarPublicacionMascota(int publicacionId) {
-        String sql = "UPDATE publicaciones_mascota_perdida SET estado_publicacion = 'rechazada', fecha_actualizacion = NOW() " +
+        String sql = "UPDATE publicaciones SET estado_publicacion = 'rechazada', fecha_creacion = NOW() " +
                 "WHERE publicacion_id = ? AND estado_publicacion = 'pendiente'";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            // Asignar el parámetro publicacionId
             stmt.setInt(1, publicacionId);
+
+            // Ejecutar la actualización
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
+            System.err.println("Error al rechazar la publicación de mascota perdida: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
+
 
     // 8. Baneo manual de un hogar temporal
     public boolean banearHogarTemporalManual(int temporalId) {
@@ -195,13 +215,13 @@ public class CoordinadorDao extends BaseDao {
     // 7. Obtener los 5 comentarios más recientes del coordinador
     public List<Comentarios> obtenerComentariosRecientes(int publicacionId) {
         List<Comentarios> comentarios = new ArrayList<>();
-        String sql = "SELECT ap.comentario, ap.fecha_actualizacion " +
-                "FROM actualizaciones_publicacion ap " +
-                "JOIN usuarios u ON ap.publicacion_id = u.user_id " +
+        String sql = "SELECT c.comentario, c.fecha_actualizacion " +
+                "FROM comentarios c " +
+                "JOIN usuarios u ON c.usuario_id = u.user_id " +
                 "JOIN roles r ON u.rol_id = r.rol_id " +
                 "WHERE r.nombre_rol = 'coordinador' " +
-                "AND ap.publicacion_id = ? " +
-                "ORDER BY ap.fecha_actualizacion DESC " +
+                "AND c.publicacion_id = ? " +
+                "ORDER BY c.fecha_actualizacion DESC " +
                 "LIMIT 5";
 
         try (Connection conn = this.getConnection();
@@ -220,6 +240,7 @@ public class CoordinadorDao extends BaseDao {
         }
         return comentarios;
     }
+
     public List<Solicitudes> obtenerTodasLasSolicitudesHogar() {
         List<Solicitudes> solicitudes = new ArrayList<>();
         String sql = "SELECT s.solicitud_id, ts.tipo_solicitud, u.nombre AS solicitante, s.fecha_solicitud, " +
@@ -262,52 +283,88 @@ public class CoordinadorDao extends BaseDao {
     }
 
 
-    public List<HogaresTemporales> obtenerSolicitudesHogarPaginadas(int offset, int pageSize) {
-        List<HogaresTemporales> hogaresTemporales = new ArrayList<>();
-        String sql = "SELECT * FROM hogares_temporales LIMIT ? OFFSET ?";
+    public List<HogarTemporalDTO> obtenerSolicitudesHogarPaginadas(int offset, int pageSize, int coordinadorId) {
+        List<HogarTemporalDTO> hogaresTemporalesDTO = new ArrayList<>();
+        String sql = "SELECT ht.temporal_id, ht.direccion, ht.distrito_id, d.nombre_distrito, " +
+                "z.nombre_zona, u.nombre AS usuario_nombre, u.apellido AS usuario_apellido, " +
+                "ht.edad, ht.genero, ht.celular, ht.estado_temporal, s.fecha_solicitud, ts.tipo_solicitud " +  // Alias para columnas
+                "FROM hogares_temporales ht " +
+                "JOIN distritos d ON ht.distrito_id = d.distrito_id " +
+                "JOIN zonas z ON d.zona_distrito_id = z.zona_id " +
+                "JOIN usuarios u ON u.zona_id = z.zona_id " +
+                "JOIN solicitudes s ON s.temporal_id = ht.temporal_id " +
+                "JOIN tipos_solicitudes ts ON ts.tipo_solicitud_id = s.tipo_solicitud_id " + // Relación con tipos_solicitudes
+                "WHERE z.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?) " + // Relación con zona_id del coordinador
+                "ORDER BY ht.temporal_id DESC " + // Ordenar por temporal_id
+                "LIMIT ? OFFSET ?"; // Paginación
+
+
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, pageSize); // Tamaño de página
-            stmt.setInt(2, offset);   // Offset para la paginación
+            // Setear parámetros
+            stmt.setInt(1, coordinadorId);  // ID del coordinador
+            stmt.setInt(2, pageSize);        // Número de elementos por página
+            stmt.setInt(3, offset);          // Desplazamiento para la paginación
 
+            // Ejecutar consulta
             try (ResultSet resultSet = stmt.executeQuery()) {
                 while (resultSet.next()) {
-                    HogaresTemporales hogar = new HogaresTemporales();
-                    hogar.setTemporalId(resultSet.getInt("temporal_id"));
-                    // Asigna el resto de atributos del hogar
-                    hogar.setEdad(resultSet.getInt("edad"));
-                    hogar.setGenero(resultSet.getString("genero"));
-                    hogar.setCelular(resultSet.getString("celular"));
-                    hogar.setDireccion(resultSet.getString("direccion"));
-                    // Completa los demás atributos de acuerdo a tu esquema
-                    hogaresTemporales.add(hogar);
+                    // Crear el DTO con los valores de la consulta
+                    HogarTemporalDTO hogarDTO = new HogarTemporalDTO(
+                            resultSet.getInt("temporal_id"),           // ID del hogar
+                            resultSet.getString("usuario_nombre"),     // Nombre del usuario
+                            resultSet.getString("usuario_apellido"),   // Apellido del usuario
+                            resultSet.getString("direccion"),          // Dirección
+                            resultSet.getString("estado_temporal"),    // Estado del hogar temporal
+                            resultSet.getDate("fecha_solicitud"),      // Fecha de solicitud
+                            resultSet.getString("tipo_solicitud"),     // Tipo de solicitud
+                            resultSet.getInt("edad"),                  // Edad
+                            resultSet.getString("genero"),             // Género
+                            resultSet.getString("celular")             // Celular
+                    );
+
+                    // Agregar el DTO a la lista
+                    hogaresTemporalesDTO.add(hogarDTO);
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            // Manejo de errores
+            logger.error("Error al obtener solicitudes de hogares temporales para el coordinador {}", coordinadorId, e);
+            throw new RuntimeException("Error al obtener solicitudes de hogares temporales", e);
         }
-        return hogaresTemporales;
+
+
+        logger.debug("Tamaño de la lista hogaresTemporalesDTO: {}", hogaresTemporalesDTO.size());
+        return hogaresTemporalesDTO;
     }
 
 
-    public int contarTotalHogaresTemporales() {
+    public int contarTotalHogaresTemporales(int coordinadorId) {
         int total = 0;
-        String sql = "SELECT COUNT(*) AS total FROM hogares_temporales";
+        String sql = "SELECT COUNT(*) AS total " +
+                "FROM hogares_temporales ht " +
+                "JOIN distritos d ON ht.distrito_id = d.distrito_id " +
+                "JOIN zonas z ON d.zona_distrito_id = z.zona_id " +
+                "WHERE z.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?)";
 
         try (Connection conn = this.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet resultSet = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            if (resultSet.next()) {
-                total = resultSet.getInt("total");
+            stmt.setInt(1, coordinadorId);  // Filtrar por el ID del coordinador
+
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                if (resultSet.next()) {
+                    total = resultSet.getInt("total");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return total;
     }
+
 
 
 }

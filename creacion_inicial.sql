@@ -67,9 +67,10 @@ INSERT INTO roles (nombre_rol) VALUES
 
 
 INSERT INTO tipos_publicaciones (tipo_publicacion) VALUES
-('adopcion'),
-('donaciones'),
-('mascota_perdida');
+('Normal'),
+('Adopcion'),
+('Donaciones'),
+('Mascota Perdida');
 
 INSERT INTO tipos_donaciones (tipo_donacion) VALUES
 ('activo'),

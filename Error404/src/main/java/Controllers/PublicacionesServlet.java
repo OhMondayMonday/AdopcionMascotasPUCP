@@ -1,10 +1,7 @@
 package Controllers;
 
 import Beans.*;
-import Daos.PublicacionesDAO;
-import Daos.RazasDao;
-import Daos.TiposPublicacionesDAO;
-import Daos.UsuarioFinalDAO;
+import Daos.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,11 +17,17 @@ import java.util.List;
 public class PublicacionesServlet extends HttpServlet {
     private PublicacionesDAO publicacionesDAO;
     private TiposPublicacionesDAO tiposPublicacionesDAO;
+    private AdopcionDAO publicacionAdopcionDAO;
+    private MascotaPerdidaDAO mascotaPerdidaDAO;
+    private DonacionesDAO donacionesDAO;
 
     @Override
     public void init() throws ServletException {
         publicacionesDAO = new PublicacionesDAO();
         tiposPublicacionesDAO = new TiposPublicacionesDAO();
+        publicacionAdopcionDAO = new AdopcionDAO();
+        mascotaPerdidaDAO = new MascotaPerdidaDAO();
+        donacionesDAO = new DonacionesDAO();
     }
 
     @Override
@@ -36,9 +39,6 @@ public class PublicacionesServlet extends HttpServlet {
         }
 
         switch (action) {
-            case "listar":
-                listarPublicaciones(request, response);
-                break;
             case "verTodasPublicaciones":
                 verTodasPublicaciones(request, response);
                 break;
@@ -57,7 +57,7 @@ public class PublicacionesServlet extends HttpServlet {
                     UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
                     Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
                     request.setAttribute("usuario", usuario);
-                    request.getRequestDispatcher("/html/dentro/crear-publicacion-usuariofinal-normal.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-normal.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("PublicacionesServlet");
                 }
@@ -77,34 +77,32 @@ public class PublicacionesServlet extends HttpServlet {
                     RazasDao razasDao = new RazasDao();
                     ArrayList<Razas> listaRazas = razasDao.listarRazas();
                     request.setAttribute("listaRazas", listaRazas);
-                    request.getRequestDispatcher("/html/dentro/crear-publicacion-usuariofinal-denunciamaltrato.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-denunciamaltrato.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("PublicacionesServlet");
+                }
+            case "agregarMascotaPerdida":
+                if (request.getParameter("user_id") != null) {
+                    String user_idString = request.getParameter("user_id");
+                    int user_id = 0;
+                    try {
+                        user_id = Integer.parseInt(user_idString);
+                    } catch (NumberFormatException e) {
+                        response.sendRedirect("PublicacionesServlet");
+                    }
+                    UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+                    Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+                    request.setAttribute("usuario", usuario);
+                    RazasDao razasDao = new RazasDao();
+                    ArrayList<Razas> listaRazas = razasDao.listarRazas();
+                    request.setAttribute("listaRazas", listaRazas);
+                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-mascotaperdida.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("PublicacionesServlet");
                 }
                 break;
 
         }
-    }
-
-    private void listarPublicaciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int pagina = 1;
-        int PublisPorPagina = 6;
-        if (request.getParameter("pagina") != null) {
-            pagina = Integer.parseInt(request.getParameter("pagina"));
-        }
-
-        int inicio = (pagina - 1) * PublisPorPagina;
-        int cantidadDePublis = publicacionesDAO.contarPublicacionesActivas();
-        int cantidadDePaginas = (int) Math.ceil(cantidadDePublis*1.0/PublisPorPagina);
-
-        request.setAttribute("cantidadDePaginas", cantidadDePaginas);
-        request.setAttribute("paginaActual", pagina);
-        request.setAttribute("paginaAnterior", (pagina > 1) ? pagina -1 : 1);
-        request.setAttribute("paginaSiguiente", (pagina < cantidadDePaginas) ? pagina + 1 : cantidadDePaginas);
-
-        List<Publicaciones> publicaciones = publicacionesDAO.obtenerPublicaciones(inicio);
-        request.setAttribute("listaPublicaciones", publicaciones);
-        request.getRequestDispatcher("/html/dentro/ver-publicaciones-usuario.jsp").forward(request, response);
     }
 
     private void verTodasPublicaciones(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -146,7 +144,7 @@ public class PublicacionesServlet extends HttpServlet {
             request.setAttribute("tiposPublicaciones", tiposPublicaciones);
 
             request.setAttribute("filtros", new HashMap<String, Object>(){{
-                put("tipoPublicacionID", tipoPublicacionId);
+                put("tipoPublicacionId", tipoPublicacionId);
                 put("fechaInicio", fechaInicioParam);
                 put("fechaFin", fechaFinParam);
             }});
@@ -166,18 +164,14 @@ public class PublicacionesServlet extends HttpServlet {
             Publicaciones publicacion = publicacionesDAO.obtenerDetallesPublicacion(id);
             if(publicacion != null) {
                 request.setAttribute("publicacion", publicacion);
-                switch (publicacion.getTipoPublicacion().getTipoPublicacionId()){
-                    case 1:
-                        PublicacionesAdopcion publicacionAdopcion = publicacionesDAO.obtenerPublicacionAdopcion(id);
-                        request.setAttribute("adopcion", publicacionAdopcion);
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    default:
-                        break;
-                }
+
+                PublicacionesAdopcion publicacionAdopcion = publicacionAdopcionDAO.obtenerPublicacionAdopcion(id);
+                PublicacionesMascotaPerdida publicacionMascotaPerdida = mascotaPerdidaDAO.obtenerPublicacionMascotaPerdida(id);
+                PublicacionesDonaciones publicacionDonacion = donacionesDAO.obtenerPublicacionDonacion(id);
+                request.setAttribute("adopcion", publicacionAdopcion);
+                request.setAttribute("mascotaPerdida", publicacionMascotaPerdida);
+                request.setAttribute("donacion",publicacionDonacion);
+
                 request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-publicaciones-detalles-usuario.jsp").forward(request, response);
             }else {
                 response.sendRedirect("PublicacionesServlet");

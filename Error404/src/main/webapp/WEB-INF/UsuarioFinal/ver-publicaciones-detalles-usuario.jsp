@@ -6,8 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Beans.Publicaciones" %>
 <jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
+<jsp:useBean id="adopcion" type="Beans.PublicacionesAdopcion" scope="request"/>
+<jsp:useBean id="mascotaPerdida" type="Beans.PublicacionesMascotaPerdida" scope="request"/>
+<jsp:useBean id="donacion" type="Beans.PublicacionesDonaciones" scope="request"/>
 
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
 
@@ -17,7 +19,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Detalles de la publicacion</title>
+    <title><%=publicacion.getTitulo()%></title>
 
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -325,28 +327,117 @@
 
                                 <!-- Para más párrafos -->
 
-                                <h4 class="text-primary">Más detalles</h4>
+
                                 <% if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
+                                <div class="row">
+                                    <div class="justify-content-around mt-4 d-flex">
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
+                                    </div>
+                                </div>
+                                <% } else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2 && adopcion != null) {%>
+                                <h4 class="text-primary">Más detalles</h4>
                                 <div class="d-flex flex-wrap">
                                     <div class="me-5">
-                                        <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;">Claudio</span></p>
-                                        <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;">Labrador Retriever</span></p>
+                                        <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;"><%=adopcion.getMascota().getNombre()%></span></p>
+                                        <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;"><%=adopcion.getMascota().getRaza().getNombreRaza()%> </span></p>
                                     </div>
-                                    <div>
-                                        <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;">6 años</span></p>
-                                        <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;">Macho</span></p>
+                                    <div class="me-5">
+                                        <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;"><%=adopcion.getMascota().getEdadAproximada()%> años</span></p>
+                                        <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;"><%=adopcion.getMascota().getGenero()%> </span></p>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="justify-content-around mt-4 d-flex">
                                         <a href="javascript:void(0)" class="btn btn-warning">Quiero adoptar</a>
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet?action=listar" class="btn btn-primary">Ir a publicaciones</a>
-
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
                                     </div>
-
                                 </div>
-                                <% }%>
+                                <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==3 && donacion != null) {%>
+                                <h4 class="text-primary">Más detalles</h4>
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-5">
+                                        <p class="text-nowrap">Punto de Acopio:  <span style="font-weight: bold;"><%=donacion.getPuntoAcopio()%></span></p>
+                                        <%if (donacion.getCantidad()!=0){%>
+                                        <p class="text-nowrap">Cantidad: <span style="font-weight: bold;"><%=donacion.getCantidad()%> </span></p>
+                                        <%}%>
+                                    </div>
+                                    <div class="me-5">
+                                        <p class="text-nowrap">Tipo de Donación: <span style="font-weight: bold;"><%=donacion.getTipoDonacion().getTipoDonacion()%> años</span></p>
+                                        <%if(donacion.getMarca()!= null){%>
+                                        <p class="text-nowrap">Marca: <span style="font-weight: bold;"><%=donacion.getMarca()%> </span></p>
+                                        <%}%>
+                                    </div>
+                                    <div class="me-5">
+                                        <p class="text-nowrap">Fecha de Recepción Inicio:  <span style="font-weight: bold;"><%=donacion.getFechaRecepcionInicio()%></span></p>
+                                        <p class="text-nowrap">Hora de Recepción: <span style="font-weight: bold;"><%=donacion.getHoraRecepcion()%> </span></p>
+                                    </div>
+                                    <div class="me-5">
+                                        <p class="text-nowrap">Fecha de Recepción Fin:  <span style="font-weight: bold;"><%=donacion.getFechaRecepcionFin()%></span></p>
+                                        <p class="text-nowrap">Nombre de Contacto: <span style="font-weight: bold;"><%=donacion.getNombreContacto()%> </span></p>
+                                    </div>
+                                    <div class="me-5">
+                                        <p class="text-nowrap">Teléfono de Contacto:  <span style="font-weight: bold;"><%=donacion.getTelefonoContacto()%></span></p>
+                                        <%if(donacion.getMotivoDonacion()!=null){%>
+                                        <p class="text-nowrap">Motivo de Donación: <span style="font-weight: bold;"><%=donacion.getMotivoDonacion()%> </span></p>
+                                        <%}%>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="justify-content-around mt-4 d-flex">
+                                        <a href="javascript:void(0)" class="btn btn-warning">Quiero Donar</a>
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
+                                    </div>
+                                </div>
+                                <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==4 && mascotaPerdida != null) {%>
+                                <h4 class="text-primary">Más detalles</h4>
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-5">
+                                        <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;"><%=mascotaPerdida.getMascota().getNombre()%></span></p>
+                                        <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;"><%=mascotaPerdida.getMascota().getRaza().getNombreRaza()%> </span></p>
+                                    </div>
+                                    <div class="me-5">
+                                        <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;"><%=mascotaPerdida.getMascota().getEdadAproximada()%> años</span></p>
+                                        <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;"><%=mascotaPerdida.getMascota().getGenero()%> </span></p>
+                                    </div>
+                                    <div class="me-5">
+                                        <p class="text-nowrap">Lugar de Pérdida: <span style="font-weight: bold;"><%=mascotaPerdida.getLugarPerdida()%></span></p>
+                                        <p class="text-nowrap">Nombre de Contacto: <span style="font-weight: bold;"><%=mascotaPerdida.getNombreContacto()%></span></p>
+                                    </div>
+                                    <div class="me-5">
+                                        <p class="text-nowrap">Fecha de Pérdida: <span style="font-weight: bold;"><%=mascotaPerdida.getFechaPerdida()%> </span></p>
+                                        <p class="text-nowrap">Teléfono de Contacto: <span style="font-weight: bold;"><%=mascotaPerdida.getTelefonoContacto()%> </span></p>
+                                    </div>
+                                    <div class="me-5">
+                                        <%if(mascotaPerdida.getRecompensa()!= null){%>
+                                        <p class="text-nowrap">Recompensa: <span style="font-weight: bold;"><%=mascotaPerdida.getRecompensa()%> </span></p>
+                                        <%}%>
+                                        <p class="text-nowrap">Descripción Adicional: <span style="font-weight: bold;"><%=mascotaPerdida.getDescripcionAdicional()%> </span></p>
+                                    </div>
+                                </div>
+                                <%if(mascotaPerdida.isMascotaEncontrada()){%>
+                                <h4 class="text-primary">¡Mascota Encontrada!</h4>
+                                <div class="row">
+                                    <div class="justify-content-around mt-4 d-flex">
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
+                                    </div>
+                                </div>
+                                <%}else {%>
+                                <div class="row">
+                                    <div class="justify-content-around mt-4 d-flex">
+                                        <a href="javascript:void(0)" class="btn btn-warning">Reportar Avistamiento</a>
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
+                                    </div>
+                                </div>
+                                <%}%>
+                                <%}else {%>
+                                <div class="row">
+                                    <div class="justify-content-around mt-4 d-flex">
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
+                                    </div>
+                                </div>
+                                <%}%>
                                 <p class="mb-4 text-secondary position-absolute bottom-0" >
                                     Fecha de Publicación: <%= publicacion.getFechaCreacion() %>
                                 </p>

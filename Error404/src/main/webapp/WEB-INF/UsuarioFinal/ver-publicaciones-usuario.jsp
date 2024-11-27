@@ -279,7 +279,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</a></li>
-                          <li><a class="dropdown-item" href="crear-publicacion-usuariofinal-mascotaperdida.html">Mascota Perdida</a></li>
+                          <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</a></li>
                           <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia Maltrato</a></li>
                         </ul>
                       </div>
@@ -313,7 +313,7 @@
                           <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
                             <div class="card d-flex flex-column"  style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                               <div class="rounded-2 text-center flex-grow-1">
-                                <a data-bs-toggle="modal" href="${publicacion.publicacionId}">
+                                <a data-bs-toggle="modal" href="#evento${publicacion.publicacionId}">
                                   <img class="img-fluid" src="${publicacion.foto.urlFoto}" alt="${publicacion.titulo}" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
                                 </a>
                               </div>
@@ -349,18 +349,19 @@
                                       <p>${publicacion.descripcion}
                                       </p>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                      <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre: Claudio</p>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                      <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxs-dog bx-sm me-2'></i>Raza: Labrador Retriever</p>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                      <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: 2 años</p>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                      <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-male-sign bx-sm me-2'></i>Género: Macho</p>
-                                    </div>
+                                      <div class="col-12 col-md-6">
+                                        <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre: Claudio</p>
+                                      </div>
+                                      <div class="col-12 col-md-6">
+                                        <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxs-dog bx-sm me-2'></i>Raza: Labrador Retriever</p>
+                                      </div>
+                                      <div class="col-12 col-md-6">
+                                        <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: 2 años</p>
+                                      </div>
+                                      <div class="col-12 col-md-6">
+                                        <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-male-sign bx-sm me-2'></i>Género: Macho</p>
+                                      </div>
+
 
 
                                     <div class="col-12 text-center">
@@ -394,13 +395,13 @@
               <nav>
                 <ul class="pagination justify-content-center">
                   <li class="page-item" ${page == 1 ? 'disabled' : ''}>
-                    <a class="page-link" href="?action=verTodasPublicaciones&page=${page - 1}&tipoPublicacionId=${filtros.tipoPublicacionId}"&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>
+                    <a class="page-link" href="?action=verTodasPublicaciones&page=${page - 1}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>
                   <c:forEach var="i" begin="1" end="${totalPages}">
                     <li class="page-item" ${i == page ? 'active' : ''}>
-                      <a class="page-link" href="?action=verTodasPublicaciones&page=${i}&tipoPublicacionId=${filtros.tipoPublicacionId}"&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>
+                      <a class="page-link" href="?action=verTodasPublicaciones&page=${i}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>
                   </c:forEach>
                     <li class="page-item" ${page == totalpages ? 'disabled' : ''}>
-                  <a class="page-link" href="?action=verTodasPublicaciones&page=${page + 1}&tipoPublicacionId=${filtros.tipoPublicacionId}"&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>
+                  <a class="page-link" href="?action=verTodasPublicaciones&page=${page + 1}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>
                 </ul>
               </nav>
             </c:when>

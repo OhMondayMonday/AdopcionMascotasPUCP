@@ -8,10 +8,18 @@ public class PublicacionesMascotaPerdida {
     private String lugarPerdida;
     private Date fechaPerdida;
     private String descripcionAdicional;
-    private String telefonoContacto;
+    private int telefonoContacto;
     private String nombreContacto;
     private String recompensa;
     private boolean mascotaEncontrada;
+    private Usuarios usuarios;
+
+    public Usuarios getUsuarios() {
+        return usuarios;
+    }
+    public void setUsuarios(Usuarios usuarios) {
+        this.usuarios = usuarios;
+    }
 
     public int getPublicacion_id() { return publicacion_id; }
 
@@ -43,11 +51,11 @@ public class PublicacionesMascotaPerdida {
 
     public void setDescripcionAdicional(String descripcionAdicional) { this.descripcionAdicional = descripcionAdicional; }
 
-    public String getTelefonoContacto() {
+    public int getTelefonoContacto() {
         return telefonoContacto;
     }
 
-    public void setTelefonoContacto(String telefonoContacto) {
+    public void setTelefonoContacto(int telefonoContacto) {
         this.telefonoContacto = telefonoContacto;
     }
 
