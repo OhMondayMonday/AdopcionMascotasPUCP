@@ -28,6 +28,7 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "home" : request.getParameter("action");
+        RequestDispatcher rd;
 
         switch (action) {
 
@@ -46,8 +47,8 @@ public class UsuarioServlet extends HttpServlet {
                 request.setAttribute("usuario", usuario);
                 request.setAttribute("solicitudesMascotas", solicitudesMascotas);
 
-                request.getRequestDispatcher("/WEB-INF/UsuarioFinal/UF-MiHogarTemporal.jsp").forward(request, response);
-
+                rd = request.getRequestDispatcher("/WEB-INF/UsuarioFinal/UF-MiHogarTemporal.jsp");
+                rd.forward(request, response);
                 break;
             case "hogarTemporal":
                 mostrarHogaresTemporales(request, response);
@@ -59,7 +60,8 @@ public class UsuarioServlet extends HttpServlet {
                 mostrarFormularioPostulacion(request, response);
                 break;
             default:
-                request.getRequestDispatcher("/WEB-INF/UsuarioFinal/Inicio-usuario.jsp").forward(request, response);;
+                rd = request.getRequestDispatcher("/WEB-INF/Inicio-usuario.jsp");
+                rd.forward(request, response);
                 break;
         }
     }
