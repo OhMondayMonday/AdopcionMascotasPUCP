@@ -51,6 +51,9 @@ public class DashboardServlet4 extends HttpServlet {
         try {
             String nombreAdministrador = dashboard4DAO.obtenerNombreAdministrador(adminitradorId);
             String fotoPerfil = dashboard4DAO.obtenerFotoPerfil(adminitradorId);
+
+
+
             // Obtener el número total de donantes en el mes actual
             int totalDonantes = dashboard4DAO.obtenerNumeroDonantesMesActual();
 
@@ -90,6 +93,7 @@ public class DashboardServlet4 extends HttpServlet {
             request.setAttribute("usuariosMasDonaciones", usuariosMasDonaciones);
             request.setAttribute("alberguesMasDonaciones", alberguesMasDonaciones);
             request.setAttribute("ultimasActualizaciones", ultimasActualizaciones);
+
 
             // Redirigir al JSP de inicio del administrador
             request.getRequestDispatcher("/WEB-INF/administrador/Administrador-inicio.jsp").forward(request, response);
