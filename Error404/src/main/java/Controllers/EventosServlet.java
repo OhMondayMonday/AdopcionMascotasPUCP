@@ -30,7 +30,7 @@ public class EventosServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action == null) {
-            action = "";
+            action = "verTodosEventos";
         }
 
         switch (action) {

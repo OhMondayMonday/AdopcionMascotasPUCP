@@ -42,32 +42,6 @@ public class PublicacionesDAO extends BaseDao {
         return publicacion;
     }
 
-    // Metodo para obtener todas las publicaciones
-    public List<Publicaciones> obtenerPublicaciones(int inicio) {
-        List<Publicaciones> publicaciones = new ArrayList<>();
-        String query = "SELECT * FROM publicaciones p\n" +
-                "INNER JOIN usuarios u ON p.user_id = u.user_id\n" +
-                "INNER JOIN fotos f ON f.foto_id = p.foto_id\n" +
-                "INNER JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id\n" +
-                "WHERE p.estado_publicacion = 'activa'\n" +
-                "ORDER BY p.publicacion_id DESC\n" +
-                "LIMIT ? OFFSET ?";
-
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query);) {
-            pstmt.setInt(1, 6);
-            pstmt.setInt(2, inicio);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                Publicaciones publicacion = fetchPublicacionDatos(rs);
-                publicaciones.add(publicacion);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return publicaciones;
-    }
-
     // Metodo para obtener detalles de una publicación por su ID
     public Publicaciones obtenerDetallesPublicacion(int publicacionId) {
         String query = "SELECT * FROM publicaciones p\n" +
@@ -248,59 +222,6 @@ public class PublicacionesDAO extends BaseDao {
         return publicaciones;
     }
 
-    public PublicacionesMascotaPerdida obtenerPublicacionMascotaPerdida(int publicacionId) {
-        PublicacionesMascotaPerdida mascotaPerdida = new PublicacionesMascotaPerdida();
-        String query = "SELECT * FROM publicaciones_mascota_perdida mp\n" +
-                "INNER JOIN mascotas m ON m.mascota_id = mp.mascota_id\n" +
-                "INNER JOIN razas r ON r.raza_id = m.raza_id\n" +
-                "INNER JOIN fotos f ON m.foto_id = f.foto_id\n" +
-                "WHERE mp.publicacion_id = ?";
-
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)){
-
-            pstmt.setInt(1, publicacionId);
-
-            try (ResultSet rs = pstmt.executeQuery()){
-                if(rs.next()){
-                    mascotaPerdida.setPublicacion_id(rs.getInt("mp.publicacion_id"));
-
-                    Mascotas mascota = new Mascotas();
-                    mascota.setMascotaId(rs.getInt("m.mascota_id"));
-                    mascota.setNombre(rs.getString("m.nombre"));
-
-                    Razas raza = new Razas();
-                    raza.setRazaId(rs.getInt("r.raza_id"));
-                    raza.setNombreRaza(rs.getString("r.nombreRaza"));
-                    raza.setTipoAnimal(rs.getString("r.tipoAnimal"));
-                    mascota.setRaza(raza);
-
-                    mascota.setDescripcion(rs.getString("m.descripcion"));
-
-                    Fotos foto = new Fotos();
-                    foto.setFotoId(rs.getInt("f.foto_id"));
-                    foto.setUrlFoto(rs.getString("f.url_foto"));
-                    foto.setFechaSubida(rs.getTimestamp("f.fecha_subida"));
-                    mascota.setFoto(foto);
-
-                    mascota.setGenero(rs.getString("m.genero"));
-                    mascota.setTamanio(rs.getString("m.tamanio"));
-                    mascota.setDistintivo(rs.getString("m.distintivo"));
-
-                    mascotaPerdida.setLugarPerdida(rs.getString("mp.lugar_perdida"));
-                    mascotaPerdida.setFechaPerdida(rs.getTimestamp("mp.fecha_perdida"));
-                    if(rs.getString("mp.descripcion_adicional") != null){
-                        mascotaPerdida.setDescripcionAdicional(rs.getString("mp.descripcion_adicional"));
-                    }
-                    mascotaPerdida.setMascotaEncontrada(rs.getBoolean("mp.mascota_encontrada"));
-                    mascotaPerdida.setMascota(mascota);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return mascotaPerdida;
-    }
 
 
 
