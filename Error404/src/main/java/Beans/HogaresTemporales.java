@@ -28,6 +28,22 @@ public class HogaresTemporales {
     private Date rangoFechaFin;
     private String estadoTemporal;
     private Timestamp fechaAprobacion;
+    private Zonas zona;
+    private Mascotas mascota;
+
+    public Mascotas getMascota() {
+        return mascota;
+    }
+    public void setMascota(Mascotas mascota) {
+        this.mascota = mascota;
+    }
+
+    public Zonas getZona() {
+            return zona;
+    }
+    public void setZona(Zonas zona) {
+        this.zona = zona;
+    }
 
     public int getTemporalId() {
         return temporalId;

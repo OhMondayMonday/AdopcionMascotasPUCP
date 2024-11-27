@@ -12,6 +12,14 @@ public class PublicacionesMascotaPerdida {
     private String nombreContacto;
     private String recompensa;
     private boolean mascotaEncontrada;
+    private Usuarios usuarios;
+
+    public Usuarios getUsuarios() {
+        return usuarios;
+    }
+    public void setUsuarios(Usuarios usuarios) {
+        this.usuarios = usuarios;
+    }
 
     public int getPublicacion_id() { return publicacion_id; }
 

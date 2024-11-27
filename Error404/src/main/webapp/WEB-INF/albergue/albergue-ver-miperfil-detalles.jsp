@@ -6,10 +6,11 @@
 
 <jsp:setProperty name="usuario" property="*" />
 <jsp:setProperty name="rol" property="*" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <!DOCTYPE html>
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
-
 
     <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
     <head>
@@ -67,7 +68,6 @@
     </head>
     <body>
 
-
         <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
@@ -79,219 +79,170 @@
                 <div class="layout-page">
                     <jsp:include page="../includes/navbarAlbergue.jsp"/>
                     <div class="content-wrapper">
-
                         <!-- Content -->
-
                         <div class="container-xxl flex-grow-1 container-p-y">
+                            <c:choose>
+                                <c:when test="${not empty usuario}">
+                                    <!-- CONTENIDO NORMAL CUANDO EL USUARIO EXISTE -->
+                                    <div class="row">
+                                        <!-- User Sidebar -->
+                                        <div class="col-xl-4 col-lg-5 col-md-5 order-0 order-md-0">
+                                            <!-- User Card -->
+                                            <div class="card mb-4">
+                                                <div class="card-body">
+                                                    <div class="user-avatar-section">
+                                                        <div class="d-flex align-items-center flex-column">
+                                                            <img class="img-fluid rounded my-4" src="https://img.freepik.com/vector-gratis/fondo-bonito-cara-sonriente-animales-felices-decorativos_23-2147590101.jpg?t=st=1726640655~exp=1726644255~hmac=810a73c0148e1c4d1ecb3b4af4a0d1b18f8dfe3d48ec5d695b0282ec0570e8d0&w=826" height="110" width="110" alt="User avatar" />
+                                                            <div class="user-info text-center">
+                                                                <h4 class="mb-2">${usuario.nombreAlbergue}</h4>
+                                                                <span class="badge bg-label-danger">Albergue</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-around flex-wrap my-4 py-3">
+                                                        <div class="d-flex align-items-start me-4 mt-3 gap-3">
+                                                            <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-check bx-sm'></i></span>
+                                                            <div>
+                                                                <h5 class="mb-0">${usuario.animalesAlbergados}</h5>
+                                                                <span>Animales albergados</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex align-items-start mt-3 gap-3">
+                                                            <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-customize bx-sm'></i></span>
+                                                            <div>
+                                                                <h5 class="mb-0">${usuario.capacidadNuevosAnimales}</h5>
+                                                                <span>Capacidad</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="pb-2 border-bottom mb-4">Detalles de la cuenta</h5>
+                                                    <div class="info-container">
+                                                        <ul class="list-unstyled">
+                                                            <li class="mb-3">
+                                                                <span class="fw-medium me-2">Nombre completo:</span>
+                                                                <span>${usuario.nombre} ${usuario.apellido}</span>
+                                                            </li>
+                                                            <li class="mb-3">
+                                                                <span class="fw-medium me-2">Nombre de usuario:</span>
+                                                                <span>${usuario.username}</span>
+                                                            </li>
+                                                            <li class="mb-3">
+                                                                <span class="fw-medium me-2">Correo:</span>
+                                                                <span>${usuario.email}</span>
+                                                            </li>
+                                                            <li class="mb-3">
+                                                                <span class="fw-medium me-2">Estado:</span>
+                                                                <span class="badge bg-label-success">${usuario.estadoCuenta}</span>
+                                                            </li>
+                                                            <li class="mb-3">
+                                                                <span class="fw-medium me-2">Cuenta activa desde: </span>
+                                                                <span>${usuario.fechaRegistro}</span>
+                                                            </li>
 
-                            <div class="row">
-                                <!-- User Sidebar -->
-                                <div class="col-xl-4 col-lg-5 col-md-5 order-0 order-md-0">
-                                    <!-- User Card -->
-                                    <div class="card mb-4">
-                                        <div class="card-body">
-                                            <div class="user-avatar-section">
-                                                <div class=" d-flex align-items-center flex-column">
-                                                    <img class="img-fluid rounded my-4" src="https://img.freepik.com/vector-gratis/fondo-bonito-cara-sonriente-animales-felices-decorativos_23-2147590101.jpg?t=st=1726640655~exp=1726644255~hmac=810a73c0148e1c4d1ecb3b4af4a0d1b18f8dfe3d48ec5d695b0282ec0570e8d0&w=826" height="110" width="110" alt="User avatar" />
-                                                    <div class="user-info text-center">
-                                                        <h4 class="mb-2">${usuario.nombreAlbergue}</h4>
-                                                        <span class="badge bg-label-danger">Albergue</span>
+                                                        </ul>
+                                                        <div class="d-flex justify-content-center pt-3">
+                                                            <a href="<c:url value='/albergue?action=editarPerfil&id=${usuario.userId}'/>" class="btn btn-warning">
+                                                                <i class='bx bx-edit'></i>Editar
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-around flex-wrap my-4 py-3">
-                                                <div class="d-flex align-items-start me-4 mt-3 gap-3">
-                                                    <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-check bx-sm'></i></span>
-                                                    <div>
-                                                        <h5 class="mb-0">15</h5>
-                                                        <span>Eventos</span>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex align-items-start mt-3 gap-3">
-                                                    <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-customize bx-sm'></i></span>
-                                                    <div>
-                                                        <h5 class="mb-0">154</h5>
-                                                        <span>Mascotas contentas</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <h5 class="pb-2 border-bottom mb-4">Detalles de la cuenta</h5>
-                                            <div class="info-container">
-                                                <ul class="list-unstyled">
-                                                    <li class="mb-3">
-                                                        <span class="fw-medium me-2">Nombre de usuario:</span>
-                                                        <span>${usuario.username}</span>
-                                                    </li>
-                                                    <li class="mb-3">
-                                                        <span class="fw-medium me-2">Correo:</span>
-                                                        <span>${usuario.email}</span>
-                                                    </li>
-                                                    <li class="mb-3">
-                                                        <span class="fw-medium me-2">Estado:</span>
-                                                        <span class="badge bg-label-success">${usuario.estadoCuenta}</span>
-                                                    </li>
-                                                    <li class="mb-3">
-                                                        <span class="fw-medium me-2">Cuenta activa desde: </span>
-                                                        <span>${usuario.fechaRegistro}</span>
-                                                    </li>
+                                            <!-- /User Card -->
+                                        </div>
+                                        <!--/ User Sidebar -->
 
-                                                    <li class="mb-3">
-                                                        <span class="fw-medium me-2">Contacto:</span>
-                                                        <span>${usuario.numeroContactoDonaciones}</span>
-                                                    </li>
-
-                                                </ul>
-
-                                                <div class="d-flex justify-content-center pt-3">
-                                                    <a href="<c:url value='/albergue?action=editarPerfil'/>" class="btn btn-warning">
-                                                        <i class='bx bx-edit'></i>Editar
+                                        <!-- User Content -->
+                                        <div class="col-xl-8 col-lg-7 col-md-7 order-1 order-md-1">
+                                            <!-- User Pills -->
+                                            <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                                                <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i>Cuenta</a></li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="<c:url value='/albergue?action=verMiPerfilSeguridad'/>">
+                                                        <i class="bx bx-lock-alt me-1"></i>Seguridad
                                                     </a>
-
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /User Card -->
-                                    <!-- Plan Card -->
-
-                                    <!-- /Plan Card -->
-                                </div>
-                                <!--/ User Sidebar -->
-
-
-                                <!-- User Content -->
-                                <div class="col-xl-8 col-lg-7 col-md-7 order-1 order-md-1">
-                                    <!-- User Pills -->
-                                    <!-- User Pills -->
-                                    <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                        <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i>Cuenta</a></li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="<c:url value='/albergue?action=verMiPerfilSeguridad'/>">
-                                                <i class="bx bx-lock-alt me-1"></i>Seguridad
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
-                                    <!--/ User Pills -->
-                                    <!--/ User Pills -->
-
-                                    <!-- Project table -->
-                                    <div class="card mb-4">
-                                        <h5 class="card-header pb-2 pt-3 ps-3">Acerca de nosotros</h5>
-                                        <div class="p-3 p pt-0 descripcion-hogar">
-                                            <strong>Albergue amoroso</strong><br>
-                                            ${usuario.descripcion}
-                                            <br><br>
-                                            Si deseas ofrecer un hogar temporal, permanente, o unirte como voluntario, contáctame y juntos haremos la diferencia.
-                                        </div>
-                                    </div>
-
-
-                                    <!-- /Project table -->
-
-                                    <!-- Activity Timeline -->
-                                    <div class="card mb-4">
-                                        <h5 class="card-header">Actividad Reciente</h5>
-                                        <div class="card-body">
-                                            <ul class="timeline">
-                                                <li class="timeline-item timeline-item-transparent">
-                                                    <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
-                                                    <div class="timeline-event">
-                                                        <div class="timeline-header mb-1">
-                                                            <h6 class="mb-0">Rescate exitoso</h6>
-                                                            <small class="text-muted">Hace 15 min</small>
-                                                        </div>
-                                                        <p class="mb-2">Se rescató un gatito atrapado en un árbol y se trasladó a un lugar seguro.</p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item timeline-item-transparent">
-                                                    <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
-                                                    <div class="timeline-event">
-                                                        <div class="timeline-header mb-1">
-                                                            <h6 class="mb-0">Evento comunitario</h6>
-                                                            <small class="text-muted">Hace 1 hora</small>
-                                                        </div>
-                                                        <p class="mb-2">Participó en un evento de la comunidad para concientizar sobre la adopción de mascotas.</p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item timeline-item-transparent">
-                                                    <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
-                                                    <div class="timeline-event">
-                                                        <div class="timeline-header mb-1">
-                                                            <h6 class="mb-0">Ingreso de animales rescatados</h6>
-                                                            <small class="text-muted">Hace 3 días</small>
-                                                        </div>
-                                                        <p class="mb-2">Dos perros y un gato fueron rescatados y están recibiendo cuidados en el hogar temporal.</p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item timeline-item-transparent">
-                                                    <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-success"></span></span>
-                                                    <div class="timeline-event">
-                                                        <div class="timeline-header mb-1">
-                                                            <h6 class="mb-0">Adopción confirmada</h6>
-                                                            <small class="text-muted">Hace 1 semana</small>
-                                                        </div>
-                                                        <p class="mb-0">Se confirmó la adopción de 4 perros que encontraron un hogar amoroso.</p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-end-indicator">
-                                                    <i class="bx bx-check-circle"></i>
                                                 </li>
                                             </ul>
-                                        </div>
-                                    </div>
-                                    <!-- /Activity Timeline -->
+                                            <!-- Project table -->
+                                            <div class="card mb-4">
+                                                <h5 class="card-header pb-2 pt-3 ps-3">Acerca de nosotros</h5>
+                                                <div class="p-3 pt-0 descripcion-hogar">
+                                                    <!-- Sección "¿Quiénes somos?" -->
+                                                    <strong>¿Quiénes somos?</strong><br>
+                                                    <span>${fn:escapeXml(usuario.descripcion != null ? usuario.descripcion : 'Descripción no disponible')}</span>
+                                                    <br>
 
+                                                    <!-- Sección "Encuéntranos en..." -->
+                                                    <strong>Encuéntranos en...</strong>
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Distrito:</span>
+                                                            <span>${usuario.distrito != null && usuario.distrito.nombreDistrito != null ? usuario.distrito.nombreDistrito : 'Distrito no especificado'}</span>
 
-                                </div>
-                                <!--/ User Content -->
-                            </div>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Dirección completa:</span>
+                                                            <span>${usuario.direccion}</span>
+                                                        </li>
+                                                    </ul>
 
-                            <!-- Modal -->
+                                                    <!-- Sección "Nuestras redes sociales" -->
+                                                    <strong>¡Nuestras redes sociales!</strong>
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Facebook:</span>
+                                                            <span>${usuario.urlFacebook}</span>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Instagram:</span>
+                                                            <span>${usuario.urlInstagram}</span>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Twitter:</span>
+                                                            <span>${usuario.urlTwitter}</span>
+                                                        </li>
+                                                    </ul>
 
-                            <!-- Add New Credit Card Modal -->
-                            <div class="modal fade" id="upgradePlanModal" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-simple modal-upgrade-plan">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <h3>Upgrade Plan</h3>
-                                                <p>Choose the best plan for user.</p>
-                                            </div>
-                                            <form id="upgradePlanForm" class="row g-3" onsubmit="return false">
-                                                <div class="col-sm-9">
-                                                    <label class="form-label" for="choosePlan">Choose Plan</label>
-                                                    <select id="choosePlan" name="choosePlan" class="form-select" aria-label="Choose Plan">
-                                                        <option selected>Choose Plan</option>
-                                                        <option value="standard">Standard - $99/month</option>
-                                                        <option value="exclusive">Exclusive - $249/month</option>
-                                                        <option value="Enterprise">Enterprise - $499/month</option>
-                                                    </select>
+                                                    <!-- Sección "Aceptamos donaciones" -->
+                                                    <strong>Aceptamos donaciones:</strong>
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Nombre del contacto de donaciones:</span>
+                                                            <span>${usuario.nombreContactoDonaciones}</span>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Número donaciones:</span>
+                                                            <span>${usuario.numeroContactoDonaciones}</span>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Dirección del Centro de acopio:</span>
+                                                            <span>${usuario.direccionDonaciones} - </span>
+                                                            <span>${usuario.puntoAcopio}</span>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Yape/Plin:</span>
+                                                            <span>${usuario.numeroYapePlin}</span>
+                                                        </li>
+                                                        <li class="mb-3">
+                                                            <span class="fw-medium me-2">Qr YAPE/PLIN:</span>
+                                                            <span>${usuario.codigoQr}</span>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <div class="col-sm-3 d-flex align-items-end">
-                                                    <button type="submit" class="btn btn-primary">Upgrade</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <hr class="mx-md-n5 mx-n3">
-                                        <div class="modal-body">
-                                            <h6 class="mb-0">User current plan is standard plan</h6>
-                                            <div class="d-flex justify-content-between align-items-center flex-wrap">
-
-                                                <button class="btn btn-label-danger cancel-subscription mt-3">Cancel Subscription</button>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Add New Credit Card Modal -->
 
-                            <!-- /Modal -->
+                                            <!--/ User Content -->
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <!-- MENSAJE DE ERROR -->
+                                    <div class="alert alert-danger" role="alert">
+                                        Error: No se encontró información del usuario. Por favor, intente nuevamente.
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
+
 
                         <footer class="footer bg-footer-theme" >
                             <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3" style="background-color: #fff1ef">
@@ -366,11 +317,7 @@
         <script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
 
-
-
     </body>
-
-
 
     <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
 </html>

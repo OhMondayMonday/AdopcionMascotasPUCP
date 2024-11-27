@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
@@ -117,6 +118,14 @@
                         <div class="container-xxl flex-grow-1 container-p-y">
                             <div class="card-header d-flex flex-wrap justify-content-between gap-3">
                                 <div class="col-12">
+                                    <p>ID del coordinador: ${id}</p>
+                                    <p>Tamaño de la lista: ${fn:length(gestionHogares)}</p>
+                                    <c:forEach var="hogar" items="${gestionHogares}">
+                                        <p>Hogar ID: ${hogar.temporalId}, Dirección: ${hogar.direccion}, Estado: ${hogar.estadoTemporal}</p>
+                                    </c:forEach>
+
+
+
                                     <div class="card mb-0" style="height: auto; padding: 5px;">
                                         <div class="card-body d-flex align-items-center justify-content-center p-1">
                                             <div class="row w-100">
@@ -167,71 +176,42 @@
                                     <div class="card mb-2">
                                         <div class="card-body">
                                             <div class="table-responsive">
-                                                <!-- Verificar si la lista de solicitudes está vacía -->
                                                 <c:if test="${empty gestionHogares}">
                                                     <div class="text-center mt-4">
                                                         <p>No hay solicitudes disponibles en este momento.</p>
                                                     </div>
                                                 </c:if>
 
-                                                <!-- Si hay solicitudes, mostrar la tabla -->
                                                 <c:if test="${!empty gestionHogares}">
                                                     <table class="table table-striped table-bordered" id="solicitudesTable">
                                                         <thead class="thead-light">
                                                             <tr>
                                                                 <th>Nombre</th>
-                                                                <th>Dirección</th>
+                                                                <th>Direccion</th>
                                                                 <th>Mascota</th>
                                                                 <th>Estado</th>
                                                                 <th>Fecha</th>
-                                                                <th>Teléfono</th>
+                                                                <th>Contacto</th>
                                                                 <th>Acciones</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <c:forEach var="solicitud" items="${gestionHogares}">
+                                                            <c:forEach var="hogar" items="${gestionHogares}">
                                                                 <tr>
-                                                                    <td>
-                                                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                                                            <li class="avatar avatar-xs pull-up">
-                                                                                <img src="${pageContext.request.contextPath}/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle">
-                                                                            </li>
-                                                                            <span class="fw-medium">${solicitud.solicitante.nombre}</span>
-                                                                        </ul>
-                                                                    </td>
-                                                                    <td>${solicitud.solicitante.direccion}</td>
-                                                                    <td>${solicitud.mascota.nombre}</td>
-                                                                    <td>
-                                                                        <c:choose>
-                                                                            <c:when test="${solicitud.estadoSolicitud == 'aprobada'}">
-                                                                                <span class="badge bg-label-success">Aprobada</span>
-                                                                            </c:when>
-                                                                            <c:when test="${solicitud.estadoSolicitud == 'pendiente'}">
-                                                                                <span class="badge bg-label-warning">Pendiente</span>
-                                                                            </c:when>
-                                                                            <c:when test="${solicitud.estadoSolicitud == 'rechazada'}">
-                                                                                <span class="badge bg-label-danger">Rechazada</span>
-                                                                            </c:when>
-                                                                            <c:otherwise>
-                                                                                <span class="badge bg-label-secondary">Desconocido</span>
-                                                                            </c:otherwise>
-                                                                        </c:choose>
-                                                                    </td>
-                                                                    <td>${solicitud.fechaSolicitud}</td>
-                                                                    <td>${solicitud.solicitante.telefono}</td>
-                                                                    <td>
-                                                                        <div class="d-flex gap-2">
-                                                                            <a href="coordinador?action=verDetalles&solicitudId=${solicitud.solicitudId}" class="btn btn-info btn-sm"><i class='bx bx-show'></i></a>
-                                                                            <a href="coordinador?action=aprobarSolicitudHogar&solicitudId=${solicitud.solicitudId}" class="btn btn-success btn-sm"><i class="bx bx-check-circle"></i></a>
-                                                                            <a href="coordinador?action=rechazarSolicitudHogar&solicitudId=${solicitud.solicitudId}" class="btn btn-danger btn-sm"><i class="bx bxs-x-circle"></i></a>
-                                                                        </div>
-                                                                    </td>
+                                                                    <td>${hogar.hogarId}</td>
+                                                                    <td>${hogar.nombre}</td> <!-- Aquí usamos 'nombre' en vez de 'usuarioNombre' -->
+                                                                    <td>${hogar.apellido}</td> <!-- Aquí usamos 'apellido' en vez de 'usuarioApellido' -->
+                                                                    <td>${hogar.direccion}</td>
+                                                                    <td>${hogar.estadoHogar}</td>
+                                                                    <td>${hogar.fechaSolicitud}</td>
+                                                                    <td>${hogar.tipoSolicitud}</td>
                                                                 </tr>
-                                                            </c:forEach>
+                                                            </c:forEach>*
                                                         </tbody>
                                                     </table>
                                                 </c:if>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
