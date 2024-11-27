@@ -51,10 +51,10 @@ public class UsuarioServlet extends HttpServlet {
                 rd.forward(request, response);
                 break;
             case "hogarTemporal":
-                mostrarHogaresTemporales(request, response);
+                //mostrarHogaresTemporales(request, response);
                 break;
             case "detalleHogarTemporal":
-                mostrarDetalleHogarTemporal(request, response);
+                //mostrarDetalleHogarTemporal(request, response);
                 break;
             case "postularHogarTemporal":
                 mostrarFormularioPostulacion(request, response);
@@ -131,29 +131,29 @@ public class UsuarioServlet extends HttpServlet {
 
 
     // Metodo para manejar la visualización de "Hogar Temporal" con filtros
-    private void mostrarHogaresTemporales(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String tipoMascota = request.getParameter("tipoMascota");
-        String palabraClave = request.getParameter("palabraClave");
-        String ubicacion = request.getParameter("ubicacion");
+    //private void mostrarHogaresTemporales(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //    String tipoMascota = request.getParameter("tipoMascota");
+    //    String palabraClave = request.getParameter("palabraClave");
+    //    String ubicacion = request.getParameter("ubicacion");
 
-        List<HogaresTemporales> hogares = hogarTemporalDAO.obtenerPublicacionesHogaresTemporales();
+    //    List<HogaresTemporales> hogares = hogarTemporalDAO.obtenerPublicacionesHogaresTemporales();
 
-        request.setAttribute("hogares", hogares);
-        request.getRequestDispatcher("/WEB-INF/UsuarioFinal/UF-HogaresTemporales.jsp").forward(request, response);
-    }
+    //    request.setAttribute("hogares", hogares);
+    //    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/UF-HogaresTemporales.jsp").forward(request, response);
+    //}
 
-    private void mostrarDetalleHogarTemporal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            int temporalId = Integer.parseInt(request.getParameter("temporalId"));
-            HogaresTemporales hogar = hogarTemporalDAO.obtenerDetallesHogarTemporal(temporalId);
+    //private void mostrarDetalleHogarTemporal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //    try {
+    //        int temporalId = Integer.parseInt(request.getParameter("temporalId"));
+    //        HogaresTemporales hogar = hogarTemporalDAO.obtenerDetallesHogarTemporal(temporalId);
 
-            request.setAttribute("hogar", hogar);
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/DetalleHogarTemporal.jsp");
-            rd.forward(request, response);
-        } catch (NumberFormatException e) {
-            response.sendRedirect("UsuarioServlet?action=hogarTemporal");
-        }
-    }
+    //        request.setAttribute("hogar", hogar);
+    //        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/DetalleHogarTemporal.jsp");
+    //        rd.forward(request, response);
+    //    } catch (NumberFormatException e) {
+    //        response.sendRedirect("UsuarioServlet?action=hogarTemporal");
+    //    }
+    //}
 
     // Método para mostrar el formulario de postulación como hogar temporal
     private void mostrarFormularioPostulacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

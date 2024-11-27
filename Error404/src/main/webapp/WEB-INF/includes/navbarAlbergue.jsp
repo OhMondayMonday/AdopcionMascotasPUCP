@@ -18,7 +18,7 @@
             <div class="nav-item navbar-search-wrapper mb-0">
 
                 <span class="d-inline-block justify-content-center">
-                <p class="mb-0 fst-normal fw-semibold ff-">Editar Evento </p>
+                <p class="mb-0 fst-normal fw-semibold ff-">Eventos </p>
               </span>
             </div>
         </div>

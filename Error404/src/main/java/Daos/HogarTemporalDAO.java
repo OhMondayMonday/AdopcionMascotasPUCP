@@ -17,7 +17,7 @@ public class HogarTemporalDAO extends BaseDao {
         List<HogaresTemporales> hogares = new ArrayList<>();
         String query = "SELECT p.publicacion_id, p.titulo, p.descripcion, f.url_foto AS foto_url, " +
                 "u.nombre AS nombre_usuario, u.apellido AS apellido_usuario, ht.tipo_mascotas, ht.distrito, " +
-                "ht.estado_temporal, ht.descripcion AS hogar_descripcion, ht.celular, ht.direccion, ht.cantidad_mascotas " +
+                "ht.estado_temporal AS hogar_descripcion, ht.celular, ht.direccion, ht.cantidad_mascotas " +
                 "FROM publicaciones p " +
                 "JOIN fotos f ON p.foto_id = f.foto_id " +
                 "JOIN usuarios u ON p.user_id = u.user_id " +

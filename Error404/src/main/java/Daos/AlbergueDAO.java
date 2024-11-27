@@ -11,7 +11,7 @@ public class AlbergueDAO extends BaseDao {
     // 1. Registrar Albergue
     // Método de registro mejorado
     public boolean registrarAlbergue(Usuarios albergue) {
-        String sql = "INSERT INTO usuarios (username, contraseña, nombre, apellido, email, DNI, direccion, distrito_id, " +
+        String sql = "INSERT INTO usuarios (username, contrasenia, nombre, apellido, email, DNI, direccion, distrito_id, " +
                 "estado_cuenta, rol_id, fecha_registro, nombre_albergue, capacidad_nuevos_animales, animales_albergados, " +
                 "anio_creacion, url_facebook, url_instagram, punto_acopio, direccion_donaciones, " +
                 "nombre_contacto_donaciones, numero_contacto_donaciones, numero_yape_plin, codigo_qr, zona_id) " +
