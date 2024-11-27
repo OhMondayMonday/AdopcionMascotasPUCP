@@ -24,4 +24,21 @@ public class LoginDAO extends BaseDao {
         }
         return -1;
     }
+
+    public int obtenerRolPorUserId(int userId) {
+        String query = "SELECT rol_id FROM usuarios WHERE user_id = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("rol_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
 }

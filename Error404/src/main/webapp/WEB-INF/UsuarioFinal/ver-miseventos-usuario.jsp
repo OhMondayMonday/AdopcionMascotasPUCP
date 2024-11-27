@@ -158,7 +158,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="EventosServlet?action=verEventosInscritosUsuario">
+                                    <a class="dropdown-item" href="EventosServlet?action=verEventosDeUsuario">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>

@@ -1,15 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 
-
-<jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
-<jsp:useBean id="rol" class="Beans.Roles" scope="request" />
-
-<jsp:setProperty name="usuario" property="*" />
-<jsp:setProperty name="rol" property="*" />
-
-
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
     <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
@@ -34,7 +27,7 @@
         <!-- End Google Tag Manager -->
 
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -42,37 +35,37 @@
         <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
 
         <!-- Icons -->
-        <link rel="stylesheet" href="../../assets/vendor/fonts/boxicons.css" />
-        <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-        <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/fontawesome.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/flag-icons.css" />
 
         <!-- Core CSS -->
-        <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-        <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
-        <link rel="stylesheet" href="../../assets/css/demo.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
 
         <!-- Vendors CSS -->
-        <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/bs-stepper/bs-stepper.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/%40form-validation/form-validation.css" />
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/typography.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/katex.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/quill/editor.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/dropzone/dropzone.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/flatpickr/flatpickr.css">
-        <link rel="stylesheet" href="../../assets/vendor/libs/tagify/tagify.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/typography.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
 
         <!-- Page CSS -->
 
 
         <!-- Helpers -->
-        <script src="../../assets/vendor/js/helpers.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
 
         <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-        <script src="../../assets/js/config.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 
     </head>
     <body>
@@ -275,41 +268,41 @@
         <!-- Core JS -->
         <!-- build:js assets/vendor/js/core.js -->
 
-        <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-        <script src="../../assets/vendor/libs/popper/popper.js"></script>
-        <script src="../../assets/vendor/js/bootstrap.js"></script>
-        <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-        <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-        <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-        <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-        <script src="../../assets/vendor/js/menu.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
 
         <!-- Vendors JS -->
-        <script src="../../assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
-        <script src="../../assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-        <script src="../../assets/vendor/libs/select2/select2.js"></script>
-        <script src="../../assets/vendor/libs/%40form-validation/popular.js"></script>
-        <script src="../../assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-        <script src="../../assets/vendor/libs/%40form-validation/auto-focus.js"></script>
-        <script src="../../assets/vendor/libs/quill/katex.js"></script>
-        <script src="../../assets/vendor/libs/quill/quill.js"></script>
-        <script src="../../assets/vendor/libs/select2/select2.js"></script>
-        <script src="../../assets/vendor/libs/bloodhound/bloodhound.js"></script>
-        <script src="../../assets/vendor/libs/dropzone/dropzone.js"></script>
-        <script src="../../assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
-        <script src="../../assets/vendor/libs/flatpickr/flatpickr.js"></script>
-        <script src="../../assets/vendor/libs/tagify/tagify.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/quill.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/bloodhound/bloodhound.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.js"></script>
 
-        <script src="../../assets/js/form-wizard-numbered.js"></script>
-        <script src="../../assets/js/form-wizard-validation-event.js"></script>
-        <script src="../../assets/js/app-ecommerce-product-add.js"></script>
-        <script src="../../assets/js/forms-selects.js"></script>
-        <script src="../../assets/js/forms-tagify.js"></script>
-        <script src="../../assets/js/forms-typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/form-wizard-numbered.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/form-wizard-validation-event.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
 
         <!-- Main JS -->
-        <script src="../../assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
         <script>
             function cambiarPagina() {
                 var select = document.getElementById("opciones");
@@ -328,3 +321,5 @@
 
 
     </body>
+
+</html>

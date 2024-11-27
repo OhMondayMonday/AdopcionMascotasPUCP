@@ -41,7 +41,7 @@ public class HogarTemporalDAO extends BaseDao {
                     hogar.setTemporalId(rs.getInt("publicacion_id"));
                     hogar.setTipoMascotas(rs.getString("tipo_mascotas"));
                     hogar.setEstadoTemporal(rs.getString("estado_temporal"));
-                    hogar.setDescripcion(rs.getString("hogar_descripcion"));
+                    // hogar.setDescripcion(rs.getString("hogar_descripcion"));
                     hogar.setCelular(rs.getString("celular"));
                     hogar.setDireccion(rs.getString("direccion"));
                     hogar.setCantidadMascotas(rs.getInt("cantidad_mascotas"));
@@ -49,7 +49,7 @@ public class HogarTemporalDAO extends BaseDao {
                     Publicaciones publicacion = new Publicaciones();
                     publicacion.setDescripcion(rs.getString("descripcion"));
                     publicacion.setTitulo(rs.getString("titulo"));
-                    hogar.setPublicacion(publicacion);
+                    // hogar.setPublicacion(publicacion);
 
                     // Relación con el objeto Fotos
                     Fotos foto = new Fotos();

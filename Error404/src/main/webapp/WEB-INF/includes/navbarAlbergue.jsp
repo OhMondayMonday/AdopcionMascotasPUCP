@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <!-- Incluye Bootstrap CSS y JavaScript en tu JSP -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -69,7 +71,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="albergue-ver-miseventos.jsp">
+                        <a class="dropdown-item" href="EventosServlet?action=verEventosDeUsuario">
                             <i class="bx bx-bone"></i>
                             <span class="align-middle">Mis eventos</span>
                         </a>
