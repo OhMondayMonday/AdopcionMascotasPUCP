@@ -11,7 +11,7 @@ public abstract class BaseDao {
             ex.printStackTrace();
         }
         String user = "root";
-        String pass = "root";
+        String pass = "iweb_proyecto";
         String url = "jdbc:mysql://localhost:3306/iweb_db?serverTimezone=America/Lima";
         return DriverManager.getConnection(url, user, pass);
     }

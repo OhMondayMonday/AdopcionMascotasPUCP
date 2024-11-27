@@ -1,14 +1,17 @@
 package Beans;
 
+import java.sql.Time;
+import java.util.Date;
+
 public class PublicacionesDonaciones {
     private int publicacion_id;
     private String puntoAcopio;
     private TiposDonaciones tipoDonacion;
     private double cantidad;
     private String marca;
-    private String fechaRecepcionInicio;
-    private String fechaRecepcionFin;
-    private String horaRecepcion;
+    private Date fechaRecepcionInicio;
+    private Date fechaRecepcionFin;
+    private Time horaRecepcion;
     private String telefonoContacto;
     private String nombreContacto;
     private String motivoDonacion;
@@ -45,25 +48,25 @@ public class PublicacionesDonaciones {
         this.marca = marca;
     }
 
-    public String getFechaRecepcionInicio() {
+    public Date getFechaRecepcionInicio() {
         return fechaRecepcionInicio;
     }
 
-    public void setFechaRecepcionInicio(String fechaRecepcionInicio) { this.fechaRecepcionInicio = fechaRecepcionInicio; }
+    public void setFechaRecepcionInicio(Date fechaRecepcionInicio) { this.fechaRecepcionInicio = fechaRecepcionInicio; }
 
-    public String getFechaRecepcionFin() {
+    public Date getFechaRecepcionFin() {
         return fechaRecepcionFin;
     }
 
-    public void setFechaRecepcionFin(String fechaRecepcionFin) {
+    public void setFechaRecepcionFin(Date fechaRecepcionFin) {
         this.fechaRecepcionFin = fechaRecepcionFin;
     }
 
-    public String getHoraRecepcion() {
+    public Time getHoraRecepcion() {
         return horaRecepcion;
     }
 
-    public void setHoraRecepcion(String horaRecepcion) {
+    public void setHoraRecepcion(Time horaRecepcion) {
         this.horaRecepcion = horaRecepcion;
     }
 

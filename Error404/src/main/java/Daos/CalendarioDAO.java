@@ -22,7 +22,6 @@ public class CalendarioDAO extends BaseDao {
                 Eventos evento = new Eventos();
                 evento.setEventId(resultSet.getInt("event_id"));
 
-                // Usuario
                 Usuarios usuario = new Usuarios();
                 usuario.setUserId(resultSet.getInt("user_id"));
                 usuario.setUsername(resultSet.getString("username"));

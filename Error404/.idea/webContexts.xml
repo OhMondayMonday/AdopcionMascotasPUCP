@@ -3,13 +3,11 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/UsuarioFinal/ver-eventos-usuario.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/UsuarioFinal" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/UsuarioFinal/ver-miseventos-usuario.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/UsuarioFinal" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/UsuarioFinal/Inicio-usuario.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/UsuarioFinal" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue/albergue-crear-evento.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue/albergue-editar-perfil.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue/albergue-ver-miperfil-seguridad.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/albergue" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/coordinador/coordinador-editar-perfil.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/coordinador" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/coordinador/coordinador-ver-solicitud-hogarestemporales.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/coordinador" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/ver-miperfil-usuario-detalles.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/ver-publicaciones.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views" />
       </map>

@@ -53,8 +53,8 @@
         <li class="nav-item"><a class="nav-link" href="#publica">Publicaciones</a></li>
       </ul>
       <div class="navbar-nav ms-auto">
-        <a href="../html/dentro/login.html" class="btn btn-outline-primary">Acceder</a>
-        <a href="../html/dentro/registro.html" class="btn btn-outline-primary">Registrarse</a>
+        <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Acceder</a>
+        <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Registrarse</a>
       </div>
     </div>
   </div>

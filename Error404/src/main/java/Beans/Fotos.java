@@ -8,6 +8,14 @@ public class Fotos {
     private String urlFoto;
     private Timestamp fechaSubida;
 
+    // Constructor vacío
+    public Fotos() {}
+
+    // Constructor con urlFoto
+    public Fotos(String urlFoto) {
+        this.urlFoto = urlFoto;
+    }
+
     public int getFotoId() {
         return fotoId;
     }
