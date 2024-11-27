@@ -14,18 +14,18 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     private final LoginDAO loginDAO = new LoginDAO();
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
-
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("userID") != null) {
-            response.sendRedirect("DashboardServlet");
+            String referer = request.getHeader("Referer");
+            if (referer != null) {
+                response.sendRedirect(referer);
+            }
             return;
         }
-
         request.getRequestDispatcher("/WEB-INF/Login/login.jsp").forward(request, response);
     }
 
@@ -36,25 +36,16 @@ public class LoginServlet extends HttpServlet {
 
         int userId = loginDAO.validarUsuario(email, contrasenia);
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
         if (userId != -1) {
             HttpSession session = request.getSession();
             session.setAttribute("userID", userId);
 
-            String redirect = request.getParameter("redirect");
-            if (redirect == null || redirect.isEmpty()) {
-                redirect = "DashboardServlet";
-            }
-
-            // Responder con JSON
-            response.getWriter().write("{\"loginExitoso\": true, \"redirect\": \"" + redirect + "\"}");
+            response.sendRedirect("DashboardServlet");
         } else {
+            request.setAttribute("error", "Correo o contraseña incorrectos");
 
-            response.getWriter().write("{\"loginExitoso\": false, \"error\": \"Correo o contraseña incorrectos\"}");
+            request.getRequestDispatcher("/WEB-INF/Login/login.jsp").forward(request, response);
         }
     }
-
 }
 
