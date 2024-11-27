@@ -57,6 +57,11 @@ public class MascotaPerdidaDAO extends BaseDao {
                     if(rs.getString("mp.descripcion_adicional") != null){
                         mascotaPerdida.setDescripcionAdicional(rs.getString("mp.descripcion_adicional"));
                     }
+                    mascotaPerdida.setNombreContacto(rs.getString("mp.nombre_contacto"));
+                    mascotaPerdida.setTelefonoContacto(rs.getInt("mp.telefono_contacto"));
+                    if(rs.getString("mp.recompensa")!= null){
+                        mascotaPerdida.setRecompensa(rs.getString("mp.recompensa"));
+                    }
                     mascotaPerdida.setMascotaEncontrada(rs.getBoolean("mp.mascota_encontrada"));
                     mascotaPerdida.setMascota(mascota);
                 }

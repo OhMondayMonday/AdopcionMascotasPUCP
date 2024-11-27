@@ -334,7 +334,7 @@
                                         <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
                                     </div>
                                 </div>
-                                <% } else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2) {%>
+                                <% } else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2 && adopcion != null) {%>
                                 <h4 class="text-primary">Más detalles</h4>
                                 <div class="d-flex flex-wrap">
                                     <div class="me-5">
@@ -353,7 +353,7 @@
                                         <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
                                     </div>
                                 </div>
-                                <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==3) {%>
+                                <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==3 && donacion != null) {%>
                                 <h4 class="text-primary">Más detalles</h4>
                                 <div class="d-flex flex-wrap">
                                     <div class="me-5">
@@ -390,7 +390,7 @@
                                         <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
                                     </div>
                                 </div>
-                                <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==4) {%>
+                                <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==4 && mascotaPerdida != null) {%>
                                 <h4 class="text-primary">Más detalles</h4>
                                 <div class="d-flex flex-wrap">
                                     <div class="me-5">
@@ -431,6 +431,12 @@
                                     </div>
                                 </div>
                                 <%}%>
+                                <%}else {%>
+                                <div class="row">
+                                    <div class="justify-content-around mt-4 d-flex">
+                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
+                                    </div>
+                                </div>
                                 <%}%>
                                 <p class="mb-4 text-secondary position-absolute bottom-0" >
                                     Fecha de Publicación: <%= publicacion.getFechaCreacion() %>

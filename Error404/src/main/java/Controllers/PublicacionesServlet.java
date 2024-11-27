@@ -81,6 +81,25 @@ public class PublicacionesServlet extends HttpServlet {
                 } else {
                     response.sendRedirect("PublicacionesServlet");
                 }
+            case "agregarMascotaPerdida":
+                if (request.getParameter("user_id") != null) {
+                    String user_idString = request.getParameter("user_id");
+                    int user_id = 0;
+                    try {
+                        user_id = Integer.parseInt(user_idString);
+                    } catch (NumberFormatException e) {
+                        response.sendRedirect("PublicacionesServlet");
+                    }
+                    UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+                    Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+                    request.setAttribute("usuario", usuario);
+                    RazasDao razasDao = new RazasDao();
+                    ArrayList<Razas> listaRazas = razasDao.listarRazas();
+                    request.setAttribute("listaRazas", listaRazas);
+                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-mascotaperdida.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("PublicacionesServlet");
+                }
                 break;
 
         }

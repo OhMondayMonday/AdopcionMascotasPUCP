@@ -356,9 +356,22 @@
                             <div class="col-12 col-lg-6">
                                 <!-- Media -->
                                 <div class="card mb-1">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
+                                        <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
+                                    </div>
                                     <div class="card-body">
-                                        <label class="form-label" for="foto">Imagen</label>
-                                        <input class="form-control" id="foto" type="image">
+                                        <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
+                                            <div class="dz-message needsclick my-3">
+                                                <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
+                                                <p class="text-muted fs-4 note needsclick my-0">o</p>
+                                                <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
+
+                                            </div>
+                                            <div class="fallback">
+                                                <input name="file" type="image" accept="image/*"/>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
