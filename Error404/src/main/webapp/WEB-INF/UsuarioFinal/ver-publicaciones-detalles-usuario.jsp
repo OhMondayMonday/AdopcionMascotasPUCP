@@ -317,6 +317,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p class="mb-4 text-secondary bottom-0" >
+                                    Fecha de Publicación: <%= publicacion.getFechaCreacion() %>
+                                </p>
                             </div>
 
                             <div class="col-lg-5">
@@ -359,11 +362,11 @@
                                     <div class="me-5">
                                         <p class="text-nowrap">Punto de Acopio:  <span style="font-weight: bold;"><%=donacion.getPuntoAcopio()%></span></p>
                                         <%if (donacion.getCantidad()!=0){%>
-                                        <p class="text-nowrap">Cantidad: <span style="font-weight: bold;"><%=donacion.getCantidad()%> </span></p>
+                                        <p class="text-nowrap">Cantidad: <span style="font-weight: bold;">S/.<%=donacion.getCantidad()%> </span></p>
                                         <%}%>
                                     </div>
                                     <div class="me-5">
-                                        <p class="text-nowrap">Tipo de Donación: <span style="font-weight: bold;"><%=donacion.getTipoDonacion().getTipoDonacion()%> años</span></p>
+                                        <p class="text-nowrap">Tipo de Donación: <span style="font-weight: bold;"><%=donacion.getTipoDonacion().getTipoDonacion()%></span></p>
                                         <%if(donacion.getMarca()!= null){%>
                                         <p class="text-nowrap">Marca: <span style="font-weight: bold;"><%=donacion.getMarca()%> </span></p>
                                         <%}%>
@@ -438,9 +441,7 @@
                                     </div>
                                 </div>
                                 <%}%>
-                                <p class="mb-4 text-secondary position-absolute bottom-0" >
-                                    Fecha de Publicación: <%= publicacion.getFechaCreacion() %>
-                                </p>
+
 
                             </div>
                         </div>
