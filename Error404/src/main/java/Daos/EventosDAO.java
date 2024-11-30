@@ -361,6 +361,82 @@ public class EventosDAO extends BaseDao {
         return eventosInscritos;
     }
 
+    // Metodo para mostrar la lista de TODOS los Eventos INSCRITOS que tiene un usuario específico usando la tabla de inscripciones_eventos y eventos, incluye lógica de filtros
+    public List<Eventos> verMisEventosInscritosUsuario(int userId, Integer tipo_evento_id, Integer distritoId, Date fechaInicio, Date fechaFin, int page, int recordsPerPage){
+
+        List<Eventos> eventosInscritos = new ArrayList<>();
+
+        StringBuilder query = new StringBuilder("SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.fecha_fin, e.descripcion_evento, ");
+        query.append("te.tipo_id AS tipo_evento_id, te.nombre_tipo, f.foto_id, f.url_foto, d.distrito_id, d.nombre_distrito ");
+        query.append("FROM inscripciones_eventos ie ");
+        query.append("JOIN eventos e ON ie.event_id = e.event_id ");
+        query.append("JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id ");
+        query.append("JOIN distritos d ON le.distrito_id = d.distrito_id ");
+        query.append("JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id ");
+        query.append("LEFT JOIN fotos f ON e.foto_id = f.foto_id ");
+        query.append("WHERE ie.activa = 1 AND ie.user_id = ? ");
+
+        List<Object> parametros = new ArrayList<>();
+        parametros.add(userId);
+
+        // Construcción dinámica de la consulta
+        if (tipo_evento_id != null) {
+            query.append(" AND te.tipo_id = ?");
+            parametros.add(tipo_evento_id);
+        }
+
+        if (distritoId != null) {
+            query.append(" AND d.distrito_id = ?");
+            parametros.add(distritoId);
+        }
+
+        if (fechaInicio != null && fechaFin != null) {
+            query.append(" AND eventos.fecha_evento BETWEEN ? AND ?");
+            parametros.add(fechaInicio);
+            parametros.add(fechaFin);
+        }
+
+        query.append(" ORDER BY e.fecha_creacion DESC LIMIT ? OFFSET ?");
+        parametros.add(recordsPerPage);
+        parametros.add((page - 1) * recordsPerPage);
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query.toString())) {
+
+            // Asignar parámetros dinámicamente
+            for (int i = 0; i < parametros.size(); i++) {
+                pstmt.setObject(i + 1, parametros.get(i));
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Eventos eventoInscrito = new Eventos();
+                    eventoInscrito.setEventId(rs.getInt("event_id"));
+                    eventoInscrito.setNombreEvento(rs.getString("nombre_evento"));
+                    eventoInscrito.setFechaEvento(rs.getDate("fecha_evento"));
+                    eventoInscrito.setFechaFin(rs.getDate("fecha_fin"));
+                    eventoInscrito.setDescripcionEvento(rs.getString("descripcion_evento"));
+
+                    TiposEventos tipoEvento = new TiposEventos();
+                    tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
+                    tipoEvento.setNombreTipo(rs.getString("nombre_tipo"));
+                    eventoInscrito.setTipoEvento(tipoEvento);
+
+                    Fotos foto = new Fotos();
+                    foto.setFotoId(rs.getInt("foto_id"));
+                    foto.setUrlFoto(rs.getString("url_foto"));
+                    eventoInscrito.setFoto(foto);
+
+                    eventosInscritos.add(eventoInscrito);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return eventosInscritos;
+    }
+
     // Metodo para obtener la lista de TODOS los eventos ACTIVOS (de cualquier usuario) que existan. Incluye lógica de filtros
     public List<Eventos> verEventosActivos(Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin, int page, int recordsPerPage) {
         List<Eventos> eventos = new ArrayList<>();
@@ -442,7 +518,7 @@ public class EventosDAO extends BaseDao {
         return eventos;
     }
 
-    //Metodo para una lista de todos los Eventos ACTIVOS
+    //Metodo para una lista de todos los Eventos ACTIVOS sin importar usuario
     public List<Eventos> obtenerEventosActivosConPaginacion(int page, int recordsPerPage) {
         List<Eventos> eventos = new ArrayList<>();
         int offset = (page - 1) * recordsPerPage;
@@ -507,12 +583,11 @@ public class EventosDAO extends BaseDao {
         return totalRecords;
     }
 
-    // Metodo para obtener la cantidad de Eventos ACTIVOS que tiene un Usuario
+    // Metodo para obtener la cantidad de Eventos CREADOS ACTIVOS que tiene un Albergue
     public int contarMisEventosActivos(int userId) {
         String query = "SELECT COUNT(*) FROM eventos WHERE estado_evento = 'activa' AND  user_id = ?";
 
         int totalRecords = 0;
-
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -527,7 +602,26 @@ public class EventosDAO extends BaseDao {
         return totalRecords;
     }
 
-    // Metodo para contar TODOS los eventos ACTIVOS para los filtros
+    // Metodo para obtener la cantidad de Eventos INSCRITOS ACTIVOS que tiene un Usuario Final
+    public int contarEventosInscritosUsuario(int userId) {
+        String query = "SELECT COUNT(*) FROM inscripciones_eventos WHERE activa = 1 AND user_id = ?";
+
+        int totalRecords = 0;
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                totalRecords = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalRecords;
+    }
+
+    // Metodo para contar TODOS los eventos ACTIVOS para los filtros, sin importar usuario
     public int contarEventosActivosConFiltros(Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin) {
         StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM eventos e ");
         query.append("JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id ");
@@ -569,7 +663,7 @@ public class EventosDAO extends BaseDao {
         return 0;
     }
 
-    //Metodo para una lista de todos los Eventos ACTIVOS de un Usuario
+    //Metodo para una lista de todos los Eventos ACTIVOS creados de un Albergue
     public List<Eventos> obtenerMisEventosActivosConPaginacion(Integer userId, int page, int recordsPerPage) {
         List<Eventos> eventosInscritos = new ArrayList<>();
         int offset = (page - 1) * recordsPerPage;
@@ -619,7 +713,58 @@ public class EventosDAO extends BaseDao {
         return eventosInscritos;
     }
 
-    // Metodo para contar los eventos ACTIVOS INSCRITOS (que le pertenecen) de un usuario. Con Filtros
+    //Metodo para una lista de todos los Eventos ACTIVOS INSCRITOS de un usuario final usando tabla inscripciones_eventos
+    public List<Eventos> obtenerMisEventosInscritosUsuarioConPaginacion(Integer userId, int page, int recordsPerPage) {
+
+        List<Eventos> eventosInscritos = new ArrayList<>();
+        int offset = (page - 1) * recordsPerPage;
+
+        String query = "SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.fecha_fin, e.descripcion_evento, " +
+                "te.tipo_id AS tipo_evento_id, te.nombre_tipo, f.foto_id, f.url_foto, d.distrito_id, d.nombre_distrito " +
+                "FROM inscripciones_eventos ie " +
+                "JOIN eventos e ON ie.event_id = e.event_id " +
+                "JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id " +
+                "JOIN distritos d ON le.distrito_id = d.distrito_id " +
+                "JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id " +
+                "LEFT JOIN fotos f ON e.foto_id = f.foto_id " +
+                "WHERE ie.activa = 1 AND ie.user_id = ? " +
+                "ORDER BY e.fecha_creacion DESC LIMIT ? OFFSET ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, recordsPerPage);
+            pstmt.setInt(3, offset);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Eventos eventoInscrito = new Eventos();
+                    eventoInscrito.setEventId(rs.getInt("event_id"));
+                    eventoInscrito.setNombreEvento(rs.getString("nombre_evento"));
+                    eventoInscrito.setFechaEvento(rs.getDate("fecha_evento"));
+                    eventoInscrito.setFechaFin(rs.getDate("fecha_fin"));
+                    eventoInscrito.setDescripcionEvento(rs.getString("descripcion_evento"));
+
+                    TiposEventos tipoEvento = new TiposEventos();
+                    tipoEvento.setTipoEventoId(rs.getInt("tipo_evento_id"));
+                    tipoEvento.setNombreTipo(rs.getString("nombre_tipo"));
+                    eventoInscrito.setTipoEvento(tipoEvento);
+
+                    Fotos foto = new Fotos();
+                    foto.setFotoId(rs.getInt("foto_id"));
+                    foto.setUrlFoto(rs.getString("url_foto"));
+                    eventoInscrito.setFoto(foto);
+
+                    eventosInscritos.add(eventoInscrito);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return eventosInscritos;
+    }
+
+    // Metodo para contar los eventos ACTIVOS de un ALBERGUE. Con Filtros
     public int contarMisEventosActivosConFiltros(Integer userId, Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin) {
         StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM eventos e ");
         query.append("JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id ");
@@ -630,6 +775,52 @@ public class EventosDAO extends BaseDao {
 
         List<Object> parametros = new ArrayList<>();
 
+        parametros.add(userId);
+
+        if (tipoEventoId != null) {
+            query.append(" AND te.tipo_id = ?");
+            parametros.add(tipoEventoId);
+        }
+        if (distritoId != null) {
+            query.append(" AND d.distrito_id = ?");
+            parametros.add(distritoId);
+        }
+        if (fechaInicio != null && fechaFin != null) {
+            query.append(" AND e.fecha_evento BETWEEN ? AND ?");
+            parametros.add(fechaInicio);
+            parametros.add(fechaFin);
+        }
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+
+            for (int i = 0; i < parametros.size(); i++) {
+                pstmt.setObject(i + 1, parametros.get(i));
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    // Metodo para contar los eventos inscritos de un usuario segun la tabla de inscripciones_eventos. Con lógica si se aplican filtros
+    public int contarEventosInscritosConFiltrosUsuario(Integer userId, Integer tipoEventoId, Integer distritoId, Date fechaInicio, Date fechaFin) {
+
+        StringBuilder query = new StringBuilder("SELECT COUNT(*) ");
+        query.append("FROM inscripciones_eventos ie ");
+        query.append("JOIN eventos e ON ie.event_id = e.event_id ");
+        query.append("JOIN lugares_eventos le ON e.lugar_evento_id = le.lugar_id ");
+        query.append("JOIN distritos d ON le.distrito_id = d.distrito_id ");
+        query.append("JOIN tipos_eventos te ON e.tipo_evento_id = te.tipo_id ");
+        query.append("WHERE ie.activa = 1 AND ie.user_id = ? ");
+
+        List<Object> parametros = new ArrayList<>();
         parametros.add(userId);
 
         if (tipoEventoId != null) {

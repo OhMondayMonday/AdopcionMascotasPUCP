@@ -1,7 +1,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
+
 
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
@@ -118,10 +121,8 @@
                         <div class="container-xxl flex-grow-1 container-p-y">
                             <div class="card-header d-flex flex-wrap justify-content-between gap-3">
                                 <div class="col-12">
-                                    <p>ID del coordinador: ${id}</p>
-                                    <p>Tamaño de la lista: ${fn:length(gestionHogares)}</p>
+
                                     <c:forEach var="hogar" items="${gestionHogares}">
-                                        <p>Hogar ID: ${hogar.temporalId}, Dirección: ${hogar.direccion}, Estado: ${hogar.estadoTemporal}</p>
                                     </c:forEach>
 
 
@@ -133,9 +134,9 @@
                                                 <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                                     <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de gestion</label>
                                                     <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
-                                                        <option value="Todas" data-href="coordinador-gestion.html">Todas</option>
-                                                        <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.html">Mascotas Perdidas</option>
-                                                        <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.html">Hogares Temporales</option>
+                                                        <option value="Todas" data-href="coordinador-gestion.jsp">Todas</option>
+                                                        <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.jsp">Mascotas Perdidas</option>
+                                                        <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.jsp">Hogares Temporales</option>
                                                     </select>
                                                 </div>
 
@@ -187,28 +188,56 @@
                                                         <thead class="thead-light">
                                                             <tr>
                                                                 <th>Nombre</th>
-                                                                <th>Direccion</th>
+                                                                <th>Dirección</th>
                                                                 <th>Mascota</th>
-                                                                <th>Estado</th>
-                                                                <th>Fecha</th>
-                                                                <th>Contacto</th>
+                                                                <th>Estado Solicitud</th>
+                                                                <th>Fecha Solicitud</th>
+                                                                <th>Teléfono</th>
                                                                 <th>Acciones</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <c:forEach var="hogar" items="${gestionHogares}">
                                                                 <tr>
-                                                                    <td>${hogar.hogarId}</td>
-                                                                    <td>${hogar.nombre}</td> <!-- Aquí usamos 'nombre' en vez de 'usuarioNombre' -->
-                                                                    <td>${hogar.apellido}</td> <!-- Aquí usamos 'apellido' en vez de 'usuarioApellido' -->
+                                                                    <td>${hogar.nombre} ${hogar.apellido}</td>
                                                                     <td>${hogar.direccion}</td>
-                                                                    <td>${hogar.estadoHogar}</td>
+                                                                    <td>${hogar.mascota}</td>
+                                                                    <td>${hogar.estadoTemporal}</td>
                                                                     <td>${hogar.fechaSolicitud}</td>
-                                                                    <td>${hogar.tipoSolicitud}</td>
+                                                                    <td>${hogar.celular}</td>
+                                                                    <td>
+                                                                        <div class="d-flex gap-2">
+                                                                            <!-- Ver Detalles -->
+                                                                            <a href="coordinador-ver-solicitud-aceptado.jsp" class="btn btn-label-info">
+                                                                                <i class='bx bx-show'></i>
+                                                                            </a>
+
+                                                                            <!-- Comprobar si el estado es "Pendiente" utilizando toLowerCase() -->
+                                                                            <c:if test="${hogar.estadoTemporal.toLowerCase() == 'pendiente'}">
+                                                                                <!-- Aceptar solicitud -->
+                                                                                <a href="CoordinadorServlet?action=aceptar&id=${hogar.hogarId}" class="btn-accept">
+                                                                                    <button type="button" class="btn btn-label-success">
+                                                                                        <i class="bx bx-check-circle"></i>
+                                                                                    </button>
+                                                                                </a>
+
+                                                                                <!-- Rechazar solicitud -->
+                                                                                <a href="CoordinadorServlet?action=rechazar&id=${hogar.hogarId}" class="btn-delete">
+                                                                                    <button type="button" class="btn btn-label-danger">
+                                                                                        <i class="bx bxs-x-circle"></i>
+                                                                                    </button>
+                                                                                </a>
+                                                                            </c:if>
+
+                                                                        </div>
+                                                                    </td>
+
                                                                 </tr>
-                                                            </c:forEach>*
+                                                            </c:forEach>
                                                         </tbody>
                                                     </table>
+
+
                                                 </c:if>
                                             </div>
 

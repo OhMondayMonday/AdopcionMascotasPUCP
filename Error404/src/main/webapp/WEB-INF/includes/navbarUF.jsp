@@ -68,13 +68,13 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                        <a class="dropdown-item" href="EventosServlet?action=verEventosDeUsuario">
                             <i class="bx bx-bone"></i>
                             <span class="align-middle">Mis eventos</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="ver-calendario-usuario.html">
+                        <a class="dropdown-item" href="CalendarioServlet">
                             <i class="bx bx-calendar"></i>
                             <span class="align-middle">Mi Calendario</span>
                         </a>

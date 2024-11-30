@@ -1,4 +1,4 @@
-<!-- Incluye Bootstrap CSS y JavaScript en tu JSP -->
+<%@ page contentType="text/html; charset=UTF-8" %>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
@@ -37,7 +37,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="albergue-ver-eventos.jsp" class="menu-link">
+            <a href="EventosServlet?action=verTodosEventos" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                 <div class="text-truncate" data-i18n="Eventos">Eventos</div>
             </a>
@@ -59,7 +59,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="albergue-ver-miseventos.jsp" class="menu-link">
+            <a href="EventosServlet?action=verEventosDeUsuario" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                 <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
             </a>
