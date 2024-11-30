@@ -17,7 +17,7 @@ public class HogarTemporalDAO extends BaseDao {
         List<HogaresTemporales> hogares = new ArrayList<>();
         String query = "SELECT p.publicacion_id, p.titulo, p.descripcion, f.url_foto AS foto_url, " +
                 "u.nombre AS nombre_usuario, u.apellido AS apellido_usuario, ht.tipo_mascotas, ht.distrito, " +
-                "ht.estado_temporal, ht.descripcion AS hogar_descripcion, ht.celular, ht.direccion, ht.cantidad_mascotas " +
+                "ht.estado_temporal AS hogar_descripcion, ht.celular, ht.direccion, ht.cantidad_mascotas " +
                 "FROM publicaciones p " +
                 "JOIN fotos f ON p.foto_id = f.foto_id " +
                 "JOIN usuarios u ON p.user_id = u.user_id " +
@@ -41,7 +41,7 @@ public class HogarTemporalDAO extends BaseDao {
                     hogar.setTemporalId(rs.getInt("publicacion_id"));
                     hogar.setTipoMascotas(rs.getString("tipo_mascotas"));
                     hogar.setEstadoTemporal(rs.getString("estado_temporal"));
-                    hogar.setDescripcion(rs.getString("hogar_descripcion"));
+                    // hogar.setDescripcion(rs.getString("hogar_descripcion"));
                     hogar.setCelular(rs.getString("celular"));
                     hogar.setDireccion(rs.getString("direccion"));
                     hogar.setCantidadMascotas(rs.getInt("cantidad_mascotas"));
@@ -49,7 +49,7 @@ public class HogarTemporalDAO extends BaseDao {
                     Publicaciones publicacion = new Publicaciones();
                     publicacion.setDescripcion(rs.getString("descripcion"));
                     publicacion.setTitulo(rs.getString("titulo"));
-                    hogar.setPublicacion(publicacion);
+                    // hogar.setPublicacion(publicacion);
 
                     // Relación con el objeto Fotos
                     Fotos foto = new Fotos();

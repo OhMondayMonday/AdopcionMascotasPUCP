@@ -356,6 +356,7 @@
                 </div>
               </div>
               <!-- Third-->
+              </div>
               <div class="col-12 col-lg-6">
                 <!-- Product Information -->
                 <div class="card mb-4">

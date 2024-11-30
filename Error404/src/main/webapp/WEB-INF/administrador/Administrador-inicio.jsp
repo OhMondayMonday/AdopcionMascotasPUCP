@@ -4,6 +4,7 @@
 <%@ page import="java.util.stream.*" %>
 <%@ page import="java.util.*" %>
 
+
 <%
     // Obtener los datos del Servlet con validaciones seguras
     String nombreAdministrador = (String) request.getAttribute("nombreAdministrador");
@@ -280,7 +281,7 @@
                                             <div class="card-title d-flex align-items-start justify-content-between">
                                                 <div class="avatar flex-shrink-0">
                                                     <!-- Cargar la imagen dinámicamente -->
-                                                    <img src="<%= request.getAttribute("imagePath") != null ? request.getAttribute("imagePath") : "/assets/img/soles.png" %>" alt="Monto Total de Donaciones" style="width: 36px; height: 36px;">
+                                                    <img src="<%= request.getContextPath() %>/assets/img/soles.png" alt="soles" style="width: 36px; height: 36px;">
                                                 </div>
                                                 <div class="dropdown"></div>
                                             </div>
@@ -298,10 +299,18 @@
 
                         <div class="col-xl-6 col-12 col-md-8 col-lg-4 order-3 order-md-2">
                             <div class="row">
+                                <!-- Card de Albergues Registrados -->
                                 <div class="col-xl-6 col-5 mb-4">
                                     <div class="card" style="min-height: 190px;">
                                         <div class="card-body">
+                                            <div class="card-title d-flex align-items-start justify-content-between">
+                                                <div class="avatar flex-shrink-0">
+                                                    <!-- Icono de la casa verde -->
+                                                    <i class="fas fa-home" style="font-size: 36px; color: #4CAF50;"></i> <!-- Albergues Registrados -->
+                                                </div>
+                                            </div>
                                             <span class="d-block mb-1">Albergues registrados</span>
+                                            <!-- Cargar dinámicamente el número de albergues registrados -->
                                             <h3 class="card-title text-nowrap mb-2">${alberguesRegistrados}</h3>
                                         </div>
                                     </div>

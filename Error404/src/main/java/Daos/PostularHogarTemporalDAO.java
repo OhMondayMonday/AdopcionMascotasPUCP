@@ -19,7 +19,7 @@ public class PostularHogarTemporalDAO extends BaseDao {
         String sqlHogar = "INSERT INTO hogares_temporales (user_id, foto_id, edad, genero, celular, direccion, distrito, " +
                 "cantidad_cuartos, metraje_vivienda, tiene_mascotas, tipo_mascotas, tiene_hijos, " +
                 "vive_solo, trabaja, persona_referencia, contacto_referencia, rango_fecha_inicio, " +
-                "rango_fecha_fin, tiempo_temporal, estado_temporal, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "rango_fecha_fin, tiempo_temporal, estado_temporal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String verificarPublicacion = "SELECT COUNT(*) FROM publicaciones WHERE user_id = ? AND tipo_publicacion_id = 2 AND estado_publicacion = 'activa'";
 
         try (Connection conn = this.getConnection()) {
@@ -98,7 +98,7 @@ public class PostularHogarTemporalDAO extends BaseDao {
                 pstmtHogar.setDate(18, new java.sql.Date(hogarTemporal.getRangoFechaFin().getTime()));
                 pstmtHogar.setInt(19, hogarTemporal.getTiempoTemporal());
                 pstmtHogar.setString(20, "pendiente");
-                pstmtHogar.setString(21, hogarTemporal.getDescripcion());
+                // pstmtHogar.setString(21, hogarTemporal.getDescripcion());
 
                 int rowsHogar = pstmtHogar.executeUpdate();
                 if (rowsHogar == 0) {

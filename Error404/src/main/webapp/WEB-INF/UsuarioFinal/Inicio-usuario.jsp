@@ -123,7 +123,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-eventos-usuario.html" class="menu-link">
+                    <a href="EventosServlet?action=verTodosEventos" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                         <div class="text-truncate" data-i18n="Eventos">Eventos</div>
                     </a>

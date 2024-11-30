@@ -158,7 +158,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="EventosServlet?action=verMisEventos">
+                                    <a class="dropdown-item" href="EventosServlet?action=verEventosDeUsuario">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
@@ -205,16 +205,12 @@
 
             </nav>
 
-
-
-
             <!-- Content wrapper -->
             <div class="content-wrapper">
 
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-
 
                     <div class="d-flex flex-wrap justify-content-between gap-3">
 
@@ -224,7 +220,7 @@
                             <div class="card-body d-flex justify-content-center p-1">
 
                                 <form action="EventosServlet" method="GET" id="filtrosForm" class="row w-100">
-                                    <input type="hidden" name="action" value="verMisEventos">
+                                    <input type="hidden" name="action" value="verEventosInscritosUsuario">
                                     <!-- Tipo de Publicacion -->
                                     <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                         <label for="tipoEventoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento </label>
@@ -289,7 +285,6 @@
                             </div>
                         </div>
 
-
                         <!-- Card Container -->
                         <div class="card col-12 pb-3" style="height: auto;">
                             <div class="card-body p-0">
@@ -319,13 +314,9 @@
                                                                 <a class="h6" data-bs-toggle="modal" href="" style="font-size: 0.875rem;">${eventoInscrito.nombreEvento}</a>
                                                                 <p class="mt-1 mb-0" style="font-size: 0.75rem;">${eventoInscrito.descripcionEvento}</p>
                                                                 <div class="d-flex flex-column gap-1 text-nowrap mt-auto">
-                                                                    <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="">
+                                                                    <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="EventosServlet?action=verDetallesEvento&event_id=${eventoInscrito.eventId}">
                                                                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                                     </a>
-
-                                                                    <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="1" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                                    </button>
 
                                                                 </div>
 
@@ -399,13 +390,13 @@
                                 <nav>
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                            <a class="page-link" href="?action=verMisEventos&page=${page - 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>                                    </li>
+                                            <a class="page-link" href="?action=verEventosInscritosUsuario&page=${page - 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>                                    </li>
                                         <c:forEach var="i" begin="1" end="${totalPages}">
                                             <li class="page-item ${i == page ? 'active' : ''}">
-                                                <a class="page-link" href="?action=verMisEventos&page=${i}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>                                        </li>
+                                                <a class="page-link" href="?action=verEventosInscritosUsuario&page=${i}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>                                        </li>
                                         </c:forEach>
                                         <li class="page-item ${page == totalPages ? 'disabled' : ''}">
-                                            <a class="page-link" href="?action=verMisEventos&page=${page + 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>                                    </li>
+                                            <a class="page-link" href="?action=verEventosInscritosUsuario&page=${page + 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>                                    </li>
                                     </ul>
                                 </nav>
                             </c:when>
@@ -455,8 +446,6 @@
             <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
             <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
-            <!-- endbuild -->
-
             <!-- Vendors JS -->
 
             <script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
@@ -494,7 +483,7 @@
                 <script>
                     function limpiarFiltros() {
                         const baseUrl = "EventosServlet";
-                        const queryParams = "?action=verMisEventos";
+                        const queryParams = "?action=verEventosInscritosUsuario";
                         window.location.href = baseUrl + queryParams;
                     }
                 </script>
