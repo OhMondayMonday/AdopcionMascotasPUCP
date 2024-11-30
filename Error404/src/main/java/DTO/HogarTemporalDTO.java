@@ -6,30 +6,39 @@ public class HogarTemporalDTO {
     private String nombre;
     private String apellido;
     private String direccion;
-    private String estadoHogar;
-    private Date fechaSolicitud;  // Usamos Date para almacenar la fecha
+    private String estadoTemporal;
+    private Date fechaSolicitud;
     private String tipoSolicitud;
-    private int edad;  // Nuevo campo para edad
-    private String genero;  // Nuevo campo para genero
-    private String celular;  // Nuevo campo para celular
+    private int edad;
+    private String genero;
+    private String celular;
+    private String mascota;  // Nuevo campo
 
-    // Constructor
+    // Constructor actualizado con el nuevo campo `mascota`
     public HogarTemporalDTO(int hogarId, String nombre, String apellido, String direccion,
-                            String estadoHogar, Date fechaSolicitud, String tipoSolicitud,
-                            int edad, String genero, String celular) {
+                            String estadoTemporal, Date fechaSolicitud, String tipoSolicitud,
+                            int edad, String genero, String celular, String mascota) {
         this.hogarId = hogarId;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
-        this.estadoHogar = estadoHogar;
+        this.estadoTemporal = estadoTemporal;
         this.fechaSolicitud = fechaSolicitud;
         this.tipoSolicitud = tipoSolicitud;
         this.edad = edad;
         this.genero = genero;
         this.celular = celular;
+        this.mascota = mascota;  // Establecer el nuevo campo `mascota`
     }
 
     // Getters y setters
+    public String getMascota() {
+        return mascota;
+    }
+
+    public void setMascota(String mascota) {
+        this.mascota = mascota;
+    }
     public int getHogarId() {
         return hogarId;
     }
@@ -62,12 +71,12 @@ public class HogarTemporalDTO {
         this.direccion = direccion;
     }
 
-    public String getEstadoHogar() {
-        return estadoHogar;
+    public String getEstadoTemporal() {
+        return estadoTemporal ;
     }
 
-    public void setEstadoHogar(String estadoHogar) {
-        this.estadoHogar = estadoHogar;
+    public void setEstadoTemporal(String estadoHogar) {
+        this.estadoTemporal  = estadoHogar;
     }
 
     public Date getFechaSolicitud() {
@@ -113,7 +122,7 @@ public class HogarTemporalDTO {
     @Override
     public String toString() {
         return "HogarTemporalDTO [hogarId=" + hogarId + ", nombre=" + nombre + ", apellido=" + apellido
-                + ", direccion=" + direccion + ", estadoHogar=" + estadoHogar + ", fechaSolicitud=" + fechaSolicitud + ", tipoSolicitud=" + tipoSolicitud + "]";
+                + ", direccion=" + direccion + ", estadoHogar=" + estadoTemporal  + ", fechaSolicitud=" + fechaSolicitud + ", tipoSolicitud=" + tipoSolicitud + "]";
     }
 }
 

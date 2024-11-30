@@ -107,33 +107,54 @@ public class CoordinadorDao extends BaseDao {
         String sql = "UPDATE solicitudes SET estado_solicitud = 'aprobada', fecha_entrega = NOW() " +
                 "WHERE solicitud_id = ? AND estado_solicitud = 'pendiente'";
 
-        try (Connection conn = this.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = this.getConnection()) {
+            conn.setAutoCommit(false);  // Iniciar transacción
 
-            stmt.setInt(1, solicitudId);
-            int filasAfectadas = stmt.executeUpdate();
-            return filasAfectadas > 0;
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, solicitudId);
+                int filasAfectadas = stmt.executeUpdate();
+
+                if (filasAfectadas > 0) {
+                    conn.commit();  // Confirmar transacción si la actualización fue exitosa
+                    logger.info("Solicitud {} aprobada exitosamente.", solicitudId);
+                    return true;
+                } else {
+                    conn.rollback();  // Revertir cambios si no se actualizó ninguna fila
+                    return false;
+                }
+            } catch (SQLException e) {
+                conn.rollback();  // Revertir cambios en caso de error
+                logger.error("Error al aprobar la solicitud de hogar: {}", e.getMessage(), e);
+                return false;
+            }
         } catch (SQLException e) {
-            System.err.println("Error al aprobar la solicitud de hogar: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error al iniciar la conexión para aprobar la solicitud de hogar: {}", e.getMessage(), e);
             return false;
         }
     }
+
 
     // 4. Rechazar solicitud de hogar temporal
     public boolean rechazarSolicitudHogar(int solicitudId) {
-        String sql = "UPDATE solicitudes SET estado_solicitud = 'rechazada' " +
-                "WHERE solicitud_id = ? AND estado_solicitud = 'pendiente'";
+        String sql = "UPDATE hogares_temporales ht " +
+                "SET ht.estado_temporal = 'rechazada', ht.fecha_rechazo = NOW() " +
+                "WHERE ht.temporal_id = (SELECT s.temporal_id FROM solicitudes s WHERE s.solicitud_id = ?) " +
+                "AND ht.estado_temporal = 'pendiente'";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, solicitudId);
-            return stmt.executeUpdate() > 0;
+
+            stmt.setInt(1, solicitudId);  // Setear el ID de la solicitud
+
+            // Ejecutar la actualización
+            int filasAfectadas = stmt.executeUpdate();
+            return filasAfectadas > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
 
 
     // 5. Aprobar publicación de mascota perdida
@@ -287,18 +308,18 @@ public class CoordinadorDao extends BaseDao {
         List<HogarTemporalDTO> hogaresTemporalesDTO = new ArrayList<>();
         String sql = "SELECT ht.temporal_id, ht.direccion, ht.distrito_id, d.nombre_distrito, " +
                 "z.nombre_zona, u.nombre AS usuario_nombre, u.apellido AS usuario_apellido, " +
-                "ht.edad, ht.genero, ht.celular, ht.estado_temporal, s.fecha_solicitud, ts.tipo_solicitud " +  // Alias para columnas
+                "ht.edad, ht.genero, ht.celular, ht.estado_temporal, s.fecha_solicitud, ts.tipo_solicitud, " +
+                "m.nombre AS mascota_nombre " +  // Nombre de la mascota
                 "FROM hogares_temporales ht " +
                 "JOIN distritos d ON ht.distrito_id = d.distrito_id " +
                 "JOIN zonas z ON d.zona_distrito_id = z.zona_id " +
                 "JOIN usuarios u ON u.zona_id = z.zona_id " +
                 "JOIN solicitudes s ON s.temporal_id = ht.temporal_id " +
-                "JOIN tipos_solicitudes ts ON ts.tipo_solicitud_id = s.tipo_solicitud_id " + // Relación con tipos_solicitudes
-                "WHERE z.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?) " + // Relación con zona_id del coordinador
+                "JOIN tipos_solicitudes ts ON ts.tipo_solicitud_id = s.tipo_solicitud_id " +
+                "LEFT JOIN mascotas m ON s.mascota_id = m.mascota_id " +  // LEFT JOIN con la tabla mascotas
+                "WHERE z.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?) " +  // Relación con zona_id del coordinador
                 "ORDER BY ht.temporal_id DESC " + // Ordenar por temporal_id
                 "LIMIT ? OFFSET ?"; // Paginación
-
-
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -322,7 +343,8 @@ public class CoordinadorDao extends BaseDao {
                             resultSet.getString("tipo_solicitud"),     // Tipo de solicitud
                             resultSet.getInt("edad"),                  // Edad
                             resultSet.getString("genero"),             // Género
-                            resultSet.getString("celular")             // Celular
+                            resultSet.getString("celular"),            // Celular
+                            resultSet.getString("mascota_nombre")      // Nombre de la mascota (si existe)
                     );
 
                     // Agregar el DTO a la lista
@@ -335,10 +357,10 @@ public class CoordinadorDao extends BaseDao {
             throw new RuntimeException("Error al obtener solicitudes de hogares temporales", e);
         }
 
-
         logger.debug("Tamaño de la lista hogaresTemporalesDTO: {}", hogaresTemporalesDTO.size());
         return hogaresTemporalesDTO;
     }
+
 
 
     public int contarTotalHogaresTemporales(int coordinadorId) {

@@ -121,17 +121,23 @@ public class CoordinadorServlet extends HttpServlet {
 
 
     // Método para aprobar solicitud de hogar temporal
+    // Método para aprobar solicitud de hogar temporal
     private void aprobarSolicitudHogar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int solicitudId = parseParameterToInt(request, "solicitudId");
         boolean aprobado = coordinadorDAO.aprobarSolicitudHogar(solicitudId);
-        redirectWithMessage(response, "listarSolicitudesHogar", aprobado ? "aprobado" : "error");
+
+        // Verificar si la actualización fue exitosa y redirigir con el mensaje correspondiente
+        String mensaje = aprobado ? "Solicitud aprobada con éxito" : "Error al aprobar solicitud";
+        redirectWithMessage(response, "listarSolicitudesHogar", mensaje);
     }
 
-    // Método para rechazar solicitud de hogar temporal
     private void rechazarSolicitudHogar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int solicitudId = parseParameterToInt(request, "solicitudId");
         boolean rechazado = coordinadorDAO.rechazarSolicitudHogar(solicitudId);
-        redirectWithMessage(response, "listarSolicitudesHogar", rechazado ? "rechazado" : "error");
+
+        // Verificar si la actualización fue exitosa y redirigir con el mensaje correspondiente
+        String mensaje = rechazado ? "Solicitud rechazada con éxito" : "Error al rechazar solicitud";
+        redirectWithMessage(response, "listarSolicitudesHogar", mensaje);
     }
 
     // Método para banear un hogar temporal manualmente
