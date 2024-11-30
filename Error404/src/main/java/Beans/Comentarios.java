@@ -1,5 +1,4 @@
 package Beans;
-
 import java.sql.Timestamp;
 
 public class Comentarios {
