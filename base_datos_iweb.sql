@@ -120,7 +120,7 @@ CREATE TABLE comentarios (
     comentario TEXT NOT NULL, -- Contenido del comentario
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora del comentario
     FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
 -- Tabla de tipos de publicaciones
@@ -162,6 +162,9 @@ CREATE TABLE publicaciones_mascota_perdida (
     lugar_perdida VARCHAR(255) NOT NULL,
     fecha_perdida DATE NOT NULL,
     descripcion_adicional TEXT,
+    telefono_contacto INT,
+    nombre_contacto VARCHAR(100),
+    recompensa VARCHAR(100),
     mascota_encontrada BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
     FOREIGN KEY (mascota_id) REFERENCES mascotas(mascota_id) ON DELETE CASCADE

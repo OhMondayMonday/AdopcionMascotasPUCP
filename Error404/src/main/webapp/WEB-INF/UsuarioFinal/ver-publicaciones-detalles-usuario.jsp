@@ -1,3 +1,4 @@
+<%@ page import="Beans.Comentarios" %>
 <!DOCTYPE html>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -5,6 +6,7 @@
 <jsp:useBean id="adopcion" type="Beans.PublicacionesAdopcion" scope="request" class="Beans.PublicacionesAdopcion"/>
 <jsp:useBean id="mascotaPerdida" type="Beans.PublicacionesMascotaPerdida" scope="request" class="Beans.PublicacionesMascotaPerdida"/>
 <jsp:useBean id="donacion" type="Beans.PublicacionesDonaciones" scope="request" class="Beans.PublicacionesDonaciones"/>
+<jsp:useBean id="comentarios" type="java.util.List<Beans.Comentarios>" scope="request" />
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
@@ -337,7 +339,7 @@
                                         <strong>Marca:</strong> <%=donacion.getMarca()%><br>
                                         <%}%>
                                         <%if(donacion.getCantidad()!=0){%>
-                                        <strong>Cantidad:</strong> S/.<%=donacion.getCantidad()%>
+                                        <strong>Cantidad:</strong> S/.<%=donacion.getCantidad()%><br>
                                         <%}%>
                                         <%if(donacion.getMotivoDonacion()!=null){%>
                                         <strong>Motivo Donación:</strong> <%=donacion.getMotivoDonacion()%>
@@ -390,12 +392,12 @@
                                     <p><strong><i class="fas fa-note-sticky"></i> Descripción Adicional:</strong> <%=mascotaPerdida.getDescripcionAdicional()%></p>
                                     <%}%>
                                     <%}%>
-                                    <%if(mascotaPerdida.isMascotaEncontrada()){%>
+                                    <%if(mascotaPerdida.isMascotaEncontrada() && publicacion.getTipoPublicacion().getTipoPublicacionId()==4){%>
                                     <h4 class="text-primary justify-content-center">¡Mascota Encontrada!</h4>
                                     <%}%>
                                     <div class="row">
                                         <div class="justify-content-around mt-4 d-flex">
-                                            <%if(mascotaPerdida.isMascotaEncontrada()==false){%>
+                                            <%if(mascotaPerdida.isMascotaEncontrada()==false && publicacion.getTipoPublicacion().getTipoPublicacionId()==4){%>
                                             <a href="javascript:void(0)" class="btn btn-warning">Reportar Avistamiento</a>
                                             <%}%>
                                             <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
@@ -412,17 +414,28 @@
                                     <table class="table table-bordered mb-0">
                                         <thead>
                                         <tr>
-                                            <th>Comentario</th>
-                                            <th>Fecha</th>
+                                            <th><strong>Comentario</strong></th>
+                                            <th><strong>Fecha</strong></th>
                                         </tr>
+                                        <%for(Comentarios comentario: comentarios){%>
+                                        <tr>
+                                            <th><%=comentario.getComentario()%></th>
+                                            <th><%=comentario.getFechaActualizacion()%></th>
+                                        </tr>
+                                        <%}%>
                                         </thead>
                                         <tbody>
+                                        <form action="PublicacionesServlet" method="GET" id="comentariosForm">
+                                            <input type="hidden" name="action" value="agregarComentario">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <input type="text" maxlength="70" class="form-control" name="comentario" placeholder="Escribe un comentario o actualización..." style="width: 100%;">
+                                                    <input type="hidden" name="user_id" value="<%=1%>">
+                                                    <input type="hidden" name="publicacion_id" value="<%=publicacion.getPublicacionId()%>">
+                                                </td>
 
-                                        <tr>
-                                            <td colspan="2">
-                                                <input type="text" class="form-control" placeholder="Escribe un comentario o actualización..." style="width: 100%;">
-                                            </td>
-                                        </tr>
+                                            </tr>
+                                        </form>
                                         </tbody>
                                     </table>
                                 </div>
