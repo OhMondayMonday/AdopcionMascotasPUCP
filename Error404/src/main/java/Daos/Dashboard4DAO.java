@@ -144,28 +144,17 @@ public class Dashboard4DAO extends BaseDao {
 
 
     public double obtenerMontoTotalDonacionesMesActual() {
-        // SQL para obtener el monto total de las donaciones de tipo "dinero" en los últimos 4 meses
+        // SQL para obtener el monto total de las donaciones de cualquier tipo en los últimos 4 meses
         String sql = """
-        SELECT SUM(COALESCE(pd.cantidad, 0)) AS total_donado
-        FROM publicaciones_donaciones pd
-        JOIN publicaciones p ON pd.publicacion_id = p.publicacion_id
-        WHERE p.tipo_publicacion_id = 1  -- Tipo de publicación: Donación
-        AND pd.tipo_donacion_id = 1      -- Tipo de donación: Dinero
-        AND pd.cantidad IS NOT NULL
-        AND pd.fecha_recepcion_inicio >= ?  -- Fecha inicio de los últimos 4 meses
-        AND pd.fecha_recepcion_fin <= ?     -- Fecha fin de los últimos 4 meses
+    SELECT SUM(COALESCE(pd.cantidad, 0)) AS total_donado
+    FROM publicaciones_donaciones pd
+    JOIN publicaciones p ON pd.publicacion_id = p.publicacion_id
+    WHERE pd.cantidad IS NOT NULL
+    AND pd.fecha_recepcion_inicio >= CURDATE() - INTERVAL 4 MONTH;
     """;
-
-        // Obtener la fecha de inicio y fin de los últimos 4 meses
-        LocalDate fechaFin = LocalDate.now();  // Fecha actual
-        LocalDate fechaInicio = fechaFin.minusMonths(4);  // Fecha hace 4 meses
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            // Establecer las fechas de inicio y fin en el PreparedStatement
-            ps.setDate(1, Date.valueOf(fechaInicio));
-            ps.setDate(2, Date.valueOf(fechaFin));
 
             // Ejecutar la consulta y obtener el resultado
             try (ResultSet rs = ps.executeQuery()) {
@@ -182,6 +171,37 @@ public class Dashboard4DAO extends BaseDao {
         // Si no hay resultados o ocurre un error, retornar 0
         return 0.0;
     }
+
+    public double obtenerMontoTotalDonacionesHoy() {
+        // SQL para obtener el monto total de las donaciones realizadas hoy
+        String sql = """
+        SELECT SUM(COALESCE(pd.cantidad, 0)) AS total_donado_hoy
+        FROM publicaciones_donaciones pd
+        JOIN publicaciones p ON pd.publicacion_id = p.publicacion_id
+        WHERE pd.cantidad IS NOT NULL
+        AND pd.fecha_recepcion_inicio = CURDATE();
+    """;
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Ejecutar la consulta y obtener el resultado
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Retornar el monto total donado hoy
+                    return rs.getDouble("total_donado_hoy");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Manejo de excepciones
+        }
+
+        // Si no hay resultados o ocurre un error, retornar 0
+        return 0.0;
+    }
+
+
 
 
 
@@ -352,96 +372,91 @@ public class Dashboard4DAO extends BaseDao {
         return resultados;
     }
 
-    // Método para obtener los usuarios con más donaciones
-    public List<Map<String, Object>> obtenerUsuariosConMasDonaciones() {
+    public List<Map<String, Object>> obtenerDonantesConMasDonaciones() {
         String sql = """
         SELECT 
             u.nombre, 
-            SUM(pd.cantidad) AS total_donado
+            u.foto_id, 
+            SUM(pd.cantidad) AS total_donado,
+            (SUM(pd.cantidad) / (SELECT SUM(cantidad) FROM publicaciones_donaciones)) * 100 AS porcentaje_total
         FROM 
-            usuarios u
+            publicaciones_donaciones pd
         JOIN 
-            publicaciones_donaciones pd ON u.user_id = pd.user_id
+            publicaciones p ON pd.publicacion_id = p.publicacion_id
+        JOIN 
+            usuarios u ON p.user_id = u.user_id
+        WHERE 
+            pd.cantidad IS NOT NULL
         GROUP BY 
             u.user_id
         ORDER BY 
-            total_donado DESC
-        LIMIT 10
+            total_donado DESC;
     """;
 
-        List<Map<String, Object>> usuarios = new ArrayList<>();
+        List<Map<String, Object>> resultados = new ArrayList<>();
+
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
-            // Recorremos los resultados y los añadimos a la lista
             while (rs.next()) {
-                Map<String, Object> usuario = new HashMap<>();
-                usuario.put("nombre", rs.getString("nombre"));
-                usuario.put("total_donado", rs.getDouble("total_donado"));
-                usuarios.add(usuario);
+                Map<String, Object> dato = new HashMap<>();
+                dato.put("nombre", rs.getString("nombre"));
+                dato.put("foto_id", rs.getInt("foto_id"));
+                dato.put("total_donado", rs.getDouble("total_donado"));
+                dato.put("porcentaje_total", rs.getDouble("porcentaje_total"));
+                resultados.add(dato);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return usuarios;  // Retorna la lista de usuarios con más donaciones
+        return resultados;
     }
 
-    // Método para obtener albergues con más donaciones
     public List<Map<String, Object>> obtenerAlberguesConMasDonaciones() {
         String sql = """
         SELECT 
             u.nombre_albergue, 
-            SUM(pd.cantidad) AS total_donado
-        FROM usuarios u
-        JOIN publicaciones_donaciones pd ON u.user_id = pd.user_id
-        WHERE u.rol_id = 2  -- Filtro para albergues
-        GROUP BY u.user_id
-        ORDER BY total_donado DESC
-        LIMIT 10
+            u.foto_id, 
+            SUM(pd.cantidad) AS total_donado,
+            (SUM(pd.cantidad) / (SELECT SUM(cantidad) FROM publicaciones_donaciones)) * 100 AS porcentaje_total
+        FROM 
+            publicaciones_donaciones pd
+        JOIN 
+            publicaciones p ON pd.publicacion_id = p.publicacion_id
+        JOIN 
+            usuarios u ON p.user_id = u.user_id
+        WHERE 
+            u.nombre_albergue IS NOT NULL
+        GROUP BY 
+            u.nombre_albergue, u.foto_id
+        ORDER BY 
+            total_donado DESC
+        LIMIT 7;
     """;
 
-        List<Map<String, Object>> albergues = new ArrayList<>();
+        List<Map<String, Object>> resultados = new ArrayList<>();
+
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
+
             while (rs.next()) {
-                Map<String, Object> albergue = new HashMap<>();
-                albergue.put("nombre_albergue", rs.getString("nombre_albergue"));
-                albergue.put("total_donado", rs.getDouble("total_donado"));
-                albergues.add(albergue);
+                Map<String, Object> dato = new HashMap<>();
+                dato.put("nombre_albergue", rs.getString("nombre_albergue"));
+                dato.put("foto_id", rs.getInt("foto_id"));
+                dato.put("total_donado", rs.getDouble("total_donado"));
+                dato.put("porcentaje_total", rs.getDouble("porcentaje_total"));
+                resultados.add(dato);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return albergues;
+        return resultados;
     }
 
-    // Método para obtener las últimas actualizaciones
-    public List<Map<String, String>> obtenerUltimasActualizaciones(int administradorId) {
-        String sql = """
-            SELECT descripcion, 
-                   DATE_FORMAT(fecha, '%d/%m/%Y %H:%i:%s') AS fecha_formateada,
-                   TIMESTAMPDIFF(MINUTE, fecha, NOW()) AS minutos_transcurridos
-            FROM logs 
-            ORDER BY fecha DESC 
-            LIMIT 5
-        """;
-        List<Map<String, String>> actualizaciones = new ArrayList<>();
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                Map<String, String> actualizacion = new HashMap<>();
-                actualizacion.put("descripcion", rs.getString("descripcion"));
-                actualizacion.put("fecha", rs.getString("fecha_formateada"));
-                actualizacion.put("minutos_transcurridos", String.valueOf(rs.getInt("minutos_transcurridos")));
-                actualizaciones.add(actualizacion);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return actualizaciones;
-    }
+
+
+
+
 }

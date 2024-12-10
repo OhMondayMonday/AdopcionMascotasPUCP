@@ -11,6 +11,7 @@
     String nombreAdministrador = (String) request.getAttribute("nombreAdministrador");
     String fotoPerfil = (String) request.getAttribute("fotoPerfil");
     double montoTotalDonaciones = (double) request.getAttribute("montoTotalDonaciones");
+    double montoTotalDonacionesHoy = (double) request.getAttribute("montoTotalDonacionesHoy");  // Nuevo valor
     int alberguesRegistrados = (int) request.getAttribute("alberguesRegistrados");
     int totalMascotasPerdidas = (int) request.getAttribute("totalMascotasPerdidas");
     int totalMascotasEncontradas = request.getAttribute("totalMascotasEncontradas") != null ? (int) request.getAttribute("totalMascotasEncontradas") : 0;
@@ -24,6 +25,10 @@
     List<Map<String, Object>> mascotasPorMez = request.getAttribute("mascotasPorMez") instanceof List
             ? (List<Map<String, Object>>) request.getAttribute("mascotasPorMez")
             : java.util.Collections.emptyList();
+
+    // Nuevos datos del servlet
+    List<Map<String, Object>> donantesConMasDonaciones = (List<Map<String, Object>>) request.getAttribute("donantesConMasDonaciones");
+    List<Map<String, Object>> alberguesConMasDonaciones = (List<Map<String, Object>>) request.getAttribute("alberguesConMasDonaciones");
 
     int totalDonantes = (Integer) request.getAttribute("totalDonantes");
     List<Map<String, Object>> donantesUltimosMeses = (List<Map<String, Object>>) request.getAttribute("donantesUltimosMeses");
@@ -312,7 +317,7 @@
                                             <span>Monto total de donaciones:</span>
                                             <h3 class="card-title text-nowrap mb-1">S/<%= request.getAttribute("montoTotalDonaciones") != null ? request.getAttribute("montoTotalDonaciones") : "1,000,000" %></h3>
                                             <small class="text-success fw-medium">
-                                                <i class='bx bx-up-arrow-alt'></i> +S/<%= request.getAttribute("montoHoy") != null ? request.getAttribute("montoHoy") : "20,000" %> (Hoy)
+                                                <i class='bx bx-up-arrow-alt'></i> +S/<%= request.getAttribute("montoTotalDonacionesHoy") != null ? request.getAttribute("montoTotalDonacionesHoy") : "20,000" %> (Hoy)
                                             </small>
                                         </div>
                                     </div>
@@ -418,6 +423,115 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 order-3 order-lg-4 mb-4 mb-lg-0">
+                            <div class="card text-center">
+                                <div class="card-header py-3">
+                                    <ul class="nav nav-pills" role="tablist">
+                                        <li class="nav-item">
+                                            <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-browser" aria-controls="navs-pills-browser" aria-selected="true">Usuarios con más donaciones</button>
+                                        </li>
+                                        <li class="nav-item">
+                                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-os" aria-controls="navs-pills-os" aria-selected="false">Albergues con más donaciones</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content pt-0">
+                                    <!-- Tab 1: Usuarios con más donaciones -->
+                                    <div class="tab-pane fade show active" id="navs-pills-browser" role="tabpanel">
+                                        <div class="table-responsive text-start">
+                                            <table class="table table-borderless text-nowrap">
+                                                <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nombre</th>
+                                                    <th>Donado</th>
+                                                    <th class="w-50">Porcentaje del total</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% int index = 1; %> <!-- Aquí inicializamos el índice -->
+                                                <%
+                                                    if (usuariosMasDonaciones != null) {
+                                                        for (Map<String, Object> usuario : usuariosMasDonaciones) {
+                                                %>
+                                                <tr>
+                                                    <td><%= index++ %></td> <!-- Incrementamos el índice en cada fila -->
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="<%= usuario.get("fotoPerfil") != null ? usuario.get("fotoPerfil") : "../../assets/img/default-avatar.png" %>" alt="<%= usuario.get("nombre") %>" height="24" class="me-2">
+                                                            <span><%= usuario.get("nombre") %></span>
+                                                        </div>
+                                                    </td>
+                                                    <td><%= usuario.get("totalDonado") != null ? usuario.get("totalDonado") : "0" %></td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-between align-items-center gap-3">
+                                                            <div class="progress w-100" style="height:10px;">
+                                                                <div class="progress-bar bg-success" role="progressbar" style="width: <%= usuario.get("porcentajeDonado") != null ? usuario.get("porcentajeDonado") : 0 %>%" aria-valuenow="<%= usuario.get("porcentajeDonado") != null ? usuario.get("porcentajeDonado") : 0 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                            <small class="fw-medium"><%= usuario.get("porcentajeDonado") != null ? usuario.get("porcentajeDonado") : 0 %>%</small>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tab 2: Albergues con más donaciones -->
+                                    <div class="tab-pane fade" id="navs-pills-os" role="tabpanel">
+                                        <div class="table-responsive text-start">
+                                            <table class="table table-borderless">
+                                                <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Albergue</th>
+                                                    <th>Cant. Don.</th>
+                                                    <th class="w-50">Porcentaje del total</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% index = 1; %> <!-- Reiniciamos el índice para los albergues -->
+                                                <%
+                                                    if (alberguesMasDonaciones != null) {
+                                                        for (Map<String, Object> albergue : alberguesMasDonaciones) {
+                                                %>
+                                                <tr>
+                                                    <td><%= index++ %></td> <!-- Incrementamos el índice en cada fila -->
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="<%= albergue.get("fotoPerfil") != null ? albergue.get("fotoPerfil") : "../../assets/img/default-albergue.jpg" %>" alt="<%= albergue.get("nombre") %>" height="24" class="me-2">
+                                                            <span><%= albergue.get("nombre") %></span>
+                                                        </div>
+                                                    </td>
+                                                    <td><%= albergue.get("cantidadDonaciones") != null ? albergue.get("cantidadDonaciones") : "0" %></td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-between align-items-center gap-3">
+                                                            <div class="progress w-100" style="height:10px;">
+                                                                <div class="progress-bar bg-info" role="progressbar" style="width: <%= albergue.get("porcentajeDonaciones") != null ? albergue.get("porcentajeDonaciones") : 0 %>%" aria-valuenow="<%= albergue.get("porcentajeDonaciones") != null ? albergue.get("porcentajeDonaciones") : 0 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                            <small class="fw-medium"><%= albergue.get("porcentajeDonaciones") != null ? albergue.get("porcentajeDonaciones") : 0 %>%</small>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                 </div>
             </div>
