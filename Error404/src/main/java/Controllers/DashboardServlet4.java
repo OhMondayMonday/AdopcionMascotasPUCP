@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @WebServlet("/DashboardServlet4")
 public class DashboardServlet4 extends HttpServlet {
@@ -47,15 +49,9 @@ public class DashboardServlet4 extends HttpServlet {
     private void mostrarDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int adminitradorId = 51; // Simulación: Cambia esto a la lógica real para obtener el ID del usuario autenticado
 
-
         try {
             String nombreAdministrador = dashboard4DAO.obtenerNombreAdministrador(adminitradorId);
             String fotoPerfil = dashboard4DAO.obtenerFotoPerfil(adminitradorId);
-
-
-
-            // Obtener el número total de donantes en el mes actual
-            int totalDonantes = dashboard4DAO.obtenerNumeroDonantesMesActual();
 
             // Obtener el monto total de donaciones en el mes actual
             double montoTotalDonaciones = dashboard4DAO.obtenerMontoTotalDonacionesMesActual();
@@ -66,8 +62,12 @@ public class DashboardServlet4 extends HttpServlet {
             // Obtener el total de mascotas reportadas como perdidas
             int totalMascotasPerdidas = dashboard4DAO.obtenerTotalMascotasPerdidas();
 
+            List<Map<String, Object>> mascotasPorMez = dashboard4DAO.obtenerMascotasPerdidasUltimosMeses(4);
+
             // Obtener el total de mascotas encontradas por mes
-            List<Map<String, Object>> mascotasEncontradas = dashboard4DAO.obtenerMascotasEncontradasPorMes(4);
+            int totalMascotasEncontradas = dashboard4DAO.obtenerTotalMascotasEncontradasUltimosMeses(4);
+
+            List<Map<String, Object>> mascotasPorMes = dashboard4DAO.obtenerMascotasEncontradasUltimosMeses(4);
 
             // Obtener usuarios con más donaciones
             List<Map<String, Object>> usuariosMasDonaciones = dashboard4DAO.obtenerUsuariosConMasDonaciones();
@@ -78,21 +78,40 @@ public class DashboardServlet4 extends HttpServlet {
             // Obtener las últimas actualizaciones
             List<Map<String, String>> ultimasActualizaciones = dashboard4DAO.obtenerUltimasActualizaciones(adminitradorId);
 
+            // Obtener el total de donantes
+            int totalDonantes = dashboard4DAO.obtenerTotalDonantes();
+            // Obtener los donantes por mes en los últimos 4 meses
+            List<Map<String, Object>> donantesUltimosMeses = dashboard4DAO.obtenerDonantesUltimosMeses(4);
+
             // Validar datos nulos o vacíos y asignar valores predeterminados
             nombreAdministrador = (nombreAdministrador != null) ? nombreAdministrador : "Anónimo";
             fotoPerfil = (fotoPerfil != null) ? fotoPerfil : "assets/img/default-profile.jpg";
 
+            mascotasPorMez = (mascotasPorMez != null && !mascotasPorMez.isEmpty()) ? mascotasPorMez : Collections.emptyList();
+            mascotasPorMes = (mascotasPorMes != null && !mascotasPorMes.isEmpty()) ? mascotasPorMes : Collections.emptyList();
+
+            if (donantesUltimosMeses == null || donantesUltimosMeses.isEmpty()) {
+                donantesUltimosMeses = new ArrayList<>();
+                // Si no hay resultados, agregar un valor por defecto (puedes usar el mes actual)
+                Map<String, Object> defaultData = new HashMap<>();
+                defaultData.put("mes", "Enero");  // Mes por defecto
+                defaultData.put("total", 0);      // Total de donantes por defecto
+                donantesUltimosMeses.add(defaultData);
+            }
             // Pasar los datos al JSP
             request.setAttribute("nombreAdministrador", nombreAdministrador);
             request.setAttribute("fotoPerfil", fotoPerfil);
-            request.setAttribute("totalDonantes", totalDonantes);
             request.setAttribute("montoTotalDonaciones", montoTotalDonaciones);
             request.setAttribute("alberguesRegistrados", alberguesRegistrados);
+            request.setAttribute("totalMascotasEncontradas", totalMascotasEncontradas);
             request.setAttribute("totalMascotasPerdidas", totalMascotasPerdidas);
-            request.setAttribute("mascotasEncontradas", mascotasEncontradas);
+            request.setAttribute("mascotasPorMez", mascotasPorMez);
+            request.setAttribute("mascotasPorMes", mascotasPorMes);
             request.setAttribute("usuariosMasDonaciones", usuariosMasDonaciones);
             request.setAttribute("alberguesMasDonaciones", alberguesMasDonaciones);
             request.setAttribute("ultimasActualizaciones", ultimasActualizaciones);
+            request.setAttribute("totalDonantes", totalDonantes);
+            request.setAttribute("donantesUltimosMeses", donantesUltimosMeses);
 
 
             // Redirigir al JSP de inicio del administrador

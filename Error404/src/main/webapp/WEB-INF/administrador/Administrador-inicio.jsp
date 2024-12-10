@@ -3,21 +3,40 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.stream.*" %>
 <%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <%
     // Obtener los datos del Servlet con validaciones seguras
     String nombreAdministrador = (String) request.getAttribute("nombreAdministrador");
     String fotoPerfil = (String) request.getAttribute("fotoPerfil");
-    int totalDonantes = (int) request.getAttribute("totalDonantes");
     double montoTotalDonaciones = (double) request.getAttribute("montoTotalDonaciones");
     int alberguesRegistrados = (int) request.getAttribute("alberguesRegistrados");
     int totalMascotasPerdidas = (int) request.getAttribute("totalMascotasPerdidas");
+    int totalMascotasEncontradas = request.getAttribute("totalMascotasEncontradas") != null ? (int) request.getAttribute("totalMascotasEncontradas") : 0;
     List<Map<String, Object>> mascotasEncontradas = (List<Map<String, Object>>) request.getAttribute("mascotasEncontradas");
     List<Map<String, Object>> usuariosMasDonaciones = (List<Map<String, Object>>) request.getAttribute("usuariosMasDonaciones");
     List<Map<String, Object>> alberguesMasDonaciones = (List<Map<String, Object>>) request.getAttribute("alberguesMasDonaciones");
     List<Map<String, String>> ultimasActualizaciones = (List<Map<String, String>>) request.getAttribute("ultimasActualizaciones");
+    List<Map<String, Object>> mascotasPorMes = request.getAttribute("mascotasPorMes") instanceof List
+            ? (List<Map<String, Object>>) request.getAttribute("mascotasPorMes")
+            : java.util.Collections.emptyList();
+    List<Map<String, Object>> mascotasPorMez = request.getAttribute("mascotasPorMez") instanceof List
+            ? (List<Map<String, Object>>) request.getAttribute("mascotasPorMez")
+            : java.util.Collections.emptyList();
+
+    int totalDonantes = (Integer) request.getAttribute("totalDonantes");
+    List<Map<String, Object>> donantesUltimosMeses = (List<Map<String, Object>>) request.getAttribute("donantesUltimosMeses");
+    List<String> meses = new ArrayList<>();
+    List<Integer> donantes = new ArrayList<>();
+
+    // Rellenar los datos de los meses y los donantes
+    for (Map<String, Object> donante : donantesUltimosMeses) {
+        meses.add((String) donante.get("mes"));
+        donantes.add((Integer) donante.get("total"));
+    }
 %>
+
 
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
@@ -267,14 +286,19 @@
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-6 mb-4">
                                     <div class="card" style="min-height: 190px;">
                                         <div class="card-body pb-2">
-                                            <span class="d-block fw-medium mb-1">Número total de donantes (mes actual):</span>
-                                            <h3 class="card-title mb-1">${totalDonantes}</h3>
+                                            <span class="d-block fw-medium mb-1">Número total de donantes:</span>
+                                            <h3 class="card-title mb-1">
+                                                <!-- Mostrar total de donantes usando JSTL -->
+                                                <c:out value="${totalDonantes}" />
+                                            </h3>
                                             <div class="chart-container-especifico" style="height: 100px;">
+                                                <!-- Gráfico de donantes -->
                                                 <canvas id="donantesChart"></canvas>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-6 mb-4">
                                     <div class="card" style="min-height: 190px;">
                                         <div class="card-body">
@@ -343,28 +367,53 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <div class="d-flex flex-column align-items-center gap-1">
-                                            <h2 class="mb-2">Total: ${mascotasEncontradas.size()}</h2>
+                                            <h2 class="mb-2">Total: <%= request.getAttribute("totalMascotasEncontradas") != null ? request.getAttribute("totalMascotasEncontradas") : 0 %></h2>
                                             <span>Mascotas encontradas</span>
                                         </div>
                                     </div>
                                     <ul class="p-0 m-0">
-                                        <c:forEach var="mes" items="${mascotasEncontradas}">
-                                            <li class="d-flex mb-4 pb-1">
-                                                <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary">
-                              <i class="fas fa-calendar-day" style="font-size: 36px; color: #4CAF50;"></i>
-                            </span>
+                                        <%
+                                            // Obtener el atributo "mascotasPorMes" del request y manejar posibles errores de tipo o nulos
+                                            Object mascotasPorMesObj = request.getAttribute("mascotasPorMes");
+                                            List<Map<String, Object>> mascotaspormes = null;
+
+                                            if (mascotasPorMesObj instanceof List) {
+                                                mascotasPorMes = (List<Map<String, Object>>) mascotasPorMesObj;
+                                            } else {
+                                                mascotasPorMes = java.util.Collections.emptyList(); // Si no es del tipo esperado, lista vacía
+                                            }
+
+                                            if (mascotasPorMes != null && !mascotasPorMes.isEmpty()) {
+                                                for (Map<String, Object> dato : mascotasPorMes) {
+                                                    String mes = dato.containsKey("mes") ? (String) dato.get("mes") : "Sin mes";
+                                                    Object total = dato.containsKey("total") ? dato.get("total") : 0;
+                                        %>
+                                        <li class="d-flex mb-4 pb-1">
+                                            <div class="avatar flex-shrink-0 me-3">
+                <span class="avatar-initial rounded bg-label-primary">
+                    <i class="fas fa-calendar-alt" style="font-size: 36px; color: #FFA500;"></i>
+                </span>
+                                            </div>
+                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                <div class="me-2">
+                                                    <h6 class="mb-0"><%= mes %></h6>
+                                                    <small class="text-muted">Detalles de mes</small>
                                                 </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">${mes.nombre}</h6>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">${mes.total}</small>
-                                                    </div>
+                                                <div class="user-progress">
+                                                    <small class="fw-medium"><%= total %></small>
                                                 </div>
-                                            </li>
-                                        </c:forEach>
+                                            </div>
+                                        </li>
+                                        <%
+                                            }
+                                        } else {
+                                        %>
+                                        <li class="d-flex mb-4 pb-1">
+                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-center">
+                                                <h6 class="mb-0 text-muted">No se encontraron datos para los últimos 4 meses.</h6>
+                                            </div>
+                                        </li>
+                                        <% } %>
                                     </ul>
                                 </div>
                             </div>
@@ -376,36 +425,6 @@
     </div>
 </div>
 
-<script>
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const data = {
-        labels: ['SEP', 'AGO', 'JUL', 'JUN'],
-        datasets: [{
-            data: [40, 35, 30, 28], // Valores dinámicos
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        }]
-    };
-
-    const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: { beginAtZero: true }
-        },
-        plugins: {
-            tooltip: { callbacks: { label: function(tooltipItem) { return 'Valor: ' + tooltipItem.raw; }}},
-            legend: { display: false }
-        }
-    };
-
-    const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: options
-    });
-</script>
 
 <!-- build:js assets/vendor/js/core.js -->
 <script src="<%= request.getContextPath() %>/assets/vendor/libs/jquery/jquery.js"></script>
@@ -428,15 +447,74 @@
 <script src="<%= request.getContextPath() %>/assets/js/dashboards-analytics.js"></script>
 <!-- Page JS -->
 
+
+<!-- JSP: Preparación de datos para el gráfico -->
+<%
+    StringBuilder etiquetasMeses = new StringBuilder();
+    StringBuilder valoresTotales = new StringBuilder();
+
+    // Convertir los datos en formato adecuado para el gráfico
+    if (mascotasPorMez != null && !mascotasPorMez.isEmpty()) {
+        for (Map<String, Object> dato : mascotasPorMez) {
+            etiquetasMeses.append("'").append(dato.get("mes")).append("',");
+            valoresTotales.append(dato.get("total")).append(",");
+        }
+
+        // Eliminar la última coma sobrante
+        if (etiquetasMeses.length() > 0) etiquetasMeses.setLength(etiquetasMeses.length() - 1);
+        if (valoresTotales.length() > 0) valoresTotales.setLength(valoresTotales.length() - 1);
+    }
+%>
+
+<!-- Script para el gráfico -->
+<script>
+    const etiquetasMeses = [<%= etiquetasMeses.length() > 0 ? etiquetasMeses.toString() : "'Sin datos'" %>];
+    const valoresTotales = [<%= valoresTotales.length() > 0 ? valoresTotales.toString() : "0" %>];
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const data = {
+        labels: etiquetasMeses,
+        datasets: [{
+            data: valoresTotales,
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    };
+    const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: { beginAtZero: true }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return 'Valor: ' + tooltipItem.raw;
+                    }
+                }
+            },
+            legend: { display: false }
+        }
+    };
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+</script>
+
+
 <script>
     const ctxDonantes = document.getElementById('donantesChart').getContext('2d');
     const donantesChart = new Chart(ctxDonantes, {
         type: 'line',
         data: {
-            labels: ['Junio', 'Julio', 'Agosto', 'Septiembre'],
+            labels: <%= new org.json.JSONArray(meses) %>, // Meses de los últimos 4 meses
             datasets: [{
                 label: 'Número de Donantes',
-                data: [300, 250, 320, 400], // Valores dinámicos
+                data: <%= new org.json.JSONArray(donantes) %>, // Total de donantes por mes
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 fill: true,
@@ -464,8 +542,10 @@
 <script>
     window.addEventListener('resize', function() {
         donantesChart.resize();  // Redimensiona el gráfico de donantes
-        myChart.resize();  // Redimensiona el gráfico de mascotas perdidas
     });
 </script>
+
+
+
 </body>
 </html>
