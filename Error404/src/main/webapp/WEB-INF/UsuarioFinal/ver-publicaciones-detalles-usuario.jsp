@@ -1,20 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Sebastian
-  Date: 10/11/2024
-  Time: 19:49
-  To change this template use File | Settings | File Templates.
---%>
+<!DOCTYPE html>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
-<jsp:useBean id="adopcion" type="Beans.PublicacionesAdopcion" scope="request"/>
-<jsp:useBean id="mascotaPerdida" type="Beans.PublicacionesMascotaPerdida" scope="request"/>
-<jsp:useBean id="donacion" type="Beans.PublicacionesDonaciones" scope="request"/>
+<jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request" class="Beans.Publicaciones"/>
+<jsp:useBean id="adopcion" type="Beans.PublicacionesAdopcion" scope="request" class="Beans.PublicacionesAdopcion"/>
+<jsp:useBean id="mascotaPerdida" type="Beans.PublicacionesMascotaPerdida" scope="request" class="Beans.PublicacionesMascotaPerdida"/>
+<jsp:useBean id="donacion" type="Beans.PublicacionesDonaciones" scope="request" class="Beans.PublicacionesDonaciones"/>
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
-<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
 
-
-<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:06 GMT -->
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -66,7 +59,6 @@
 
     <!-- Page CSS -->
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-faq.css" />
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
@@ -77,15 +69,14 @@
 
 </head>
 
-<body style="background-color: #d4e1ffa9;">
+<body>
 
 
 <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar">
+<div class="layout-wrapper layout-content-navbar" style="background-color: #fef8e5;">
     <div class="layout-container">
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -93,9 +84,9 @@
 
             <div class="app-brand demo px-3">
                 <a href="javascript:void(0);" class="app-brand-link">
-          <span class="app-brand-logo demo">
-            <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
-          </span>
+            <span class="app-brand-logo demo">
+              <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
+            </span>
                 </a>
 
                 <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -110,25 +101,20 @@
             <ul class="menu-inner py-1">
 
                 <li class="menu-item">
-                    <a href="ver-inicio-usuario.html"  class="menu-link">
+                    <a href="coordinador-inicio.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home"></i>
                         <div class="text-truncate" data-i18n="Inicio">Inicio</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-publicaciones-usuario.html"  class="menu-link">
+                    <a href="coordinador-ver-publicaciones.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
                     </a>
                 </li>
+
                 <li class="menu-item">
-                    <a href="ver-eventos-usuario.html"  class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Eventos">Eventos</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="postular-hogarestemporales.html"  class="menu-link">
+                    <a href="coordinador-ver-hogarestemporales.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
                     </a>
@@ -138,36 +124,55 @@
                     <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-mispublicaciones-usuario.html" class="menu-link">
+                    <a href="coordinador-tablas-gestion.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
+                        <div class="text-truncate" data-i18n="Todas">Todas</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-miseventos-usuario.html" class="menu-link">
+                    <a href="coordinador-tablas-publicaciones.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
+                        <div class="text-truncate" data-i18n="Mascotas Perdidas">Mascotas Perdidas</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="usuario-mi-hogar-temporal.html" class="menu-link">
+                    <a href="coordinador-tables-hogaresTemporales.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                        <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
+                        <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
+                    </a>
+                </li>
+
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text" data-i18n="Solicitudes">Solicitudes</span>
+                </li>
+                <li class="menu-item">
+                    <a href="coordinador-solicitudes.html" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-building-house"></i>
+                        <div class="text-truncate" data-i18n="Todas">Todas</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="coordinador-ver-solicitud-hogarestemporales.html" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+                        <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="coordinador-ver-solicitudes-mascotasPerdidas.html" class="menu-link">
+                        <i class="menu-icon tf-icons bx bxs-building-house"></i>
+                        <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
                     </a>
                 </li>
 
                 <!-- Misc -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
                 <li class="menu-item">
-                    <a href="Preguntas-frecuentes.html"  class="menu-link">
+                    <a href="coordinador-Preguntas-frecuentes.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-help-circle"></i>
-                        <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
+                        <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas Frecuentes</div>
                     </a>
                 </li>
             </ul>
-
-
-
         </aside>
 
         <div class="layout-page">
@@ -185,7 +190,7 @@
 
                     <div class="w-75 align-items-center me-auto">
                         <div class="nav-item navbar-search-wrapper mb-0">
-              <span class="d-inline-block justify-content-center">
+                <span class="d-inline-block justify-content-center">
               <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario / Publicaciones /</span> Detalles</p>
             </span>
                         </div>
@@ -194,8 +199,10 @@
                     <ul class="navbar-nav flex-row align-items-center ms-0">
 
                         <!-- Notification -->
-                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+
                         <!--/ Notification -->
+
+                        <span style="margin-left: 10px; margin-right: 2px; font-weight: bold; color: rgba(163, 108, 20, 0.83);">Coordinador Andy</span>
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -205,7 +212,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                                    <a class="dropdown-item" href="coordinador-editar-perfil.html">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
@@ -213,8 +220,8 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block"> Adolfo Contreras</span>
-                                                <small class="text-muted">Usuario</small>
+                                                <span class="fw-medium d-block"> Andy </span>
+                                                <small class="text-muted">Coordinador</small>
                                             </div>
                                         </div>
                                     </a>
@@ -223,9 +230,15 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
-                                        <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
-                                        <span class="align-middle" style="color: #1f4397;">Seguridad</span>
+                                    <a class="dropdown-item" href="coordinador-miperfil-detalles.html">
+                                        <i class="bx bx-user me-2"></i>
+                                        <span class="align-middle">Mi perfil</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="coordinador-ver-miperfil-seguridad.html">
+                                        <i class="bx bx-lock me-2"></i>
+                                        <span class="align-middle">Seguridad</span>
                                     </a>
                                 </li>
 
@@ -234,29 +247,20 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
-                                        <i class="bx bx-building-house"></i>
-                                        <span class="align-middle">Mis publicaciones</span>
+                                    <a class="dropdown-item" href="coordinador-tablas-gestion.html">
+                                        <i class="bx bx-task me-2"></i>
+                                        <span class="align-middle">Gestion</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
-                                        <i class="bx bx-bone"></i>
-                                        <span class="align-middle">Mis eventos</span>
+                                    <a class="dropdown-item" href="coordinador-solicitudes.html">
+                                        <i class="bx bx-envelope me-2"></i>
+                                        <span class="align-middle">Solicitudes</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-calendario-usuario.html">
-                                        <i class="bx bx-calendar"></i>
-                                        <span class="align-middle">Mi Calendario</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="Preguntas-frecuentes.html">
-                                        <i class="bx bx-help-circle"></i>
+                                    <a class="dropdown-item" href="coordinador-Preguntas-frecuentes.html">
+                                        <i class="bx bx-help-circle me-2"></i>
                                         <span class="align-middle">Preguntas frecuentes</span>
                                     </a>
                                 </li>
@@ -264,9 +268,9 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../index.html" >
-                                        <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
-                                        <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
+                                    <a class="dropdown-item" href="../index.html">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Salir</span>
                                     </a>
                                 </li>
                             </ul>
@@ -287,204 +291,208 @@
 
             </nav>
 
-
-            <!-- Content wrapper -->
-            <div class="content-wrapper">
-
-                <!-- Content -->
-
+            <div class="content-wrapper" style="background-color: #fef8e5;">
                 <div class="container-xxl flex-grow-1 container-p-y">
-
-                    <!-- /Select2 -->
-
-                    <div class="card g-3 mt-2">
-                        <div class="card-body row g-3">
-                            <div class="col-lg-7">
-                                <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
-                                    <div class="me-1">
-                                        <h2 class="mb-2 text-black"><%=publicacion.getTitulo()%></h2>
+                    <div class="row">
+                        <!-- Columna 1: Imagen y descripción -->
+                        <div class="col-lg-6">
+                            <div class="card g-3 mt-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
+                                        <div class="me-1">
+                                            <h3 class="mb-2 text-black mt-1"><%=publicacion.getTitulo()%></h3>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge bg-label-info"><%=publicacion.getTipoPublicacion().getTipoPublicacion()%></span>
+                                            <i class='bx bx-share-alt bx-sm mx-4 cursor-pointer'></i>
+                                            <i class='bx bx-bookmarks bx-sm cursor-pointer'></i>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge bg-label-info"><%=publicacion.getTipoPublicacion().getTipoPublicacion()%></span>
-                                        <i class='bx bx-share-alt bx-sm mx-4 cursor-pointer'></i>
-                                        <i class='bx bx-bookmarks bx-sm cursor-pointer'></i>
+                                    <div class="card academy-content shadow-none border">
+                                        <div class="p-2 mx-auto" style="max-width: 70%;">
+                                            <div class="cursor-pointer">
+                                                <img src="<%=publicacion.getFoto().getUrlFoto()%>" class="w-100" alt="donacion">
+                                            </div>
+                                        </div>
                                     </div>
+                                    <p class="mb-4 text-secondary bottom-0" >
+                                        Fecha de Publicación: <%= publicacion.getFechaCreacion() %>
+                                    </p>
+                                    <%if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
+
+                                    <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2 && adopcion != null) {%>
+                                    <h4 class="text-primary mt-4">Caracteristicas de la mascota:</h4>
+                                    <p class="mb-4 text-dark">
+                                        <strong>Nombre:</strong> <%=adopcion.getMascota().getNombre()%><br>
+                                        <strong>Raza:</strong> <%=adopcion.getMascota().getRaza().getNombreRaza()%><br>
+                                        <strong>Edad Aprox.:</strong> <%=adopcion.getMascota().getEdadAproximada()%> años<br>
+                                        <strong>Género:</strong> <%=adopcion.getMascota().getGenero()%>
+                                    </p>
+                                    <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==3 && donacion != null) {%>
+                                    <h4 class="text-primary mt-4">Detalles:</h4>
+                                    <p class="mb-4 text-dark">
+                                        <strong>Punto de Acopio:</strong> <%=donacion.getPuntoAcopio()%><br>
+                                        <strong>Tipo de Donacion:</strong> <%=donacion.getTipoDonacion().getTipoDonacion()%><br>
+                                        <%if(donacion.getMarca()!= null){%>
+                                        <strong>Marca:</strong> <%=donacion.getMarca()%><br>
+                                        <%}%>
+                                        <%if(donacion.getCantidad()!=0){%>
+                                        <strong>Cantidad:</strong> S/.<%=donacion.getCantidad()%>
+                                        <%}%>
+                                        <%if(donacion.getMotivoDonacion()!=null){%>
+                                        <strong>Motivo Donación:</strong> <%=donacion.getMotivoDonacion()%>
+                                        <%}%>
+                                    </p>
+                                    <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==4 && mascotaPerdida != null) {%>
+                                    <h4 class="text-primary mt-4">Caracteristicas de la mascota:</h4>
+                                    <p class="mb-4 text-dark">
+                                        <strong>Nombre:</strong> <%=mascotaPerdida.getMascota().getNombre()%><br>
+                                        <strong>Raza:</strong> <%=mascotaPerdida.getMascota().getRaza().getNombreRaza()%><br>
+                                        <strong>Edad Aprox.:</strong> <%=mascotaPerdida.getMascota().getEdadAproximada()%> años<br>
+                                        <strong>Género:</strong> <%=mascotaPerdida.getMascota().getGenero()%>
+                                    </p>
+                                    <%}%>
+                                    <p class="mb-4 text-dark">
+                                        <%= publicacion.getDescripcion() %>
+                                    </p>
                                 </div>
-                                <div class="card academy-content shadow-none border">
-                                    <div class="p-2">
-                                        <div class="cursor-pointer">
-                                            <img src="<%=publicacion.getFoto().getUrlFoto()%>" class="w-100" alt="foto">
+                            </div>
+                        </div>
+
+                        <!-- Columna 2: Datos del Dueño y Comentarios -->
+                        <div class="col-lg-6">
+                            <!-- Tarjeta de Datos del Dueño -->
+                            <div class="card g-3 mt-4">
+                                <div class="card-body">
+                                    <%if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
+
+                                    <%}else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2 && adopcion != null) {%>
+                                    <h5 class="mb-3">Información:</h5>
+                                    <p><strong><i class="fas fa-map-location"></i> Lugar Encontrado:</strong> <%=adopcion.getLugarEncontrado()%></p>
+                                    <p><strong><i class="fas fa-user"></i> Condiciones de adopción:</strong> <%=adopcion.getCondicionesAdopcion()%></p>
+                                    <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==3 && donacion != null) {%>
+                                    <h5 class="mb-3">Contacto:</h5>
+                                    <p><strong><i class="fas fa-user"></i> Nombre:</strong> <%=donacion.getNombreContacto()%></p>
+                                    <p><strong><i class="fas fa-phone-alt"></i> Teléfono:</strong> <a href="tel:<%=donacion.getTelefonoContacto()%>"><%=donacion.getTelefonoContacto()%></a></p>
+                                    <p><strong><i class="fas fa-calendar"></i> Fecha de Recepción Inicio:</strong> <%=donacion.getFechaRecepcionInicio()%></p>
+                                    <p><strong><i class="fas fa-calendar-alt"></i> Fecha de Recepción Final:</strong> <%=donacion.getFechaRecepcionFin()%></p>
+                                    <p><strong><i class="fas fa-clock"></i> Hora de Recepción:</strong> <%=donacion.getHoraRecepcion()%></p>
+                                    <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==4 && mascotaPerdida != null) {%>
+                                    <h5 class="mb-3">Contacto:</h5>
+                                    <p><strong><i class="fas fa-user"></i> Nombre:</strong> <%=mascotaPerdida.getNombreContacto()%></p>
+                                    <p><strong><i class="fas fa-phone-alt"></i> Teléfono:</strong> <a href="tel:<%=mascotaPerdida.getTelefonoContacto()%>"><%=mascotaPerdida.getTelefonoContacto()%></a></p>
+                                    <p><strong><i class="fas fa-map-location"></i> Lugar de Pérdida:</strong> <%=mascotaPerdida.getLugarPerdida()%></p>
+                                    <p><strong><i class="fas fa-calendar"></i> Fecha de Pérdida:</strong> <%=mascotaPerdida.getFechaPerdida()%></p>
+                                    <%if(mascotaPerdida.getRecompensa()!= null){%>
+                                    <p><strong><i class="fas fa-money-bill"></i> Recompensa:</strong> <%=mascotaPerdida.getRecompensa()%></p>
+                                    <%}%>
+                                    <%if(mascotaPerdida.getDescripcionAdicional()!= null){%>
+                                    <p><strong><i class="fas fa-note-sticky"></i> Descripción Adicional:</strong> <%=mascotaPerdida.getDescripcionAdicional()%></p>
+                                    <%}%>
+                                    <%}%>
+                                    <%if(mascotaPerdida.isMascotaEncontrada()){%>
+                                    <h4 class="text-primary justify-content-center">¡Mascota Encontrada!</h4>
+                                    <%}%>
+                                    <div class="row">
+                                        <div class="justify-content-around mt-4 d-flex">
+                                            <%if(mascotaPerdida.isMascotaEncontrada()==false){%>
+                                            <a href="javascript:void(0)" class="btn btn-warning">Reportar Avistamiento</a>
+                                            <%}%>
+                                            <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mb-4 text-secondary bottom-0" >
-                                    Fecha de Publicación: <%= publicacion.getFechaCreacion() %>
-                                </p>
                             </div>
 
-                            <div class="col-lg-5">
-                                <h4 class="text-primary mt-2">Descripción</h4>
-                                <p class="mb-4 text-dark">
-                                    <%= publicacion.getDescripcion() %>
-                                </p>
 
-                                <!-- Para más párrafos -->
+                            <!-- Tarjeta de Comentarios -->
+                            <div class="card g-3 mt-4">
+                                <div class="card-body">
+                                    <h5>Seguimiento:</h5>
+                                    <table class="table table-bordered mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th>Comentario</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
-
-                                <% if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
-                                <div class="row">
-                                    <div class="justify-content-around mt-4 d-flex">
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
-                                    </div>
+                                        <tr>
+                                            <td colspan="2">
+                                                <input type="text" class="form-control" placeholder="Escribe un comentario o actualización..." style="width: 100%;">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <% } else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2 && adopcion != null) {%>
-                                <h4 class="text-primary">Más detalles</h4>
-                                <div class="d-flex flex-wrap">
-                                    <div class="me-5">
-                                        <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;"><%=adopcion.getMascota().getNombre()%></span></p>
-                                        <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;"><%=adopcion.getMascota().getRaza().getNombreRaza()%> </span></p>
-                                    </div>
-                                    <div class="me-5">
-                                        <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;"><%=adopcion.getMascota().getEdadAproximada()%> años</span></p>
-                                        <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;"><%=adopcion.getMascota().getGenero()%> </span></p>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="justify-content-around mt-4 d-flex">
-                                        <a href="javascript:void(0)" class="btn btn-warning">Quiero adoptar</a>
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
-                                    </div>
-                                </div>
-                                <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==3 && donacion != null) {%>
-                                <h4 class="text-primary">Más detalles</h4>
-                                <div class="d-flex flex-wrap">
-                                    <div class="me-5">
-                                        <p class="text-nowrap">Punto de Acopio:  <span style="font-weight: bold;"><%=donacion.getPuntoAcopio()%></span></p>
-                                        <%if (donacion.getCantidad()!=0){%>
-                                        <p class="text-nowrap">Cantidad: <span style="font-weight: bold;">S/.<%=donacion.getCantidad()%> </span></p>
-                                        <%}%>
-                                    </div>
-                                    <div class="me-5">
-                                        <p class="text-nowrap">Tipo de Donación: <span style="font-weight: bold;"><%=donacion.getTipoDonacion().getTipoDonacion()%></span></p>
-                                        <%if(donacion.getMarca()!= null){%>
-                                        <p class="text-nowrap">Marca: <span style="font-weight: bold;"><%=donacion.getMarca()%> </span></p>
-                                        <%}%>
-                                    </div>
-                                    <div class="me-5">
-                                        <p class="text-nowrap">Fecha de Recepción Inicio:  <span style="font-weight: bold;"><%=donacion.getFechaRecepcionInicio()%></span></p>
-                                        <p class="text-nowrap">Hora de Recepción: <span style="font-weight: bold;"><%=donacion.getHoraRecepcion()%> </span></p>
-                                    </div>
-                                    <div class="me-5">
-                                        <p class="text-nowrap">Fecha de Recepción Fin:  <span style="font-weight: bold;"><%=donacion.getFechaRecepcionFin()%></span></p>
-                                        <p class="text-nowrap">Nombre de Contacto: <span style="font-weight: bold;"><%=donacion.getNombreContacto()%> </span></p>
-                                    </div>
-                                    <div class="me-5">
-                                        <p class="text-nowrap">Teléfono de Contacto:  <span style="font-weight: bold;"><%=donacion.getTelefonoContacto()%></span></p>
-                                        <%if(donacion.getMotivoDonacion()!=null){%>
-                                        <p class="text-nowrap">Motivo de Donación: <span style="font-weight: bold;"><%=donacion.getMotivoDonacion()%> </span></p>
-                                        <%}%>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="justify-content-around mt-4 d-flex">
-                                        <a href="javascript:void(0)" class="btn btn-warning">Quiero Donar</a>
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
-                                    </div>
-                                </div>
-                                <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==4 && mascotaPerdida != null) {%>
-                                <h4 class="text-primary">Más detalles</h4>
-                                <div class="d-flex flex-wrap">
-                                    <div class="me-5">
-                                        <p class="text-nowrap"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre:  <span style="font-weight: bold;"><%=mascotaPerdida.getMascota().getNombre()%></span></p>
-                                        <p class="text-nowrap"><i class='bx bxs-dog bx-sm me-2'></i>Raza: <span style="font-weight: bold;"><%=mascotaPerdida.getMascota().getRaza().getNombreRaza()%> </span></p>
-                                    </div>
-                                    <div class="me-5">
-                                        <p class="text-nowrap"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: <span style="font-weight: bold;"><%=mascotaPerdida.getMascota().getEdadAproximada()%> años</span></p>
-                                        <p class="text-nowrap"><i class='bx bx-male-sign bx-sm me-2'></i>Género: <span style="font-weight: bold;"><%=mascotaPerdida.getMascota().getGenero()%> </span></p>
-                                    </div>
-                                    <div class="me-5">
-                                        <p class="text-nowrap">Lugar de Pérdida: <span style="font-weight: bold;"><%=mascotaPerdida.getLugarPerdida()%></span></p>
-                                        <p class="text-nowrap">Nombre de Contacto: <span style="font-weight: bold;"><%=mascotaPerdida.getNombreContacto()%></span></p>
-                                    </div>
-                                    <div class="me-5">
-                                        <p class="text-nowrap">Fecha de Pérdida: <span style="font-weight: bold;"><%=mascotaPerdida.getFechaPerdida()%> </span></p>
-                                        <p class="text-nowrap">Teléfono de Contacto: <span style="font-weight: bold;"><%=mascotaPerdida.getTelefonoContacto()%> </span></p>
-                                    </div>
-                                    <div class="me-5">
-                                        <%if(mascotaPerdida.getRecompensa()!= null){%>
-                                        <p class="text-nowrap">Recompensa: <span style="font-weight: bold;"><%=mascotaPerdida.getRecompensa()%> </span></p>
-                                        <%}%>
-                                        <p class="text-nowrap">Descripción Adicional: <span style="font-weight: bold;"><%=mascotaPerdida.getDescripcionAdicional()%> </span></p>
-                                    </div>
-                                </div>
-                                <%if(mascotaPerdida.isMascotaEncontrada()){%>
-                                <h4 class="text-primary">¡Mascota Encontrada!</h4>
-                                <div class="row">
-                                    <div class="justify-content-around mt-4 d-flex">
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
-                                    </div>
-                                </div>
-                                <%}else {%>
-                                <div class="row">
-                                    <div class="justify-content-around mt-4 d-flex">
-                                        <a href="javascript:void(0)" class="btn btn-warning">Reportar Avistamiento</a>
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
-                                    </div>
-                                </div>
-                                <%}%>
-                                <%}else {%>
-                                <div class="row">
-                                    <div class="justify-content-around mt-4 d-flex">
-                                        <a href="<%=request.getContextPath()%>/PublicacionesServlet" class="btn btn-primary">Ir a publicaciones</a>
-                                    </div>
-                                </div>
-                                <%}%>
-
-
                             </div>
+
                         </div>
+
+
+                        <div class="content-backdrop fade"></div>
                     </div>
-
-
-
-                    <div class="content-backdrop fade"></div>
+                    <!-- Content wrapper -->
                 </div>
-                <!-- Content -->
-
-                <!-- Footer -->
-                <footer class="footer">
-                    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-                        <div>
-                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-
-                        </div>
-                        <div>
-                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">Ayuda</a>
-                            <a href="javascript:void(0)" class="footer-link me-4 text-muted">Contactos</a>
-                            <a href="javascript:void(0)" class="footer-link text-muted">Terminos &amp; Condiciones</a>
-                        </div>
-                    </div>
-                </footer>
-                <!-- / Footer -->
-                <!-- Content wrapper -->
+                <!-- / Layout page -->
             </div>
+            <footer class="footer bg-footer-theme" >
+                <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3"  style="background-color: #fef8e5;">
+                    <div>
+                        <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
 
-            <!-- / Layout wrapper -->
+                    </div>
+                    <div>
+                        <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+                        <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+                        <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
 
-            <!-- Core JS -->
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
-            <!-- Main JS -->
-            <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+
+
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+
+
+</div>
+<!-- / Layout wrapper -->
+
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
+
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+
+
+
+<!-- Main JS -->
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+
+
+<!-- Page JS -->
+
+
 
 </body>
+
+<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
 </html>
