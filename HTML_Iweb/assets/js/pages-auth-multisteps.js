@@ -162,7 +162,7 @@ $(function () {
                 buttonsStyling: false
             }).then((result) => {
               if (result.isConfirmed) {
-                  window.location.href = '../../index.html';
+                  window.location.href = '';
               }
           });
         });
@@ -190,42 +190,5 @@ $(function () {
           });
         });
     }
-  });
-  document.addEventListener("DOMContentLoaded", function () {
-    const documentType = document.getElementById("documentType");
-    const documentNumber = document.getElementById("multiStepsMobile");
-  
-    // Deshabilitar el campo de documento inicialmente
-    //documentNumber.disabled = true;
-  
-    function updateDocumentValidation() {
-      const selectedType = documentType.value;
-  
-      if (selectedType === "DNI") {
-        documentNumber.disabled = false; // Habilitar el campo
-        documentNumber.setAttribute("maxlength", "8");
-        documentNumber.setAttribute("pattern", "^\\d{8}$");
-        documentNumber.placeholder = "Ingrese su número DNI";
-      } else if (selectedType === "CARNET_EXT") {
-        documentNumber.disabled = false; // Habilitar el campo
-        documentNumber.setAttribute("maxlength", "12");
-        documentNumber.setAttribute("pattern", "^\\d{11,12}$");
-        documentNumber.placeholder = "Ingrese número de CE";
-      } else {
-        documentNumber.disabled = true; // Deshabilitar si no se selecciona tipo
-        documentNumber.value = ""; // Limpia el campo si se vuelve a "Tipo"
-        documentNumber.removeAttribute("maxlength");
-        documentNumber.removeAttribute("pattern");
-        documentNumber.placeholder = "Ingresa tu documento";
-      }
-    }
-  
-    // Permitir solo números en el campo de documento
-    documentNumber.addEventListener("input", function (event) {
-      documentNumber.value = documentNumber.value.replace(/\D/g, ""); // Elimina cualquier caracter no numérico
-    });
-  
-    // Actualizar la validación cuando cambia el tipo de documento
-    documentType.addEventListener("change", updateDocumentValidation);
   });
   

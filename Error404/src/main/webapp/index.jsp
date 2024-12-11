@@ -54,7 +54,7 @@
       </ul>
       <div class="navbar-nav ms-auto">
         <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Acceder</a>
-        <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Registrarse</a>
+        <a href="<%=request.getContextPath()%>/register" class="btn btn-outline-primary">Registrarse</a>
       </div>
     </div>
   </div>
