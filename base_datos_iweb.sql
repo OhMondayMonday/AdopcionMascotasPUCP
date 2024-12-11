@@ -54,6 +54,7 @@ CREATE TABLE fotos (
 
 -- Tabla de usuarios (incluye usuarios finales, albergues, coordinadores y administrador)
 CREATE TABLE usuarios (
+<<<<<<< Updated upstream
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     contraseña VARCHAR(255) NOT NULL,
@@ -68,6 +69,22 @@ CREATE TABLE usuarios (
     estado_cuenta ENUM('pendiente', 'rechazada', 'activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
     rol_id INT NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+=======
+                          user_id INT AUTO_INCREMENT PRIMARY KEY,
+                          username VARCHAR(50) UNIQUE NOT NULL,
+                          contrasenia VARCHAR(255) NOT NULL,
+                          nombre VARCHAR(100),
+                          apellido VARCHAR(100),
+                          email VARCHAR(100) UNIQUE,
+                          dni VARCHAR(8) UNIQUE,
+                          descripcion TEXT,
+                          direccion VARCHAR(255),
+                          foto_id INT,
+                          distrito_id INT,
+                          estado_cuenta ENUM('pendiente', 'rechazada', 'activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
+                          rol_id INT NOT NULL DEFAULT 1,
+                          fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+>>>>>>> Stashed changes
     -- datos albergue
     nombre_albergue VARCHAR(150),
     capacidad_nuevos_animales INT,
