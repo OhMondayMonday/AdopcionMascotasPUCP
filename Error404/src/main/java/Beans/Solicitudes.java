@@ -7,10 +7,74 @@ public class Solicitudes {
     private TiposSolicitudes tipoSolicitud;
     private Usuarios solicitante;
     private Usuarios solicitado;
+    private String username;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private String DNI;
+    private String direccion;
+    private int distrito_id;
     private String nombreAlbergue;
     private String nombreEncargado;
     private String apellidoEncargado;
-    private String email;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEmail_albergue() {
+        return email_albergue;
+    }
+
+    public void setEmail_albergue(String email_albergue) {
+        this.email_albergue = email_albergue;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getDistrito_id() {
+        return distrito_id;
+    }
+
+    public void setDistrito_id(int distrito_id) {
+        this.distrito_id = distrito_id;
+    }
+
+    private String email_albergue;
     private String fechaSolicitud;
     private String estadoSolicitud;
     private String comentarioSolicitud;

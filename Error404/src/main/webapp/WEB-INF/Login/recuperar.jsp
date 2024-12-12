@@ -95,38 +95,26 @@
                     </a>
                 </div>
                 <!-- /Logo -->
-                <h4 class="mb-2">¡Bienvenido! 👋</h4>
-                <p class="mb-4">Inicia sesión con tu cuenta y apoya a los albergues</p>
+                <h4 class="mb-2">Recupera tu cuenta</h4>
+                <p class="mb-4">Ingresa tu correo y recupera tu contraseña</p>
 
                 <form id="formAuthentication">
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo electrónico</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
                     </div>
-                    <div class="mb-3 form-password-toggle">
-                        <div class="d-flex justify-content-between">
-                            <label class="form-label" for="contrasenia">Contraseña</label>
-                            <a href="auth-forgot-password-cover.html">
-                                <small>¿Olvidaste tu contraseña?</small>
-                            </a>
-                        </div>
-                        <div class="input-group input-group-merge">
-                            <input type="password" id="contrasenia" class="form-control" name="contrasenia" placeholder="••••••••••" required aria-describedby="password">
-                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary d-grid w-100" type="submit">Iniciar sesión</button>
+                    <button class="btn btn-primary d-grid w-100" type="submit">Recupera tu cuenta</button>
                 </form>
-                <p id="errorMessage" style="color:red; display:none;">Correo o contraseña incorrectos.</p>
 
                 <p class="text-center">
-                    <span>¿Nuevo en nuestra comunidad?</span>
+                    <span>¿Deseas crear una cuenta?</span>
                     <a href="<%=request.getContextPath()%>/register">
                         <span>Crea una cuenta</span>
                     </a>
                 </p>
             </div>
         </div>
+        <!-- /Login -->
     </div>
 </div>
 
@@ -135,50 +123,6 @@
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-
-
-<!-- Login Scripts-->
-<script>
-    document.getElementById('formAuthentication').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const email = document.getElementById('email').value;
-        const contrasenia = document.getElementById('contrasenia').value;
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirect = urlParams.get('redirect') || '';
-
-        fetch('login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: "email=" + encodeURIComponent(email) + "&contrasenia=" + encodeURIComponent(contrasenia) + "&redirect=" + encodeURIComponent(redirect)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.loginExitoso) {
-                    window.location.href = data.redirect;
-                } else {
-                    const errorMessage = document.getElementById('errorMessage');
-                    errorMessage.textContent = data.error || 'Correo o contraseña incorrectos.';
-                    errorMessage.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                console.error('Error al procesar la solicitud:', error);
-                const errorMessage = document.getElementById('errorMessage');
-                errorMessage.textContent = 'Ocurrió un error inesperado.';
-                errorMessage.style.display = 'block';
-            });
-    });
-
-</script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/popular.js"></script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/auto-focus.js"></script>

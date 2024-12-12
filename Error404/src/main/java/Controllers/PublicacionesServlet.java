@@ -20,6 +20,7 @@ public class PublicacionesServlet extends HttpServlet {
     private AdopcionDAO publicacionAdopcionDAO;
     private MascotaPerdidaDAO mascotaPerdidaDAO;
     private DonacionesDAO donacionesDAO;
+    private ComentariosDAO comentariosDAO;
 
     @Override
     public void init() throws ServletException {
@@ -28,6 +29,7 @@ public class PublicacionesServlet extends HttpServlet {
         publicacionAdopcionDAO = new AdopcionDAO();
         mascotaPerdidaDAO = new MascotaPerdidaDAO();
         donacionesDAO = new DonacionesDAO();
+        comentariosDAO = new ComentariosDAO();
     }
 
     @Override
@@ -36,6 +38,14 @@ public class PublicacionesServlet extends HttpServlet {
 
         if (action == null) {
             action = "verTodasPublicaciones";
+        }
+
+        Comentarios comentario = new Comentarios();
+
+        if(request.getParameter("comentario") != null) {
+            comentario.setUsuarioId(Integer.parseInt(request.getParameter("user_id")));
+            comentario.setPublicacionId(Integer.parseInt(request.getParameter("publicacion_id")));
+            comentario.setComentario(request.getParameter("comentario"));
         }
 
         switch (action) {
@@ -61,6 +71,10 @@ public class PublicacionesServlet extends HttpServlet {
                 } else {
                     response.sendRedirect("PublicacionesServlet");
                 }
+                break;
+            case "agregarComentario":
+                comentariosDAO.agregarComentario(comentario);
+                mostrarDetallesPublicacion(request, response);
                 break;
             case "agregarDenuncia":
                 if (request.getParameter("user_id") != null) {
@@ -168,9 +182,11 @@ public class PublicacionesServlet extends HttpServlet {
                 PublicacionesAdopcion publicacionAdopcion = publicacionAdopcionDAO.obtenerPublicacionAdopcion(id);
                 PublicacionesMascotaPerdida publicacionMascotaPerdida = mascotaPerdidaDAO.obtenerPublicacionMascotaPerdida(id);
                 PublicacionesDonaciones publicacionDonacion = donacionesDAO.obtenerPublicacionDonacion(id);
+                List<Comentarios> comentarios = comentariosDAO.obtenerComentariosPublis(id);
                 request.setAttribute("adopcion", publicacionAdopcion);
                 request.setAttribute("mascotaPerdida", publicacionMascotaPerdida);
                 request.setAttribute("donacion",publicacionDonacion);
+                request.setAttribute("comentarios", comentarios);
 
                 request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-publicaciones-detalles-usuario.jsp").forward(request, response);
             }else {
@@ -190,6 +206,10 @@ public class PublicacionesServlet extends HttpServlet {
 
         Publicaciones publicacion = new Publicaciones();
 
+        ComentariosDAO comentariosDAO = new ComentariosDAO();
+
+        Comentarios comentario = new Comentarios();
+
         Usuarios usuario = new Usuarios();
         usuario.setUserId(Integer.parseInt(request.getParameter("user_id")));
 
@@ -198,16 +218,16 @@ public class PublicacionesServlet extends HttpServlet {
         publicacion.setDescripcion(request.getParameter("descripcion"));
 
         Fotos foto = new Fotos();
-        foto.setFotoId(Integer.parseInt(request.getParameter("foto_id")));
-        publicacion.setFoto(foto);
-
-        if(request.getParameter("comentario") != null) {
-            publicacion.setComentario(request.getParameter("comentario"));
+        if (request.getParameter("foto") != null) {
+            foto.setFotoId(Integer.parseInt(request.getParameter("foto_id")));
+            publicacion.setFoto(foto);
         }
 
         TiposPublicaciones tiposPublicacion = new TiposPublicaciones();
-        tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion_id")));
-        publicacion.setTipoPublicacion(tiposPublicacion);
+        if(request.getParameter("tipo_publicacion_id") != null) {
+            tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion_id")));
+            publicacion.setTipoPublicacion(tiposPublicacion);
+        }
 
         if(request.getParameter("estado_publicacion") != null) {
             publicacion.setEstadoPublicacion(request.getParameter("estado_publicacion"));

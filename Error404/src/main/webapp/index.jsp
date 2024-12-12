@@ -54,7 +54,7 @@
       </ul>
       <div class="navbar-nav ms-auto">
         <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Acceder</a>
-        <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Registrarse</a>
+        <a href="<%=request.getContextPath()%>/register" class="btn btn-outline-primary">Registrarse</a>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@
       <div class="text-center">
         <h1 class="mx-auto my-0 text">Alianza Animal</h1>
         <h2 class="text-white-50 mx-auto mt-2 mb-5">Buscando un refugio con amor y ternura para los animales.</h2>
-        <a class="btn btn-primary" href="../html/dentro/login.html">¡Adopta ya!</a>
+        <a class="btn btn-primary" href="<%=request.getContextPath()%>/Dashboard">¡Adopta ya!</a>
       </div>
     </div>
   </div>
