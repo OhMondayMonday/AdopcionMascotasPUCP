@@ -120,20 +120,6 @@ $(function () {
                         },
                     },
                 },
-                multiStepsPass: {
-                    validators: { notEmpty: { message: "Por favor ingresa una contraseña" } },
-                },
-                multiStepsConfirmPass: {
-                    validators: {
-                        notEmpty: { message: "Debes confirmar tu contraseña" },
-                        identical: {
-                            compare: function () {
-                                return i.querySelector('[name="multiStepsPass"]').value;
-                            },
-                            message: "Las contraseñas no coinciden",
-                        },
-                    },
-                },
                 multiStepsAddress: {
                     validators: {
                         notEmpty: {message: "Por favor, ingresa tu dirección"}
@@ -213,7 +199,6 @@ $(function () {
                         data: {
                             action: 'registerUser',
                             multiStepsUsername: $('#multiStepsUsername').val(),
-                            multiStepsPass: $('#multiStepsPass').val(),
                             multiStepsEmail: $('#multiStepsEmail').val(),
                             multiStepsFirstName: $('#multiStepsFirstName').val(),
                             multiStepsLastName: $('#multiStepsLastName').val(),
@@ -234,7 +219,7 @@ $(function () {
                                     buttonsStyling: false
                                 }).then((result) => {
                                     if (result.isConfirmed) {
-                                        window.location.href = "login"; // Redirigir a la página de inicio de sesión
+                                        window.location.href = "/";
                                     }
                                 });
                             } else {

@@ -21,6 +21,7 @@ public class LoginDAO extends BaseDao {
                     Usuarios usuario = new Usuarios();
                     usuario.setUserId(resultSet.getInt("user_id"));
                     return usuario;
+
                 }
             }
         } catch (SQLException e) {
@@ -30,11 +31,21 @@ public class LoginDAO extends BaseDao {
     }
 
     public boolean EmailRepetido(String email) {
-        String sql = "SELECT user_id FROM usuarios WHERE email = ?";
+        String sql = """
+        SELECT user_id
+        FROM usuarios
+        WHERE email = ?
+        UNION
+        SELECT solicitud_id
+        FROM solicitudes
+        WHERE email = ? AND estado_solicitud IN ('pendiente', 'aprobada')
+    """;
+
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, email);
+            pstmt.setString(2, email);
 
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 return resultSet.next();
@@ -45,27 +56,47 @@ public class LoginDAO extends BaseDao {
     }
 
     public boolean UsernameRepetido(String username) {
-        String sql = "SELECT user_id FROM usuarios WHERE username = ?";
+        String sql = """
+        SELECT user_id
+        FROM usuarios
+        WHERE username = ?
+        UNION
+        SELECT solicitud_id
+        FROM solicitudes
+        WHERE username = ? AND estado_solicitud IN ('pendiente', 'aprobada')
+    """;
+
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
+            pstmt.setString(2, username);
 
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 return resultSet.next();
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+
     public boolean DNIRepetido(String dni) {
-        String sql = "SELECT user_id FROM usuarios WHERE dni = ?";
+        String sql = """
+        SELECT user_id
+        FROM usuarios
+        WHERE dni = ?
+        UNION
+        SELECT solicitud_id
+        FROM solicitudes
+        WHERE DNI = ? AND estado_solicitud IN ('pendiente', 'aprobada')
+    """;
+
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, dni);
+            pstmt.setString(2, dni);
 
             try (ResultSet resultSet = pstmt.executeQuery()) {
                 return resultSet.next();
@@ -75,7 +106,9 @@ public class LoginDAO extends BaseDao {
         }
     }
 
-    public boolean registrarUsuario(String username, String email, String nombre, String apellido, String direccion, String dni, String distrito_id, String contrasenia) {
+
+
+    public boolean registrarSolicitud(String username, String email, String nombre, String apellido, String direccion, String dni, String distrito_id) {
         Connection connection = null;
         PreparedStatement statement = null;
         boolean registrado = false;
@@ -83,7 +116,7 @@ public class LoginDAO extends BaseDao {
         try {
             connection = getConnection();
 
-            String sql = "INSERT INTO usuarios (username, email, nombre, apellido, direccion, dni, distrito_id, contrasenia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO solicitudes (username, email, nombre, apellido, direccion, dni, distrito_id, tipo_solicitud_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Crear el PreparedStatement
             statement = connection.prepareStatement(sql);
@@ -94,7 +127,7 @@ public class LoginDAO extends BaseDao {
             statement.setString(5, direccion);
             statement.setString(6, dni);
             statement.setString(7, distrito_id);
-            statement.setString(8, contrasenia);
+            statement.setInt(8, 1);
 
             // Ejecutar la consulta de inserción
             int filasAfectadas = statement.executeUpdate();

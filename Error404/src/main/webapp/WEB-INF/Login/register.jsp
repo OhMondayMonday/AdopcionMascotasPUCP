@@ -225,17 +225,6 @@
                                         </select>
                                     </div>
 
-                                    <!-- Contraseña -->
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="multiStepsPass">Contraseña</label>
-                                        <input type="password" id="multiStepsPass" name="multiStepsPass" class="form-control" placeholder="Contraseña"/>
-                                    </div>
-
-                                    <!-- Confirmar contraseña -->
-                                    <div class="col-sm-6">
-                                        <label class="form-label" for="multiStepsConfirmPass">Confirmar Contraseña</label>
-                                        <input type="password" id="multiStepsConfirmPass" name="multiStepsConfirmPass" class="form-control" placeholder="Confirmar contraseña"/>
-                                    </div>
                                     <div class="col-md-12">
                                         <label class="form-label" for="multiStepsAddress">Dirección</label>
                                         <input type="text" id="multiStepsAddress" name="multiStepsAddress" class="form-control" placeholder="Ingresa tu dirección" />
