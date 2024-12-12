@@ -4,6 +4,7 @@
 <%@ page import="java.util.stream.*" %>
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ArrayList, java.util.Map" %>
 
 
 <%
@@ -15,32 +16,47 @@
     int alberguesRegistrados = (int) request.getAttribute("alberguesRegistrados");
     int totalMascotasPerdidas = (int) request.getAttribute("totalMascotasPerdidas");
     int totalMascotasEncontradas = request.getAttribute("totalMascotasEncontradas") != null ? (int) request.getAttribute("totalMascotasEncontradas") : 0;
+
+    // Obtener listas, con verificación para evitar errores si son null
     List<Map<String, Object>> mascotasEncontradas = (List<Map<String, Object>>) request.getAttribute("mascotasEncontradas");
+    mascotasEncontradas = mascotasEncontradas != null ? mascotasEncontradas : java.util.Collections.emptyList();
+
     List<Map<String, Object>> usuariosMasDonaciones = (List<Map<String, Object>>) request.getAttribute("usuariosMasDonaciones");
+    usuariosMasDonaciones = usuariosMasDonaciones != null ? usuariosMasDonaciones : java.util.Collections.emptyList();
+
     List<Map<String, Object>> alberguesMasDonaciones = (List<Map<String, Object>>) request.getAttribute("alberguesMasDonaciones");
+    alberguesMasDonaciones = alberguesMasDonaciones != null ? alberguesMasDonaciones : java.util.Collections.emptyList();
+
     List<Map<String, String>> ultimasActualizaciones = (List<Map<String, String>>) request.getAttribute("ultimasActualizaciones");
-    List<Map<String, Object>> mascotasPorMes = request.getAttribute("mascotasPorMes") instanceof List
-            ? (List<Map<String, Object>>) request.getAttribute("mascotasPorMes")
-            : java.util.Collections.emptyList();
-    List<Map<String, Object>> mascotasPorMez = request.getAttribute("mascotasPorMez") instanceof List
-            ? (List<Map<String, Object>>) request.getAttribute("mascotasPorMez")
-            : java.util.Collections.emptyList();
+    ultimasActualizaciones = ultimasActualizaciones != null ? ultimasActualizaciones : java.util.Collections.emptyList();
+
+    List<Map<String, Object>> mascotasPorMes = (List<Map<String, Object>>) request.getAttribute("mascotasPorMes");
+    mascotasPorMes = (mascotasPorMes != null) ? mascotasPorMes : java.util.Collections.emptyList();
+
+    List<Map<String, Object>> mascotasPorMez = (List<Map<String, Object>>) request.getAttribute("mascotasPorMez");
+    mascotasPorMez = (mascotasPorMez != null) ? mascotasPorMez : java.util.Collections.emptyList();
 
     // Nuevos datos del servlet
     List<Map<String, Object>> donantesConMasDonaciones = (List<Map<String, Object>>) request.getAttribute("donantesConMasDonaciones");
+    donantesConMasDonaciones = donantesConMasDonaciones != null ? donantesConMasDonaciones : java.util.Collections.emptyList();
+
     List<Map<String, Object>> alberguesConMasDonaciones = (List<Map<String, Object>>) request.getAttribute("alberguesConMasDonaciones");
+    alberguesConMasDonaciones = alberguesConMasDonaciones != null ? alberguesConMasDonaciones : java.util.Collections.emptyList();
 
     int totalDonantes = (Integer) request.getAttribute("totalDonantes");
+
     List<Map<String, Object>> donantesUltimosMeses = (List<Map<String, Object>>) request.getAttribute("donantesUltimosMeses");
-    List<String> meses = new ArrayList<>();
-    List<Integer> donantes = new ArrayList<>();
+    donantesUltimosMeses = (donantesUltimosMeses != null) ? donantesUltimosMeses : java.util.Collections.emptyList();
 
     // Rellenar los datos de los meses y los donantes
+    List<String> meses = new ArrayList<>();
+    List<Integer> donantes = new ArrayList<>();
     for (Map<String, Object> donante : donantesUltimosMeses) {
         meses.add((String) donante.get("mes"));
         donantes.add((Integer) donante.get("total"));
     }
 %>
+
 
 
 <!DOCTYPE html>
@@ -126,6 +142,8 @@
 </head>
 
 <body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
 
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -423,6 +441,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="col-md-6 order-3 order-lg-4 mb-4 mb-lg-0">
                             <div class="card text-center">
                                 <div class="card-header py-3">
@@ -436,7 +456,7 @@
                                     </ul>
                                 </div>
                                 <div class="tab-content pt-0">
-                                    <!-- Tab 1: Usuarios con más donaciones -->
+                                    <!-- Usuarios con más donaciones -->
                                     <div class="tab-pane fade show active" id="navs-pills-browser" role="tabpanel">
                                         <div class="table-responsive text-start">
                                             <table class="table table-borderless text-nowrap">
@@ -449,78 +469,66 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <% int index = 1; %> <!-- Aquí inicializamos el índice -->
-                                                <%
-                                                    if (usuariosMasDonaciones != null) {
-                                                        for (Map<String, Object> usuario : usuariosMasDonaciones) {
-                                                %>
+                                                <% int no = 1; %> <!-- Declaramos no para los usuarios -->
+                                                <% for (Map<String, Object> donante : donantesConMasDonaciones) { %>
                                                 <tr>
-                                                    <td><%= index++ %></td> <!-- Incrementamos el índice en cada fila -->
+                                                    <td><%= no++ %></td>
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            <img src="<%= usuario.get("fotoPerfil") != null ? usuario.get("fotoPerfil") : "../../assets/img/default-avatar.png" %>" alt="<%= usuario.get("nombre") %>" height="24" class="me-2">
-                                                            <span><%= usuario.get("nombre") %></span>
+                                                            <img src="<%= donante.get("foto_url") %>" alt="Avatar" height="24" class="me-2">
+                                                            <span><%= donante.get("nombre") %></span>
                                                         </div>
                                                     </td>
-                                                    <td><%= usuario.get("totalDonado") != null ? usuario.get("totalDonado") : "0" %></td>
+                                                    <td>S/ <%= donante.get("total_donado") %></td> <!-- Símbolo de soles -->
                                                     <td>
                                                         <div class="d-flex justify-content-between align-items-center gap-3">
                                                             <div class="progress w-100" style="height:10px;">
-                                                                <div class="progress-bar bg-success" role="progressbar" style="width: <%= usuario.get("porcentajeDonado") != null ? usuario.get("porcentajeDonado") : 0 %>%" aria-valuenow="<%= usuario.get("porcentajeDonado") != null ? usuario.get("porcentajeDonado") : 0 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar" role="progressbar" style="width: <%= donante.get("porcentaje_total") %>%" aria-valuenow="<%= donante.get("porcentaje_total") %>" aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
-                                                            <small class="fw-medium"><%= usuario.get("porcentajeDonado") != null ? usuario.get("porcentajeDonado") : 0 %>%</small>
+                                                            <small class="fw-medium"><%= donante.get("porcentaje_total") %>%</small>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <%
-                                                        }
-                                                    }
-                                                %>
+                                                <% } %>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
 
-                                    <!-- Tab 2: Albergues con más donaciones -->
+                                    <!-- Albergues con más donaciones -->
                                     <div class="tab-pane fade" id="navs-pills-os" role="tabpanel">
                                         <div class="table-responsive text-start">
-                                            <table class="table table-borderless">
+                                            <table class="table table-borderless text-nowrap">
                                                 <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Albergue</th>
-                                                    <th>Cant. Don.</th>
+                                                    <th>Nombre del Albergue</th>
+                                                    <th>Donado</th>
                                                     <th class="w-50">Porcentaje del total</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <% index = 1; %> <!-- Reiniciamos el índice para los albergues -->
-                                                <%
-                                                    if (alberguesMasDonaciones != null) {
-                                                        for (Map<String, Object> albergue : alberguesMasDonaciones) {
-                                                %>
+                                                <% int noAlbergue = 1; %> <!-- Declaramos noAlbergue para los albergues, comenzando desde el siguiente número -->
+                                                <% for (Map<String, Object> albergue : alberguesConMasDonaciones) { %>
                                                 <tr>
-                                                    <td><%= index++ %></td> <!-- Incrementamos el índice en cada fila -->
+                                                    <td><%= noAlbergue++ %></td>
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            <img src="<%= albergue.get("fotoPerfil") != null ? albergue.get("fotoPerfil") : "../../assets/img/default-albergue.jpg" %>" alt="<%= albergue.get("nombre") %>" height="24" class="me-2">
-                                                            <span><%= albergue.get("nombre") %></span>
+                                                            <img src="<%= albergue.get("foto_id") %>" alt="Albergue" height="24" class="me-2">
+                                                            <span><%= albergue.get("nombre_albergue") %></span>
                                                         </div>
                                                     </td>
-                                                    <td><%= albergue.get("cantidadDonaciones") != null ? albergue.get("cantidadDonaciones") : "0" %></td>
+                                                    <td>S/ <%= albergue.get("total_donado") %></td> <!-- Símbolo de soles -->
                                                     <td>
                                                         <div class="d-flex justify-content-between align-items-center gap-3">
                                                             <div class="progress w-100" style="height:10px;">
-                                                                <div class="progress-bar bg-info" role="progressbar" style="width: <%= albergue.get("porcentajeDonaciones") != null ? albergue.get("porcentajeDonaciones") : 0 %>%" aria-valuenow="<%= albergue.get("porcentajeDonaciones") != null ? albergue.get("porcentajeDonaciones") : 0 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                <div class="progress-bar" role="progressbar" style="width: <%= albergue.get("porcentaje_total") %>%" aria-valuenow="<%= albergue.get("porcentaje_total") %>" aria-valuemin="0" aria-valuemax="100"></div>
                                                             </div>
-                                                            <small class="fw-medium"><%= albergue.get("porcentajeDonaciones") != null ? albergue.get("porcentajeDonaciones") : 0 %>%</small>
+                                                            <small class="fw-medium"><%= albergue.get("porcentaje_total") %>%</small>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <%
-                                                        }
-                                                    }
-                                                %>
+                                                <% } %>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -528,6 +536,13 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
+
 
 
 
