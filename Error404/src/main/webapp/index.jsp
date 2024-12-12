@@ -53,7 +53,7 @@
         <li class="nav-item"><a class="nav-link" href="#publica">Publicaciones</a></li>
       </ul>
       <div class="navbar-nav ms-auto">
-        <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Acceder</a>
+        <a href="<%=request.getContextPath()%>/Dashboard" class="btn btn-outline-primary">Acceder</a>
         <a href="<%=request.getContextPath()%>/register" class="btn btn-outline-primary">Registrarse</a>
       </div>
     </div>
@@ -109,7 +109,7 @@
             <div class="project-text w-100 my-auto text-center text-lg-left">
               <h4 class="text-white">16:00 - 20:00 San Isidro: Concurso de Disfraces para Mascotas</h4>
               <p class="mb-3 text-white-50">Descripción: Trae a tu mascota disfrazada y compite por premios. Las categorías incluyen el disfraz más original, el más gracioso y el mejor dúo dueño-mascota.</p>
-              <a class="btn btn-primary" href="../html/dentro/login.html">Saber más</a>
+              <a class="btn btn-primary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@
             <div class="project-text w-100 my-auto text-center text-lg-right">
               <h4 class="text-white">10:00 - 14:00 Pueblo Libre: Jornada de Esterilización Gratuita</h4>
               <p class="mb-3 text-white-50">Descripción: Un evento dedicado al control de la población de animales callejeros. Se ofrecerá esterilización gratuita para perros y gatos. Se recomienda llevar a las mascotas en ayuno y con correa.</p>
-              <a class="btn btn-primary" href="../html/dentro/login.html">Saber más</a>
+              <a class="btn btn-primary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@
             <div class="project-text w-100 my-auto text-center text-lg-left">
               <h4 class="text-white">09:00 - 13:00 San Isidro: Taller de Nutrición y Cuidado de Mascotas</h4>
               <p class="mb-3 text-white-50">Descripción: En este taller aprenderás a preparar dietas saludables para tus mascotas y consejos para mantenerlas en óptimas condiciones de salud. Incluye consulta veterinaria gratuita.</p>
-              <a class="btn btn-primary" href="../html/dentro/login.html">Saber más</a>
+              <a class="btn btn-primary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@
           <div class="carousel-caption text-white">
             <h3>Dale una casa!!</h3>
             <p>Este perrito esta buscando un hogar amoroso</p>
-            <a class="btn btn-secondary" href="../html/dentro/login.html">Saber más</a>
+            <a class="btn btn-secondary" href=<%=request.getContextPath()%>/Dashboard">Saber más</a>
           </div>
         </div>
         <div class="carousel-item">
@@ -223,7 +223,7 @@
           <div class="carousel-caption text-white">
             <h3>Necesitamos comida!!</h3>
             <p>Una ayuda siempre viene bien y mejor si ayudamos a nuestros amigos</p>
-            <a class="btn btn-secondary" href="../html/dentro/login.html">Saber más</a>
+            <a class="btn btn-secondary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
           </div>
         </div>
         <div class="carousel-item">
@@ -232,7 +232,7 @@
 
             <h3>Ayudanós a encontrarlo</h3>
             <p>Claudio se perdió hace unos dias en el distrito de San Miguel</p>
-            <a class="btn btn-secondary" href="../html/dentro/login.html">Saber más</a>
+            <a class="btn btn-secondary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
           </div>
         </div>
 
@@ -242,7 +242,7 @@
 
             <h3>Encontrado!!</h3>
             <p>Este perrito se perdió pero fue encontrado y devuelto a su dueño</p>
-            <a class="btn btn-secondary" href="../html/dentro/login.html">Saber más</a>
+            <a class="btn btn-secondary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
           </div>
         </div>
 

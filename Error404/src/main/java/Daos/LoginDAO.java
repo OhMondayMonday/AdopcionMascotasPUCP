@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginDAO extends BaseDao {
     public Usuarios validarUsuario(String email, String contrasenia) {
@@ -13,6 +15,7 @@ public class LoginDAO extends BaseDao {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
+            contrasenia = hashPassword(contrasenia);
             statement.setString(1, email);
             statement.setString(2, contrasenia);
 
@@ -26,6 +29,8 @@ public class LoginDAO extends BaseDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -169,4 +174,51 @@ public class LoginDAO extends BaseDao {
         return -1;
     }
 
+    public int getUserIdByEmail(String email) {
+        String sql = "SELECT user_id FROM usuarios WHERE email = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() ? rs.getInt("user_id") : -1;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Actualiza la contraseña del usuario
+    public boolean updatePassword(int userId, String newPassword) {
+        String sql = "UPDATE usuarios SET password = ? WHERE user_id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            String hashedPassword = hashPassword(newPassword);
+            pstmt.setString(1, hashedPassword);
+            pstmt.setInt(2, userId);
+
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    private String hashPassword(String password) throws NoSuchAlgorithmException {
+        // Crear una instancia del algoritmo SHA-256
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+        // Aplicar el hash a la contraseña
+        byte[] hashedBytes = digest.digest(password.getBytes());
+
+        // Convertir el hash a formato hexadecimal
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hashedBytes) {
+            hexString.append(String.format("%02x", b));
+        }
+
+        return hexString.toString();
+    }
 }

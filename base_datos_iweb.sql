@@ -10,6 +10,8 @@ DROP TABLE IF EXISTS eventos;
 DROP TABLE IF EXISTS tipos_eventos;
 DROP TABLE IF EXISTS lugares_eventos;
 DROP TABLE IF EXISTS solicitudes;
+DROP TABLE IF EXISTS password_reset_tokens;
+DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS tipos_solicitudes;
 DROP TABLE IF EXISTS publicaciones_adopcion;
 DROP TABLE IF EXISTS publicaciones_mascota_perdida;
@@ -23,7 +25,6 @@ DROP TABLE IF EXISTS usuarios;
 DROP TABLE IF EXISTS fotos;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS distritos;
-DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS zonas;
  -- zonas 
 CREATE TABLE zonas (
@@ -56,7 +57,7 @@ CREATE TABLE fotos (
 CREATE TABLE usuarios (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
-    contrasenia VARCHAR(255) NOT NULL,
+    contrasenia VARCHAR(64) NOT NULL,
     nombre VARCHAR(100),
     apellido VARCHAR(100),
     email VARCHAR(100) UNIQUE,
@@ -353,6 +354,14 @@ CREATE TABLE logs (
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id INT,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE SET NULL
+);
+
+CREATE TABLE password_reset_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expiration TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
 DELIMITER $$

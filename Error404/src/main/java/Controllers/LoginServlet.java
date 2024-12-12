@@ -8,12 +8,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import Beans.Usuarios;
+import Services.EmailService;
+import Daos.TokenDAO;
 
+import javax.mail.AuthenticationFailedException;
+import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login", "/register", "/recuperar"})
 public class LoginServlet extends HttpServlet {
     private final LoginDAO loginDAO = new LoginDAO();
+    private final TokenDAO tokenDAO = new TokenDAO(); // Acceso a la base de datos para tokens
+    private final EmailService emailService = new EmailService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,30 +34,31 @@ public class LoginServlet extends HttpServlet {
                 response.setDateHeader("Expires", 0);
 
                 HttpSession session = request.getSession(false);
-                if (session != null && session.getAttribute("usuario") != null) {
-                    response.sendRedirect("DashboardServlet");
+                if (session != null && session.getAttribute("usuariosession") != null) {
+                    response.sendRedirect("/AlianzaAnimal/Dashboard");
                     return;
                 }
+
                 request.getRequestDispatcher("/WEB-INF/Login/login.jsp").forward(request, response);
             }
             case "/register" -> {
                 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
                 response.setHeader("Pragma", "no-cache");
                 response.setDateHeader("Expires", 0);
-                HttpSession session = request.getSession(false);
-                if (session != null && session.getAttribute("usuario") != null) {
-                    response.sendRedirect("DashboardServlet");
-                }
+
                 request.getRequestDispatcher("/WEB-INF/Login/register.jsp").forward(request, response);
             }
             case "/recuperar" -> {
                 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
                 response.setHeader("Pragma", "no-cache");
                 response.setDateHeader("Expires", 0);
+
                 HttpSession session = request.getSession(false);
-                if (session != null && session.getAttribute("usuario") != null) {
-                    response.sendRedirect("DashboardServlet");
+                if (session != null && session.getAttribute("usuariosession") != null) {
+                    response.sendRedirect("/AlianzaAnimal/Dashboard");
+                    return;
                 }
+
                 request.getRequestDispatcher("/WEB-INF/Login/recuperar.jsp").forward(request, response);
             }
         }
@@ -68,11 +76,15 @@ public class LoginServlet extends HttpServlet {
 
                 Usuarios usuario = loginDAO.validarUsuario(email, contrasenia);
 
+                HttpSession session = request.getSession(false);
+                if (session != null && session.getAttribute("usuariosession") != null) {
+                    response.sendRedirect("/AlianzaAnimal");
+                }
+
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
 
                 if (usuario != null) {
-                    HttpSession session = request.getSession();
                     session.setAttribute("usuariosession", usuario);
                     String redirect = (String) session.getAttribute("redirect");
                     if (redirect == null || redirect.isEmpty()) {
@@ -138,9 +150,76 @@ public class LoginServlet extends HttpServlet {
                 String action = request.getParameter("action");
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
-                if ("recuperar".equals(action)) {
-                    String email = request.getParameter("email");
+                String email = request.getParameter("email");
 
+                HttpSession session = request.getSession(false);
+                if (session != null && session.getAttribute("usuariosession") != null) {
+                    response.sendRedirect("/AlianzaAnimal");
+                }
+
+                int userId = loginDAO.getUserIdByEmail(email);
+                System.out.println(userId);
+
+                if (userId == -1) {
+                    response.getWriter().write("{\"status\":\"error\", \"message\":\"El correo no está registrado.\"}");
+                    return;
+                }
+
+                String token = UUID.randomUUID().toString();
+                tokenDAO.saveToken(userId, token);
+
+                // Construye el enlace de recuperación
+                String resetLink = request.getRequestURL().toString().replace("/forgot-password", "/reset-password?token=") + token;
+                System.out.println("Enlace ");
+
+                // Envía el correo al usuario
+                String subject = "Recuperación de contraseña";
+                String body = "Hola, \n\n" +
+                        "Hemos recibido una solicitud para restablecer tu contraseña. Haz clic en el siguiente enlace para restablecerla:\n" +
+                        resetLink + "\n\n" +
+                        "Si no solicitaste este cambio, ignora este correo.\n\n" +
+                        "Saludos,\nEl equipo.";
+
+                try {
+                    emailService.sendEmail(email, subject, body);
+                    System.out.println("success ");
+                    response.getWriter().write("{\"status\":\"success\", \"message\":\"Se envió un correo de recuperación.\"}");
+                } catch (MessagingException  e) {
+                    e.printStackTrace();
+                    response.getWriter().write("{\"status\":\"error\", \"message\":\"No se pudo enviar el correo.\"}");
+                }
+            }
+            case "/reset-password" -> {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+
+                // Obtener parámetros del cliente
+                String token = request.getParameter("token");
+                String newPassword = request.getParameter("password");
+
+                // Usar PrintWriter para las respuestas
+                try (var out = response.getWriter()) {
+                    // Validar token
+                    int userId = tokenDAO.validateToken(token);
+                    if (userId == -1) {
+                        out.write("{\"status\":\"error\", \"message\":\"El token es inválido o ha expirado.\"}");
+                        return;
+                    }
+
+                    boolean passwordUpdated = loginDAO.updatePassword(userId, newPassword);
+                    if (passwordUpdated) {
+                        // Eliminar el token después de usarlo
+                        tokenDAO.deleteToken(token);
+                        out.write("{\"status\":\"success\", \"message\":\"Contraseña actualizada correctamente.\"}");
+                    } else {
+                        out.write("{\"status\":\"error\", \"message\":\"No se pudo actualizar la contraseña. Inténtalo de nuevo.\"}");
+                    }
+                } catch (Exception e) {
+                    // Manejo de errores inesperados
+                    e.printStackTrace();
+                    try (var out = response.getWriter()) {
+                        out.write("{\"status\":\"error\", \"message\":\"Ocurrió un error inesperado. Inténtalo más tarde.\"}");
+                    }
                 }
             }
         }

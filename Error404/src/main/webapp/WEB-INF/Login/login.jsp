@@ -87,7 +87,7 @@
             <div class="w-px-400 mx-auto">
                 <!-- Logo -->
                 <div class="app-brand mb-5">
-                    <a href="<%=request.getContextPath()%>/index.html" class="app-brand-link gap-2">
+                    <a href="<%=request.getContextPath()%>" class="app-brand-link gap-2">
                         <div class="app-brand-logo demo">
                             <img src="<%=request.getContextPath()%>/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="Logo de Alianza Animal" width="50">
                         </div>
@@ -106,7 +106,7 @@
                     <div class="mb-3 form-password-toggle">
                         <div class="d-flex justify-content-between">
                             <label class="form-label" for="contrasenia">Contraseña</label>
-                            <a href="auth-forgot-password-cover.html">
+                            <a href="<%=request.getContextPath()%>/recuperar">
                                 <small>¿Olvidaste tu contraseña?</small>
                             </a>
                         </div>
@@ -177,6 +177,14 @@
                 errorMessage.style.display = 'block';
             });
     });
+
+    async function generateSHA256Hash(input) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    }
 
 </script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/popular.js"></script>

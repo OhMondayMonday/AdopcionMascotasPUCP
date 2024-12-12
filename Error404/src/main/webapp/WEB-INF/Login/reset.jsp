@@ -1,10 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html lang="es" class="light-style layout-wide  customizer-hide" dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
-
-
-<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/auth-login-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:15:07 GMT -->
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -62,16 +58,7 @@
     <script src="<%=request.getContextPath()%>/assets/js/config.js"></script>
 
 </head>
-
 <body>
-
-
-<!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<!-- Content -->
-
 <div class="authentication-wrapper authentication-cover">
     <div class="authentication-inner row m-0">
         <!-- /Left Text -->
@@ -98,100 +85,107 @@
                 <h4 class="mb-2">Recupera tu cuenta</h4>
                 <p class="mb-4">Ingresa tu correo y recupera tu contraseña</p>
 
-                <form id="forgotPasswordForm">
-                    <label for="email" class="form-label">Correo electrónico:</label>
-                    <input type="email" class = "form-control" id="email" name="email" required>
-                    <span id="emailFeedback" style="color: red; display: none;">Por favor, ingresa un correo válido.</span>
-                    <button class="btn btn-primary d-grid w-100" type="submit">Recuperar contraseña</button>
-                </form>
+                <form id="resetPasswordForm" class="needs-validation" novalidate>
+                    <!-- Campo oculto para el token -->
+                    <input type="hidden" id="token" name="token" value="${param.token}">
 
-                <p class="text-center">
-                    <span>¿Deseas crear una cuenta?</span>
-                    <a href="<%=request.getContextPath()%>/register">
-                        <span>Crea una cuenta</span>
-                    </a>
-                </p>
+                    <!-- Nueva contraseña -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Nueva contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" required minlength="8">
+                        <div class="invalid-feedback">
+                            La contraseña debe tener al menos 8 caracteres.
+                        </div>
+                    </div>
+
+                    <!-- Confirmar contraseña -->
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirma tu contraseña:</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                        <div class="invalid-feedback">
+                            Las contraseñas no coinciden.
+                        </div>
+                    </div>
+
+                    <!-- Botón de enviar -->
+                    <button type="submit" class="btn btn-primary w-100">Cambiar Contraseña</button>
+                </form>
             </div>
         </div>
         <!-- /Login -->
     </div>
 </div>
 
-<!-- / Content -->
+<!-- JavaScript -->
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const forgotPasswordForm = document.getElementById("forgotPasswordForm");
-        const emailInput = document.getElementById("email");
-        const emailFeedback = document.getElementById("emailFeedback");
-
-        // Validación al escribir en el campo de correo
-        emailInput.addEventListener("input", () => {
-            const email = emailInput.value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!emailRegex.test(email)) {
-                emailFeedback.style.display = "inline"; // Mostrar mensaje de error
-            } else {
-                emailFeedback.style.display = "none"; // Ocultar mensaje de error
-            }
-        });
+        const resetPasswordForm = document.getElementById("resetPasswordForm");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+        const token = document.getElementById("token").value;
 
         // Manejo del envío del formulario
-        forgotPasswordForm.addEventListener("submit", (event) => {
+        resetPasswordForm.addEventListener("submit", (event) => {
             event.preventDefault();
 
-            const email = emailInput.value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const password = passwordInput.value.trim();
+            const confirmPassword = confirmPasswordInput.value.trim();
 
-            // Validación del correo antes de enviar
-            if (!emailRegex.test(email)) {
-                emailFeedback.style.display = "inline";
+            // Validaciones en el cliente
+            if (password.length < 8) {
+                passwordInput.classList.add("is-invalid");
                 return;
+            } else {
+                passwordInput.classList.remove("is-invalid");
             }
 
-            // Envía la solicitud al servidor en segundo plano
-            fetch("recuperar", {
+            if (password !== confirmPassword) {
+                confirmPasswordInput.classList.add("is-invalid");
+                return;
+            } else {
+                confirmPasswordInput.classList.remove("is-invalid");
+            }
+
+            // Envío de la solicitud al servidor
+            fetch("reset-password", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams({ email: email }),
-            }).catch(error => {
-                console.error("Error en la solicitud:", error);
-            });
-
-            // Mostrar mensaje de confirmación con SweetAlert
-            Swal.fire({
-                title: "Correo en proceso",
-                text: "Si el correo está registrado, recibirás un enlace para restablecer tu contraseña.",
-                icon: "info",
-                confirmButtonText: "Aceptar",
-            }).then(() => {
-                // Redirige al usuario a la página principal
-                window.location.href = window.location.origin + "/AlianzaAnimal/";
-            });
+                body: new URLSearchParams({ token: token, password: password }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        // SweetAlert de éxito
+                        Swal.fire({
+                            title: "Contraseña actualizada",
+                            text: data.message,
+                            icon: "success",
+                            confirmButtonText: "Aceptar",
+                        }).then(() => {
+                            // Redirige al usuario al login
+                            window.location.href = window.location.origin + "/AlianzaAnimal/login";
+                        });
+                    } else {
+                        // SweetAlert de error
+                        Swal.fire({
+                            title: "Error",
+                            text: data.message,
+                            icon: "error",
+                            confirmButtonText: "Aceptar",
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Error en la solicitud:", error);
+                    Swal.fire({
+                        title: "Error",
+                        text: "Hubo un problema al actualizar la contraseña. Inténtalo de nuevo.",
+                        icon: "error",
+                        confirmButtonText: "Aceptar",
+                    });
+                });
         });
     });
-e
 </script>
-
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/popular.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
-
-<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
-
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/jquery/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/popper/popper.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/js/bootstrap.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/hammer/hammer.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/i18n/i18n.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-<script src="<%=request.getContextPath()%>/assets/vendor/js/menu.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
-
 </html>
