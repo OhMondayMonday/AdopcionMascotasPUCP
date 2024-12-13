@@ -37,11 +37,10 @@ public class DashboardDAO extends BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "assets/img/default-profile.jpg"; //una por defeto puem
+        return "assets/img/FotoPerfil/perfil_user1.jpg"; //una por defeto puem
     }
 
 
-    // Obtener el conteo de animales ayudados
     public int obtenerAnimalesAyudados(int userId) {
         // Ajusta esta consulta para reflejar la relación correcta
         String sql = "SELECT COUNT(*) FROM Mascotas m " +
@@ -57,7 +56,8 @@ public class DashboardDAO extends BaseDao {
             e.printStackTrace();
         }
         return 0;
-    }
+    } // Obtener el conteo de animales ayudados
+
 
 
     // Obtener el conteo de publicaciones realizadas
@@ -133,7 +133,7 @@ public class DashboardDAO extends BaseDao {
 
                 // Configurar la URL de la imagen
                 String urlFoto = rs.getString("url_foto");
-                evento.setUrlFoto(urlFoto != null ? urlFoto : "assets/img/default-event.jpg"); // Imagen por defecto si es null
+                evento.setUrlFoto(urlFoto != null ? urlFoto : "assets/img/illustrations/boy-app-academy.png"); // Imagen por defecto si es null
 
                 return evento;
             }
