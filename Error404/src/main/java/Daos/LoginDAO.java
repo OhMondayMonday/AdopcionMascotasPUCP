@@ -1,7 +1,7 @@
 package Daos;
 
 import Beans.Usuarios;
-
+import Beans.Roles;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +11,10 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginDAO extends BaseDao {
     public Usuarios validarUsuario(String email, String contrasenia) {
-        String sql = "SELECT user_id FROM usuarios WHERE email = ? AND contrasenia = ?";
+        String sql = "SELECT usuarios.*, roles.nombre_rol " +
+                "FROM usuarios " +
+                "JOIN roles ON usuarios.rol_id = roles.rol_id " +
+                "WHERE usuarios.email = ? AND usuarios.contrasenia = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -23,8 +26,14 @@ public class LoginDAO extends BaseDao {
                 if (resultSet.next()) {
                     Usuarios usuario = new Usuarios();
                     usuario.setUserId(resultSet.getInt("user_id"));
+                    usuario.setEmail(resultSet.getString("email"));
+                    usuario.setNombre(resultSet.getString("nombre"));
+                    usuario.setApellido(resultSet.getString("apellido"));
+                    Roles rol = new Roles();
+                    rol.setRolId(resultSet.getInt("rol_id"));
+                    rol.setNombreRol(resultSet.getString("nombre_rol"));
+                    usuario.setRol(rol);
                     return usuario;
-
                 }
             }
         } catch (SQLException e) {
