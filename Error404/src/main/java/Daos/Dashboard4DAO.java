@@ -374,23 +374,23 @@ public class Dashboard4DAO extends BaseDao {
 
     public List<Map<String, Object>> obtenerDonantesConMasDonaciones() {
         String sql = """
-        SELECT 
-            u.nombre, 
-            u.foto_id, 
-            SUM(pd.cantidad) AS total_donado,
-            (SUM(pd.cantidad) / (SELECT SUM(cantidad) FROM publicaciones_donaciones)) * 100 AS porcentaje_total
-        FROM 
-            publicaciones_donaciones pd
-        JOIN 
-            publicaciones p ON pd.publicacion_id = p.publicacion_id
-        JOIN 
-            usuarios u ON p.user_id = u.user_id
-        WHERE 
-            pd.cantidad IS NOT NULL
-        GROUP BY 
-            u.user_id
-        ORDER BY 
-            total_donado DESC;
+    SELECT 
+        u.nombre, 
+        u.foto_id, 
+        SUM(pd.cantidad) AS total_donado,
+        (SUM(pd.cantidad) / (SELECT SUM(cantidad) FROM publicaciones_donaciones)) * 100 AS porcentaje_total
+    FROM 
+        publicaciones_donaciones pd
+    JOIN 
+        publicaciones p ON pd.publicacion_id = p.publicacion_id
+    JOIN 
+        usuarios u ON p.user_id = u.user_id
+    WHERE 
+        pd.cantidad IS NOT NULL
+    GROUP BY 
+        u.user_id
+    ORDER BY 
+        total_donado DESC;
     """;
 
         List<Map<String, Object>> resultados = new ArrayList<>();
@@ -398,6 +398,9 @@ public class Dashboard4DAO extends BaseDao {
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
+
+            // Depuración: Imprimir la consulta SQL ejecutada
+            System.out.println("Ejecutando consulta SQL para obtener los donantes con más donaciones: " + sql);
 
             while (rs.next()) {
                 Map<String, Object> dato = new HashMap<>();
@@ -406,8 +409,13 @@ public class Dashboard4DAO extends BaseDao {
                 dato.put("total_donado", rs.getDouble("total_donado"));
                 dato.put("porcentaje_total", rs.getDouble("porcentaje_total"));
                 resultados.add(dato);
+
+                // Depuración: Mostrar los resultados de cada fila
+                System.out.println("Donante: " + rs.getString("nombre") + ", Total Donado: " + rs.getDouble("total_donado") + ", Porcentaje Total: " + rs.getDouble("porcentaje_total"));
             }
         } catch (SQLException e) {
+            // Depuración: Mostrar el error de SQL
+            System.err.println("Error al ejecutar la consulta SQL para obtener los donantes con más donaciones: " + e.getMessage());
             e.printStackTrace();
         }
         return resultados;
@@ -415,24 +423,24 @@ public class Dashboard4DAO extends BaseDao {
 
     public List<Map<String, Object>> obtenerAlberguesConMasDonaciones() {
         String sql = """
-        SELECT 
-            u.nombre_albergue, 
-            u.foto_id, 
-            SUM(pd.cantidad) AS total_donado,
-            (SUM(pd.cantidad) / (SELECT SUM(cantidad) FROM publicaciones_donaciones)) * 100 AS porcentaje_total
-        FROM 
-            publicaciones_donaciones pd
-        JOIN 
-            publicaciones p ON pd.publicacion_id = p.publicacion_id
-        JOIN 
-            usuarios u ON p.user_id = u.user_id
-        WHERE 
-            u.nombre_albergue IS NOT NULL
-        GROUP BY 
-            u.nombre_albergue, u.foto_id
-        ORDER BY 
-            total_donado DESC
-        LIMIT 7;
+    SELECT 
+        u.nombre_albergue, 
+        u.foto_id, 
+        SUM(pd.cantidad) AS total_donado,
+        (SUM(pd.cantidad) / (SELECT SUM(cantidad) FROM publicaciones_donaciones)) * 100 AS porcentaje_total
+    FROM 
+        publicaciones_donaciones pd
+    JOIN 
+        publicaciones p ON pd.publicacion_id = p.publicacion_id
+    JOIN 
+        usuarios u ON p.user_id = u.user_id
+    WHERE 
+        u.nombre_albergue IS NOT NULL
+    GROUP BY 
+        u.nombre_albergue, u.foto_id
+    ORDER BY 
+        total_donado DESC
+    LIMIT 7;
     """;
 
         List<Map<String, Object>> resultados = new ArrayList<>();
@@ -441,6 +449,9 @@ public class Dashboard4DAO extends BaseDao {
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
+            // Depuración: Imprimir la consulta SQL ejecutada
+            System.out.println("Ejecutando consulta SQL para obtener los albergues con más donaciones: " + sql);
+
             while (rs.next()) {
                 Map<String, Object> dato = new HashMap<>();
                 dato.put("nombre_albergue", rs.getString("nombre_albergue"));
@@ -448,12 +459,19 @@ public class Dashboard4DAO extends BaseDao {
                 dato.put("total_donado", rs.getDouble("total_donado"));
                 dato.put("porcentaje_total", rs.getDouble("porcentaje_total"));
                 resultados.add(dato);
+
+                // Depuración: Mostrar los resultados de cada fila
+                System.out.println("Albergue: " + rs.getString("nombre_albergue") + ", Total Donado: " + rs.getDouble("total_donado") + ", Porcentaje Total: " + rs.getDouble("porcentaje_total"));
             }
         } catch (SQLException e) {
+            // Depuración: Mostrar el error de SQL
+            System.err.println("Error al ejecutar la consulta SQL para obtener los albergues con más donaciones: " + e.getMessage());
             e.printStackTrace();
         }
         return resultados;
     }
+
+
 
 
 

@@ -85,44 +85,32 @@
         <!-- Login -->
         <div class="d-flex col-12 col-lg-5 col-xl-5 align-items-center authentication-bg p-sm-5 p-4">
             <div class="w-px-400 mx-auto">
-
-                <div class="border border-dark p-3 rounded bg-white">
+                <!-- Logo y formulario con borde -->
+                <div class="border border-dark p-4 rounded bg-white">
                     <!-- Logo -->
-                    <div class="app-brand mb-3">
-                        <a href="<%=request.getContextPath()%>" class="app-brand-link gap-2">
+                    <div class="app-brand mb-2 text-center">
+                        <a href="<%=request.getContextPath()%>/login" class="app-brand-link gap-2">
                             <div class="app-brand-logo demo">
                                 <img src="<%=request.getContextPath()%>/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="Logo de Alianza Animal" width="50">
                             </div>
                             <span class="text-body fw-bold" style="font-size:large">Alianza Animal</span>
-                            <p class="mt-3 ms-5 fw-bold fs-normal">Volver al inicio</p>
+                            <p class="mt-3 ms-5 fw-bold fs-big">Iniciar sesión</p>
                         </a>
                     </div>
+                    <div class="d-flex justify-content-center align-items-center mb-2">
+                        <img src="<%=request.getContextPath()%>/assets/img/padlock-2873246_960_720.webp" width="150" alt="Candado">
+                    </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">¡Bienvenido! 👋</h4>
-                    <p class="mb-4">Inicia sesión con tu cuenta y apoya a los albergues</p>
+                    <h4 class="mb-1 text-center">¿Tienes problemas para ingresar?</h4>
+                    <p class="mb-4 text-center">Ingresa tu correo y en breve te enviaremos un enlace para que puedas restablecer tu contraseña</p>
 
-                    <form id="formAuthentication">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
-                        </div>
-                        <div class="mb-3 form-password-toggle">
-                            <div class="d-flex justify-content-between">
-                                <label class="form-label" for="contrasenia">Contraseña</label>
-                                <a href="<%=request.getContextPath()%>/recuperar">
-                                    <small>¿Olvidaste tu contraseña?</small>
-                                </a>
-                            </div>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="contrasenia" class="form-control" name="contrasenia" placeholder="••••••••••" required aria-describedby="password">
-                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                            </div>
-                        </div>
-                        <p id="errorMessage" class = "mt-1 mb-1" style="color:red; display:none;">Correo o contraseña incorrectos.</p>
-                        <button class="btn btn-primary d-grid w-100" type="submit">Iniciar sesión</button>
+                    <form id="forgotPasswordForm">
+                        <label for="email" class="form-label">Correo electrónico:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico" name="email" required>
+                        <span id="emailFeedback" style="color: red; display: none;">Por favor, ingresa un correo válido.</span>
+                        <button class="btn btn-primary d-grid w-100 mt-3" type="submit">Recuperar contraseña</button>
                     </form>
                 </div>
-
 
                 <!-- Línea negra entre las cajas -->
                 <div class="d-flex align-items-center my-4">
@@ -131,6 +119,7 @@
                     <hr class="flex-grow-1 border-dark">
                 </div>
 
+                <!-- Sección de "Crear nueva cuenta" con borde -->
                 <div class="border border-dark p-3 rounded bg-white">
                     <p class="text-center mb-0">
                         <span>¿Deseas crear una cuenta?</span>
@@ -141,66 +130,68 @@
                 </div>
             </div>
         </div>
+        <!-- /Login -->
     </div>
 </div>
 
 <!-- / Content -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+        const emailInput = document.getElementById("email");
+        const emailFeedback = document.getElementById("emailFeedback");
 
+        // Validación al escribir en el campo de correo
+        emailInput.addEventListener("input", () => {
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                emailFeedback.style.display = "inline"; // Mostrar mensaje de error
+            } else {
+                emailFeedback.style.display = "none"; // Ocultar mensaje de error
+            }
+        });
+
+        // Manejo del envío del formulario
+        forgotPasswordForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Validación del correo antes de enviar
+            if (!emailRegex.test(email)) {
+                emailFeedback.style.display = "inline";
+                return;
+            }
+
+            // Envía la solicitud al servidor en segundo plano
+            fetch("recuperar", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ email: email }),
+            }).catch(error => {
+                console.error("Error en la solicitud:", error);
+            });
+
+            // Mostrar mensaje de confirmación con SweetAlert
+            Swal.fire({
+                title: "Correo en proceso",
+                text: "Si el correo está registrado, recibirás un enlace para restablecer tu contraseña.",
+                icon: "info",
+                confirmButtonText: "Aceptar",
+            }).then(() => {
+                // Redirige al usuario a la página principal
+                window.location.href = window.location.origin + "/AlianzaAnimal/";
+            });
+        });
+    });
+e
+</script>
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-
-
-<!-- Login Scripts-->
-<script>
-    document.getElementById('formAuthentication').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const email = document.getElementById('email').value;
-        const contrasenia = document.getElementById('contrasenia').value;
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirect = urlParams.get('redirect') || '';
-
-        fetch('login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: "email=" + encodeURIComponent(email) + "&contrasenia=" + encodeURIComponent(contrasenia) + "&redirect=" + encodeURIComponent(redirect)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.loginExitoso) {
-                    window.location.href = data.redirect;
-                } else {
-                    const errorMessage = document.getElementById('errorMessage');
-                    errorMessage.textContent = data.error || 'Correo o contraseña incorrectos.';
-                    errorMessage.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                console.error('Error al procesar la solicitud:', error);
-                const errorMessage = document.getElementById('errorMessage');
-                errorMessage.textContent = 'Ocurrió un error inesperado.';
-                errorMessage.style.display = 'block';
-            });
-    });
-
-    async function generateSHA256Hash(input) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(input);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-    }
-
-</script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/popular.js"></script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
@@ -216,6 +207,7 @@
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/typeahead-js/typeahead.js"></script>
 <script src="<%=request.getContextPath()%>/assets/vendor/js/menu.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

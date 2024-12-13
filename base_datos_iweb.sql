@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS IWEB_DB ;
 USE IWEB_DB;
 
 DROP TABLE IF EXISTS logs;
+DROP TABLE IF EXISTS sesiones_usuarios;
 DROP TABLE IF EXISTS denuncias_maltrato_animal;
 DROP TABLE IF EXISTS hogares_temporales;
 DROP TABLE IF EXISTS inscripciones_eventos;
@@ -9,6 +10,8 @@ DROP TABLE IF EXISTS eventos;
 DROP TABLE IF EXISTS tipos_eventos;
 DROP TABLE IF EXISTS lugares_eventos;
 DROP TABLE IF EXISTS solicitudes;
+DROP TABLE IF EXISTS password_reset_tokens;
+DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS tipos_solicitudes;
 DROP TABLE IF EXISTS publicaciones_adopcion;
 DROP TABLE IF EXISTS publicaciones_mascota_perdida;
@@ -22,9 +25,7 @@ DROP TABLE IF EXISTS usuarios;
 DROP TABLE IF EXISTS fotos;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS distritos;
-DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS zonas;
-
  -- zonas 
 CREATE TABLE zonas (
 	zona_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -192,6 +193,16 @@ CREATE TABLE publicaciones_donaciones (
     FOREIGN KEY (tipo_donacion_id) REFERENCES tipos_donaciones(tipo_donacion_id) ON DELETE CASCADE
 );
 
+CREATE TABLE comentarios (
+    comentario_id INT AUTO_INCREMENT PRIMARY KEY,
+    publicacion_id INT NOT NULL, -- ID de la publicación a la que pertenece el comentario
+    usuario_id INT NOT NULL, -- ID del usuario (coordinador o usuario final) que hizo el comentario
+    comentario TEXT NOT NULL, -- Contenido del comentario
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora del comentario
+    FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
+);
+
 -- Tabla de tipos de solicitudes
 CREATE TABLE tipos_solicitudes (
     tipo_solicitud_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -202,16 +213,24 @@ CREATE TABLE tipos_solicitudes (
 CREATE TABLE solicitudes (
     solicitud_id INT AUTO_INCREMENT PRIMARY KEY,
     tipo_solicitud_id INT NOT NULL,
-    solicitante_id INT NOT NULL,
-    solicitado_id INT, -- puede ser una solicitud directa o, si es creación de cuenta, puede ir en NULL
-    -- datos para solicitud de cuenta
+    solicitante_id INT, -- puede ir en null si es una solicitud de creación de cuenta
+    solicitado_id INT, -- puede ser una solicitud directa o, si es solicitud de creacion de albergue, puede ir en NULL
+    fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado_solicitud ENUM('pendiente', 'aprobada', 'rechazada') DEFAULT 'pendiente',
+    -- datos para solicitud de cuenta inicial
+    username VARCHAR(50),
+    nombre VARCHAR(100),
+    apellido VARCHAR(100),
+    email VARCHAR(100),
+    DNI VARCHAR(8),
+    direccion VARCHAR(255),
+    distrito_id INT,
+    -- datos para solicitud de albergue
     nombre_albergue VARCHAR (255),
     nombre_encargado VARCHAR (50),
     apellido_encargado VARCHAR (50),
-    email VARCHAR (100),
+    email_albergue VARCHAR (100),
     -- solicitud de temporal o donacion
-    fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado_solicitud ENUM('pendiente', 'aprobada', 'rechazada', 'eliminada') DEFAULT 'pendiente',
     comentario_solicitud TEXT,
     mascota_id INT, -- en caso sea una solicitud de temporal 
     cantidad DECIMAL(10, 2),
@@ -342,6 +361,14 @@ CREATE TABLE logs (
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id INT,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE SET NULL
+);
+
+CREATE TABLE password_reset_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expiration TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
 DELIMITER $$

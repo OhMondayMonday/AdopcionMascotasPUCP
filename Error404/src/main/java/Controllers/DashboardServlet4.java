@@ -99,6 +99,28 @@ public class DashboardServlet4 extends HttpServlet {
                 donantesUltimosMeses.add(defaultData);
             }
 
+            // Validar donantes con más donaciones
+            if (donantesConMasDonaciones == null || donantesConMasDonaciones.isEmpty()) {
+                donantesConMasDonaciones = new ArrayList<>();
+                // Agregar un valor por defecto si no hay donantes con más donaciones
+                Map<String, Object> defaultData = new HashMap<>();
+                defaultData.put("nombre", "Sin Donantes");
+                defaultData.put("total_donado", 0.0);
+                defaultData.put("porcentaje_total", 0.0);
+                donantesConMasDonaciones.add(defaultData);
+            }
+
+            // Validar albergues con más donaciones
+            if (alberguesConMasDonaciones == null || alberguesConMasDonaciones.isEmpty()) {
+                alberguesConMasDonaciones = new ArrayList<>();
+                // Agregar un valor por defecto si no hay albergues con más donaciones
+                Map<String, Object> defaultData = new HashMap<>();
+                defaultData.put("nombre_albergue", "Sin Albergues");
+                defaultData.put("total_donado", 0.0);
+                defaultData.put("porcentaje_total", 0.0);
+                alberguesConMasDonaciones.add(defaultData);
+            }
+
             // Pasar los datos al JSP
             request.setAttribute("nombreAdministrador", nombreAdministrador);
             request.setAttribute("fotoPerfil", fotoPerfil);
