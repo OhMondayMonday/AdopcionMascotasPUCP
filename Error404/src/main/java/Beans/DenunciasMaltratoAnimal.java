@@ -1,19 +1,14 @@
 package Beans;
 
 import java.sql.Timestamp;
-import java.util.Timer;
 
 public class DenunciasMaltratoAnimal {
     private int reportId;
     private int userId;
-    private String descripcion;
-    private Fotos foto;
     private String tipoMaltrato;
     private String nombreMaltratador;
     private String direccionMaltrato;
-    private String tamanio;
-    private String animal;
-    private String tipoRaza;
+    private Mascotas mascota;
     private boolean denunciaPolicial;
     private Timestamp fechaDenuncia;
 
@@ -32,18 +27,6 @@ public class DenunciasMaltratoAnimal {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Fotos getFoto() { return foto; }
-
-    public void setFoto(Fotos foto) { this.foto = foto; }
 
     public String getTipoMaltrato() {
         return tipoMaltrato;
@@ -69,30 +52,6 @@ public class DenunciasMaltratoAnimal {
         this.direccionMaltrato = direccionMaltrato;
     }
 
-    public String getTamanio() {
-        return tamanio;
-    }
-
-    public void setTamanio(String tamanio) {
-        this.tamanio = tamanio;
-    }
-
-    public String getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(String animal) {
-        this.animal = animal;
-    }
-
-    public String getTipoRaza() {
-        return tipoRaza;
-    }
-
-    public void setTipoRaza(String tipoRaza) {
-        this.tipoRaza = tipoRaza;
-    }
-
     public boolean isDenunciaPolicial() {
         return denunciaPolicial;
     }
@@ -109,5 +68,8 @@ public class DenunciasMaltratoAnimal {
         this.fechaDenuncia = fechaDenuncia;
     }
 
+    public Mascotas getMascota() { return mascota; }
+
+    public void setMascota(Mascotas mascota) { this.mascota = mascota; }
 }
 

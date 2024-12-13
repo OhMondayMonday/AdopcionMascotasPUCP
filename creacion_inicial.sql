@@ -70,7 +70,8 @@ INSERT INTO tipos_publicaciones (tipo_publicacion) VALUES
 ('Normal'),
 ('Adopcion'),
 ('Donaciones'),
-('Mascota Perdida');
+('Mascota Perdida'),
+('Denuncia Maltrato');
 
 INSERT INTO tipos_donaciones (tipo_donacion) VALUES
 ('activo'),

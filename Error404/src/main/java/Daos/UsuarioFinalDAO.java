@@ -28,8 +28,8 @@ public class UsuarioFinalDAO extends BaseDao {
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setInt(1, userId);
-            System.out.println("Query ejecutada: " + query);
-            System.out.println("Con parámetro: user_id = " + userId);
+            //System.out.println("Query ejecutada: " + query);
+            //System.out.println("Con parámetro: user_id = " + userId);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {

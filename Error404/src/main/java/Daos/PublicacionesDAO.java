@@ -227,6 +227,9 @@ public class PublicacionesDAO extends BaseDao {
 
     // Metodo para agregar una nueva publicación
     public void agregarPublicacion(Publicaciones publicacion) {
+        FotosDAO fotosDAO = new FotosDAO();
+        fotosDAO.agregarFotoPubli(publicacion.getFoto().getUrlFoto());
+        Fotos foto = fotosDAO.obtenerIdPorUrl(publicacion.getFoto().getUrlFoto());
         String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, foto_id, tipo_publicacion_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
@@ -234,7 +237,28 @@ public class PublicacionesDAO extends BaseDao {
             pstmt.setInt(1, publicacion.getUsuario().getUserId());
             pstmt.setString(2, publicacion.getTitulo());
             pstmt.setString(3, publicacion.getDescripcion());
-            pstmt.setInt(4, publicacion.getFoto().getFotoId());
+            pstmt.setInt(4, foto.getFotoId());
+            pstmt.setInt(5, publicacion.getTipoPublicacion().getTipoPublicacionId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void agregarPublicacionDenunciaMaltrato(Publicaciones publicacion, DenunciasMaltratoAnimal denunciaMaltrato, String urlFoto) {
+        FotosDAO fotosDAO = new FotosDAO();
+        fotosDAO.agregarFotoPubli(urlFoto);
+        Fotos foto = fotosDAO.obtenerIdPorUrl(urlFoto);
+        DenunciaMaltratoDAO denunciaMaltratoDAO = new DenunciaMaltratoDAO();
+        denunciaMaltratoDAO.agregarDenunciaMaltrato(denunciaMaltrato);
+        String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, foto_id, tipo_publicacion_id) VALUES (?, ?, ?, ?, ?)";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+            pstmt.setInt(1, publicacion.getUsuario().getUserId());
+            pstmt.setString(2, publicacion.getTitulo());
+            pstmt.setString(3, publicacion.getDescripcion());
+            pstmt.setInt(4, foto.getFotoId());
             pstmt.setInt(5, publicacion.getTipoPublicacion().getTipoPublicacionId());
             pstmt.executeUpdate();
         } catch (SQLException e) {

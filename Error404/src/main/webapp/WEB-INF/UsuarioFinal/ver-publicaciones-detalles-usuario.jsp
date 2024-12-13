@@ -6,7 +6,9 @@
 <jsp:useBean id="adopcion" type="Beans.PublicacionesAdopcion" scope="request" class="Beans.PublicacionesAdopcion"/>
 <jsp:useBean id="mascotaPerdida" type="Beans.PublicacionesMascotaPerdida" scope="request" class="Beans.PublicacionesMascotaPerdida"/>
 <jsp:useBean id="donacion" type="Beans.PublicacionesDonaciones" scope="request" class="Beans.PublicacionesDonaciones"/>
+<jsp:useBean id="denunciaMaltrato" type="Beans.DenunciasMaltratoAnimal" scope="request" class="Beans.DenunciasMaltratoAnimal"/>
 <jsp:useBean id="comentarios" type="java.util.List<Beans.Comentarios>" scope="request" />
+
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
@@ -323,36 +325,42 @@
                                     <%if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
 
                                     <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2 && adopcion != null) {%>
-                                    <h4 class="text-primary mt-4">Caracteristicas de la mascota:</h4>
-                                    <p class="mb-4 text-dark">
-                                        <strong>Nombre:</strong> <%=adopcion.getMascota().getNombre()%><br>
-                                        <strong>Raza:</strong> <%=adopcion.getMascota().getRaza().getNombreRaza()%><br>
-                                        <strong>Edad Aprox.:</strong> <%=adopcion.getMascota().getEdadAproximada()%> años<br>
-                                        <strong>Género:</strong> <%=adopcion.getMascota().getGenero()%>
-                                    </p>
+                                        <h4 class="text-primary mt-4">Caracteristicas de la mascota:</h4>
+                                        <p class="mb-4 text-dark">
+                                            <strong>Nombre:</strong> <%=adopcion.getMascota().getNombre()%><br>
+                                            <strong>Raza:</strong> <%=adopcion.getMascota().getRaza().getNombreRaza()%><br>
+                                            <strong>Edad Aprox.:</strong> <%=adopcion.getMascota().getEdadAproximada()%> años<br>
+                                            <strong>Género:</strong> <%=adopcion.getMascota().getGenero()%>
+                                        </p>
                                     <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==3 && donacion != null) {%>
-                                    <h4 class="text-primary mt-4">Detalles:</h4>
-                                    <p class="mb-4 text-dark">
-                                        <strong>Punto de Acopio:</strong> <%=donacion.getPuntoAcopio()%><br>
-                                        <strong>Tipo de Donacion:</strong> <%=donacion.getTipoDonacion().getTipoDonacion()%><br>
-                                        <%if(donacion.getMarca()!= null){%>
-                                        <strong>Marca:</strong> <%=donacion.getMarca()%><br>
-                                        <%}%>
-                                        <%if(donacion.getCantidad()!=0){%>
-                                        <strong>Cantidad:</strong> S/.<%=donacion.getCantidad()%><br>
-                                        <%}%>
-                                        <%if(donacion.getMotivoDonacion()!=null){%>
-                                        <strong>Motivo Donación:</strong> <%=donacion.getMotivoDonacion()%>
-                                        <%}%>
-                                    </p>
+                                        <h4 class="text-primary mt-4">Detalles:</h4>
+                                        <p class="mb-4 text-dark">
+                                            <strong>Punto de Acopio:</strong> <%=donacion.getPuntoAcopio()%><br>
+                                            <strong>Tipo de Donacion:</strong> <%=donacion.getTipoDonacion().getTipoDonacion()%><br>
+                                            <%if(donacion.getMarca()!= null){%>
+                                            <strong>Marca:</strong> <%=donacion.getMarca()%><br>
+                                            <%}%>
+                                            <%if(donacion.getCantidad()!=0){%>
+                                            <strong>Cantidad:</strong> S/.<%=donacion.getCantidad()%><br>
+                                            <%}%>
+                                            <%if(donacion.getMotivoDonacion()!=null){%>
+                                            <strong>Motivo Donación:</strong> <%=donacion.getMotivoDonacion()%>
+                                            <%}%>
+                                        </p>
                                     <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==4 && mascotaPerdida != null) {%>
-                                    <h4 class="text-primary mt-4">Caracteristicas de la mascota:</h4>
-                                    <p class="mb-4 text-dark">
-                                        <strong>Nombre:</strong> <%=mascotaPerdida.getMascota().getNombre()%><br>
-                                        <strong>Raza:</strong> <%=mascotaPerdida.getMascota().getRaza().getNombreRaza()%><br>
-                                        <strong>Edad Aprox.:</strong> <%=mascotaPerdida.getMascota().getEdadAproximada()%> años<br>
-                                        <strong>Género:</strong> <%=mascotaPerdida.getMascota().getGenero()%>
-                                    </p>
+                                        <h4 class="text-primary mt-4">Caracteristicas de la mascota:</h4>
+                                        <p class="mb-4 text-dark">
+                                            <strong>Nombre:</strong> <%=mascotaPerdida.getMascota().getNombre()%><br>
+                                            <strong>Raza:</strong> <%=mascotaPerdida.getMascota().getRaza().getNombreRaza()%><br>
+                                            <strong>Edad Aprox.:</strong> <%=mascotaPerdida.getMascota().getEdadAproximada()%> años<br>
+                                            <strong>Género:</strong> <%=mascotaPerdida.getMascota().getGenero()%>
+                                        </p>
+                                    <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 5 && denunciaMaltrato != null) {%>
+                                        <p class="mb-4 text-dark">
+                                            <strong>Nombre:</strong> <%=denunciaMaltrato.getMascota().getNombre()%><br>
+                                            <strong>Raza:</strong> <%=denunciaMaltrato.getMascota().getRaza().getNombreRaza()%><br>
+                                            <strong>Tamaño:</strong> <%=denunciaMaltrato.getMascota().getTamanio()%><br>
+                                        </p>
                                     <%}%>
                                     <p class="mb-4 text-dark">
                                         <%= publicacion.getDescripcion() %>
@@ -369,28 +377,38 @@
                                     <%if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 1){%>
 
                                     <%}else if (publicacion.getTipoPublicacion().getTipoPublicacionId()==2 && adopcion != null) {%>
-                                    <h5 class="mb-3">Información:</h5>
-                                    <p><strong><i class="fas fa-map-location"></i> Lugar Encontrado:</strong> <%=adopcion.getLugarEncontrado()%></p>
-                                    <p><strong><i class="fas fa-user"></i> Condiciones de adopción:</strong> <%=adopcion.getCondicionesAdopcion()%></p>
+                                        <h5 class="mb-3">Información:</h5>
+                                        <p><strong><i class="fas fa-map-location"></i> Lugar Encontrado:</strong> <%=adopcion.getLugarEncontrado()%></p>
+                                        <p><strong><i class="fas fa-user"></i> Condiciones de adopción:</strong> <%=adopcion.getCondicionesAdopcion()%></p>
                                     <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==3 && donacion != null) {%>
-                                    <h5 class="mb-3">Contacto:</h5>
-                                    <p><strong><i class="fas fa-user"></i> Nombre:</strong> <%=donacion.getNombreContacto()%></p>
-                                    <p><strong><i class="fas fa-phone-alt"></i> Teléfono:</strong> <a href="tel:<%=donacion.getTelefonoContacto()%>"><%=donacion.getTelefonoContacto()%></a></p>
-                                    <p><strong><i class="fas fa-calendar"></i> Fecha de Recepción Inicio:</strong> <%=donacion.getFechaRecepcionInicio()%></p>
-                                    <p><strong><i class="fas fa-calendar-alt"></i> Fecha de Recepción Final:</strong> <%=donacion.getFechaRecepcionFin()%></p>
-                                    <p><strong><i class="fas fa-clock"></i> Hora de Recepción:</strong> <%=donacion.getHoraRecepcion()%></p>
+                                        <h5 class="mb-3">Contacto:</h5>
+                                        <p><strong><i class="fas fa-user"></i> Nombre:</strong> <%=donacion.getNombreContacto()%></p>
+                                        <p><strong><i class="fas fa-phone-alt"></i> Teléfono:</strong> <a href="tel:<%=donacion.getTelefonoContacto()%>"><%=donacion.getTelefonoContacto()%></a></p>
+                                        <p><strong><i class="fas fa-calendar"></i> Fecha de Recepción Inicio:</strong> <%=donacion.getFechaRecepcionInicio()%></p>
+                                        <p><strong><i class="fas fa-calendar-alt"></i> Fecha de Recepción Final:</strong> <%=donacion.getFechaRecepcionFin()%></p>
+                                        <p><strong><i class="fas fa-clock"></i> Hora de Recepción:</strong> <%=donacion.getHoraRecepcion()%></p>
                                     <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() ==4 && mascotaPerdida != null) {%>
-                                    <h5 class="mb-3">Contacto:</h5>
-                                    <p><strong><i class="fas fa-user"></i> Nombre:</strong> <%=mascotaPerdida.getNombreContacto()%></p>
-                                    <p><strong><i class="fas fa-phone-alt"></i> Teléfono:</strong> <a href="tel:<%=mascotaPerdida.getTelefonoContacto()%>"><%=mascotaPerdida.getTelefonoContacto()%></a></p>
-                                    <p><strong><i class="fas fa-map-location"></i> Lugar de Pérdida:</strong> <%=mascotaPerdida.getLugarPerdida()%></p>
-                                    <p><strong><i class="fas fa-calendar"></i> Fecha de Pérdida:</strong> <%=mascotaPerdida.getFechaPerdida()%></p>
-                                    <%if(mascotaPerdida.getRecompensa()!= null){%>
-                                    <p><strong><i class="fas fa-money-bill"></i> Recompensa:</strong> <%=mascotaPerdida.getRecompensa()%></p>
-                                    <%}%>
-                                    <%if(mascotaPerdida.getDescripcionAdicional()!= null){%>
-                                    <p><strong><i class="fas fa-note-sticky"></i> Descripción Adicional:</strong> <%=mascotaPerdida.getDescripcionAdicional()%></p>
-                                    <%}%>
+                                        <h5 class="mb-3">Contacto:</h5>
+                                        <p><strong><i class="fas fa-user"></i> Nombre:</strong> <%=mascotaPerdida.getNombreContacto()%></p>
+                                        <p><strong><i class="fas fa-phone-alt"></i> Teléfono:</strong> <a href="tel:<%=mascotaPerdida.getTelefonoContacto()%>"><%=mascotaPerdida.getTelefonoContacto()%></a></p>
+                                        <p><strong><i class="fas fa-map-location"></i> Lugar de Pérdida:</strong> <%=mascotaPerdida.getLugarPerdida()%></p>
+                                        <p><strong><i class="fas fa-calendar"></i> Fecha de Pérdida:</strong> <%=mascotaPerdida.getFechaPerdida()%></p>
+                                        <%if(mascotaPerdida.getRecompensa()!= null){%>
+                                        <p><strong><i class="fas fa-money-bill"></i> Recompensa:</strong> <%=mascotaPerdida.getRecompensa()%></p>
+                                        <%}%>
+                                        <%if(mascotaPerdida.getDescripcionAdicional()!= null){%>
+                                        <p><strong><i class="fas fa-note-sticky"></i> Descripción Adicional:</strong> <%=mascotaPerdida.getDescripcionAdicional()%></p>
+                                        <%}%>
+                                    <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 5 && denunciaMaltrato != null) {%>
+                                        <h5 class="mb-3">Datos del Maltratador:</h5>
+                                        <p><strong><i class="fas fa-user"></i> Nombre:</strong> <%=denunciaMaltrato.getNombreMaltratador()%></p>
+                                        <p><strong><i class="fas fa-hand-fist"></i> Tipo de Maltrato:</strong> <%=denunciaMaltrato.getTipoMaltrato()%></p>
+                                        <p><strong><i class="fas fa-map-location"></i> Direccion Maltrato:</strong> <%=denunciaMaltrato.getDireccionMaltrato()%></p>
+                                        <%if(denunciaMaltrato.isDenunciaPolicial()){%>
+                                        <p><strong><i class="fas fa-user-ninja"></i> Ya se ha relizado la Denuncia Policial</strong></p>
+                                        <%} else{%>
+                                        <p><strong><i class="fas fa-user-ninja"></i> Todavia no se ha relizado la Denuncia Policial</strong></p>
+                                        <%}%>
                                     <%}%>
                                     <%if(mascotaPerdida.isMascotaEncontrada() && publicacion.getTipoPublicacion().getTipoPublicacionId()==4){%>
                                     <h4 class="text-primary justify-content-center">¡Mascota Encontrada!</h4>
@@ -409,22 +427,22 @@
 
                             <!-- Tarjeta de Comentarios -->
                             <div class="card g-3 mt-4">
-                                <div class="card-body">
+                                <div class="card-body table-responsive">
                                     <h5>Seguimiento:</h5>
-                                    <table class="table table-bordered mb-0">
+                                    <table class="table table-bordered mb-0 align-middle">
                                         <thead>
                                         <tr>
                                             <th><strong>Comentario</strong></th>
                                             <th><strong>Fecha</strong></th>
                                         </tr>
+                                        </thead>
+                                        <tbody>
                                         <%for(Comentarios comentario: comentarios){%>
-                                        <tr>
+                                        <tr class="align-middle">
                                             <th><%=comentario.getComentario()%></th>
                                             <th><%=comentario.getFechaActualizacion()%></th>
                                         </tr>
                                         <%}%>
-                                        </thead>
-                                        <tbody>
                                         <form action="PublicacionesServlet" method="GET" id="comentariosForm">
                                             <input type="hidden" name="action" value="agregarComentario">
                                             <tr>
