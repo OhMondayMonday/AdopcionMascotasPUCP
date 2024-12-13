@@ -20,7 +20,7 @@ public class LugaresEventos {
         this.lugarId = lugarId;
     }
 
-    public Distritos getDistrito() { return distrito; }|
+    public Distritos getDistrito() { return distrito; }
 
     public void setDistrito(Distritos distrito) { this.distrito = distrito; }
 
