@@ -34,6 +34,7 @@ public class Usuarios {
     private Zonas zona;
     private String fechaNacimiento;
     private String fechaContratacion;
+    private HogaresTemporales hogarTemporal;
 
 
 
@@ -249,6 +250,14 @@ public class Usuarios {
 
     public void setFechaContratacion(String fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
+    }
+
+    public HogaresTemporales getHogarTemporal() {
+        return hogarTemporal;
+    }
+
+    public void setHogarTemporal(HogaresTemporales hogarTemporal) {
+        this.hogarTemporal = hogarTemporal;
     }
 }
 

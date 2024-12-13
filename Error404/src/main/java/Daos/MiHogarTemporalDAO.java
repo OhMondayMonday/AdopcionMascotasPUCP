@@ -4,6 +4,7 @@ import Beans.Solicitudes;
 import Beans.Usuarios;
 import Beans.Roles;
 import Beans.Mascotas;
+import Beans.HogaresTemporales;
 import Beans.Razas;
 import Beans.Fotos;
 import Beans.Distritos;
@@ -17,18 +18,20 @@ public class MiHogarTemporalDAO extends BaseDao{
     // Método para obtener los detalles del usuario
     public Usuarios obtenerDetallesUsuarioTemporal(int userId) {
         Usuarios usuario = null;
+
         String query = "SELECT u.username, u.email, u.estado_cuenta, r.nombre_rol AS rol, u.user_id AS id, " +
-                "u.nombre, u.apellido, u.numero_contacto_donaciones AS contacto, d.nombre_distrito AS distrito, f.url_foto " +
+                "u.nombre, u.apellido, u.numero_contacto_donaciones AS contacto, d.nombre_distrito AS distrito, f.url_foto, h.cantidad_mascotas, h.celular, h.temporal_id " +
                 "FROM usuarios u " +
                 "JOIN roles r ON u.rol_id = r.rol_id " +
                 "JOIN distritos d ON u.distrito_id = d.distrito_id " +
                 "JOIN fotos f ON u.foto_id = f.foto_id " +
-                "WHERE u.user_id = 1";
+                "LEFT JOIN hogares_temporales h ON u.user_id = h.user_id " +
+                "WHERE u.user_id = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-
+            pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -55,6 +58,18 @@ public class MiHogarTemporalDAO extends BaseDao{
                 Distritos distrito = new Distritos();
                 distrito.setNombreDistrito(rs.getString("distrito"));
                 usuario.setDistrito(distrito);
+
+                int temporalId = rs.getInt("temporal_id");
+                if (temporalId > 0) { // Existe hogar temporal
+                    HogaresTemporales hogarTemporal = new HogaresTemporales();
+                    hogarTemporal.setTemporalId(temporalId);
+                    hogarTemporal.setCantidadMascotas(rs.getInt("cantidad_mascotas"));
+                    hogarTemporal.setCelular(rs.getString("celular"));
+
+                    usuario.setHogarTemporal(hogarTemporal);
+                } else {
+                    usuario.setHogarTemporal(null); // No es un usuario hogar temporal
+                }
 
             }
         } catch (SQLException e) {
@@ -87,47 +102,96 @@ public class MiHogarTemporalDAO extends BaseDao{
     }
 
     // Método para obtener la lista de mascotas solicitadas por un usuario
-    public List<Solicitudes> obtenerSolicitudesPorUsuario(int userId) {
-        List<Solicitudes> solicitudes  = new ArrayList<>();
-        String query = "SELECT m.mascota_id, m.nombre, m.descripcion, m.edad_aproximada, " +
-                "r.nombre_raza, m.genero, m.tamanio, s.fecha_solicitud " +
+    public List<Solicitudes> obtenerTodasLasSolicitudes() {
+        List<Solicitudes> solicitudes = new ArrayList<>();
+        String query = "SELECT s.solicitud_id, m.mascota_id, m.nombre AS nombre_mascota, m.descripcion, m.edad_aproximada, " +
+                "r.nombre_raza, s.solicitado_id, s.estado_solicitud " +
                 "FROM solicitudes s " +
                 "JOIN mascotas m ON s.mascota_id = m.mascota_id " +
-                "JOIN razas r ON m.raza_id = r.raza_id " +
+                "LEFT JOIN razas r ON m.raza_id = r.raza_id " +
                 "ORDER BY s.fecha_solicitud DESC";
 
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            //pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                // Crear objetos necesarios
                 Mascotas mascota = new Mascotas();
                 mascota.setMascotaId(rs.getInt("mascota_id"));
-                mascota.setNombre(rs.getString("nombre"));
+                mascota.setNombre(rs.getString("nombre_mascota"));
                 mascota.setDescripcion(rs.getString("descripcion"));
                 mascota.setEdadAproximada(rs.getInt("edad_aproximada"));
-                mascota.setGenero(rs.getString("genero"));
-                mascota.setTamanio(rs.getString("tamanio"));
 
-                // Crear el objeto Razas y asignarlo a la mascota
                 Razas raza = new Razas();
                 raza.setNombreRaza(rs.getString("nombre_raza"));
                 mascota.setRaza(raza);
 
-                // Crear el objeto Solicitudes y asignar la fecha
                 Solicitudes solicitud = new Solicitudes();
-                solicitud.setFechaSolicitud(rs.getString("fecha_solicitud"));
-                solicitud.setMascota(mascota);  // Asignar la mascota a la solicitud
+                solicitud.setSolicitudId(rs.getInt("solicitud_id"));
+                solicitud.setEstadoSolicitud(rs.getString("estado_solicitud"));
+                solicitud.setMascota(mascota);
 
                 solicitudes.add(solicitud);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return solicitudes;
+    }
+
+    public boolean aceptarMascota(int solicitudId, int hogarTemporalId) {
+        String queryActualizarSolicitud = "UPDATE solicitudes SET estado_solicitud = 'aprobada' WHERE solicitud_id = ?";
+        String queryIncrementarMascotas = "UPDATE hogares_temporales SET cantidad_mascotas = cantidad_mascotas + 1 WHERE temporal_id = ?";
+        String queryEliminarSolicitud = "DELETE FROM solicitudes WHERE solicitud_id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement pstmtSolicitud = connection.prepareStatement(queryActualizarSolicitud);
+             PreparedStatement pstmtMascotas = connection.prepareStatement(queryIncrementarMascotas);
+             PreparedStatement pstmtEliminar = connection.prepareStatement(queryEliminarSolicitud)) {
+
+            // Imprimir consultas y valores
+
+
+            pstmtSolicitud.setInt(1, solicitudId);
+            int filasSolicitud = pstmtSolicitud.executeUpdate();
+
+
+
+            pstmtMascotas.setInt(1, hogarTemporalId);
+            int filasMascotas = pstmtMascotas.executeUpdate();
+
+            pstmtEliminar.setInt(1, solicitudId);
+            int filasEliminadas = pstmtEliminar.executeUpdate();
+
+            return filasSolicitud > 0 && filasMascotas > 0 && filasEliminadas > 0;
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+    public boolean eliminarSolicitud(int solicitudId) {
+        String query = "DELETE FROM solicitudes WHERE solicitud_id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+
+            pstmt.setInt(1, solicitudId);
+            int filasAfectadas = pstmt.executeUpdate();
+
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar solicitud: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

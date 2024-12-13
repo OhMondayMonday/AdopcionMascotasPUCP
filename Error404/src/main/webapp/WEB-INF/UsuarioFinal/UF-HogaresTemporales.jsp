@@ -95,6 +95,62 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
 
+    <style>
+        .card {
+            width: 100%;
+            max-width: 2000px;
+            height: auto;
+            display: flex;
+
+            justify-content: space-between;
+        }
+
+        .card-img-top {
+            height: 200px; /* Tamaño fijo para la imagen */
+            object-fit: cover; /* Evita la distorsión */
+        }
+
+        .card-body {
+            min-height: 90px; /* Altura mínima para mantener el espacio de texto */
+        }
+
+        .card-filters {
+            width: 100%;
+            max-width: 2000px; /* Ancho máximo */
+            height: auto; /* Ajuste dinámico al contenido */
+            min-height: 10px; /* Ajusta este valor según sea necesario */
+            padding: 10px; /* Reduce el relleno interno */
+            background-color: #ffffff; /* Color de fondo blanco */
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+            border-radius: 10px;
+        }
+
+    </style>
+    <style>
+        .custom-btn {
+            font-size: 0.75rem;
+            padding: 10px 20px;
+            border-radius: 8px; /* Borde redondeado */
+            background-color: #3b5998; /* Azul para estilo consistente */
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Para el botón tipo enlace */
+        }
+
+        .custom-btn:hover {
+            background-color: #2d4373; /* Cambio de color al pasar el cursor */
+            text-decoration: none;
+        }
+
+        .custom-btn i {
+            margin-left: 5px; /* Separación del ícono */
+        }
+
+    </style>
 </head>
 
 <body style="background-color: #d4e1ffa9;">
@@ -214,27 +270,32 @@
                     <ul class="navbar-nav flex-row align-items-center ms-0">
 
                         <!-- Notification -->
-                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">
+                            ¡Hola, ${sessionScope.usuarioLogueado.nombre}!
+                        </span>
                         <!--/ Notification -->
+
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                                    <img src="${sessionScope.usuarioLogueado.foto != null ? sessionScope.usuarioLogueado.foto.urlFoto : 'https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg'}"
+                                         alt="Foto de usuario" class="w-px-40 h-auto rounded-circle">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMiPerfil">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                                                    <img src="${sessionScope.usuarioLogueado.foto != null ? sessionScope.usuarioLogueado.foto.urlFoto : 'https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg'}"
+                                                         alt="Foto de usuario" class="w-px-40 h-auto rounded-circle">
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block"> Adolfo Contreras</span>
-                                                <small class="text-muted">Usuario</small>
+                                                <span class="fw-medium d-block">${sessionScope.usuarioLogueado.nombre} ${sessionScope.usuarioLogueado.apellido}</span>
+                                                <small class="text-muted">${sessionScope.usuarioLogueado.rol}</small>
                                             </div>
                                         </div>
                                     </a>
@@ -243,30 +304,28 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMiSeguridad">
                                         <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
                                         <span class="align-middle" style="color: #1f4397;">Seguridad</span>
                                     </a>
                                 </li>
-
-
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMisPublicaciones">
                                         <i class="bx bx-building-house"></i>
                                         <span class="align-middle">Mis publicaciones</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMisEventos">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-calendario-usuario.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verCalendario">
                                         <i class="bx bx-calendar"></i>
                                         <span class="align-middle">Mi Calendario</span>
                                     </a>
@@ -275,7 +334,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="Preguntas-frecuentes.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=preguntasFrecuentes">
                                         <i class="bx bx-help-circle"></i>
                                         <span class="align-middle">Preguntas frecuentes</span>
                                     </a>
@@ -284,7 +343,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../index.html" >
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
                                         <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
                                         <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                                     </a>
@@ -292,7 +351,6 @@
                             </ul>
                         </li>
                         <!--/ User -->
-
 
                     </ul>
                 </div>
@@ -320,49 +378,61 @@
 
                         <!-- Select2 -->
                         <div class="col-12">
-                            <div class="card mb-0" style="height: auto; padding: 5px;">
-                                <div class="card-body d-flex align-items-center justify-content-center p-1">
+                            <div class="card-filters mb-0" style="padding: 5px;">
+                                <form method="GET" action="${pageContext.request.contextPath}/UsuarioServlet" class="card-body d-flex align-items-center justify-content-center p-1">
+                                    <input type="hidden" name="action" value="hogarTemporal"> <!-- Acción para el servlet -->
                                     <div class="row w-100">
-                                        <!-- Tipo de Publicacion -->
+                                        <!-- Tipo de Mascota -->
                                         <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                             <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Mascotas</label>
-                                            <select id="select2Basic" class="form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                <option value="AK">Todas</option>
-                                                <option value="Perros">Perros</option>
-                                                <option value="Gatos">Gatos</option>
-                                                <option value="Roedores">Roedores</option>
-                                                <option value="Pajaros">Pajaros</option>
-                                                <option value="Reptiles">reptiles</option>
+                                            <select id="select2Basic" name="tipoMascota" class="form-select form-select-sm" style="font-size: 0.75rem;">
+                                                <option value="Todas" ${param.tipoMascota == 'Todas' ? 'selected' : ''}>Todas</option>
+                                                <option value="Perros" ${param.tipoMascota == 'Perros' ? 'selected' : ''}>Perros</option>
+                                                <option value="Gatos" ${param.tipoMascota == 'Gatos' ? 'selected' : ''}>Gatos</option>
+                                                <option value="Roedores" ${param.tipoMascota == 'Roedores' ? 'selected' : ''}>Roedores</option>
+                                                <option value="Pajaros" ${param.tipoMascota == 'Pajaros' ? 'selected' : ''}>Pájaros</option>
+                                                <option value="Reptiles" ${param.tipoMascota == 'Reptiles' ? 'selected' : ''}>Reptiles</option>
                                             </select>
                                         </div>
-                                        <!-- Palabra clave -->
+
+                                        <!-- Palabra Clave -->
                                         <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                             <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
-                                            <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
+                                            <input type="text" id="inputPalabraClave" name="palabraClave" class="form-control form-control-sm"
+                                                   placeholder="Escribe palabra clave" style="font-size: 0.75rem;"
+                                                   value="${param.palabraClave != null ? param.palabraClave : ''}">
                                         </div>
-                                        <!-- ubicacion -->
-                                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                            <label for="select2Ubi" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicacion</label>
-                                            <select id="select2Ubi" class="form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                <option value="AK">Todas</option>
-                                                <option value="Barranco">Barranco</option>
-                                                <option value="Lima">Lima</option>
-                                                <option value="Chorrillos">Chorrillos</option>
-                                                <option value="Lamolina">La Molina</option>
-                                                <option value="Jesusmaria">Jesus Maria</option>
-                                                <option value="Sanmiguel">San Miguel</option>
-                                                <option value="Losolivos">Los Olivos</option>
-                                                <option value="Miraflores">Miraflores</option>
-                                                <option value="Sanisidro">San isidro</option>
+
+                                        <!-- Distrito -->
+                                        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                                            <label for="select2Ubi" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Distrito</label>
+                                            <select id="select2Ubi" name="distrito" class="form-select form-select-sm" style="font-size: 0.75rem;">
+                                                <option value="Todas" ${param.distrito == 'Todas' ? 'selected' : ''}>Todas</option>
+                                                <option value="Barranco" ${param.distrito == 'Barranco' ? 'selected' : ''}>Barranco</option>
+                                                <option value="Lima" ${param.distrito == 'Lima' ? 'selected' : ''}>Lima</option>
+                                                <option value="Chorrillos" ${param.distrito == 'Chorrillos' ? 'selected' : ''}>Chorrillos</option>
+                                                <option value="Lamolina" ${param.distrito == 'Lamolina' ? 'selected' : ''}>La Molina</option>
+                                                <option value="Jesusmaria" ${param.distrito == 'Jesusmaria' ? 'selected' : ''}>Jesús María</option>
+                                                <option value="Sanmiguel" ${param.distrito == 'Sanmiguel' ? 'selected' : ''}>San Miguel</option>
+                                                <option value="Losolivos" ${param.distrito == 'Losolivos' ? 'selected' : ''}>Los Olivos</option>
+                                                <option value="Miraflores" ${param.distrito == 'Miraflores' ? 'selected' : ''}>Miraflores</option>
+                                                <option value="Sanisidro" ${param.distrito == 'Sanisidro' ? 'selected' : ''}>San Isidro</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
-                                            <a href="${pageContext.request.contextPath}/UsuarioServlet?action=postularHogarTemporal" class="btn btn-facebook" style="font-size: 0.75rem;">
-                                                <span>Quiero postular</span><i class="bx bx-chevron-right"></i>
+
+                                        <!-- Botones -->
+                                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                                            <button type="submit" class="btn custom-btn me-2">
+                                                <span>Buscar</span>
+                                                <i class="bx bx-search"></i>
+                                            </button>
+                                            <a href="${pageContext.request.contextPath}/UsuarioServlet?action=postularHogarTemporal" class="btn custom-btn">
+                                                <span>Quiero postular</span>
+                                                <i class="bx bx-chevron-right"></i>
                                             </a>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
 
@@ -373,15 +443,15 @@
                                     <div class="row gx-1 gy-2 justify-content-center m-0">
                                         <%
                                             List<HogaresTemporales> hogares = (List<HogaresTemporales>) request.getAttribute("hogares");
-                                            int i = 1; // Contador para identificar las publicaciones
 
+                                            int i = 1;
                                             for (HogaresTemporales hogar : hogares) { // Cambia `hogares` por el nombre real de tu lista
                                         %>
                                         <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
                                             <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                                                 <div class="rounded-2 text-center flex-grow-1">
                                                     <a href="#">
-                                                        <img class="img-fluid" src="<%= hogar.getFoto().getUrlFoto() %>" alt="Imagen de publicación <%= hogar.getTemporalId() %>"
+                                                         <img class="card-img-top" src="<%= hogar.getFoto().getUrlFoto() %>" alt="Imagen de publicación <%= hogar.getTemporalId() %>"
                                                              style="height: 200px; object-fit: cover; border-radius: 3px;"/>
                                                     </a>
                                                 </div>
@@ -389,7 +459,7 @@
                                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                                         <span class="badge bg-label-info" style="font-size: 0.75rem;"><%= hogar.getTipoMascotas() %></span>
                                                     </div>
-                                                    <a class="h6" href="UsuarioServlet?action=detalleHogarTemporal&temporalId=<%= hogar.getTemporalId() %>" style="font-size: 0.875rem;">
+                                                    <a class="h6" style="font-size: 0.875rem;">
                                                         <%= hogar.getPublicacion().getTitulo() %>
                                                     </a>
                                                     <p class="mt-1 mb-0" style="font-size: 0.75rem;"><%= hogar.getPublicacion().getDescripcion() %></p>
@@ -451,6 +521,8 @@
                                                 i++; // Incrementa el contador
                                             }
                                         %>
+
+
                                     </div>
                                 </div>
                             </div>
