@@ -85,32 +85,49 @@
         <!-- Login -->
         <div class="d-flex col-12 col-lg-5 col-xl-5 align-items-center authentication-bg p-sm-5 p-4">
             <div class="w-px-400 mx-auto">
-                <!-- Logo -->
-                <div class="app-brand mb-5">
-                    <a href="<%=request.getContextPath()%>/index.html" class="app-brand-link gap-2">
-                        <div class="app-brand-logo demo">
-                            <img src="<%=request.getContextPath()%>/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="Logo de Alianza Animal" width="50">
-                        </div>
-                        <span class="text-body fw-bold" style="font-size:xx-large">Alianza Animal</span>
-                    </a>
+                <!-- Logo y formulario con borde -->
+                <div class="border border-dark p-4 rounded bg-white">
+                    <!-- Logo -->
+                    <div class="app-brand mb-2 text-center">
+                        <a href="<%=request.getContextPath()%>/login" class="app-brand-link gap-2">
+                            <div class="app-brand-logo demo">
+                                <img src="<%=request.getContextPath()%>/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="Logo de Alianza Animal" width="50">
+                            </div>
+                            <span class="text-body fw-bold" style="font-size:large">Alianza Animal</span>
+                            <p class="mt-3 ms-5 fw-bold fs-big">Iniciar sesión</p>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center mb-2">
+                        <img src="<%=request.getContextPath()%>/assets/img/padlock-2873246_960_720.webp" width="150" alt="Candado">
+                    </div>
+                    <!-- /Logo -->
+                    <h4 class="mb-1 text-center">¿Tienes problemas para ingresar?</h4>
+                    <p class="mb-4 text-center">Ingresa tu correo y en breve te enviaremos un enlace para que puedas restablecer tu contraseña</p>
+
+                    <form id="forgotPasswordForm">
+                        <label for="email" class="form-label">Correo electrónico:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico" name="email" required>
+                        <span id="emailFeedback" style="color: red; display: none;">Por favor, ingresa un correo válido.</span>
+                        <button class="btn btn-primary d-grid w-100 mt-3" type="submit">Recuperar contraseña</button>
+                    </form>
                 </div>
-                <!-- /Logo -->
-                <h4 class="mb-2">Recupera tu cuenta</h4>
-                <p class="mb-4">Ingresa tu correo y recupera tu contraseña</p>
 
-                <form id="forgotPasswordForm">
-                    <label for="email" class="form-label">Correo electrónico:</label>
-                    <input type="email" class = "form-control" id="email" name="email" required>
-                    <span id="emailFeedback" style="color: red; display: none;">Por favor, ingresa un correo válido.</span>
-                    <button class="btn btn-primary d-grid w-100" type="submit">Recuperar contraseña</button>
-                </form>
+                <!-- Línea negra entre las cajas -->
+                <div class="d-flex align-items-center my-4">
+                    <hr class="flex-grow-1 border-dark">
+                    <span class="px-2 text-dark bg-white rounded-circle">o</span>
+                    <hr class="flex-grow-1 border-dark">
+                </div>
 
-                <p class="text-center">
-                    <span>¿Deseas crear una cuenta?</span>
-                    <a href="<%=request.getContextPath()%>/register">
-                        <span>Crea una cuenta</span>
-                    </a>
-                </p>
+                <!-- Sección de "Crear nueva cuenta" con borde -->
+                <div class="border border-dark p-3 rounded bg-white">
+                    <p class="text-center mb-0">
+                        <span>¿Deseas crear una cuenta?</span>
+                        <a href="<%=request.getContextPath()%>/register">
+                            <span>Crea una cuenta</span>
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
         <!-- /Login -->
