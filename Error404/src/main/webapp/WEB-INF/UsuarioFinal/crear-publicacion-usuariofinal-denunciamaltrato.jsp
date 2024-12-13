@@ -305,7 +305,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
           <div class="app-ecommerce">
-            <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardarDenuncia">
+            <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardarDenuncia" enctype="multipart/form-data">
 
             <!-- Add Product -->
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
@@ -342,7 +342,7 @@
                           <option value="" disabled selected>Elija el tipo de publicación</option>
                           <option value="crear-publicacion-usuariofinal-normal.html">Normal</option>
                           <option value="crear-publicacion-usuariofinal-mascotaperdida.html">Mascota Perdida</option>
-                          <option value="crear-publicacion-usuariofinal-denunciamaltrato.html" selected>Denuncia por Maltrato Animal</option>
+                          <option value="" selected>Denuncia por Maltrato Animal</option>
                         </select>
                       </div>
                     </div>
@@ -376,9 +376,9 @@
                         <select class="form-control" name="mascota_tamanio" id="mascota_tamanio" required>
                           <option value="" disabled selected>Elija el tamaño</option>
                           <option value="pequeño">Pequeño</option>
-                          <option value="normal">Normal</option>
+                          <option value="mediano">Mediano</option>
                           <option value="grande">Grande</option>
-                          <option value="muy grande">Muy Grande</option>
+                          <option value="gigante">Gigante</option>
                         </select>
                       </div>
                       <div class="col"><label class="form-label" for="mascota_raza">Raza</label>

@@ -300,7 +300,7 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
 
                     <div class="app-ecommerce">
-                        <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardar">
+                        <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardar" enctype="multipart/form-data">
                         <!-- Add Product -->
                         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 

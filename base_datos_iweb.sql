@@ -103,10 +103,10 @@ CREATE TABLE mascotas (
     mascota_id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     raza_id INT NOT NULL,
-    descripcion TEXT NOT NULL,
-    foto_id INT NOT NULL,
+    descripcion TEXT,
+    foto_id INT,
     edad_aproximada INT,
-    genero ENUM('macho', 'hembra') NOT NULL,
+    genero ENUM('macho', 'hembra'),
     tamanio ENUM('pequeño', 'mediano', 'grande', 'gigante') NOT NULL,
     distintivo VARCHAR(255),
     en_hogar_temporal BOOLEAN DEFAULT FALSE,
@@ -191,16 +191,6 @@ CREATE TABLE publicaciones_donaciones (
     motivo_donacion TEXT,
     FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
     FOREIGN KEY (tipo_donacion_id) REFERENCES tipos_donaciones(tipo_donacion_id) ON DELETE CASCADE
-);
-
-CREATE TABLE comentarios (
-    comentario_id INT AUTO_INCREMENT PRIMARY KEY,
-    publicacion_id INT NOT NULL, -- ID de la publicación a la que pertenece el comentario
-    usuario_id INT NOT NULL, -- ID del usuario (coordinador o usuario final) que hizo el comentario
-    comentario TEXT NOT NULL, -- Contenido del comentario
-    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora del comentario
-    FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
 -- Tabla de tipos de solicitudes

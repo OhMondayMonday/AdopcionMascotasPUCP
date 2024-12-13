@@ -1,6 +1,6 @@
 INSERT INTO usuarios(username, contrasenia, nombre, apellido, email, DNI, estado_cuenta, rol_id) VALUES ("sebas", "1234", "Sebastian", "Ramirez", "sebas@pucp.com", 72519702, "activa", 1);
 
-INSERT INTO fotos(url_foto, fecha_subida) values ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ7xc7Q5j6x-Vy9l7fNSlp6VaSrKKEfglO8A&s", current_timestamp());
+INSERT INTO fotos(url_foto, fecha_subida) values ("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ7xc7Q5j6x-Vy9l7fNSlp6VaSrKKEfglO8A&s");
 INSERT INTO fotos(url_foto) values ("https://static.vecteezy.com/system/resources/previews/023/928/152/non_2x/cat-sad-lonely-abandoned-under-the-rain-illustration-generative-ai-photo.jpg");
 
 INSERT INTO publicaciones (publicacion_id, user_id, titulo, descripcion, foto_id, comentario, tipo_publicacion_id, estado_publicacion) VALUES (1, 1, "Adopta a Pablo", "Por favor", 1, "JEJE", 1, "activa");

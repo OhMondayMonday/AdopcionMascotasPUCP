@@ -2,7 +2,7 @@ INSERT INTO fotos (foto_id, url_foto, fecha_subida) VALUES (1, "https://ichef.bb
 INSERT INTO usuarios (user_id, username, contraseña, nombre, apellido, email, DNI, rol_id) VALUES (1, "Sebas", "1234", "Sebastian", "Ramirez", 'dhannysebas@hotmail.com', '72519702', 1);
 INSERT INTO publicaciones (user_id, titulo, descripcion, foto_id, comentario, tipo_publicacion_id, estado_publicacion) VALUES ( 1, "Adopta a Pablo",  "Por favor", 1, "JEJE", 1, "activa"); 
 UPDATE publicaciones SET fecha_creacion=CURRENT_TIMESTAMP WHERE publicacion_id = 1;
-UPDATE publicaciones SET estado_publicacion='activa' WHERE publicacion_id=21;
+UPDATE publicaciones SET estado_publicacion='activa' WHERE publicacion_id=24;
 UPDATE usuarios SET distrito_id=1 WHERE user_id =1;
 SELECT * from publicaciones;
 SELECT * from tipos_publicaciones;
@@ -12,3 +12,4 @@ select * from publicaciones_mascota_perdida;
 select * from mascotas;
 select * from tipos_donaciones;
 SELECT * from fotos;
+SELECT * from denuncias_maltrato_animal;

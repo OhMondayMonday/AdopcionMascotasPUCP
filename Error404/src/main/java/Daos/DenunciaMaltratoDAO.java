@@ -1,8 +1,10 @@
 package Daos;
 
 import Beans.DenunciasMaltratoAnimal;
+import Beans.Fotos;
 import Beans.Mascotas;
 import Beans.Razas;
+import com.oracle.wls.shaded.org.apache.bcel.generic.NEW;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -53,6 +55,12 @@ public class DenunciaMaltratoDAO extends BaseDao {
 
     // Método para agregar una nueva denuncia de maltrato
     public void agregarDenunciaMaltrato(DenunciasMaltratoAnimal denuncia) {
+        MascotaDAO mascotaDAO = new MascotaDAO();
+        mascotaDAO.agregarMascota(denuncia.getMascota());
+        denuncia.getMascota().setMascotaId(mascotaDAO.obtenerIdUltimaMascota());
+        Fotos foto = new Fotos();
+        foto.setFotoId(0);
+        denuncia.getMascota().setFoto(foto);
         String query = "INSERT INTO denuncias_maltrato_animal (publicacion_id, user_id, tipo_maltrato, nombre_maltratador, direccion_maltrato, mascota_id, denuncia_policial) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {

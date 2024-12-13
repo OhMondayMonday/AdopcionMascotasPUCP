@@ -67,6 +67,22 @@ public class PublicacionesDAO extends BaseDao {
         return publicacion;
     }
 
+    public int obtenerIdUltimaPublicacion(){
+        int id = 0;
+
+        String sql = "SELECT * FROM publicaciones ORDER BY publicacion_id DESC LIMIT 1";
+        try (Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)){
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                id = rs.getInt("publicacion_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     public int contarPublicacionesActivas() {
         String query = "SELECT COUNT(*) FROM publicaciones WHERE estado_publicacion = 'activa'";
         int totalrecords = 0;
@@ -222,35 +238,11 @@ public class PublicacionesDAO extends BaseDao {
         return publicaciones;
     }
 
-
-
-
     // Metodo para agregar una nueva publicación
     public void agregarPublicacion(Publicaciones publicacion) {
         FotosDAO fotosDAO = new FotosDAO();
         fotosDAO.agregarFotoPubli(publicacion.getFoto().getUrlFoto());
         Fotos foto = fotosDAO.obtenerIdPorUrl(publicacion.getFoto().getUrlFoto());
-        String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, foto_id, tipo_publicacion_id) VALUES (?, ?, ?, ?, ?)";
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-
-            pstmt.setInt(1, publicacion.getUsuario().getUserId());
-            pstmt.setString(2, publicacion.getTitulo());
-            pstmt.setString(3, publicacion.getDescripcion());
-            pstmt.setInt(4, foto.getFotoId());
-            pstmt.setInt(5, publicacion.getTipoPublicacion().getTipoPublicacionId());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void agregarPublicacionDenunciaMaltrato(Publicaciones publicacion, DenunciasMaltratoAnimal denunciaMaltrato, String urlFoto) {
-        FotosDAO fotosDAO = new FotosDAO();
-        fotosDAO.agregarFotoPubli(urlFoto);
-        Fotos foto = fotosDAO.obtenerIdPorUrl(urlFoto);
-        DenunciaMaltratoDAO denunciaMaltratoDAO = new DenunciaMaltratoDAO();
-        denunciaMaltratoDAO.agregarDenunciaMaltrato(denunciaMaltrato);
         String query = "INSERT INTO publicaciones (user_id, titulo, descripcion, foto_id, tipo_publicacion_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
