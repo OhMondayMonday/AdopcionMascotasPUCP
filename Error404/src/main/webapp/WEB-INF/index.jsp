@@ -23,14 +23,14 @@
   <!-- End Google Tag Manager -->
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+  <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <!-- Google fonts-->
   <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="css/styles.css" rel="stylesheet" />
+  <link href="<%=request.getContextPath()%>/css/styles.css" rel="stylesheet" />
   <style>
     .navbar-nav .btn {
       margin-left: 10px;
@@ -53,8 +53,8 @@
         <li class="nav-item"><a class="nav-link" href="#publica">Publicaciones</a></li>
       </ul>
       <div class="navbar-nav ms-auto">
-        <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Acceder</a>
-        <a href="<%=request.getContextPath()%>/login" class="btn btn-outline-primary">Registrarse</a>
+        <a href="<%=request.getContextPath()%>/Dashboard" class="btn btn-outline-primary">Acceder</a>
+        <a href="<%=request.getContextPath()%>/register" class="btn btn-outline-primary">Registrarse</a>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@
       <div class="text-center">
         <h1 class="mx-auto my-0 text">Alianza Animal</h1>
         <h2 class="text-white-50 mx-auto mt-2 mb-5">Buscando un refugio con amor y ternura para los animales.</h2>
-        <a class="btn btn-primary" href="../html/dentro/login.html">¡Adopta ya!</a>
+        <a class="btn btn-primary" href="<%=request.getContextPath()%>/Dashboard">¡Adopta ya!</a>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
   <div class="container px-4 px-lg-5">
     <!-- Featured Project Row-->
     <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-      <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/eventosIntro.jpg" alt="..." /></div>
+      <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="<%=request.getContextPath()%>/assets/img/eventosIntro.jpg" alt="..." /></div>
       <div class="col-xl-4 col-lg-6">
         <div class="featured-text text-center text-lg-left">
           <h4>Próximos eventos:</h4>
@@ -102,14 +102,14 @@
     </div>
     <!-- Primer Evento-->
     <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-      <div class="col-lg-6"><img class="img-fluid" src="assets/img/DisfrazPerrito.jpg" alt="..." /></div>
+      <div class="col-lg-6"><img class="img-fluid" src="<%=request.getContextPath()%>/assets/img/DisfrazPerrito.jpg" alt="..." /></div>
       <div class="col-lg-6">
         <div class="bg-black text-center h-100 project">
           <div class="d-flex h-100">
             <div class="project-text w-100 my-auto text-center text-lg-left">
               <h4 class="text-white">16:00 - 20:00 San Isidro: Concurso de Disfraces para Mascotas</h4>
               <p class="mb-3 text-white-50">Descripción: Trae a tu mascota disfrazada y compite por premios. Las categorías incluyen el disfraz más original, el más gracioso y el mejor dúo dueño-mascota.</p>
-              <a class="btn btn-primary" href="../html/dentro/login.html">Saber más</a>
+              <a class="btn btn-primary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
             </div>
           </div>
         </div>
@@ -117,14 +117,14 @@
     </div>
     <!-- Segundo Evento-->
     <div class="row gx-0 mb-lg-0 mb-5 justify-content-center">
-      <div class="col-lg-6"><img class="img-fluid" src="assets/img/VacunacionPerrito.jpg" alt="Vacunacion" /></div>
+      <div class="col-lg-6"><img class="img-fluid" src="<%=request.getContextPath()%>/assets/img/VacunacionPerrito.jpg" alt="Vacunacion" /></div>
       <div class="col-lg-6 order-lg-first">
         <div class="bg-black text-center h-100 project">
           <div class="d-flex h-100">
             <div class="project-text w-100 my-auto text-center text-lg-right">
               <h4 class="text-white">10:00 - 14:00 Pueblo Libre: Jornada de Esterilización Gratuita</h4>
               <p class="mb-3 text-white-50">Descripción: Un evento dedicado al control de la población de animales callejeros. Se ofrecerá esterilización gratuita para perros y gatos. Se recomienda llevar a las mascotas en ayuno y con correa.</p>
-              <a class="btn btn-primary" href="../html/dentro/login.html">Saber más</a>
+              <a class="btn btn-primary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
             </div>
           </div>
         </div>
@@ -132,14 +132,14 @@
     </div>
 
     <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-      <div class="col-lg-6"><img class="img-fluid" src="assets/img/NutricionPerrito.jpg" alt="Nutrición" /></div>
+      <div class="col-lg-6"><img class="img-fluid" src="<%=request.getContextPath()%>/assets/img/NutricionPerrito.jpg" alt="Nutrición" /></div>
       <div class="col-lg-6">
         <div class="bg-black text-center h-100 project">
           <div class="d-flex h-100">
             <div class="project-text w-100 my-auto text-center text-lg-left">
               <h4 class="text-white">09:00 - 13:00 San Isidro: Taller de Nutrición y Cuidado de Mascotas</h4>
               <p class="mb-3 text-white-50">Descripción: En este taller aprenderás a preparar dietas saludables para tus mascotas y consejos para mantenerlas en óptimas condiciones de salud. Incluye consulta veterinaria gratuita.</p>
-              <a class="btn btn-primary" href="../html/dentro/login.html">Saber más</a>
+              <a class="btn btn-primary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
             </div>
           </div>
         </div>
@@ -211,38 +211,38 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100 " src="assets/img/Perrito perdido.jpg" alt="First slide" />
+          <img class="d-block w-100 " src="<%=request.getContextPath()%>/assets/img/Perrito%20perdido.jpg" alt="First slide" />
           <div class="carousel-caption text-white">
             <h3>Dale una casa!!</h3>
             <p>Este perrito esta buscando un hogar amoroso</p>
-            <a class="btn btn-secondary" href="../html/dentro/login.html">Saber más</a>
+            <a class="btn btn-secondary" href=<%=request.getContextPath()%>/Dashboard">Saber más</a>
           </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100 " src="assets/img/perritocomiendo.jpg" alt="Second slide" />
+          <img class="d-block w-100 " src="<%=request.getContextPath()%>/assets/img/perritocomiendo.jpg" alt="Second slide" />
           <div class="carousel-caption text-white">
             <h3>Necesitamos comida!!</h3>
             <p>Una ayuda siempre viene bien y mejor si ayudamos a nuestros amigos</p>
-            <a class="btn btn-secondary" href="../html/dentro/login.html">Saber más</a>
+            <a class="btn btn-secondary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
           </div>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100 img-fluid" src="assets/img/perrito4.jpg" alt="Third slide" />
+          <img class="d-block w-100 img-fluid" src="<%=request.getContextPath()%>/assets/img/perrito4.jpg" alt="Third slide" />
           <div class="carousel-caption text-white">
 
             <h3>Ayudanós a encontrarlo</h3>
             <p>Claudio se perdió hace unos dias en el distrito de San Miguel</p>
-            <a class="btn btn-secondary" href="../html/dentro/login.html">Saber más</a>
+            <a class="btn btn-secondary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
           </div>
         </div>
 
         <div class="carousel-item">
-          <img class="d-block w-100 img-fluid" src="assets/img/perritodurmiendo.jpg" alt="four slide" />
+          <img class="d-block w-100 img-fluid" src="<%=request.getContextPath()%>/assets/img/perritodurmiendo.jpg" alt="four slide" />
           <div class="carousel-caption text-white">
 
             <h3>Encontrado!!</h3>
             <p>Este perrito se perdió pero fue encontrado y devuelto a su dueño</p>
-            <a class="btn btn-secondary" href="../html/dentro/login.html">Saber más</a>
+            <a class="btn btn-secondary" href="<%=request.getContextPath()%>/Dashboard">Saber más</a>
           </div>
         </div>
 
@@ -354,7 +354,7 @@
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
+<script src="<%=request.getContextPath()%>/js/scripts.js"></script>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <!-- * *                               SB Forms JS                               * *-->
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

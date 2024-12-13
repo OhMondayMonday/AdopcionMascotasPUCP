@@ -47,20 +47,16 @@
 
     <!-- Core CSS -->
 
+    <style>
+        .fondo{
+            background-color: #d4e1ffa9;
+        }
+    </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/typography.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/typography.css">
@@ -304,7 +300,7 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
 
                     <div class="app-ecommerce">
-                        <form method="post" action="PublicacionesServlet?action=guardar">
+                        <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardar" enctype="multipart/form-data">
                         <!-- Add Product -->
                         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
@@ -314,7 +310,7 @@
                             </div>
 
                             <div class="d-flex align-content-center flex-wrap gap-3">
-                                <button id="publish-button" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
                                 <button class="btn btn-danger cancel-subscription">Descartar</button>
                             </div>
 
@@ -330,7 +326,9 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label class="form-label" for="titulo" >Titulo</label>
-                                            <input type="text" class="form-control" id="titulo" placeholder="Título de la publicación">
+                                            <input required type="text" class="form-control" id="titulo" name="titulo" placeholder="Título de la publicación">
+                                            <input type="hidden" name="tipo_publicacion_id" value="1">
+                                            <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col">
@@ -346,7 +344,7 @@
                                         <!-- Description -->
                                         <div>
                                             <label class="form-label" for="descripcion">Descripción<span class="text-muted"></span></label>
-                                            <textarea class="form-control" rows="7" maxlength="500" id="descripcion"></textarea>
+                                            <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion"></textarea>
                                         </div>
 
                                     </div>
@@ -358,20 +356,9 @@
                                 <div class="card mb-1">
                                     <div class="card-header d-flex justify-content-between align-items-center">
                                         <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
-                                        <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
                                     </div>
                                     <div class="card-body">
-                                        <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                                            <div class="dz-message needsclick my-3">
-                                                <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
-                                                <p class="text-muted fs-4 note needsclick my-0">o</p>
-                                                <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
-
-                                            </div>
-                                            <div class="fallback">
-                                                <input name="file" type="image" accept="image/*"/>
-                                            </div>
-                                        </form>
+                                        <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
                                     </div>
                                 </div>
                             </div>
@@ -425,13 +412,11 @@
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/popular.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/auto-focus.js"></script>
@@ -456,11 +441,47 @@
 <script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/modal-enable-otp.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr("#html5-date-input", {
+            dateFormat: "d-m-Y", // Cambia al formato deseado
+            locale: "es" // Ajuste de idioma a español
+        });
+    });
+</script>
+
+<script>
+    // Asegúrate de que el DOM esté cargado antes de ejecutar tu script
+    document.getElementById('confirm-text').addEventListener('click', function() {
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "Deseas Publicar la nueva Publicación",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, confirmar",
+            cancelButtonText: "Cancelar",
+            customClass: {
+                confirmButton: "btn btn-primary",
+                cancelButton: "btn btn-label-secondary"
+            },
+            buttonsStyling: false
+        }).then(function(result) {
+            if (result.isConfirmed) {
+                console.log("Formulario enviado"); // Depuración
+                document.getElementById('formPublis').submit();
+            }
+        });
+
+
+
+        // Botón "Cancelar"
+        document.querySelector('.cancel-subscription').addEventListener('click', function() {
+            window.location.href = "/PublicacionesServlet"; // Cambia esta ruta según tu necesidad
+        });
+    });
+
+</script>
 
 </body>
 

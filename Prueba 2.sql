@@ -1,0 +1,12 @@
+set FOREIGN_KEY_CHECKS = 0;
+set FOREIGN_KEY_CHECKS = 1;
+TRUNCATE TABLE tipos_publicaciones;
+INSERT INTO mascotas (mascota_id, nombre, raza_id, descripcion, foto_id, edad_aproximada, genero, tamanio) values (1, "Max", 4, "Maxcito", 1, 8, "macho", "pequeño");
+INSERT INTO mascotas (mascota_id, nombre, raza_id, descripcion, foto_id, edad_aproximada, genero, tamanio) values (2, "Chispa", 5, "Chispitas", 1, 2, "hembra", "mediano");
+INSERT INTO mascotas (mascota_id, nombre, raza_id, descripcion, foto_id, edad_aproximada, genero, tamanio) values (3, "Kira", 14, "Kira Queen", 1, 99, "hembra", "grande");
+INSERT INTO publicaciones_adopcion (publicacion_id, mascota_id, lugar_encontrado, condiciones_adopcion) values (3, 1, "Parque PUCP", "Nada");
+INSERT INTO publicaciones_mascota_perdida(publicacion_id, mascota_id, lugar_perdida, fecha_perdida, descripcion_adicional, nombre_contacto, telefono_contacto, recompensa, mascota_encontrada) values (14, 2, "Por mi casa", '2024-11-09', "No sé", "Pepito", 111999888, "NADA",false);
+INSERT INTO publicaciones_mascota_perdida(publicacion_id, mascota_id, lugar_perdida, fecha_perdida, descripcion_adicional, nombre_contacto, telefono_contacto, recompensa, mascota_encontrada) values (10, 3, "Por ahí", '2024-11-01', "Sí sé","Sebas",999111888,"Un pan con pollo",true);
+INSERT INTO publicaciones_donaciones(publicacion_id, punto_acopio, tipo_donacion_id, cantidad, marca, fecha_recepcion_inicio, fecha_recepcion_fin, hora_recepcion, telefono_contacto, nombre_contacto, motivo_donacion) VALUES (9, "PUCP", 1, 0, "RicoCan", "2024-11-09", "2024-11-12", "17:00:00", 111222333, "Sebas", "Tobi tiene hambre");
+INSERT INTO publicaciones_donaciones(publicacion_id, punto_acopio, tipo_donacion_id, cantidad, marca, fecha_recepcion_inicio, fecha_recepcion_fin, hora_recepcion, telefono_contacto, nombre_contacto, motivo_donacion) VALUES (13, "Cato", 2, 200, null, "2024-11-09", "2024-11-12", "17:00:00", 111222333, "Dhanny", "Leo necesita dinero");
+truncate table publicaciones_mascota_perdida;

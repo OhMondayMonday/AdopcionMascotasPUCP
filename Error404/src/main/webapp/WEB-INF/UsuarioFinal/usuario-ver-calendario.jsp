@@ -64,36 +64,12 @@
     <!-- Page CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/app-calendar.css" />
 
-    <style>
-        .calendar-contenedor::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        .calendar-contenedor::-webkit-scrollbar-track {
-            background: #f0f0f0;
-            border-radius: 10px;
-        }
-
-        .calendar-contenedor::-webkit-scrollbar-thumb {
-            background: rgba(67, 60, 81, 0.79);
-            border-radius: 10px;
-            border: 2px solid #f0f0f0;
-        }
-
-        .calendar-contenedor::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-    </style>
-
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/l10n/es.js"></script>
 
 </head>
 
@@ -116,7 +92,7 @@
         <div class="layout-page">
 
             <!-- Navbar -->
-            <jsp:include page="../includes/navbarUF.jsp" />
+            <jsp:include page="../includes/navbarUF.jsp"/>
             <!-- / Navbar -->
 
             <!-- Content wrapper -->
@@ -232,8 +208,6 @@
     window.eventosInscritos = <%= eventosInscritosJson %>;
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/l10n/es.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/locales/es.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
@@ -258,6 +232,7 @@
 <!-- Page JS -->
 <script src="${pageContext.request.contextPath}/assets/js/app-calendar-events.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/app-calendar.js"></script>
+
 
 </body>
 

@@ -46,6 +46,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
 
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+
     <!-- Icons -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/boxicons.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/fontawesome.css" />
@@ -81,7 +88,107 @@
 
     <!-- Config -->
     <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
 
+
+        /* Reducción de tamaño de las tarjetas */
+        .card {
+            display: flex;
+            flex-direction: column;
+            height: auto; /* Altura dinámica */
+            height: 500px; /* Mantener un tamaño mínimo */
+        }
+
+        .card-body {
+            flex: 1; /* Ocupa todo el espacio restante */
+            overflow: hidden; /* Evitar scroll no deseado */
+        }
+
+        .user-avatar-section img {
+            height: 80px; /* Reducción de la imagen de avatar */
+            width: 80px;
+        }
+
+        .user-info h4 {
+            font-size: 18px; /* Reducir tamaño del texto */
+            margin-bottom: 5px;
+        }
+
+        /* Ajustar el tamaño de la lista de solicitudes */
+
+
+
+    </style>
+    <style>
+        /* Ajusta el campo de búsqueda */
+        #solicitudesTable_filter {
+            display: flex;
+            justify-content: flex-start; /* Alinea el campo de búsqueda a la izquierda */
+            margin-bottom: 10px; /* Espacio adicional si es necesario */
+            margin-right: 20px; /* Ajusta el margen derecho para separarlo del borde */
+        }
+
+        #solicitudesTable_filter label {
+            display: flex;
+            align-items: center; /* Centra el texto "Buscar" verticalmente */
+            gap: 10px; /* Espacio entre la etiqueta y el input */
+        }
+
+        #solicitudesTable_filter input {
+            padding: 5px 10px; /* Ajusta el espacio interno del campo */
+            border-radius: 5px; /* Bordes redondeados */
+            border: 1px solid #ddd; /* Borde ligero */
+        }
+
+        #solicitudesTable_filter {
+            margin-bottom: 15px; /* Separación hacia abajo */
+            margin-top: 15px; /* Separación hacia arriba */
+        }
+
+        /* Eliminar scroll innecesario */
+        body, html {
+            overflow-x: hidden; /* Evita el scroll horizontal */
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+
+    <style>
+        /* Corrige el ancho del contenedor de paginación */
+        .col-md-4, .col-sm-12 {
+            flex: 0 0 100% !important; /* Ajusta el ancho al 100% */
+            max-width: 100% !important;
+        }
+
+        /* Centra la paginación */
+        #solicitudesTable_paginate {
+            display: flex;
+            justify-content: center !important;
+            margin-top: 20px; /* Ajusta la separación superior */
+        }
+    </style>
+
+    <style>
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+    </style>
 </head>
 <body style="background-color: #d4e1ffa9;">
 
@@ -196,7 +303,7 @@
                         <ul class="navbar-nav flex-row align-items-center ms-0">
 
                             <!-- Notification -->
-                            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+                            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, ${sessionScope.usuarioLogueado.nombre}!</span>
 
                             <!--/ Notification -->
                             <!-- User -->
@@ -308,9 +415,9 @@
 
                             %>
                             <!-- User Sidebar -->
-                            <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+                            <div class="col-md-5 mb-4 d-flex">
                                 <!-- User Card -->
-                                <div class="card">
+                                <div class="card flex-grow-1 h-100">
                                     <div class="card-body">
                                         <%
 
@@ -343,44 +450,38 @@
                                             <div class="d-flex align-items-start mt-3 gap-3">
                                                 <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-customize bx-sm'></i></span>
                                                 <div>
-                                                    <h5 class="mb-0"><%= usuario.getAnimalesAlbergados() %></h5> <!-- Número de mascotas -->
+                                                    <h5 class="mb-0"><%= usuario.getHogarTemporal().getCantidadMascotas() %></h5> <!-- Número de mascotas -->
                                                     <span>Mascotas</span>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <h5 class="pb-2 border-bottom mb-4">Detalles</h5>
-                                        <div class="info-container">
-                                            <ul class="list-unstyled">
-                                                <li class="mb-3">
-                                                    <span class="fw-medium me-2">Nombre de usuario:</span>
-                                                    <span><%= usuario.getUsername() %></span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-medium me-2">Correo:</span>
-                                                    <span><%= usuario.getEmail() %></span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-medium me-2">Estado:</span>
-                                                    <span class="badge bg-label-success"><%= usuario.getEstadoCuenta() %></span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-medium me-2">Rol:</span>
-                                                    <span><%= usuario.getRol().getNombreRol() %></span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-medium me-2">ID:</span>
-                                                    <span><%= usuario.getUserId() %></span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-medium me-2">Contacto:</span>
-                                                    <span><%= usuario.getNumeroContactoDonaciones() %></span>
-                                                </li>
-                                                <li class="mb-3">
-                                                    <span class="fw-medium me-2">Distrito:</span>
-                                                    <span><%= usuario.getDistrito().getNombreDistrito() %></span>
-                                                </li>
-                                            </ul>
+                                        <div class="row">
+                                            <div class="col-6 mb-2">
+                                                <span class="fw-medium">Nombre de usuario:</span>
+                                                <p class="mb-0 text-muted"><%= usuario.getUsername() %></p>
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <span class="fw-medium">Correo:</span>
+                                                <p class="mb-0 text-muted"><%= usuario.getEmail() %></p>
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <span class="fw-medium">Estado:</span>
+                                                <p class="mb-0"><span class="badge bg-success"><%= usuario.getEstadoCuenta() %></span></p>
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <span class="fw-medium">Rol:</span>
+                                                <p class="mb-0 text-muted"><%= usuario.getRol().getNombreRol() %></p>
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <span class="fw-medium">Distrito:</span>
+                                                <p class="mb-0 text-muted"><%= usuario.getDistrito().getNombreDistrito() %></p>
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <span class="fw-medium">Contacto:</span>
+                                                <p class="mb-0 text-muted"><%= usuario.getHogarTemporal().getCelular() %></p>
+                                            </div>
                                         </div>
 
                                         <% } else { %>
@@ -393,63 +494,70 @@
                             <!--/ User Sidebar -->
 
                             <!-- User Content -->
-                            <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
-                                <!-- User Pills -->
-                                <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="usuario-mi-hogar-temporal.html">
-                                            <i class="fas fa-file-alt me-1"></i> Solicitudes
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="usuario-mi-hogar-temporal-registro.html">
-                                            <i class="fas fa-history me-1"></i> Historial
-                                        </a>
-                                    </li>
-                                </ul>
-                                <!-- /User Pills -->
-
-                                <!-- Project table -->
-                                <div class="card mb-4">
-                                    <h5 class="card-header">Lista de solicitudes</h5>
-                                    <div class="table-responsive mb-3">
-                                        <table class="table datatable-project border-top">
-                                            <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Descripcion</th>
-                                                <th>Edad</th>
-                                                <th>Raza</th>
-                                                <th>Fecha</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
+                            <div class="col-md-7 mb-4 d-flex">
+                                <div class="card flex-grow-1 h-100">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">Lista de solicitudes</h5>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
                                             <%
-                                                // Verificar si hay solicitudes
+                                                Boolean mostrarAviso = (Boolean) request.getAttribute("mostrarAviso");
+                                            %>
+                                            <% if (mostrarAviso == null || !mostrarAviso) { %>
+                                            <table id="solicitudesTable" class="table table-hover mb-0">
+                                                <thead class="bg-light">
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Descripción</th>
+                                                    <th>Edad</th>
+                                                    <th>Raza</th>
+                                                    <th class="text-center">Acciones</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <%
+                                                    if (solicitudesMascotas != null && !solicitudesMascotas.isEmpty()) {
+                                                        for (Solicitudes solicitud : solicitudesMascotas) {
+                                                %>
+                                                <tr id="solicitud-<%= solicitud.getSolicitudId() %>">
+                                                    <td><%= solicitud.getMascota().getNombre() %></td>
+                                                    <td><%= solicitud.getMascota().getDescripcion() %></td>
+                                                    <td><%= solicitud.getMascota().getEdadAproximada() %></td>
+                                                    <td><%= solicitud.getMascota().getRaza() != null ? solicitud.getMascota().getRaza().getNombreRaza() : "Sin raza" %></td>
+                                                    <td class="text-center">
+                                                        <!-- Botón Aceptar -->
+                                                        <!-- Botón Aceptar -->
+                                                        <button class="btn btn-sm btn-success" title="Aceptar"
+                                                                onclick="confirmarAccion('Aceptar', '<%= solicitud.getSolicitudId() %>', '<%= usuario.getHogarTemporal().getTemporalId() %>')">
+                                                            <i class="bx bx-check"></i>
+                                                        </button>
 
-                                                if (solicitudesMascotas != null && !solicitudesMascotas.isEmpty()) {
-                                                    for (Solicitudes solicitud : solicitudesMascotas) {
-                                            %>
-                                            <tr>
-                                                <td><%= solicitud.getMascota().getNombre() %></td>
-                                                <td><%= solicitud.getMascota().getDescripcion() %></td>
-                                                <td><%= solicitud.getMascota().getEdadAproximada() %></td>
-                                                <td><%= solicitud.getMascota().getRaza() != null ? solicitud.getMascota().getRaza().getNombreRaza() : "Sin raza" %></td>
-                                                <td><%= solicitud.getFechaSolicitud() != null ? solicitud.getFechaSolicitud() : "Sin fecha" %></td>
-                                            </tr>
-                                            <%
-                                                }
-                                            } else {
-                                            %>
-                                            <tr>
-                                                <td colspan="5">No hay solicitudes disponibles.</td>
-                                            </tr>
-                                            <% } %>
-                                            </tbody>
-                                        </table>
+                                                        <!-- Botón Rechazar -->
+                                                        <button class="btn btn-sm btn-danger" title="Rechazar"
+                                                                onclick="confirmarAccion('Rechazar', '<%= solicitud.getSolicitudId() %>')">
+                                                            <i class="bx bx-x"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <%
+                                                    }
+                                                } else {
+                                                %>
+                                                <tr>
+                                                    <td colspan="5" class="text-center">No hay solicitudes disponibles.</td>
+                                                </tr>
+                                                <% }} %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                    <div class="px-3 py-2" style="text-align: center; padding: 0;">
+                                        <!-- Aquí se centra la paginación -->
+                                        <div id="solicitudesTable_paginate" style="display: inline-block;"></div>
                                     </div>
                                 </div>
-                                <!-- /Project table -->
                             </div>
                             <!--/ User Content -->
                         </div>
@@ -529,5 +637,92 @@
     <!-- Titulos tabla -->
     <script src="${pageContext.request.contextPath}/assets/js/app-user-view-account.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (document.getElementById("solicitudesTable")) {
+                $('#solicitudesTable').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "pageLength": 6,
+                    "info": false,
+                    "language": {
+                        "paginate": {
+                            "previous": "Anterior",
+                            "next": "Siguiente"
+                        },
+                        "emptyTable": "No hay solicitudes disponibles",
+                        "search": "Buscar:"
+                    },
+                    "columnDefs": [
+                        { "orderable": false, "targets": 4 }
+                    ]
+                });
+            }
+        });
+    </script>
+    <script>
+        function confirmarAccion(accion, solicitudId, hogarTemporalId) {
+            let mensaje = accion === 'Aceptar'
+                ? "¿Estás seguro de aceptar esta mascota?"
+                : "¿Estás seguro de eliminar esta solicitud?";
+
+            Swal.fire({
+                title: mensaje,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: accion === 'Aceptar' ? "#28a745" : "#d33", // Verde para aceptar, rojo para rechazar
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: accion === 'Aceptar' ? "Aceptar" : "Eliminar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let form = document.createElement("form");
+                    form.method = "POST";
+                    form.action = "UsuarioServlet";
+
+                    let actionInput = document.createElement("input");
+                    actionInput.type = "hidden";
+                    actionInput.name = "action";
+                    actionInput.value = accion === 'Aceptar' ? "aceptarMascota" : "rechazarMascota";
+                    form.appendChild(actionInput);
+
+                    let solicitudInput = document.createElement("input");
+                    solicitudInput.type = "hidden";
+                    solicitudInput.name = "solicitudId";
+                    solicitudInput.value = solicitudId;
+                    form.appendChild(solicitudInput);
+
+                    if (accion === 'Aceptar') {
+                        let hogarInput = document.createElement("input");
+                        hogarInput.type = "hidden";
+                        hogarInput.name = "hogarTemporalId";
+                        hogarInput.value = hogarTemporalId;
+                        form.appendChild(hogarInput);
+                    }
+
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
+    </script>
+
+    <script>
+        <% if (mostrarAviso != null && mostrarAviso) { %>
+        window.onload = function () {
+            Swal.fire({
+                title: 'Acceso restringido',
+                text: 'Para ver solicitudes, primero debes postular como hogar temporal.',
+                icon: 'warning',
+                confirmButtonText: 'Postular ahora',
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'UsuarioServlet?action=postularHogarTemporal'; // Redirige a postulación
+                }
+            });
+        }
+        <% } %>
+    </script>
 </body>
 </html>

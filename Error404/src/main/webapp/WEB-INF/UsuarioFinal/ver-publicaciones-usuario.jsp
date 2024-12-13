@@ -349,18 +349,7 @@
                                       <p>${publicacion.descripcion}
                                       </p>
                                     </div>
-                                      <div class="col-12 col-md-6">
-                                        <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxl-baidu bx-sm me-2'></i>Nombre: Claudio</p>
-                                      </div>
-                                      <div class="col-12 col-md-6">
-                                        <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bxs-dog bx-sm me-2'></i>Raza: Labrador Retriever</p>
-                                      </div>
-                                      <div class="col-12 col-md-6">
-                                        <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-heart bx-sm me-2'></i>Edad: 2 años</p>
-                                      </div>
-                                      <div class="col-12 col-md-6">
-                                        <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-male-sign bx-sm me-2'></i>Género: Macho</p>
-                                      </div>
+
 
 
 

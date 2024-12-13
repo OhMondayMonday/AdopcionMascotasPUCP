@@ -19,14 +19,23 @@ public class PostularHogarTemporalDAO extends BaseDao {
         String sqlHogar = "INSERT INTO hogares_temporales (user_id, foto_id, edad, genero, celular, direccion, distrito, " +
                 "cantidad_cuartos, metraje_vivienda, tiene_mascotas, tipo_mascotas, tiene_hijos, " +
                 "vive_solo, trabaja, persona_referencia, contacto_referencia, rango_fecha_inicio, " +
-                "rango_fecha_fin, tiempo_temporal, estado_temporal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "rango_fecha_fin, tiempo_temporal, estado_temporal, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String verificarPublicacion = "SELECT COUNT(*) FROM publicaciones WHERE user_id = ? AND tipo_publicacion_id = 2 AND estado_publicacion = 'activa'";
 
         try (Connection conn = this.getConnection()) {
             // Iniciar transacción
             conn.setAutoCommit(false);
 
-
+            // 1. Validar si ya existe una publicación activa para este usuario
+            try (PreparedStatement pstmtVerificar = conn.prepareStatement(verificarPublicacion)) {
+                pstmtVerificar.setInt(1, hogarTemporal.getUsuario().getUserId());
+                try (ResultSet rs = pstmtVerificar.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        System.err.println("El usuario ya tiene una publicación activa. No se permite duplicados.");
+                        return false; // Salir si ya existe una publicación activa
+                    }
+                }
+            }
 
             // 1. Insertar foto
             try (PreparedStatement pstmtFoto = conn.prepareStatement(sqlInsertFoto, Statement.RETURN_GENERATED_KEYS)) {
@@ -98,7 +107,7 @@ public class PostularHogarTemporalDAO extends BaseDao {
                 pstmtHogar.setDate(18, new java.sql.Date(hogarTemporal.getRangoFechaFin().getTime()));
                 pstmtHogar.setInt(19, hogarTemporal.getTiempoTemporal());
                 pstmtHogar.setString(20, "pendiente");
-                // pstmtHogar.setString(21, hogarTemporal.getDescripcion());
+                pstmtHogar.setString(21, hogarTemporal.getDescripcion());
 
                 int rowsHogar = pstmtHogar.executeUpdate();
                 if (rowsHogar == 0) {

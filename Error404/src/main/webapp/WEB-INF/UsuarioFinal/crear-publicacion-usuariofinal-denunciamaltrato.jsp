@@ -305,6 +305,7 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
           <div class="app-ecommerce">
+            <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardarDenuncia" enctype="multipart/form-data">
 
             <!-- Add Product -->
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
@@ -314,7 +315,7 @@
                 <p class="text-muted">Rellena los campos abajo</p>
               </div>
               <div class="d-flex align-content-center flex-wrap gap-3">
-                <button id="publish-button" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
                 <button class="btn btn-danger cancel-subscription">Descartar</button>
               </div>
 
@@ -331,7 +332,9 @@
                   <div class="card-body">
                     <div class="mb-3">
                       <label class="form-label" for="titulo">Titulo</label>
-                      <input type="text" class="form-control" id="titulo" placeholder="Título de la publicación">
+                      <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título de la publicación">
+                      <input type="hidden" name="tipo_publicacion" value="5">
+                      <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
                     </div>
                     <div class="row mb-3">
                       <div class="col"><label class="form-label" for="opciones">Tipo</label>
@@ -339,14 +342,14 @@
                           <option value="" disabled selected>Elija el tipo de publicación</option>
                           <option value="crear-publicacion-usuariofinal-normal.html">Normal</option>
                           <option value="crear-publicacion-usuariofinal-mascotaperdida.html">Mascota Perdida</option>
-                          <option value="crear-publicacion-usuariofinal-denunciamaltrato.html" selected>Denuncia por Maltrato Animal</option>
+                          <option value="" selected>Denuncia por Maltrato Animal</option>
                         </select>
                       </div>
                     </div>
                     <!-- Description -->
                     <div>
                       <label class="form-label" for="descripcion">Descripción<span class="text-muted"></span></label>
-                      <textarea class="form-control" id="descripcion" rows="7"></textarea>
+                      <textarea class="form-control" name="descripcion" id="descripcion" rows="7"></textarea>
                     </div>
                 </div>
                 <!-- /Second column -->
@@ -366,35 +369,27 @@
                   <div class="card-body">
                     <div class="mb-3">
                       <label class="form-label" for="mascota_nombre">Nombre</label>
-                      <input type="text" required class="form-control" id="mascota_nombre" placeholder="Nombre del mascota">
+                      <input type="text" required class="form-control" id="mascota_nombre" name="mascota_nombre" placeholder="Nombre del mascota">
                     </div>
                     <div class="row mb-3">
                       <div class="col"><label class="form-label" for="mascota_tamanio">Tamaño</label>
-                        <select class="form-control" id="mascota_tamanio" required>
+                        <select class="form-control" name="mascota_tamanio" id="mascota_tamanio" required>
                           <option value="" disabled selected>Elija el tamaño</option>
-                          <option value="P">Pequeño</option>
-                          <option value="N">Normal</option>
-                          <option value="G">Grande</option>
-                          <option value="MG">Muy Grande</option>
+                          <option value="pequeño">Pequeño</option>
+                          <option value="mediano">Mediano</option>
+                          <option value="grande">Grande</option>
+                          <option value="gigante">Gigante</option>
                         </select>
                       </div>
                       <div class="col"><label class="form-label" for="mascota_raza">Raza</label>
                         <div class="col">
-                          <select id="mascota_raza" class="select2 form-select form-select-lg" data-allow-clear="true">
+                          <select id="mascota_raza" name="mascota_raza_id" class="select2 form-select form-select-lg" data-allow-clear="true">
                             <option value="" disabled selected>Elija la raza</option>
-                            <%
-                              for(Razas raza : listaRazas){
-                            %>
+                            <%for(Razas raza : listaRazas){%>
                             <option value="<%=raza.getRazaId()%>"><%=raza.getNombreRaza()%></option>
-                            <%
-                              }
-                            %>
+                            <%}%>
                           </select>
                         </div>
-
-
-
-
                       </div>
                     </div>
                   </div>
@@ -409,23 +404,23 @@
                     <div class="row mb-3">
                       <div class="col">
                         <label class="form-label" for="maltratador_nombre">Nombre</label>
-                        <input type="text" required class="form-control" id="maltratador_nombre" placeholder="Nombre del maltratador">
+                        <input type="text" required class="form-control" name="maltratador_nombre" id="maltratador_nombre" placeholder="Nombre del maltratador">
                       </div>
                       <div class="col">
                         <label class="form-label" for="maltrato_tipo">Tipo de maltrato</label>
-                        <input type="text" required class="form-control" id="maltrato_tipo" placeholder="Indique el tipo de maltratato">
+                        <input type="text" required class="form-control" name="maltrato_tipo" id="maltrato_tipo" placeholder="Indique el tipo de maltratato">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col"><label class="form-label" for="denuncia_policial">¿Ha realizado la denuncia policial?</label>
-                        <select class="form-control" id="denuncia_policial" required>
+                        <select class="form-control" name="denuncia_policial" id="denuncia_policial" required>
                           <option value="" disabled selected>Indique</option>
                           <option value="SI">Sí</option>
                           <option value="NO">No</option>
                         </select>
                       </div>
                       <div class="col"><label class="form-label" for="direccion_maltrato">Dirección</label>
-                        <input type="text" class="form-control" id="direccion_maltrato" placeholder="Indique la Dirección de la mascota maltratada">
+                        <input type="text" class="form-control" name="direccion_maltrato" id="direccion_maltrato" placeholder="Indique la Dirección de la mascota maltratada">
                       </div>
                     </div>
                   </div>
@@ -438,25 +433,16 @@
                   <div class="card mb-1">
                     <div class="card-header d-flex justify-content-between align-items-center">
                       <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
-                      <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
                     </div>
                     <div class="card-body">
-                      <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                        <div class="dz-message needsclick my-3">
-                          <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
-                          <p class="text-muted fs-4 note needsclick my-0">o</p>
-                          <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Examinar imagen</span>
-
-                        </div>
-                        <div class="fallback">
-                          <input name="file" type="image" accept="image/*"/>
-                        </div>
-                      </form>
+                      <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
+                    </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            </form>
           </div>
         </div>
 
@@ -521,10 +507,47 @@
 <script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
-<!--Botones de confirmación-->
-<script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
-<!--Botones de confirmación-->
-<script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    flatpickr("#html5-date-input", {
+      dateFormat: "d-m-Y", // Cambia al formato deseado
+      locale: "es" // Ajuste de idioma a español
+    });
+  });
+</script>
+
+<script>
+  // Asegúrate de que el DOM esté cargado antes de ejecutar tu script
+  document.getElementById('confirm-text').addEventListener('click', function() {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Deseas Publicar la nueva Publicación",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, confirmar",
+      cancelButtonText: "Cancelar",
+      customClass: {
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-label-secondary"
+      },
+      buttonsStyling: false
+    }).then(function(result) {
+      if (result.isConfirmed) {
+        console.log("Formulario enviado"); // Depuración
+        document.getElementById('formPublis').submit();
+      }
+    });
+
+
+
+    // Botón "Cancelar"
+    document.querySelector('.cancel-subscription').addEventListener('click', function() {
+      window.location.href = "/PublicacionesServlet"; // Cambia esta ruta según tu necesidad
+    });
+  });
+
+</script>
 
 </body>
 

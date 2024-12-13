@@ -179,7 +179,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../../index.jsp" >
+                                    <a class="dropdown-item" href="../index.jsp" >
                                         <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
                                         <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                                     </a>

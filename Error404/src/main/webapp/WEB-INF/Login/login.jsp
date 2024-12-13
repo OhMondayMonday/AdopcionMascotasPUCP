@@ -85,49 +85,62 @@
         <!-- Login -->
         <div class="d-flex col-12 col-lg-5 col-xl-5 align-items-center authentication-bg p-sm-5 p-4">
             <div class="w-px-400 mx-auto">
-                <!-- Logo -->
-                <div class="app-brand mb-5">
-                    <a href="<%=request.getContextPath()%>/index.html" class="app-brand-link gap-2">
-                        <div class="app-brand-logo demo">
-                            <img src="<%=request.getContextPath()%>/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="Logo de Alianza Animal" width="50">
+
+                <div class="border border-dark p-3 rounded bg-white">
+                    <!-- Logo -->
+                    <div class="app-brand mb-3">
+                        <a href="<%=request.getContextPath()%>" class="app-brand-link gap-2">
+                            <div class="app-brand-logo demo">
+                                <img src="<%=request.getContextPath()%>/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="Logo de Alianza Animal" width="50">
+                            </div>
+                            <span class="text-body fw-bold" style="font-size:large">Alianza Animal</span>
+                            <p class="mt-3 ms-5 fw-bold fs-normal">Volver al inicio</p>
+                        </a>
+                    </div>
+                    <!-- /Logo -->
+                    <h4 class="mb-2">¡Bienvenido! 👋</h4>
+                    <p class="mb-4">Inicia sesión con tu cuenta y apoya a los albergues</p>
+
+                    <form id="formAuthentication">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
                         </div>
-                        <span class="text-body fw-bold" style="font-size:xx-large">Alianza Animal</span>
-                    </a>
+                        <div class="mb-3 form-password-toggle">
+                            <div class="d-flex justify-content-between">
+                                <label class="form-label" for="contrasenia">Contraseña</label>
+                                <a href="<%=request.getContextPath()%>/recuperar">
+                                    <small>¿Olvidaste tu contraseña?</small>
+                                </a>
+                            </div>
+                            <div class="input-group input-group-merge">
+                                <input type="password" id="contrasenia" class="form-control" name="contrasenia" placeholder="••••••••••" required aria-describedby="password">
+                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            </div>
+                        </div>
+                        <p id="errorMessage" class = "mt-1 mb-1" style="color:red; display:none;">Correo o contraseña incorrectos.</p>
+                        <button class="btn btn-primary d-grid w-100" type="submit">Iniciar sesión</button>
+                    </form>
                 </div>
-                <!-- /Logo -->
-                <h4 class="mb-2">¡Bienvenido! 👋</h4>
-                <p class="mb-4">Inicia sesión con tu cuenta y apoya a los albergues</p>
 
-                <form id="formAuthentication">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo electrónico" required autofocus>
-                    </div>
-                    <div class="mb-3 form-password-toggle">
-                        <div class="d-flex justify-content-between">
-                            <label class="form-label" for="contrasenia">Contraseña</label>
-                            <a href="auth-forgot-password-cover.html">
-                                <small>¿Olvidaste tu contraseña?</small>
-                            </a>
-                        </div>
-                        <div class="input-group input-group-merge">
-                            <input type="password" id="contrasenia" class="form-control" name="contrasenia" placeholder="••••••••••" required aria-describedby="password">
-                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary d-grid w-100" type="submit">Iniciar sesión</button>
-                </form>
-                <p id="errorMessage" style="color:red; display:none;">Correo o contraseña incorrectos.</p>
 
-                <p class="text-center">
-                    <span>¿Nuevo en nuestra comunidad?</span>
-                    <a href="registro-2.html">
-                        <span>Crea una cuenta</span>
-                    </a>
-                </p>
+                <!-- Línea negra entre las cajas -->
+                <div class="d-flex align-items-center my-4">
+                    <hr class="flex-grow-1 border-dark">
+                    <span class="px-2 text-dark bg-white rounded-circle">o</span>
+                    <hr class="flex-grow-1 border-dark">
+                </div>
+
+                <div class="border border-dark p-3 rounded bg-white">
+                    <p class="text-center mb-0">
+                        <span>¿Deseas crear una cuenta?</span>
+                        <a href="<%=request.getContextPath()%>/register">
+                            <span>Crea una cuenta</span>
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
-        <!-- /Login -->
     </div>
 </div>
 
@@ -178,6 +191,14 @@
                 errorMessage.style.display = 'block';
             });
     });
+
+    async function generateSHA256Hash(input) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    }
 
 </script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/popular.js"></script>
