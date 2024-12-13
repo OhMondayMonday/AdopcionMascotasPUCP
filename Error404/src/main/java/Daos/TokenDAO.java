@@ -21,7 +21,7 @@ public class TokenDAO extends BaseDao{
         }
     }
     public int validateToken(String token) {
-        String sql = "SELECT user_id FROM password_reset_tokens WHERE token = ? AND expiration_date > NOW()";
+        String sql = "SELECT user_id FROM password_reset_tokens WHERE token = ? AND expiration > NOW()";
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -34,7 +34,7 @@ public class TokenDAO extends BaseDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1; // Token inválido o expirado
+        return -1;
     }
 
     public void deleteToken(String token) {

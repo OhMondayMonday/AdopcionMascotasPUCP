@@ -189,7 +189,7 @@ public class LoginDAO extends BaseDao {
 
     // Actualiza la contraseña del usuario
     public boolean updatePassword(int userId, String newPassword) {
-        String sql = "UPDATE usuarios SET password = ? WHERE user_id = ?";
+        String sql = "UPDATE usuarios SET contrasenia = ? WHERE user_id = ?";
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 

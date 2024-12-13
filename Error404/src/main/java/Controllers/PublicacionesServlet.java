@@ -7,12 +7,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.Part;
+
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@MultipartConfig
 @WebServlet("/PublicacionesServlet")
 public class PublicacionesServlet extends HttpServlet {
     private PublicacionesDAO publicacionesDAO;
@@ -21,6 +27,8 @@ public class PublicacionesServlet extends HttpServlet {
     private MascotaPerdidaDAO mascotaPerdidaDAO;
     private DonacionesDAO donacionesDAO;
     private ComentariosDAO comentariosDAO;
+    private DenunciaMaltratoDAO denunciaMaltratoDAO;
+    private FotosDAO fotosDAO;
 
     @Override
     public void init() throws ServletException {
@@ -30,6 +38,8 @@ public class PublicacionesServlet extends HttpServlet {
         mascotaPerdidaDAO = new MascotaPerdidaDAO();
         donacionesDAO = new DonacionesDAO();
         comentariosDAO = new ComentariosDAO();
+        denunciaMaltratoDAO = new DenunciaMaltratoDAO();
+        fotosDAO = new FotosDAO();
     }
 
     @Override
@@ -56,64 +66,17 @@ public class PublicacionesServlet extends HttpServlet {
                 mostrarDetallesPublicacion(request, response);
                 break;
             case "agregar":
-                if (request.getParameter("user_id") != null) {
-                    String user_idString = request.getParameter("user_id");
-                    int user_id = 0;
-                    try {
-                        user_id = Integer.parseInt(user_idString);
-                    } catch (NumberFormatException e) {
-                        response.sendRedirect("PublicacionesServlet");
-                    }
-                    UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-                    Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-                    request.setAttribute("usuario", usuario);
-                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-normal.jsp").forward(request, response);
-                } else {
-                    response.sendRedirect("PublicacionesServlet");
-                }
+                agregarPublicacion(request, response);
                 break;
             case "agregarComentario":
                 comentariosDAO.agregarComentario(comentario);
                 mostrarDetallesPublicacion(request, response);
                 break;
             case "agregarDenuncia":
-                if (request.getParameter("user_id") != null) {
-                    String user_idString = request.getParameter("user_id");
-                    int user_id = 0;
-                    try {
-                        user_id = Integer.parseInt(user_idString);
-                    } catch (NumberFormatException e) {
-                        response.sendRedirect("PublicacionesServlet");
-                    }
-                    UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-                    Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-                    request.setAttribute("usuario", usuario);
-                    RazasDao razasDao = new RazasDao();
-                    ArrayList<Razas> listaRazas = razasDao.listarRazas();
-                    request.setAttribute("listaRazas", listaRazas);
-                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-denunciamaltrato.jsp").forward(request, response);
-                } else {
-                    response.sendRedirect("PublicacionesServlet");
-                }
+                agregarDenuncia(request, response);
+                break;
             case "agregarMascotaPerdida":
-                if (request.getParameter("user_id") != null) {
-                    String user_idString = request.getParameter("user_id");
-                    int user_id = 0;
-                    try {
-                        user_id = Integer.parseInt(user_idString);
-                    } catch (NumberFormatException e) {
-                        response.sendRedirect("PublicacionesServlet");
-                    }
-                    UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-                    Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-                    request.setAttribute("usuario", usuario);
-                    RazasDao razasDao = new RazasDao();
-                    ArrayList<Razas> listaRazas = razasDao.listarRazas();
-                    request.setAttribute("listaRazas", listaRazas);
-                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-mascotaperdida.jsp").forward(request, response);
-                } else {
-                    response.sendRedirect("PublicacionesServlet");
-                }
+                agregarMascotaPerdida(request, response);
                 break;
 
         }
@@ -182,10 +145,12 @@ public class PublicacionesServlet extends HttpServlet {
                 PublicacionesAdopcion publicacionAdopcion = publicacionAdopcionDAO.obtenerPublicacionAdopcion(id);
                 PublicacionesMascotaPerdida publicacionMascotaPerdida = mascotaPerdidaDAO.obtenerPublicacionMascotaPerdida(id);
                 PublicacionesDonaciones publicacionDonacion = donacionesDAO.obtenerPublicacionDonacion(id);
+                DenunciasMaltratoAnimal denunciaMaltratoAnimal = denunciaMaltratoDAO.obtenerDenunciaMaltratoAnimal(id);
                 List<Comentarios> comentarios = comentariosDAO.obtenerComentariosPublis(id);
                 request.setAttribute("adopcion", publicacionAdopcion);
                 request.setAttribute("mascotaPerdida", publicacionMascotaPerdida);
                 request.setAttribute("donacion",publicacionDonacion);
+                request.setAttribute("denunciaMaltrato", denunciaMaltratoAnimal);
                 request.setAttribute("comentarios", comentarios);
 
                 request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-publicaciones-detalles-usuario.jsp").forward(request, response);
@@ -197,46 +162,79 @@ public class PublicacionesServlet extends HttpServlet {
         }
     }
 
+    private void agregarPublicacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("user_id") != null) {
+            String user_idString = request.getParameter("user_id");
+            int user_id = 0;
+            try {
+                user_id = Integer.parseInt(user_idString);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("PublicacionesServlet");
+            }
+            UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+            request.setAttribute("usuario", usuario);
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-normal.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("PublicacionesServlet");
+        }
+    }
+
+    private void agregarDenuncia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("user_id") != null) {
+            String user_idString = request.getParameter("user_id");
+            int user_id = 0;
+            try {
+                user_id = Integer.parseInt(user_idString);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("PublicacionesServlet");
+            }
+            UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+            request.setAttribute("usuario", usuario);
+            RazasDao razasDao = new RazasDao();
+            ArrayList<Razas> listaRazas = razasDao.listarRazas();
+            request.setAttribute("listaRazas", listaRazas);
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-denunciamaltrato.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("PublicacionesServlet");
+        }
+    }
+
+    private void agregarMascotaPerdida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("user_id") != null) {
+            String user_idString = request.getParameter("user_id");
+            int user_id = 0;
+            try {
+                user_id = Integer.parseInt(user_idString);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("PublicacionesServlet");
+            }
+            UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+            request.setAttribute("usuario", usuario);
+            RazasDao razasDao = new RazasDao();
+            ArrayList<Razas> listaRazas = razasDao.listarRazas();
+            request.setAttribute("listaRazas", listaRazas);
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-mascotaperdida.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("PublicacionesServlet");
+        }
+    }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "listar" : request.getParameter("action");
 
         PublicacionesDAO publicacionesDAO = new PublicacionesDAO();
-
-        Publicaciones publicacion = new Publicaciones();
-
-        ComentariosDAO comentariosDAO = new ComentariosDAO();
-
-        Comentarios comentario = new Comentarios();
-
-        Usuarios usuario = new Usuarios();
-        usuario.setUserId(Integer.parseInt(request.getParameter("user_id")));
-
-        publicacion.setUsuario(usuario);
-        publicacion.setTitulo(request.getParameter("titulo"));
-        publicacion.setDescripcion(request.getParameter("descripcion"));
-
-        Fotos foto = new Fotos();
-        if (request.getParameter("foto") != null) {
-            foto.setFotoId(Integer.parseInt(request.getParameter("foto_id")));
-            publicacion.setFoto(foto);
-        }
-
-        TiposPublicaciones tiposPublicacion = new TiposPublicaciones();
-        if(request.getParameter("tipo_publicacion_id") != null) {
-            tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion_id")));
-            publicacion.setTipoPublicacion(tiposPublicacion);
-        }
-
-        if(request.getParameter("estado_publicacion") != null) {
-            publicacion.setEstadoPublicacion(request.getParameter("estado_publicacion"));
-        }
-
         switch (action) {
             case "guardar":
-                publicacionesDAO.agregarPublicacion(publicacion);
-
+                guardarPublicacion(request, response);
+                response.sendRedirect("PublicacionesServlet");
+                break;
+            case "guardarDenuncia":
+                guardarDenuncia(request, response);
                 response.sendRedirect("PublicacionesServlet");
                 break;
             case "actualizar":
@@ -244,4 +242,109 @@ public class PublicacionesServlet extends HttpServlet {
         }
 
     }
+
+    private void guardarPublicacion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Publicaciones publicacion = new Publicaciones();
+        Usuarios usuario = new Usuarios();
+        usuario.setUserId(Integer.parseInt(request.getParameter("user_id")));
+
+        publicacion.setUsuario(usuario);
+        publicacion.setTitulo(request.getParameter("titulo"));
+        publicacion.setDescripcion(request.getParameter("descripcion"));
+
+        TiposPublicaciones tiposPublicacion = new TiposPublicaciones();
+        if(request.getParameter("tipo_publicacion_id") != null) {
+            tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion_id")));
+            publicacion.setTipoPublicacion(tiposPublicacion);
+        }
+        Part fotoPart = request.getPart("foto");
+        if (fotoPart != null && fotoPart.getSize() > 0) {
+            // Ruta de almacenamiento
+            String nombreArchivo = Paths.get(fotoPart.getSubmittedFileName()).getFileName().toString();
+            String rutaSubida = getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis" + File.separator + nombreArchivo;
+
+            // Guardar la imagen en el servidor
+            File uploadsDir = new File(getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis");
+            if (!uploadsDir.exists()) {
+                uploadsDir.mkdirs();
+            }
+            fotoPart.write(rutaSubida);
+            // Actualizar en el objeto HogaresTemporales
+            publicacion.setFoto(new Fotos("assets/img/Publis/" + nombreArchivo));
+            System.out.println("URL de la foto almacenada: " + publicacion.getFoto().getUrlFoto());
+        }else{
+            System.err.println("No se recibió ninguna imagen o el archivo está vacío.");
+            return;
+        }
+
+        publicacionesDAO.agregarPublicacion(publicacion);
+    }
+
+    private void guardarDenuncia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Publicaciones publicacion = new Publicaciones();
+        Usuarios usuario = new Usuarios();
+        usuario.setUserId(Integer.parseInt(request.getParameter("user_id")));
+
+        publicacion.setUsuario(usuario);
+        publicacion.setTitulo(request.getParameter("titulo"));
+        publicacion.setDescripcion(request.getParameter("descripcion"));
+
+        TiposPublicaciones tiposPublicacion = new TiposPublicaciones();
+
+        if(request.getParameter("tipo_publicacion") != null) {
+            tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion")));
+            publicacion.setTipoPublicacion(tiposPublicacion);
+            System.out.println("Si llega a guardar los tipos de publis");
+        }
+
+        Mascotas mascota = new Mascotas();
+        mascota.setNombre(request.getParameter("mascota_nombre"));
+        mascota.setTamanio(request.getParameter("mascota_tamanio"));
+
+        Razas razas = new Razas();
+        razas.setRazaId(Integer.parseInt(request.getParameter("mascota_raza_id")));
+        mascota.setRaza(razas);
+
+        DenunciasMaltratoAnimal denunciasMaltratoAnimal = new DenunciasMaltratoAnimal();
+        denunciasMaltratoAnimal.setUserId(Integer.parseInt(request.getParameter("user_id")));
+        denunciasMaltratoAnimal.setMascota(mascota);
+        denunciasMaltratoAnimal.setNombreMaltratador(request.getParameter("maltratador_nombre"));
+        denunciasMaltratoAnimal.setTipoMaltrato(request.getParameter("maltrato_tipo"));
+        denunciasMaltratoAnimal.setDireccionMaltrato(request.getParameter("direccion_maltrato"));
+
+        switch (request.getParameter("denuncia_policial")){
+            case "SI":
+                denunciasMaltratoAnimal.setDenunciaPolicial(true);
+                break;
+            case "NO":
+                denunciasMaltratoAnimal.setDenunciaPolicial(false);
+                break;
+        }
+        Part fotoPart = request.getPart("foto");
+        if (fotoPart != null && fotoPart.getSize() > 0) {
+            // Ruta de almacenamiento
+            String nombreArchivo = Paths.get(fotoPart.getSubmittedFileName()).getFileName().toString();
+            String rutaSubida = getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis" + File.separator + nombreArchivo;
+
+            // Guardar la imagen en el servidor
+            File uploadsDir = new File(getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis");
+            if (!uploadsDir.exists()) {
+                uploadsDir.mkdirs();
+            }
+            fotoPart.write(rutaSubida);
+            // Actualizar en el objeto HogaresTemporales
+            publicacion.setFoto(new Fotos("assets/img/Publis/" + nombreArchivo));
+            System.out.println("URL de la foto almacenada: " + publicacion.getFoto().getUrlFoto());
+        }else{
+            System.err.println("No se recibió ninguna imagen o el archivo está vacío.");
+            publicacion.setFoto(new Fotos(""));
+        }
+        publicacionesDAO.agregarPublicacion(publicacion);
+        denunciasMaltratoAnimal.setReportId(publicacionesDAO.obtenerIdUltimaPublicacion());
+        denunciasMaltratoAnimal.getMascota().setFoto(fotosDAO.obtenerIdPorUrl(publicacion.getFoto().getUrlFoto()));
+        denunciaMaltratoDAO.agregarDenunciaMaltrato(denunciasMaltratoAnimal);
+    }
 }
+
+

@@ -55,20 +55,20 @@ CREATE TABLE fotos (
 
 -- Tabla de usuarios (incluye usuarios finales, albergues, coordinadores y administrador)
 CREATE TABLE usuarios (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    contrasenia VARCHAR(64) NOT NULL,
-    nombre VARCHAR(100),
-    apellido VARCHAR(100),
-    email VARCHAR(100) UNIQUE,
-    DNI VARCHAR(8) UNIQUE,
-    descripcion TEXT,
-    direccion VARCHAR(255),
-    foto_id INT,
-    distrito_id INT,
-    estado_cuenta ENUM('activa', 'baneada', 'eliminada') DEFAULT 'activa',
-    rol_id INT NOT NULL DEFAULT 1,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	user_id INT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(50) UNIQUE NOT NULL,
+	contrasenia VARCHAR(255) NOT NULL,
+	nombre VARCHAR(100),
+	apellido VARCHAR(100),
+	email VARCHAR(100) UNIQUE,
+	dni VARCHAR(8) UNIQUE,
+	descripcion TEXT,
+	direccion VARCHAR(255),
+	foto_id INT,
+	distrito_id INT,
+	estado_cuenta ENUM('pendiente', 'rechazada', 'activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
+	rol_id INT NOT NULL DEFAULT 1,
+	fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- datos albergue
     nombre_albergue VARCHAR(150),
     capacidad_nuevos_animales INT,
@@ -103,10 +103,10 @@ CREATE TABLE mascotas (
     mascota_id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     raza_id INT NOT NULL,
-    descripcion TEXT NOT NULL,
-    foto_id INT NOT NULL,
+    descripcion TEXT,
+    foto_id INT,
     edad_aproximada INT,
-    genero ENUM('macho', 'hembra') NOT NULL,
+    genero ENUM('macho', 'hembra'),
     tamanio ENUM('pequeño', 'mediano', 'grande', 'gigante') NOT NULL,
     distintivo VARCHAR(255),
     en_hogar_temporal BOOLEAN DEFAULT FALSE,
@@ -134,6 +134,16 @@ CREATE TABLE publicaciones (
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (tipo_publicacion_id) REFERENCES tipos_publicaciones(tipo_publicacion_id) ON DELETE CASCADE
+);
+
+CREATE TABLE comentarios (
+    comentario_id INT AUTO_INCREMENT PRIMARY KEY,
+    publicacion_id INT NOT NULL, -- ID de la publicación a la que pertenece el comentario
+    usuario_id INT NOT NULL, -- ID del usuario (coordinador o usuario final) que hizo el comentario
+    comentario TEXT NOT NULL, -- Contenido del comentario
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora del comentario
+    FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
 -- Tabla de publicaciones de adopción
@@ -181,16 +191,6 @@ CREATE TABLE publicaciones_donaciones (
     motivo_donacion TEXT,
     FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
     FOREIGN KEY (tipo_donacion_id) REFERENCES tipos_donaciones(tipo_donacion_id) ON DELETE CASCADE
-);
-
-CREATE TABLE comentarios (
-    comentario_id INT AUTO_INCREMENT PRIMARY KEY,
-    publicacion_id INT NOT NULL, -- ID de la publicación a la que pertenece el comentario
-    usuario_id INT NOT NULL, -- ID del usuario (coordinador o usuario final) que hizo el comentario
-    comentario TEXT NOT NULL, -- Contenido del comentario
-    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora del comentario
-    FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
 -- Tabla de tipos de solicitudes
@@ -320,20 +320,17 @@ CREATE TABLE hogares_temporales (
 
 -- Tabla de denuncias de maltrato animal
 CREATE TABLE denuncias_maltrato_animal (
-    report_id INT AUTO_INCREMENT PRIMARY KEY,
+    publicacion_id INT PRIMARY KEY,
     user_id INT,
-    descripcion TEXT,
-    foto_id INT,
     tipo_maltrato VARCHAR(100) NOT NULL,
     nombre_maltratador VARCHAR(100),
     direccion_maltrato VARCHAR(255) NOT NULL,
-    tamanio ENUM('pequeño', 'mediano', 'grande', 'gigante'),
-    animal VARCHAR(50) NOT NULL,
-    tipo_raza VARCHAR(100),
+    mascota_id INT NOT NULL,
     denuncia_policial BOOLEAN DEFAULT FALSE,
     fecha_denuncia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
+	FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (mascota_id) REFERENCES mascotas(mascota_id) ON DELETE CASCADE
 );
 -- Tabla de sesiones de usuario para registrar el tiempo empleado
 CREATE TABLE sesiones_usuarios (

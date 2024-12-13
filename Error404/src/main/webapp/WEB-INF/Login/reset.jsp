@@ -70,11 +70,11 @@
         <!-- /Left Text -->
 
         <!-- Login -->
-        <div class="d-flex col-12 col-lg-5 col-xl-5 align-items-center authentication-bg p-sm-5 p-4">
+        <div class="d-flex col-12 col-lg-5 col-xl-5 align-items-center authentication-bg p-sm-5 p-4" style="background: #fff">
             <div class="w-px-400 mx-auto">
                 <!-- Logo -->
                 <div class="app-brand mb-5">
-                    <a href="<%=request.getContextPath()%>/index.html" class="app-brand-link gap-2">
+                    <a href="<%=request.getContextPath()%>" class="app-brand-link gap-2">
                         <div class="app-brand-logo demo">
                             <img src="<%=request.getContextPath()%>/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="Logo de Alianza Animal" width="50">
                         </div>
@@ -82,8 +82,8 @@
                     </a>
                 </div>
                 <!-- /Logo -->
-                <h4 class="mb-2">Recupera tu cuenta</h4>
-                <p class="mb-4">Ingresa tu correo y recupera tu contraseña</p>
+                <h4 class="mb-2">Cambia tu contraseña</h4>
+                <p class="mb-4">Ingresa tu nueva contraseña</p>
 
                 <form id="resetPasswordForm" class="needs-validation" novalidate>
                     <!-- Campo oculto para el token -->
@@ -96,6 +96,13 @@
                         <div class="invalid-feedback">
                             La contraseña debe tener al menos 8 caracteres.
                         </div>
+                    </div>
+
+                    <!-- Línea negra entre las cajas -->
+                    <div class="d-flex align-items-center my-4">
+                        <hr class="flex-grow-1 border-dark">
+                        <span class="px-2 text-dark bg-white rounded-circle">o</span>
+                        <hr class="flex-grow-1 border-dark">
                     </div>
 
                     <!-- Confirmar contraseña -->
@@ -187,5 +194,22 @@
         });
     });
 </script>
+
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+
+<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
+
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/popper/popper.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/js/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/hammer/hammer.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/i18n/i18n.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="<%=request.getContextPath()%>/assets/vendor/js/menu.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
