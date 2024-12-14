@@ -58,9 +58,6 @@ public class DenunciaMaltratoDAO extends BaseDao {
         MascotaDAO mascotaDAO = new MascotaDAO();
         mascotaDAO.agregarMascota(denuncia.getMascota());
         denuncia.getMascota().setMascotaId(mascotaDAO.obtenerIdUltimaMascota());
-        Fotos foto = new Fotos();
-        foto.setFotoId(0);
-        denuncia.getMascota().setFoto(foto);
         String query = "INSERT INTO denuncias_maltrato_animal (publicacion_id, user_id, tipo_maltrato, nombre_maltratador, direccion_maltrato, mascota_id, denuncia_policial) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {

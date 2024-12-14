@@ -14,6 +14,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -237,6 +242,10 @@ public class PublicacionesServlet extends HttpServlet {
                 guardarDenuncia(request, response);
                 response.sendRedirect("PublicacionesServlet");
                 break;
+            case "guardarMascotaPerdida":
+                guardarMascotaPerdida(request, response);
+                response.sendRedirect("PublicacionesServlet");
+                break;
             case "actualizar":
                 break;
         }
@@ -344,6 +353,81 @@ public class PublicacionesServlet extends HttpServlet {
         denunciasMaltratoAnimal.setReportId(publicacionesDAO.obtenerIdUltimaPublicacion());
         denunciasMaltratoAnimal.getMascota().setFoto(fotosDAO.obtenerIdPorUrl(publicacion.getFoto().getUrlFoto()));
         denunciaMaltratoDAO.agregarDenunciaMaltrato(denunciasMaltratoAnimal);
+    }
+
+    private void guardarMascotaPerdida (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Publicaciones publicacion = new Publicaciones();
+        Usuarios usuario = new Usuarios();
+        usuario.setUserId(Integer.parseInt(request.getParameter("user_id")));
+
+        publicacion.setUsuario(usuario);
+        publicacion.setTitulo(request.getParameter("titulo"));
+        publicacion.setDescripcion(request.getParameter("descripcion"));
+
+        TiposPublicaciones tiposPublicacion = new TiposPublicaciones();
+
+        if(request.getParameter("tipo_publicacion") != null) {
+            tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion")));
+            publicacion.setTipoPublicacion(tiposPublicacion);
+            System.out.println("Si llega a guardar los tipos de publis");
+        }
+
+        Mascotas mascota = new Mascotas();
+        mascota.setNombre(request.getParameter("mascota_nombre"));
+        mascota.setEdadAproximada(Integer.parseInt(request.getParameter("mascota_edad")));
+        mascota.setTamanio(request.getParameter("mascota_tamanio"));
+        mascota.setDistintivo(request.getParameter("mascota_distintivo"));
+
+        Razas razas = new Razas();
+        razas.setRazaId(Integer.parseInt(request.getParameter("mascota_raza_id")));
+        mascota.setRaza(razas);
+
+        PublicacionesMascotaPerdida mascotaPerdida = new PublicacionesMascotaPerdida();
+        mascotaPerdida.setMascota(mascota);
+
+        if(request.getParameter("descripcion_adicional") != null) {
+            mascotaPerdida.setDescripcionAdicional(request.getParameter("descripcion_adicional"));
+        }
+        mascotaPerdida.setNombreContacto(request.getParameter("contacto_nombre"));
+        mascotaPerdida.setTelefonoContacto(Integer.parseInt(request.getParameter("contacto_numero")));
+        mascotaPerdida.setLugarPerdida(request.getParameter("lugar_perdida"));
+
+        String fecha_perdida = request.getParameter("fecha_perdida");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fecha_perdida_date = null;
+        try{
+            fecha_perdida_date = (Date) formato.parse(fecha_perdida);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mascotaPerdida.setFechaPerdida(fecha_perdida_date);
+        if(request.getParameter("recompensa")!= null) {
+            mascotaPerdida.setRecompensa(request.getParameter("recompensa"));
+        }
+        Part fotoPart = request.getPart("foto");
+        if (fotoPart != null && fotoPart.getSize() > 0) {
+            // Ruta de almacenamiento
+            String nombreArchivo = Paths.get(fotoPart.getSubmittedFileName()).getFileName().toString();
+            String rutaSubida = getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis" + File.separator + nombreArchivo;
+
+            // Guardar la imagen en el servidor
+            File uploadsDir = new File(getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis");
+            if (!uploadsDir.exists()) {
+                uploadsDir.mkdirs();
+            }
+            fotoPart.write(rutaSubida);
+            // Actualizar en el objeto HogaresTemporales
+            publicacion.setFoto(new Fotos("assets/img/Publis/" + nombreArchivo));
+            System.out.println("URL de la foto almacenada: " + publicacion.getFoto().getUrlFoto());
+        }else{
+            System.err.println("No se recibió ninguna imagen o el archivo está vacío.");
+            publicacion.setFoto(new Fotos(""));
+        }
+        publicacionesDAO.agregarPublicacion(publicacion);
+        mascotaPerdida.setPublicacion_id(publicacionesDAO.obtenerIdUltimaPublicacion());
+        mascotaPerdida.getMascota().setFoto(fotosDAO.obtenerIdPorUrl(publicacion.getFoto().getUrlFoto()));
+        mascotaPerdidaDAO.agregarMascotaPerdida(mascotaPerdida);
+
     }
 }
 
