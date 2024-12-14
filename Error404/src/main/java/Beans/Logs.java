@@ -8,7 +8,11 @@ public class Logs {
     private Timestamp fecha;
     private int userId;
 
-    // Getters and setters
+    // Campos nuevos para fecha formateada y tiempo transcurrido
+    private String fechaFormateada;
+    private String tiempoTranscurrido;
+
+    // Getters y setters
     public int getLogId() {
         return logId;
     }
@@ -40,5 +44,22 @@ public class Logs {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-}
 
+    // Getter y setter para fecha formateada
+    public String getFechaFormateada() {
+        return fechaFormateada;
+    }
+
+    public void setFechaFormateada(String fechaFormateada) {
+        this.fechaFormateada = fechaFormateada;
+    }
+
+    // Getter y setter para tiempo transcurrido
+    public String getTiempoTranscurrido() {
+        return tiempoTranscurrido;
+    }
+
+    public void setTiempoTranscurrido(String tiempoTranscurrido) {
+        this.tiempoTranscurrido = tiempoTranscurrido;
+    }
+}

@@ -7,6 +7,7 @@ import java.util.Date;
 public class HogaresTemporales {
     private int temporalId;
     private Usuarios usuario;
+    private Publicaciones publicacion;
     private Fotos foto;
     private int edad;
     private String genero;
@@ -30,12 +31,29 @@ public class HogaresTemporales {
     private Timestamp fechaAprobacion;
     private Zonas zona;
     private Mascotas mascota;
+    private String descripcion;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     public Mascotas getMascota() {
         return mascota;
     }
     public void setMascota(Mascotas mascota) {
         this.mascota = mascota;
+    }
+
+    public Publicaciones getPublicacion() {
+        return publicacion;
+    }
+
+    public void setPublicacion(Publicaciones publicacion) {
+        this.publicacion = publicacion;
     }
 
     public Zonas getZona() {
@@ -216,6 +234,7 @@ public class HogaresTemporales {
     public void setFechaAprobacion(Timestamp fechaAprobacion) {
         this.fechaAprobacion = fechaAprobacion;
     }
+
 
 }
 

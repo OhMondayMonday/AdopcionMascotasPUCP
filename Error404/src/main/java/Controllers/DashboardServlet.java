@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "DashboardServlet", urlPatterns = "/Dashboard")
 public class DashboardServlet extends HttpServlet {
@@ -62,7 +63,7 @@ public class DashboardServlet extends HttpServlet {
                 int publicacionesRealizadas = dashboardDAO.obtenerPublicacionesRealizadas(userId);
                 int eventosInscritos = dashboardDAO.obtenerEventosInscritos(userId);
                 String actividadPrincipal = dashboardDAO.obtenerActividadPrincipal(userId);
-                Eventos proximoEvento = dashboardDAO.obtenerProximoEvento(userId);
+                Eventos proximoEvento = dashboardDAO.obtenerProximoEvento();
 
                 List<Logs> actualizaciones = dashboardDAO.getLast4LogsByUserId(userId);
 

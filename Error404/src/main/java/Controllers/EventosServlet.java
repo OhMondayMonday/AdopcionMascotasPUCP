@@ -109,16 +109,14 @@ public class EventosServlet extends HttpServlet {
     // Mostrar TODOS los eventos ACTIVOS que existan. Incluye lógica de filtros
     private void verTodosEventos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        LoginDAO loginDAO = new LoginDAO();
-
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("userID") == null) {
+        if (session == null || session.getAttribute("usuariosession") == null) {
             response.sendRedirect("login");
             return;
         }
 
-        Integer userId = (Integer) session.getAttribute("userID");
-        int rolId = loginDAO.obtenerRolPorUserId(userId);
+        Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+        int rolId = usuario.getRol().getRolId();
 
         // Obtener filtros si se aplican
         String tipoEventoIdParam = request.getParameter("tipoEventoId");
@@ -204,14 +202,15 @@ public class EventosServlet extends HttpServlet {
 
     private void verEventosDeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("userID") == null) {
+        if (session == null || session.getAttribute("usuariosession") == null) {
             response.sendRedirect("login");
             return;
         }
 
-        Integer userId = (Integer) session.getAttribute("userID");
+        Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+        int userId = usuario.getUserId();
         LoginDAO loginDAO = new LoginDAO();
-        int rolId = loginDAO.obtenerRolPorUserId(userId);
+        int rolId = usuario.getRol().getRolId();
 
         // Obtener filtros si se aplican
         String tipoEventoIdParam = request.getParameter("tipoEventoId");

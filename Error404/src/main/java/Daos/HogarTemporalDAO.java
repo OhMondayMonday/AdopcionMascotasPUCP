@@ -13,43 +13,71 @@ public class HogarTemporalDAO extends BaseDao {
 
 
 
-    public List<HogaresTemporales> obtenerPublicacionesPaginadas(Integer start, Integer size) {
-        List<HogaresTemporales> hogares = new ArrayList<>();
-        String query = "SELECT p.publicacion_id, p.titulo, p.descripcion, f.url_foto AS foto_url, " +
+    public List<HogaresTemporales> filtrarHogaresConPaginacion(String palabraClave, String tipoMascota, String distrito, int start, int size) {
+        List<HogaresTemporales> hogaresList = new ArrayList<>();
+        String sql = "SELECT p.publicacion_id, p.titulo, p.descripcion, f.url_foto AS foto_url, " +
                 "u.nombre AS nombre_usuario, u.apellido AS apellido_usuario, ht.tipo_mascotas, ht.distrito, " +
-                "ht.estado_temporal AS hogar_descripcion, ht.celular, ht.direccion, ht.cantidad_mascotas " +
+                "ht.estado_temporal, ht.descripcion AS hogar_descripcion, ht.celular, ht.direccion, ht.cantidad_mascotas " +
                 "FROM publicaciones p " +
                 "JOIN fotos f ON p.foto_id = f.foto_id " +
                 "JOIN usuarios u ON p.user_id = u.user_id " +
                 "JOIN hogares_temporales ht ON u.user_id = ht.user_id " +
-                "WHERE p.tipo_publicacion_id = 2 AND p.estado_publicacion = 'activa' " +
-                "LIMIT ?, ?";
+                "WHERE p.tipo_publicacion_id = 2 AND p.estado_publicacion = 'activa' ";
 
-        // Validar los parámetros
-        if (start == null || start < 0 || size == null || size <= 0) {
-            throw new IllegalArgumentException("Los parámetros de paginación no son válidos.");
+        // Agregar condiciones dinámicas de los filtros
+        if (palabraClave != null && !palabraClave.trim().isEmpty()) {
+            sql += " AND (p.titulo LIKE ? OR p.descripcion LIKE ?)";
+        }
+        if (tipoMascota != null && !tipoMascota.equals("Todas")) {
+            sql += " AND ht.tipo_mascotas = ?";
+        }
+        if (distrito != null && !distrito.equals("Todas")) {
+            sql += " AND ht.distrito = ?";
         }
 
-        try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setInt(1, start); // Desde qué registro comenzar
-            pstmt.setInt(2, size); // Cuántos registros obtener
+        // Agregar paginación
+        sql += " LIMIT ?, ?";
 
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            int parameterIndex = 1;
+
+            // Setear parámetros dinámicos
+            if (palabraClave != null && !palabraClave.trim().isEmpty()) {
+                pstmt.setString(parameterIndex++, "%" + palabraClave + "%");
+                pstmt.setString(parameterIndex++, "%" + palabraClave + "%");
+            }
+            if (tipoMascota != null && !tipoMascota.equals("Todas")) {
+                pstmt.setString(parameterIndex++, tipoMascota);
+            }
+            if (distrito != null && !distrito.equals("Todas")) {
+                pstmt.setString(parameterIndex++, distrito);
+            }
+
+            // Setear los parámetros de paginación
+            pstmt.setInt(parameterIndex++, start);
+            pstmt.setInt(parameterIndex, size);
+
+            // Ejecutar la consulta
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     HogaresTemporales hogar = new HogaresTemporales();
+
+                    // Mapear datos específicos de Hogares Temporales
                     hogar.setTemporalId(rs.getInt("publicacion_id"));
                     hogar.setTipoMascotas(rs.getString("tipo_mascotas"));
                     hogar.setEstadoTemporal(rs.getString("estado_temporal"));
-                    // hogar.setDescripcion(rs.getString("hogar_descripcion"));
+                    hogar.setDescripcion(rs.getString("hogar_descripcion"));
                     hogar.setCelular(rs.getString("celular"));
                     hogar.setDireccion(rs.getString("direccion"));
                     hogar.setCantidadMascotas(rs.getInt("cantidad_mascotas"));
 
+                    // Mapear datos de Publicaciones
                     Publicaciones publicacion = new Publicaciones();
-                    publicacion.setDescripcion(rs.getString("descripcion"));
                     publicacion.setTitulo(rs.getString("titulo"));
-                    // hogar.setPublicacion(publicacion);
+                    publicacion.setDescripcion(rs.getString("descripcion"));
+                    hogar.setPublicacion(publicacion);
 
                     // Relación con el objeto Fotos
                     Fotos foto = new Fotos();
@@ -63,39 +91,67 @@ public class HogarTemporalDAO extends BaseDao {
                     hogar.setUsuario(usuario);
 
                     // Relación con el objeto Distritos
-                    Distritos distrito = new Distritos();
-                    distrito.setNombreDistrito(rs.getString("distrito"));
-                    hogar.setDistrito(distrito);
+                    Distritos distritoObj = new Distritos();
+                    distritoObj.setNombreDistrito(rs.getString("distrito"));
+                    hogar.setDistrito(distritoObj);
 
-
-                    hogares.add(hogar);
-
+                    // Agregar a la lista
+                    hogaresList.add(hogar);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return hogares;
+        return hogaresList;
     }
 
-    public int contarTotalPublicaciones() {
-        String sql = "SELECT COUNT(*) AS total FROM publicaciones p " +
-                "JOIN hogares_temporales ht ON p.user_id = ht.user_id " +
-                "WHERE p.tipo_publicacion_id = 2 AND p.estado_publicacion = 'activa'";
+    public int contarTotalPublicacionesFiltradas(String palabraClave, String tipoMascota, String direccion) {
+        String sql = "SELECT COUNT(*) AS total " +
+                "FROM hogares_temporales ht " +
+                "JOIN publicaciones p ON ht.user_id = p.user_id " +
+                "WHERE p.tipo_publicacion_id = 2 AND p.estado_publicacion = 'activa' ";
+
+        // Agregar condiciones dinámicas de los filtros
+        if (palabraClave != null && !palabraClave.trim().isEmpty()) {
+            sql += " AND (p.titulo LIKE ? OR p.descripcion LIKE ?)";
+        }
+        if (tipoMascota != null && !tipoMascota.equals("Todas")) {
+            sql += " AND ht.tipo_mascotas = ?";
+        }
+        if (direccion != null && !direccion.equals("Todas")) {
+            sql += " AND ht.direccion = ?";
+        }
 
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-            if (rs.next()) {
-                return rs.getInt("total");
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            int parameterIndex = 1;
+
+            // Setear parámetros dinámicos
+            if (palabraClave != null && !palabraClave.trim().isEmpty()) {
+                pstmt.setString(parameterIndex++, "%" + palabraClave + "%");
+                pstmt.setString(parameterIndex++, "%" + palabraClave + "%");
+            }
+            if (tipoMascota != null && !tipoMascota.equals("Todas")) {
+                pstmt.setString(parameterIndex++, tipoMascota);
+            }
+            if (direccion != null && !direccion.equals("Todas")) {
+                pstmt.setString(parameterIndex++, direccion);
+            }
+
+            // Ejecutar la consulta
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Error al contar las publicaciones activas", e);
         }
-
         return 0; // Retornar 0 si hay algún error o no se encuentran registros
     }
+
+
+
 
 }

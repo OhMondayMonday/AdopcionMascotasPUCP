@@ -284,7 +284,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/index.jsp">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/WEB-INF/index.jsp">
                                         <i class="bx bx-power-off me-2"></i>
                                         <span class="align-middle">Cerrar sesión</span>
                                     </a>

@@ -1,7 +1,8 @@
 package Controllers;
+import Beans.*;
 import DTO.HogarTemporalDTO;
 
-import Daos.CoordinadorDao;
+import Daos.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @WebServlet("/coordinador")
@@ -28,6 +30,16 @@ public class CoordinadorServlet extends HttpServlet {
         }
 
         try {
+            // 1. Verifica el parámetro id para las acciones "verMiPerfilDetalles" y "editarPerfil"
+            String idStr = request.getParameter("id");
+            if ("verMiPerfilDetalles".equals(action) || "editarPerfil".equals(action)) {
+                if (idStr == null || idStr.isEmpty()) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID no proporcionado");
+                    return;  // Termina el flujo de ejecución aquí, no se realiza más ningún forward o sendError después.
+                }
+            }
+
+            // 2. Maneja las diferentes acciones
             switch (action) {
                 case "listarSolicitudesHogar":
                     listarSolicitudesHogar(request, response);
@@ -44,13 +56,205 @@ public class CoordinadorServlet extends HttpServlet {
                 case "banearHogarTemporal":
                     banearHogarTemporal(request, response);
                     break;
-                default:
-                    listarSolicitudesHogar(request, response);
+                case "editarPerfil":
+                    try {
+                        int id = Integer.parseInt(idStr);
+                        Usuarios coordinador = coordinadorDAO.obtenerInformacionCoordinador(id);
+                        if (coordinador == null) {
+                            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Coordinador no encontrado");
+                            return; // Termina el flujo aquí
+                        }
+                        request.setAttribute("usuario", coordinador);
+                        request.getRequestDispatcher("/WEB-INF/coordinador/coordinador-editar-perfil.jsp").forward(request, response);
+                    } catch (NumberFormatException e) {
+                        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de ID no válido");
+                        return; // Termina el flujo aquí
+                    }
                     break;
+                case "verMiPerfilSeguridad":
+                    request.getRequestDispatcher("/WEB-INF/coordinador/coordinador-ver-miperfil-seguridad.jsp").forward(request, response);
+                    break;
+                // Dentro del caso para "verMiPerfilDetalles"
+                case "verMiPerfilDetalles":
+                    try {
+                        int id = Integer.parseInt(idStr);
+                        Usuarios coordinadorDetalle = coordinadorDAO.obtenerInformacionCoordinador(id);
+                        if (coordinadorDetalle == null) {
+                            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Coordinador no encontrado");
+                            return; // Termina el flujo aquí
+                        }
+                        request.setAttribute("usuario", coordinadorDetalle);
+
+                        // Obtén el ID de la zona que está asociada al coordinador
+                        // Obtener los distritos por zona
+                        int zonaId = coordinadorDetalle.getZona().getZonaId(); // Zona asociada al coordinador
+                        List<Distritos> distritos = coordinadorDAO.obtenerDistritosPorZona(zonaId);
+
+// Asegúrate de que la lista de distritos no esté vacía
+                        if (distritos == null || distritos.isEmpty()) {
+                            System.out.println("No hay distritos para esta zona.");
+                        } else {
+                            System.out.println("Distritos obtenidos: " + distritos.size());
+                        }
+
+// Pasar los distritos al JSP
+                        request.setAttribute("distritos", distritos);
+
+                        // Redirigir a la página del perfil
+                        request.getRequestDispatcher("/WEB-INF/coordinador/coordinador-miperfil-detalles.jsp").forward(request, response);
+                    } catch (NumberFormatException e) {
+                        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de ID no válido");
+                        return; // Termina el flujo aquí
+                    }
+                    break;
+
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ocurrió un error al procesar la solicitud.");
+        }
+    }
+
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        if ("registrar".equals(action)) {
+            registrarCoordinador(request, response);
+        } else if ("actualizar".equals(action)) {
+            actualizarCoordinador(request, response);
+        } else if ("seleccionarZona".equals(action)) { // Acción para manejar la zona
+            String zonaIdStr = request.getParameter("zonaId");
+
+            // Validar que zonaId no esté vacío o nulo
+            if (zonaIdStr != null && !zonaIdStr.isEmpty()) {
+                try {
+                    int zonaId = Integer.parseInt(zonaIdStr); // Obtener zonaId como entero
+                    System.out.println("Zona ID seleccionado: " + zonaId);  // Depuración del zonaId
+
+                    List<Distritos> distritos = coordinadorDAO.obtenerDistritosPorZona(zonaId); // Obtener distritos
+                    System.out.println("Distritos encontrados: " + distritos.size());  // Depuración de los distritos encontrados
+
+                    // Pasar distritos a la JSP
+                    if (distritos.isEmpty()) {
+                        System.out.println("No hay distritos para esta zona.");
+                        request.setAttribute("mensaje", "No hay distritos para esta zona.");
+                    } else {
+                        request.setAttribute("distritos", distritos);
+                    }
+
+                    // Redirigir de nuevo a la vista donde se muestran los distritos
+                    request.getRequestDispatcher("/WEB-INF/coordinador/coordinador-editar-perfil.jsp").forward(request, response);
+
+                } catch (NumberFormatException e) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de zona ID no válido");
+                }
+            } else {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Zona no seleccionada");
+            }
+        }
+    }
+
+
+
+
+    private void registrarCoordinador(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            Usuarios coordinador = new Usuarios();
+            // Obtener los parámetros del formulario
+            coordinador.setUsername(request.getParameter("username"));
+            coordinador.setContrasenia(request.getParameter("contrasenia"));
+            coordinador.setNombre(request.getParameter("nombre"));
+            coordinador.setApellido(request.getParameter("apellido"));
+            coordinador.setEmail(request.getParameter("email"));
+            coordinador.setDni(request.getParameter("dni"));
+            coordinador.setDireccion(request.getParameter("direccion"));
+
+            // Manejo del año de creación
+            String anioCreacionStr = request.getParameter("anioCreacion");
+            if (anioCreacionStr != null && !anioCreacionStr.isBlank()) { // Validar nulo o vacío
+                try {
+                    Date anioCreacion = Date.valueOf(anioCreacionStr); // Formato yyyy-MM-dd
+                    coordinador.setAnioCreacion(anioCreacion);
+                } catch (IllegalArgumentException e) {
+                    response.getWriter().write("Error: Fecha de creación inválida");
+                    return;
+                }
+            } else {
+                coordinador.setAnioCreacion(null); // Establecer como nulo si no se proporciona
+            }
+
+
+            // Guardar en la base de datos
+            if (coordinadorDAO.registrarCoordinador(coordinador)) {
+                response.sendRedirect("coordinador?action=verMiPerfilDetalles");
+            } else {
+                response.getWriter().write("Error: No se pudo registrar el coordinador");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().write("Error: " + e.getMessage());
+        }
+    }
+
+    private void actualizarCoordinador(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            // Configuración de caracteres
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+
+            // Obtener y verificar el ID del usuario
+            String idStr = request.getParameter("id");
+            if (idStr == null || idStr.isEmpty()) {
+                response.getWriter().write("Error: ID no proporcionado");
+                return;
+            }
+
+            int id;
+            try {
+                id = Integer.parseInt(idStr);
+            } catch (NumberFormatException e) {
+                response.getWriter().write("Error: Formato de ID no válido");
+                return;
+            }
+
+            System.out.println("ID Capturado en el Servlet: " + id);
+
+            // Crear el objeto Usuarios y establecer los datos del formulario
+            Usuarios coordinador = new Usuarios();
+            coordinador.setUserId(id);
+            coordinador.setUsername(request.getParameter("username")); // Username
+            coordinador.setNombre(request.getParameter("nombre")); // Nombre de persona
+            coordinador.setApellido(request.getParameter("apellido"));
+            coordinador.setEmail(request.getParameter("email"));
+            coordinador.setDireccion(request.getParameter("direccion"));
+            coordinador.setNumeroYapePlin(request.getParameter("numeroYapePlin"));
+
+            // Obtener la zona seleccionada
+            String zonaSeleccionada = request.getParameter("zona");
+            if (zonaSeleccionada != null && !zonaSeleccionada.isEmpty()) {
+                Zonas zona = new Zonas();
+                zona.setZonaId(Integer.parseInt(zonaSeleccionada)); // Asignamos la zona seleccionada
+                coordinador.setZona(zona); // Establecemos la zona en el objeto coordinador
+            } else {
+                // Si la zona no es seleccionada, se puede dejar en null o asignar una zona por defecto
+                coordinador.setZona(null);
+            }
+
+            // Llamar al método del DAO para actualizar la información
+            if (coordinadorDAO.actualizarInformacionCoordinador(coordinador)) {
+                // Redirigir al perfil con los detalles actualizados
+                response.sendRedirect("coordinador?action=verMiPerfilDetalles&id=" + id);
+            } else {
+                response.getWriter().write("Error: No se pudo actualizar la información del coordinador. Verifique los datos y vuelva a intentarlo.");
+            }
+        } catch (Exception e) {
+            // Manejo general de excepciones
+            e.printStackTrace();
+            response.getWriter().write("Error: Ocurrió un error al procesar la solicitud. Detalles: " + e.getMessage());
         }
     }
 
@@ -118,9 +322,6 @@ public class CoordinadorServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/coordinador/coordinador-tables-hogaresTemporales.jsp").forward(request, response);
     }
 
-
-
-    // Método para aprobar solicitud de hogar temporal
     // Método para aprobar solicitud de hogar temporal
     private void aprobarSolicitudHogar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int solicitudId = parseParameterToInt(request, "solicitudId");
@@ -170,4 +371,5 @@ public class CoordinadorServlet extends HttpServlet {
         String paramValue = request.getParameter(paramName);
         return (paramValue != null && !paramValue.isEmpty()) ? Integer.parseInt(paramValue) : 0;
     }
+
 }
