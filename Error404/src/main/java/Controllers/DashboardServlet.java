@@ -62,7 +62,7 @@ public class DashboardServlet extends HttpServlet {
                 int publicacionesRealizadas = dashboardDAO.obtenerPublicacionesRealizadas(userId);
                 int eventosInscritos = dashboardDAO.obtenerEventosInscritos(userId);
                 String actividadPrincipal = dashboardDAO.obtenerActividadPrincipal(userId);
-                Eventos proximoEvento = dashboardDAO.obtenerProximoEvento(userId);
+                Eventos proximoEvento = dashboardDAO.obtenerProximoEvento();
 
                 List<Logs> actualizaciones = dashboardDAO.getLast4LogsByUserId(userId);
 

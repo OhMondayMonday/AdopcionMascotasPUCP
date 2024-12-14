@@ -9,6 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.sql.Date;
+import java.sql.Time;
 
 public class DashboardDAO extends BaseDao {
     // Obtener el nombre del usuario
@@ -40,23 +44,25 @@ public class DashboardDAO extends BaseDao {
         return "assets/img/FotoPerfil/perfil_user1.jpg"; //una por defeto puem
     }
 
-
+    //obtener animales ayudados
     public int obtenerAnimalesAyudados(int userId) {
-        // Ajusta esta consulta para reflejar la relación correcta
-        String sql = "SELECT COUNT(*) FROM Mascotas m " +
-                "JOIN Hogares_Temporales ht ON m.mascota_id = ht.mascota_id " +
-                "WHERE ht.user_id = ? AND m.en_hogar_temporal = FALSE";
+        String sql = "SELECT COUNT(pa.publicacion_id) AS cantidad_adopciones " +
+                "FROM publicaciones_adopcion pa " +
+                "JOIN publicaciones p ON pa.publicacion_id = p.publicacion_id " +
+                "WHERE p.user_id = ?";
         try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt("cantidad_adopciones");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
-    } // Obtener el conteo de animales ayudados
+        return 0; // Si no hay adopciones, devuelve 0
+    }
+
+
 
 
 
@@ -106,42 +112,70 @@ public class DashboardDAO extends BaseDao {
         return "No hay actividad reciente";
     }
 
-    // Obtener el próximo evento
-    public Eventos obtenerProximoEvento(int userId) {
+    public Eventos obtenerProximoEvento() {
         String sql = "SELECT e.event_id, e.nombre_evento, e.fecha_evento, e.hora_evento, e.foto_id, " +
                 "le.lugar_id, le.nombre_lugar, f.url_foto " +
                 "FROM Eventos e " +
                 "JOIN Lugares_Eventos le ON e.lugar_evento_id = le.lugar_id " +
-                "LEFT JOIN Fotos f ON e.foto_id = f.foto_id " + // JOIN para obtener la URL de la imagen
-                "WHERE e.user_id = ? AND e.fecha_evento > NOW() " +
+                "LEFT JOIN Fotos f ON e.foto_id = f.foto_id " +
+                "WHERE e.fecha_evento > NOW() " +
                 "ORDER BY e.fecha_evento ASC LIMIT 1";
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, userId);
-            ResultSet rs = ps.executeQuery();
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
             if (rs.next()) {
+                // Crear un nuevo objeto Evento
                 Eventos evento = new Eventos();
                 evento.setEventId(rs.getInt("event_id"));
                 evento.setNombreEvento(rs.getString("nombre_evento"));
-                evento.setFechaEvento(rs.getDate("fecha_evento"));
+
+                // Asignar la fecha del evento
+                java.sql.Date fechaSql = rs.getDate("fecha_evento");
+                if (fechaSql != null) {
+                    evento.setFechaEvento(fechaSql);
+                }
+
+                // Obtener la hora del evento
                 evento.setHoraEvento(rs.getTime("hora_evento"));
 
-                // Configurar el lugar del evento
+                // Crear objeto LugarEvento y asignarlo al evento
                 LugaresEventos lugarEvento = new LugaresEventos();
                 lugarEvento.setLugarId(rs.getInt("lugar_id"));
                 lugarEvento.setNombreLugar(rs.getString("nombre_lugar"));
                 evento.setLugarEvento(lugarEvento);
 
-                // Configurar la URL de la imagen
+                // Obtener la URL de la foto
                 String urlFoto = rs.getString("url_foto");
-                evento.setUrlFoto(urlFoto != null ? urlFoto : "assets/img/illustrations/boy-app-academy.png"); // Imagen por defecto si es null
+                System.out.println("URL Foto obtenida de la base de datos: " + urlFoto);  // Depuración
 
-                return evento;
+                // Verificar si la URL es válida y asignar la foto correspondiente
+                if (urlFoto != null && !urlFoto.isEmpty()) {
+                    evento.setUrlFoto(urlFoto);  // Asignar la URL de la foto si está disponible
+                    System.out.println("Asignando URL de la foto: " + urlFoto);  // Depuración
+                } else {
+                    evento.setUrlFoto("/assets/img/illustrations/sitting-girl-with-laptop-dark.png");
+                    System.out.println("Asignando URL de la foto por defecto: /assets/img/illustrations/sitting-girl-with-laptop-dark.png");  // Depuración
+                }
+
+                return evento;  // Devolver el evento más cercano
             }
+
         } catch (SQLException e) {
+            System.err.println("Error al obtener el próximo evento: " + e.getMessage());
             e.printStackTrace();
         }
+
         return null;
     }
+
+
+
+
+
+
+
 
 
 

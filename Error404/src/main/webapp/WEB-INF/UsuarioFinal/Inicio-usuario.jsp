@@ -3,16 +3,18 @@
 <%@ page import="Beans.Eventos" %>
 <%@ page import="Beans.Logs" %>
 <%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <%
     // Instanciar el DAO y obtener datos simulados
     DashboardDAO dashboardDAO = new DashboardDAO();
-    int userId = 1; // Simula el userId; en producción, usa el userId del usuario autenticado
+    int userId = 2; // Simula el userId; en producción, usa el userId del usuario autenticado
     int animalesAyudados = dashboardDAO.obtenerAnimalesAyudados(userId);
     int publicacionesRealizadas = dashboardDAO.obtenerPublicacionesRealizadas(userId);
     int eventosInscritos = dashboardDAO.obtenerEventosInscritos(userId);
     String actividadPrincipal = dashboardDAO.obtenerActividadPrincipal(userId);
-    Eventos proximoEvento = dashboardDAO.obtenerProximoEvento(userId);
+    Eventos proximoEvento = dashboardDAO.obtenerProximoEvento();
     String nombreUsuario = (String) request.getAttribute("nombreUsuario");
     String fotoPerfil = dashboardDAO.obtenerFotoPerfil(userId);
 %>
@@ -312,58 +314,114 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <% if (proximoEvento != null && proximoEvento.getUrlFoto() != null && !proximoEvento.getUrlFoto().isEmpty()) { %>
-                                <img src="<%= proximoEvento.getUrlFoto() %>" alt="Imagen del Evento" class="img-fluid rounded" style="max-height: 250px;">
-                                <% } else { %>
-                                <img src="assets/img/Eventos/default-event.jpg" alt="Imagen por Defecto" class="img-fluid rounded" style="max-height: 250px;">
-                                <% } %>
-                                <h4 class="mb-2 pb-1">Próximo evento</h4>
-                                <% if (proximoEvento != null) { %>
-                                <p class="small">Sigue compartiendo con los demás por un bien animal</p>
-                                <div class="row mb-3">
-                                    <div class="col-6 d-flex align-items-center">
+                    <div class="col-12 col-xl-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <!-- Imagen del evento o por defecto (controlado por DAO) -->
+                            <% if (proximoEvento != null) { %>
+                            <div class="bg-label-primary rounded-3 text-center mb-3 pt-4">
+                                <img class="img-fluid w-60" src="<%= proximoEvento.getUrlFoto() != null ? proximoEvento.getUrlFoto() : "assets/img/default-event.jpg" %>" alt="Imagen del Evento" />
+                            </div>
+                            <% } else { %>
+                            <div class="bg-label-primary rounded-3 text-center mb-3 pt-4">
+                                <img class="img-fluid w-60" src="assets/img/illustrations/sitting-girl-with-laptop-dark.png" alt="Imagen por Defecto" />
+                            </div>
+                            <% } %>
+
+                            <h4 class="mb-2 pb-1">Próximo evento</h4>
+                            <% if (proximoEvento != null) { %>
+                            <p class="small">Sigue compartiendo con los demás por un bien animal</p>
+                            <!-- Información del evento -->
+                            <div class="row mb-3 g-3">
+                                <div class="col-6">
+                                    <div class="d-flex">
                                         <div class="avatar flex-shrink-0 me-2">
                             <span class="avatar-initial rounded bg-label-primary">
                                 <i class="bx bx-calendar-exclamation bx-sm"></i>
                             </span>
                                         </div>
                                         <div>
-                                            <h6 class="mb-0 text-nowrap"><%= proximoEvento.getFechaEvento() %></h6>
+                                            <!-- Mostrar la fecha formateada -->
+                                            <h6 class="mb-0 text-nowrap"><%= proximoEvento.getFechaEventoFormateada() %></h6>
                                             <small><%= proximoEvento.getNombreEvento() %></small>
                                         </div>
                                     </div>
-                                    <div class="col-6 d-flex align-items-center">
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex">
                                         <div class="avatar flex-shrink-0 me-2">
                             <span class="avatar-initial rounded bg-label-primary">
                                 <i class="bx bx-time-five bx-sm"></i>
                             </span>
                                         </div>
                                         <div>
-                                            <h6 class="mb-0 text-nowrap"><%= proximoEvento.getLugarEvento().getNombreLugar() %></h6>
+                                            <!-- Verificación para mostrar el lugar del evento -->
+                                            <h6 class="mb-0 text-nowrap"><%= proximoEvento.getLugarEvento() != null ? proximoEvento.getLugarEvento().getNombreLugar() : "Lugar no disponible" %></h6>
                                             <small>Lugar</small>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-primary w-100 mb-1">Participar en el evento</a>
-                                <div class="text-center">
-                                    <small>¿Deseas crear una nueva publicación?</small>
-                                </div>
-                                <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicación</a>
-                                <% } else { %>
-                                <p>No hay próximos eventos.</p>
-                                <% } %>
                             </div>
+
+                            <!-- Botones -->
+                            <a href="#" class="btn btn-primary w-100 mb-1">Participar en el evento</a>
+                            <div class="row mb-1 align-items-center justify-content-center">
+                                <small>¿Deseas crear una nueva publicación?</small>
+                            </div>
+                            <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicación</a>
+                            <% } else { %>
+                            <p>No hay próximos eventos.</p>
+                            <!-- Mostrar los íconos y texto aunque no haya evento -->
+                            <div class="row mb-3 g-3">
+                                <div class="col-6">
+                                    <div class="d-flex">
+                                        <div class="avatar flex-shrink-0 me-2">
+                            <span class="avatar-initial rounded bg-label-primary">
+                                <i class="bx bx-calendar-exclamation bx-sm"></i>
+                            </span>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0 text-nowrap">No hay eventos</h6>
+                                            <small>Nuevo evento</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex">
+                                        <div class="avatar flex-shrink-0 me-2">
+                            <span class="avatar-initial rounded bg-label-primary">
+                                <i class="bx bx-time-five bx-sm"></i>
+                            </span>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0 text-nowrap">Sin lugar asignado</h6>
+                                            <small>Lugar</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botones visibles incluso cuando no hay evento -->
+                            <a href="#" class="btn btn-primary w-100 mb-1">Participar en el evento</a>
+                            <div class="row mb-1 align-items-center justify-content-center">
+                                <small>¿Deseas crear una nueva publicación?</small>
+                            </div>
+                            <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicación</a>
+                            <% } %>
                         </div>
                     </div>
+                </div>
+
+
+
 
 
 
                     <div class="col-xl-4">
                         <div class="card h-100">
-                            <div class="card-header"><h5>Últimas actualizaciones:</h5></div>
+                            <div class="card-header">
+                                <h5>Últimas actualizaciones:</h5>
+                            </div>
                             <div class="card-body">
                                 <ul class="timeline">
                                     <%
@@ -373,9 +431,9 @@
                                             for (Logs log : actualizaciones) {
                                     %>
                                     <li class="timeline-item timeline-item-transparent">
-        <span class="timeline-point-wrapper">
-            <span class="timeline-point timeline-point-primary"></span>
-        </span>
+                        <span class="timeline-point-wrapper">
+                            <span class="timeline-point timeline-point-primary"></span>
+                        </span>
                                         <div class="timeline-event">
                                             <div class="timeline-header mb-1">
                                                 <h6 class="mb-0"><%= log.getDescripcion() %></h6> <!-- Muestra la descripción del log -->
@@ -384,7 +442,21 @@
                                         </div>
                                     </li>
                                     <%
-                                            }
+                                        }
+                                    } else {
+                                    %>
+                                    <!-- Sección visual atractiva cuando no hay actualizaciones -->
+                                    <li class="timeline-item timeline-item-transparent">
+                        <span class="timeline-point-wrapper">
+                            <span class="timeline-point timeline-point-warning"></span>
+                        </span>
+                                        <div class="timeline-event text-center" style="border: 2px dashed #e0e0e0; padding: 20px; background-color: #f9f9f9;">
+                                            <h6 class="text-muted mb-0">No hay actualizaciones disponibles</h6>
+                                            <p class="text-muted">Parece que no hay ninguna actividad reciente en este momento.</p>
+                                            <i class="bx bx-sad bx-lg text-muted"></i> <!-- Ícono visual -->
+                                        </div>
+                                    </li>
+                                    <%
                                         }
                                     %>
                                     <li class="timeline-end-indicator">
@@ -394,22 +466,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <footer class="footer">
-                <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
-                    <div>
-                        <a href="<%= request.getContextPath() %>/home" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-                    </div>
-                    <div>
-                        <a href="<%= request.getContextPath() %>/ayuda" class="footer-link me-4 text-muted">Ayuda</a>
-                        <a href="<%= request.getContextPath() %>/contactos" class="footer-link me-4 text-muted">Contactos</a>
-                        <a href="<%= request.getContextPath() %>/terminos" class="footer-link text-muted">Términos &amp; Condiciones</a>
-                    </div>
-                </div>
-
-        </footer>
 
 
             <!-- / Layout page -->
@@ -430,6 +488,19 @@
 
 
     <!-- / Footer -->
+            <footer class="footer">
+                <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+                    <div>
+                        <a href="<%= request.getContextPath() %>/home" class="footer-link me-4 text-muted">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+                    </div>
+                    <div>
+                        <a href="<%= request.getContextPath() %>/ayuda" class="footer-link me-4 text-muted">Ayuda</a>
+                        <a href="<%= request.getContextPath() %>/contactos" class="footer-link me-4 text-muted">Contactos</a>
+                        <a href="<%= request.getContextPath() %>/terminos" class="footer-link text-muted">Términos &amp; Condiciones</a>
+                    </div>
+                </div>
+
+            </footer>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
