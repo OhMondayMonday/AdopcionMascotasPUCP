@@ -169,52 +169,6 @@ public class DashboardDAO extends BaseDao {
     }
 
 
-
-
-
-
-
-
-
-
-
-    // Método para obtener últimas actualizaciones
-    public List<Map<String, String>> obtenerUltimasActualizaciones(int userId) {
-        String sql = """
-        SELECT descripcion, 
-               DATE_FORMAT(fecha, '%d/%m/%Y %H:%i:%s') AS fecha_formateada,
-               TIMESTAMPDIFF(MINUTE, fecha, NOW()) AS minutos_transcurridos
-        FROM logs 
-        WHERE user_id = ? 
-        ORDER BY fecha DESC 
-        LIMIT 5
-        """;
-        List<Map<String, String>> actualizaciones = new ArrayList<>();
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, userId);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    Map<String, String> actualizacion = new HashMap<>();
-                    actualizacion.put("descripcion", rs.getString("descripcion"));
-                    actualizacion.put("fecha", rs.getString("fecha_formateada"));
-                    int minutos = rs.getInt("minutos_transcurridos");
-                    if (minutos < 60) {
-                        actualizacion.put("tiempo", "Hace " + minutos + " minutos");
-                    } else if (minutos < 1440) {
-                        actualizacion.put("tiempo", "Hace " + (minutos / 60) + " horas");
-                    } else {
-                        actualizacion.put("tiempo", "Hace " + (minutos / 1440) + " días");
-                    }
-                    actualizaciones.add(actualizacion);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return actualizaciones;
-    }
-
     public void finalizarSesion(int sesionId) {
         String sql = "UPDATE sesiones_usuarios SET fin_sesion = NOW(), " +
                 "duracion_sesion = TIMESTAMPDIFF(SECOND, inicio_sesion, NOW()) WHERE sesion_id = ?";
