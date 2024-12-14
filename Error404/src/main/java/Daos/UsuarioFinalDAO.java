@@ -1,84 +1,164 @@
 package Daos;
-import Beans.Usuarios;
+import Beans.*;
 
 import java.sql.Connection;
-import Beans.Distritos;
-import Beans.Roles;
-import Beans.Fotos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class UsuarioFinalDAO extends BaseDao {
 
     // Metodo para obtener todos los detalles de un usuario específico
-    public Usuarios obtenerUsuarioPorId(int userId) {
-        String query = "SELECT u.user_id, u.username, u.nombre, u.apellido, u.email, u.DNI, u.descripcion, u.direccion, u.estado_cuenta, u.fecha_registro, " +
-                "       u.url_facebook, u.url_instagram, u.numero_yape_plin, u.fecha_nacimiento, " +
-                "       r.rol_id AS rol_id, r.nombre_rol, f.foto_id, f.url_foto, d.distrito_id, d.nombre_distrito " +
-                "FROM usuarios u " +
-                "LEFT JOIN fotos f ON u.foto_id = f.foto_id " +
-                "LEFT JOIN distritos d ON u.distrito_id = d.distrito_id " +
-                "LEFT JOIN roles r ON u.rol_id = r.rol_id " +
-                "WHERE u.user_id = ?";
-        Usuarios usuario = null;
+    public boolean registrarUsuario(Usuarios usuario) {
+        String sql = "INSERT INTO usuarios (username, contrasenia, nombre, apellido, email, DNI, direccion, distrito_id, " +
+                "estado_cuenta, rol_id, fecha_registro, anio_creacion, numero_yape_plin, zona_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?)";
+        boolean isSuccess = false;
 
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            pstmt.setInt(1, userId);
-            //System.out.println("Query ejecutada: " + query);
-            //System.out.println("Con parámetro: user_id = " + userId);
+            stmt.setString(1, usuario.getUsername());
+            stmt.setString(2, usuario.getContrasenia());
+            stmt.setString(3, usuario.getNombre());
+            stmt.setString(4, usuario.getApellido());
+            stmt.setString(5, usuario.getEmail());
+            stmt.setString(6, usuario.getDni());
+            stmt.setString(7, usuario.getDireccion());
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    usuario = new Usuarios();
-                    usuario.setUserId(rs.getInt("user_id"));
-                    usuario.setUsername(rs.getString("username"));
-                    usuario.setNombre(rs.getString("nombre"));
-                    usuario.setApellido(rs.getString("apellido"));
-                    usuario.setEmail(rs.getString("email"));
-                    usuario.setDni(rs.getString("DNI"));
-                    usuario.setDescripcion(rs.getString("descripcion"));
-                    usuario.setDireccion(rs.getString("direccion"));
+            if (usuario.getDistrito() != null) {
+                stmt.setInt(8, usuario.getDistrito().getDistritoId());
+            } else {
+                stmt.setNull(8, java.sql.Types.INTEGER);
+            }
 
-                    // Foto relacionada
-                    Fotos foto = new Fotos();
-                    if (rs.getObject("foto_id") != null) {
-                        foto.setFotoId(rs.getInt("foto_id"));
-                        foto.setUrlFoto(rs.getString("url_foto"));
+            stmt.setString(9, "pendiente"); // Estado inicial
+            stmt.setInt(10, usuario.getRol().getRolId());
+            stmt.setInt(11, usuario.getCapacidadNuevosAnimales());
+            stmt.setInt(12, usuario.getAnimalesAlbergados());
+            stmt.setString(13, usuario.getNumeroYapePlin());
+
+            if (usuario.getZona() != null) {
+                stmt.setInt(14, usuario.getZona().getZonaId());
+            } else {
+                stmt.setNull(14, java.sql.Types.INTEGER);
+            }
+
+            int affectedRows = stmt.executeUpdate();
+            isSuccess = affectedRows > 0;
+
+            if (isSuccess) {
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        int generatedId = rs.getInt(1);
+                        usuario.setUserId(generatedId); // Asigna el userId al objeto usuario
                     }
-                    usuario.setFoto(foto);
-
-                    // Distrito relacionado
-                    Distritos distrito = new Distritos();
-                    if (rs.getObject("distrito_id") != null) {
-                        distrito.setDistritoId(rs.getInt("distrito_id"));
-                        distrito.setNombreDistrito(rs.getString("nombre_distrito"));
-                    }
-                    usuario.setDistrito(distrito);
-
-                    // Rol relacionado
-                    Roles rol = new Roles();
-                    rol.setRolId(rs.getInt("rol_id"));
-                    rol.setNombreRol(rs.getString("nombre_rol"));
-                    usuario.setRol(rol);
-
-                    usuario.setEstadoCuenta(rs.getString("estado_cuenta"));
-                    usuario.setFechaRegistro(rs.getTimestamp("fecha_registro"));
-                    usuario.setUrlFacebook(rs.getString("url_facebook"));
-                    usuario.setUrlInstagram(rs.getString("url_instagram"));
-                    usuario.setNumeroYapePlin(rs.getString("numero_yape_plin"));
-                    usuario.setFechaNacimiento(rs.getString("fecha_nacimiento"));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return usuario;
+        return isSuccess;
     }
 
+
+    // 2. Obtener Información del Albergue
+    public Usuarios obtenerInformacionUsuario(int usuarioId) {
+        String sql = "SELECT user_id, username, nombre, apellido, email, direccion, descripcion, distrito_id, estado_cuenta, " +
+                "anio_creacion, numero_yape_plin, zona_id, capacidad_nuevos_animales, animales_albergados, url_facebook, url_instagram " +
+                "FROM usuarios WHERE user_id = ? AND rol_id = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, usuarioId);
+            stmt.setInt(2, 1); // Suponiendo que el rolId de usuario final es 2
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Usuarios usuario = new Usuarios();
+                usuario.setUserId(rs.getInt("user_id"));
+                usuario.setUsername(rs.getString("username"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setDireccion(rs.getString("direccion"));
+                usuario.setDescripcion(rs.getString("descripcion")); // Descripción agregada
+
+                // Asignar Distrito
+                if (rs.getObject("distrito_id") != null) {
+                    Distritos distrito = new Distritos();
+                    distrito.setDistritoId(rs.getInt("distrito_id"));
+                    usuario.setDistrito(distrito);
+                }
+
+
+                usuario.setEstadoCuenta(rs.getString("estado_cuenta"));
+                usuario.setAnioCreacion(rs.getDate("anio_creacion"));
+                usuario.setNumeroYapePlin(rs.getString("numero_yape_plin"));
+
+                // Campos adicionales
+                usuario.setCapacidadNuevosAnimales(rs.getInt("capacidad_nuevos_animales"));
+                usuario.setAnimalesAlbergados(rs.getInt("animales_albergados"));
+                usuario.setUrlFacebook(rs.getString("url_facebook"));
+                usuario.setUrlInstagram(rs.getString("url_instagram"));
+
+                return usuario;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // 3. Actualizar Información del Albergue
+    public boolean actualizarInformacionUsuario(Usuarios usuario) {
+        String sql = "UPDATE usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, direccion = ?, distrito_id = ?, " +
+                "numero_yape_plin = ?, descripcion = ?, zona_id = ?, capacidad_nuevos_animales = ?, animales_albergados = ?, url_facebook = ?, url_instagram = ? " +
+                "WHERE user_id = ? AND rol_id = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, usuario.getUsername());
+            stmt.setString(2, usuario.getNombre());
+            stmt.setString(3, usuario.getApellido());
+            stmt.setString(4, usuario.getEmail());
+            stmt.setString(5, usuario.getDireccion());
+
+            if (usuario.getDistrito() != null) {
+                stmt.setInt(6, usuario.getDistrito().getDistritoId());
+            } else {
+                stmt.setNull(6, java.sql.Types.INTEGER);
+            }
+
+            stmt.setString(7, usuario.getNumeroYapePlin());
+            stmt.setString(8, usuario.getDescripcion());
+
+            // Asignar zona_id
+            if (usuario.getZona() != null) {
+                stmt.setInt(9, usuario.getZona().getZonaId());
+            } else {
+                stmt.setNull(9, java.sql.Types.INTEGER);
+            }
+
+            stmt.setInt(10, usuario.getCapacidadNuevosAnimales());
+            stmt.setInt(11, usuario.getAnimalesAlbergados());
+            stmt.setString(12, usuario.getUrlFacebook());
+            stmt.setString(13, usuario.getUrlInstagram());
+
+            stmt.setInt(14, usuario.getUserId());
+            stmt.setInt(15, 1); // Suponiendo que el rolId de usuario final es 2
+
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     // Crear un nuevo usuario
     public boolean crearUsuario(Usuarios usuario) {
         String query = "INSERT INTO Usuarios (username, contrasenia, nombre, apellido, email, DNI, direccion, distrito_id, estado_cuenta, rol_id, fecha_registro) " +
@@ -123,33 +203,6 @@ public class UsuarioFinalDAO extends BaseDao {
         return false;
     }
 
-
-    // Actualizar un usuario existente
-    public boolean actualizarUsuario(Usuarios usuario) {
-        String query = "UPDATE Usuarios SET username = ?, contrasenia = ?, nombre = ?, apellido = ?, email = ?, DNI = ?, direccion = ?, distrito_id = ?, " +
-                "estado_cuenta = ?, rol_id = ? WHERE user_id = ?";
-
-        try (Connection connection = this.getConnection();
-             PreparedStatement ps = connection.prepareStatement(query)) {
-
-            ps.setString(1, usuario.getUsername());
-            ps.setString(2, usuario.getContrasenia());
-            ps.setString(3, usuario.getNombre());
-            ps.setString(4, usuario.getApellido());
-            ps.setString(5, usuario.getEmail());
-            ps.setString(6, usuario.getDni());
-            ps.setString(7, usuario.getDireccion());
-            ps.setInt(8, usuario.getDistrito().getDistritoId());
-            ps.setString(9, usuario.getEstadoCuenta());
-            ps.setInt(10, usuario.getRol().getRolId());
-            ps.setInt(11, usuario.getUserId());
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     // Cambiar el estado de la cuenta de un usuario a 'eliminada' para una eliminación lógica
     public boolean eliminarUsuarioLogicamente(int userId) {
