@@ -40,7 +40,7 @@ public class DashboardServlet2 extends HttpServlet {
 
     private void mostrarDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Simular el albergueId; en un entorno real, deberías obtenerlo del usuario autenticado
-        int albergueId = 2; // Cambia a 2 para usar el ID del albergue "Huellas"
+        int albergueId = 1; // Cambia a 2 para usar el ID del albergue "Huellas"
 
         try {
             // Obtener datos del albergue desde el Dashboard2DAO
@@ -49,8 +49,8 @@ public class DashboardServlet2 extends HttpServlet {
             int animalesAyudados = dashboard2DAO.obtenerAnimalesAyudados(albergueId); // Corregido
             int publicacionesRealizadas = dashboard2DAO.obtenerPublicacionesRealizadas(albergueId);
             int eventosOrganizados = dashboard2DAO.obtenerEventosOrganizados(albergueId);
-            Eventos proximoEvento = dashboard2DAO.obtenerProximoEvento(albergueId);
-            List<Logs> actualizaciones = dashboard2DAO.obtenerUltimasActualizaciones(albergueId);
+            Eventos proximoEvento = dashboard2DAO.obtenerProximoEvento();
+            List<Logs> actualizaciones = dashboard2DAO.getLast4LogsByUserId(albergueId);
 
             // Pasar los datos al JSP
             request.setAttribute("nombreAlbergue", nombreAlbergue);

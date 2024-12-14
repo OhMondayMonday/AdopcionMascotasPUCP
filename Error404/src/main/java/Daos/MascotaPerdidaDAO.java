@@ -72,6 +72,28 @@ public class MascotaPerdidaDAO extends BaseDao {
         return mascotaPerdida;
     }
 
+    public void agregarMascotaPerdida(PublicacionesMascotaPerdida mascotaPerdida){
+        MascotaDAO mascotaDAO = new MascotaDAO();
+        mascotaDAO.agregarMascota(mascotaPerdida.getMascota());
+        mascotaPerdida.getMascota().setMascotaId(mascotaDAO.obtenerIdUltimaMascota());
+
+        String sql = "INSERT INTO publicaciones_mascota_perdida(publicacion_id, mascota_id, lugar_perdida, fecha_perdida, descripcion_adicional, telefono_contacto, nombre_contacto, recompensa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, mascotaPerdida.getPublicacion_id());
+            pstmt.setInt(2, mascotaPerdida.getMascota().getMascotaId());
+            pstmt.setString(3, mascotaPerdida.getLugarPerdida());
+            pstmt.setDate(4, mascotaPerdida.getFechaPerdida());
+            pstmt.setString(5, mascotaPerdida.getDescripcionAdicional());
+            pstmt.setInt(6, mascotaPerdida.getTelefonoContacto());
+            pstmt.setString(7, mascotaPerdida.getNombreContacto());
+            pstmt.setString(8, mascotaPerdida.getRecompensa());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // Metodo para descartar la publicación de Mascota Perdida
     public void descartarPublicacionMascotaPerdida(int publicacionId) {
         String query = "UPDATE publicaciones SET estado_publicacion = ? WHERE publicacion_id = ?";

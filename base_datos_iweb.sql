@@ -67,7 +67,7 @@ CREATE TABLE usuarios (
 	direccion VARCHAR(255),
 	foto_id INT,
 	distrito_id INT,
-	estado_cuenta ENUM('pendiente', 'rechazada', 'activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
+	estado_cuenta ENUM('activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
 	rol_id INT NOT NULL DEFAULT 1,
 	fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- datos albergue
@@ -249,6 +249,7 @@ CREATE TABLE lugares_eventos (
     aforo_maximo INT NOT NULL,
     direccion_lugar VARCHAR(200) NOT NULL,
     activo BOOLEAN NOT NULL,
+    disponible boolean,
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (distrito_id) REFERENCES distritos(distrito_id) ON DELETE CASCADE
 );
@@ -327,6 +328,7 @@ CREATE TABLE denuncias_maltrato_animal (
     nombre_maltratador VARCHAR(100),
     direccion_maltrato VARCHAR(255) NOT NULL,
     mascota_id INT NOT NULL,
+    descripcion TEXT,
     denuncia_policial BOOLEAN DEFAULT FALSE,
     fecha_denuncia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,

@@ -336,8 +336,8 @@
                                                 <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
                                                     <option value="" disabled selected>Elija el tipo de publicación</option>
                                                     <option value="" selected>Normal</option>
-                                                    <option value="crear-publicacion-usuariofinal-mascotaperdida.jsp">Mascota Perdida</option>
-                                                    <option value="crear-publicacion-usuariofinal-denunciamaltrato.jsp">Denuncia por Maltrato Animal</option>
+                                                    <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</option>
+                                                    <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia por Maltrato Animal</option>
                                                 </select>
                                             </div>
                                         </div>

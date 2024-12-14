@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0 d-xl-none">
         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
@@ -9,7 +11,7 @@
         <div class="w-75 align-items-center me-auto">
             <div class="nav-item navbar-search-wrapper mb-0">
                 <span class="d-inline-block justify-content-center">
-                    <p class="mb-0 fst-normal fw-semibold">Calendario de eventos</p>
+                    <p class="mb-0 fst-normal fw-semibold"><%=request.getParameter("vista")%></p>
                 </span>
             </div>
         </div>
