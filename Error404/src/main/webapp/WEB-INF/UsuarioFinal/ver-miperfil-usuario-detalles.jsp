@@ -1,4 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -83,138 +86,12 @@
 
         <jsp:include page="../includes/sidebarUF.jsp" />
 
-
         <div class="layout-page">
-            <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-
-
-                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0   d-xl-none ">
-                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                        <i class="bx bx-menu bx-sm"></i>
-                    </a>
-                </div>
-
-
-                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-
-                    <div class="w-75 align-items-center me-auto">
-                        <div class="nav-item navbar-search-wrapper mb-0">
-              <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario / Mi Perfil /</span> Cuenta</p>
-            </span>
-                        </div>
-                    </div>
-
-                    <ul class="navbar-nav flex-row align-items-center ms-0">
-
-                        <!-- Notification -->
-                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, ${usuario.nombre}!</span>
-
-                        <!--/ Notification -->
-                        <!-- User -->
-                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                <div class="avatar avatar-online">
-                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="UsuarioServlet?action=verMiPerfil">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0 me-3">
-                                                <div class="avatar avatar-online">
-                                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <span class="fw-medium d-block"> ${usuario.nombre} ${usuario.apellido} </span>
-                                                <small class="text-muted">${usuario.rol.nombreRol}</small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="UsuarioServlet?action=verMiSeguridad">
-                                        <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
-                                        <span class="align-middle" style="color: #1f4397;">Seguridad</span>
-                                    </a>
-                                </li>
-
-
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="ver-mispublicaciones-usuario.jsp">
-                                        <i class="bx bx-building-house"></i>
-                                        <span class="align-middle">Mis publicaciones</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="ver-miseventos-usuario.jsp">
-                                        <i class="bx bx-bone"></i>
-                                        <span class="align-middle">Mis eventos</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="CalendarioServlet">
-                                        <i class="bx bx-calendar"></i>
-                                        <span class="align-middle">Mi Calendario</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="Preguntas-frecuentes.jsp">
-                                        <i class="bx bx-help-circle"></i>
-                                        <span class="align-middle">Preguntas frecuentes</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="../index.jsp" >
-                                        <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
-                                        <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!--/ User -->
-
-
-                    </ul>
-                </div>
-
-
-                <!-- Search Small Screens -->
-                <div class="navbar-search-wrapper search-input-wrapper  d-none">
-                    <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
-                    <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
-                </div>
-
-
-            </nav>
-
-
-
-            <!-- Content wrapper -->
             <div class="content-wrapper">
-
-                <!-- Content -->
-
                 <div class="container-xxl flex-grow-1 container-p-y">
 
                     <div class="row">
-                        <!-- User Sidebar -->
                         <div class="col-xl-4 col-lg-5 col-md-5 order-0 order-md-0">
-                            <!-- User Card -->
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <div class="user-avatar-section">
@@ -230,15 +107,15 @@
                                         <div class="d-flex align-items-start me-4 mt-3 gap-3">
                                             <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-check bx-sm'></i></span>
                                             <div>
-                                                <h5 class="mb-0"></h5>
-                                                <span>Publicaciones</span>
+                                                <h5 class="mb-0">${usuario.animalesAlbergados}</h5>
+                                                <span>Hogar temporal</span>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-start mt-3 gap-3">
                                             <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-customize bx-sm'></i></span>
                                             <div>
-                                                <h5 class="mb-0">12</h5>
-                                                <span>Participaciones</span>
+                                                <h5 class="mb-0">${usuario.capacidadAnimales}</h5>
+                                                <span>Capacidad</span>
                                             </div>
                                         </div>
                                     </div>
@@ -270,32 +147,24 @@
                                         </ul>
 
                                         <div class="d-flex justify-content-center pt-3">
-                                            <a href="usuario-editar-perfil.jsp" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
+                                            <a href="${pageContext.request.contextPath}/UsuarioServlet?action=editarPerfil&id=${usuario.userId}" class="btn btn-warning">
+                                                <i class='bx bx-edit'></i>Editar
+                                            </a>
                                         </div>
+
 
                                     </div>
                                 </div>
                             </div>
-                            <!-- /User Card -->
-                            <!-- Plan Card -->
 
-                            <!-- /Plan Card -->
                         </div>
-                        <!--/ User Sidebar -->
 
-
-                        <!-- User Content -->
                         <div class="col-xl-8 col-lg-7 col-md-7 order-1 order-md-1">
-                            <!-- User Pills -->
-                            <!-- User Pills -->
                             <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                 <li class="nav-item"><a class="nav-link active" href="UsuarioServlet?action=verMiPerfil"><i class="bx bx-user me-1"></i>Cuenta</a></li>
                                 <li class="nav-item"><a class="nav-link" href="UsuarioServlet?action=verMiSeguridad"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
                             </ul>
-                            <!--/ User Pills -->
-                            <!--/ User Pills -->
 
-                            <!-- Project table -->
                             <div class="card mb-4">
                                 <h5 class="card-header pt-3 ps-3">Acerca de mí</h5>
                                 <div class="p-3 pt-0 descripcion-hogar">
@@ -303,56 +172,46 @@
                                 </div>
                             </div>
 
-
-                            <!-- /Project table -->
-
-                            <!-- Activity Timeline -->
                             <div class="card mb-4">
-                                <h5 class="card-header">Actividad Reciente</h5>
-                                <div class="card-body">
-                                    <ul class="timeline">
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-primary"></span></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Rescate exitoso</h6>
-                                                    <small class="text-muted">Hace 15 min</small>
-                                                </div>
-                                                <p class="mb-2">Se rescató un gatito atrapado en un árbol y se trasladó a un lugar seguro.</p>
-                                            </div>
+                                <h5 class="card-header pb-2 pt-3 ps-3">Acerca de nosotros</h5>
+                                <div class="p-3 pt-0 descripcion-hogar">
+                                    <strong>¿Quién soy?</strong><br>
+                                    <span>${fn:escapeXml(usuario.descripcion != null ? usuario.descripcion : 'Descripción no disponible')}</span>
+                                    <br>
+                                    <!-- Sección "Encuéntranos en..." -->
+                                    <strong>Soy de... </strong>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3">
+                                            <span class="fw-medium me-2">Distrito:</span>
+                                            <span>${usuario.distrito != null && usuario.distrito.nombreDistrito != null ? usuario.distrito.nombreDistrito : 'Distrito no especificado'}</span>
+
                                         </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-warning"></span></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Evento comunitario</h6>
-                                                    <small class="text-muted">Hace 1 hora</small>
-                                                </div>
-                                                <p class="mb-2">Participó en un evento de la comunidad para concientizar sobre la adopción de mascotas.</p>
-                                            </div>
+                                        <li class="mb-3">
+                                            <span class="fw-medium me-2">Dirección completa:</span>
+                                            <span>${usuario.direccion}</span>
                                         </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-info"></span></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Ingreso de animales rescatados</h6>
-                                                    <small class="text-muted">Hace 3 días</small>
-                                                </div>
-                                                <p class="mb-2">Dos perros y un gato fueron rescatados y están recibiendo cuidados en el hogar temporal.</p>
-                                            </div>
+                                    </ul>
+
+                                    <strong>¡Mis redes sociales!</strong>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3">
+                                            <span class="fw-medium me-2">Facebook:</span>
+                                            <span>${usuario.urlFacebook}</span>
                                         </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper"><span class="timeline-point timeline-point-success"></span></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Adopción confirmada</h6>
-                                                    <small class="text-muted">Hace 1 semana</small>
-                                                </div>
-                                                <p class="mb-0">Se confirmó la adopción de 4 perros que encontraron un hogar amoroso.</p>
-                                            </div>
+                                        <li class="mb-3">
+                                            <span class="fw-medium me-2">Instagram:</span>
+                                            <span>${usuario.urlInstagram}</span>
                                         </li>
-                                        <li class="timeline-end-indicator">
-                                            <i class="bx bx-check-circle"></i>
+                                        <li class="mb-3">
+                                            <span class="fw-medium me-2">Twitter:</span>
+                                            <span>${usuario.urlTwitter}</span>
+                                        </li>
+                                    </ul>
+                                    <strong>Mi contacto:</strong>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3">
+                                            <span class="fw-medium me-2">Número:</span>
+                                            <span>${usuario.numeroYapePlin}</span>
                                         </li>
                                     </ul>
                                 </div>
