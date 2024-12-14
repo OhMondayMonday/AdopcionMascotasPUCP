@@ -83,15 +83,15 @@
     <div class="authentication-inner row m-0">
 
         <!-- Left Text -->
-        <div class="d-none d-lg-flex col-lg-7 col-xl-7 align-items-center justify-content-center p-5 pe-0">
-            <div class="w-px-600">
-                <img src="<%=request.getContextPath()%>/assets/img/animal-shelter-sinfondo.png" class="img-fluid" alt="multi-steps">
+        <div class="d-none d-lg-flex col-lg-6 col-xl-6 align-items-center justify-content-center p-5 pe-0">
+            <div class="w-px-1000">
+                <img src="<%=request.getContextPath()%>/assets/img/flat-adoptar-ilustracion-perro_23-2150594864.avif" class="img-fluid" alt="multi-steps">
             </div>
         </div>
         <!-- /Left Text -->
 
         <!--  Multi Steps Registration -->
-        <div class="d-flex flex-column col-12 col-lg-5 col-xl-5 align-items-center justify-content-center authentication-bg p-sm-5 p-3">
+        <div class="d-flex flex-column col-12 col-lg-6 col-xl-6 align-items-center justify-content-center authentication-bg p-sm-5 p-3">
             <div class="w-100 border border-dark p-4 rounded bg-white mb-3">
                 <div class="app-brand mb-1 text-center">
                     <a href="<%=request.getContextPath()%>" class="app-brand-link gap-2">

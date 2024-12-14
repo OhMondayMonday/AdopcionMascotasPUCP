@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS solicitudes;
 DROP TABLE IF EXISTS password_reset_tokens;
 DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS tipos_solicitudes;
+DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS publicaciones_adopcion;
 DROP TABLE IF EXISTS publicaciones_mascota_perdida;
 DROP TABLE IF EXISTS publicaciones_donaciones;
@@ -332,6 +333,19 @@ CREATE TABLE denuncias_maltrato_animal (
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (mascota_id) REFERENCES mascotas(mascota_id) ON DELETE CASCADE
 );
+
+
+CREATE TABLE comentarios (
+    comentario_id INT AUTO_INCREMENT PRIMARY KEY,
+    publicacion_id INT NOT NULL, -- ID de la publicación a la que pertenece el comentario
+    usuario_id INT NOT NULL, -- ID del usuario (coordinador o usuario final) que hizo el comentario
+    comentario TEXT NOT NULL, -- Contenido del comentario
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora del comentario
+    FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
+);
+
+
 -- Tabla de sesiones de usuario para registrar el tiempo empleado
 CREATE TABLE sesiones_usuarios (
     sesion_id INT AUTO_INCREMENT PRIMARY KEY,

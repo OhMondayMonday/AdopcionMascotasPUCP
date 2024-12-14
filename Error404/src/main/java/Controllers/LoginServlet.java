@@ -16,7 +16,7 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.UUID;
 
-@WebServlet(name = "LoginServlet", urlPatterns = {"/login", "/register", "/recuperar", "/reset-password"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login", "/register", "/recuperar", "/reset-password", "/logout"})
 public class LoginServlet extends HttpServlet {
     private final LoginDAO loginDAO = new LoginDAO();
     private final TokenDAO tokenDAO = new TokenDAO(); // Acceso a la base de datos para tokens
@@ -24,8 +24,9 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String action = request.getParameter("action");
         String path = request.getServletPath();
+
 
         switch (path) {
             case "/login" -> {
@@ -35,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession(false);
                 if (session != null && session.getAttribute("usuariosession") != null) {
-                    response.sendRedirect("/AlianzaAnimal/Dashboard");
+                    response.sendRedirect(request.getContextPath() + "/");
                     return;
                 }
 
@@ -55,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession(false);
                 if (session != null && session.getAttribute("usuariosession") != null) {
-                    response.sendRedirect("/AlianzaAnimal/Dashboard");
+                    response.sendRedirect(request.getContextPath() + "/Dashboard");
                     return;
                 }
 
@@ -68,17 +69,24 @@ public class LoginServlet extends HttpServlet {
                 String token = request.getParameter("token");
 
                 if (tokenDAO.validateToken(token)== -1) {
-                    response.sendRedirect("/AlianzaAnimal/");
+                    response.sendRedirect(request.getContextPath() + "/Dashboard");
                     return;
                 }
 
                 HttpSession session = request.getSession(false);
                 if (session != null && session.getAttribute("usuariosession") != null) {
-                    response.sendRedirect("/AlianzaAnimal/Dashboard");
+                    response.sendRedirect(request.getContextPath() + "/Dashboard");
                     return;
                 }
 
                 request.getRequestDispatcher("/WEB-INF/Login/reset.jsp").forward(request, response);
+            }
+            case "/logout" -> {
+                if (request.getSession(false) != null) {
+                    request.getSession().invalidate();
+                }
+
+                response.sendRedirect(request.getContextPath() + "/login");
             }
         }
     }
@@ -97,7 +105,7 @@ public class LoginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession(false);
                 if (session != null && session.getAttribute("usuariosession") != null) {
-                    response.sendRedirect("/AlianzaAnimal");
+                    response.sendRedirect(request.getContextPath());
                 }
 
                 response.setContentType("application/json");
@@ -173,7 +181,7 @@ public class LoginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession(false);
                 if (session != null && session.getAttribute("usuariosession") != null) {
-                    response.sendRedirect("/AlianzaAnimal");
+                    response.sendRedirect(request.getContextPath());
                 }
 
                 int userId = loginDAO.getUserIdByEmail(email);

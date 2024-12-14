@@ -94,18 +94,8 @@ isRtl && (direction = "rtl"), document.addEventListener("DOMContentLoaded", func
             direction: direction,
             initialDate: new Date,
             navLinks: !0,
-            eventClassNames: function ({event: e}) {
-                return ["fc-event-" + g[e._def.extendedProps.calendar]]
-            },
-            dateClick: function (e) {
-                e = moment(e.date).format("YYYY-MM-DD");
-                u(), C.show(), b && (b.innerHTML = "Add Event"), y.innerHTML = "Add", y.classList.remove("btn-update-event"), y.classList.add("btn-add-event"), S.classList.add("d-none"), k.value = e, w.value = e
-            },
-            datesSet: function () {
-                s()
-            },
-            viewDidMount: function () {
-                s()
+            eventClick: function (info) {
+                window.location.href = `Dashboard?id=${info.event.id}`;
             }
         });
         i.render(), s();

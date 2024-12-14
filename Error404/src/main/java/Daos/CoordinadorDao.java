@@ -1,9 +1,8 @@
 package Daos;
 
 import Beans.*;
-
 import DTO.HogarTemporalDTO;
-
+import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -387,6 +386,191 @@ public class CoordinadorDao extends BaseDao {
         return total;
     }
 
+    // 10. Editar perfil de coordinador
+    public boolean registrarCoordinador(Usuarios coordinador) {
+        // Aquí la consulta SQL se ajusta para registrar el coordinador con la zona
+        String sql = "INSERT INTO usuarios (username, contrasenia, nombre, apellido, email, DNI, direccion, " +
+                "estado_cuenta, rol_id, fecha_registro, numero_yape_plin, zona_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)";  // Se agrega zona_id
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, coordinador.getUsername());
+            stmt.setString(2, coordinador.getContrasenia());
+            stmt.setString(3, coordinador.getNombre());
+            stmt.setString(4, coordinador.getApellido());
+            stmt.setString(5, coordinador.getEmail());
+            stmt.setString(6, coordinador.getDni());
+            stmt.setString(7, coordinador.getDireccion());
+
+            // Estado inicial "pendiente"
+            stmt.setString(8, "pendiente");
+
+            // Rol de coordinador (supongo que el rol es 3)
+            stmt.setInt(9, coordinador.getRol().getRolId());
+
+            // Fecha de registro
+            if (coordinador.getFechaRegistro() == null) {
+                coordinador.setFechaRegistro(new Timestamp(System.currentTimeMillis())); // Asignar fecha actual si no está definida
+            }
+            stmt.setTimestamp(10, coordinador.getFechaRegistro());
+
+            stmt.setString(11, coordinador.getNumeroYapePlin());
+
+            // Asignar la zona_id directamente (sin usar distritos)
+            if (coordinador.getZona() != null) {
+                stmt.setInt(12, coordinador.getZona().getZonaId()); // Asignar zona_id del coordinador
+            } else {
+                stmt.setNull(12, java.sql.Types.INTEGER);  // Asignar null si la zona no está definida
+            }
+
+            // Ejecutar la inserción
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public Usuarios obtenerInformacionCoordinador(int coordinadorId) {
+        String sql = "SELECT user_id, username, nombre, apellido, email, direccion, estado_cuenta, " +
+                "numero_yape_plin, zona_id, fecha_registro " +  // Cambio aquí: zona_id en vez de distrito_id
+                "FROM usuarios WHERE user_id = ? AND rol_id = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, coordinadorId);
+            stmt.setInt(2, 3); // Suponiendo que el rolId de coordinadores es 3
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Usuarios coordinador = new Usuarios();
+                coordinador.setUserId(rs.getInt("user_id"));
+                coordinador.setUsername(rs.getString("username"));
+                coordinador.setNombre(rs.getString("nombre"));
+                coordinador.setApellido(rs.getString("apellido"));
+                coordinador.setEmail(rs.getString("email"));
+                coordinador.setDireccion(rs.getString("direccion"));
+                coordinador.setEstadoCuenta(rs.getString("estado_cuenta"));
+                coordinador.setNumeroYapePlin(rs.getString("numero_yape_plin"));
+
+                // Obtener la fecha de registro
+                Timestamp fechaRegistro = rs.getTimestamp("fecha_registro");
+                coordinador.setFechaRegistro(fechaRegistro);
+
+                // Asignar Zona si está disponible
+                Beans.Zonas zona = new Beans.Zonas();
+                zona.setZonaId(rs.getInt("zona_id")); // Asignamos el zona_id en lugar de distrito_id
+                coordinador.setZona(zona);
+
+                return coordinador;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public boolean actualizarInformacionCoordinador(Usuarios coordinador) {
+        // Actualización de zona en lugar de distrito
+        String sql = "UPDATE usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, direccion = ?, zona_id = ?, numero_yape_plin = ? " +
+                "WHERE user_id = ? AND rol_id = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Imprimir los valores para depuración
+            System.out.println("Actualizando el coordinador con los siguientes datos:");
+            System.out.println("Username: " + coordinador.getUsername());
+            System.out.println("Nombre: " + coordinador.getNombre());
+            System.out.println("Apellido: " + coordinador.getApellido());
+            System.out.println("Email: " + coordinador.getEmail());
+            System.out.println("Dirección: " + coordinador.getDireccion());
+            System.out.println("Zona ID: " + (coordinador.getZona() != null ? coordinador.getZona().getZonaId() : "No asignada"));
+            System.out.println("Yape Plin: " + coordinador.getNumeroYapePlin());
+
+            stmt.setString(1, coordinador.getUsername());
+            stmt.setString(2, coordinador.getNombre());
+            stmt.setString(3, coordinador.getApellido());
+            stmt.setString(4, coordinador.getEmail());
+            stmt.setString(5, coordinador.getDireccion());
+
+            // Aquí cambiamos de distrito_id a zona_id
+            if (coordinador.getZona() != null) {
+                stmt.setInt(6, coordinador.getZona().getZonaId()); // Usamos zona_id
+            } else {
+                stmt.setNull(6, java.sql.Types.INTEGER); // Si la zona es nula, insertamos un valor nulo
+            }
+
+            stmt.setString(7, coordinador.getNumeroYapePlin());
+            stmt.setInt(8, coordinador.getUserId());
+            stmt.setInt(9, 3); // Suponiendo que el rolId de coordinadores es 3
+
+            // Verificar si la actualización fue exitosa
+            int filasAfectadas = stmt.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("Actualización exitosa.");
+            } else {
+                System.out.println("No se actualizaron filas.");
+            }
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public List<Distritos> obtenerDistritosPorZona(int zonaId) {
+        List<Distritos> distritos = new ArrayList<>();
+        String sql = "SELECT distrito_id, nombre_distrito FROM distritos WHERE zona_distrito_id = ?";  // Filtrar distritos por zona_id
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, zonaId);  // Usamos el ID de zona para obtener los distritos relacionados
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Distritos distrito = new Distritos();
+                distrito.setDistritoId(rs.getInt("distrito_id"));
+                distrito.setNombreDistrito(rs.getString("nombre_distrito"));
+                distritos.add(distrito);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return distritos;
+    }
+
+
+    // Método para obtener todas las zonas (necesario para el formulario)
+    public List<Zonas> obtenerZonas() {
+        List<Zonas> zonas = new ArrayList<>();
+        String sql = "SELECT zona_id, nombre_zona FROM zonas";  // Consulta para obtener todas las zonas
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Zonas zona = new Zonas();
+                zona.setZonaId(rs.getInt("zona_id"));
+                zona.setNombreZona(rs.getString("nombre_zona"));
+                zonas.add(zona);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return zonas;
+    }
 
 
 }

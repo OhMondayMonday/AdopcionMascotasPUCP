@@ -1,4 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="Beans.Usuarios" %>
+<%
+    Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+    String nombre = usuario.getNombre();
+    String apellido = usuario.getApellido();
+    String rol = usuario.getRol().getNombreRol();
+%>
+
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
 
 
@@ -22,7 +30,7 @@
         <ul class="navbar-nav flex-row align-items-center ms-0">
 
             <!-- Notification -->
-            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola!, <%= nombre %></span>
             <!--/ Notification -->
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -41,8 +49,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block"> Adolfo Contreras</span>
-                                    <small class="text-muted">Usuario</small>
+                                    <span class="fw-medium d-block"> <%=nombre%> <%=apellido%></span>
+                                    <small class="text-muted"><%=rol%></small>
                                 </div>
                             </div>
                         </a>
