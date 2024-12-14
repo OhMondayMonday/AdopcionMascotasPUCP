@@ -11,6 +11,15 @@ public class LugaresEventos {
     private int aforoMaximo;
     private String direccionLugar;
     private boolean activo;
+    private boolean disponible;
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
 
     public int getLugarId() {
         return lugarId;
