@@ -7,10 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -180,30 +178,41 @@ public class DashboardDAO extends BaseDao {
 
 
 
-    // Obtener las últimas actualizaciones (ajustada para asegurar que se obtengan correctamente)
-    public List<String> obtenerUltimasActualizaciones(int userId) {
-        List<String> actualizaciones = new ArrayList<>();
-        String sql = "SELECT comentario FROM Publicaciones WHERE user_id = ? ORDER BY fecha_creacion DESC LIMIT 5";
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+    // Método para obtener últimas actualizaciones
+    public List<Map<String, String>> obtenerUltimasActualizaciones(int userId) {
+        String sql = """
+        SELECT descripcion, 
+               DATE_FORMAT(fecha, '%d/%m/%Y %H:%i:%s') AS fecha_formateada,
+               TIMESTAMPDIFF(MINUTE, fecha, NOW()) AS minutos_transcurridos
+        FROM logs 
+        WHERE user_id = ? 
+        ORDER BY fecha DESC 
+        LIMIT 5
+        """;
+        List<Map<String, String>> actualizaciones = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                actualizaciones.add(rs.getString("comentario"));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Map<String, String> actualizacion = new HashMap<>();
+                    actualizacion.put("descripcion", rs.getString("descripcion"));
+                    actualizacion.put("fecha", rs.getString("fecha_formateada"));
+                    int minutos = rs.getInt("minutos_transcurridos");
+                    if (minutos < 60) {
+                        actualizacion.put("tiempo", "Hace " + minutos + " minutos");
+                    } else if (minutos < 1440) {
+                        actualizacion.put("tiempo", "Hace " + (minutos / 60) + " horas");
+                    } else {
+                        actualizacion.put("tiempo", "Hace " + (minutos / 1440) + " días");
+                    }
+                    actualizaciones.add(actualizacion);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return actualizaciones;
-    }
-
-    public void registrarSesion(int userId) {
-        String sql = "INSERT INTO sesiones_usuarios (user_id) VALUES (?)";
-        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, userId);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public void finalizarSesion(int sesionId) {
@@ -235,7 +244,16 @@ public class DashboardDAO extends BaseDao {
     // Dao para actualizaciones (revisado para manejar mejor las excepciones)
     public List<Logs> getLast4LogsByUserId(int userId) {
         List<Logs> logs = new ArrayList<>();
-        String sql = "SELECT log_id, descripcion, fecha, user_id FROM logs WHERE user_id = ? ORDER BY fecha DESC LIMIT 4";
+        String sql = """
+        SELECT log_id, descripcion, 
+               DATE_FORMAT(fecha, '%d/%m/%Y %H:%i:%s') AS fecha_formateada,
+               TIMESTAMPDIFF(MINUTE, fecha, NOW()) AS minutos_transcurridos, 
+               user_id 
+        FROM logs 
+        WHERE user_id = ? 
+        ORDER BY fecha DESC 
+        LIMIT 4
+    """;
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -247,8 +265,21 @@ public class DashboardDAO extends BaseDao {
                 Logs log = new Logs();
                 log.setLogId(rs.getInt("log_id"));
                 log.setDescripcion(rs.getString("descripcion"));
-                log.setFecha(rs.getTimestamp("fecha"));
+                log.setFechaFormateada(rs.getString("fecha_formateada"));
                 log.setUserId(rs.getInt("user_id"));
+
+                // Calcular el tiempo transcurrido
+                int minutos = rs.getInt("minutos_transcurridos");
+                String tiempoTranscurrido = "";
+                if (minutos < 60) {
+                    tiempoTranscurrido = "Hace " + minutos + " minutos";
+                } else if (minutos < 1440) {
+                    tiempoTranscurrido = "Hace " + (minutos / 60) + " horas";
+                } else {
+                    tiempoTranscurrido = "Hace " + (minutos / 1440) + " días";
+                }
+                log.setTiempoTranscurrido(tiempoTranscurrido);
+
                 logs.add(log);
             }
         } catch (SQLException e) {
@@ -257,4 +288,6 @@ public class DashboardDAO extends BaseDao {
 
         return logs;
     }
+
+
 }

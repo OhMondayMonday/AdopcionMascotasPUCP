@@ -436,13 +436,18 @@
                                             for (Logs log : actualizaciones) {
                                     %>
                                     <li class="timeline-item timeline-item-transparent">
-                        <span class="timeline-point-wrapper">
-                            <span class="timeline-point timeline-point-primary"></span>
-                        </span>
+                    <span class="timeline-point-wrapper">
+                        <span class="timeline-point timeline-point-primary"></span>
+                    </span>
                                         <div class="timeline-event">
                                             <div class="timeline-header mb-1">
                                                 <h6 class="mb-0"><%= log.getDescripcion() %></h6> <!-- Muestra la descripción del log -->
-                                                <small class="text-muted"><%= log.getFecha() %></small> <!-- Muestra la fecha del log -->
+                                                <small class="text-muted">
+                                                    <!-- Muestra la fecha formateada -->
+                                                    <%= log.getFechaFormateada() %>
+                                                    <!-- Muestra el tiempo transcurrido -->
+                                                    <br><%= log.getTiempoTranscurrido() %>
+                                                </small>
                                             </div>
                                         </div>
                                     </li>
@@ -452,9 +457,9 @@
                                     %>
                                     <!-- Sección visual atractiva cuando no hay actualizaciones -->
                                     <li class="timeline-item timeline-item-transparent">
-                        <span class="timeline-point-wrapper">
-                            <span class="timeline-point timeline-point-warning"></span>
-                        </span>
+                    <span class="timeline-point-wrapper">
+                        <span class="timeline-point timeline-point-warning"></span>
+                    </span>
                                         <div class="timeline-event text-center" style="border: 2px dashed #e0e0e0; padding: 20px; background-color: #f9f9f9;">
                                             <h6 class="text-muted mb-0">No hay actualizaciones disponibles</h6>
                                             <p class="text-muted">Parece que no hay ninguna actividad reciente en este momento.</p>
@@ -475,7 +480,8 @@
 
 
 
-            <!-- / Layout page -->
+
+                    <!-- / Layout page -->
         </div>
 
 
