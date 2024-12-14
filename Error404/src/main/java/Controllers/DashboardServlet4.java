@@ -47,7 +47,7 @@ public class DashboardServlet4 extends HttpServlet {
 
     // Método para mostrar el Dashboard
     private void mostrarDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int administradorId = 51; // Simulación: Cambia esto a la lógica real para obtener el ID del usuario autenticado
+        int administradorId = 4; // Simulación: Cambia esto a la lógica real para obtener el ID del usuario autenticado
 
         try {
             String nombreAdministrador = dashboard4DAO.obtenerNombreAdministrador(administradorId);

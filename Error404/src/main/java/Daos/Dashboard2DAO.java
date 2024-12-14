@@ -41,7 +41,7 @@ public class Dashboard2DAO extends BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "assets/img/default-profile.jpg"; // Imagen por defecto
+        return "/assets/img/FotoPerfil/perfil_user1.jpg"; // Imagen por defecto
     }
 
     public int obtenerAnimalesAyudados(int albergueId) {

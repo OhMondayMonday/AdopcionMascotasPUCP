@@ -47,7 +47,7 @@ public class Dashboard3DAO extends BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "assets/img/default-profile.jpg"; // Ruta predeterminada si no se encuentra la foto
+        return "/assets/img/FotoPerfil/perfil_user1.jpg"; // Ruta predeterminada si no se encuentra la foto
     }
 
     // Método para obtener mascotas encontradas por mes en los últimos meses
@@ -215,24 +215,26 @@ public class Dashboard3DAO extends BaseDao {
     }
 
 
-    // Método para obtener últimas actualizaciones
-    public List<Map<String, String>> obtenerUltimasActualizaciones(int coordinadorId) {
+    // Método para obtener últimas actualizaciones de cualquier usuario
+    public List<Map<String, String>> obtenerUltimasActualizaciones() {
         String sql = """
-        SELECT descripcion, 
-               DATE_FORMAT(fecha, '%d/%m/%Y %H:%i:%s') AS fecha_formateada,
-               TIMESTAMPDIFF(MINUTE, fecha, NOW()) AS minutos_transcurridos
-        FROM logs 
-        WHERE user_id = ? 
-        ORDER BY fecha DESC 
+        SELECT u.nombre, u.apellido, l.descripcion, 
+               DATE_FORMAT(l.fecha, '%d/%m/%Y %H:%i:%s') AS fecha_formateada,
+               TIMESTAMPDIFF(MINUTE, l.fecha, NOW()) AS minutos_transcurridos
+        FROM logs l
+        INNER JOIN usuarios u ON l.user_id = u.user_id
+        ORDER BY l.fecha DESC 
         LIMIT 5
-        """;
+    """;
         List<Map<String, String>> actualizaciones = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, coordinadorId);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Map<String, String> actualizacion = new HashMap<>();
+                    String nombre = rs.getString("nombre");
+                    String apellido = rs.getString("apellido");
+                    actualizacion.put("usuario", nombre + " " + apellido);
                     actualizacion.put("descripcion", rs.getString("descripcion"));
                     actualizacion.put("fecha", rs.getString("fecha_formateada"));
                     int minutos = rs.getInt("minutos_transcurridos");
@@ -251,4 +253,7 @@ public class Dashboard3DAO extends BaseDao {
         }
         return actualizaciones;
     }
+
+
+
 }
