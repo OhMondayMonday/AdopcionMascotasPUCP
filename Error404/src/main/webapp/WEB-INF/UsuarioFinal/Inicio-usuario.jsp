@@ -315,102 +315,107 @@
                     </div>
 
                     <div class="col-12 col-xl-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <!-- Imagen del evento o por defecto (controlado por DAO) -->
-                            <% if (proximoEvento != null) { %>
-                            <div class="bg-label-primary rounded-3 text-center mb-3 pt-4">
-                                <img class="img-fluid w-60" src="<%= proximoEvento.getUrlFoto() != null ? proximoEvento.getUrlFoto() : "assets/img/default-event.jpg" %>" alt="Imagen del Evento" />
-                            </div>
-                            <% } else { %>
-                            <div class="bg-label-primary rounded-3 text-center mb-3 pt-4">
-                                <img class="img-fluid w-60" src="assets/img/illustrations/sitting-girl-with-laptop-dark.png" alt="Imagen por Defecto" />
-                            </div>
-                            <% } %>
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <!-- Imagen del evento o por defecto (controlado por DAO) -->
+                                <% if (proximoEvento != null) { %>
+                                <div class="bg-label-primary rounded-3 text-center mb-3 pt-4">
+                                    <!-- Aseguramos un tamaño adecuado para la imagen y centrado con márgenes -->
+                                    <img class="img-fluid" style="max-width: 100%; height: auto; padding-left: 15px; padding-right: 15px;"
+                                         src="${pageContext.request.contextPath}<%= proximoEvento.getUrlFoto() != null ? proximoEvento.getUrlFoto() : "/assets/img/default-event.jpg" %>" alt="Imagen del Evento" />
+                                </div>
+                                <% } else { %>
+                                <div class="bg-label-primary rounded-3 text-center mb-3 pt-4">
+                                    <img class="img-fluid" style="max-width: 100%; height: auto; padding-left: 15px; padding-right: 15px;"
+                                         src="${pageContext.request.contextPath}/assets/img/illustrations/sitting-girl-with-laptop-dark.png" alt="Imagen por Defecto" />
+                                </div>
+                                <% } %>
 
-                            <h4 class="mb-2 pb-1">Próximo evento</h4>
-                            <% if (proximoEvento != null) { %>
-                            <p class="small">Sigue compartiendo con los demás por un bien animal</p>
-                            <!-- Información del evento -->
-                            <div class="row mb-3 g-3">
-                                <div class="col-6">
-                                    <div class="d-flex">
-                                        <div class="avatar flex-shrink-0 me-2">
+                                <h4 class="mb-2 pb-1">Próximo evento</h4>
+                                <% if (proximoEvento != null) { %>
+                                <p class="small">Sigue compartiendo con los demás por un bien animal</p>
+                                <!-- Información del evento -->
+                                <div class="row mb-3 g-3">
+                                    <div class="col-6">
+                                        <div class="d-flex">
+                                            <div class="avatar flex-shrink-0 me-2">
                             <span class="avatar-initial rounded bg-label-primary">
                                 <i class="bx bx-calendar-exclamation bx-sm"></i>
                             </span>
-                                        </div>
-                                        <div>
-                                            <!-- Mostrar la fecha formateada -->
-                                            <h6 class="mb-0 text-nowrap"><%= proximoEvento.getFechaEventoFormateada() %></h6>
-                                            <small><%= proximoEvento.getNombreEvento() %></small>
+                                            </div>
+                                            <div>
+                                                <!-- Mostrar la fecha formateada -->
+                                                <h6 class="mb-0 text-nowrap"><%= proximoEvento.getFechaEventoFormateada() %></h6>
+                                                <small><%= proximoEvento.getNombreEvento() %></small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="d-flex">
-                                        <div class="avatar flex-shrink-0 me-2">
+                                    <div class="col-6">
+                                        <div class="d-flex">
+                                            <div class="avatar flex-shrink-0 me-2">
                             <span class="avatar-initial rounded bg-label-primary">
                                 <i class="bx bx-time-five bx-sm"></i>
                             </span>
-                                        </div>
-                                        <div>
-                                            <!-- Verificación para mostrar el lugar del evento -->
-                                            <h6 class="mb-0 text-nowrap"><%= proximoEvento.getLugarEvento() != null ? proximoEvento.getLugarEvento().getNombreLugar() : "Lugar no disponible" %></h6>
-                                            <small>Lugar</small>
+                                            </div>
+                                            <div>
+                                                <!-- Verificación para mostrar el lugar del evento -->
+                                                <h6 class="mb-0 text-nowrap"><%= proximoEvento.getLugarEvento() != null ? proximoEvento.getLugarEvento().getNombreLugar() : "Lugar no disponible" %></h6>
+                                                <small>Lugar</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Botones -->
-                            <a href="#" class="btn btn-primary w-100 mb-1">Participar en el evento</a>
-                            <div class="row mb-1 align-items-center justify-content-center">
-                                <small>¿Deseas crear una nueva publicación?</small>
-                            </div>
-                            <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicación</a>
-                            <% } else { %>
-                            <p>No hay próximos eventos.</p>
-                            <!-- Mostrar los íconos y texto aunque no haya evento -->
-                            <div class="row mb-3 g-3">
-                                <div class="col-6">
-                                    <div class="d-flex">
-                                        <div class="avatar flex-shrink-0 me-2">
+                                <!-- Botones -->
+                                <a href="#" class="btn btn-primary w-100 mb-1">Participar en el evento</a>
+                                <div class="row mb-1 align-items-center justify-content-center">
+                                    <small>¿Deseas crear una nueva publicación?</small>
+                                </div>
+                                <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicación</a>
+                                <% } else { %>
+                                <p>No hay próximos eventos.</p>
+                                <!-- Mostrar los íconos y texto aunque no haya evento -->
+                                <div class="row mb-3 g-3">
+                                    <div class="col-6">
+                                        <div class="d-flex">
+                                            <div class="avatar flex-shrink-0 me-2">
                             <span class="avatar-initial rounded bg-label-primary">
                                 <i class="bx bx-calendar-exclamation bx-sm"></i>
                             </span>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-nowrap">No hay eventos</h6>
-                                            <small>Nuevo evento</small>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 text-nowrap">No hay eventos</h6>
+                                                <small>Nuevo evento</small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="d-flex">
-                                        <div class="avatar flex-shrink-0 me-2">
+                                    <div class="col-6">
+                                        <div class="d-flex">
+                                            <div class="avatar flex-shrink-0 me-2">
                             <span class="avatar-initial rounded bg-label-primary">
                                 <i class="bx bx-time-five bx-sm"></i>
                             </span>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-nowrap">Sin lugar asignado</h6>
-                                            <small>Lugar</small>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 text-nowrap">Sin lugar asignado</h6>
+                                                <small>Lugar</small>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Botones visibles incluso cuando no hay evento -->
-                            <a href="#" class="btn btn-primary w-100 mb-1">Participar en el evento</a>
-                            <div class="row mb-1 align-items-center justify-content-center">
-                                <small>¿Deseas crear una nueva publicación?</small>
+                                <!-- Botones visibles incluso cuando no hay evento -->
+                                <a href="#" class="btn btn-primary w-100 mb-1">Participar en el evento</a>
+                                <div class="row mb-1 align-items-center justify-content-center">
+                                    <small>¿Deseas crear una nueva publicación?</small>
+                                </div>
+                                <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicación</a>
+                                <% } %>
                             </div>
-                            <a href="crear-publicacion-usuariofinal-normal.html" class="btn btn-facebook w-100">Nueva publicación</a>
-                            <% } %>
                         </div>
                     </div>
-                </div>
+
+
 
 
 
