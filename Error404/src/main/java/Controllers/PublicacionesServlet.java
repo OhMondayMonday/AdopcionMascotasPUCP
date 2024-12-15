@@ -185,7 +185,7 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
             request.setAttribute("usuario", usuario);
             request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-normal.jsp").forward(request, response);
         } else {
@@ -203,7 +203,7 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
             request.setAttribute("usuario", usuario);
             RazasDao razasDao = new RazasDao();
             ArrayList<Razas> listaRazas = razasDao.listarRazas();
@@ -224,7 +224,7 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
             request.setAttribute("usuario", usuario);
             RazasDao razasDao = new RazasDao();
             ArrayList<Razas> listaRazas = razasDao.listarRazas();
@@ -245,7 +245,7 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
             request.setAttribute("usuario", usuario);
             request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-albergue-donacion-activo.jsp").forward(request, response);
         } else {
@@ -263,7 +263,7 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
             request.setAttribute("usuario", usuario);
             RazasDao razasDao = new RazasDao();
             ArrayList<Razas> listaRazas = razasDao.listarRazas();
