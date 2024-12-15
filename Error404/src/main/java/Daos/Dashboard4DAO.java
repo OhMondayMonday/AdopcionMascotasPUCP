@@ -221,6 +221,22 @@ public class Dashboard4DAO extends BaseDao {
         return 0; // Retorna 0 si no hay resultados
     }
 
+    // Método para obtener el número de albergues registrados hoy
+    public int obtenerAlberguesRegistradosHoy() {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE rol_id = 2 AND DATE(fecha_registro) = CURDATE()";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1); // Retorna el conteo de albergues registrados hoy
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Retorna 0 si no hay resultados o hay un error
+    }
+
+
     // Método para obtener el total de mascotas reportadas como perdidas
     public int obtenerTotalMascotasPerdidas() {
         String sql = """

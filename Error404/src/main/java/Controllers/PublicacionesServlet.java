@@ -177,8 +177,8 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-            request.setAttribute("usuario", usuario);
+           // Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+          //  request.setAttribute("usuario", usuario);
             request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-normal.jsp").forward(request, response);
         } else {
             response.sendRedirect("PublicacionesServlet");
@@ -195,8 +195,8 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-            request.setAttribute("usuario", usuario);
+       //     Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+        //    request.setAttribute("usuario", usuario);
             RazasDao razasDao = new RazasDao();
             ArrayList<Razas> listaRazas = razasDao.listarRazas();
             request.setAttribute("listaRazas", listaRazas);
@@ -216,8 +216,8 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-            Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-            request.setAttribute("usuario", usuario);
+     //       Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
+        //    request.setAttribute("usuario", usuario);
             RazasDao razasDao = new RazasDao();
             ArrayList<Razas> listaRazas = razasDao.listarRazas();
             request.setAttribute("listaRazas", listaRazas);

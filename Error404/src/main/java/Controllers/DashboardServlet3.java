@@ -48,6 +48,7 @@ public class DashboardServlet3 extends HttpServlet {
             String nombreCoordinador = dashboard3DAO.obtenerNombreCoordinador(coordinadorId);
             String fotoPerfil = dashboard3DAO.obtenerFotoPerfil(coordinadorId);
             int hogaresTemporalesRegistrados = dashboard3DAO.obtenerHogaresTemporalesRegistrados();
+            double porcentajeAumentoHogaresHoy = dashboard3DAO.obtenerPorcentajeAumentoHogaresHoy(); // Nuevo DAO
             int totalMascotasPerdidas = dashboard3DAO.obtenerTotalMascotasPerdidas();
             List<Map<String, Object>> mascotasPorMes = dashboard3DAO.obtenerMascotasEncontradasUltimosMeses(4);
             int totalMascotasEncontradas = dashboard3DAO.obtenerTotalMascotasEncontradasUltimosMeses(4);
@@ -69,16 +70,17 @@ public class DashboardServlet3 extends HttpServlet {
             System.out.println("Nombre Coordinador: " + nombreCoordinador);
             System.out.println("Foto Perfil: " + fotoPerfil);
             System.out.println("Hogares Temporales Registrados: " + hogaresTemporalesRegistrados);
+            System.out.println("Porcentaje Aumento Hogares Hoy: " + porcentajeAumentoHogaresHoy + "%");
             System.out.println("Total Mascotas Perdidas: " + totalMascotasPerdidas);
             System.out.println("Mascotas por Mes: " + mascotasPorMez);
             System.out.println("Total Mascotas Encontradas: " + totalMascotasEncontradas);
-            System.out.println("Mascotas por Mes: " + mascotasPorMes);
             System.out.println("Últimas Actualizaciones: " + ultimasActualizaciones);
 
             // Pasar los datos al JSP
             request.setAttribute("nombreCoordinador", nombreCoordinador);
             request.setAttribute("fotoPerfil", fotoPerfil);
             request.setAttribute("hogaresTemporalesRegistrados", hogaresTemporalesRegistrados);
+            request.setAttribute("porcentajeAumentoHogaresHoy", porcentajeAumentoHogaresHoy); // Nuevo atributo
             request.setAttribute("totalMascotasPerdidas", totalMascotasPerdidas);
             request.setAttribute("mascotasPorMez", mascotasPorMez);
             request.setAttribute("totalMascotasEncontradas", totalMascotasEncontradas);

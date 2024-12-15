@@ -112,20 +112,21 @@
             <div class="menu-inner-shadow"></div>
 
             <ul class="menu-inner py-1">
+                <!-- Menú principal -->
                 <li class="menu-item">
-                    <a href="ver-inicio-usuario.html" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/Dashboard" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home"></i>
                         <div class="text-truncate" data-i18n="Inicio">Inicio</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-publicaciones-usuario.html" class="menu-link">
+                    <a href="${pageContext.request.contextPath}WEB-INF/UsuarioFinal/ver-publicaciones-usuario.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="EventosServlet?action=verTodosEventos" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/EventosServlet?action=verTodosEventos" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                         <div class="text-truncate" data-i18n="Eventos">Eventos</div>
                     </a>
@@ -136,18 +137,19 @@
                         <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
                     </a>
                 </li>
-                <!-- Gestion -->
+
+                <!-- Gestión -->
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text" data-i18n="Gestion">Gestión</span>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-mispublicaciones-usuario.html" class="menu-link">
+                    <a href="${pageContext.request.contextPath}WEB-INF/UsuarioFinal/ver-publicaciones-usuario.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-miseventos-usuario.html" class="menu-link">
+                    <a href="${pageContext.request.contextPath}WEB-INF/UsuarioFinal/ver-miseventos-usuario.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                         <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
                     </a>
@@ -158,12 +160,13 @@
                         <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
                     </a>
                 </li>
-                <!-- Misc -->
+
+                <!-- Otros -->
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text" data-i18n="Otros">Otros</span>
                 </li>
                 <li class="menu-item">
-                    <a href="Preguntas-frecuentes.html" class="menu-link">
+                    <a href="${pageContext.request.contextPath}/WEB-INF/UsuarioFinal/preguntas-frecuentes.jsp" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-help-circle"></i>
                         <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
                     </a>
@@ -202,7 +205,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ver-miperfil-usuario-detalles.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioFinal/ver-miperfil-usuario-detalles.jsp">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
@@ -218,33 +221,33 @@
                                 </li>
                                 <li><div class="dropdown-divider"></div></li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ver-miperfil-usuario-seguridad.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioFinal/ver-miperfil-usuario-seguridad.jsp">
                                         <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
                                         <span class="align-middle" style="color: #1f4397;">Seguridad</span>
                                     </a>
                                 </li>
                                 <li><div class="dropdown-divider"></div></li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ver-mispublicaciones-usuario.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioFinal/ver-mispublicaciones-usuario.jsp">
                                         <i class="bx bx-building-house"></i>
                                         <span class="align-middle">Mis publicaciones</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ver-miseventos-usuario.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioFinal/ver-miseventos-usuario.jsp">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/ver-calendario-usuario.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioFinal/ver-calendario-usuario.jsp">
                                         <i class="bx bx-calendar"></i>
                                         <span class="align-middle">Mi Calendario</span>
                                     </a>
                                 </li>
                                 <li><div class="dropdown-divider"></div></li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/Preguntas-frecuentes.html">
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioFinal/Preguntas-frecuentes.jsp">
                                         <i class="bx bx-help-circle"></i>
                                         <span class="align-middle">Preguntas frecuentes</span>
                                     </a>

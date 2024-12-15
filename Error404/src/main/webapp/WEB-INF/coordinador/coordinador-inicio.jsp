@@ -9,6 +9,7 @@
     String nombreCoordinador = (String) request.getAttribute("nombreCoordinador");
     String fotoPerfil = (String) request.getAttribute("fotoPerfil");
     int hogaresTemporalesRegistrados = request.getAttribute("hogaresTemporalesRegistrados") != null ? (int) request.getAttribute("hogaresTemporalesRegistrados") : 0;
+    double porcentajeAumentoHogaresHoy = request.getAttribute("porcentajeAumentoHogaresHoy") != null ? (double) request.getAttribute("porcentajeAumentoHogaresHoy") : 0.0;
     int totalMascotasPerdidas = request.getAttribute("totalMascotasPerdidas") != null ? (int) request.getAttribute("totalMascotasPerdidas") : 0;
     int totalMascotasEncontradas = request.getAttribute("totalMascotasEncontradas") != null ? (int) request.getAttribute("totalMascotasEncontradas") : 0;
     List<Map<String, String>> actualizaciones = request.getAttribute("ultimasActualizaciones") != null
@@ -23,6 +24,7 @@
             ? (List<Map<String, Object>>) request.getAttribute("mascotasPorMez")
             : java.util.Collections.emptyList();
 %>
+
 
 
 
@@ -252,9 +254,12 @@
                                             <span class="d-block mb-1"> Hogares temporales > Registrados </span>
                                             <h3 class="card-title text-nowrap mb-2"><%= hogaresTemporalesRegistrados %></h3>
                                             <small class="text fw-medium">
-                                                <i class='bx bx-up-arrow-alt'></i>
-                                                <span class="text-success">+14.82%</span>
+                                                <i class='bx bx-up-arrow-alt text-success'></i> <!-- Clase text-success aplicada al ícono -->
+                                                <span class="text-success">
+                                                    +<%= String.format("%.2f", porcentajeAumentoHogaresHoy) %>% (hoy)
+                                                </span>
                                             </small>
+
                                         </div>
                                     </div>
                                 </div>
