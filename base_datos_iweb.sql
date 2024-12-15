@@ -181,7 +181,7 @@ CREATE TABLE publicaciones_donaciones (
     publicacion_id INT PRIMARY KEY,
     punto_acopio VARCHAR(255) NOT NULL,
     tipo_donacion_id INT NOT NULL,
-    cantidad DECIMAL(10, 2) NOT NULL,
+    cantidad DECIMAL(10, 2),
     marca VARCHAR(100),
     fecha_recepcion_inicio DATE NOT NULL,
     fecha_recepcion_fin DATE NOT NULL,
