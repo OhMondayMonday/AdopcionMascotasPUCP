@@ -66,7 +66,7 @@ CREATE TABLE usuarios (
 	direccion VARCHAR(255),
 	foto_id INT,
 	distrito_id INT,
-	estado_cuenta ENUM('activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
+	estado_cuenta ENUM('activa', 'baneada', 'eliminada') DEFAULT 'activa',
 	rol_id INT NOT NULL DEFAULT 1,
 	fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- datos albergue
@@ -226,7 +226,8 @@ CREATE TABLE solicitudes (
     cantidad DECIMAL(10, 2),
     fecha_entrega DATE,
     punto_entrega_seleccionado VARCHAR(255),
-    dinero_donado DECIMAL (10,2),
+    dinero_donado DECIMAL (10,2) default 0.00,
+    medio_pago VARCHAR (25) NOT NULL,
     FOREIGN KEY (solicitante_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (solicitado_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (mascota_id) REFERENCES mascotas(mascota_id) ON DELETE CASCADE,
