@@ -1,22 +1,16 @@
-<%@ page import="Beans.Razas" %><%--
-  Created by IntelliJ IDEA.
-  User: Sebastian
-  Date: 20/11/2024
-  Time: 00:34
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Beans.Razas" %>
+<!DOCTYPE html>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaRazas" type="java.util.ArrayList<Beans.Razas>" scope="request"/>
 <jsp:useBean id="usuario" type="Beans.Usuarios" scope="request"/>
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
-
-<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-ecommerce-product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:07 GMT -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Crear Nueva Publicación | Denuncia por Maltrato Animal</title>
+  <title>Crear Nueva Publicación | Adopción</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -46,11 +40,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/fonts/flag-icons.css" />
 
   <!-- Core CSS -->
-  <style>
-    .fondo{
-      background-color: #d4e1ffa9;
-    }
-  </style>
+
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
@@ -65,10 +55,8 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/form-validation.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/animate-css/animate.css" />
 
   <!-- Page CSS -->
@@ -83,16 +71,16 @@
 
 </head>
 
-<body class="fondo">
+<body style="background-color: #d4e1ffa9;">
 
 
 <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
+
     <!-- Navbar -->
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
@@ -116,25 +104,25 @@
       <ul class="menu-inner py-1">
 
         <li class="menu-item">
-          <a href="ver-inicio-usuario.html" class="menu-link">
+          <a href="ver-inicio-usuario.html"  class="menu-link">
             <i class="menu-icon tf-icons bx bx-home"></i>
             <div class="text-truncate" data-i18n="Inicio">Inicio</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="ver-publicaciones-usuario.html" class="menu-link">
+          <a href="ver-publicaciones-usuario.html"  class="menu-link">
             <i class="menu-icon tf-icons bx bx-building-house"></i>
             <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="ver-eventos-usuario.html" class="menu-link">
+          <a href="ver-eventos-usuario.html"  class="menu-link">
             <i class="menu-icon tf-icons bx bx-calendar-event"></i>
             <div class="text-truncate" data-i18n="Eventos">Eventos</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="postular-hogarestemporales.html" class="menu-link">
+          <a href="postular-hogarestemporales.html"  class="menu-link">
             <i class="menu-icon tf-icons bx bx-building-house"></i>
             <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
           </a>
@@ -165,9 +153,9 @@
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
         <li class="menu-item">
-          <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/" target="_blank" class="menu-link">
+          <a href="Preguntas-frecuentes.html"  class="menu-link">
             <i class="menu-icon tf-icons bx bx-help-circle"></i>
-            <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas Frecuentes</div>
+            <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
           </a>
         </li>
       </ul>
@@ -192,7 +180,7 @@
           <div class="w-75 align-items-center me-auto">
             <div class="nav-item navbar-search-wrapper mb-0">
           <span class="d-inline-block justify-content-center">
-          <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Publicaciones / Crear Publicación /</span> Denuncia por maltrato</p>
+          <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Publicaciones / Crear Publicación /</span> Mascota Perdida</p>
         </span>
             </div>
           </div>
@@ -293,9 +281,7 @@
 
 
       </nav>
-
-
-
+      <!-- / Navbar -->
 
       <!-- Content wrapper -->
       <div class="content-wrapper">
@@ -305,130 +291,56 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
           <div class="app-ecommerce">
-            <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardarDenuncia" enctype="multipart/form-data">
+            <form id="form_publis" method="POST" action="PublicacionesServlet?action=guardarAdopcion" enctype="multipart/form-data">
 
-            <!-- Add Product -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+              <!-- Add Product -->
+              <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
-              <div class="d-flex flex-column justify-content-center">
-                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
-                <p class="text-muted">Rellena los campos abajo</p>
-              </div>
-              <div class="d-flex align-content-center flex-wrap gap-3">
-                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
-                <button class="btn btn-danger cancel-subscription">Descartar</button>
-              </div>
-
-            </div>
-
-            <!-- First column-->
-            <div class="row">
-              <div class="col-12 col-lg-6">
-                <!-- Product Information -->
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h5 class="card-tile mb-0" style="color: #3318ca;">Denuncia por Maltrato</h5>
-                  </div>
-                  <div class="card-body">
-                    <div class="mb-3">
-                      <label class="form-label" for="titulo">Titulo</label>
-                      <input required type="text" class="form-control" id="titulo" name="titulo" placeholder="Título de la publicación">
-                      <input type="hidden" name="tipo_publicacion" value="5">
-                      <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col"><label class="form-label" for="opciones">Tipo</label>
-                        <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
-                          <option value="" disabled selected>Elija el tipo de publicación</option>
-                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</option>
-                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</option>
-                          <option value="" selected>Denuncia por Maltrato Animal</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!-- Description -->
-                    <div>
-                      <label class="form-label" for="descripcion">Descripción<span class="text-muted"></span></label>
-                      <textarea required class="form-control" name="descripcion" id="descripcion" rows="10"></textarea>
-                    </div>
+                <div class="d-flex flex-column justify-content-center">
+                  <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+                  <p class="text-muted">Rellena los campos abajo</p>
                 </div>
-                <!-- /Second column -->
-                <div class="col-12 col-lg-12">
-                  <!-- Media -->
-
+                <div class="d-flex align-content-center flex-wrap gap-3">
+                  <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                  <button class="btn btn-danger cancel-subscription">Descartar</button>
                 </div>
+
               </div>
-              <!-- Third-->
-              </div>
-              <div class="col-12 col-lg-6">
-                <!-- Product Information -->
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h5 class="card-tile mb-0" style="color: #3318ca;">Datos de la Mascota</h5>
-                  </div>
-                  <div class="card-body">
-                    <div class="mb-3">
-                      <label class="form-label" for="mascota_nombre">Nombre</label>
-                      <input type="text" required class="form-control" id="mascota_nombre" name="mascota_nombre" placeholder="Nombre del mascota">
+
+              <div class="row">
+                <!-- First column-->
+                <div class="col-12 col-lg-6">
+                  <!-- Product Information -->
+                  <div class="card mb-4">
+                    <div class="card-header">
+                      <h5 class="card-tile mb-0" style="color: #3318ca;">Adopción</h5>
                     </div>
-                    <div class="row mb-3">
-                      <div class="col"><label class="form-label" for="mascota_tamanio">Tamaño</label>
-                        <select class="form-control" name="mascota_tamanio" id="mascota_tamanio" required>
-                          <option value="" disabled selected>Elija el tamaño</option>
-                          <option value="pequeño">Pequeño</option>
-                          <option value="mediano">Mediano</option>
-                          <option value="grande">Grande</option>
-                          <option value="gigante">Gigante</option>
-                        </select>
+                    <div class="card-body">
+                      <div class="mb-3">
+                        <label class="form-label" for="titulo">Titulo</label>
+                        <input type="text" required class="form-control" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
+                        <input type="hidden" name="tipo_publicacion" value="3">
+                        <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
                       </div>
-                      <div class="col"><label class="form-label" for="mascota_raza">Raza</label>
-                        <div class="col">
-                          <select required id="mascota_raza" name="mascota_raza_id" class="select2 form-select form-select-lg" data-allow-clear="true">
-                            <option value="" disabled selected>Elija la raza</option>
-                            <%for(Razas raza : listaRazas){%>
-                            <option value="<%=raza.getRazaId()%>"><%=raza.getNombreRaza()%></option>
-                            <%}%>
+                      <div class="row mb-3">
+                        <div class="col"><label class="form-label" for="opciones">Tipo</label>
+                          <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
+                            <option value="" disabled selected>Elija el tipo de publicación</option>
+                            <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</option>
+                            <option value="" selected>Adopción</option>
+                            <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</option>
+                            <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia por Maltrato Animal</option>
                           </select>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Fourth-->
-                <!-- Product Information -->
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h5 class="card-tile mb-0" style="color: #3318ca;">Datos del maltratador</h5>
-                  </div>
-                  <div class="card-body">
-                    <div class="row mb-3">
-                      <div class="col">
-                        <label class="form-label" for="maltratador_nombre">Nombre</label>
-                        <input type="text" required class="form-control" name="maltratador_nombre" id="maltratador_nombre" placeholder="Nombre del maltratador">
-                      </div>
-                      <div class="col">
-                        <label class="form-label" for="maltrato_tipo">Tipo de maltrato</label>
-                        <input type="text" required class="form-control" name="maltrato_tipo" id="maltrato_tipo" placeholder="Indique el tipo de maltratato">
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col"><label class="form-label" for="denuncia_policial">¿Ha realizado la denuncia policial?</label>
-                        <select class="form-control" name="denuncia_policial" id="denuncia_policial" required>
-                          <option value="" disabled selected>Indique</option>
-                          <option value="SI">Sí</option>
-                          <option value="NO">No</option>
-                        </select>
-                      </div>
-                      <div class="col"><label class="form-label" for="direccion_maltrato">Dirección</label>
-                        <input required type="text" class="form-control" name="direccion_maltrato" id="direccion_maltrato" placeholder="Indique la Dirección de la mascota maltratada">
+                      <!-- Description -->
+                      <div>
+                        <label class="form-label">Descripción <span class="text-muted"></span></label>
+                        <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion"></textarea>
                       </div>
                     </div>
                   </div>
-                </div>
-
-              </div>
-              <div class="row">
-                <div class="col-12">
+                  <!-- /Second column -->
                   <!-- Media -->
                   <div class="card mb-1">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -437,16 +349,72 @@
                     <div class="card-body">
                       <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
                     </div>
-                    </div>
                   </div>
                 </div>
+                <!-- Third-->
+                <div class="col-12 col-lg-6">
+                  <!-- Product Information -->
+                  <div class="card mb-4">
+                    <div class="card-header">
+                      <h5 class="card-tile mb-0" style="color: #3318ca;">Datos de la Mascota</h5>
+                    </div>
+                    <div class="card-body">
+                      <div class="row mb-3">
+                        <div class="col">
+                          <label class="form-label" for="mascota_nombre">Nombre</label>
+                          <input type="text" required class="form-control" id="mascota_nombre" placeholder="Nombre del mascota" name="mascota_nombre" aria-label="Product title">
+                        </div>
+                        <div class="col">
+                          <label class="form-label" for="mascota_edad">Edad</label>
+                          <input type="text" required class="form-control" id="mascota_edad" placeholder="Indique la edad de la mascota" name="mascota_edad" aria-label="Product title">                  </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col"><label class="form-label" for="mascota_genero">Género</label>
+                          <select class="form-control" id="mascota_genero" name="mascota_genero" required>
+                            <option value="" disabled selected>Elija el Género</option>
+                            <option value="macho">Macho</option>
+                            <option value="hembra">Hembra</option>
+                          </select>
+                        </div>
+                        <div class="col">
+                          <label class="form-label" for="mascota_raza">Raza</label>
+                          <div class="col">
+                            <select required id="mascota_raza" name="mascota_raza_id" class="select2 form-select form-select-lg" data-allow-clear="true">
+                              <option value="" disabled selected>Elija la raza</option>
+                              <%for(Razas raza : listaRazas){%>
+                              <option value="<%=raza.getRazaId()%>"><%=raza.getNombreRaza()%></option>
+                              <%}%>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Fourth-->
+                  <!-- Product Information -->
+                  <div class="card mb-4">
+                    <div class="card-header">
+                      <h5 class="card-tile mb-0" style="color: #3318ca;">Información Adicional</h5>
+                    </div>
+                    <div class="card-body">
+                      <div class="row mb-3">
+                        <div class="col">
+                          <label class="form-label" >Condiciones de Adopción</label>
+                          <input type="text" required class="form-control" placeholder="Indique las condiciones de Adopción" id="condiciones_adopcion" name="condiciones_adopcion" aria-label="Product barcode">
+                        </div>
+                        <div class="col">
+                          <label class="form-label" >Lugar Encontrado</label>
+                          <input type="text" required class="form-control" placeholder="Indique el Lugar donde fue Encontrado" id="lugar_encontrado" name="lugar_encontrado" aria-label="Product barcode">
+                        </div>
+                      </div>
+
+                  </div>
+                </div>
+
               </div>
-            </div>
             </form>
           </div>
         </div>
-
-        <!-- Content -->
 
         <!-- Footer -->
         <footer class="footer">
@@ -463,12 +431,12 @@
           </div>
         </footer>
         <!-- / Footer -->
+
       </div>
 
     </div>
   </div>
 </div>
-
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 
@@ -489,25 +457,19 @@
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/popular.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/auto-focus.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
 
 <!-- Main JS -->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-
-<!-- Page JS -->
-<script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
-
 <script>
   function cambiarPagina() {
     var select = document.getElementById("opciones");
@@ -518,15 +480,6 @@
       window.location.href = opcionSeleccionada;
     }
   }
-</script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    flatpickr("#html5-date-input", {
-      dateFormat: "d-m-Y", // Cambia al formato deseado
-      locale: "es" // Ajuste de idioma a español
-    });
-  });
 </script>
 
 <script>
@@ -561,6 +514,34 @@
 
 </script>
 
+<script>
+  document.getElementById("contacto_numero").addEventListener("input", function() {
+    // Solo permite números y elimina cualquier carácter que no sea un número
+    this.value = this.value.replace(/[^0-9]/g, '');
+  });
+
+</script>
+
+<script>
+  document.getElementById("mascota_edad").addEventListener("input", function() {
+    // Solo permite números y elimina cualquier carácter que no sea un número
+    this.value = this.value.replace(/[^0-9]/g, '');
+  });
+
+</script>
+
+<!-- Page JS -->
+<script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-enable-otp.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
+
+
 </body>
 
 
@@ -568,4 +549,3 @@
 </html>
 
 <!-- beautify ignore:end -->
-

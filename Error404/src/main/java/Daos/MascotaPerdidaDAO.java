@@ -83,7 +83,7 @@ public class MascotaPerdidaDAO extends BaseDao {
             pstmt.setInt(1, mascotaPerdida.getPublicacion_id());
             pstmt.setInt(2, mascotaPerdida.getMascota().getMascotaId());
             pstmt.setString(3, mascotaPerdida.getLugarPerdida());
-            pstmt.setDate(4, mascotaPerdida.getFechaPerdida());
+            pstmt.setDate(4, (new java.sql.Date(mascotaPerdida.getFechaPerdida().getTime())));
             pstmt.setString(5, mascotaPerdida.getDescripcionAdicional());
             pstmt.setInt(6, mascotaPerdida.getTelefonoContacto());
             pstmt.setString(7, mascotaPerdida.getNombreContacto());

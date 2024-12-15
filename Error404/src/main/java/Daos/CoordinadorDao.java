@@ -19,175 +19,35 @@ public class CoordinadorDao extends BaseDao {
     private static final Logger logger = LoggerFactory.getLogger(CoordinadorDao.class);
 
 
-    // 1. Obtener solicitudes de hogares temporales pendientes
-    public List<Solicitudes> obtenerSolicitudesHogarPendientes() {
-        List<Solicitudes> solicitudes = new ArrayList<>();
-        String sql = "SELECT s.solicitud_id, ts.tipo_solicitud, u.nombre AS solicitante, s.fecha_solicitud, " +
-                "COALESCE(m.nombre, '-') AS mascota " +
-                "FROM solicitudes s " +
-                "JOIN tipos_solicitudes ts ON s.tipo_solicitud_id = ts.tipo_solicitud_id " +
-                "JOIN usuarios u ON s.solicitante_id = u.user_id " +
-                "LEFT JOIN mascotas m ON s.mascota_id = m.mascota_id " +
-                "WHERE s.estado_solicitud = 'pendiente' " +
-                "AND ts.tipo_solicitud = 'hogar_temporal' " +
-                "ORDER BY s.fecha_solicitud DESC";
-
-        try (Connection conn = this.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Solicitudes solicitud = new Solicitudes();
-                solicitud.setSolicitudId(rs.getInt("solicitud_id"));
-                TiposSolicitudes tipoSolicitud = new TiposSolicitudes();
-                tipoSolicitud.setTipoSolicitud(rs.getString("tipo_solicitud"));
-                solicitud.setTipoSolicitud(tipoSolicitud);
-
-                Usuarios solicitante = new Usuarios();
-                solicitante.setNombre(rs.getString("solicitante"));
-                solicitud.setSolicitante(solicitante);
-
-                solicitud.setFechaSolicitud(rs.getString("fecha_solicitud"));
-
-                Mascotas mascota = new Mascotas();
-                mascota.setNombre(rs.getString("mascota"));
-                solicitud.setMascota(mascota);
-
-                solicitudes.add(solicitud);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return solicitudes;
-    }
-
-    // 2. Obtener solicitudes de publicaciones de mascotas perdidas pendientes
-    public List<PublicacionesMascotaPerdida> obtenerSolicitudesPublicacionesPendientes() {
-        List<PublicacionesMascotaPerdida> publicaciones = new ArrayList<>();
-        String sql = "SELECT pmp.publicacion_id, m.nombre AS mascota, pmp.lugar_perdida, pmp.fecha_perdida, " +
-                "u.nombre AS usuario, pub.estado_publicacion " +
-                "FROM publicaciones_mascota_perdida pmp " +
-                "JOIN publicaciones pub ON pmp.publicacion_id = pub.publicacion_id " +
-                "JOIN mascotas m ON pmp.mascota_id = m.mascota_id " +
-                "JOIN usuarios u ON pub.user_id = u.user_id " +
-                "WHERE pub.estado_publicacion = 'pendiente' " +
-                "ORDER BY pmp.fecha_perdida DESC";
-
-        try (Connection conn = this.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                PublicacionesMascotaPerdida publicacion = new PublicacionesMascotaPerdida();
-                publicacion.setPublicacion_id(rs.getInt("publicacion_id"));
-
-                Mascotas mascota = new Mascotas();
-                mascota.setNombre(rs.getString("mascota"));
-                publicacion.setMascota(mascota);
-
-                publicacion.setLugarPerdida(rs.getString("lugar_perdida"));
-                publicacion.setFechaPerdida(rs.getDate("fecha_perdida"));
-
-                Usuarios usuario = new Usuarios();
-                usuario.setNombre(rs.getString("usuario"));
-                publicacion.setUsuarios(usuario);
-
-                publicaciones.add(publicacion);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return publicaciones;
-    }
-
-
-    // 3. Aprobar solicitud de hogar temporal
     public boolean aprobarSolicitudHogar(int solicitudId) {
         String sql = "UPDATE solicitudes SET estado_solicitud = 'aprobada', fecha_entrega = NOW() " +
                 "WHERE solicitud_id = ? AND estado_solicitud = 'pendiente'";
 
-        try (Connection conn = this.getConnection()) {
-            conn.setAutoCommit(false);  // Iniciar transacción
-
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, solicitudId);
-                int filasAfectadas = stmt.executeUpdate();
-
-                if (filasAfectadas > 0) {
-                    conn.commit();  // Confirmar transacción si la actualización fue exitosa
-                    logger.info("Solicitud {} aprobada exitosamente.", solicitudId);
-                    return true;
-                } else {
-                    conn.rollback();  // Revertir cambios si no se actualizó ninguna fila
-                    return false;
-                }
-            } catch (SQLException e) {
-                conn.rollback();  // Revertir cambios en caso de error
-                logger.error("Error al aprobar la solicitud de hogar: {}", e.getMessage(), e);
-                return false;
-            }
-        } catch (SQLException e) {
-            logger.error("Error al iniciar la conexión para aprobar la solicitud de hogar: {}", e.getMessage(), e);
-            return false;
-        }
-    }
-
-
-    // 4. Rechazar solicitud de hogar temporal
-    public boolean rechazarSolicitudHogar(int solicitudId) {
-        String sql = "UPDATE hogares_temporales ht " +
-                "SET ht.estado_temporal = 'rechazada', ht.fecha_rechazo = NOW() " +
-                "WHERE ht.temporal_id = (SELECT s.temporal_id FROM solicitudes s WHERE s.solicitud_id = ?) " +
-                "AND ht.estado_temporal = 'pendiente'";
-
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, solicitudId);  // Setear el ID de la solicitud
-
-            // Ejecutar la actualización
+            stmt.setInt(1, solicitudId);
             int filasAfectadas = stmt.executeUpdate();
             return filasAfectadas > 0;
         } catch (SQLException e) {
+            System.err.println("Error al aprobar la solicitud: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
 
-
-
-    // 5. Aprobar publicación de mascota perdida
-    public boolean aprobarPublicacionMascota(int publicacionId) {
-        String sql = "UPDATE publicaciones SET estado_publicacion = 'activa' " +
-                "WHERE publicacion_id = ? AND estado_publicacion = 'pendiente'";
+    public boolean rechazarSolicitudHogar(int solicitudId) {
+        String sql = "UPDATE solicitudes SET estado_solicitud = 'rechazada'" +
+                "WHERE solicitud_id = ? AND estado_solicitud = 'pendiente'";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, publicacionId);
-            return stmt.executeUpdate() > 0;
+            stmt.setInt(1, solicitudId);
+            int filasAfectadas = stmt.executeUpdate();
+            return filasAfectadas > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-
-    // 6. Rechazar publicación de mascota perdida
-    public boolean rechazarPublicacionMascota(int publicacionId) {
-        String sql = "UPDATE publicaciones SET estado_publicacion = 'rechazada', fecha_creacion = NOW() " +
-                "WHERE publicacion_id = ? AND estado_publicacion = 'pendiente'";
-
-        try (Connection conn = this.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            // Asignar el parámetro publicacionId
-            stmt.setInt(1, publicacionId);
-
-            // Ejecutar la actualización
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.err.println("Error al rechazar la publicación de mascota perdida: " + e.getMessage());
+            System.err.println("Error al rechazar la solicitud: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -209,15 +69,13 @@ public class CoordinadorDao extends BaseDao {
         }
     }
 
-    // 9. Baneo automático si un usuario ha sido rechazado 3 veces
     public boolean banearUsuarioPorRechazos() {
         String sql = "UPDATE usuarios " +
                 "SET estado_cuenta = 'suspendida' " +
                 "WHERE user_id IN ( " +
                 "    SELECT solicitante_id " +
                 "    FROM solicitudes " +
-                "    WHERE tipo_solicitud_id = 1 " +
-                "    AND estado_solicitud = 'rechazada' " +
+                "    WHERE estado_solicitud = 'rechazada' " +
                 "    GROUP BY solicitante_id " +
                 "    HAVING COUNT(*) >= 3 " +
                 ")";
@@ -227,12 +85,13 @@ public class CoordinadorDao extends BaseDao {
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
+            System.err.println("Error al banear usuarios por rechazos: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
 
-    // 7. Obtener los 5 comentarios más recientes del coordinador
+
     public List<Comentarios> obtenerComentariosRecientes(int publicacionId) {
         List<Comentarios> comentarios = new ArrayList<>();
         String sql = "SELECT c.comentario, c.fecha_actualizacion " +
@@ -305,53 +164,95 @@ public class CoordinadorDao extends BaseDao {
 
     public List<HogarTemporalDTO> obtenerSolicitudesHogarPaginadas(int offset, int pageSize, int coordinadorId) {
         List<HogarTemporalDTO> hogaresTemporalesDTO = new ArrayList<>();
-        String sql = "SELECT ht.temporal_id, ht.direccion, ht.distrito_id, d.nombre_distrito, " +
-                "z.nombre_zona, u.nombre AS usuario_nombre, u.apellido AS usuario_apellido, " +
-                "ht.edad, ht.genero, ht.celular, ht.estado_temporal, s.fecha_solicitud, ts.tipo_solicitud, " +
-                "m.nombre AS mascota_nombre " +  // Nombre de la mascota
-                "FROM hogares_temporales ht " +
-                "JOIN distritos d ON ht.distrito_id = d.distrito_id " +
-                "JOIN zonas z ON d.zona_distrito_id = z.zona_id " +
-                "JOIN usuarios u ON u.zona_id = z.zona_id " +
-                "JOIN solicitudes s ON s.temporal_id = ht.temporal_id " +
-                "JOIN tipos_solicitudes ts ON ts.tipo_solicitud_id = s.tipo_solicitud_id " +
-                "LEFT JOIN mascotas m ON s.mascota_id = m.mascota_id " +  // LEFT JOIN con la tabla mascotas
-                "WHERE z.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?) " +  // Relación con zona_id del coordinador
-                "ORDER BY ht.temporal_id DESC " + // Ordenar por temporal_id
-                "LIMIT ? OFFSET ?"; // Paginación
+        String sql = "SELECT \n" +
+                "    s.solicitud_id,\n" +
+                "    ts.tipo_solicitud AS tipo_solicitud,  -- Usamos el valor directo de la tabla tipos_solicitudes\n" +
+                "    IF(ht.temporal_id IS NOT NULL, \n" +
+                "        CONCAT('Solicito hogar temporal para ', m.nombre), \n" +
+                "        CONCAT('Mascota perdida: ', m.nombre, ', Lugar: ', pmp.lugar_perdida, ', ', pmp.descripcion_adicional)\n" +
+                "    ) AS descripcion,\n" +
+                "    ht.temporal_id, ht.direccion, \n" +
+                "    d.nombre_distrito, z.nombre_zona, \n" +
+                "    u.nombre AS usuario_nombre, u.apellido AS usuario_apellido, \n" +
+                "    ht.edad, ht.genero, ht.celular, ht.estado_temporal, \n" +
+                "    s.fecha_solicitud, \n" +
+                "    GROUP_CONCAT(DISTINCT m.nombre SEPARATOR ', ') AS mascota_nombres, \n" +
+                "    pmp.lugar_perdida, pmp.fecha_perdida, pmp.descripcion_adicional, \n" +
+                "    pmp.telefono_contacto, pmp.nombre_contacto, pmp.recompensa\n" +
+                "FROM solicitudes s\n" +
+                "LEFT JOIN hogares_temporales ht ON s.temporal_id = ht.temporal_id\n" +
+                "LEFT JOIN distritos d ON ht.distrito_id = d.distrito_id\n" +
+                "LEFT JOIN zonas z ON d.zona_distrito_id = z.zona_id\n" +
+                "LEFT JOIN usuarios u ON s.solicitante_id = u.user_id\n" +
+                "LEFT JOIN tipos_solicitudes ts ON ts.tipo_solicitud_id = s.tipo_solicitud_id  -- Tabla de tipos de solicitud\n" +
+                "LEFT JOIN mascotas m ON s.mascota_id = m.mascota_id\n" +
+                "LEFT JOIN publicaciones_mascota_perdida pmp ON s.publicacion_id = pmp.publicacion_id\n" +
+                "WHERE \n" +
+                "    (z.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?) \n" +
+                "    OR u.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?))\n" +
+                "    AND s.estado_solicitud = 'pendiente'\n" +
+                "GROUP BY s.solicitud_id, ht.temporal_id, ht.direccion, \n" +
+                "         d.nombre_distrito, z.nombre_zona, u.nombre, u.apellido, \n" +
+                "         ht.edad, ht.genero, ht.celular, ht.estado_temporal, \n" +
+                "         s.fecha_solicitud, ts.tipo_solicitud, \n" +
+                "         pmp.lugar_perdida, pmp.fecha_perdida, pmp.descripcion_adicional, \n" +
+                "         pmp.telefono_contacto, pmp.nombre_contacto, pmp.recompensa\n" +
+                "ORDER BY s.fecha_solicitud DESC\n" +
+                "LIMIT ? OFFSET ?;\n";
+
+
+        System.out.println("ID de la zona: " + coordinadorId);
+        System.out.println("Page size: " + pageSize);
+        System.out.println("Offset: " + offset);
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Setear parámetros
-            stmt.setInt(1, coordinadorId);  // ID del coordinador
-            stmt.setInt(2, pageSize);        // Número de elementos por página
-            stmt.setInt(3, offset);          // Desplazamiento para la paginación
+            stmt.setInt(1, coordinadorId); // Primer parámetro: zona del coordinador para hogar temporal
+            stmt.setInt(2, coordinadorId); // Segundo parámetro: zona del coordinador para publicaciones
+            stmt.setInt(3, pageSize);      // Tercer parámetro: límite (page size)
+            stmt.setInt(4, offset);        // Cuarto parámetro: desplazamiento (offset)
+
 
             // Ejecutar consulta
             try (ResultSet resultSet = stmt.executeQuery()) {
                 while (resultSet.next()) {
-                    // Crear el DTO con los valores de la consulta
+                    System.out.println("Solicitud ID: " + resultSet.getInt("solicitud_id"));
+                    System.out.println("Temporal ID: " + resultSet.getInt("temporal_id"));
+                    System.out.println("Dirección: " + resultSet.getString("direccion"));
+                    System.out.println("Usuario: " + resultSet.getString("usuario_nombre") + " " + resultSet.getString("usuario_apellido"));
+                    System.out.println("Mascotas: " + resultSet.getString("mascota_nombres"));
+                    System.out.println("Solicitud ID: " + resultSet.getInt("solicitud_id"));
+                    System.out.println("Mascota(s): " + resultSet.getString("mascota_nombres"));
+
+
+
                     HogarTemporalDTO hogarDTO = new HogarTemporalDTO(
-                            resultSet.getInt("temporal_id"),           // ID del hogar
-                            resultSet.getString("usuario_nombre"),     // Nombre del usuario
-                            resultSet.getString("usuario_apellido"),   // Apellido del usuario
-                            resultSet.getString("direccion"),          // Dirección
-                            resultSet.getString("estado_temporal"),    // Estado del hogar temporal
-                            resultSet.getDate("fecha_solicitud"),      // Fecha de solicitud
-                            resultSet.getString("tipo_solicitud"),     // Tipo de solicitud
-                            resultSet.getInt("edad"),                  // Edad
-                            resultSet.getString("genero"),             // Género
-                            resultSet.getString("celular"),            // Celular
-                            resultSet.getString("mascota_nombre")      // Nombre de la mascota (si existe)
+                            resultSet.getInt("solicitud_id"),
+                            resultSet.getInt("temporal_id"),            // ID del hogar temporal o NULL si no aplica
+                            resultSet.getString("usuario_nombre"),      // Nombre del usuario
+                            resultSet.getString("usuario_apellido"),    // Apellido del usuario
+                            resultSet.getString("direccion"),           // Dirección del hogar temporal o solicitud
+                            resultSet.getString("estado_temporal"),     // Estado del hogar temporal
+                            resultSet.getDate("fecha_solicitud"),       // Fecha de la solicitud
+                            resultSet.getString("tipo_solicitud"),      // Tipo de solicitud (temporal o mascota perdida)
+                            resultSet.getInt("edad"),                   // Edad (si aplica)
+                            resultSet.getString("genero"),              // Género (si aplica)
+                            resultSet.getString("celular"),             // Teléfono de contacto
+                            resultSet.getString("mascota_nombres"),     // Nombre(s) de la(s) mascota(s)
+                            resultSet.getDate("fecha_perdida"),         // Fecha de pérdida de la mascota
+                            resultSet.getString("lugar_perdida"),       // Lugar donde se perdió la mascota
+                            resultSet.getString("descripcion_adicional"),// Descripción adicional sobre la pérdida
+                            resultSet.getString("telefono_contacto"),   // Teléfono de contacto para mascota perdida
+                            resultSet.getString("nombre_contacto"),     // Nombre del contacto para mascota perdida
+                            resultSet.getString("recompensa")           // Recompensa si existe
                     );
 
-                    // Agregar el DTO a la lista
                     hogaresTemporalesDTO.add(hogarDTO);
                 }
             }
         } catch (SQLException e) {
-            // Manejo de errores
             logger.error("Error al obtener solicitudes de hogares temporales para el coordinador {}", coordinadorId, e);
             throw new RuntimeException("Error al obtener solicitudes de hogares temporales", e);
         }
@@ -549,8 +450,6 @@ public class CoordinadorDao extends BaseDao {
         return distritos;
     }
 
-
-    // Método para obtener todas las zonas (necesario para el formulario)
     public List<Zonas> obtenerZonas() {
         List<Zonas> zonas = new ArrayList<>();
         String sql = "SELECT zona_id, nombre_zona FROM zonas";  // Consulta para obtener todas las zonas

@@ -39,7 +39,7 @@ public class DonacionesDAO extends BaseDao{
                 publicacionDonacion.setFechaRecepcionInicio(rs.getDate("pd.fecha_recepcion_inicio"));
                 publicacionDonacion.setFechaRecepcionFin(rs.getDate("pd.fecha_recepcion_fin"));
                 publicacionDonacion.setHoraRecepcion(rs.getTime("pd.hora_recepcion"));
-                publicacionDonacion.setTelefonoContacto(rs.getString("pd.telefono_contacto"));
+                publicacionDonacion.setTelefonoContacto(rs.getInt("pd.telefono_contacto"));
                 publicacionDonacion.setNombreContacto(rs.getString("pd.nombre_contacto"));
                 if(rs.getString("pd.motivo_donacion")!=null){
                     publicacionDonacion.setMotivoDonacion(rs.getString("pd.motivo_donacion"));
@@ -51,5 +51,26 @@ public class DonacionesDAO extends BaseDao{
         }
 
         return publicacionDonacion;
+    }
+
+    public void agregarPublicacion(PublicacionesDonaciones donacion){
+        String sql = "INSERT INTO publicaciones_donaciones(publicacion_id, punto_acopio, tipo_donacion_id, cantidad, marca, fecha_recepcion_inicio, fecha_recepcion_fin, hora_recepcion,  telefono_contacto, nombre_contacto, motivo_donacion) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        try(Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, donacion.getPublicacion_id());
+            pstmt.setString(2, donacion.getPuntoAcopio());
+            pstmt.setInt(3, donacion.getTipoDonacion().getTipoDonacionId());
+            pstmt.setDouble(4, donacion.getCantidad());
+            pstmt.setString(5, donacion.getMarca());
+            pstmt.setDate(6, new java.sql.Date(donacion.getFechaRecepcionInicio().getTime()));
+            pstmt.setDate(7, new java.sql.Date(donacion.getFechaRecepcionFin().getTime()));
+            pstmt.setTime(8, donacion.getHoraRecepcion());
+            pstmt.setInt(9, donacion.getTelefonoContacto());
+            pstmt.setString(10, donacion.getNombreContacto());
+            pstmt.setString(11, donacion.getMotivoDonacion());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

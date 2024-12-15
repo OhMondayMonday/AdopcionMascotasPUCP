@@ -1,21 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Sebastian
-  Date: 13/11/2024
-  Time: 10:04
-  To change this template use File | Settings | File Templates.
---%>
+<!DOCTYPE html>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuario" type="Beans.Usuarios" scope="request"/>
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
-
-<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-ecommerce-product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:07 GMT -->
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Crear Nueva Publicación</title>
+    <title>Crear Nueva Publicación | Donación</title>
 
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -34,7 +27,6 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -47,11 +39,6 @@
 
     <!-- Core CSS -->
 
-    <style>
-        .fondo{
-            background-color: #d4e1ffa9;
-        }
-    </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/demo.css" />
@@ -66,10 +53,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/form-validation.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/animate-css/animate.css" />
 
     <!-- Page CSS -->
@@ -93,6 +78,7 @@
 
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
+
         <!-- Navbar -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
@@ -192,7 +178,7 @@
                     <div class="w-75 align-items-center me-auto">
                         <div class="nav-item navbar-search-wrapper mb-0">
           <span class="d-inline-block justify-content-center">
-          <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Publicaciones / Crear Publicación /</span> Normal</p>
+          <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Publicaciones / Crear Publicación /</span> Mascota Perdida</p>
         </span>
                         </div>
                     </div>
@@ -280,6 +266,7 @@
                         </li>
                         <!--/ User -->
 
+
                     </ul>
                 </div>
 
@@ -292,7 +279,9 @@
 
 
             </nav>
+            <!-- / Navbar -->
 
+            <!-- Content wrapper -->
             <div class="content-wrapper">
 
                 <!-- Content -->
@@ -300,75 +289,134 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
 
                     <div class="app-ecommerce">
-                        <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardar" enctype="multipart/form-data">
-                        <!-- Add Product -->
-                        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                        <form id="form_publis" method="POST" action="PublicacionesServlet?action=guardarDonacion" enctype="multipart/form-data">
 
-                            <div class="d-flex flex-column justify-content-center">
-                                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
-                                <p class="text-muted">Rellena los campos abajo</p>
+                            <!-- Add Product -->
+                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+                                    <p class="text-muted">Rellena los campos abajo</p>
+                                </div>
+                                <div class="d-flex align-content-center flex-wrap gap-3">
+                                    <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                                    <button class="btn btn-danger cancel-subscription">Descartar</button>
+                                </div>
+
                             </div>
 
-                            <div class="d-flex align-content-center flex-wrap gap-3">
-                                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
-                                <button class="btn btn-danger cancel-subscription">Descartar</button>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <!-- First column-->
-                            <div class="col-12 col-lg-6">
-                                <!-- Product Information -->
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <h5 class="card-tile mb-0" style="color: #3318ca;">Publicación</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="titulo" >Titulo</label>
-                                            <input required type="text" class="form-control" id="titulo" name="titulo" placeholder="Título de la publicación">
-                                            <input type="hidden" name="tipo_publicacion_id" value="1">
-                                            <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
+                            <div class="row">
+                                <!-- First column-->
+                                <div class="col-12 col-lg-6">
+                                    <!-- Product Information -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-tile mb-0" style="color: #3318ca;">Donación</h5>
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <label class="form-label" >Tipo</label>
-                                                <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
-                                                    <option value="" disabled selected>Elija el tipo de publicación</option>
-                                                    <option value="" selected>Normal</option>
-                                                    <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarAdopcion&user_id=1">Adopción</option>
-                                                    <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</option>
-                                                    <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia por Maltrato Animal</option>
-                                                </select>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="titulo">Titulo</label>
+                                                <input type="text" required class="form-control" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
+                                                <input type="hidden" name="tipo_publicacion" value="3">
+                                                <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col"><label class="form-label" for="opciones">Tipo</label>
+                                                    <select class="form-control" id="opciones" name="tipo_donacion" required>
+                                                        <option value="" disabled selected>Elija el tipo de Donación</option>
+                                                        <option value="1" >Activo</option>
+                                                        <option value="2" >Dinero</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Description -->
+                                            <div>
+                                                <label class="form-label">Descripción <span class="text-muted"></span></label>
+                                                <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion"></textarea>
                                             </div>
                                         </div>
-                                        <!-- Description -->
-                                        <div>
-                                            <label class="form-label" for="descripcion">Descripción<span class="text-muted"></span></label>
-                                            <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion"></textarea>
+                                    </div>
+                                    <!-- /Second column -->
+                                    <!-- Media -->
+                                    <div class="card mb-1">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Third-->
+                                <div class="col-12 col-lg-6">
+                                    <!-- Product Information -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-tile mb-0" style="color: #3318ca;">Detalles</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label class="form-label" for="punto_de_acopio">Punto de Acopio</label>
+                                                    <input type="text" required class="form-control" id="punto_de_acopio" placeholder="Indique el Punto de Acopio" name="punto_de_acopio" aria-label="Product title">
+                                                </div>
+                                                <div class="col">
+                                                    <label class="form-label" for="motivo_donacion">Motivo Donación</label>
+                                                    <input type="text" class="form-control" id="motivo_donacion" placeholder="Indique el motivo de la Donación" name="motivo_donacion" aria-label="Product title">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label class="form-label" for="cantidad">Cantidad Monetaria</label>
+                                                    <input type="text" class="form-control" id="cantidad" placeholder="Indique el Monto Objetivo" name="cantidad" aria-label="Product title">
+                                                </div>
+                                                <div class="col">
+                                                    <label class="form-label" for="marca">Marca</label>
+                                                    <input type="text" class="form-control" id="marca" placeholder="Indique la Marca de la Donacion" name="marca" aria-label="Product title">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fourth-->
+                                    <!-- Product Information -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            <h5 class="card-tile mb-0" style="color: #3318ca;">Información de Contacto</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label class="form-label" for="contacto_nombre">Nombre</label>
+                                                    <input type="text" required class="form-control" id="contacto_nombre" placeholder="Nombre de Contacto" name="contacto_nombre" aria-label="Product title">
+                                                </div>
+                                                <div class="col">
+                                                    <label class="form-label" for="contacto_numero">Número de Contacto</label>
+                                                    <input type="text" required class="form-control" id="contacto_numero" placeholder="Indique un número de Contacto" name="contacto_numero" aria-label="Product title">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label class="form-label" >Fecha de Recepción Inicio</label>
+                                                    <input type="date" required class="form-control" id="fecha_recepcion_inicio" name="fecha_recepcion_inicio" aria-label="Product title">
+                                                </div>
+                                                <div class="col">
+                                                    <label class="form-label" >Fecha de Recepción Final</label>
+                                                    <input type="date" required class="form-control" id="fecha_recepcion_final" name="fecha_recepcion_final" aria-label="Product title">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" >Hora de Recepción</label>
+                                                <input type="time" class="form-control" id="hora_recepcion" name="hora_recepcion" aria-label="Product title">
+                                            </div>
                                         </div>
 
                                     </div>
                                 </div>
+
                             </div>
-                            <!-- /Second column -->
-                            <div class="col-12 col-lg-6">
-                                <!-- Media -->
-                                <div class="card mb-1">
-                                    <div class="card-header d-flex justify-content-between align-items-center">
-                                        <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         </form>
                     </div>
                 </div>
-
-                <!-- Content -->
 
                 <!-- Footer -->
                 <footer class="footer">
@@ -385,14 +433,12 @@
                     </div>
                 </footer>
                 <!-- / Footer -->
+
             </div>
 
         </div>
     </div>
 </div>
-
-
-
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 
@@ -413,44 +459,19 @@
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/popular.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/@form-validation/auto-focus.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
 
 <!-- Main JS -->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-<script>
-    function cambiarPagina() {
-        var select = document.getElementById("opciones");
-        var opcionSeleccionada = select.value;
-
-        if (opcionSeleccionada) {
-            // Cambia la página según la opción seleccionada
-            window.location.href = opcionSeleccionada;
-        }
-    }
-</script>
-
-<!-- Page JS -->
-<script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        flatpickr("#html5-date-input", {
-            dateFormat: "d-m-Y", // Cambia al formato deseado
-            locale: "es" // Ajuste de idioma a español
-        });
-    });
-</script>
 
 <script>
     // Asegúrate de que el DOM esté cargado antes de ejecutar tu script
@@ -483,6 +504,34 @@
     });
 
 </script>
+
+<script>
+    document.getElementById("cantidad").addEventListener("input", function() {
+        // Solo permite números y elimina cualquier carácter que no sea un número
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+</script>
+
+<script>
+    document.getElementById("contacto_numero").addEventListener("input", function() {
+        // Solo permite números y elimina cualquier carácter que no sea un número
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+</script>
+
+<!-- Page JS -->
+<script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-enable-otp.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
+
 
 </body>
 

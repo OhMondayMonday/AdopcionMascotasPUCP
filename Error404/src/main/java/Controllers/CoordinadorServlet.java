@@ -155,9 +155,37 @@ public class CoordinadorServlet extends HttpServlet {
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Zona no seleccionada");
             }
+        } else if ("aprobar".equals(action)) {
+            manejarSolicitud(request, response, true);
+        } else if ("rechazar".equals(action)) {
+            manejarSolicitud(request, response, false); // Rechazar solicitud
+        } else if ("banear".equals(action)) {
+            manejarBaneo(request, response);
         }
     }
 
+    private void manejarSolicitud(HttpServletRequest request, HttpServletResponse response, boolean aprobar) throws IOException {
+        int solicitudId = parseParameterToInt(request, "solicitudId");
+
+        boolean exito = aprobar
+                ? coordinadorDAO.rechazarSolicitudHogar(solicitudId)
+                : coordinadorDAO.rechazarSolicitudHogar(solicitudId);
+
+        String mensaje = exito
+                ? (aprobar ? "Solicitud aprobada exitosamente." : "Solicitud rechazada exitosamente.")
+                : "Error al procesar la solicitud.";
+        redirectWithMessage(response, "listarSolicitudesHogar", mensaje);
+    }
+
+    private void manejarBaneo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int temporalId = parseParameterToInt(request, "temporalId");
+
+        boolean baneado = coordinadorDAO.banearHogarTemporalManual(temporalId);
+        String mensaje = baneado
+                ? "Hogar temporal baneado exitosamente."
+                : "Error al banear el hogar temporal.";
+        redirectWithMessage(response, "listarGestionHogares", mensaje);
+    }
 
 
 

@@ -14,9 +14,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -82,6 +84,12 @@ public class PublicacionesServlet extends HttpServlet {
                 break;
             case "agregarMascotaPerdida":
                 agregarMascotaPerdida(request, response);
+                break;
+            case "agregarDonacion":
+                agregarDonacion(request, response);
+                break;
+            case "agregarAdopcion":
+                agregarAdopcion(request, response);
                 break;
 
         }
@@ -177,8 +185,8 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-           // Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-          //  request.setAttribute("usuario", usuario);
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
+            request.setAttribute("usuario", usuario);
             request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-normal.jsp").forward(request, response);
         } else {
             response.sendRedirect("PublicacionesServlet");
@@ -195,8 +203,8 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-       //     Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-        //    request.setAttribute("usuario", usuario);
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
+            request.setAttribute("usuario", usuario);
             RazasDao razasDao = new RazasDao();
             ArrayList<Razas> listaRazas = razasDao.listarRazas();
             request.setAttribute("listaRazas", listaRazas);
@@ -216,12 +224,51 @@ public class PublicacionesServlet extends HttpServlet {
                 response.sendRedirect("PublicacionesServlet");
             }
             UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
-     //       Usuarios usuario = usuarioFinalDAO.obtenerUsuarioPorId(user_id);
-        //    request.setAttribute("usuario", usuario);
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
+            request.setAttribute("usuario", usuario);
             RazasDao razasDao = new RazasDao();
             ArrayList<Razas> listaRazas = razasDao.listarRazas();
             request.setAttribute("listaRazas", listaRazas);
             request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-mascotaperdida.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("PublicacionesServlet");
+        }
+    }
+
+    private void agregarDonacion(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException{
+        if (request.getParameter("user_id") != null) {
+            String user_idString = request.getParameter("user_id");
+            int user_id = 0;
+            try {
+                user_id = Integer.parseInt(user_idString);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("PublicacionesServlet");
+            }
+            UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
+            request.setAttribute("usuario", usuario);
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-albergue-donacion-activo.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("PublicacionesServlet");
+        }
+    }
+
+    private void agregarAdopcion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("user_id") != null) {
+            String user_idString = request.getParameter("user_id");
+            int user_id = 0;
+            try {
+                user_id = Integer.parseInt(user_idString);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("PublicacionesServlet");
+            }
+            UsuarioFinalDAO usuarioFinalDAO = new UsuarioFinalDAO();
+            Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(user_id);
+            request.setAttribute("usuario", usuario);
+            RazasDao razasDao = new RazasDao();
+            ArrayList<Razas> listaRazas = razasDao.listarRazas();
+            request.setAttribute("listaRazas", listaRazas);
+            request.getRequestDispatcher("/WEB-INF/UsuarioFinal/crear-publicacion-usuariofinal-adopcion.jsp").forward(request, response);
         } else {
             response.sendRedirect("PublicacionesServlet");
         }
@@ -244,6 +291,14 @@ public class PublicacionesServlet extends HttpServlet {
                 break;
             case "guardarMascotaPerdida":
                 guardarMascotaPerdida(request, response);
+                response.sendRedirect("PublicacionesServlet");
+                break;
+            case "guardarDonacion":
+                guardarDonacion(request, response);
+                response.sendRedirect("PublicacionesServlet");
+                break;
+            case "guardarAdopcion":
+                guardarAdopcion(request,response);
                 response.sendRedirect("PublicacionesServlet");
                 break;
             case "actualizar":
@@ -393,10 +448,10 @@ public class PublicacionesServlet extends HttpServlet {
         mascotaPerdida.setLugarPerdida(request.getParameter("lugar_perdida"));
 
         String fecha_perdida = request.getParameter("fecha_perdida");
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fecha_perdida_date = null;
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date fecha_perdida_date = null;
         try{
-            fecha_perdida_date = (Date) formato.parse(fecha_perdida);
+            fecha_perdida_date = formato.parse(fecha_perdida);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -404,6 +459,7 @@ public class PublicacionesServlet extends HttpServlet {
         if(request.getParameter("recompensa")!= null) {
             mascotaPerdida.setRecompensa(request.getParameter("recompensa"));
         }
+
         Part fotoPart = request.getPart("foto");
         if (fotoPart != null && fotoPart.getSize() > 0) {
             // Ruta de almacenamiento
@@ -423,11 +479,162 @@ public class PublicacionesServlet extends HttpServlet {
             System.err.println("No se recibió ninguna imagen o el archivo está vacío.");
             publicacion.setFoto(new Fotos(""));
         }
+
         publicacionesDAO.agregarPublicacion(publicacion);
         mascotaPerdida.setPublicacion_id(publicacionesDAO.obtenerIdUltimaPublicacion());
         mascotaPerdida.getMascota().setFoto(fotosDAO.obtenerIdPorUrl(publicacion.getFoto().getUrlFoto()));
         mascotaPerdidaDAO.agregarMascotaPerdida(mascotaPerdida);
 
+    }
+
+    private void guardarDonacion (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        Publicaciones publicacion = new Publicaciones();
+        Usuarios usuario = new Usuarios();
+        usuario.setUserId(Integer.parseInt(request.getParameter("user_id")));
+
+        publicacion.setUsuario(usuario);
+        publicacion.setTitulo(request.getParameter("titulo"));
+        publicacion.setDescripcion(request.getParameter("descripcion"));
+
+        TiposPublicaciones tiposPublicacion = new TiposPublicaciones();
+
+        if(request.getParameter("tipo_publicacion") != null) {
+            tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion")));
+            publicacion.setTipoPublicacion(tiposPublicacion);
+            System.out.println("Si llega a guardar los tipos de publis");
+        }
+
+        PublicacionesDonaciones donacion = new PublicacionesDonaciones();
+        donacion.setPuntoAcopio(request.getParameter("punto_de_acopio"));
+
+        TiposDonaciones tiposDonacion = new TiposDonaciones();
+        tiposDonacion.setTipoDonacionId(Integer.parseInt(request.getParameter("tipo_donacion")));
+        donacion.setTipoDonacion(tiposDonacion);
+
+        if(request.getParameter("cantidad")!= null) {
+            donacion.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
+        }
+
+        if(request.getParameter("marca")!= null) {
+            donacion.setMarca(request.getParameter("marca"));
+        }
+
+        //Convertir String a Date
+        String fecha_recepcion_inicio = request.getParameter("fecha_recepcion_inicio");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date fecha_recepcion_inicio_date = null;
+
+        try{
+            fecha_recepcion_inicio_date = formato.parse(fecha_recepcion_inicio);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        donacion.setFechaRecepcionInicio(fecha_recepcion_inicio_date);
+
+        //Convertir String a Date
+        String fecha_recepcion_fin = request.getParameter("fecha_recepcion_final");
+        java.util.Date fecha_recepcion_fin_date = null;
+        try{
+            fecha_recepcion_fin_date = formato.parse(fecha_recepcion_fin);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        donacion.setFechaRecepcionFin(fecha_recepcion_fin_date);
+
+        //Convertir String a Time
+        String hora_recepcion = request.getParameter("hora_recepcion");
+        LocalTime localTime = LocalTime.parse(hora_recepcion, DateTimeFormatter.ofPattern("HH:mm"));
+        Time hora_recepcion_time = Time.valueOf(localTime);
+        donacion.setHoraRecepcion(hora_recepcion_time);
+        donacion.setTelefonoContacto(Integer.parseInt(request.getParameter("contacto_numero")));
+
+        donacion.setNombreContacto(request.getParameter("contacto_nombre"));
+        if(request.getParameter("motivo_donacion")!= null) {
+            donacion.setMotivoDonacion(request.getParameter("motivo_donacion"));
+        }
+
+        Part fotoPart = request.getPart("foto");
+        if (fotoPart != null && fotoPart.getSize() > 0) {
+            // Ruta de almacenamiento
+            String nombreArchivo = Paths.get(fotoPart.getSubmittedFileName()).getFileName().toString();
+            String rutaSubida = getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis" + File.separator + nombreArchivo;
+
+            // Guardar la imagen en el servidor
+            File uploadsDir = new File(getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis");
+            if (!uploadsDir.exists()) {
+                uploadsDir.mkdirs();
+            }
+            fotoPart.write(rutaSubida);
+            // Actualizar en el objeto HogaresTemporales
+            publicacion.setFoto(new Fotos("assets/img/Publis/" + nombreArchivo));
+            System.out.println("URL de la foto almacenada: " + publicacion.getFoto().getUrlFoto());
+        }else{
+            System.err.println("No se recibió ninguna imagen o el archivo está vacío.");
+            publicacion.setFoto(new Fotos(""));
+        }
+
+        publicacionesDAO.agregarPublicacion(publicacion);
+        donacion.setPublicacion_id(publicacionesDAO.obtenerIdUltimaPublicacion());
+        donacionesDAO.agregarPublicacion(donacion);
+
+    }
+
+    private void guardarAdopcion (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        Publicaciones publicacion = new Publicaciones();
+        Usuarios usuario = new Usuarios();
+        usuario.setUserId(Integer.parseInt(request.getParameter("user_id")));
+
+        publicacion.setUsuario(usuario);
+        publicacion.setTitulo(request.getParameter("titulo"));
+        publicacion.setDescripcion(request.getParameter("descripcion"));
+
+        TiposPublicaciones tiposPublicacion = new TiposPublicaciones();
+
+        if(request.getParameter("tipo_publicacion") != null) {
+            tiposPublicacion.setTipoPublicacionId(Integer.parseInt(request.getParameter("tipo_publicacion")));
+            publicacion.setTipoPublicacion(tiposPublicacion);
+            System.out.println("Si llega a guardar los tipos de publis");
+        }
+        PublicacionesAdopcion adopcion = new PublicacionesAdopcion();
+
+        Mascotas mascota = new Mascotas();
+        mascota.setNombre(request.getParameter("mascota_nombre"));
+        mascota.setEdadAproximada(Integer.parseInt(request.getParameter("mascota_edad")));
+        mascota.setGenero(request.getParameter("mascota_genero"));
+
+        Razas raza = new Razas();
+        raza.setRazaId(Integer.parseInt(request.getParameter("mascota_raza_id")));
+        mascota.setRaza(raza);
+
+        adopcion.setMascota(mascota);
+
+        adopcion.setCondicionesAdopcion(request.getParameter("condiciones_adopcion"));
+        adopcion.setLugarEncontrado(request.getParameter("lugar_encontrado"));
+
+        Part fotoPart = request.getPart("foto");
+        if (fotoPart != null && fotoPart.getSize() > 0) {
+            // Ruta de almacenamiento
+            String nombreArchivo = Paths.get(fotoPart.getSubmittedFileName()).getFileName().toString();
+            String rutaSubida = getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis" + File.separator + nombreArchivo;
+
+            // Guardar la imagen en el servidor
+            File uploadsDir = new File(getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "img" + File.separator + "Publis");
+            if (!uploadsDir.exists()) {
+                uploadsDir.mkdirs();
+            }
+            fotoPart.write(rutaSubida);
+            // Actualizar en el objeto HogaresTemporales
+            publicacion.setFoto(new Fotos("assets/img/Publis/" + nombreArchivo));
+            System.out.println("URL de la foto almacenada: " + publicacion.getFoto().getUrlFoto());
+        }else{
+            System.err.println("No se recibió ninguna imagen o el archivo está vacío.");
+            publicacion.setFoto(new Fotos(""));
+        }
+
+        publicacionesDAO.agregarPublicacion(publicacion);
+        adopcion.setPublicacion_id(publicacionesDAO.obtenerIdUltimaPublicacion());
+        adopcion.getMascota().setFoto(fotosDAO.obtenerIdPorUrl(publicacion.getFoto().getUrlFoto()));
+        publicacionAdopcionDAO.agregarAdopcion(adopcion);
     }
 }
 
