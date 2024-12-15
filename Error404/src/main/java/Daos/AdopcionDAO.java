@@ -64,4 +64,23 @@ public class AdopcionDAO extends BaseDao{
         }
         return publicacionAdopcion;
     }
+
+    public void agregarAdopcion(PublicacionesAdopcion publicacionAdopcion) {
+        MascotaDAO mascotaDAO = new MascotaDAO();
+        publicacionAdopcion.getMascota().setTamanio("pequeño");
+        mascotaDAO.agregarMascota(publicacionAdopcion.getMascota());
+        publicacionAdopcion.getMascota().setMascotaId(mascotaDAO.obtenerIdUltimaMascota());
+
+        String sql = "INSERT INTO publicaciones_adopcion(publicacion_id, mascota_id, lugar_encontrado, condiciones_adopcion) VALUES(?,?,?,?)";
+        try (Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, publicacionAdopcion.getPublicacion_id());
+            pstmt.setInt(2, publicacionAdopcion.getMascota().getMascotaId());
+            pstmt.setString(3, publicacionAdopcion.getLugarEncontrado());
+            pstmt.setString(4, publicacionAdopcion.getCondicionesAdopcion());
+            pstmt.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

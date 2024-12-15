@@ -318,7 +318,7 @@
                   <div class="card-body">
                     <div class="mb-3">
                       <label class="form-label" for="titulo">Titulo</label>
-                      <input type="text" class="form-control" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
+                      <input type="text" required class="form-control" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
                       <input type="hidden" name="tipo_publicacion" value="4">
                       <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
                     </div>
@@ -327,6 +327,7 @@
                         <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
                           <option value="" disabled selected>Elija el tipo de publicación</option>
                           <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</option>
+                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarAdopcion&user_id=1">Adopción</option>
                           <option value="" selected>Mascota Perdida</option>
                           <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia por Maltrato Animal</option>
                         </select>
@@ -344,7 +345,6 @@
                 <div class="card mb-1">
                   <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
-                    <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
                   </div>
                   <div class="card-body">
                     <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
@@ -381,7 +381,7 @@
                       <div class="col">
                         <label class="form-label" for="mascota_raza">Raza</label>
                         <div class="col">
-                          <select id="mascota_raza" name="mascota_raza_id" class="select2 form-select form-select-lg" data-allow-clear="true">
+                          <select required id="mascota_raza" name="mascota_raza_id" class="select2 form-select form-select-lg" data-allow-clear="true">
                             <option value="" disabled selected>Elija la raza</option>
                             <%for(Razas raza : listaRazas){%>
                             <option value="<%=raza.getRazaId()%>"><%=raza.getNombreRaza()%></option>
@@ -395,14 +395,11 @@
                         <label class="form-label" for="mascota_distintivo">Distintivo</label>
                         <input type="text" required class="form-control" id="mascota_distintivo" placeholder="Indique algún distintivo de la mascota" name="mascota_distintivo" aria-label="Product title">
                       </div>
-                    </div>
-                    <div class="row mb-3">
                       <div class="col">
                         <label class="form-label" for="informacion_adicional">Información Adicional</label>
                         <input type="text" class="form-control" id="informacion_adicional" placeholder="Indique alguna información adicional" name="informacion_adicional" aria-label="Product title">
                       </div>
                     </div>
-
                   </div>
                 </div>
                 <!-- Fourth-->
@@ -419,7 +416,7 @@
                       </div>
                       <div class="col">
                         <label class="form-label" for="contacto_numero">Número de Contacto</label>
-                        <input type="text" required class="form-control" id="contacto_numero" placeholder="Indique un número de Contacto" name="contacto-numero" aria-label="Product title">
+                        <input type="text" required class="form-control" id="contacto_numero" placeholder="Indique un número de Contacto" name="contacto_numero" aria-label="Product title">
                       </div>
                     </div>
                     <div class="row mb-3">
@@ -429,7 +426,7 @@
                       </div>
                       <div class="col">
                         <label class="form-label" >Lugar de Pérdida</label>
-                        <input type="text" class="form-control" placeholder="Indique el Lugar de Pérdida" id="lugar_perdida" name="lugar_perdida" aria-label="Product barcode">
+                        <input type="text" required class="form-control" placeholder="Indique el Lugar de Pérdida" id="lugar_perdida" name="lugar_perdida" aria-label="Product barcode">
                       </div>
                     </div>
                     <div class="mb-3">
@@ -540,6 +537,22 @@
     document.querySelector('.cancel-subscription').addEventListener('click', function() {
       window.location.href = "/PublicacionesServlet"; // Cambia esta ruta según tu necesidad
     });
+  });
+
+</script>
+
+<script>
+  document.getElementById("contacto_numero").addEventListener("input", function() {
+    // Solo permite números y elimina cualquier carácter que no sea un número
+    this.value = this.value.replace(/[^0-9]/g, '');
+  });
+
+</script>
+
+<script>
+  document.getElementById("mascota_edad").addEventListener("input", function() {
+    // Solo permite números y elimina cualquier carácter que no sea un número
+    this.value = this.value.replace(/[^0-9]/g, '');
   });
 
 </script>

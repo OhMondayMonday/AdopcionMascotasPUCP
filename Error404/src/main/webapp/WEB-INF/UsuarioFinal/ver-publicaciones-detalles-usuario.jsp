@@ -353,7 +353,6 @@
                                             <strong>Nombre:</strong> <%=mascotaPerdida.getMascota().getNombre()%><br>
                                             <strong>Raza:</strong> <%=mascotaPerdida.getMascota().getRaza().getNombreRaza()%><br>
                                             <strong>Edad Aprox.:</strong> <%=mascotaPerdida.getMascota().getEdadAproximada()%> años<br>
-                                            <strong>Género:</strong> <%=mascotaPerdida.getMascota().getGenero()%>
                                         </p>
                                     <%} else if (publicacion.getTipoPublicacion().getTipoPublicacionId() == 5 && denunciaMaltrato != null) {%>
                                         <p class="mb-4 text-dark">
