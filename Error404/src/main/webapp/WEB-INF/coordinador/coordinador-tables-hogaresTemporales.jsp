@@ -188,10 +188,10 @@
                                                         <thead class="thead-light">
                                                             <tr>
                                                                 <th>Nombre</th>
-                                                                <th>Dirección</th>
-                                                                <th>Mascota</th>
-                                                                <th>Estado Solicitud</th>
-                                                                <th>Fecha Solicitud</th>
+                                                                <th>Tipo</th>
+                                                                <th>Descripcion</th>
+                                                                <th>Estado</th>
+                                                                <th>Fecha</th>
                                                                 <th>Teléfono</th>
                                                                 <th>Acciones</th>
                                                             </tr>
@@ -199,42 +199,100 @@
                                                         <tbody>
                                                             <c:forEach var="hogar" items="${gestionHogares}">
                                                                 <tr>
+                                                                    <!-- Nombre del solicitante -->
                                                                     <td>${hogar.nombre} ${hogar.apellido}</td>
-                                                                    <td>${hogar.direccion}</td>
-                                                                    <td>${hogar.mascota}</td>
-                                                                    <td>${hogar.estadoTemporal}</td>
+
+                                                                    <!-- Tipo de solicitud -->
+                                                                    <td>
+                                                                        <c:choose>
+                                                                            <c:when test="${hogar.tipoSolicitud eq 'temporal'}">Hogar Temporal</c:when>
+                                                                            <c:when test="${hogar.tipoSolicitud eq 'mascota_perdida'}">Publicación</c:when>
+                                                                            <c:otherwise>Otro</c:otherwise>
+                                                                        </c:choose>
+                                                                    </td>
+
+
+                                                                    <!-- Descripción (condicional según tipo de solicitud) -->
+                                                                    <td>
+                                                                        <c:choose>
+                                                                            <c:when test="${hogar.tipoSolicitud eq 'temporal'}">
+                                                                                Solicito hogar temporal para ${hogar.mascota != null ? hogar.mascota : 'mascota'}.
+                                                                            </c:when>
+                                                                            <c:when test="${hogar.tipoSolicitud eq 'mascota_perdida'}">
+                                                                                Mascota perdida: ${hogar.mascota}, ${hogar.descripcionAdicional}.
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                Sin descripción.
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </td>
+
+                                                                    <!-- Estado de la solicitud -->
+                                                                    <td>
+                                                                        <c:choose>
+                                                                            <c:when test="${hogar.estadoTemporal != null}">
+                                                                                ${hogar.estadoTemporal}
+                                                                            </c:when>
+                                                                            <c:otherwise>pendiente</c:otherwise>
+                                                                        </c:choose>
+                                                                    </td>
+
+                                                                    <!-- Fecha de solicitud -->
                                                                     <td>${hogar.fechaSolicitud}</td>
-                                                                    <td>${hogar.celular}</td>
+
+                                                                    <!-- Teléfono de contacto -->
+                                                                    <!-- Teléfono de contacto -->
+                                                                    <td>
+                                                                        <c:choose>
+                                                                            <c:when test="${hogar.tipoSolicitud eq 'mascota_perdida' and hogar.telefonoContacto != null}">
+                                                                                ${hogar.telefonoContacto}
+                                                                            </c:when>
+                                                                            <c:when test="${hogar.tipoSolicitud eq 'temporal' and hogar.celular != null}">
+                                                                                ${hogar.celular}
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                Sin teléfono
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </td>
+
+
+                                                                    <!-- Acciones -->
+                                                                    <!-- Acciones -->
                                                                     <td>
                                                                         <div class="d-flex gap-2">
-                                                                            <!-- Ver Detalles -->
-                                                                            <a href="coordinador-ver-solicitud-aceptado.jsp" class="btn btn-label-info">
+                                                                            <!-- Botón para Ver detalles -->
+                                                                            <button id="btn-detalles-${hogar.solicitudId}" class="btn btn-label-info"
+                                                                                    onclick="verDetalles(${hogar.solicitudId})">
                                                                                 <i class='bx bx-show'></i>
-                                                                            </a>
+                                                                            </button>
 
-                                                                            <!-- Comprobar si el estado es "Pendiente" utilizando toLowerCase() -->
-                                                                            <c:if test="${hogar.estadoTemporal.toLowerCase() == 'pendiente'}">
-                                                                                <!-- Aceptar solicitud -->
-                                                                                <a href="CoordinadorServlet?action=aceptar&id=${hogar.hogarId}" class="btn-accept">
-                                                                                    <button type="button" class="btn btn-label-success">
-                                                                                        <i class="bx bx-check-circle"></i>
-                                                                                    </button>
-                                                                                </a>
+                                                                            <!-- Aceptar/Rechazar solo si el estado es 'pendiente' -->
+                                                                            <c:if test="${hogar.estadoTemporal == 'pendiente'}">
+                                                                                <button id="btn-aceptar-${hogar.solicitudId}" class="btn btn-label-success"
+                                                                                        onclick="gestionarSolicitud(${hogar.solicitudId}, 'aceptar')">
+                                                                                    <i class="bx bx-check-circle"></i>
+                                                                                </button>
 
-                                                                                <!-- Rechazar solicitud -->
-                                                                                <a href="CoordinadorServlet?action=rechazar&id=${hogar.hogarId}" class="btn-delete">
-                                                                                    <button type="button" class="btn btn-label-danger">
-                                                                                        <i class="bx bxs-x-circle"></i>
-                                                                                    </button>
-                                                                                </a>
+                                                                                <button id="btn-rechazar-${hogar.solicitudId}" class="btn btn-label-danger"
+                                                                                        onclick="gestionarSolicitud(${hogar.solicitudId}, 'rechazar')">
+                                                                                    <i class="bx bxs-x-circle"></i>
+                                                                                </button>
                                                                             </c:if>
 
+                                                                            <!-- Mostrar estado inmutable si no está pendiente -->
+                                                                            <c:if test="${hogar.estadoTemporal != 'pendiente'}">
+                                                                                <span class="badge badge-${hogar.estadoTemporal == 'rechazada' ? 'danger' : 'success'}">
+                                                                                        ${hogar.estadoTemporal}
+                                                                                </span>
+                                                                            </c:if>
                                                                         </div>
                                                                     </td>
 
                                                                 </tr>
                                                             </c:forEach>
                                                         </tbody>
+
                                                     </table>
 
 
@@ -398,6 +456,39 @@
                 });
             }
         </script>
+
+        <script>
+            function gestionarSolicitud(solicitudId, accion) {
+                fetch('CoordinadorServlet', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `action=${accion}&solicitudId=${solicitudId}`
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Actualiza el estado en la UI
+                            document.querySelector(`#estado-solicitud-${solicitudId}`).textContent = accion === 'aceptar' ? 'aprobada' : 'rechazada';
+
+                            // Deshabilita los botones para evitar más acciones
+                            document.querySelector(`#btn-aceptar-${solicitudId}`).disabled = true;
+                            document.querySelector(`#btn-rechazar-${solicitudId}`).disabled = true;
+
+                            Swal.fire('¡Éxito!', data.message, 'success');
+                        } else {
+                            Swal.fire('Error', data.message, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire('Error', 'No se pudo procesar la solicitud.', 'error');
+                    });
+            }
+        </script>
+
+
         <script src="${pageContext.request.contextPath}/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
         <!-- Main JS -->
