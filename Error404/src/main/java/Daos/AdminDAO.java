@@ -189,4 +189,54 @@ public class AdminDAO extends BaseDao{
         }
     }
 
+    public List<Solicitudes> obtenerSolicitudesDonacionDinero(){
+        List<Solicitudes> solicitudes = new ArrayList<>();
+        String query = "SELECT s.solicitud_id, s.tipo_solicitud_id, s.solicitante_id, s.solicitado_id, " +
+                "s.fecha_solicitud, s.estado_solicitud, s.dinero_donado, s.medio_pago, " +
+                "ts.tipo_solicitud, " +
+                "u_solicitante.nombre AS nombre_solicitante, u_solicitante.apellido AS apellido_solicitante, " +
+                "u_solicitado.nombre_albergue AS nombre_albergue " +
+                "FROM solicitudes s " +
+                "INNER JOIN tipos_solicitudes ts ON s.tipo_solicitud_id = ts.tipo_solicitud_id " +
+                "LEFT JOIN usuarios u_solicitante ON s.solicitante_id = u_solicitante.user_id " +
+                "LEFT JOIN usuarios u_solicitado ON s.solicitado_id = u_solicitado.user_id " +
+                "WHERE ts.tipo_solicitud = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, "donacion_dinero");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Solicitudes solicitud = new Solicitudes();
+                    solicitud.setSolicitudId(resultSet.getInt("solicitud_id"));
+
+                    Usuarios solicitante = new Usuarios();
+                    solicitante.setNombre(resultSet.getString("nombre_solicitante"));
+                    solicitante.setApellido(resultSet.getString("apellido_solicitante"));
+                    solicitud.setSolicitante(solicitante);
+
+                    Usuarios solicitado = new Usuarios();
+                    solicitado.setNombreAlbergue(resultSet.getString("nombre_albergue"));
+                    solicitud.setSolicitado(solicitado);
+
+
+                    solicitud.setFechaSolicitud(resultSet.getTimestamp("fecha_solicitud"));
+                    solicitud.setEstadoSolicitud(resultSet.getString("estado_solicitud"));
+                    solicitud.setDineroDonado(resultSet.getDouble("dinero_donado"));
+                    solicitud.setMedioPago(resultSet.getString("medio_pago"));
+
+                    solicitudes.add(solicitud);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return solicitudes;
+    }
+
 }

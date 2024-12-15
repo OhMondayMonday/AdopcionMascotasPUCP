@@ -1,5 +1,7 @@
 package Beans;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Solicitudes {
@@ -17,6 +19,33 @@ public class Solicitudes {
     private String nombreAlbergue;
     private String nombreEncargado;
     private String apellidoEncargado;
+    private String medioPago;
+    private String email_albergue;
+    private Timestamp fechaSolicitud;
+    private String estadoSolicitud;
+    private String comentarioSolicitud;
+    private Mascotas mascota;
+    private double cantidad;
+    private Date fechaEntrega;
+    private String puntoEntregaSeleccionado;
+    private double dineroDonado;
+
+
+    public Timestamp getFechaSolicitud() {
+        return fechaSolicitud;
+    }
+
+    public void setFechaSolicitud(Timestamp fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
+    }
+
+    public String getMedioPago() {
+        return medioPago;
+    }
+
+    public void setMedioPago(String medioPago) {
+        this.medioPago = medioPago;
+    }
 
     public String getUsername() {
         return username;
@@ -74,16 +103,6 @@ public class Solicitudes {
         this.distrito_id = distrito_id;
     }
 
-    private String email_albergue;
-    private String fechaSolicitud;
-    private String estadoSolicitud;
-    private String comentarioSolicitud;
-    private Mascotas mascota;
-    private double cantidad;
-    private Date fechaEntrega;
-    private String puntoEntregaSeleccionado;
-    private double dineroDonado;
-
     public int getSolicitudId() {
         return solicitudId;
     }
@@ -134,14 +153,6 @@ public class Solicitudes {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getFechaSolicitud() {
-        return fechaSolicitud;
-    }
-
-    public void setFechaSolicitud(String fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
     }
 
     public String getEstadoSolicitud() {

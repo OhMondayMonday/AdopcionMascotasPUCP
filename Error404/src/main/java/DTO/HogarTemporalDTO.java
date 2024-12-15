@@ -1,7 +1,9 @@
 package DTO;
+
 import java.util.Date;
 
 public class HogarTemporalDTO {
+    private int solicitudId;
     private int hogarId;
     private String nombre;
     private String apellido;
@@ -12,12 +14,22 @@ public class HogarTemporalDTO {
     private int edad;
     private String genero;
     private String celular;
-    private String mascota;  // Nuevo campo
+    private String mascota;  // Campo existente
+    private Date fechaPerdida;      // Nuevo campo
+    private String lugarPerdida;    // Nuevo campo
+    private String descripcionAdicional; // Nuevo campo
+    private String telefonoContacto; // Nuevo campo
+    private String nombreContacto;   // Nuevo campo
+    private String recompensa;       // Nuevo campo
 
-    // Constructor actualizado con el nuevo campo `mascota`
-    public HogarTemporalDTO(int hogarId, String nombre, String apellido, String direccion,
+    // Constructor actualizado con campos adicionales
+    public HogarTemporalDTO(int solicitudId,int hogarId, String nombre, String apellido, String direccion,
                             String estadoTemporal, Date fechaSolicitud, String tipoSolicitud,
-                            int edad, String genero, String celular, String mascota) {
+                            int edad, String genero, String celular, String mascota,
+                            Date fechaPerdida, String lugarPerdida,
+                            String descripcionAdicional, String telefonoContacto,
+                            String nombreContacto, String recompensa) {
+        this.solicitudId = solicitudId;
         this.hogarId = hogarId;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -28,10 +40,74 @@ public class HogarTemporalDTO {
         this.edad = edad;
         this.genero = genero;
         this.celular = celular;
-        this.mascota = mascota;  // Establecer el nuevo campo `mascota`
+        this.mascota = mascota;
+        this.fechaPerdida = fechaPerdida;
+        this.lugarPerdida = lugarPerdida;
+        this.descripcionAdicional = descripcionAdicional;
+        this.telefonoContacto = telefonoContacto;
+        this.nombreContacto = nombreContacto;
+        this.recompensa = recompensa;
     }
 
-    // Getters y setters
+    // Getters y Setters para los nuevos campos
+    public int getSolicitudId() {
+        return solicitudId;
+    }
+
+    public void setSolicitudId(int solicitudId) {
+        this.solicitudId = solicitudId;
+    }
+
+
+    public Date getFechaPerdida() {
+        return fechaPerdida;
+    }
+
+    public void setFechaPerdida(Date fechaPerdida) {
+        this.fechaPerdida = fechaPerdida;
+    }
+
+    public String getLugarPerdida() {
+        return lugarPerdida;
+    }
+
+    public void setLugarPerdida(String lugarPerdida) {
+        this.lugarPerdida = lugarPerdida;
+    }
+
+    public String getDescripcionAdicional() {
+        return descripcionAdicional;
+    }
+
+    public void setDescripcionAdicional(String descripcionAdicional) {
+        this.descripcionAdicional = descripcionAdicional;
+    }
+
+    public String getTelefonoContacto() {
+        return telefonoContacto;
+    }
+
+    public void setTelefonoContacto(String telefonoContacto) {
+        this.telefonoContacto = telefonoContacto;
+    }
+
+    public String getNombreContacto() {
+        return nombreContacto;
+    }
+
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
+    }
+
+    public String getRecompensa() {
+        return recompensa;
+    }
+
+    public void setRecompensa(String recompensa) {
+        this.recompensa = recompensa;
+    }
+
+    // Getters y setters existentes
     public String getMascota() {
         return mascota;
     }
@@ -39,6 +115,7 @@ public class HogarTemporalDTO {
     public void setMascota(String mascota) {
         this.mascota = mascota;
     }
+
     public int getHogarId() {
         return hogarId;
     }
@@ -51,8 +128,8 @@ public class HogarTemporalDTO {
         return nombre;
     }
 
-    public void setNombre(String usuarioNombre) {
-        this.nombre = usuarioNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellido() {
@@ -72,11 +149,11 @@ public class HogarTemporalDTO {
     }
 
     public String getEstadoTemporal() {
-        return estadoTemporal ;
+        return estadoTemporal;
     }
 
-    public void setEstadoTemporal(String estadoHogar) {
-        this.estadoTemporal  = estadoHogar;
+    public void setEstadoTemporal(String estadoTemporal) {
+        this.estadoTemporal = estadoTemporal;
     }
 
     public Date getFechaSolicitud() {
@@ -122,8 +199,11 @@ public class HogarTemporalDTO {
     @Override
     public String toString() {
         return "HogarTemporalDTO [hogarId=" + hogarId + ", nombre=" + nombre + ", apellido=" + apellido
-                + ", direccion=" + direccion + ", estadoHogar=" + estadoTemporal  + ", fechaSolicitud=" + fechaSolicitud + ", tipoSolicitud=" + tipoSolicitud + "]";
+                + ", direccion=" + direccion + ", estadoTemporal=" + estadoTemporal + ", fechaSolicitud="
+                + fechaSolicitud + ", tipoSolicitud=" + tipoSolicitud + ", mascota=" + mascota
+                + ", solicitudId=" + ", fechaPerdida=" + fechaPerdida
+                + ", lugarPerdida=" + lugarPerdida + ", descripcionAdicional=" + descripcionAdicional
+                + ", telefonoContacto=" + telefonoContacto + ", nombreContacto=" + nombreContacto
+                + ", recompensa=" + recompensa + "]";
     }
 }
-
-
