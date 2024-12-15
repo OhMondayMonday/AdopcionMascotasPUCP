@@ -12,7 +12,7 @@ public class PublicacionesDonaciones {
     private Date fechaRecepcionInicio;
     private Date fechaRecepcionFin;
     private Time horaRecepcion;
-    private String telefonoContacto;
+    private int telefonoContacto;
     private String nombreContacto;
     private String motivoDonacion;
 
@@ -70,11 +70,9 @@ public class PublicacionesDonaciones {
         this.horaRecepcion = horaRecepcion;
     }
 
-    public String getTelefonoContacto() {
-        return telefonoContacto;
-    }
+    public int getTelefonoContacto() { return telefonoContacto; }
 
-    public void setTelefonoContacto(String telefonoContacto) {
+    public void setTelefonoContacto(int telefonoContacto) {
         this.telefonoContacto = telefonoContacto;
     }
 

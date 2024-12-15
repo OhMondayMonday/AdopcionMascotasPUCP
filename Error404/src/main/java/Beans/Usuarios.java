@@ -35,8 +35,15 @@ public class Usuarios {
     private String fechaNacimiento;
     private String fechaContratacion;
     private HogaresTemporales hogarTemporal;
+    private String telefono;
 
+    public String getTelefono() {
+        return telefono;
+    }
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
     public int getUserId() {
         return userId;

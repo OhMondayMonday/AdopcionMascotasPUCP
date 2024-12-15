@@ -37,7 +37,7 @@ public class PublicacionesMascotaPerdida {
         this.lugarPerdida = lugarPerdida;
     }
 
-    public java.sql.Date getFechaPerdida() { return (java.sql.Date) fechaPerdida; }
+    public Date getFechaPerdida() { return (Date) fechaPerdida; }
 
     public void setFechaPerdida(Date fechaPerdida) {
         this.fechaPerdida = fechaPerdida;

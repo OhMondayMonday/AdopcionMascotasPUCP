@@ -279,6 +279,8 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</a></li>
+                          <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarAdopcion&user_id=1">Adopcion</a></li>
+                          <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDonacion&user_id=1">Donación</a></li>
                           <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</a></li>
                           <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia Maltrato</a></li>
                         </ul>

@@ -1,5 +1,6 @@
 package Controllers;
 import Beans.LugaresEventos;
+import Beans.Solicitudes;
 import Beans.Usuarios;
 import Daos.AdminDAO;
 import jakarta.servlet.ServletException;
@@ -14,12 +15,12 @@ import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "AdminServlet", urlPatterns = {"/lugares-eventos", "/listarUsuarios"})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/crearLugares", "/lugares-eventos", "/listarUsuarios", "/gestionDonaciones", "/crearCoordinador"})
 public class AdminServlet extends HttpServlet{
 
     private final AdminDAO adminDAO = new AdminDAO();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
         switch(request.getServletPath()){
             case "/lugares-eventos" -> {
@@ -42,6 +43,21 @@ public class AdminServlet extends HttpServlet{
                 // Redirigir al JSP
                 request.getRequestDispatcher("WEB-INF/administrador/Administrador-gestionar-usuarios.jsp").forward(request, response);
             }
+            case "/gestionDonaciones" -> {
+                List<Solicitudes> donacionesDinero = adminDAO.obtenerSolicitudesDonacionDinero();
+
+                request.setAttribute("listaSolicitudes", donacionesDinero);
+
+                System.out.println(donacionesDinero);
+
+                request.getRequestDispatcher("WEB-INF/administrador/Administrador-gestionar-donaciones.jsp").forward(request, response);
+            }
+            case "/crearCoordinador" -> {
+                request.getRequestDispatcher("WEB-INF/administrador/Administrador-crear-coordinador.jsp").forward(request, response);
+            }
+            case "/crearLugares" -> {
+                request.getRequestDispatcher("WEB-INF/administrador/Administrador-crear-lugares.jsp").forward(request, response);
+            }
         }
     }
 
@@ -50,9 +66,6 @@ public class AdminServlet extends HttpServlet{
         String action = request.getParameter("action");
 
         switch (request.getServletPath()){
-            case "/lugares-eventos" -> {
-
-            }
             case "/listarUsuarios" -> {
                 switch (action) {
                     case "suspender" -> {

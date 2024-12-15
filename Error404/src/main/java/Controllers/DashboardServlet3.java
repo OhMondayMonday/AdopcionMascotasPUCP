@@ -41,7 +41,7 @@ public class DashboardServlet3 extends HttpServlet {
 
     // Método para mostrar el Dashboard
     private void mostrarDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int coordinadorId = 10;
+        int coordinadorId = 3;
 
         try {
             // Obtener datos desde el Dashboard3DAO
@@ -52,7 +52,7 @@ public class DashboardServlet3 extends HttpServlet {
             List<Map<String, Object>> mascotasPorMes = dashboard3DAO.obtenerMascotasEncontradasUltimosMeses(4);
             int totalMascotasEncontradas = dashboard3DAO.obtenerTotalMascotasEncontradasUltimosMeses(4);
             List<Map<String, Object>> mascotasPorMez = dashboard3DAO.obtenerMascotasPerdidasUltimosMeses(4);
-            List<Map<String, String>> ultimasActualizaciones = dashboard3DAO.obtenerUltimasActualizaciones(coordinadorId);
+            List<Map<String, String>> ultimasActualizaciones = dashboard3DAO.obtenerUltimasActualizaciones();
 
             // Validar datos nulos o vacíos y asignar valores predeterminados
             nombreCoordinador = (nombreCoordinador != null) ? nombreCoordinador : "Coordinador Anónimo";

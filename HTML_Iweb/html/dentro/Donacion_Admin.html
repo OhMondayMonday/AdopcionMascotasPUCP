@@ -694,55 +694,81 @@
 
 
   <script>
+
+    function convertirFechaPeruana(fecha) {
+      // Dividir la fecha en componentes (Año, Mes, Día)
+      var partes = fecha.split('-');  // Esto dividirá el string en un arreglo: [2024, 09, 11]
+
+      // Reorganizar para formato peruano "DD/MM/YYYY"
+      var fechaFormateada = partes[2] + '/' + partes[1] + '/' + partes[0];
+
+      return fechaFormateada;
+    }
+
+    function desconvertirFechaPeruana(fecha) {
+      // Dividir la fecha en componentes (Día, Mes, Año)
+      var partes = fecha.split('/');  // Esto dividirá el string en un arreglo: [11, 09, 2024]
+
+      // Reorganizar para formato "YYYY-MM-DD"
+      var fechaDesconvertida = partes[2] + '-' + partes[1] + '-' + partes[0];
+
+      return fechaDesconvertida;
+    }
+
     function configurarFiltros(table) {
-    // Filtro de Tipo de Usuario
-    $('#select2Basic').on('change', function () {
-      var valor = $(this).val(); // Capturamos el valor del select
-      if (valor === "Todas") valor = ''; // Si es "Todas", no filtramos nada
-      table.column(1).search(valor).draw(); // Filtramos por la columna 1 (Tipo de Usuario)
-    });
+      // Filtro de Tipo de Usuario
+      $('#select2Basic').on('change', function () {
+        var valor = $(this).val(); // Capturamos el valor del select
+        if (valor === "Todas") valor = ''; // Si es "Todas", no filtramos nada
+        table.column(1).search(valor).draw(); // Filtramos por la columna 1 (Tipo de Usuario)
+      });
 
-    // Filtro de Palabra Clave (en cualquier columna)
-    $('#inputPalabraClave').on('keyup', function () {
-      table.search(this.value).draw(); // Realizamos la búsqueda global
-    });
+      // Filtro de Palabra Clave (en cualquier columna)
+      $('#inputPalabraClave').on('keyup', function () {
+        table.search(this.value).draw(); // Realizamos la búsqueda global
+      });
 
-    // Filtro de Fecha
-    $('#select2Fecha').on('change', function () {
-      var valor = $(this).val();
-      var fechaActual = new Date();
-      var filtroFecha;
+      // Filtro de Fecha
+      $('#select2Fecha').on('change', function () {
+        var valor = $(this).val();
+        var fechaActual = new Date();
+        var fechaInicio;
 
-      // Filtrar según la opción seleccionada
-      switch (valor) {
-        case "Ultimas24Horas":
-          filtroFecha = new Date(fechaActual);
-          filtroFecha.setDate(fechaActual.getDate() - 1);
-          break;
-        case "UltimaSemana":
-          filtroFecha = new Date(fechaActual);
-          filtroFecha.setDate(fechaActual.getDate() - 7);
-          break;
-        case "UltimoMes":
-          filtroFecha = new Date(fechaActual);
-          filtroFecha.setMonth(fechaActual.getMonth() - 1);
-          break;
-        case "UltimoAnio":
-          filtroFecha = new Date(fechaActual);
-          filtroFecha.setFullYear(fechaActual.getFullYear() - 1);
-          break;
-        default:
-          filtroFecha = ''; // No filtrar si es "Todas"
-      }
+        // Calculamos el rango de fechas basado en la selección
+        switch (valor) {
+          case "Ultimas24Horas":
+            fechaInicio = new Date(fechaActual);
+            fechaInicio.setDate(fechaActual.getDate() - 1); // Hace 24 horas
+            break;
+          case "UltimaSemana":
+            fechaInicio = new Date(fechaActual);
+            fechaInicio.setDate(fechaActual.getDate() - 7); // Hace 7 días
+            break;
+          case "UltimoMes":
+            fechaInicio = new Date(fechaActual);
+            fechaInicio.setMonth(fechaActual.getMonth() - 1); // Hace 1 mes
+            break;
+          default:
+            fechaInicio = null; // No aplicar filtro si es "Todas"
+        }
 
-      // Aplica el filtro de fecha en la columna correspondiente (columna 5 en este caso)
-      if (filtroFecha) {
-        table.column(5).search(filtroFecha.toISOString().split('T')[0]).draw();
-      } else {
-        table.column(5).search('').draw(); // Sin filtro
-      }
-    });
-  }
+        // Filtrado de la tabla según las fechas
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+          if (!fechaInicio) return true; // No filtrar si fechaInicio es nulo
+
+          // Crear la fecha de la tabla a partir de la fecha y hora de la fila
+          let fechaFila = data[4] + "T" + data[5] + ":00";  // Concatenar la fecha y la hora
+          let fechaTabla = new Date(fechaFila);  // Crear un objeto Date con la fecha de la fila
+
+          // Comparar la fecha de la fila con el rango de fechas
+          return fechaTabla >= fechaInicio && fechaTabla <= fechaActual;
+        });
+
+        table.draw(); // Aplicar el filtro
+        $.fn.dataTable.ext.search.pop(); // Limpiar el filtro personalizado para no acumular filtros
+      });
+    }
+
   </script>
 
 </body>

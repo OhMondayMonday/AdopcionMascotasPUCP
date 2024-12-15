@@ -39,7 +39,7 @@ public class DashboardDAO extends BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "assets/img/FotoPerfil/perfil_user1.jpg"; //una por defeto puem
+        return "/assets/img/FotoPerfil/perfil_user1.jpg"; //una por defeto puem
     }
 
     //obtener animales ayudados

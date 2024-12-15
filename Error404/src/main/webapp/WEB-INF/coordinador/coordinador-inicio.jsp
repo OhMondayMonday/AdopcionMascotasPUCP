@@ -339,9 +339,9 @@
 
 
                         <div class="col-xl-4 col-lg-4 col-md-6 col-12 order-md-2 mb-4">
-                            <div class="card">
+                            <div class="card" style="padding: 1.25rem;">
                                 <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title m-0 me-2">Ultimas actualizaciones:</h5>
+                                    <h5 class="card-title m-0 me-2">Últimas actualizaciones:</h5>
                                     <div class="dropdown">
                                         <button class="btn p-0" type="button" id="timelineWapper" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="bx bx-dots-vertical-rounded"></i>
@@ -351,22 +351,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="timeline">
+                                <div class="card-body" style="padding: 0;">
+                                    <ul class="timeline" style="margin: 0; padding: 0; list-style: none;">
                                         <%
                                             if (actualizaciones != null && !actualizaciones.isEmpty()) {
                                                 for (Map<String, String> actualizacion : actualizaciones) {
+                                                    String usuario = actualizacion.get("usuario"); // Nombre del usuario
                                                     String descripcion = actualizacion.get("descripcion");
                                                     String tiempo = actualizacion.get("tiempo");
                                         %>
-                                        <li class="timeline-item timeline-item-transparent">
-            <span class="timeline-point-wrapper">
-                <span class="timeline-point timeline-point-primary"></span>
-            </span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0"><%= descripcion %></h6>
-                                                    <small class="text-muted"><%= tiempo %></small>
+                                        <li class="timeline-item timeline-item-transparent" style="margin-bottom: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                    <span class="timeline-point-wrapper" style="display: flex; align-items: center;">
+                        <span class="timeline-point timeline-point-primary" style="width: 10px; height: 10px; border-radius: 50%; background-color: #0d6efd; margin-right: 10px;"></span>
+                    </span>
+                                            <div class="timeline-event" style="flex-grow: 1; display: flex; justify-content: space-between; align-items: center; padding-left: 20px; flex-wrap: wrap;">
+                                                <!-- Columna de descripción -->
+                                                <div class="timeline-description" style="flex: 2; padding-right: 10px; word-wrap: break-word; white-space: normal; min-width: 150px;">
+                                                    <h6 class="mb-0" style="margin-bottom: 5px; font-size: 14px; line-height: 1.4;"><%= descripcion %></h6>
+                                                </div>
+                                                <!-- Columna de tiempo -->
+                                                <div class="timeline-time" style="flex: 1; text-align: center; font-size: 12px; color: #6c757d; min-width: 80px;">
+                                                    <small><%= tiempo %></small>
+                                                </div>
+                                                <!-- Columna de usuario -->
+                                                <div class="timeline-user" style="flex: 1; text-align: right; min-width: 120px;">
+                                                    <div><strong><%= usuario %></strong> realizó esta actualización.</div>
                                                 </div>
                                             </div>
                                         </li>
@@ -374,27 +383,29 @@
                                             }
                                         } else {
                                         %>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point-wrapper">
-                                                <span class="timeline-point timeline-point-secondary"></span>
-                                            </span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">No hay actualizaciones recientes.</h6>
+                                        <li class="timeline-item timeline-item-transparent" style="margin-bottom: 1rem; display: flex; justify-content: space-between;">
+                    <span class="timeline-point-wrapper" style="display: flex; align-items: center;">
+                        <span class="timeline-point timeline-point-secondary" style="width: 10px; height: 10px; border-radius: 50%; background-color: #6c757d; margin-right: 10px;"></span>
+                    </span>
+                                            <div class="timeline-event" style="flex-grow: 1; display: flex; justify-content: space-between; align-items: center; padding-left: 20px;">
+                                                <div class="timeline-description" style="flex: 2; padding-right: 10px; word-wrap: break-word; white-space: normal;">
+                                                    <h6 class="mb-0" style="margin-bottom: 5px; font-size: 14px; line-height: 1.4;">No hay actualizaciones recientes.</h6>
                                                 </div>
                                             </div>
                                         </li>
                                         <%
                                             }
                                         %>
-                                        <li class="timeline-end-indicator">
-                                            <i class="bx bx-check-circle"></i>
+                                        <li class="timeline-end-indicator" style="text-align: center; margin-top: 20px;">
+                                            <i class="bx bx-check-circle" style="font-size: 24px; color: #28a745;"></i>
                                         </li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
+
+
+
                     </div>
                 </div>
 
