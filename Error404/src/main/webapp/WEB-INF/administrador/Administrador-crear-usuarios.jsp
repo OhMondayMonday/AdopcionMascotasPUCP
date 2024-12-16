@@ -2,6 +2,7 @@
 <%@ page import="Beans.Roles" %>
 <%@ page import="Beans.Distritos" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Beans.Solicitudes" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
@@ -271,94 +272,55 @@
                                         <thead>
 
                                         <th style="width: 180px;">Nombre</th>
-                                        <th style="width: 120px;">Tipo Usuario</th>
-                                        <th style="width: 240px;">Correo Electrónico</th>
+                                        <th style="width: 120px;">Correo electrónico</th>
                                         <th style="width: 120px;">Distrito</th>
-                                        <th style="width: 140px;">Fecha Creación</th>
-                                        <th style="width: 130px;">Estado</th>
+                                        <th style="width: 240px;">Dirección</th>
+                                        <th style="width: 100px;">DNI</th>
+                                        <th style="width: 130px;">Fecha</th>
                                         <th style="width: 100px;">Acciones</th>
 
                                         </thead>
                                         <tbody>
                                         <%
                                             // Obtener la lista de usuarios del request
-                                            List<Usuarios> usuarios = (List<Usuarios>) request.getAttribute("listaUsuarios");
-                                            if (usuarios != null) {
-                                                for (Usuarios usuario : usuarios) {
+                                            List<Solicitudes> solicitudes = (List<Solicitudes>) request.getAttribute("listaSolicitudes");
+                                            if (solicitudes != null) {
+                                                for (Solicitudes solicitud : solicitudes) {
                                         %>
                                         <tr>
                                             <!-- Columna con foto y nombre -->
-                                            <td style="display: flex; align-items: center;">
-                                                <img src="<%= request.getContextPath() %>/assets/img/Albergue avatar.jpg"
-                                                     alt="Avatar"
-                                                     class="rounded-circle"
-                                                     style="width: 35px; margin-right: 10px;">
-                                                <span class="fw-medium">
-                                                    <%
-                                                        // Mostrar nombre y apellido si es usuario
-                                                        if (usuario.getRol().getRolId() == 1) {
-                                                    %>
-                                                        <%= usuario.getNombre() + " " + usuario.getApellido() %>
-                                                    <%
-                                                        // Mostrar nombre del albergue si es albergue
-                                                    } else if (usuario.getRol().getRolId() == 2) {
-                                                    %>
-                                                        <%= usuario.getNombreAlbergue() %>
-                                                    <%
-                                                        // Valor por defecto
-                                                    } else {
-                                                    %>
-                                                        Sin especificar
-                                                    <% } %>
-                                                </span>
+                                            <td>
+                                                <%= solicitud.getNombre().split(" ")[0] + " " + solicitud.getApellido().split(" ")[0] %>
                                             </td>
                                             <!-- Tipo usuario -->
                                             <td>
-                                                <%= usuario.getRol().getNombreRol() != null ? usuario.getRol().getNombreRol() : "No especificado" %>
+                                                <%= solicitud.getEmail()%>
                                             </td>
                                             <!-- Correo electrónico -->
                                             <td>
-                                                <%= usuario.getEmail() %>
+                                                <%= solicitud.getDistrito().getNombreDistrito() %>
                                             </td>
                                             <!-- Distrito -->
                                             <td>
-                                                <%= usuario.getDistrito() != null ? usuario.getDistrito().getNombreDistrito() : "No especificado" %>
+                                                <%= solicitud.getDireccion() %>
+                                            </td>
+                                            <td>
+                                                <%= solicitud.getDNI()%>
                                             </td>
                                             <!-- Email -->
-                                            <td><%= usuario.getFechaRegistro().toString().substring(0,10)%></td>
-                                            <!-- Username -->
-                                            <td>
-                                                <span class="badge
-                                                    <%=
-                                                        "activa".equals(usuario.getEstadoCuenta()) ? "bg-label-success" : "eliminada".equals(usuario.getEstadoCuenta()) ? "bg-label-warning" : "bg-label-danger"
-                                                    %>">
-                                                    <%= usuario.getEstadoCuenta() %>
-                                                </span>
-                                            </td>
+                                            <td><%= solicitud.getFechaSolicitud().toString().substring(0,10)%></td>
                                             <!-- Botones de acción -->
                                             <td>
                                                 <div class="card-body p-0">
                                                     <div class="d-inline-flex">
-                                                        <!-- Condición para mostrar botones según el estado -->
-                                                        <% if ("activa".equals(usuario.getEstadoCuenta())) { %>
-                                                        <!-- Botón de suspender -->
-                                                        <button type="button" class="btn btn-sm btn-danger me-1 btn-suspender"
-                                                                data-bs-toggle="tooltip" title="Suspender"
-                                                                onclick="confirmarSuspension(<%= usuario.getUserId() %>)">
-                                                            <i class="bx bxs-alarm-exclamation"></i>
+                                                        <!-- Botón de Aceptar con onClick, pasando el solicitudId -->
+                                                        <button type="button" class="btn btn-sm btn-success me-1" data-bs-toggle="tooltip" title="Ver Aceptar" onclick="confirmarAceptacion(<%=solicitud.getSolicitudId()%>)">
+                                                            <i class="bx bx-check-circle"></i>
                                                         </button>
-                                                        <% } else if ("baneada".equals(usuario.getEstadoCuenta())) { %>
-                                                        <!-- Botón de desbloquear -->
-                                                        <button type="button" class="btn btn-sm btn-success me-1 btn-desbloquear"
-                                                                data-bs-toggle="tooltip" title="Desbloquear"
-                                                                onclick="confirmarDesbloqueo(<%= usuario.getUserId() %>)">
-                                                            <i class="bx bxs-lock-open"></i>
-                                                        </button>
-                                                        <% } %>
 
-                                                        <!-- Botón de editar (siempre visible) -->
-                                                        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Info" onclick="editarUsuario(<%= usuario.getUserId() %>)">
-                                                            <i class="bx bxs-info-circle"></i>
+                                                        <!-- Botón de Rechazar con onClick, pasando el solicitudId -->
+                                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Rechazar" onclick="confirmarRechazo(<%=solicitud.getSolicitudId()%>)">
+                                                            <i class="bx bxs-x-circle"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -440,84 +402,134 @@
 <!-- Activa los tooltips -->
 
 <script>
-    function confirmarDesbloqueo(userId) {
+    function confirmarAceptacion(solicitudId) {
         // Muestra la alerta de confirmación con SweetAlert
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "Esta acción desbloqueará la cuenta del usuario.",
+            text: "Esta acción aceptará la solicitud.",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Sí, desbloquear',
+            confirmButtonText: 'Sí, aceptar',
             cancelButtonText: 'Cancelar',
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                desbloquearCuenta(userId); // Enviar la solicitud para desbloquear
+                aceptarSolicitud(solicitudId); // Enviar la solicitud para aceptar
             }
         });
     }
 
-    function desbloquearCuenta(userId) {
-        // Realiza una solicitud AJAX para desbloquear la cuenta
+    function aceptarSolicitud(solicitudId) {
+        // Mostrar SweetAlert de carga mientras se procesa la solicitud
+        Swal.fire({
+            title: 'Procesando solicitud...',
+            text: 'Por favor espera un momento.',
+            icon: 'info',
+            allowOutsideClick: false, // Evita que el usuario cierre el alert haciendo clic fuera
+            showConfirmButton: false, // Oculta el botón de confirmación
+            didOpen: () => {
+                Swal.showLoading(); // Muestra el spinner de carga
+            }
+        });
+
+        // Realiza una solicitud AJAX para aceptar la solicitud
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "listarUsuarios", true);
+        xhr.open("POST", "crearUsuarios", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                // Respuesta exitosa, recargar la página
-                Swal.fire(
-                    'Cuenta desbloqueada',
-                    'La cuenta ha sido desbloqueada exitosamente.',
-                    'success'
-                ).then(() => {
-                    location.reload(); // Recarga toda la página
-                });
+                // Cierra el alert de carga
+                Swal.close();
+
+                // Analiza la respuesta del servidor como JSON
+                var response = JSON.parse(xhr.responseText);
+
+                if (response.status === "success") {
+                    Swal.fire(
+                        'Solicitud aceptada',
+                        response.message, // Mensaje de éxito desde el servidor
+                        'success'
+                    ).then(() => {
+                        location.reload(); // Recarga toda la página
+                    });
+                } else {
+                    Swal.fire(
+                        'Error',
+                        response.message, // Mensaje de error desde el servidor
+                        'error'
+                    );
+                }
             }
         };
 
-        // Enviar tanto el ID del usuario como la acción (desbloquear)
-        xhr.send("userId=" + userId + "&action=desbloquear");
+        // Enviar tanto el ID de la solicitud como la acción (aceptar)
+        xhr.send("solicitudId=" + solicitudId + "&action=aceptar");
     }
 
 </script>
 <script>
-    function confirmarSuspension(userId) {
+    function confirmarRechazo(solicitudId) {
         // Muestra la alerta de confirmación con SweetAlert
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "Esta acción suspenderá la cuenta del usuario.",
+            text: "Esta acción rechazará la solicitud.",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Sí, suspender',
+            confirmButtonText: 'Sí, rechazar',
             cancelButtonText: 'Cancelar',
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                suspenderCuenta(userId); // Enviar la solicitud para suspender
+                rechazarSolicitud(solicitudId); // Enviar la solicitud para rechazar
             }
         });
     }
 
-    function suspenderCuenta(userId) {
-        // Realiza una solicitud AJAX para suspender la cuenta
+    function rechazarSolicitud(solicitudId) {
+        // Mostrar SweetAlert de carga mientras se procesa la solicitud
+        Swal.fire({
+            title: 'Procesando solicitud...',
+            text: 'Por favor espera un momento.',
+            icon: 'info',
+            allowOutsideClick: false, // Evita que el usuario cierre el alert haciendo clic fuera
+            showConfirmButton: false, // Oculta el botón de confirmación
+            didOpen: () => {
+                Swal.showLoading(); // Muestra el spinner de carga
+            }
+        });
+
+        // Realiza una solicitud AJAX para rechazar la solicitud
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "listarUsuarios", true);
+        xhr.open("POST", "crearUsuarios", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                // Respuesta exitosa, recargar la página
-                Swal.fire(
-                    'Cuenta suspendida',
-                    'La cuenta ha sido suspendida exitosamente.',
-                    'success'
-                ).then(() => {
-                    location.reload(); // Recarga toda la página
-                });
+                // Cierra el alert de carga
+                Swal.close();
+
+                // Analiza la respuesta del servidor como JSON
+                var response = JSON.parse(xhr.responseText);
+
+                if (response.status === "success") {
+                    Swal.fire(
+                        'Solicitud rechazada',
+                        response.message, // Mensaje de éxito desde el servidor
+                        'success'
+                    ).then(() => {
+                        location.reload(); // Recarga toda la página
+                    });
+                } else {
+                    Swal.fire(
+                        'Error',
+                        response.message,
+                        'error'
+                    );
+                }
             }
         };
 
-        // Enviar tanto el ID del usuario como la acción (suspender)
-        xhr.send("userId=" + userId + "&action=suspender");
+        // Enviar tanto el ID de la solicitud como la acción (rechazar)
+        xhr.send("solicitudId=" + solicitudId + "&action=rechazar");
     }
 
 </script>
