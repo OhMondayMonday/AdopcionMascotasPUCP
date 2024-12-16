@@ -298,12 +298,6 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
-                <h5 class="mb-2">Tiempo empleado</h5>
-                <p>Reporte semanal</p>
-                <h3>5<span class="text-muted">h</span> 14<span class="text-muted">m</span></h3>
-                <span class="badge bg-label-success">+10%</span>
-              </div>
             </div>
           </div>
 

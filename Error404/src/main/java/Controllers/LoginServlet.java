@@ -115,7 +115,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("usuariosession", usuario); // Almacena el usuario en sesión
                     session.setAttribute("usuarioId", usuario.getUserId());
                     String redirect;
-                    switch (usuario.getRolId()) { // Usa el rolId directo
+                    switch (usuario.getRol().getRolId()) { // Usa el rolId directo
                         case 2: // Albergue
                             redirect = "/DashboardServlet2"; // Redirige al Dashboard de Albergues
                             break;
