@@ -129,18 +129,67 @@ public class Dashboard3DAO extends BaseDao {
 
     // Método para obtener hogares temporales registrados
     public int obtenerHogaresTemporalesRegistrados() {
-        String sql = "SELECT COUNT(*) FROM hogares_temporales";
+        String sql = "SELECT COUNT(*) FROM hogares_temporales WHERE estado_temporal = 'activa'";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
-                return rs.getInt(1); // Devuelve la cantidad total de hogares temporales
+                return rs.getInt(1); // Devuelve la cantidad total de hogares temporales activos
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0; // Retorna 0 si no hay resultados
     }
+
+
+    public double obtenerPorcentajeAumentoHogaresHoy() {
+        // Consulta para contar hogares aprobados hoy
+        String sqlHoy = "SELECT COUNT(*) AS total_hoy FROM hogares_temporales " +
+                "WHERE DATE(fecha_aprobacion) = CURDATE() AND estado_temporal = 'activa'";
+
+        // Consulta para contar hogares aprobados hasta ayer
+        String sqlTotalAyer = "SELECT COUNT(*) AS total_ayer FROM hogares_temporales " +
+                "WHERE DATE(fecha_aprobacion) < CURDATE() AND estado_temporal = 'activa'";
+
+        int totalHoy = 0;
+        int totalAyer = 0;
+
+        try (Connection conn = getConnection()) {
+            // Obtener cantidad de hogares aprobados hoy
+            try (PreparedStatement psHoy = conn.prepareStatement(sqlHoy);
+                 ResultSet rsHoy = psHoy.executeQuery()) {
+                if (rsHoy.next()) {
+                    totalHoy = rsHoy.getInt("total_hoy");
+                }
+            }
+
+            // Obtener cantidad de hogares aprobados hasta ayer
+            try (PreparedStatement psAyer = conn.prepareStatement(sqlTotalAyer);
+                 ResultSet rsAyer = psAyer.executeQuery()) {
+                if (rsAyer.next()) {
+                    totalAyer = rsAyer.getInt("total_ayer");
+                }
+            }
+
+            // Calcular el porcentaje de aumento
+            if (totalAyer > 0) {
+                return ((double) totalHoy / totalAyer) * 100; // Porcentaje normal de aumento
+            } else if (totalHoy > 0) {
+                return 100.0; // Si no hay registros anteriores y hoy sí hay registros
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al calcular el porcentaje de aumento de hogares aprobados: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // Si no hay registros o hay un error, retorna 0%
+        return 0.0;
+    }
+
+
+
 
     // Método para obtener el total de mascotas reportadas como perdidas
     public int obtenerTotalMascotasPerdidas() {

@@ -9,7 +9,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="Beans.HogaresTemporales" %>
 <%@ page import="Daos.HogarTemporalDAO" %>
+<%@ page import="Beans.Usuarios" %>
 <%@ page import="java.util.List" %>
+
+<%
+    // Recuperar el usuario desde el request o la sesión
+    Usuarios usuario = (Usuarios) request.getAttribute("usuario");
+    if (usuario == null) {
+        usuario = (Usuarios) session.getAttribute("usuariosession");
+    }
+%>
 
 <!DOCTYPE html>
 
@@ -162,6 +171,7 @@
 
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
+
     <div class="layout-container">
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -268,13 +278,9 @@
                     </div>
 
                     <ul class="navbar-nav flex-row align-items-center ms-0">
-
-                        <!-- Notification -->
-                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">
-                            ¡Hola, ${sessionScope.usuarioLogueado.nombre}!
+                        <span class="text-body" style="font-weight: bold;">
+                            ¡Hola, <%= (usuario != null && usuario.getNombre() != null) ? usuario.getNombre() : "Invitado" %>!
                         </span>
-                        <!--/ Notification -->
-
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">

@@ -14,6 +14,7 @@
     double montoTotalDonaciones = (double) request.getAttribute("montoTotalDonaciones");
     double montoTotalDonacionesHoy = (double) request.getAttribute("montoTotalDonacionesHoy");  // Nuevo valor
     int alberguesRegistrados = (int) request.getAttribute("alberguesRegistrados");
+    int alberguesRegistradosHoy = (int) request.getAttribute("alberguesRegistradosHoy");
     int totalMascotasPerdidas = (int) request.getAttribute("totalMascotasPerdidas");
     int totalMascotasEncontradas = request.getAttribute("totalMascotasEncontradas") != null ? (int) request.getAttribute("totalMascotasEncontradas") : 0;
 
@@ -148,82 +149,7 @@
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
 
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-            <div class="app-brand demo px-3">
-                <a href="javascript:void(0);" class="app-brand-link">
-            <span class="app-brand-logo demo">
-                <img class="h-px-50 tf-icon" src="<%= request.getContextPath() %>/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
-            </span>
-                </a>
-
-                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                </a>
-            </div>
-            <ul class="menu-inner py-1">
-
-                <li class="menu-item">
-                    <a href="<%= request.getContextPath() %>/Principal_Administrador.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-home"></i>
-                        <div class="text-truncate" data-i18n="Inicio">Inicio</div>
-                    </a>
-                </li>
-
-                <!-- Gestion -->
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
-                </li>
-                <li class="menu-item">
-                    <a href="<%= request.getContextPath() %>/GestionarUsua_Admin.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Gestionar Cuentas">Gestionar Cuentas</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="<%= request.getContextPath() %>/Donacion_Admin.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Donaciones">Donaciones</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="<%= request.getContextPath() %>/Solicitud_Admin.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-list-check"></i>
-                        <div class="text-truncate" data-i18n="Solicitudes">Solicitudes</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="<%= request.getContextPath() %>/AdminVerCoordinadores.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                        <div class="text-truncate" data-i18n="Coordinadores de zona">Coordinadores De Zona</div>
-                    </a>
-                </li>
-
-                <li class="menu-item">
-                    <a href="<%= request.getContextPath() %>/Admin_VerLugares.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-food-menu"></i>
-                        <div class="text-truncate" data-i18n="Lugares Registrados">Lugares Registrados</div>
-                    </a>
-                </li>
-
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text" data-i18n="Crear">Crear</span>
-                </li>
-
-                <li class="menu-item">
-                    <a href="<%= request.getContextPath() %>/Admin_CreaCoordinador.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div class="text-truncate" data-i18n="Crear Coordinador">Crear Coordinador</div>
-                    </a>
-                </li>
-
-                <li class="menu-item">
-                    <a href="<%= request.getContextPath() %>/Admin_CreaLugarEvento.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-detail"></i>
-                        <div class="text-truncate" data-i18n="Lugar Para Eventos">Lugar Para Eventos</div>
-                    </a>
-                </li>
-            </ul>
-        </aside>
+        <jsp:include page="/WEB-INF/includes/sidebarAdmin.jsp" />
 
         <div class="layout-page">
             <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
@@ -333,9 +259,9 @@
                                                 <div class="dropdown"></div>
                                             </div>
                                             <span>Monto total de donaciones:</span>
-                                            <h3 class="card-title text-nowrap mb-1">S/<%= request.getAttribute("montoTotalDonaciones") != null ? request.getAttribute("montoTotalDonaciones") : "1,000,000" %></h3>
+                                            <h3 class="card-title text-nowrap mb-1">S/<%= request.getAttribute("montoTotalDonaciones") != null ? request.getAttribute("montoTotalDonaciones") : "0" %></h3>
                                             <small class="text-success fw-medium">
-                                                <i class='bx bx-up-arrow-alt'></i> +S/<%= request.getAttribute("montoTotalDonacionesHoy") != null ? request.getAttribute("montoTotalDonacionesHoy") : "20,000" %> (Hoy)
+                                                <i class='bx bx-up-arrow-alt'></i> +S/<%= request.getAttribute("montoTotalDonacionesHoy") != null ? request.getAttribute("montoTotalDonacionesHoy") : "0" %> (Hoy)
                                             </small>
                                         </div>
                                     </div>
@@ -359,7 +285,11 @@
                                             <span class="d-block mb-1">Albergues registrados</span>
                                             <!-- Cargar dinámicamente el número de albergues registrados -->
                                             <h3 class="card-title text-nowrap mb-2">${alberguesRegistrados}</h3>
+                                            <small class="text-success fw-medium">
+                                                <i class='bx bx-up-arrow-alt'></i> +${alberguesRegistradosHoy != null ? alberguesRegistradosHoy : 0} (Hoy)
+                                            </small>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-7 mb-4">

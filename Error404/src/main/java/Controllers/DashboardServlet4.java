@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@WebServlet("/DashboardServlet4")
+@WebServlet(name = "DashboardServlet4", urlPatterns = "/Dashboard4")
 public class DashboardServlet4 extends HttpServlet {
     private Dashboard4DAO dashboard4DAO = new Dashboard4DAO();
 
@@ -61,6 +61,9 @@ public class DashboardServlet4 extends HttpServlet {
 
             // Obtener el número de albergues registrados
             int alberguesRegistrados = dashboard4DAO.obtenerAlberguesRegistrados();
+
+            int alberguesRegistradosHoy = dashboard4DAO.obtenerAlberguesRegistradosHoy();
+
 
             // Obtener el total de mascotas reportadas como perdidas
             int totalMascotasPerdidas = dashboard4DAO.obtenerTotalMascotasPerdidas();
@@ -127,6 +130,7 @@ public class DashboardServlet4 extends HttpServlet {
             request.setAttribute("montoTotalDonaciones", montoTotalDonaciones);
             request.setAttribute("montoTotalDonacionesHoy", montoTotalDonacionesHoy); // Agregar el monto total de donaciones hoy
             request.setAttribute("alberguesRegistrados", alberguesRegistrados);
+            request.setAttribute("alberguesRegistradosHoy", alberguesRegistradosHoy);
             request.setAttribute("totalMascotasEncontradas", totalMascotasEncontradas);
             request.setAttribute("totalMascotasPerdidas", totalMascotasPerdidas);
             request.setAttribute("mascotasPorMez", mascotasPorMez);

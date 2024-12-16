@@ -8,20 +8,14 @@
             <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
           </span>
         </a>
-
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
     </div>
-
     <div class="menu-inner-shadow"></div>
-
-
-
     <ul class="menu-inner py-1">
-
         <li class="menu-item">
-            <a href="ver-inicio-usuario.html"  class="menu-link">
+            <a href="${pageContext.request.contextPath}/Dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home"></i>
                 <div class="text-truncate" data-i18n="Inicio">Inicio</div>
             </a>

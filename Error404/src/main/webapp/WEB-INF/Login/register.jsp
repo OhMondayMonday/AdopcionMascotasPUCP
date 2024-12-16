@@ -267,7 +267,10 @@
 </script>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
-
+<script type="text/javascript">
+    // Inyecta el contextPath desde el servidor
+    var contextPath = "<%= request.getContextPath() %>";
+</script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/jquery/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/assets/vendor/libs/popper/popper.js"></script>
 <script src="<%=request.getContextPath()%>/assets/vendor/js/bootstrap.js"></script>

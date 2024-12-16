@@ -215,7 +215,7 @@ public class LoginDAO extends BaseDao {
         return false;
     }
 
-    private String hashPassword(String password) throws NoSuchAlgorithmException {
+    public String hashPassword(String password) throws NoSuchAlgorithmException {
         // Crear una instancia del algoritmo SHA-256
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
