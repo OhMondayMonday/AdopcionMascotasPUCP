@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuario" type="Beans.Usuarios" scope="request"/>
+<jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
@@ -15,7 +16,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Crear Nueva Publicación</title>
+    <title>Editar Publicación</title>
 
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -110,17 +111,17 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
 
                     <div class="app-ecommerce">
-                        <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardar" enctype="multipart/form-data">
+                        <form id="formPublis" method="POST" action="PublicacionesServlet?action=actualizar" enctype="multipart/form-data">
                         <!-- Add Product -->
                         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
                             <div class="d-flex flex-column justify-content-center">
-                                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+                                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Editar Publicación</h4>
                                 <p class="text-muted">Rellena los campos abajo</p>
                             </div>
 
                             <div class="d-flex align-content-center flex-wrap gap-3">
-                                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Confirmar Cambios</button>
                                 <button class="btn btn-danger cancel-subscription">Descartar</button>
                             </div>
 
@@ -136,9 +137,10 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label class="form-label" for="titulo" >Titulo</label>
-                                            <input required type="text" class="form-control" id="titulo" name="titulo" placeholder="Título de la publicación">
+                                            <input required type="text" class="form-control" id="titulo" value="<%=publicacion.getTitulo()%>" name="titulo" placeholder="Título de la publicación">
                                             <input type="hidden" name="tipo_publicacion_id" value="1">
                                             <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
+                                            <input type="hidden" name="publicacion_id" value="<%=publicacion.getPublicacionId()%>">
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col">
@@ -146,16 +148,16 @@
                                                 <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
                                                     <option value="" disabled selected>Elija el tipo de publicación</option>
                                                     <option value="" selected>Normal</option>
-                                                    <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarAdopcion&user_id=1">Adopción</option>
-                                                    <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</option>
-                                                    <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia por Maltrato Animal</option>
+                                                    <option value="" disabled>Adopción</option>
+                                                    <option value="" disabled>Mascota Perdida</option>
+                                                    <option value="" disabled>Denuncia por Maltrato Animal</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <!-- Description -->
                                         <div>
-                                            <label class="form-label" for="descripcion">Descripción<span class="text-muted" style="resize: none;"></span></label>
-                                            <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion"></textarea>
+                                            <label class="form-label" for="descripcion">Descripción<span class="text-muted"></span></label>
+                                            <textarea required class="form-control" rows="7" name="descripcion" maxlength="500" id="descripcion" style="resize: none;"><%=publicacion.getDescripcion()%></textarea>
                                         </div>
 
                                     </div>
@@ -169,7 +171,7 @@
                                         <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
                                     </div>
                                     <div class="card-body">
-                                        <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
+                                        <input disabled class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
                                     </div>
                                 </div>
                             </div>

@@ -112,27 +112,18 @@ public class LoginServlet extends HttpServlet {
                 response.setCharacterEncoding("UTF-8");
 
                 if (usuario != null) {
-                    session.setAttribute("usuariosession", usuario); // Almacena el usuario en sesión
-                    session.setAttribute("usuarioId", usuario.getUserId());
-                    String redirect;
-                    switch (usuario.getRol().getRolId()) { // Usa el rolId directo
-                        case 2: // Albergue
-                            redirect = "/DashboardServlet2"; // Redirige al Dashboard de Albergues
-                            break;
-                        case 1: // Usuario Final
-                            redirect = "/Dashboard";
-                            break;
-                        default: // Otros roles
-                            redirect = "/defaultDashboard";
-                            break;
+                    session.setAttribute("usuariosession", usuario);
+                    String redirect = (String) session.getAttribute("redirect");
+                    if (redirect == null || redirect.isEmpty()) {
+                        redirect = request.getContextPath();
                     }
 
-                    redirect = request.getContextPath() + redirect;
-                    System.out.println("Redirigiendo a: " + redirect);
+                    System.out.println(redirect);
 
                     // Responder con JSON
                     response.getWriter().write("{\"loginExitoso\": true, \"redirect\": \"" + redirect + "\"}");
                 } else {
+
                     response.getWriter().write("{\"loginExitoso\": false, \"error\": \"Correo o contraseña incorrectos\"}");
                 }
             }

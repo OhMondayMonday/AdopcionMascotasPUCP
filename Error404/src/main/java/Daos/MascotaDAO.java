@@ -54,5 +54,21 @@ public class MascotaDAO extends BaseDao {
         return id;
     }
 
+    public void actualizarMascota(Mascotas mascota){
+        String sql = "UPDATE mascotas SET nombre = ?, raza_id = ?, edad_aproximada = ?, genero = ?, tamanio = ? WHERE mascota_id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, mascota.getNombre());
+            pstmt.setInt(2, mascota.getRaza().getRazaId());
+            pstmt.setInt(3, mascota.getEdadAproximada());
+            pstmt.setString(4, mascota.getGenero());
+            pstmt.setString(5, mascota.getTamanio());
+            pstmt.setInt(6, mascota.getMascotaId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

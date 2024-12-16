@@ -6,11 +6,36 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="Beans.HogaresTemporales" %>
+<%@ page import="Daos.HogarTemporalDAO" %>
+<%@ page import="Beans.Usuarios" %>
+<%@ page import="java.util.List" %>
+<%
+    // Recuperar el usuario desde el request o la sesión
+    Usuarios usuario = (Usuarios) request.getAttribute("usuario");
+    if (usuario == null) {
+        usuario = (Usuarios) session.getAttribute("usuariosession");
+    }
+%>
+<%
+    String nombreAlbergue = (String) session.getAttribute("nombreUsuario"); // nombre_albergue
+    String fotoPerfil = (String) session.getAttribute("fotoPerfil");
+    // Imagen por defecto si no hay foto
+    if (fotoPerfil == null || fotoPerfil.isEmpty()) {
+        fotoPerfil = "assets/default-avatar.png";
+    }
+
+    // Valor por defecto si no hay nombre del albergue
+    if (nombreAlbergue == null || nombreAlbergue.isEmpty()) {
+        nombreAlbergue = "Albergue";
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <title>Enviar Solicitud de Mascota</title>
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -52,10 +77,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/quill/editor.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.css" />
 
     <!-- Page CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/css/pages/page-faq.css" />
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -70,81 +96,7 @@
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Navbar -->
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-
-            <div class="app-brand demo px-3">
-                <a href="javascript:void(0);" class="app-brand-link">
-          <span class="app-brand-logo demo">
-            <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
-          </span>
-                </a>
-
-                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                </a>
-            </div>
-
-            <div class="menu-inner-shadow"></div>
-
-
-
-            <ul class="menu-inner py-1">
-
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/albergue?action=inicio" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-home"></i>
-                        <div class="text-truncate" data-i18n="Inicio">Inicio</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="albergue-ver-publicaciones.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="albergue-ver-eventos.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Eventos">Eventos</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/albergue?action=hogaresTemporales" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
-                    </a>
-                </li>
-                <!-- Gestion -->
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
-                </li>
-                <li class="menu-item">
-                    <a href="albergue-ver-mispublicaciones.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="albergue-ver-miseventos.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
-                    </a>
-                </li>
-
-                <!-- Misc -->
-                <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
-                <li class="menu-item">
-                    <a href="albergue-preguntas-frecuentes.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-help-circle"></i>
-                        <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
-                    </a>
-                </li>
-            </ul>
-
-
-
-        </aside>
+        <jsp:include page="/WEB-INF/includes/sidebarAlbergue.jsp" />
 
         <div class="layout-page">
             <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
@@ -170,14 +122,14 @@
                     <ul class="navbar-nav flex-row align-items-center ms-0">
 
                         <!-- Notification -->
-                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+                        <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, <%= nombreAlbergue %>!</span>
 
                         <!--/ Notification -->
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                                    <img src="${pageContext.request.contextPath}/${sessionScope.fotoPerfil}" alt class="w-px-40 h-auto rounded-circle">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -186,23 +138,25 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                                                    <img src="${pageContext.request.contextPath}/${sessionScope.fotoPerfil}" alt class="w-px-40 h-auto rounded-circle">
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block"> Adolfo Contreras</span>
-                                                <small class="text-muted">Usuario</small>
+                                                <span class="fw-medium d-block"> <%= nombreAlbergue %></span>
+                                                <small class="text-muted">Albergue</small>
                                             </div>
                                         </div>
                                     </a>
                                 </li>
+
+
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
-                                        <i class="bx bx-lock me-2"></i>
-                                        <span class="align-middle">Seguridad</span>
+                                    <a class="dropdown-item" href="albergue-ver-miperfil-detalles.html">
+                                        <i class="bx bx-user me-2"></i>
+                                        <span class="align-middle">Mi perfil</span>
                                     </a>
                                 </li>
 
@@ -211,36 +165,24 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+                                    <a class="dropdown-item" href="albergue-ver-mispublicaciones.html">
                                         <i class="bx bx-building-house"></i>
                                         <span class="align-middle">Mis publicaciones</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                                    <a class="dropdown-item" href="albergue-ver-miseventos.html">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="ver-calendario-usuario.html">
-                                        <i class="bx bx-calendar"></i>
-                                        <span class="align-middle">Mi Calendario</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="pages-faq.html">
-                                        <i class="bx bx-help-circle me-2"></i>
-                                        <span class="align-middle">FAQ</span>
                                     </a>
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../index.html" target="_blank">
-                                        <i class="bx bx-power-off me-2"></i>
-                                        <span class="align-middle">Salir</span>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
+                                        <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
+                                        <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                                     </a>
                                 </li>
                             </ul>
@@ -472,17 +414,22 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/quill.js"></script>
+
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/dropzone/dropzone.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/libs/tagify/tagify.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
 
 <!-- Main JS -->
 <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+
+
+<!-- Page JS -->
+<script src="${pageContext.request.contextPath}/assets/js/pages-pricing.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
 
 <script>
     Dropzone.options.dropzoneBasic = {

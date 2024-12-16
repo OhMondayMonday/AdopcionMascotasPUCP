@@ -211,17 +211,14 @@
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
 
-        <aside>
-            <!-- Sidebar aquí si es necesario -->
-            <jsp:include page="../includes/sidebarAdmin.jsp"/>
-        </aside>
+        <!-- Sidebar aquí si es necesario -->
+        <jsp:include page="../includes/sidebarAdmin.jsp"/>
 
         <div class="layout-page">
-            <nav>
-                <jsp:include page="../includes/navbarAdmin.jsp">
-                    <jsp:param name="vista" value="Gestion de usuarios"/>
-                </jsp:include>
-            </nav>
+
+            <jsp:include page="../includes/navbarAdmin.jsp">
+                <jsp:param name="vista" value="Gestion de usuarios"/>
+            </jsp:include>
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
@@ -267,7 +264,7 @@
                         <div class="card mb-2 col-12" style="padding: 10px; margin: 0;">
                             <div class="card-body">
                                 <div class="card-datatable table-responsive">
-                                    <table class="table table-striped table-bordered" id="solicitudesTable" >
+                                    <table class="table table-striped table-bordered" style="visibility: hidden" id="solicitudesTable" >
 
                                         <thead>
 
@@ -550,7 +547,12 @@
                         next: '<i class="bx bx-chevron-right"></i>',
                         previous: '<i class="bx bx-chevron-left"></i>'
                     }
+                },
+                initComplete: function () {
+                    // Mostrar la tabla después de la inicialización
+                    $('#solicitudesTable').css('visibility', 'visible');
                 }
+
             });
 
             // Ocultar manualmente el buscador

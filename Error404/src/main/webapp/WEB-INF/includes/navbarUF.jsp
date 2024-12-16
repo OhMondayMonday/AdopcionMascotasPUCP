@@ -41,7 +41,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMiPerfilDetalles&id=<%=usuario.getUserId()%>">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
@@ -59,7 +59,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMiPerfilSeguridad&">
                             <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
                             <span class="align-middle" style="color: #1f4397;">Seguridad</span>
                         </a>
@@ -70,19 +70,19 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/PublicacionesServlet?action=verTodasMisPublicaciones&user_id=<%=usuario.getUserId()%>">
                             <i class="bx bx-building-house"></i>
                             <span class="align-middle">Mis publicaciones</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="EventosServlet?action=verEventosDeUsuario">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/EventosServlet?action=verEventosDeUsuario">
                             <i class="bx bx-bone"></i>
                             <span class="align-middle">Mis eventos</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="CalendarioServlet">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Calendario">
                             <i class="bx bx-calendar"></i>
                             <span class="align-middle">Mi Calendario</span>
                         </a>
@@ -91,7 +91,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="Preguntas-frecuentes.html">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/WEB-INF/UsuarioFinal/Preguntas-frecuentes.jsp">
                             <i class="bx bx-help-circle"></i>
                             <span class="align-middle">Preguntas frecuentes</span>
                         </a>
@@ -100,7 +100,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="../index.html" >
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/logout" >
                             <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
                             <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                         </a>

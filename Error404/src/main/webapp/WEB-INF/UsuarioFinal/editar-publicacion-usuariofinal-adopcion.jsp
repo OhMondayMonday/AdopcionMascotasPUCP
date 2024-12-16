@@ -1,16 +1,19 @@
 <%@ page import="Beans.Razas" %>
+<%@ page import="java.util.Objects" %>
 <!DOCTYPE html>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaRazas" type="java.util.ArrayList<Beans.Razas>" scope="request"/>
 <jsp:useBean id="usuario" type="Beans.Usuarios" scope="request"/>
+<jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
+<jsp:useBean id="adopcion" type="Beans.PublicacionesAdopcion" scope="request"/>
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Crear Nueva Publicación | Adopción</title>
+  <title>Editar Publicación | Adopción</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -90,7 +93,6 @@
       <jsp:include page="${pageContext.request.contextPath}/WEB-INF/includes/navbarUF.jsp">
         <jsp:param name="usuariosession" value=""/>
       </jsp:include>
-
       <!-- / Navbar -->
 
       <!-- Content wrapper -->
@@ -101,17 +103,17 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
           <div class="app-ecommerce">
-            <form id="form_publis" method="POST" action="PublicacionesServlet?action=guardarAdopcion" enctype="multipart/form-data">
+            <form id="form_publis" method="POST" action="PublicacionesServlet?action=actualizarAdopcion" enctype="multipart/form-data">
 
               <!-- Add Product -->
               <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
                 <div class="d-flex flex-column justify-content-center">
-                  <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+                  <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Editar Publicación</h4>
                   <p class="text-muted">Rellena los campos abajo</p>
                 </div>
                 <div class="d-flex align-content-center flex-wrap gap-3">
-                  <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                  <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Confirmar Cambios</button>
                   <button class="btn btn-danger cancel-subscription">Descartar</button>
                 </div>
 
@@ -128,25 +130,27 @@
                     <div class="card-body">
                       <div class="mb-3">
                         <label class="form-label" for="titulo">Titulo</label>
-                        <input type="text" required class="form-control" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
+                        <input type="text" required class="form-control" id="titulo" value="<%=publicacion.getTitulo()%>" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
                         <input type="hidden" name="tipo_publicacion" value="2">
                         <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
+                        <input type="hidden" name="publicacion_id" value="<%=publicacion.getPublicacionId()%>">
+                        <input type="hidden" name="mascota_id" value="<%=adopcion.getMascota().getMascotaId()%>">
                       </div>
                       <div class="row mb-3">
                         <div class="col"><label class="form-label" for="opciones">Tipo</label>
                           <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
                             <option value="" disabled selected>Elija el tipo de publicación</option>
-                            <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</option>
+                            <option value="" disabled>Normal</option>
                             <option value="" selected>Adopción</option>
-                            <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</option>
-                            <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia por Maltrato Animal</option>
+                            <option value="" disabled>Mascota Perdida</option>
+                            <option value="" disabled>Denuncia por Maltrato Animal</option>
                           </select>
                         </div>
                       </div>
                       <!-- Description -->
                       <div>
                         <label class="form-label">Descripción <span class="text-muted"></span></label>
-                        <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion" style="resize: none;"></textarea>
+                        <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion" style="resize: none;"><%=publicacion.getDescripcion()%></textarea>
                       </div>
                     </div>
                   </div>
@@ -157,7 +161,7 @@
                       <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
                     </div>
                     <div class="card-body">
-                      <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
+                      <input disabled class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
                     </div>
                   </div>
                 </div>
@@ -172,18 +176,24 @@
                       <div class="row mb-3">
                         <div class="col">
                           <label class="form-label" for="mascota_nombre">Nombre</label>
-                          <input type="text" required class="form-control" id="mascota_nombre" placeholder="Nombre del mascota" name="mascota_nombre" aria-label="Product title">
+                          <input type="text" required class="form-control" id="mascota_nombre" value="<%=adopcion.getMascota().getNombre()%>" placeholder="Nombre del mascota" name="mascota_nombre" aria-label="Product title">
                         </div>
                         <div class="col">
                           <label class="form-label" for="mascota_edad">Edad</label>
-                          <input type="text" required class="form-control" id="mascota_edad" placeholder="Indique la edad de la mascota" name="mascota_edad" aria-label="Product title">                  </div>
+                          <input type="text" required class="form-control" id="mascota_edad" value="<%=adopcion.getMascota().getEdadAproximada()%>" placeholder="Indique la edad de la mascota" name="mascota_edad" aria-label="Product title">                  </div>
                       </div>
                       <div class="row mb-3">
                         <div class="col"><label class="form-label" for="mascota_genero">Género</label>
                           <select class="form-control" id="mascota_genero" name="mascota_genero" required>
+                            <%if(Objects.equals(adopcion.getMascota().getGenero(), "macho")){%>
+                            <option value="" disabled>Elija el Género</option>
+                            <option value="macho" selected>Macho</option>
+                            <option value="hembra">Hembra</option>
+                            <%} else{%>
                             <option value="" disabled selected>Elija el Género</option>
                             <option value="macho">Macho</option>
-                            <option value="hembra">Hembra</option>
+                            <option value="hembra" selected>Hembra</option>
+                            <%}%>
                           </select>
                         </div>
                         <div class="col">
@@ -192,7 +202,7 @@
                             <select required id="mascota_raza" name="mascota_raza_id" class="select2 form-select form-select-lg" data-allow-clear="true">
                               <option value="" disabled selected>Elija la raza</option>
                               <%for(Razas raza : listaRazas){%>
-                              <option value="<%=raza.getRazaId()%>"><%=raza.getNombreRaza()%></option>
+                              <option value="<%=raza.getRazaId()%>"<%if(adopcion.getMascota().getRaza().getRazaId() == raza.getRazaId()){%>selected<%}%>><%=raza.getNombreRaza()%></option>
                               <%}%>
                             </select>
                           </div>
@@ -210,11 +220,11 @@
                       <div class="row mb-3">
                         <div class="col">
                           <label class="form-label" >Condiciones de Adopción</label>
-                          <input type="text" required class="form-control" placeholder="Indique las condiciones de Adopción" id="condiciones_adopcion" name="condiciones_adopcion" aria-label="Product barcode">
+                          <input type="text" required class="form-control" value="<%=adopcion.getCondicionesAdopcion()%>" placeholder="Indique las condiciones de Adopción" id="condiciones_adopcion" name="condiciones_adopcion" aria-label="Product barcode">
                         </div>
                         <div class="col">
                           <label class="form-label" >Lugar Encontrado</label>
-                          <input type="text" required class="form-control" placeholder="Indique el Lugar donde fue Encontrado" id="lugar_encontrado" name="lugar_encontrado" aria-label="Product barcode">
+                          <input type="text" required class="form-control" value="<%=adopcion.getLugarEncontrado()%>" placeholder="Indique el Lugar donde fue Encontrado" id="lugar_encontrado" name="lugar_encontrado" aria-label="Product barcode">
                         </div>
                       </div>
 
@@ -337,7 +347,23 @@
     // Solo permite números y elimina cualquier carácter que no sea un número
     this.value = this.value.replace(/[^0-9]/g, '');
   });
+</script>
 
+<script>
+  // Función para reemplazar valores "null" en todos los inputs
+  function replaceNullInInputs() {
+    // Seleccionar todos los elementos <input> en la página
+    const inputs = document.querySelectorAll("input");
+
+    // Iterar sobre cada input y verificar su valor
+    inputs.forEach(input => {
+      if (input.value === "null") {
+        input.value = ""; // Reemplazar el valor por una cadena vacía
+      }
+    });
+  }
+  // Ejecutar la función cuando la página se haya cargado
+  document.addEventListener("DOMContentLoaded", replaceNullInInputs);
 </script>
 
 <!-- Page JS -->

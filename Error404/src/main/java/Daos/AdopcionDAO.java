@@ -83,4 +83,20 @@ public class AdopcionDAO extends BaseDao{
             e.printStackTrace();
         }
     }
+
+    public void actualizarAdopcion(PublicacionesAdopcion adopcion) {
+        MascotaDAO mascotaDAO = new MascotaDAO();
+        adopcion.getMascota().setTamanio("pequeño");
+        mascotaDAO.actualizarMascota(adopcion.getMascota());
+        String sql = "UPDATE publicaciones_adopcion SET lugar_encontrado=?, condiciones_adopcion=? WHERE publicacion_id=?";
+        try (Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, adopcion.getLugarEncontrado());
+            pstmt.setString(2, adopcion.getCondicionesAdopcion());
+            pstmt.setInt(3, adopcion.getPublicacion_id());
+            pstmt.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
