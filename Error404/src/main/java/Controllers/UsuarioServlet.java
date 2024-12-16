@@ -102,6 +102,7 @@ public class UsuarioServlet extends HttpServlet {
                 mostrarFormularioPostulacion(request, response);
                 break;
 
+
             default:
                 rd = request.getRequestDispatcher("/WEB-INF/Inicio-usuario.jsp");
                 rd.forward(request, response);
