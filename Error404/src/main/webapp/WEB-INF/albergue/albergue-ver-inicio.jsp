@@ -103,7 +103,7 @@
 
 
         <li class="menu-item">
-          <a href="javascript:void(0);" class="menu-link">
+          <a href="${pageContext.request.contextPath}/albergue?action=inicio" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home"></i>
             <div class="text-truncate" data-i18n="Inicio">Inicio</div>
           </a>
@@ -121,7 +121,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="albergue-ver-hogarestemporales.html" class="menu-link">
+          <a href="${pageContext.request.contextPath}/albergue?action=hogaresTemporales" class="menu-link">
             <i class="menu-icon tf-icons bx bx-building-house"></i>
             <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
           </a>

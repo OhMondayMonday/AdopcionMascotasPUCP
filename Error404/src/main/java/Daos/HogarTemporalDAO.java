@@ -1,12 +1,12 @@
 package Daos;
 
-import Beans.HogaresTemporales;
-import Beans.Publicaciones;
-import Beans.Usuarios;
-import Beans.Fotos;
-import Beans.Distritos;
+import Beans.*;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 
 public class HogarTemporalDAO extends BaseDao {
@@ -152,6 +152,32 @@ public class HogarTemporalDAO extends BaseDao {
     }
 
 
+    public Usuarios obtenerUsuarioPorCredenciales(String username, String password) {
+        Usuarios usuario = null;
+        String sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuarios();
+                    usuario.setUserId(rs.getInt("user_id"));
+                    usuario.setNombre(rs.getString("nombre"));
+                    usuario.setApellido(rs.getString("apellido"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setDni(rs.getString("dni"));
+                    usuario.setDireccion(rs.getString("direccion"));
+                    // Asigna otros atributos si los necesitas
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
 
 
 }
