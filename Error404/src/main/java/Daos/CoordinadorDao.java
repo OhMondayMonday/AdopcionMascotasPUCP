@@ -146,7 +146,11 @@ public class CoordinadorDao extends BaseDao {
                 solicitante.setNombre(rs.getString("solicitante"));
                 solicitud.setSolicitante(solicitante);
 
+<<<<<<< Updated upstream
  //               solicitud.setFechaSolicitud(rs.getString("fecha_solicitud"));
+=======
+                solicitud.setFechaSolicitud(rs.getTimestamp("fecha_solicitud"));
+>>>>>>> Stashed changes
                 solicitud.setEstadoSolicitud(rs.getString("estado_solicitud"));
 
                 Mascotas mascota = new Mascotas();
