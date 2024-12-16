@@ -43,7 +43,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}"  class="menu-link">
+            <a href="${pageContext.request.contextPath}/UsuarioServlet?action=hogarTemporal"  class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building-house"></i>
                 <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
             </a>
@@ -65,7 +65,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}" class="menu-link">
+            <a href="${pageContext.request.contextPath}/UsuarioServlet?action=miHogarTemporal" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-building-house"></i>
                 <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
             </a>

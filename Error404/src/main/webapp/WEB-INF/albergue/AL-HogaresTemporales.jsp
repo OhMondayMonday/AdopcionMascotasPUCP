@@ -174,85 +174,23 @@
 
     <div class="layout-container">
 
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-
-
-            <div class="app-brand demo px-3">
-                <a href="javascript:void(0);" class="app-brand-link">
-          <span class="app-brand-logo demo">
-            <img class = "h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
-          </span>
-                </a>
-
-                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                </a>
-            </div>
-
-            <div class="menu-inner-shadow"></div>
-
-
-
-            <ul class="menu-inner py-1">
-
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/albergue?action=inicio" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-home"></i>
-                        <div class="text-truncate" data-i18n="Inicio">Inicio</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="albergue-ver-publicaciones.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="albergue-ver-eventos.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Eventos">Eventos</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/albergue?action=hogaresTemporales" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
-                    </a>
-                </li>
-                <!-- Gestion -->
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
-                </li>
-                <li class="menu-item">
-                    <a href="albergue-ver-mispublicaciones.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="albergue-ver-miseventos.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
-                    </a>
-                </li>
-
-                <!-- Misc -->
-                <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
-                <li class="menu-item">
-                    <a href="albergue-preguntas-frecuentes.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-help-circle"></i>
-                        <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
-                    </a>
-                </li>
-            </ul>
-
-
-
-        </aside>
+        <jsp:include page="/WEB-INF/includes/sidebarAlbergue.jsp" />
 
         <div class="layout-page">
             <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                <%
+                    String nombreAlbergue = (String) session.getAttribute("nombreUsuario"); // nombre_albergue
+                    String fotoPerfil = (String) session.getAttribute("fotoPerfil");
+                    // Imagen por defecto si no hay foto
+                    if (fotoPerfil == null || fotoPerfil.isEmpty()) {
+                        fotoPerfil = "assets/default-avatar.png";
+                    }
 
+                    // Valor por defecto si no hay nombre del albergue
+                    if (nombreAlbergue == null || nombreAlbergue.isEmpty()) {
+                        nombreAlbergue = "Albergue";
+                    }
+                %>
 
                 <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0   d-xl-none ">
                     <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
@@ -273,13 +211,13 @@
 
                     <ul class="navbar-nav flex-row align-items-center ms-0">
                         <span class="text-body" style="font-weight: bold;">
-                            ¡Hola, <%= (usuario != null && usuario.getNombreAlbergue() != null) ? usuario.getNombreAlbergue() : "Invitado" %>!
+                            ¡Hola, <%= nombreAlbergue %>!
                         </span>
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="${sessionScope.usuarioLogueado.foto != null ? sessionScope.usuarioLogueado.foto.urlFoto : 'https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg'}"
+                                    <img src="${pageContext.request.contextPath}/${sessionScope.fotoPerfil}"
                                          alt="Foto de usuario" class="w-px-40 h-auto rounded-circle">
                                 </div>
                             </a>
@@ -289,11 +227,11 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="../../assets/img/huella.jpg" alt class="w-px-40 h-auto rounded-circle">
+                                                    <img src="${pageContext.request.contextPath}/${sessionScope.fotoPerfil}" alt class="w-px-40 h-auto rounded-circle">
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block"> Huellas </span>
+                                                <span class="fw-medium d-block"> <%= nombreAlbergue %> </span>
                                                 <small class="text-muted">Albergue</small>
                                             </div>
                                         </div>
@@ -329,9 +267,9 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../index.html">
-                                        <i class="bx bx-power-off me-2"></i>
-                                        <span class="align-middle">Salir</span>
+                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
+                                        <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
+                                        <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                                     </a>
                                 </li>
                             </ul>
