@@ -267,7 +267,7 @@
                         <div class="card mb-2 col-12" style="padding: 10px; margin: 0;">
                             <div class="card-body">
                                 <div class="card-datatable table-responsive">
-                                    <table class="table table-striped table-bordered" id="solicitudesTable" >
+                                    <table class="table table-striped table-bordered" style = "visibility: hidden" id="solicitudesTable" >
 
                                         <thead>
 
@@ -314,12 +314,12 @@
                                                 <div class="card-body p-0">
                                                     <div class="d-inline-flex">
                                                         <!-- Botón de Aceptar con onClick, pasando el solicitudId -->
-                                                        <button type="button" class="btn btn-sm btn-success me-1" data-bs-toggle="tooltip" title="Ver Aceptar" onclick="confirmarAceptacion(<%=solicitud.getSolicitudId()%>)">
+                                                        <button type="button" class="btn btn-label-success me-1" data-bs-toggle="tooltip" title="Ver Aceptar" onclick="confirmarAceptacion(<%=solicitud.getSolicitudId()%>)">
                                                             <i class="bx bx-check-circle"></i>
                                                         </button>
 
                                                         <!-- Botón de Rechazar con onClick, pasando el solicitudId -->
-                                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Rechazar" onclick="confirmarRechazo(<%=solicitud.getSolicitudId()%>)">
+                                                        <button type="button" class="btn btn-label-danger" data-bs-toggle="tooltip" title="Rechazar" onclick="confirmarRechazo(<%=solicitud.getSolicitudId()%>)">
                                                             <i class="bx bxs-x-circle"></i>
                                                         </button>
                                                     </div>
@@ -400,7 +400,43 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 
 <!-- Activa los tooltips -->
+<script>
+    $(document).ready(function () {
+        if (!$.fn.DataTable.isDataTable('#solicitudesTable')) {
+            var table = $('#solicitudesTable').DataTable({
+                paging: true,
+                pagingType: "full_numbers",
+                pageLength: 5,
+                lengthChange: true,
+                buttons: ['copy', 'excel', 'pdf'],
+                dom: 'Bfrtip', // Con buscador y mostrando información
+                language: {
+                    lengthMenu: "Mostrar _MENU_ entradas",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                    infoEmpty: "Mostrando 0 a 0 de 0 entradas",
+                    infoFiltered: "(filtrado de _MAX_ entradas totales)",
+                    paginate: {
+                        first: '<i class="bx bx-chevrons-left"></i>',
+                        last: '<i class="bx bx-chevrons-right"></i>',
+                        next: '<i class="bx bx-chevron-right"></i>',
+                        previous: '<i class="bx bx-chevron-left"></i>'
+                    }
+                },
+                initComplete: function () {
+                    // Mostrar la tabla después de la inicialización
+                    $('#solicitudesTable').css('visibility', 'visible');
+                }
 
+            });
+
+            // Ocultar manualmente el buscador
+            $('#solicitudesTable_filter').hide();
+
+            // Función para filtrar en tiempo real
+            configurarFiltros(table);
+        }
+    });
+</script>
 <script>
     function confirmarAceptacion(solicitudId) {
         // Muestra la alerta de confirmación con SweetAlert
@@ -532,39 +568,6 @@
         xhr.send("solicitudId=" + solicitudId + "&action=rechazar");
     }
 
-</script>
-
-<script>
-    $(document).ready(function () {
-        if (!$.fn.DataTable.isDataTable('#solicitudesTable')) {
-            var table = $('#solicitudesTable').DataTable({
-                paging: true,
-                pagingType: "full_numbers",
-                pageLength: 5,
-                lengthChange: true,
-                buttons: ['copy', 'excel', 'pdf'],
-                dom: 'Bfrtip', // Con buscador y mostrando información
-                language: {
-                    lengthMenu: "Mostrar _MENU_ entradas",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                    infoEmpty: "Mostrando 0 a 0 de 0 entradas",
-                    infoFiltered: "(filtrado de _MAX_ entradas totales)",
-                    paginate: {
-                        first: '<i class="bx bx-chevrons-left"></i>',
-                        last: '<i class="bx bx-chevrons-right"></i>',
-                        next: '<i class="bx bx-chevron-right"></i>',
-                        previous: '<i class="bx bx-chevron-left"></i>'
-                    }
-                }
-            });
-
-            // Ocultar manualmente el buscador
-            $('#solicitudesTable_filter').hide();
-
-            // Función para filtrar en tiempo real
-            configurarFiltros(table);
-        }
-    });
 </script>
 
 <script>

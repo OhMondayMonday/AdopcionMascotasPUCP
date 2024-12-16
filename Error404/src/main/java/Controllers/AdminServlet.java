@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
-@WebServlet(name = "AdminServlet", urlPatterns = {"/crearLugares", "/lugares-eventos", "/listarUsuarios", "/gestionDonaciones", "/crearCoordinador", "/crearUsuarios", "/crearAlbergues"})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/crearLugares", "/lugares-eventos", "/gestionUsuarios", "/gestionDonaciones", "/crearCoordinador", "/crearUsuarios", "/crearAlbergues"})
 public class AdminServlet extends HttpServlet{
 
     private final AdminDAO adminDAO = new AdminDAO();
@@ -40,7 +40,7 @@ public class AdminServlet extends HttpServlet{
                 // Redirigir al JSP que mostrará los datos
                 request.getRequestDispatcher("WEB-INF/administrador/Administrador-ver-lugares-eventos.jsp").forward(request, response);
             }
-            case "/listarUsuarios" -> {
+            case "/gestionUsuarios" -> {
 
                 List<Usuarios> usuarios = adminDAO.obtenerUsuarios();
 
@@ -87,7 +87,7 @@ public class AdminServlet extends HttpServlet{
         String action = request.getParameter("action");
 
         switch (request.getServletPath()){
-            case "/listarUsuarios" -> {
+            case "/gestionUsuarios" -> {
                 switch (action) {
                     case "suspender" -> {
                         int userId = Integer.parseInt(request.getParameter("userId"));
@@ -118,6 +118,7 @@ public class AdminServlet extends HttpServlet{
                 String accion = request.getParameter("action");
                 switch (accion){
                     case "aceptar" -> {
+                        System.out.println("Si quiera esto se ejecuta?");
                         int solicitudId = Integer.parseInt(request.getParameter("solicitudId"));
                         Solicitudes solicitud1 = adminDAO.obtenerSolicitudPorId(solicitudId);
                         String contrasenia = generarContraseniaAleatoria();
@@ -128,10 +129,12 @@ public class AdminServlet extends HttpServlet{
                             throw new RuntimeException(e);
                         }
                         boolean exito = adminDAO.insertarUsuario(solicitud1, contraseniaHash);
+                        System.out.println("Esto se ejecuta bien carajo");
                         response.getWriter().write("{\"status\": \"success\", \"message\": \"La solicitud ha sido procesada exitosamente.\"}");
+                        System.out.println("Esto se ejecuta bien carajo x2222");
                         if (exito) {
+                            adminDAO.cambiarEstadoAAceptado(solicitudId);
                             try{
-                                adminDAO.cambiarEstadoAAceptado(solicitudId);
                                 String subject = "Creación de cuenta exitosa";
                                 String body = "Hola, \n\n" +
                                         "¡Bienvenido! Hemos creado una cuenta para ti en nuestro sistema. Aquí están los detalles de tu cuenta:\n\n" +
@@ -157,12 +160,18 @@ public class AdminServlet extends HttpServlet{
                         int solicitudId = Integer.parseInt(request.getParameter("solicitudId"));
                         Solicitudes solicitud2 = adminDAO.obtenerSolicitudPorId(solicitudId);
                         boolean exito = adminDAO.cambiarEstadoARechazado(solicitudId);
-                        if (exito) {response.getWriter().write("{\"status\": \"success\", \"message\": \"La solicitud ha sido procesada exitosamente.\"}");}
+                        System.out.println(exito);
+                        if (exito) {
+                            response.getWriter().write("{\"status\": \"success\", \"message\": \"La solicitud ha sido procesada exitosamente.\"}");
+                            System.out.println("Esto se ejecuta mal carajo");
+                        }
                         else {
                             response.getWriter().write("{\"status\": \"error\", \"message\": \"Hubo un error al procesar la solicitud.\"}");
                         }
                         if (exito) {
-                            String recipientEmail = solicitud2.getEmail();  // Obtener el email del solicitante
+                            System.out.println("Esto se ejecuta bien carajo 1");
+                            String recipientEmail = solicitud2.getEmail();
+                            System.out.println(recipientEmail); // Obtener el email del solicitante
                             String subject = "Solicitud de cuenta rechazada";
                             String body = "Hola, \n\n" +
                                     "Lamentablemente, tu solicitud para crear una cuenta ha sido rechazada. " +
@@ -172,6 +181,7 @@ public class AdminServlet extends HttpServlet{
                                     "El equipo de Alianza Animal.";
 
                             try {
+                                System.out.println("quiero enviar correo xdxd");
                                 emailService.sendEmail(recipientEmail, subject, body);
                                 System.out.println("Correo de cuenta rechazada enviado.");
                             } catch (MessagingException e) {

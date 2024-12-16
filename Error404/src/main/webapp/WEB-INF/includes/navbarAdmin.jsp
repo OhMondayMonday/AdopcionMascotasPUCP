@@ -1,3 +1,4 @@
+<%@ page import="Beans.Usuarios" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
@@ -34,7 +35,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block">Administrador</span>
+                                    <span class="fw-medium d-block">Admin</span>
+                                    <small class="text-muted">Administrador</small>
                                 </div>
                             </div>
                         </a>
@@ -43,7 +45,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Admin_Calendario.jsp">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Calendario">
                             <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                             <span class="align-middle">Calendario</span>
                         </a>
@@ -52,7 +54,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/WEB-INF/index.jsp">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Cerrar sesión</span>
                         </a>

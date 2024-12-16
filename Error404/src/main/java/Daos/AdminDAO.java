@@ -19,8 +19,8 @@ public class AdminDAO extends BaseDao{
         String sql = "SELECT le.lugar_id, le.nombre_lugar, le.direccion_lugar, le.aforo_maximo, le.activo, " +
                 "d.distrito_id, d.nombre_distrito, f.foto_id, f.url_foto " +
                 "FROM lugares_eventos le " +
-                "JOIN distritos d ON le.distrito_id = d.distrito_id " +
-                "JOIN fotos f ON le.foto_id = f.foto_id";
+                "LEFT JOIN distritos d ON le.distrito_id = d.distrito_id " +
+                "LEFT JOIN fotos f ON le.foto_id = f.foto_id";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -105,7 +105,7 @@ public class AdminDAO extends BaseDao{
                 r.nombre_rol AS rol_nombre
             FROM 
                 usuarios u
-            JOIN 
+            LEFT JOIN 
                 roles r ON u.rol_id = r.rol_id
             LEFT JOIN 
                 distritos d ON u.distrito_id = d.distrito_id
@@ -197,7 +197,7 @@ public class AdminDAO extends BaseDao{
                 "u_solicitante.nombre AS nombre_solicitante, u_solicitante.apellido AS apellido_solicitante, " +
                 "u_solicitado.nombre_albergue AS nombre_albergue " +
                 "FROM solicitudes s " +
-                "INNER JOIN tipos_solicitudes ts ON s.tipo_solicitud_id = ts.tipo_solicitud_id " +
+                "LEFT JOIN tipos_solicitudes ts ON s.tipo_solicitud_id = ts.tipo_solicitud_id " +
                 "LEFT JOIN usuarios u_solicitante ON s.solicitante_id = u_solicitante.user_id " +
                 "LEFT JOIN usuarios u_solicitado ON s.solicitado_id = u_solicitado.user_id " +
                 "WHERE ts.tipo_solicitud = ?";
@@ -245,7 +245,7 @@ public class AdminDAO extends BaseDao{
                 "s.direccion, s.distrito_id, s.fecha_solicitud, " +
                 "d.nombre_distrito AS nombre_distrito " +
                 "FROM solicitudes s " +
-                "JOIN distritos d ON s.distrito_id = d.distrito_id " +
+                "LEFT JOIN distritos d ON s.distrito_id = d.distrito_id " +
                 "WHERE s.tipo_solicitud_id = 1 " +
                 "AND s.estado_solicitud = 'pendiente'";
 
@@ -288,7 +288,7 @@ public class AdminDAO extends BaseDao{
         String query = "SELECT s.solicitud_id, s.nombre_albergue, s.nombre_encargado, s.apellido_encargado, " +
                 "s.email_albergue, s.solicitante_id, s.fecha_solicitud, u.nombre, u.apellido, u.email " +
                 "FROM solicitudes s " +
-                "JOIN usuarios u ON s.solicitante_id = u.user_id " +
+                "LEFT JOIN usuarios u ON s.solicitante_id = u.user_id " +
                 "WHERE s.tipo_solicitud_id = 3 " +
                 "AND s.estado_solicitud = 'pendiente'";
 
@@ -358,13 +358,13 @@ public class AdminDAO extends BaseDao{
     }
 
     public Solicitudes obtenerSolicitudPorId(int solicitudId) {
-        Solicitudes solicitud = null;
-        String query = "SELECT s.solicitud_id, s.username, s.nombre, s.apellido, s.email, s.DNI, s.direccion, " +
+        Solicitudes solicitud = new Solicitudes();
+        String query = "SELECT s.solicitud_id, s.username, s.nombre, s.apellido, s.email AS email_usuario, s.DNI, s.direccion, " +
                 "s.distrito_id, s.nombre_albergue, s.nombre_encargado, s.apellido_encargado, s.email_albergue, " +
                 "s.fecha_solicitud, s.estado_solicitud, " +
                 "u.nombre AS nombre_solicitante, u.apellido AS apellido_solicitante, u.email AS email_solicitante, u.DNI AS DNI_solicitante, u.direccion AS direccion_solicitante " +
                 "FROM solicitudes s " +
-                "INNER JOIN usuarios u ON s.solicitante_id = u.user_id " +
+                "LEFT JOIN usuarios u ON s.solicitante_id = u.user_id " +
                 "WHERE s.solicitud_id = ?";
 
         try (Connection connection = this.getConnection();
@@ -376,14 +376,13 @@ public class AdminDAO extends BaseDao{
             // Ejecutar la consulta
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    solicitud = new Solicitudes();
 
                     // Asignar los valores de la consulta a los atributos de la solicitud
                     solicitud.setSolicitudId(resultSet.getInt("solicitud_id"));
                     solicitud.setUsername(resultSet.getString("username"));
                     solicitud.setNombre(resultSet.getString("nombre"));
                     solicitud.setApellido(resultSet.getString("apellido"));
-                    solicitud.setEmail(resultSet.getString("email"));
+                    solicitud.setEmail(resultSet.getString("email_usuario"));
                     solicitud.setDNI(resultSet.getString("DNI"));
                     solicitud.setDireccion(resultSet.getString("direccion"));
 
@@ -393,8 +392,6 @@ public class AdminDAO extends BaseDao{
                     solicitante.setEmail(resultSet.getString("email_solicitante"));
                     solicitud.setSolicitante(solicitante);
 
-                    // Aquí se asume que el distrito ya ha sido mapeado en otro lugar si es necesario
-                    // Y si no es necesario, podemos dejarlo como null o mapearlo también.
 
                     Distritos distrito = new Distritos();  // Si necesitas mapear el distrito
                     distrito.setDistritoId(resultSet.getInt("distrito_id"));

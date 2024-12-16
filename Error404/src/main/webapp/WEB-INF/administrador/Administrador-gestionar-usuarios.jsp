@@ -342,14 +342,14 @@
                                                         <!-- Condición para mostrar botones según el estado -->
                                                         <% if ("activa".equals(usuario.getEstadoCuenta())) { %>
                                                         <!-- Botón de suspender -->
-                                                        <button type="button" class="btn btn-sm btn-danger me-1 btn-suspender"
+                                                        <button type="button" class="btn btn-label-danger me-1 btn-suspender"
                                                                 data-bs-toggle="tooltip" title="Suspender"
                                                                 onclick="confirmarSuspension(<%= usuario.getUserId() %>)">
                                                             <i class="bx bxs-alarm-exclamation"></i>
                                                         </button>
                                                         <% } else if ("baneada".equals(usuario.getEstadoCuenta())) { %>
                                                         <!-- Botón de desbloquear -->
-                                                        <button type="button" class="btn btn-sm btn-success me-1 btn-desbloquear"
+                                                        <button type="button" class="btn btn-label-success me-1 btn-desbloquear"
                                                                 data-bs-toggle="tooltip" title="Desbloquear"
                                                                 onclick="confirmarDesbloqueo(<%= usuario.getUserId() %>)">
                                                             <i class="bx bxs-lock-open"></i>
@@ -357,7 +357,7 @@
                                                         <% } %>
 
                                                         <!-- Botón de editar (siempre visible) -->
-                                                        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Info" onclick="editarUsuario(<%= usuario.getUserId() %>)">
+                                                        <button type="button" class="btn btn-sm btn-label-info" data-bs-toggle="tooltip" title="Info" onclick="editarUsuario(<%= usuario.getUserId() %>)">
                                                             <i class="bx bxs-info-circle"></i>
                                                         </button>
                                                     </div>
@@ -460,7 +460,7 @@
     function desbloquearCuenta(userId) {
         // Realiza una solicitud AJAX para desbloquear la cuenta
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "listarUsuarios", true);
+        xhr.open("POST", "gestionUsuarios", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -501,7 +501,7 @@
     function suspenderCuenta(userId) {
         // Realiza una solicitud AJAX para suspender la cuenta
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "listarUsuarios", true);
+        xhr.open("POST", "gestionUsuarios", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
