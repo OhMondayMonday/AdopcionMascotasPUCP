@@ -1,15 +1,19 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
+<jsp:useBean id="rol" class="Beans.Roles" scope="request" />
+
+<jsp:setProperty name="usuario" property="*" />
+<jsp:setProperty name="rol" property="*" />
+
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-
-
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0   d-xl-none ">
         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
             <i class="bx bx-menu bx-sm"></i>
         </a>
     </div>
-
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
@@ -22,10 +26,6 @@
         </div>
 
         <ul class="navbar-nav flex-row align-items-center ms-0">
-
-            <!-- Notification -->
-
-            <!--/ Notification -->
 
             <span style="margin-left: 10px; margin-right: 2px; font-weight: bold; color: rgba(163, 108, 20, 0.83);">Coordinador Andy</span>
             <!-- User -->

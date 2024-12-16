@@ -3,8 +3,9 @@ package DTO;
 import java.util.Date;
 
 public class HogarTemporalDTO {
+    private int temporalId;
     private int solicitudId;
-    private int hogarId;
+
     private String nombre;
     private String apellido;
     private String direccion;
@@ -23,14 +24,14 @@ public class HogarTemporalDTO {
     private String recompensa;       // Nuevo campo
 
     // Constructor actualizado con campos adicionales
-    public HogarTemporalDTO(int solicitudId,int hogarId, String nombre, String apellido, String direccion,
+    public HogarTemporalDTO(int solicitudId,int temporalId, String nombre, String apellido, String direccion,
                             String estadoTemporal, Date fechaSolicitud, String tipoSolicitud,
                             int edad, String genero, String celular, String mascota,
                             Date fechaPerdida, String lugarPerdida,
                             String descripcionAdicional, String telefonoContacto,
                             String nombreContacto, String recompensa) {
         this.solicitudId = solicitudId;
-        this.hogarId = hogarId;
+        this.temporalId = temporalId;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -116,12 +117,12 @@ public class HogarTemporalDTO {
         this.mascota = mascota;
     }
 
-    public int getHogarId() {
-        return hogarId;
+    public int getTemporalId() {
+        return temporalId;
     }
 
-    public void setHogarId(int hogarId) {
-        this.hogarId = hogarId;
+    public void setTemporalId(int temporalId) {
+        this.temporalId = temporalId;
     }
 
     public String getNombre() {
@@ -198,7 +199,7 @@ public class HogarTemporalDTO {
 
     @Override
     public String toString() {
-        return "HogarTemporalDTO [hogarId=" + hogarId + ", nombre=" + nombre + ", apellido=" + apellido
+        return "HogarTemporalDTO [temporal_id=" + temporalId + ", nombre=" + nombre + ", apellido=" + apellido
                 + ", direccion=" + direccion + ", estadoTemporal=" + estadoTemporal + ", fechaSolicitud="
                 + fechaSolicitud + ", tipoSolicitud=" + tipoSolicitud + ", mascota=" + mascota
                 + ", solicitudId=" + ", fechaPerdida=" + fechaPerdida

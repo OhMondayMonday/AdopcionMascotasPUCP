@@ -8,6 +8,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+
 
 import java.io.IOException;
 import java.sql.Date;
@@ -46,12 +48,6 @@ public class CoordinadorServlet extends HttpServlet {
                     break;
                 case "listarGestionHogares":
                     listarGestionHogares(request, response);
-                    break;
-                case "aprobarSolicitudHogar":
-                    aprobarSolicitudHogar(request, response);
-                    break;
-                case "rechazarSolicitudHogar":
-                    rechazarSolicitudHogar(request, response);
                     break;
                 case "banearHogarTemporal":
                     banearHogarTemporal(request, response);
@@ -116,12 +112,23 @@ public class CoordinadorServlet extends HttpServlet {
         }
     }
 
-
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
+        // Define la respuesta en formato JSON
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        // Obtener ID de solicitud y temporal (según el tipo de solicitud)
+        String solicitudIdStr = request.getParameter("solicitudId");
+        String temporalIdStr = request.getParameter("temporalId");
+
+        // Verifica que los IDs de solicitud o temporal sean válidos
+        int solicitudId = (solicitudIdStr != null && !solicitudIdStr.isEmpty()) ? Integer.parseInt(solicitudIdStr) : -1;
+        int temporalId = (temporalIdStr != null && !temporalIdStr.isEmpty()) ? Integer.parseInt(temporalIdStr) : -1;
+
+        // Lógica para manejar las diferentes acciones
         if ("registrar".equals(action)) {
             registrarCoordinador(request, response);
         } else if ("actualizar".equals(action)) {
@@ -133,14 +140,10 @@ public class CoordinadorServlet extends HttpServlet {
             if (zonaIdStr != null && !zonaIdStr.isEmpty()) {
                 try {
                     int zonaId = Integer.parseInt(zonaIdStr); // Obtener zonaId como entero
-                    System.out.println("Zona ID seleccionado: " + zonaId);  // Depuración del zonaId
-
                     List<Distritos> distritos = coordinadorDAO.obtenerDistritosPorZona(zonaId); // Obtener distritos
-                    System.out.println("Distritos encontrados: " + distritos.size());  // Depuración de los distritos encontrados
 
                     // Pasar distritos a la JSP
                     if (distritos.isEmpty()) {
-                        System.out.println("No hay distritos para esta zona.");
                         request.setAttribute("mensaje", "No hay distritos para esta zona.");
                     } else {
                         request.setAttribute("distritos", distritos);
@@ -155,36 +158,51 @@ public class CoordinadorServlet extends HttpServlet {
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Zona no seleccionada");
             }
-        } else if ("aprobar".equals(action)) {
-            manejarSolicitud(request, response, true);
-        } else if ("rechazar".equals(action)) {
-            manejarSolicitud(request, response, false); // Rechazar solicitud
-        } else if ("banear".equals(action)) {
-            manejarBaneo(request, response);
+
+        } else if ("aprobarHogar".equals(action)) { // Acción para aprobar la solicitud de hogar temporal
+            boolean success = coordinadorDAO.aprobarHogarTemporal(temporalId);  // Llamada al método para aprobar
+            String jsonResponse = success
+                    ? "{\"success\": true, \"message\": \"Solicitud aprobada con éxito.\"}"
+                    : "{\"success\": false, \"message\": \"Error al aprobar la solicitud.\"}";
+
+            response.getWriter().write(jsonResponse);
+
+        } else if ("rechazarHogar".equals(action)) { // Acción para rechazar la solicitud de hogar temporal
+            boolean success = coordinadorDAO.rechazarHogarTemporal(temporalId);  // Llamada al método para rechazar
+            String jsonResponse = success
+                    ? "{\"success\": true, \"message\": \"Solicitud rechazada con éxito.\"}"
+                    : "{\"success\": false, \"message\": \"Error al rechazar la solicitud.\"}";
+
+            response.getWriter().write(jsonResponse);
+
+        } else if ("aprobarMascota".equals(action)) { // Acción para aprobar la solicitud de mascota perdida
+            boolean success = coordinadorDAO.aprobarSolicitudMascota(solicitudId);  // Llamada al método para aprobar solicitud de mascota perdida
+            String jsonResponse = success
+                    ? "{\"success\": true, \"message\": \"Solicitud de mascota perdida aprobada con éxito.\"}"
+                    : "{\"success\": false, \"message\": \"Error al aprobar la solicitud de mascota perdida.\"}";
+
+            response.getWriter().write(jsonResponse);
+
+        } else if ("rechazarMascota".equals(action)) { // Acción para rechazar la solicitud de mascota perdida
+            boolean success = coordinadorDAO.rechazarSolicitudMascota(solicitudId);  // Llamada al método para rechazar solicitud de mascota perdida
+            String jsonResponse = success
+                    ? "{\"success\": true, \"message\": \"Solicitud de mascota perdida rechazada con éxito.\"}"
+                    : "{\"success\": false, \"message\": \"Error al rechazar la solicitud de mascota perdida.\"}";
+
+            response.getWriter().write(jsonResponse);
         }
     }
 
-    private void manejarSolicitud(HttpServletRequest request, HttpServletResponse response, boolean aprobar) throws IOException {
-        int solicitudId = parseParameterToInt(request, "solicitudId");
 
-        boolean exito = aprobar
-                ? coordinadorDAO.rechazarSolicitudHogar(solicitudId)
-                : coordinadorDAO.rechazarSolicitudHogar(solicitudId);
+    // Método auxiliar para enviar la respuesta JSON
+    private void enviarRespuesta(HttpServletResponse response, boolean success, String message) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
 
-        String mensaje = exito
-                ? (aprobar ? "Solicitud aprobada exitosamente." : "Solicitud rechazada exitosamente.")
-                : "Error al procesar la solicitud.";
-        redirectWithMessage(response, "listarSolicitudesHogar", mensaje);
-    }
-
-    private void manejarBaneo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int temporalId = parseParameterToInt(request, "temporalId");
-
-        boolean baneado = coordinadorDAO.banearHogarTemporalManual(temporalId);
-        String mensaje = baneado
-                ? "Hogar temporal baneado exitosamente."
-                : "Error al banear el hogar temporal.";
-        redirectWithMessage(response, "listarGestionHogares", mensaje);
+        String jsonResponse = "{\"success\": " + success + ", \"message\": \"" + message + "\"}";
+        out.write(jsonResponse);
+        out.flush();
     }
 
 
@@ -302,7 +320,7 @@ public class CoordinadorServlet extends HttpServlet {
         // **Depuración: Verificar el tamaño de la lista y sus elementos**
         System.out.println("Tamaño de la lista solicitudes: " + solicitudes.size());
         for (HogarTemporalDTO hogarDTO : solicitudes) {
-            System.out.println("Hogar ID: " + hogarDTO.getHogarId() + ", Dirección: " + hogarDTO.getDireccion());
+            System.out.println("Hogar ID: " + hogarDTO.getTemporalId() + ", Dirección: " + hogarDTO.getDireccion());
         }
 
         int totalSolicitudes = solicitudes.size(); // Si necesitas contar registros, ajusta el método en el DAO.
@@ -334,7 +352,7 @@ public class CoordinadorServlet extends HttpServlet {
         // **Depuración: Imprimir tamaño de la lista y sus elementos**
         System.out.println("Tamaño de la lista solicitudes: " + solicitudes.size());
         for (HogarTemporalDTO hogar : solicitudes) {
-            System.out.println("Hogar ID: " + hogar.getHogarId() + ", Dirección: " + hogar.getDireccion());
+            System.out.println("Hogar ID: " + hogar.getTemporalId() + ", Dirección: " + hogar.getDireccion());
         }
 
         int totalSolicitudes = coordinadorDAO.contarTotalHogaresTemporales(coordinadorId);
@@ -348,25 +366,6 @@ public class CoordinadorServlet extends HttpServlet {
 
         // Redirigir a la página de JSP
         request.getRequestDispatcher("/WEB-INF/coordinador/coordinador-tables-hogaresTemporales.jsp").forward(request, response);
-    }
-
-    // Método para aprobar solicitud de hogar temporal
-    private void aprobarSolicitudHogar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int solicitudId = parseParameterToInt(request, "solicitudId");
-        boolean aprobado = coordinadorDAO.aprobarSolicitudHogar(solicitudId);
-
-        // Verificar si la actualización fue exitosa y redirigir con el mensaje correspondiente
-        String mensaje = aprobado ? "Solicitud aprobada con éxito" : "Error al aprobar solicitud";
-        redirectWithMessage(response, "listarSolicitudesHogar", mensaje);
-    }
-
-    private void rechazarSolicitudHogar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int solicitudId = parseParameterToInt(request, "solicitudId");
-        boolean rechazado = coordinadorDAO.rechazarSolicitudHogar(solicitudId);
-
-        // Verificar si la actualización fue exitosa y redirigir con el mensaje correspondiente
-        String mensaje = rechazado ? "Solicitud rechazada con éxito" : "Error al rechazar solicitud";
-        redirectWithMessage(response, "listarSolicitudesHogar", mensaje);
     }
 
     // Método para banear un hogar temporal manualmente
