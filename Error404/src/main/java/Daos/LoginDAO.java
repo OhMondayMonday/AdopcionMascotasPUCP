@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginDAO extends BaseDao {
     public Usuarios validarUsuario(String email, String contrasenia) {
-        String sql = "SELECT u.*, r.nombre_rol, d.nombre_distrito, z.nombre_zona, f.url_foto " +
+        String sql = "SELECT u.*, r.nombre_rol, d.nombre_distrito, z.nombre_zona, f.url_foto, d.zona_distrito_id " +
                 "FROM usuarios u " +
                 "LEFT JOIN roles r ON u.rol_id = r.rol_id " +
                 "LEFT JOIN distritos d ON u.distrito_id = d.distrito_id " +
@@ -68,7 +68,7 @@ public class LoginDAO extends BaseDao {
 
                     // Zona
                     Zonas zona = new Zonas();
-                    zona.setZonaId(resultSet.getInt("zona_distrito_id"));
+                    zona.setZonaId(resultSet.getInt("zona_id"));
                     zona.setNombreZona(resultSet.getString("nombre_zona"));
                     distrito.setZona(zona);
 
