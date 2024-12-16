@@ -80,10 +80,6 @@
 
         <!-- Helpers -->
         <script src="${pageContext.request.contextPath}/assets/vendor/js/helpers.js"></script>
-        <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-        <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-
-        <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
         <script src="${pageContext.request.contextPath}/assets/js/config.js"></script>
     </head>
 
@@ -118,7 +114,7 @@
 
                                                         <div class="user-info text-center">
                                                             <h4 class="mt-3" style="color: #1f4397;">${usuario.nombre} ${usuario.apellido}</h4>
-                                                            <span class="badge bg-label-success">Activo</span>
+                                                            <span class="badge bg-label-success">Usuario</span>
                                                         </div>
 
                                                     </div>
@@ -172,81 +168,28 @@
                                                 </li>
                                             </ul>
 
-                                                <form id="miFormularioPersonal" action="UsuarioServlet?action=actualizar" method="post">
-                                                    <input type="hidden" name="id" value="1">
-
-                                                    <!-- Información Básica Tab -->
+                                                <form id="miFormularioPersonal" action="${pageContext.request.contextPath}/UsuarioServlet?action=actualizar" method="post">
+                                                    <input type="hidden" name="id" value=1>
                                                     <div class="tab-content">
                                                     <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
                                                         <div class="row g-3">
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="nombre">Nombre</label>
-                                                                <input type="text" id="nombre" name="nombre" class="form-control" value="${usuario.nombre}" required />
+                                                                <label class="form-label" for="formtabs-username">Nombre:</label>
+                                                                <input type="text" id="formtabs-username" name="nombre" class="form-control"
+                                                                       value="${usuario.nombre}" placeholder="Nombre de usuario" required />
                                                             </div>
 
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="apellido">Apellido</label>
-                                                                <input type="text" id="apellido" name="apellido" class="form-control" value="${usuario.apellido}" required />
-                                                            </div>
-
-                                                            <div class="col-md-6">
-                                                                <label class="form-label" for="username">Nombre de Usuario</label>
-                                                                <input type="text" id="username" name="username" class="form-control" value="${usuario.username}" required />
-                                                            </div>
-
-                                                            <div class="col-md-6">
-                                                                <label class="form-label" for="email">Correo Electrónico</label>
-                                                                <input type="email" id="email" name="email" class="form-control" value="${usuario.email}" required />
+                                                                <label class="form-label" for="formtabs-apellido">Apellido:</label>
+                                                                <input type="text" id="formtabs-apellido" name="apellido" class="form-control"
+                                                                       value="${usuario.apellido}" placeholder="Apellido" required />
                                                             </div>
 
 
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="distrito">Distrito</label>
-                                                                <select id="distrito" name="distrito" class="select2 form-select form-select-lg" data-allow-clear="true">
-                                                                    <option value="AK">Ancón</option>
-                                                                    <option value="HI">Ate</option>
-                                                                    <option value="CA">Barranco</option>
-                                                                    <option value="NV">Breña</option>
-                                                                    <option value="OR">Carabayllo</option>
-                                                                    <option value="WA">Chaclacayo</option>
-                                                                    <option value="AZ">Chorrillos</option>
-                                                                    <option value="CO">Cineguilla</option>
-                                                                    <option value="ID">Comas</option>
-                                                                    <option value="MT">El Agustino</option>
-                                                                    <option value="NE">Independencia</option>
-                                                                    <option value="NM">Jesús María</option>
-                                                                    <option value="ND">La Molina</option>
-                                                                    <option value="UT">La Victoria</option>
-                                                                    <option value="WY">Lima</option>
-                                                                    <option value="AL">Lince</option>
-                                                                    <option value="AR">Los Olivos</option>
-                                                                    <option value="IL">Lurigancho</option>
-                                                                    <option value="IA">Lurín</option>
-                                                                    <option value="KS">Magdalena del Mar</option>
-                                                                    <option value="KY">Miraflores</option>
-                                                                    <option value="LA">Pachacámac</option>
-                                                                    <option value="MN">Pucusana</option>
-                                                                    <option value="MS">Pueblo Libre</option>
-                                                                    <option value="MO">Puente Piedra</option>
-                                                                    <option value="OK">Punta Hermosa</option>
-                                                                    <option value="SD">Punta Negra</option>
-                                                                    <option value="TX">Rímac</option>
-                                                                    <option value="TN">San Bartolo</option>
-                                                                    <option value="WI">San Borja</option>
-                                                                    <option value="CT">San Isidro</option>
-                                                                    <option value="DE">San Juan de Lurigancho</option>
-                                                                    <option value="FL">San Juan de Miraflores</option>
-                                                                    <option value="GA">San Luis</option>
-                                                                    <option value="IN">San Martín de Porres</option>
-                                                                    <option value="ME">San Miguel</option>
-                                                                    <option value="MD">Santa Anita</option>
-                                                                    <option value="MA">Santa María del Mar</option>
-                                                                    <option value="MI">Santa Rosa</option>
-                                                                    <option value="NH">Santiago de Surco</option>
-                                                                    <option value="NJ">Surquillo</option>
-                                                                    <option value="NY">Villa El Salvador</option>
-                                                                    <option value="NC">Villa María del Triunfo</option>
-                                                                </select>
+                                                                <label class="form-label" for="formtabs-alias">User:</label>
+                                                                <input type="text" id="formtabs-alias" name="username" class="form-control"
+                                                                       value="${usuario.username}" placeholder="Alias" required />
                                                             </div>
 
                                                             <div class="col-md-6">
@@ -254,17 +197,82 @@
                                                                 <input class="form-control" name="fecha_nacimiento" type="date" id="fecha_nacimiento" value="${usuario.fechaNacimiento}" />
                                                             </div>
 
+
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="telefono_contacto">Teléfono Contacto</label>
-                                                                <div class="input-group input-group-merge">
-                                                                    <span id="telefono_contacto" class="input-group-text"><i class="bx bx-phone"></i></span>
-                                                                    <input type="text" name="numero_yape_plin" id="telefono_contacto1" class="form-control phone-mask" placeholder="999 999 999" value="${usuario.numeroYapePlin}" />
-                                                                </div>
+                                                                <label class="form-label" for="distrito">Distrito:</label>
+                                                                <select id="distrito" name="distritoId" class="form-select" required>
+                                                                    <option value="" disabled selected>Seleccione un distrito</option>
+                                                                    <option value="1">Ancón</option>
+                                                                    <option value="2">Ate</option>
+                                                                    <option value="3">Barranco</option>
+                                                                    <option value="4">Breña</option>
+                                                                    <option value="5">Carabayllo</option>
+                                                                    <option value="6">Chaclacayo</option>
+                                                                    <option value="7">Chorrillos</option>
+                                                                    <option value="8">Cieneguilla</option>
+                                                                    <option value="9">Comas</option>
+                                                                    <option value="10">El Agustino</option>
+                                                                    <option value="11">Independencia</option>
+                                                                    <option value="12">Jesús María</option>
+                                                                    <option value="13">La Molina</option>
+                                                                    <option value="14">La Victoria</option>
+                                                                    <option value="15">Lima</option>
+                                                                    <option value="16">Lince</option>
+                                                                    <option value="17">Los Olivos</option>
+                                                                    <option value="18">Lurigancho</option>
+                                                                    <option value="19">Lurín</option>
+                                                                    <option value="20">Magdalena del Mar</option>
+                                                                    <option value="21">Miraflores</option>
+                                                                    <option value="22">Pachacámac</option>
+                                                                    <option value="23">Pucusana</option>
+                                                                    <option value="24">Pueblo Libre</option>
+                                                                    <option value="25">Puente Piedra</option>
+                                                                    <option value="26">Punta Hermosa</option>
+                                                                    <option value="27">Punta Negra</option>
+                                                                    <option value="28">Rímac</option>
+                                                                    <option value="29">San Bartolo</option>
+                                                                    <option value="30">San Borja</option>
+                                                                    <option value="31">San Isidro</option>
+                                                                    <option value="32">San Juan de Lurigancho</option>
+                                                                    <option value="33">San Juan de Miraflores</option>
+                                                                    <option value="34">San Luis</option>
+                                                                    <option value="35">San Martín de Porres</option>
+                                                                    <option value="36">San Miguel</option>
+                                                                    <option value="37">Santa Anita</option>
+                                                                    <option value="38">Santa María del Mar</option>
+                                                                    <option value="39">Santa Rosa</option>
+                                                                    <option value="40">Santiago de Surco</option>
+                                                                    <option value="41">Surquillo</option>
+                                                                    <option value="42">Villa El Salvador</option>
+                                                                    <option value="43">Villa María del Triunfo</option>
+                                                                </select>
+                                                                <small class="form-text text-muted">Seleccione su distrito de la lista.</small>
                                                             </div>
 
-                                                            <div class="col-md-12">
-                                                                <label class="form-label" for="descripcion">Sobre mí</label>
-                                                                <textarea id="descripcion" name="descripcion" class="form-control" rows="2" placeholder="Ingresa una descripción sobre ti">${usuario.descripcion}</textarea>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label" for="formtabs-direccion">Direccion:</label>
+                                                                <input type="text" id="formtabs-direccion" name="direccion" class="form-control"
+                                                                       value="${usuario.direccion}" placeholder="Dirección" required />
+                                                            </div>
+
+
+                                                            <div class="col-md-6">
+                                                                <label class="form-label" for="yape-contact">Numero contacto:</label>
+                                                                <input type="text" id="yape-contact" name="numeroYapePlin" class="form-control"
+                                                                       value="${usuario.numeroYapePlin}" placeholder="999 999 999" />
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <label class="form-label" for="formtabs-email">Correo Electrónico</label>
+                                                                <input type="email" id="formtabs-email" name="email" class="form-control"
+                                                                       value="${usuario.email}" placeholder="usuario@ejemplo.com" required />
+                                                            </div>
+
+
+                                                            <div class="col-12">
+                                                                <label class="form-label" for="collapsible-description">Descripción</label>
+                                                                <textarea id="collapsible-description" name="descripcion" class="form-control" rows="2"
+                                                                          placeholder="Ingresa una descripción">${usuario.descripcion}</textarea>
                                                             </div>
 
                                                             <div class="col-md-12">
@@ -276,34 +284,30 @@
                                                                 <!-- Tab de Redes Sociales -->
                                                     <div class="tab-pane fade" id="form-tabs-social" role="tabpanel">
                                                         <div class="row g-3">
-                                                            <div class="col-md-6">
-                                                                <label class="form-label" for="twitter-link">Twitter</label>
-                                                                <div class="input-group input-group-merge">
-                                                                    <span id="twitter-icon" class="input-group-text"><i class="bx bxl-twitter"></i></span>
-                                                                    <input type="text" id="twitter-link" name="urlTwitter" class="form-control" value="${usuario.urlTwitter}" placeholder="https://twitter.com/abc" />
-                                                                </div>
-                                                            </div>
+
 
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="facebook-link">Facebook</label>
                                                                 <div class="input-group input-group-merge">
                                                                     <span id="facebook-icon" class="input-group-text"><i class="bx bxl-facebook-circle"></i></span>
-                                                                    <input type="url" id="facebook-link" name="urlFacebook" class="form-control" value="${usuario.urlFacebook}" placeholder="https://facebook.com/abc" />
+                                                                    <input type="url" id="facebook-link" name="urlFacebook" class="form-control"
+                                                                           value="${usuario.urlFacebook}" placeholder="https://facebook.com/abc" />
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="instagram-link">Instagram</label>
-                                                                <input type="url" id="instagram-link" name="urlInstagram" class="form-control" value="${usuario.urlInstagram}" placeholder="https://instagram.com/abc" />
+                                                                <input type="url" id="instagram-link" name="urlInstagram" class="form-control"
+                                                                       value="${usuario.urlInstagram}" placeholder="https://instagram.com/abc" />
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <!-- Botones de Acción -->
-                                                    <div class="pt-4">
-                                                        <button type="submit" class="btn btn-success me-sm-3 me-1"><span style="font-weight: bold;">Confirmar</span></button>
-                                                        <button type="button" class="btn btn-danger cancel-subscription me-sm-3 me-1">Cancelar</button>
-                                                    </div>
+                                                        <div class="pt-4">
+                                                            <button type="button" class="btn btn-success me-sm-3 me-1" id="confirm-text"><span style="font-weight: bold;">Confirmar</span></button>
+                                                            <button class="btn btn-danger cancel-subscription me-sm-3 me-1">Cancelar</button>
+                                                        </div>
                                                     </div>
 
                                                 </form>

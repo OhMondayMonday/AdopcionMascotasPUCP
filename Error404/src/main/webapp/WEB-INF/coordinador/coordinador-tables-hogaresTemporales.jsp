@@ -4,8 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
-
-
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
@@ -219,22 +217,14 @@
                                                                         </c:choose>
                                                                     </td>
 
-                                                                    <!-- Estado de la solicitud -->
-                                                                    <td>
-                                                                        <c:choose>
-                                                                            <c:when test="${hogar.estadoTemporal != null}">
-                                                                                ${hogar.estadoTemporal}
-                                                                            </c:when>
-                                                                            <c:otherwise>pendiente</c:otherwise>
-                                                                        </c:choose>
-
+                                                                    <td class="estado"> <!-- Clase 'estado' para acceder al estado -->
+                                                                        <span class="badge bg-label-warning">Pendiente</span>
                                                                     </td>
 
-                                                                    <!-- Fecha de solicitud -->
+
                                                                     <td>${hogar.fechaSolicitud}</td>
 
-                                                                    <!-- Teléfono de contacto -->
-                                                                    <!-- Teléfono de contacto -->
+
                                                                     <td>
                                                                         <c:choose>
                                                                             <c:when test="${hogar.tipoSolicitud eq 'mascota_perdida' and hogar.telefonoContacto != null}">
@@ -250,37 +240,28 @@
                                                                     </td>
 
 
-                                                                    <!-- Botones de Acciones -->
-                                                                    <!-- Botones Aceptar/Rechazar -->
                                                                     <td>
                                                                         <div class="d-flex gap-2">
-                                                                            <!-- Ver detalles -->
-                                                                            <button id="btn-detalles-${hogar.solicitudId}" class="btn btn-label-info"
-                                                                                    onclick="verDetalles(${hogar.solicitudId}, ${hogar.temporalId})">
+                                                                            <!-- Botón Ver Detalles -->
+                                                                            <a href="coordinador-ver-solicitud-aceptado.html" class="btn btn-label-info">
                                                                                 <i class='bx bx-show'></i>
-                                                                            </button>
+                                                                            </a>
 
-                                                                            <!-- Botones Aceptar/Rechazar -->
-                                                                            <button id="btn-aceptar-${hogar.solicitudId}" class="btn btn-label-success"
-                                                                                    data-solicitudId="${hogar.solicitudId}"
-                                                                                    data-temporalId="${hogar.temporalId}"
-                                                                                    data-tipoSolicitud="${hogar.tipoSolicitud}"
-                                                                                    onclick="gestionarSolicitud(${hogar.solicitudId}, ${hogar.temporalId}, 'aceptar', '${hogar.tipoSolicitud}')">
-                                                                                <i class="bx bx-check-circle"></i>
-                                                                            </button>
+                                                                            <!-- Botón Aceptar -->
+                                                                            <a href="#" class="btn-accept" data-solicitudId="${hogar.solicitudId}" data-temporalId="${hogar.temporalId}">
+                                                                                <button type="button" class="btn btn-label-success">
+                                                                                    <i class="bx bx-check-circle"></i>
+                                                                                </button>
+                                                                            </a>
 
-
-                                                                            <button id="btn-rechazar-${hogar.solicitudId}" class="btn btn-label-danger"
-                                                                                    data-solicitudId="${hogar.solicitudId}"
-                                                                                    data-temporalId="${hogar.temporalId}"
-                                                                                    data-tipoSolicitud="${hogar.tipoSolicitud}"
-                                                                                    onclick="gestionarSolicitud(${hogar.solicitudId}, ${hogar.temporalId}, 'rechazar', '${hogar.tipoSolicitud}')">
-                                                                                <i class="bx bxs-x-circle"></i>
-                                                                            </button>
+                                                                            <a href="#" class="btn-reject" data-solicitudId="${hogar.solicitudId}" data-temporalId="${hogar.temporalId}">
+                                                                                <button type="button" class="btn btn-label-danger">
+                                                                                    <i class="bx bxs-x-circle"></i>
+                                                                                </button>
+                                                                            </a>
 
                                                                         </div>
                                                                     </td>
-
 
                                                                 </tr>
                                                             </c:forEach>
@@ -494,90 +475,107 @@
 
         <!-- SweetAlert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- SweetAlert -->
         <script>
-            // Función para gestionar la solicitud (aprobar o rechazar)
-            function gestionarSolicitud(solicitudId, temporalId, accion, tipoSolicitud) {
-                // Definir la URL según la acción (aprobar o rechazar) y el tipo de solicitud
-                let url = '';
-                if (tipoSolicitud === 'temporal') {
-                    url = accion === 'aceptar'
-                        ? `/coordinador?action=aprobarHogar&temporalId=${temporalId}`
-                        : `/coordinador?action=rechazarHogar&temporalId=${temporalId}`;
-                } else if (tipoSolicitud === 'mascota_perdida') {
-                    url = accion === 'aceptar'
-                        ? `/coordinador?action=aprobarMascota&solicitudId=${solicitudId}`
-                        : `/coordinador?action=rechazarMascota&solicitudId=${solicitudId}`;
-                }
+            // Para aceptar solicitudes
+            document.querySelectorAll('.btn-accept').forEach(button => {
+                button.addEventListener('click', event => {
+                    event.preventDefault();
+                    const temporalId = button.dataset.temporalId; // Obtener el ID del hogar temporal
+                    const tipoSolicitud = button.dataset.tipoSolicitud; // Obtener el tipo de solicitud (mascota_perdida o temporal)
 
-                // Confirmación con SweetAlert
-                Swal.fire({
-                    title: `¿Estás seguro de ${accion == 'aceptar' ? 'aceptar' : 'rechazar'} la solicitud?`,
-                    text: "Esta acción no se puede revertir.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: `Sí, ${accion}`,
-                    cancelButtonText: "Cancelar",
-                    customClass: { confirmButton: "btn btn-success me-2", cancelButton: "btn btn-secondary" },
-                    buttonsStyling: false
-                }).then(result => {
-                    if (result.isConfirmed) {
-                        // Realizar petición AJAX al servidor para aprobar o rechazar
-                        fetch('/coordinador?action=aprobarHogar&temporalId=${temporalId}', { method: 'GET' })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    Swal.fire({
-                                        icon: "success",
-                                        title: "¡Hecho!",
-                                        text: data.message,
-                                        customClass: { confirmButton: "btn btn-success" }
-                                    }).then(() => {
-                                        location.reload(); // Recargar la página para reflejar el cambio
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: "error",
-                                        title: "Error",
-                                        text: data.message,
-                                        customClass: { confirmButton: "btn btn-danger" }
-                                    });
+                    // Confirmación con SweetAlert
+                    Swal.fire({
+                        title: "¿Estás seguro?",
+                        text: "Aceptarás la solicitud seleccionada.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, aceptar",
+                        cancelButtonText: "Cancelar",
+                        customClass: { confirmButton: "btn btn-success me-2", cancelButton: "btn btn-secondary" },
+                        buttonsStyling: false
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            // Encontramos el td con la clase 'estado' dentro de la fila
+                            const tdEstado = button.closest('tr').querySelector('.estado');
+
+                            console.log('tdEstado:', tdEstado);  // Verificar que estamos accediendo correctamente al td
+
+                            // Si el tdEstado se encuentra correctamente, actualizamos su contenido
+                            if (tdEstado) {
+                                if (tipoSolicitud === 'mascota_perdida') {
+                                    tdEstado.innerHTML = '<span class="badge bg-label-success">Aprobada</span>'; // Cambiar estado a "Aprobada"
+                                } else if (tipoSolicitud === 'temporal') {
+                                    tdEstado.innerHTML = '<span class="badge bg-label-success">Activa</span>'; // Cambiar estado a "Activa"
                                 }
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Error",
-                                    text: "Ocurrió un error inesperado.",
-                                    customClass: { confirmButton: "btn btn-danger" }
-                                });
+
+                                console.log('Nuevo estado:', tdEstado.innerHTML);  // Verificar que el estado se haya actualizado
+                            } else {
+                                console.error('No se encontró el td con la clase estado');  // Verificar si no se encuentra el td
+                            }
+
+                            Swal.fire({
+                                icon: "success",
+                                title: "¡Hecho!",
+                                text: "La solicitud ha sido aceptada",
+                                customClass: { confirmButton: "btn btn-success" }
                             });
-                    }
-                });
-            }
-
-            // Asignar los eventos de click a los botones de aceptar y rechazar
-            document.querySelectorAll('.btn-aceptar').forEach(button => {
-                button.addEventListener('click', event => {
-                    event.preventDefault();
-                    const solicitudId = button.dataset.solicitudId; // Obtener el ID de la solicitud
-                    const temporalId = button.dataset.temporalId; // Obtener el ID del hogar temporal
-                    const tipoSolicitud = button.dataset.tipoSolicitud; // Obtener el tipo de solicitud
-                    gestionarSolicitud(solicitudId, temporalId, 'aceptar', tipoSolicitud);
+                        }
+                    });
                 });
             });
 
-            document.querySelectorAll('.btn-rechazar').forEach(button => {
+            // Para rechazar solicitudes
+            document.querySelectorAll('.btn-reject').forEach(button => {
                 button.addEventListener('click', event => {
                     event.preventDefault();
-                    const solicitudId = button.dataset.solicitudId; // Obtener el ID de la solicitud
                     const temporalId = button.dataset.temporalId; // Obtener el ID del hogar temporal
-                    const tipoSolicitud = button.dataset.tipoSolicitud; // Obtener el tipo de solicitud
-                    gestionarSolicitud(solicitudId, temporalId, 'rechazar', tipoSolicitud);
+                    const tipoSolicitud = button.dataset.tipoSolicitud; // Obtener el tipo de solicitud (mascota_perdida o temporal)
+
+                    // Confirmación con SweetAlert
+                    Swal.fire({
+                        title: "¿Estás seguro?",
+                        text: "Rechazarás la solicitud seleccionada.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Sí, rechazar",
+                        cancelButtonText: "Cancelar",
+                        customClass: { confirmButton: "btn btn-danger me-2", cancelButton: "btn btn-secondary" },
+                        buttonsStyling: false
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            // Encontramos el td con la clase 'estado' dentro de la fila
+                            const tdEstado = button.closest('tr').querySelector('.estado');
+
+                            console.log('tdEstado:', tdEstado);  // Verificar que estamos accediendo correctamente al td
+
+                            // Si el tdEstado se encuentra correctamente, actualizamos su contenido
+                            if (tdEstado) {
+                                if (tipoSolicitud === 'mascota_perdida') {
+                                    tdEstado.innerHTML = '<span class="badge bg-label-danger">Rechazada</span>'; // Cambiar estado a "Rechazada"
+                                } else if (tipoSolicitud === 'temporal') {
+                                    tdEstado.innerHTML = '<span class="badge bg-label-danger">Rechazada</span>'; // Cambiar estado a "Rechazada"
+                                }
+
+                                console.log('Nuevo estado:', tdEstado.innerHTML);  // Verificar que el estado se haya actualizado
+                            } else {
+                                console.error('No se encontró el td con la clase estado');  // Verificar si no se encuentra el td
+                            }
+
+                            Swal.fire({
+                                icon: "success",
+                                title: "¡Hecho!",
+                                text: "La solicitud ha sido rechazada",
+                                customClass: { confirmButton: "btn btn-danger" }
+                            });
+                        }
+                    });
                 });
             });
+
+
         </script>
+
+
 
 
     </body>
