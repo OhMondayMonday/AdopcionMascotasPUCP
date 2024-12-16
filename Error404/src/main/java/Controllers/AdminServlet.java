@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "AdminServlet", urlPatterns = {"/crearLugares", "/lugares-eventos", "/listarUsuarios", "/gestionDonaciones", "/crearCoordinador"})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/crearLugares", "/lugares-eventos", "/listarUsuarios", "/gestionDonaciones", "/crearCoordinador", "/creacionCuentas"})
 public class AdminServlet extends HttpServlet{
 
     private final AdminDAO adminDAO = new AdminDAO();
@@ -57,6 +57,9 @@ public class AdminServlet extends HttpServlet{
             }
             case "/crearLugares" -> {
                 request.getRequestDispatcher("WEB-INF/administrador/Administrador-crear-lugares.jsp").forward(request, response);
+            }
+            case "/creacionCuentas" -> {
+
             }
         }
     }
