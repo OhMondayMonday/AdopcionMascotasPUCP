@@ -10,7 +10,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-        <title>Ver Mis Eventos</title>
+        <title>Mis Eventos</title>
 
 
         <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -100,7 +100,7 @@
                                     <div class="card-body d-flex justify-content-center p-1">
 
                                         <form action="EventosServlet" method="GET" id="filtrosForm" class="row justify-content-between w-100">
-                                            <input type="hidden" name="action" value="verMisEventosAlbergue">
+                                            <input type="hidden" name="action" value="verEventosDeUsuario">
                                             <!-- Tipo de Publicacion -->
 
                                             <div class="<c:choose><c:when test="${not empty filtros.tipoEventoId or not empty filtros.distritoId or not empty filtros.fechaInicio or not empty filtros.fechaFin}">
@@ -175,7 +175,7 @@
                                             </c:if>
 
                                             <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
-                                                <a class="btn btn-primary" type="button" id="dropdownMenuButton" href="albergue-crear-evento.html">Nuevo evento</a>
+                                                <a class="btn btn-primary" type="button" id="dropdownMenuButton" href="EventosServlet?action=verFormularioEvento">Nuevo evento</a>
                                             </div>
 
                                         </form>
@@ -214,7 +214,7 @@
                                                                             <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="EventosServlet?action=verDetallesEvento&event_id=${eventoInscrito.eventId}">
                                                                                 <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                                             </a>
-                                                                            <a class="btn btn-label-primary d-flex align-items-center" style="font-size: 0.75rem;" href="albergue-editar-evento.html">
+                                                                            <a class="btn btn-label-primary d-flex align-items-center" style="font-size: 0.75rem;" href="EventosServlet?action=verEditarEvento&event_id=${eventoInscrito.eventId}">
                                                                                 <span>Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                                             </a>
 
@@ -245,13 +245,13 @@
                                         <nav>
                                             <ul class="pagination justify-content-center">
                                                 <li class="page-item ${page == 1 ? 'disabled' : ''}">
-                                                    <a class="page-link" href="?action=verMisEventosAlbergue&page=${page - 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>                                    </li>
+                                                    <a class="page-link" href="?action=verEventosDeUsuario&page=${page - 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>                                    </li>
                                                 <c:forEach var="i" begin="1" end="${totalPages}">
                                                     <li class="page-item ${i == page ? 'active' : ''}">
-                                                        <a class="page-link" href="?action=verMisEventosAlbergue&page=${i}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>                                        </li>
+                                                        <a class="page-link" href="?action=verEventosDeUsuario&page=${i}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>                                        </li>
                                                 </c:forEach>
                                                 <li class="page-item ${page == totalPages ? 'disabled' : ''}">
-                                                    <a class="page-link" href="?action=verMisEventosAlbergue&page=${page + 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>                                    </li>
+                                                    <a class="page-link" href="?action=verEventosDeUsuario&page=${page + 1}&tipoEventoId=${filtros.tipoEventoId}&distritoId=${filtros.distritoId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>                                    </li>
                                             </ul>
                                         </nav>
                                     </c:when>
@@ -337,7 +337,7 @@
             <script>
                 function limpiarFiltros() {
                     const baseUrl = "EventosServlet";
-                    const queryParams = "?action=verMisEventosAlbergue";
+                    const queryParams = "?action=verEventosDeUsuario";
                     window.location.href = baseUrl + queryParams;
                 }
             </script>

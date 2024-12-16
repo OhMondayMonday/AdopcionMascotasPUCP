@@ -1,10 +1,8 @@
 package Controllers;
 
 import Beans.*;
-import Daos.DistritosDAO;
-import Daos.EventosDAO;
-import Daos.LoginDAO;
-import Daos.TiposEventosDAO;
+import Daos.*;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -53,8 +51,16 @@ public class EventosServlet extends HttpServlet {
                 verDetallesEvento(request, response);
                 break;
 
-            case "editarEvento":
-                editarEvento(request, response);
+            case "verFormularioEvento":
+                verFormularioEvento(request, response);
+                break;
+
+            case "verEditarEvento":
+                verEditarEvento(request, response);
+                break;
+
+            case "inscribirEvento":
+                inscribirEvento(request, response);
                 break;
 
             default:
@@ -63,43 +69,264 @@ public class EventosServlet extends HttpServlet {
         }
     }
 
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            response.sendRedirect("EventosServlet?action=verTodosEventos");
+        }
+
+        // Agregar el metodo de editarEvento
+
+
+        // Metodo para crear evento
+        if ("crearEvento".equals(action)) {
+            try {
+                // Obtener la sesión y el user_id
+                HttpSession session = request.getSession(false);
+                if (session == null || session.getAttribute("userID") == null) {
+                    response.sendRedirect("login");
+                    return;
+                }
+                int userId = (Integer) session.getAttribute("userID"); // Obtener el user_id de la sesión
+
+                // Obtener parámetros del lugar
+                int distritoId = Integer.parseInt(request.getParameter("distritoId"));
+                String direccionLugar = request.getParameter("direccionLugar");
+                int aforo = Integer.parseInt(request.getParameter("aforo"));
+
+                // Crear objeto Lugar
+                LugaresEventos lugar = new LugaresEventos();
+                Distritos distritos = new Distritos();
+                distritos.setDistritoId(distritoId);
+                lugar.setDistrito(distritos);
+                lugar.setDireccionLugar(direccionLugar);
+                lugar.setAforoMaximo(aforo);
+
+                // Insertar el lugar y obtener su ID
+                LugaresEventosDAO lugaresDAO = new LugaresEventosDAO();
+                int lugarIdGenerado = lugaresDAO.crearLugarEvento(lugar);
+
+                if (lugarIdGenerado > 0) {
+                    // Obtener parámetros del evento
+                    String nombreEvento = request.getParameter("nombreEvento");
+                    Date fechaEvento = Date.valueOf(request.getParameter("fechaEvento"));
+                    int tipoEventoId = Integer.parseInt(request.getParameter("tipoEventoId"));
+                    String descripcion = request.getParameter("descripcionEvento");
+                    String entrada = request.getParameter("entrada");
+                    String artistas = request.getParameter("artistasProveedores");
+                    String razon = request.getParameter("razonEvento");
+
+                    Usuarios usuario = new Usuarios();
+                    usuario.setUserId(userId);
+
+                    // Crear objeto Evento
+                    Eventos evento = new Eventos();
+                    evento.setNombreEvento(nombreEvento);
+                    evento.setFechaEvento(fechaEvento);
+                    TiposEventos tiposEventos = new TiposEventos();
+                    tiposEventos.setTipoEventoId(tipoEventoId);
+                    evento.setTipoEvento(tiposEventos);
+                    evento.setDescripcionEvento(descripcion);
+                    evento.setEntrada(entrada);
+                    evento.setArtistasProveedores(artistas);
+                    evento.setRazonEvento(razon);
+                    evento.setUsuario(usuario);
+
+                    // Insertar el evento
+                    EventosDAO eventosDAO = new EventosDAO();
+                    boolean eventoCreado = eventosDAO.crearEvento(evento, lugarIdGenerado);
+
+                    if (eventoCreado) {
+                        response.sendRedirect("EventosServlet?action=verTodosEventos");
+                    } else {
+                        response.getWriter().write("Error al crear el evento.");
+                    }
+                } else {
+                    response.getWriter().write("Error al crear el lugar del evento.");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.getWriter().write("Error: " + e.getMessage());
+            }
+        }
+
+        switch (action){
+
+            case "editarEvento":
+                int eventId = Integer.parseInt(request.getParameter("eventId"));
+                String nombreEvento = request.getParameter("nombreEvento");
+                Date fechaEvento = Date.valueOf(request.getParameter("fechaEvento"));
+                String direccionLugar = request.getParameter("direccionLugar");
+                int distritoId = Integer.parseInt(request.getParameter("distritoId"));
+                int aforo = Integer.parseInt(request.getParameter("aforo"));
+                int tipoEventoId = Integer.parseInt(request.getParameter("tipoEventoId"));
+                String descripcionEvento = request.getParameter("descripcionEvento");
+                String entrada = request.getParameter("entrada");
+                String artistas = request.getParameter("artistasProveedores");
+                String razon = request.getParameter("razonEvento");
+
+                // Obtener lugar del evento
+                Eventos evento = eventosDAO.obtenerDetalleEvento(eventId);
+                if (evento != null) {
+                    // Actualizar datos del lugar
+                    LugaresEventos lugar = evento.getLugarEvento();
+                    lugar.setDireccionLugar(direccionLugar);
+                    lugar.setAforoMaximo(aforo);
+
+                    Distritos distrito = new Distritos();
+                    distrito.setDistritoId(distritoId);
+                    lugar.setDistrito(distrito);
+
+                    // Setear nuevos datos del evento
+                    evento.setNombreEvento(nombreEvento);
+                    evento.setFechaEvento(fechaEvento);
+                    evento.setDescripcionEvento(descripcionEvento);
+                    evento.setEntrada(entrada);
+                    evento.setArtistasProveedores(artistas);
+                    evento.setRazonEvento(razon);
+
+                    TiposEventos tipoEvento = new TiposEventos();
+                    tipoEvento.setTipoEventoId(tipoEventoId);
+                    evento.setTipoEvento(tipoEvento);
+
+                    // Llamar al metodo para actualizar
+                    eventosDAO.actualizarEventoYLugar(evento);
+                }
+
+                response.sendRedirect("EventosServlet?action=verMisEventos");
+                break;
+
+
+        }
+
+    }
+
+    private void inscribirEvento(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("userID") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        int userId = (int) session.getAttribute("userID");
+        int eventId = Integer.parseInt(request.getParameter("event_id"));
+
+        InscripcionesEventosDAO inscripcionesDAO = new InscripcionesEventosDAO();
+
+        // Verificar si la inscripción ya existe
+        if (inscripcionesDAO.verificarInscripcionExistente(userId, eventId)) {
+            System.out.println("El usuario ya está inscrito en este evento.");
+            response.sendRedirect("EventosServlet?action=verEventosDeUsuario"); // Redirigir si ya existe
+            return;
+        }
+
+        // Realizar la inscripción
+        boolean exito = inscripcionesDAO.inscribirUsuarioEnEvento(userId, eventId);
+        if (exito) {
+            System.out.println("Inscripción exitosa.");
+            response.sendRedirect("EventosServlet?action=verEventosDeUsuario");
+        } else {
+            System.out.println("Error al inscribir el evento.");
+            response.sendRedirect("ver-eventos-usuario.jsp");
+        }
+    }
+
+
+
+
     private void listarEventos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Eventos> eventos = eventosDAO.obtenerEventos();
         request.setAttribute("eventos", eventos);
         request.getRequestDispatcher("/WEB-INF/jsp/albergue-ver-eventos.jsp").forward(request, response);
     }
 
-    // Metodo para editar un evento específico
-    private void editarEvento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            int eventoId = Integer.parseInt(request.getParameter("event_id")); // Para obtener el ID del evento
-            Eventos eventoDetalles = eventosDAO.obtenerDetalleEvento(eventoId);
 
-            if (eventoDetalles != null) {
-                request.setAttribute("evento", eventoDetalles); // Pasar el evento como atributo al JSP
+    private void verEditarEvento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            int eventoId = Integer.parseInt(request.getParameter("event_id")); // Obtener el ID del evento
+            Eventos evento = eventosDAO.obtenerDetalleEvento(eventoId); // Obtener detalles del evento
+
+            if (evento != null) {
+                request.setAttribute("evento", evento); // Pasar detalles del evento al JSP
+                // También cargar listas para los selectores
+                DistritosDAO distritosDAO = new DistritosDAO();
+                List<Distritos> distritos = distritosDAO.obtenerDistritos();
+                TiposEventosDAO tiposEventosDAO = new TiposEventosDAO();
+                List<TiposEventos> tiposEventos = tiposEventosDAO.obtenerTiposEventos();
+
+                request.setAttribute("distritos", distritos);
+                request.setAttribute("tiposEventos", tiposEventos);
+
                 request.getRequestDispatcher("/WEB-INF/albergue/albergue-editar-evento.jsp").forward(request, response);
             } else {
-                response.sendRedirect("EventosServlet?action=verTodosEventos"); // Si no se encuentra el evento, se vuelve a ver todos
+                response.sendRedirect("EventosServlet?action=verTodosEventos");
             }
-
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            response.sendRedirect("EventosServlet");
+            response.sendRedirect("EventosServlet?action=verTodosEventos");
         }
     }
+
+    private void verFormularioEvento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("userID") == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
+        DistritosDAO distritosDAO = new DistritosDAO();
+        List<Distritos> distritos = distritosDAO.obtenerDistritos();
+
+        TiposEventosDAO tiposEventosDAO = new TiposEventosDAO();
+        List<TiposEventos> tiposEventos = tiposEventosDAO.obtenerTiposEventos();
+
+        request.setAttribute("distritos", distritos);
+        request.setAttribute("tiposEventos", tiposEventos);
+
+        // Redirigir al formulario
+        request.getRequestDispatcher("/WEB-INF/albergue/albergue-crear-evento.jsp").forward(request, response);
+    }
+
 
     // Metodo para ver detalles de un evento específico
     private void verDetallesEvento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int eventoId = Integer.parseInt(request.getParameter("event_id")); // Obtener ID del evento desde la URL
-            Eventos eventoDetalles = eventosDAO.obtenerDetalleEvento(eventoId); // Obtener los detalles del evento
+            LoginDAO loginDAO = new LoginDAO();
 
-            if (eventoDetalles != null) {
-                request.setAttribute("evento", eventoDetalles); // Pasar el evento como atributo al JSP
-                request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-evento-detalles-usuario.jsp").forward(request, response);
-            } else {
-                response.sendRedirect("EventosServlet?action=verTodosEventos"); // Si no se encuentra el evento, redirigir
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute("userID") == null) {
+                response.sendRedirect("login");
+                return;
             }
+
+            Integer userId = (Integer) session.getAttribute("userID");
+            int rolId = loginDAO.obtenerRolPorUserId(userId);
+
+            if (rolId==2){ // Albergue
+                int eventoId = Integer.parseInt(request.getParameter("event_id")); // Obtener ID del evento desde la URL
+                Eventos eventoDetalles = eventosDAO.obtenerDetalleEvento(eventoId); // Obtener los detalles del evento
+
+                if (eventoDetalles != null) {
+                    request.setAttribute("evento", eventoDetalles); // Pasar el evento como atributo al JSP
+                    request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-eventos-detalles.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("EventosServlet?action=verTodosEventos"); // Si no se encuentra el evento, redirigir
+                }
+            } else if (rolId==1) { // Usuario Final
+                int eventoId = Integer.parseInt(request.getParameter("event_id")); // Obtener ID del evento desde la URL
+                Eventos eventoDetalles = eventosDAO.obtenerDetalleEvento(eventoId); // Obtener los detalles del evento
+
+                if (eventoDetalles != null) {
+                    request.setAttribute("evento", eventoDetalles); // Pasar el evento como atributo al JSP
+                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-evento-detalles-usuario.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("EventosServlet?action=verTodosEventos"); // Si no se encuentra el evento, redirigir
+                }
+
+            }
+
         } catch (NumberFormatException e) {
             e.printStackTrace();
             response.sendRedirect("EventosServlet?action=verTodosEventos"); // Redirigir en caso de error
@@ -212,32 +439,32 @@ public class EventosServlet extends HttpServlet {
         LoginDAO loginDAO = new LoginDAO();
         int rolId = usuario.getRol().getRolId();
 
-        // Obtener filtros si se aplican
-        String tipoEventoIdParam = request.getParameter("tipoEventoId");
-        String distritoIdParam = request.getParameter("distritoId");
-        String fechaInicioParam = request.getParameter("fechaInicio");
-        String fechaFinParam = request.getParameter("fechaFin");
-
-        Integer tipoEventoId = (tipoEventoIdParam != null && !tipoEventoIdParam.isEmpty())
-                ? Integer.parseInt(tipoEventoIdParam)
-                : null;
-
-        Integer distritoId = (distritoIdParam != null && !distritoIdParam.isEmpty())
-                ? Integer.parseInt(distritoIdParam)
-                : null;
-
-        Date fechaInicio = (fechaInicioParam != null && !fechaInicioParam.isEmpty())
-                ? Date.valueOf(fechaInicioParam)
-                : null;
-
-        Date fechaFin = (fechaFinParam != null && !fechaFinParam.isEmpty())
-                ? Date.valueOf(fechaFinParam)
-                : null;
-
-        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-        int recordsPerPage = 6;
-
         if (rolId == 2) { // Usuario tipo Albergue
+
+            // Obtener filtros si se aplican
+            String tipoEventoIdParam = request.getParameter("tipoEventoId");
+            String distritoIdParam = request.getParameter("distritoId");
+            String fechaInicioParam = request.getParameter("fechaInicio");
+            String fechaFinParam = request.getParameter("fechaFin");
+
+            Integer tipoEventoId = (tipoEventoIdParam != null && !tipoEventoIdParam.isEmpty())
+                    ? Integer.parseInt(tipoEventoIdParam)
+                    : null;
+
+            Integer distritoId = (distritoIdParam != null && !distritoIdParam.isEmpty())
+                    ? Integer.parseInt(distritoIdParam)
+                    : null;
+
+            Date fechaInicio = (fechaInicioParam != null && !fechaInicioParam.isEmpty())
+                    ? Date.valueOf(fechaInicioParam)
+                    : null;
+
+            Date fechaFin = (fechaFinParam != null && !fechaFinParam.isEmpty())
+                    ? Date.valueOf(fechaFinParam)
+                    : null;
+
+            int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+            int recordsPerPage = 6;
 
             List<Eventos> eventos;
             int totalRecords;
@@ -272,18 +499,43 @@ public class EventosServlet extends HttpServlet {
                 put("fechaFin", fechaFinParam);
             }});
 
-            System.out.println("Tipos de eventos: " + tiposEventos.size());
-            System.out.println("Eventos activos: " + eventos.size());
-            System.out.println("Filtro de distrito ID: " + distritoId);
-            System.out.println("Fecha Inicio: " + fechaInicio);
-            System.out.println("Fecha Fin: " + fechaFin);
-            System.out.println("Cantidad de eventos: " + (eventos != null ? eventos.size() : "null"));
-            System.out.println("Cantidad de tipos de eventos: " + (tiposEventos != null ? tiposEventos.size() : "null"));
-            System.out.println("Cantidad de distritos: " + (distritos != null ? distritos.size() : "null"));
+            // System.out.println("Tipos de eventos: " + tiposEventos.size());
+            // System.out.println("Eventos activos: " + eventos.size());
+            // System.out.println("Filtro de distrito ID: " + distritoId);
+            // System.out.println("Fecha Inicio: " + fechaInicio);
+            // System.out.println("Fecha Fin: " + fechaFin);
+            // System.out.println("Cantidad de eventos: " + (eventos != null ? eventos.size() : "null"));
+            // System.out.println("Cantidad de tipos de eventos: " + (tiposEventos != null ? tiposEventos.size() : "null"));
+            // System.out.println("Cantidad de distritos: " + (distritos != null ? distritos.size() : "null"));
 
             request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miseventos.jsp").forward(request, response);
 
         } else if (rolId == 1) { // Usuario Final
+
+            // Obtener filtros si se aplican
+            String tipoEventoIdParam = request.getParameter("tipoEventoId");
+            String distritoIdParam = request.getParameter("distritoId");
+            String fechaInicioParam = request.getParameter("fechaInicio");
+            String fechaFinParam = request.getParameter("fechaFin");
+
+            Integer tipoEventoId = (tipoEventoIdParam != null && !tipoEventoIdParam.isEmpty())
+                    ? Integer.parseInt(tipoEventoIdParam)
+                    : null;
+
+            Integer distritoId = (distritoIdParam != null && !distritoIdParam.isEmpty())
+                    ? Integer.parseInt(distritoIdParam)
+                    : null;
+
+            Date fechaInicio = (fechaInicioParam != null && !fechaInicioParam.isEmpty())
+                    ? Date.valueOf(fechaInicioParam)
+                    : null;
+
+            Date fechaFin = (fechaFinParam != null && !fechaFinParam.isEmpty())
+                    ? Date.valueOf(fechaFinParam)
+                    : null;
+
+            int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+            int recordsPerPage = 6;
 
             List<Eventos> eventos;
             int totalRecords;
@@ -319,14 +571,14 @@ public class EventosServlet extends HttpServlet {
                 put("fechaFin", fechaFinParam);
             }});
 
-            System.out.println("Tipos de eventos: " + tiposEventos.size());
-            System.out.println("Eventos activos: " + eventos.size());
-            System.out.println("Filtro de distrito ID: " + distritoId);
-            System.out.println("Fecha Inicio: " + fechaInicio);
-            System.out.println("Fecha Fin: " + fechaFin);
-            System.out.println("Cantidad de eventos: " + (eventos != null ? eventos.size() : "null"));
-            System.out.println("Cantidad de tipos de eventos: " + (tiposEventos != null ? tiposEventos.size() : "null"));
-            System.out.println("Cantidad de distritos: " + (distritos != null ? distritos.size() : "null"));
+            // System.out.println("Tipos de eventos: " + tiposEventos.size());
+            // System.out.println("Eventos activos: " + eventos.size());
+            // System.out.println("Filtro de distrito ID: " + distritoId);
+            // System.out.println("Fecha Inicio: " + fechaInicio);
+            // System.out.println("Fecha Fin: " + fechaFin);
+            // System.out.println("Cantidad de eventos: " + (eventos != null ? eventos.size() : "null"));
+            // System.out.println("Cantidad de tipos de eventos: " + (tiposEventos != null ? tiposEventos.size() : "null"));
+            // System.out.println("Cantidad de distritos: " + (distritos != null ? distritos.size() : "null"));
 
             request.getRequestDispatcher("/WEB-INF/UsuarioFinal/ver-miseventos-usuario.jsp").forward(request, response);
 

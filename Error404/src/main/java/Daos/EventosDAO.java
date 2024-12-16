@@ -129,86 +129,44 @@ public class EventosDAO extends BaseDao {
         return false;
     }
 
-    // Metodo para agregar Evento
-    public void agregarEvento(Eventos evento) {
-        String query = "INSERT INTO eventos (event_id, user_id, tipo_evento_id, nombre_evento, fecha_evento, hora_evento, lugar_evento_id, entrada, descripcion_evento, artistas_proveedores, razon_evento, fecha_creacion, estado_evento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-
-            pstmt.setInt(1, evento.getEventId());
-            pstmt.setInt(2, evento.getUsuario().getUserId());
-                                    pstmt.setInt(3, evento.getTipoEvento().getTipoEventoId());
-            pstmt.setString(4, evento.getNombreEvento());
-            pstmt.setDate(5, evento.getFechaEvento());
-            pstmt.setTime(6, evento.getHoraEvento());
-            pstmt.setInt(7, evento.getLugarEvento().getLugarId());
-            pstmt.setString(8, evento.getEntrada());
-            pstmt.setString(9, evento.getDescripcionEvento());
-            pstmt.setString(10, evento.getArtistasProveedores());
-            pstmt.setString(11, evento.getRazonEvento());
-            pstmt.setDate(12, evento.getFechaCreacion());
-            pstmt.setString(13, evento.getEstadoEvento());
-            pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     //Metodo para actualizar un Evento sin verificacion
-    public void actualizarEvento(Eventos evento) {
-        String query = "UPDATE eventos SET nombre_evento = ?, fecha_evento = ?, hora_evento = ?, lugar_evento_id = ?, tipo_evento_id = ?,entrada = ?, descripcion_evento = ?, artistas_proveedores = ?, razon_evento = ? WHERE event_id = ?";
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setString(1, evento.getNombreEvento());
-            pstmt.setDate(2, evento.getFechaEvento());
-            pstmt.setTime(3, evento.getHoraEvento());
-            pstmt.setInt(4, evento.getLugarEvento().getLugarId());
-            pstmt.setInt(5, evento.getTipoEvento().getTipoEventoId());
-            pstmt.setString(6, evento.getEntrada());
-            pstmt.setString(7, evento.getDescripcionEvento());
-            pstmt.setString(8, evento.getArtistasProveedores());
-            pstmt.setString(9, evento.getRazonEvento());
-            pstmt.setInt(10, evento.getEventId());
-            pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    public void actualizarEventoYLugar(Eventos evento) {
+        try (Connection connection = this.getConnection()) {
+            // Iniciar transacción
+            connection.setAutoCommit(false);
+
+            // Actualizar lugar del evento
+            String updateLugarSQL = "UPDATE lugares_eventos SET direccion_lugar = ?, aforo_maximo = ?, distrito_id = ? WHERE lugar_id = ?";
+            try (PreparedStatement psLugar = connection.prepareStatement(updateLugarSQL)) {
+                psLugar.setString(1, evento.getLugarEvento().getDireccionLugar());
+                psLugar.setInt(2, evento.getLugarEvento().getAforoMaximo());
+                psLugar.setInt(3, evento.getLugarEvento().getDistrito().getDistritoId());
+                psLugar.setInt(4, evento.getLugarEvento().getLugarId());
+                psLugar.executeUpdate();
+            }
+
+            // Actualizar evento
+            String updateEventoSQL = "UPDATE eventos SET nombre_evento = ?, fecha_evento = ?, tipo_evento_id = ?, descripcion_evento = ?, entrada = ?, artistas_proveedores = ?, razon_evento = ? WHERE event_id = ?";
+            try (PreparedStatement psEvento = connection.prepareStatement(updateEventoSQL)) {
+                psEvento.setString(1, evento.getNombreEvento());
+                psEvento.setDate(2, evento.getFechaEvento());
+                psEvento.setInt(3, evento.getTipoEvento().getTipoEventoId());
+                psEvento.setString(4, evento.getDescripcionEvento());
+                psEvento.setString(5, evento.getEntrada());
+                psEvento.setString(6, evento.getArtistasProveedores());
+                psEvento.setString(7, evento.getRazonEvento());
+                psEvento.setInt(8, evento.getEventId());
+                psEvento.executeUpdate();
+            }
+
+            // Confirmar transacción
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    //Metodo para eliminar un Evento sin verificacion
-    public void eliminarEvento(int event_id) {
-        String query = "UPDATE eventos SET estado_evento = ? WHERE event_id = ?";
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setString(1, "eliminada");
-            pstmt.setInt(2, event_id);
-            pstmt.executeUpdate();
-        } catch(SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
 
-    //Metodo para actualizar un Evento con verificacion
-    public void actualizarEventoVerificacion(Eventos evento, int userID) {
-        String query = "UPDATE eventos SET nombre_evento = ?, fecha_evento = ?, hora_evento = ?, lugar_evento_id = ?, lugar_evento_id = ?, entrada = ?, descripcion_evento = ?, artistas_proveedores = ?, razon_evento = ? WHERE event_id = ? and user_id = ?";
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setString(1, evento.getNombreEvento());
-            pstmt.setDate(2, evento.getFechaEvento());
-            pstmt.setTime(3, evento.getHoraEvento());
-            pstmt.setInt(4, evento.getLugarEvento().getLugarId());
-            pstmt.setInt(5, evento.getTipoEvento().getTipoEventoId());
-            pstmt.setString(6, evento.getEntrada());
-            pstmt.setString(7, evento.getDescripcionEvento());
-            pstmt.setString(8, evento.getArtistasProveedores());
-            pstmt.setString(9, evento.getRazonEvento());
-            pstmt.setInt(10, evento.getEventId());
-            pstmt.setInt(11, userID);
-            pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     //Metodo para eliminar un Evento con verificacion
     public void eliminarEventoVerificacion(int event_id, int user_id) {
@@ -224,7 +182,33 @@ public class EventosDAO extends BaseDao {
         }
     }
 
-    //
+    // Metodo para crear un Evento (crearEvento)
+    public boolean crearEvento(Eventos evento, int lugarId) {
+        String sql = "INSERT INTO eventos (nombre_evento, fecha_evento, lugar_evento_id, tipo_evento_id, descripcion_evento, entrada, artistas_proveedores, razon_evento, user_id, hora_evento, hora_fin, fecha_fin, foto_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '10:00:00', '12:00:00', '2024-12-20', 1)";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, evento.getNombreEvento());
+            ps.setDate(2, new java.sql.Date(evento.getFechaEvento().getTime()));
+            ps.setInt(3, lugarId); // FK lugar_evento_id
+            ps.setInt(4, evento.getTipoEvento().getTipoEventoId());
+            ps.setString(5, evento.getDescripcionEvento());
+            ps.setString(6, evento.getEntrada());
+            ps.setString(7, evento.getArtistasProveedores());
+            ps.setString(8, evento.getRazonEvento());
+            ps.setInt(9, evento.getUsuario().getUserId());
+
+            ps.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 
     // Metodo para obtener todos los detalles de un evento específico
     public Eventos obtenerDetalleEvento(int eventId) {
@@ -250,9 +234,13 @@ public class EventosDAO extends BaseDao {
                 evento.setEventId(rs.getInt("event_id"));
                 evento.setNombreEvento(rs.getString("nombre_evento"));
                 evento.setFechaEvento(rs.getDate("fecha_evento"));
+                evento.setHoraEvento(rs.getTime("hora_evento"));
                 evento.setFechaFin(rs.getDate("fecha_fin"));
+                evento.setHoraFin(rs.getTime("hora_fin"));
+                evento.setEntrada(rs.getString("entrada"));
                 evento.setDescripcionEvento(rs.getString("descripcion_evento"));
                 evento.setEstadoEvento(rs.getString("estado_evento"));
+                evento.setArtistasProveedores("artistas_proveedores");
 
                 // Asignar tipo de evento
                 TiposEventos tipoEvento = new TiposEventos();
@@ -315,7 +303,7 @@ public class EventosDAO extends BaseDao {
         }
 
         if (fechaInicio != null && fechaFin != null) {
-            query.append(" AND eventos.fecha_evento BETWEEN ? AND ?");
+            query.append(" AND e.fecha_evento BETWEEN ? AND ?");
             parametros.add(fechaInicio);
             parametros.add(fechaFin);
         }
@@ -391,7 +379,7 @@ public class EventosDAO extends BaseDao {
         }
 
         if (fechaInicio != null && fechaFin != null) {
-            query.append(" AND eventos.fecha_evento BETWEEN ? AND ?");
+            query.append(" AND e.fecha_evento BETWEEN ? AND ?");
             parametros.add(fechaInicio);
             parametros.add(fechaFin);
         }

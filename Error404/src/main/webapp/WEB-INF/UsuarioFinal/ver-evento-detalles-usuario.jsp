@@ -117,7 +117,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                                    <a class="dropdown-item" href="UsuarioServlet?action=verMiPerfil">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
@@ -135,7 +135,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                                    <a class="dropdown-item" href="UsuarioServlet?action=verMiSeguridad">
                                         <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
                                         <span class="align-middle" style="color: #1f4397;">Seguridad</span>
                                     </a>
@@ -152,13 +152,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                                    <a class="dropdown-item" href="EventosServlet?action=verEventosDeUsuario">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="ver-calendario-usuario.html">
+                                    <a class="dropdown-item" href="CalendarioServlet">
                                         <i class="bx bx-calendar"></i>
                                         <span class="align-middle">Mi Calendario</span>
                                     </a>
@@ -198,7 +198,6 @@
 
 
             </nav>
-
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
@@ -245,7 +244,7 @@
                                                 <p class="text-nowrap"><i class='bx bx-calendar bx-sm me-2'></i>Fecha: Del ${evento.fechaEvento} al ${evento.fechaFin}</p>
                                             </div>
                                         </c:when>
-                                        <c:when test="${evento.fechaEvento != null}">
+                                        <c:when test="${evento.fechaFin == null}">
                                             <div class="me-5">
                                                 <p class="text-nowrap"><i class='bx bx-calendar bx-sm me-2'></i>Fecha Inicio: ${evento.fechaEvento}</p>
                                             </div>
@@ -261,7 +260,7 @@
                                                 <p class="text-nowrap"><i class='bx bx-time-five bx-sm me-2'></i>Hora Fin: ${evento.horaFin}</p>
                                             </div>
                                         </c:when>
-                                        <c:when test="${evento.horaEvento != null}">
+                                        <c:when test="${evento.horaFin == null}">
                                             <div class="me-5">
                                                 <p class="text-nowrap"><i class='bx bx-time-five bx-sm me-2'></i>Hora: ${evento.horaEvento}</p>
                                             </div>
@@ -356,14 +355,12 @@
 
 
             <!-- Vendors JS -->
-
             <script src="${pageContext.request.contextPath}/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
             <!-- Main JS -->
             <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
             <!-- Page JS -->
-
             <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
         </div>
     </div>

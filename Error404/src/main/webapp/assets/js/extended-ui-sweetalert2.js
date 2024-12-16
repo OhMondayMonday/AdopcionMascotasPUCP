@@ -491,57 +491,12 @@
                     switch (postType) {
 
                         case 'publi':
-                            // Configura el enlace de detalles basado en el ID del evento
-                            switch (eventId) {
-                                case '1':
-                                eventLink = 'ver-publicaciones-detalles-usuario.html'; // Cambia esto por el enlace real
-                                break;
-                                case '2':
-                                eventLink = 'ver-publicaciones-detalles-usuario.html';
-                                break;
-                                case '3':
-                                eventLink = 'ver-publicaciones-detalles-usuario.html';
-                                break;
-                                case '4':
-                                eventLink = 'ver-publicaciones-detalles-usuario.html';
-                                break;
-                                case '5':
-                                eventLink = 'ver-publicaciones-detalles-usuario.html';
-                                break;
-                                case '6':
-                                eventLink = 'ver-publicaciones-detalles-usuario.html';
-                                break;
-                                default:
-                                eventLink = '#'; // O enlace por defecto
-                            }
+                            eventLink = 'ver-publicaciones-detalles-usuario.html';
                         break;
 
                         case 'event':
-                            // Configura el enlace de detalles basado en el ID del evento
-                            switch (eventId) {
-                                case '1':
-                                eventLink = 'ver-evento-detalles-usuario.html'; // Cambia esto por el enlace real
-                                break;
-                                case '2':
-                                eventLink = 'ver-evento-detalles-usuario.html';
-                                break;
-                                case '3':
-                                eventLink = 'ver-evento-detalles-usuario.html';
-                                break;
-                                case '4':
-                                eventLink = 'ver-evento-detalles-usuario.html';
-                                break;
-                                case '5':
-                                eventLink = 'ver-evento-detalles-usuario.html';
-                                break;
-                                case '6':
-                                eventLink = 'ver-evento-detalles-usuario.html';
-                                break;
-                                default:
-                                eventLink = '#'; // O enlace por defecto
-                            }
-                        break;
-
+                            eventLink = 'EventosServlet?action=verDetallesEvento&event_id='+eventId;
+                            break;
                     }
                     break;
 
@@ -635,6 +590,7 @@
                     confirmButtonText: "Hecho", 
                     customClass: {confirmButton: "btn btn-success" },
                   });
+                  window.location.href = `EventosServlet?action=inscribirEvento&event_id=${eventId}`;
                 }
               });
             });
