@@ -87,38 +87,8 @@
 
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-            <div class="app-brand demo px-3">
-                <a href="javascript:void(0);" class="app-brand-link">
-                    <span class="app-brand-logo demo">
-                        <img class="h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
-                    </span>
-                </a>
-                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                </a>
-            </div>
-            <div class="menu-inner-shadow"></div>
+        <jsp:include page="/WEB-INF/includes/sidebarCoordinador.jsp" />
 
-            <ul class="menu-inner py-1">
-                <!-- Menú principal -->
-                <li class="menu-item"><a href="coordinador-inicio.jsp" class="menu-link"><i class="menu-icon tf-icons bx bx-home"></i><div>Inicio</div></a></li>
-                <li class="menu-item"><a href="coordinador-ver-publicaciones.jsp" class="menu-link"><i class="menu-icon tf-icons bx bx-building-house"></i><div>Publicaciones</div></a></li>
-                <li class="menu-item"><a href="coordinador-ver-hogarestemporales.jsp" class="menu-link"><i class="menu-icon tf-icons bx bx-building-house"></i><div>Hogares temporales</div></a></li>
-                <li class="menu-header small text-uppercase"><span>Gestión</span></li>
-                <li class="menu-item"><a href="coordinador-tablas-gestion.jsp" class="menu-link"><i class="menu-icon tf-icons bx bx-building-house"></i><div>Todas</div></a></li>
-                <li class="menu-item"><a href="coordinador-tablas-publicaciones.jsp" class="menu-link"><i class="menu-icon tf-icons bx bx-calendar-event"></i><div>Mascotas Perdidas</div></a></li>
-                <li class="menu-item"><a href="coordinador-tables-hogaresTemporales.jsp" class="menu-link"><i class="menu-icon tf-icons bx bxs-building-house"></i><div>Hogares temporales</div></a></li>
-                <li class="menu-header small text-uppercase"><span>Solicitudes</span></li>
-                <li class="menu-item"><a href="coordinador-solicitudes.jsp" class="menu-link"><i class="menu-icon tf-icons bx bx-building-house"></i><div>Todas</div></a></li>
-                <li class="menu-item"><a href="coordinador-ver-solicitud-hogarestemporales.jsp" class="menu-link"><i class="menu-icon tf-icons bx bx-calendar-event"></i><div>Hogares temporales</div></a></li>
-                <li class="menu-item"><a href="coordinador-ver-solicitudes-mascotasPerdidas.jsp" class="menu-link"><i class="menu-icon tf-icons bx bxs-building-house"></i><div>Publicaciones</div></a></li>
-                <li class="menu-header small text-uppercase"><span>Otros</span></li>
-                <li class="menu-item"><a href="coordinador-Preguntas-frecuentes.jsp" class="menu-link"><i class="menu-icon tf-icons bx bx-help-circle"></i><div>Preguntas Frecuentes</div></a></li>
-            </ul>
-
-
-        </aside>
         <div class="layout-page">
             <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
                 <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0 d-xl-none">
