@@ -76,6 +76,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <style>
             /* Controla el margen entre la tabla y la paginación */
             .dataTables_wrapper .dataTables_info,
@@ -101,6 +102,7 @@
             }
         </style>
 
+
     </head>
 
     <body>
@@ -111,6 +113,7 @@
         <!-- End Google Tag Manager (noscript) -->
 
         <div class="layout-wrapper layout-content-navbar" style="background-color: #fef8e5;">
+            <div class="layout-container">
             <jsp:include page="../includes/sidebarCoordinador.jsp" />
 
             <div class="layout-page">
@@ -311,6 +314,8 @@
             </div>
             <div class="layout-overlay layout-menu-toggle"></div>
         </div>
+
+        </div>
         <!-- / Layout wrapper -->
 
         <!-- Core JS -->
@@ -486,15 +491,6 @@
                 });
             }
         </script>
-
-
-
-
-
-
-
-
-
 
         <!-- SweetAlert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

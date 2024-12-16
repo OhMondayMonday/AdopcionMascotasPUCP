@@ -46,40 +46,16 @@
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="coordinador-tablas-publicaciones.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                <div class="text-truncate" data-i18n="Mascotas Perdidas">Mascotas Perdidas</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="coordinador-tables-hogaresTemporales.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
-            </a>
-        </li>
-
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text" data-i18n="Solicitudes">Solicitudes</span>
         </li>
         <li class="menu-item">
-            <a href="coordinador-solicitudes.html" class="menu-link">
+            <a href="${pageContext.request.contextPath}/AprobarSolicitudes?" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building-house"></i>
                 <div class="text-truncate" data-i18n="Todas">Todas</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="coordinador-ver-solicitud-hogarestemporales.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="coordinador-ver-solicitudes-mascotasPerdidas.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
-            </a>
-        </li>
+
 
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
