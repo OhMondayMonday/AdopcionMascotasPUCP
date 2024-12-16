@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter({"/Dashboard"})
+@WebFilter({"/Dashboard", "/crearLugares", "/lugares-eventos", "/gestionUsuarios", "/gestionDonaciones", "/crearCoordinador", "/crearUsuarios", "/crearAlbergues", "/Dashboard"})
 public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -21,7 +21,14 @@ public class AuthFilter implements Filter {
 
         // Verificar si hay sesión activa
         if (httpRequest.getSession(false) == null || httpRequest.getSession(false).getAttribute("usuariosession") == null) {
-            // Redirigir al login si no hay sesión activa
+            // Guardar la URL original en la sesión
+            String originalURL = httpRequest.getRequestURI();
+            if (httpRequest.getQueryString() != null) {
+                originalURL += "?" + httpRequest.getQueryString();
+            }
+            httpRequest.getSession(true).setAttribute("redirect", originalURL);
+
+            // Redirigir al login
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
             return;
         }

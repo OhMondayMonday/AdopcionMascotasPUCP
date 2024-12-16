@@ -211,17 +211,14 @@
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
 
-        <aside>
-            <!-- Sidebar aquí si es necesario -->
-            <jsp:include page="../includes/sidebarAdmin.jsp"/>
-        </aside>
+        <!-- Sidebar aquí si es necesario -->
+        <jsp:include page="../includes/sidebarAdmin.jsp"/>
 
         <div class="layout-page">
-            <nav>
-                <jsp:include page="../includes/navbarAdmin.jsp">
-                    <jsp:param name="vista" value="Gestion de usuarios"/>
-                </jsp:include>
-            </nav>
+
+            <jsp:include page="../includes/navbarAdmin.jsp">
+                <jsp:param name="vista" value="Gestion de usuarios"/>
+            </jsp:include>
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->

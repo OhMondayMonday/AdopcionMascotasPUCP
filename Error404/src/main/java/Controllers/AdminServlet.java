@@ -29,6 +29,12 @@ public class AdminServlet extends HttpServlet{
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
+        HttpSession session = request.getSession(false);
+        Usuarios usuario = (Usuarios)session.getAttribute("usuariosession");
+        if(!usuario.getRol().getNombreRol().equals("Administrador")){
+            request.getRequestDispatcher("/WEB-INF/auxiliares/pagina-error.jsp").forward(request, response);
+        }
+
         switch(request.getServletPath()){
             case "/lugares-eventos" -> {
                 // Obtener la lista de lugares de eventos con disponibilidad

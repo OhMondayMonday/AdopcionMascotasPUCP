@@ -82,7 +82,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/CalendarioServlet">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Calendario">
                             <i class="bx bx-calendar"></i>
                             <span class="align-middle">Mi Calendario</span>
                         </a>
@@ -100,7 +100,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/WEB-INF/index.jsp" >
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/logout" >
                             <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
                             <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
                         </a>

@@ -1,7 +1,6 @@
 package Daos;
 
-import Beans.Usuarios;
-import Beans.Roles;
+import Beans.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,28 +10,74 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginDAO extends BaseDao {
     public Usuarios validarUsuario(String email, String contrasenia) {
-        String sql = "SELECT usuarios.*, roles.nombre_rol " +
-                "FROM usuarios " +
-                "JOIN roles ON usuarios.rol_id = roles.rol_id " +
-                "WHERE usuarios.email = ? AND usuarios.contrasenia = ?";
+        String sql = "SELECT u.*, r.nombre_rol, d.nombre_distrito, z.nombre_zona, f.url_foto " +
+                "FROM usuarios u " +
+                "LEFT JOIN roles r ON u.rol_id = r.rol_id " +
+                "LEFT JOIN distritos d ON u.distrito_id = d.distrito_id " +
+                "LEFT JOIN zonas z ON d.zona_distrito_id = z.zona_id " +
+                "LEFT JOIN fotos f ON u.foto_id = f.foto_id " +
+                "WHERE u.email = ? AND u.contrasenia = ?";
+
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
+            // Hash de la contraseña
             contrasenia = hashPassword(contrasenia);
             statement.setString(1, email);
             statement.setString(2, contrasenia);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
+                    // Crear objeto usuario
                     Usuarios usuario = new Usuarios();
                     usuario.setUserId(resultSet.getInt("user_id"));
+                    usuario.setUsername(resultSet.getString("username"));
                     usuario.setEmail(resultSet.getString("email"));
                     usuario.setNombre(resultSet.getString("nombre"));
                     usuario.setApellido(resultSet.getString("apellido"));
+                    usuario.setDni(resultSet.getString("dni"));
+                    usuario.setDescripcion(resultSet.getString("descripcion"));
+                    usuario.setDireccion(resultSet.getString("direccion"));
+                    usuario.setEstadoCuenta(resultSet.getString("estado_cuenta"));
+                    usuario.setFechaRegistro(resultSet.getTimestamp("fecha_registro"));
+                    usuario.setNombreAlbergue(resultSet.getString("nombre_albergue"));
+                    usuario.setCapacidadNuevosAnimales(resultSet.getInt("capacidad_nuevos_animales"));
+                    usuario.setAnimalesAlbergados(resultSet.getInt("animales_albergados"));
+                    usuario.setAnioCreacion(resultSet.getDate("anio_creacion"));
+                    usuario.setUrlFacebook(resultSet.getString("url_facebook"));
+                    usuario.setUrlInstagram(resultSet.getString("url_instagram"));
+                    usuario.setPuntoAcopio(resultSet.getString("punto_acopio"));
+                    usuario.setDireccionDonaciones(resultSet.getString("direccion_donaciones"));
+                    usuario.setNombreContactoDonaciones(resultSet.getString("nombre_contacto_donaciones"));
+                    usuario.setNumeroContactoDonaciones(resultSet.getString("numero_contacto_donaciones"));
+                    usuario.setNumeroYapePlin(resultSet.getString("numero_yape_plin"));
+                    usuario.setFechaNacimiento(resultSet.getString("fecha_nacimiento"));
+                    usuario.setFechaContratacion(resultSet.getString("fecha_contratacion"));
+
+                    // Rol
                     Roles rol = new Roles();
                     rol.setRolId(resultSet.getInt("rol_id"));
                     rol.setNombreRol(resultSet.getString("nombre_rol"));
                     usuario.setRol(rol);
+
+                    // Distrito
+                    Distritos distrito = new Distritos();
+                    distrito.setDistritoId(resultSet.getInt("distrito_id"));
+                    distrito.setNombreDistrito(resultSet.getString("nombre_distrito"));
+                    usuario.setDistrito(distrito);
+
+                    // Zona
+                    Zonas zona = new Zonas();
+                    zona.setZonaId(resultSet.getInt("zona_distrito_id"));
+                    zona.setNombreZona(resultSet.getString("nombre_zona"));
+                    distrito.setZona(zona);
+
+                    // Foto
+                    Fotos foto = new Fotos();
+                    foto.setFotoId(resultSet.getInt("foto_id"));
+                    foto.setUrlFoto(resultSet.getString("url_foto"));
+                    usuario.setFoto(foto);
+
                     return usuario;
                 }
             }
