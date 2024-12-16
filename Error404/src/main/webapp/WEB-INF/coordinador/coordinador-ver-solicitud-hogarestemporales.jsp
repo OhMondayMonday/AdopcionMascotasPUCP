@@ -373,6 +373,16 @@
                         <div class="layout-overlay layout-menu-toggle"></div>
 
 
+
+                        <!-- Overlay -->
+                        <div class="layout-overlay layout-menu-toggle"></div>
+
+
+                        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+
+
+                    </div>
+                    <!-- / Layout wrapper -->
                         <footer class="footer bg-footer-theme" >
                             <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3"  style="background-color: #fef8e5;">
                                 <div>
@@ -387,17 +397,8 @@
                             </div>
                         </footer>
 
-                        <!-- Overlay -->
-                        <div class="layout-overlay layout-menu-toggle"></div>
 
-
-                        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-
-
-                    </div>
-                    <!-- / Layout wrapper -->
-
-                    <!-- Core JS -->
+                        <!-- Core JS -->
                     <!-- build:js assets/vendor/js/core.js -->
 
                     <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>

@@ -422,19 +422,6 @@
                 <div class="layout-overlay layout-menu-toggle"></div>
 
 
-                    <footer class="footer bg-footer-theme" >
-                        <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3"  style="background-color: #fef8e5;">
-                            <div>
-                                <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
-
-                            </div>
-                            <div>
-                                <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
-                                <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
-                                <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
-                            </div>
-                        </div>
-                    </footer>
 
                     <!-- Overlay -->
                     <div class="layout-overlay layout-menu-toggle"></div>
@@ -445,6 +432,20 @@
 
                 </div>
                 <!-- / Layout wrapper -->
+                <footer class="footer bg-footer-theme" >
+                    <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3"  style="background-color: #fef8e5;">
+                        <div>
+                            <a href="javascript:void(0)" class="footer-link me-4">©2024 Alianza Animal S.A. Todos los derechos reservados.</a>
+
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)" class="footer-link me-4">Ayuda</a>
+                            <a href="javascript:void(0)" class="footer-link me-4">Contactos</a>
+                            <a href="javascript:void(0)" class="footer-link">Terminos &amp; Condiciones</a>
+                        </div>
+                    </div>
+                </footer>
+
 
                 <!-- Core JS -->
                 <!-- build:js assets/vendor/js/core.js -->
