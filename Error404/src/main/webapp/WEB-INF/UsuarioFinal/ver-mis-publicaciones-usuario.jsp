@@ -9,7 +9,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Publicaciones</title>
+  <title>Mis Publicaciones</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -91,6 +91,121 @@
         <jsp:param name="usuariosession" value=""/>
       </jsp:include>
 
+
+        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0   d-xl-none ">
+          <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bx bx-menu bx-sm"></i>
+          </a>
+        </div>
+
+
+        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+          <div class="w-75 align-items-center me-auto">
+            <div class="nav-item navbar-search-wrapper mb-0">
+              <span class="d-inline-block justify-content-center">
+                <p class="mb-0 fst-normal fw-semibold ff-">Mis Publicaciones</p>
+            </span>
+            </div>
+          </div>
+
+          <ul class="navbar-nav flex-row align-items-center ms-0">
+
+            <!-- Notification -->
+            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+
+            <!--/ Notification -->
+            <!-- User -->
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                <div class="avatar avatar-online">
+                  <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                </div>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar avatar-online">
+                          <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <span class="fw-medium d-block"> Adolfo Contreras</span>
+                        <small class="text-muted">Usuario</small>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                    <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
+                    <span class="align-middle" style="color: #1f4397;">Seguridad</span>
+                  </a>
+                </li>
+
+
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+                    <i class="bx bx-building-house"></i>
+                    <span class="align-middle">Mis publicaciones</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                    <i class="bx bx-bone"></i>
+                    <span class="align-middle">Mis eventos</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ver-calendario-usuario.html">
+                    <i class="bx bx-calendar"></i>
+                    <span class="align-middle">Mi Calendario</span>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="Preguntas-frecuentes.html">
+                    <i class="bx bx-help-circle"></i>
+                    <span class="align-middle">Preguntas frecuentes</span>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../index.html" >
+                    <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
+                    <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--/ User -->
+
+
+          </ul>
+        </div>
+
+
+        <!-- Search Small Screens -->
+        <div class="navbar-search-wrapper search-input-wrapper  d-none">
+          <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
+          <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
+        </div>
+
+
+      </nav>
+
       <!-- Content wrapper -->
       <div class="content-wrapper">
 
@@ -107,7 +222,7 @@
                 <div class="card-body d-flex justify-content-center p-1">
 
                   <form action="PublicacionesServlet" method="GET" id="filtrosForm" class="row w-100">
-                    <input type="hidden" name="action" value="verTodasPublicaciones">
+                    <input type="hidden" name="action" value="verTodasMisPublicaciones">
                     <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                       <label for="tipoPublicacionId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de Publicacion</label>
                       <select name="tipoPublicacionId" id="tipoPublicacionId" class="select2 form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
@@ -215,9 +330,36 @@
                                 <a class="h6" data-bs-toggle="modal" href="#evento${publicacion.publicacionId}" style="font-size: 0.875rem;">${publicacion.titulo}</a>
                                 <p class="mt-1 mb-0" style="font-size: 0.75rem;">${publicacion.descripcion}</p>
                                 <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                  <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="<%=request.getContextPath()%>/PublicacionesServlet?action=mostrar&id=${publicacion.publicacionId}">
+                                  <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="<%=request.getContextPath()%>/PublicacionesServlet?action=mostrar&id=${publicacion.publicacionId}&user_id=1">
                                     <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                   </a>
+                                  <c:choose>
+                                    <c:when test="${publicacion.tipoPublicacion.tipoPublicacionId == 1}">
+                                      <a class="btn btn-label-primary d-flex align-items-center" href="<%=request.getContextPath()%>/PublicacionesServlet?action=editar&id=${publicacion.publicacionId}&user_id=1" style="font-size: 0.75rem;">
+                                        <span>Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                      </a>
+                                    </c:when>
+                                    <c:when test="${publicacion.tipoPublicacion.tipoPublicacionId == 2}">
+                                      <a class="btn btn-label-primary d-flex align-items-center" href="<%=request.getContextPath()%>/PublicacionesServlet?action=editarAdopcion&id=${publicacion.publicacionId}&user_id=1" style="font-size: 0.75rem;">
+                                        <span>Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                      </a>
+                                    </c:when>
+                                    <c:when test="${publicacion.tipoPublicacion.tipoPublicacionId == 3}">
+                                      <a class="btn btn-label-primary d-flex align-items-center" href="<%=request.getContextPath()%>/PublicacionesServlet?action=editarDonacion&id=${publicacion.publicacionId}&user_id=1" style="font-size: 0.75rem;">
+                                        <span>Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                      </a>
+                                    </c:when>
+                                    <c:when test="${publicacion.tipoPublicacion.tipoPublicacionId == 4}">
+                                      <a class="btn btn-label-primary d-flex align-items-center" href="<%=request.getContextPath()%>/PublicacionesServlet?action=editarMascotaPerdida&id=${publicacion.publicacionId}&user_id=1" style="font-size: 0.75rem;">
+                                        <span>Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                      </a>
+                                    </c:when>
+                                    <c:when test="${publicacion.tipoPublicacion.tipoPublicacionId == 5}">
+                                      <a class="btn btn-label-primary d-flex align-items-center" href="<%=request.getContextPath()%>/PublicacionesServlet?action=editarDenunciaMaltrato&id=${publicacion.publicacionId}&user_id=1" style="font-size: 0.75rem;">
+                                        <span>Editar</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                      </a>
+                                    </c:when>
+                                  </c:choose>
                                 </div>
                               </div>
                             </div>
@@ -268,13 +410,13 @@
               <nav>
                 <ul class="pagination justify-content-center">
                   <li class="page-item" ${page == 1 ? 'disabled' : ''}>
-                    <a class="page-link" href="?action=verTodasPublicaciones&page=${page - 1}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>
+                    <a class="page-link" href="?action=verTodasMisPublicaciones&page=${page - 1}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Anterior</a>
                   <c:forEach var="i" begin="1" end="${totalPages}">
                     <li class="page-item" ${i == page ? 'active' : ''}>
-                      <a class="page-link" href="?action=verTodasPublicaciones&page=${i}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>
+                      <a class="page-link" href="?action=verTodasMisPublicaciones&page=${i}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">${i}</a>
                   </c:forEach>
                     <li class="page-item" ${page == totalpages ? 'disabled' : ''}>
-                  <a class="page-link" href="?action=verTodasPublicaciones&page=${page + 1}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>
+                  <a class="page-link" href="?action=verTodasMisPublicaciones&page=${page + 1}&tipoPublicacionId=${filtros.tipoPublicacionId}&fechaInicio=${filtros.fechaInicio}&fechaFin=${filtros.fechaFin}">Siguiente</a>
                 </ul>
               </nav>
             </c:when>

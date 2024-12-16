@@ -83,12 +83,175 @@ public class PublicacionesDAO extends BaseDao {
         return id;
     }
 
+    public int contarMisPublicacionesActivas(int user_id) {
+        String query = "SELECT COUNT(*) FROM publicaciones WHERE estado_publicacion = 'activa' AND user_id = ?";
+        int totalrecords = 0;
+        try (Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, user_id);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                totalrecords = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalrecords;
+    }
+
+    public int contarMisPublicacionesActivasConFiltros(Integer tipoPublicacionId, Date fechaInicio, Date fechaFin, int user_id) {
+        StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM publicaciones p ");
+        query.append("JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id ");
+        query.append("WHERE p.estado_publicacion = 'activa' ");
+        query.append("AND p.user_id = ? ");
+
+        List<Object> parametros = new ArrayList<>();
+
+        if(tipoPublicacionId != null){
+            query.append(" AND tp.tipo_publicacion_id = ?");
+            parametros.add(tipoPublicacionId);
+        }
+        if(fechaInicio != null && fechaFin != null){
+            query.append(" AND p.fecha_creacion BETWEEN ? AND ? ");
+            parametros.add(fechaInicio);
+            parametros.add(fechaFin);
+        }
+
+        try (Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query.toString())){
+            pstmt.setInt(1, user_id);
+            for (int i = 0; i < parametros.size(); i++) {
+                pstmt.setObject(i + 2, parametros.get(i));
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Publicaciones> obtenerMisPublicacionesActivasConPaginacion(int page, int recordsPerPage, int user_id) {
+        List<Publicaciones> publicaciones = new ArrayList<>();
+        int offset = (page - 1) * recordsPerPage;
+
+        String query = "SELECT p.publicacion_id, p.titulo, p.descripcion, p.comentario, p.fecha_creacion, " +
+                "tp.tipo_publicacion_id, tp.tipo_publicacion, f.foto_id, f.url_foto " +
+                "FROM publicaciones p " +
+                "JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id " +
+                "LEFT JOIN fotos f ON p.foto_id = f.foto_id " +
+                " WHERE p.estado_publicacion= 'activa' " +
+                " AND p.user_id = ?" +
+                " ORDER BY p.fecha_creacion DESC LIMIT ? OFFSET ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, user_id);
+            pstmt.setInt(2, recordsPerPage);
+            pstmt.setInt(3, offset);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Publicaciones publicacion = new Publicaciones();
+                    publicacion.setPublicacionId(rs.getInt("publicacion_id"));
+                    publicacion.setTitulo(rs.getString("titulo"));
+                    publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                    publicacion.setDescripcion(rs.getString("descripcion"));
+                    publicacion.setComentario(rs.getString("comentario"));
+
+                    TiposPublicaciones tipoPublicacion = new TiposPublicaciones();
+                    tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                    tipoPublicacion.setTipoPublicacion(rs.getString("tipo_publicacion"));
+                    publicacion.setTipoPublicacion(tipoPublicacion);
+
+                    Fotos foto = new Fotos();
+                    foto.setFotoId(rs.getInt("foto_id"));
+                    foto.setUrlFoto(rs.getString("url_foto"));
+                    publicacion.setFoto(foto);
+
+                    publicaciones.add(publicacion);
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return publicaciones;
+    }
+
+    public List<Publicaciones> verMisPublicacionesActivos(Integer tipoPublicacionId, Date fechaInicio, Date fechaFin, int page, int recordsPerPage, int user_id) {
+        List<Publicaciones> publicaciones = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT p.publicacion_id, p.titulo, p.descripcion, p.comentario, p.fecha_creacion, ");
+        query.append("tp.tipo_publicacion_id, tp.tipo_publicacion, f.foto_id, f.url_foto ");
+        query.append("FROM publicaciones p ");
+        query.append("JOIN tipos_publicaciones tp ON p.tipo_publicacion_id = tp.tipo_publicacion_id ");
+        query.append("LEFT JOIN fotos f ON p.foto_id = f.foto_id ");
+        query.append(" WHERE p.estado_publicacion = 'activa'");
+        query.append(" AND p.user_id = ? ");
+
+        List<Object> parametros = new ArrayList<>();
+
+        if (tipoPublicacionId != null) {
+            query.append(" AND tp.tipo_publicacion_id = ?");
+            parametros.add(tipoPublicacionId);
+        }
+        if (fechaInicio != null && fechaFin != null) {
+            query.append(" AND p.fecha_creacion BETWEEN ? AND ? ");
+            parametros.add(fechaInicio);
+            parametros.add(fechaFin);
+        }
+
+        query.append(" ORDER BY p.fecha_creacion DESC LIMIT ? OFFSET ?");
+        parametros.add(recordsPerPage);
+        parametros.add((page - 1) * recordsPerPage);
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+            pstmt.setInt(1, user_id);
+            for (int i = 0; i < parametros.size(); i++) {
+                pstmt.setObject(i + 2, parametros.get(i)); // Ajustar índices
+            }
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Publicaciones publicacion = new Publicaciones();
+                publicacion.setPublicacionId(rs.getInt("publicacion_id"));
+                publicacion.setTitulo(rs.getString("titulo"));
+                publicacion.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+                publicacion.setDescripcion(rs.getString("descripcion"));
+                publicacion.setComentario(rs.getString("comentario"));
+
+                TiposPublicaciones tipoPublicacion = new TiposPublicaciones();
+                tipoPublicacion.setTipoPublicacionId(rs.getInt("tipo_publicacion_id"));
+                tipoPublicacion.setTipoPublicacion(rs.getString("tipo_publicacion"));
+                publicacion.setTipoPublicacion(tipoPublicacion);
+
+                if (rs.getObject("foto_id") != null) {
+                    Fotos foto = new Fotos();
+                    foto.setFotoId(rs.getInt("foto_id"));
+                    foto.setUrlFoto(rs.getString("url_foto"));
+                    publicacion.setFoto(foto);
+                }
+
+                publicaciones.add(publicacion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Reemplazar con un logger en producción
+        }
+        return publicaciones;
+
+    }
+
     public int contarPublicacionesActivas() {
         String query = "SELECT COUNT(*) FROM publicaciones WHERE estado_publicacion = 'activa'";
         int totalrecords = 0;
         try (Connection conn = this.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query)) {
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
             if(rs.next()){
                 totalrecords = rs.getInt(1);
             }
@@ -116,7 +279,7 @@ public class PublicacionesDAO extends BaseDao {
         }
 
         try (Connection conn = this.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query.toString())){
+             PreparedStatement pstmt = conn.prepareStatement(query.toString())){
 
             for (int i = 0; i < parametros.size(); i++) {
                 pstmt.setObject(i + 1, parametros.get(i));
@@ -204,7 +367,7 @@ public class PublicacionesDAO extends BaseDao {
         parametros.add((page - 1) * recordsPerPage);
 
         try (Connection conn = this.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+             PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
 
             for (int i = 0; i < parametros.size(); i++) {
                 pstmt.setObject(i + 1, parametros.get(i));
@@ -260,16 +423,14 @@ public class PublicacionesDAO extends BaseDao {
 
     // Metodo para actualizar una publicación sin verificacion
     public void actualizarPublicacion(Publicaciones publicacion) {
-        String query = "UPDATE publicaciones SET titulo = ?, descripcion = ?, comentario = ?, tipo_publicacion_id = ?, estado_publicacion = ? WHERE publicacion_id = ?";
+        String query = "UPDATE publicaciones SET titulo = ?, descripcion = ? WHERE publicacion_id = ? AND user_id = ?";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(query)) {
 
             pstmt.setString(1, publicacion.getTitulo());
             pstmt.setString(2, publicacion.getDescripcion());
-            pstmt.setString(3, publicacion.getComentario());
-            pstmt.setInt(4, publicacion.getTipoPublicacion().getTipoPublicacionId());
-            pstmt.setString(5, publicacion.getEstadoPublicacion());
-            pstmt.setInt(6, publicacion.getPublicacionId());
+            pstmt.setInt(3, publicacion.getPublicacionId());
+            pstmt.setInt(4, publicacion.getUsuario().getUserId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
