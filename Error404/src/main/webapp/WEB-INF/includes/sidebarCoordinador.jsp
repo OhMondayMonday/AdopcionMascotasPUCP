@@ -20,7 +20,7 @@
     <ul class="menu-inner py-1">
 
         <li class="menu-item">
-            <a href="coordinador-inicio.html" class="menu-link">
+            <a href="${pageContext.request.contextPath}/Dashboard3" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home"></i>
                 <div class="text-truncate" data-i18n="Inicio">Inicio</div>
             </a>

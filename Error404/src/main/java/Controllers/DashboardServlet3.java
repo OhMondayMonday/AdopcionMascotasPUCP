@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/DashboardServlet3")
+@WebServlet(name = "DashboardServlet", urlPatterns = "/Dashboard3")
 public class DashboardServlet3 extends HttpServlet {
     private Dashboard3DAO dashboard3DAO;
 

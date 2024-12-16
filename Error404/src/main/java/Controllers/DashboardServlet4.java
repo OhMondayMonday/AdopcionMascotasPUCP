@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@WebServlet("/DashboardServlet4")
+@WebServlet(name = "DashboardServlet", urlPatterns = "/Dashboard4")
 public class DashboardServlet4 extends HttpServlet {
     private Dashboard4DAO dashboard4DAO = new Dashboard4DAO();
 
