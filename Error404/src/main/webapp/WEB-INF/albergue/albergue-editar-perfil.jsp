@@ -85,23 +85,11 @@
                         <!-- Content -->
 
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <!-- Título
-                            <h4 class="py-3 mb-4">
-                              <span class="text-muted fw-light">Publicaciones /</span><span> Crear Nueva Publicación</span><span> | Donaciones Activas</span>
-                            </h4>
-                            -->
                             <div class="app-ecommerce">
-
-                                <!-- Add Product -->
                                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
-
                                 </div>
-
                                 <div class="row">
-                                    <!-- First column-->
                                     <div class="col-xl-4 col-lg-5 col-md-5 order-0 order-md-0">
-                                        <!-- User Card -->
-
                                         <div class="card mb-4">
                                             <div class="card-body">
                                                 <div class="user-avatar-section">
@@ -171,7 +159,7 @@
                                             </ul>
                                             <form id="miFormularioPersonal" action="${pageContext.request.contextPath}/albergue?action=actualizar" method="post">
                                                 <!-- Campo oculto para el ID del usuario -->
-                                                <input type="hidden" name="id" value="2">
+                                                <input type="hidden" name="id" value=27>
                                                 <div class="tab-content">
                                                     <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
 
@@ -273,10 +261,6 @@
                                                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^0+/, '');" required />
                                                             </div>
 
-
-
-
-
                                                             <div class="col-md">
                                                                 <label class="form-label" for="collapsible-description">Descripción</label>
                                                                 <textarea id="collapsible-description" name="descripcion" class="form-control" rows="2"
@@ -289,12 +273,8 @@
                                                                 <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-photo-upload">
                                                                 </form>
                                                             </div>
-                                                        </div>
+                                                            </div>
 
-                                                        <label class="form-label mt-2" for="new-photo-upload">Nueva Foto</label>
-                                                        <input class="form-control" type="file" id="new-photo-upload" name="nuevaFoto" accept="image/*">
-                                                        </div>
-                                                    </div>
                                                     <!-- Donaciones -->
                                                     <div class="tab-pane fade" id="form-tabs-donations" role="tabpanel">
                                                         <div class="row g-3">
@@ -343,14 +323,7 @@
 
                                                     <div class="tab-pane fade" id="form-tabs-social" role="tabpanel">
                                                         <div class="row g-3">
-                                                            <div class="col-md-6">
-                                                                <label class="form-label" for="twitter-link">Twitter</label>
-                                                                <div class="input-group input-group-merge">
-                                                                    <span id="twitter-icon" class="input-group-text"><i class="bx bxl-twitter"></i></span>
-                                                                    <input type="text" id="twitter-link" name="urlTwitter" class="form-control"
-                                                                           value="${usuario.urlTwitter}" placeholder="https://twitter.com/abc" />
-                                                                </div>
-                                                            </div>
+
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="facebook-link">Facebook</label>
                                                                 <div class="input-group input-group-merge">
@@ -377,6 +350,7 @@
                                                         <button class="btn btn-danger cancel-subscription me-sm-3 me-1">Cancelar</button>
                                                     </div>
                                                 </div>
+
                                             </form>
                                         </div>
                                     </div>
@@ -480,9 +454,9 @@
 
 
 
-            // Botón "Cancelar"
+                // Botón "Cancelar"
                 document.querySelector('.cancel-subscription').addEventListener('click', function() {
-                    window.location.href = "/albergue-editar-perfil.jsp"; // Cambia esta ruta según tu necesidad
+                    window.location.href = "/usuario-editar-perfil.jsp"; // Cambia esta ruta según tu necesidad
                 });
             });
 

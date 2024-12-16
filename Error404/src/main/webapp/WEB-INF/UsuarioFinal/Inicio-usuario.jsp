@@ -3,19 +3,21 @@
 <%@ page import="Beans.Eventos" %>
 <%@ page import="Beans.Logs" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Beans.Usuarios" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <%
     // Instanciar el DAO y obtener datos simulados
     DashboardDAO dashboardDAO = new DashboardDAO();
-    int userId = 2; // Simula el userId; en producción, usa el userId del usuario autenticado
+    Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+    String nombreUsuario = usuario.getNombre();
+    int userId = usuario.getUserId();
     int animalesAyudados = dashboardDAO.obtenerAnimalesAyudados(userId);
     int publicacionesRealizadas = dashboardDAO.obtenerPublicacionesRealizadas(userId);
     int eventosInscritos = dashboardDAO.obtenerEventosInscritos(userId);
     String actividadPrincipal = dashboardDAO.obtenerActividadPrincipal(userId);
     Eventos proximoEvento = dashboardDAO.obtenerProximoEvento();
-    String nombreUsuario = (String) request.getAttribute("nombreUsuario");
     String fotoPerfil = dashboardDAO.obtenerFotoPerfil(userId);
 %>
 

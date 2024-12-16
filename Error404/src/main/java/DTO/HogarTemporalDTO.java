@@ -5,13 +5,13 @@ import java.util.Date;
 public class HogarTemporalDTO {
     private int temporalId;
     private int solicitudId;
-
     private String nombre;
     private String apellido;
     private String direccion;
     private String estadoTemporal;
     private Date fechaSolicitud;
     private String tipoSolicitud;
+    private String estado_publicacion;
     private int edad;
     private String genero;
     private String celular;
@@ -23,13 +23,15 @@ public class HogarTemporalDTO {
     private String nombreContacto;   // Nuevo campo
     private String recompensa;       // Nuevo campo
 
+
     // Constructor actualizado con campos adicionales
     public HogarTemporalDTO(int solicitudId,int temporalId, String nombre, String apellido, String direccion,
                             String estadoTemporal, Date fechaSolicitud, String tipoSolicitud,
                             int edad, String genero, String celular, String mascota,
                             Date fechaPerdida, String lugarPerdida,
                             String descripcionAdicional, String telefonoContacto,
-                            String nombreContacto, String recompensa) {
+                            String nombreContacto, String recompensa, String estado_publicacion) {
+        this.estado_publicacion = estado_publicacion;
         this.solicitudId = solicitudId;
         this.temporalId = temporalId;
         this.nombre = nombre;
@@ -49,6 +51,7 @@ public class HogarTemporalDTO {
         this.nombreContacto = nombreContacto;
         this.recompensa = recompensa;
     }
+
 
     // Getters y Setters para los nuevos campos
     public int getSolicitudId() {

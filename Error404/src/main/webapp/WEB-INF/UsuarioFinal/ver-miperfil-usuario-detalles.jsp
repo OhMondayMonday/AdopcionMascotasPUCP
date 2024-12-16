@@ -104,20 +104,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-around flex-wrap my-4 py-3">
-                                        <div class="d-flex align-items-start me-4 mt-3 gap-3">
-                                            <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-check bx-sm'></i></span>
-                                            <div>
-                                                <h5 class="mb-0">${usuario.animalesAlbergados}</h5>
-                                                <span>Hogar temporal</span>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-start mt-3 gap-3">
-                                            <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-customize bx-sm'></i></span>
-                                            <div>
-                                                <h5 class="mb-0">${usuario.capacidadAnimales}</h5>
-                                                <span>Capacidad</span>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <h5 class="pb-2 border-bottom mb-4">Detalles de la cuenta</h5>
                                     <div class="info-container">
@@ -161,19 +148,16 @@
 
                         <div class="col-xl-8 col-lg-7 col-md-7 order-1 order-md-1">
                             <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                <li class="nav-item"><a class="nav-link active" href="UsuarioServlet?action=verMiPerfil"><i class="bx bx-user me-1"></i>Cuenta</a></li>
-                                <li class="nav-item"><a class="nav-link" href="UsuarioServlet?action=verMiSeguridad"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i>Cuenta</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<c:url value='/UsuarioServlet?action=verMiPerfilSeguridad'/>">
+                                        <i class="bx bx-lock-alt me-1"></i>Seguridad
+                                    </a>
+                                </li>
                             </ul>
 
                             <div class="card mb-4">
-                                <h5 class="card-header pt-3 ps-3">Acerca de mí</h5>
-                                <div class="p-3 pt-0 descripcion-hogar">
-                                    ${usuario.descripcion}
-                                </div>
-                            </div>
-
-                            <div class="card mb-4">
-                                <h5 class="card-header pb-2 pt-3 ps-3">Acerca de nosotros</h5>
+                                <h5 class="card-header pb-2 pt-3 ps-3">Acerca de mi</h5>
                                 <div class="p-3 pt-0 descripcion-hogar">
                                     <strong>¿Quién soy?</strong><br>
                                     <span>${fn:escapeXml(usuario.descripcion != null ? usuario.descripcion : 'Descripción no disponible')}</span>
@@ -202,10 +186,7 @@
                                             <span class="fw-medium me-2">Instagram:</span>
                                             <span>${usuario.urlInstagram}</span>
                                         </li>
-                                        <li class="mb-3">
-                                            <span class="fw-medium me-2">Twitter:</span>
-                                            <span>${usuario.urlTwitter}</span>
-                                        </li>
+
                                     </ul>
                                     <strong>Mi contacto:</strong>
                                     <ul class="list-unstyled">
