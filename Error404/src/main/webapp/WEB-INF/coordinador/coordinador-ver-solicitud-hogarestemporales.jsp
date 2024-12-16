@@ -88,224 +88,290 @@
 
                         <div class="container-xxl flex-grow-1 container-p-y">
 
-
-                            <div class="card mb-0"></div>
-                            <div class="card-header d-flex flex-wrap justify-content-between gap-3">
-
-                                <!-- Select2 -->
-                                <div class="col-12">
-                                    <div class="card mb-0" style="height: auto; padding: 5px;">
-                                        <div class="card-body d-flex align-items-center justify-content-center p-1">
-                                            <div class="row w-100">
-                                                <!-- Tipo de Publicacion -->
-                                                <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                                    <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de solicitud</label>
-                                                    <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                        <option value="AK">Todas</option>
-                                                        <option value="Adopcion">Mascotas Perdidas</option>
-                                                        <option value="Donaciones de dinero"> Hogares Temporales</option>
-                                                    </select>
-                                                </div>
-                                                <!-- Palabra clave -->
-                                                <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                                    <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
-                                                    <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
-                                                </div>
-                                                <!-- ubicacion -->
-                                                <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                                    <label for="select2Ubi" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Ubicacion</label>
-                                                    <select id="select2Ubi" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
-                                                        <option value="AK">Todas</option>
-                                                        <option value="Barranco">Barranco</option>
-                                                        <option value="Lima">Lima</option>
-                                                        <option value="Chorrillos">Chorrillos</option>
-                                                        <option value="Lamolina">La Molina</option>
-                                                        <option value="Jesusmaria">Jesus Maria</option>
-                                                        <option value="Sanmiguel">San Miguel</option>
-                                                        <option value="Losolivos">Los Olivos</option>
-                                                        <option value="Miraflores">Miraflores</option>
-                                                        <option value="Sanisidro">San isidro</option>
-                                                    </select>
-                                                </div>
+                            <!-- Filtros -->
+                            <div class="card mb-0">
+                                <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-3">
+                                    <form method="get" action="${pageContext.request.contextPath}/AprobarSolicitudes" class="w-100">
+                                        <div class="row gx-2 gy-2 align-items-center">
+                                            <!-- Tipo de solicitud -->
+                                            <div class="col-md-3">
+                                                <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem;">Tipo de solicitud</label>
+                                                <select id="select2Basic" name="tipoSolicitud" class="form-select form-select-sm" style="font-size: 0.75rem;">
+                                                    <option value="">Todas</option>
+                                                    <option value="Perros">Perros</option>
+                                                    <option value="Gatos">Gatos</option>
+                                                    <option value="Reptiles">Reptiles</option>
+                                                </select>
                                             </div>
+
+                                            <!-- Palabra clave -->
+                                            <div class="col-md-3">
+                                                <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem;">Palabra clave</label>
+                                                <input type="text" id="inputPalabraClave" name="palabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
+                                            </div>
+
+                                            <!-- Ubicación -->
+                                            <div class="col-md-3">
+                                                <label for="select2Ubi" class="form-label mb-1" style="font-size: 0.75rem;">Ubicación</label>
+                                                <select id="select2Ubi" name="ubicacion" class="form-select form-select-sm" style="font-size: 0.75rem;">
+                                                    <option value="">Todas</option>
+                                                    <option value="Barranco">Barranco</option>
+                                                    <option value="Lima">Lima</option>
+                                                    <option value="Chorrillos">Chorrillos</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Botón de aplicar filtros -->
+                                            <div class="col-md-3 text-end">
+                                                <button type="submit" class="btn btn-primary btn-sm mt-3">Aplicar Filtros</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Cards -->
+                            <div class="card mt-2">
+                                <div class="card-body p-0">
+                                    <div class="container-fluid">
+                                        <div class="row gx-1 gy-2 justify-content-center m-0">
+
+                                            <!-- Mostrar mensaje si no hay solicitudes -->
+                                            <c:if test="${empty solicitudes}">
+                                                <div class="text-center mt-4">
+                                                    <p>No hay solicitudes disponibles en este momento.</p>
+                                                </div>
+                                            </c:if>
+
+                                            <!-- Iterar sobre solicitudes -->
+                                            <c:if test="${!empty solicitudes}">
+                                                <c:forEach var="solicitud" items="${solicitudes}">
+                                                    <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
+                                                        <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
+                                                            <!-- Imagen -->
+                                                            <div class="rounded-2 text-center flex-grow-1">
+                                                                <img class="img-fluid" src="${pageContext.request.contextPath}${solicitud.foto.urlFoto}"
+                                                                     alt="Imagen de la solicitud" style="height: 200px; object-fit: cover; border-radius: 3px;">
+                                                            </div>
+                                                            <!-- Información -->
+                                                            <div class="card-body p-2 d-flex flex-column">
+                                                                <!-- Tipo de mascota -->
+                                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">${solicitud.tipoMascotas}</span>
+
+                                                                <!-- Título: Nombre del usuario -->
+                                                                <h6 class="mt-1" style="font-size: 0.875rem;">
+                                                                    Hogar temporal de ${solicitud.usuario.nombre} ${solicitud.usuario.apellido}
+                                                                </h6>
+
+                                                                <!-- Descripción: Dirección -->
+                                                                <p class="mt-1 mb-0" style="font-size: 0.75rem;">
+                                                                    Dirección: ${solicitud.direccion}
+                                                                </p>
+
+                                                                <!-- Botones -->
+                                                                <div class="d-flex flex-column gap-1 mt-auto">
+                                                                    <a class="btn btn-label-info d-flex align-items-center"
+                                                                       href="#modal-${solicitud.temporalId}" data-bs-toggle="modal" style="font-size: 0.75rem;">
+                                                                        <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                                    </a>
+                                                                    <a href="#" class="btn btn-success btn-accept"
+                                                                       data-solicitud-id="${solicitud.temporalId}" style="font-size: 0.75rem;">
+                                                                        <span>Aceptar</span><i class="bx bx-check-circle"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </c:forEach>
+                                            </c:if>
+
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Verificar si la lista de solicitudes está vacía -->
-                                <c:if test="${empty solicitudes}">
-                                    <div class="text-center mt-4">
-                                        <p>No hay solicitudes disponibles en este momento.</p>
-                                    </div>
-                                </c:if>
+                                <div class="card-footer d-flex justify-content-center">
+                                    <ul class="pagination m-0">
+                                        <!-- Botón Anterior -->
+                                        <c:if test="${currentPage > 1}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=${currentPage - 1}">Anterior</a>
+                                            </li>
+                                        </c:if>
 
-                                <!-- Si hay solicitudes, iterar sobre ellas -->
-                                <c:if test="${!empty solicitudes}">
-                                    <!-- Card Container -->
-                                    <div class="card mb-2" style="padding: 0; margin: 0;">
-                                        <div class="card-body p-0">
-                                            <div class="container-fluid">
-                                                <div class="row gx-1 gy-2 justify-content-center m-0">
-                                                    <!-- Iterar sobre las solicitudes usando c:forEach -->
-                                                    <c:forEach var="solicitud" items="${solicitudes}">
-                                                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
-                                                            <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
-                                                                <div class="rounded-2 text-center flex-grow-1">
-                                                                    <a data-bs-toggle="modal" href="#evento${solicitud.id}">
-                                                                        <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/2.jpg" alt="avatar" style="height: 200px; object-fit: cover; border-radius: 3px;"/>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="card-body p-2 d-flex flex-column">
-                                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">${solicitud.tipo}</span>
-                                                                    </div>
-                                                                    <a class="h6" data-bs-toggle="modal" href="#evento${solicitud.id}" style="font-size: 0.875rem;">${solicitud.nombre}</a>
-                                                                    <p class="mt-1 mb-0" style="font-size: 0.75rem;">${solicitud.descripcion}</p>
-                                                                    <div class="d-flex flex-column gap-1 text-nowrap mt-auto mb-auto">
-                                                                        <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="coordinador-refugio${solicitud.id}.html">
-                                                                            <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                                        </a>
-                                                                        <a href="#" class="btn btn-success btn-accept" style="font-size: 0.75rem;" data-solicitud-id="${solicitud.id}">
-                                                                            <span>Aceptar </span><i class="bx bx-check-circle"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </c:forEach>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <!-- Mostrar rango dinámico de páginas -->
+                                        <c:choose>
+                                            <c:when test="${totalPages <= 5}">
+                                                <!-- Mostrar todas las páginas si son 5 o menos -->
+                                                <c:forEach var="i" begin="1" end="${totalPages}">
+                                                    <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                                        <a class="page-link" href="?page=${i}">${i}</a>
+                                                    </li>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <!-- Mostrar un rango dinámico -->
+                                                <c:set var="startPage" value="${currentPage - 2}" />
+                                                <c:set var="endPage" value="${currentPage + 2}" />
 
-                                    <!-- Modales dinámicos -->
-                                    <c:forEach var="solicitud" items="${solicitudes}">
-                                        <div class="modal fade" id="evento${solicitud.id}" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                                <div class="modal-content p-3 p-md-5">
-                                                    <div class="modal-body">
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        <div class="text-center mb-4">
-                                                            <img class="img-fluid mb-4" src="${pageContext.request.contextPath}/assets/img/${solicitud.imagen}" alt="Imagen de ${solicitud.nombre}" style="height: 200px; object-fit: cover;"/>
-                                                            <h3 class="text-primary">${solicitud.nombre}</h3>
-                                                            <span class="badge bg-label-info" style="font-size: 0.75rem;">${solicitud.tipo}</span>
+                                                <!-- Ajustar el rango si está fuera de los límites -->
+                                                <c:if test="${startPage < 1}">
+                                                    <c:set var="endPage" value="${endPage + (1 - startPage)}" />
+                                                    <c:set var="startPage" value="1" />
+                                                </c:if>
+                                                <c:if test="${endPage > totalPages}">
+                                                    <c:set var="startPage" value="${startPage - (endPage - totalPages)}" />
+                                                    <c:set var="endPage" value="${totalPages}" />
+                                                </c:if>
+
+                                                <!-- Mostrar las páginas en el rango ajustado -->
+                                                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                                                    <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                                        <a class="page-link" href="?page=${i}">${i}</a>
+                                                    </li>
+                                                </c:forEach>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                        <!-- Botón Siguiente -->
+                                        <c:if test="${currentPage < totalPages}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=${currentPage + 1}">Siguiente</a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+                                </div>
+
+
+                                <!-- Modales dinámicos -->
+                                <c:forEach var="solicitud" items="${solicitudes}">
+                                    <div class="modal fade" id="modal-${solicitud.temporalId}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+                                            <div class="modal-content p-3 p-md-5">
+                                                <div class="modal-body">
+                                                    <!-- Botón de cierre -->
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                                    <!-- Encabezado: Imagen y título -->
+                                                    <div class="text-center mb-4">
+                                                        <img class="img-fluid mb-3 rounded-3"
+                                                             src="${pageContext.request.contextPath}${solicitud.foto.urlFoto}"
+                                                             alt="Imagen del hogar temporal"
+                                                             style="height: 250px; object-fit: cover;" />
+
+                                                        <h3 class="text-primary">Hogar temporal de ${solicitud.usuario.nombre} ${solicitud.usuario.apellido}</h3>
+                                                        <span class="badge bg-label-info fs-6">${solicitud.tipoMascotas}</span>
+                                                    </div>
+
+                                                    <!-- Descripción General -->
+                                                    <div class="mb-4">
+                                                        <p class="text-muted">
+                                                                ${solicitud.publicacion.descripcion != null ? solicitud.publicacion.descripcion :
+                                                                        "Este hogar temporal está disponible para brindar amor y cuidado a mascotas que lo necesitan. ¡Ofrece un espacio seguro y cómodo para los animales!"}
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- Información Detallada -->
+                                                    <div class="row mb-4">
+                                                        <!-- Columna 1 -->
+                                                        <div class="col-md-6 mb-3">
+                                                            <h5 class="text-secondary">Detalles del Hogar</h5>
+                                                            <ul class="list-unstyled">
+                                                                <li><strong>Dirección:</strong> ${solicitud.direccion}</li>
+                                                                <li><strong>Edad:</strong> ${solicitud.edad} años</li>
+                                                                <li><strong>Género:</strong> ${solicitud.genero}</li>
+                                                                <li><strong>Cantidad de cuartos:</strong> ${solicitud.cantidadCuartos}</li>
+                                                                <li><strong>Metraje de vivienda:</strong> ${solicitud.metrajeVivienda} m²</li>
+                                                            </ul>
                                                         </div>
-                                                        <form class="row g-3">
-                                                            <div class="col-12" style="text-align: justify;">
-                                                                <p>${solicitud.descripcionCompleta}</p>
-                                                            </div>
-                                                            <div class="col-12 text-center">
-                                                                <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                            </div>
-                                                        </form>
+
+                                                        <!-- Columna 2 -->
+                                                        <div class="col-md-6 mb-3">
+                                                            <h5 class="text-secondary">Información de Contacto</h5>
+                                                            <ul class="list-unstyled">
+                                                                <li><strong>Nombre:</strong> ${solicitud.usuario.nombre} ${solicitud.usuario.apellido}</li>
+                                                                <li><strong>Teléfono:</strong> ${solicitud.celular}</li>
+                                                                <li><strong>Referencia:</strong> ${solicitud.personaReferencia}</li>
+                                                                <li><strong>Contacto de referencia:</strong> ${solicitud.contactoReferencia}</li>
+                                                                <li><strong>Tiempo ofrecido:</strong> ${solicitud.tiempoTemporal} meses</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Botón para cerrar -->
+                                                    <div class="text-center">
+                                                        <button type="button" class="btn btn-label-primary" data-bs-dismiss="modal">Cerrar</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </c:forEach>
-                                </c:if>
-
-                            </div>
-                        </div>
-
-                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-                                                <script>
-                                                    // Selecciona todos los botones con la clase 'btn-accept'
-                                                    document.querySelectorAll('.btn-accept').forEach(function(button) {
-                                                        button.addEventListener('click', function(event) {
-                                                            event.preventDefault();
-                                                            const idSolicitud = button.dataset.solicitudId; // Usar un atributo data-solicitud-id en el botón
-
-                                                            Swal.fire({
-                                                                title: "¿Estás seguro?",
-                                                                text: "Aceptarás la solicitud",
-                                                                icon: "warning",
-                                                                showCancelButton: true,
-                                                                confirmButtonText: "Sí, aceptar",
-                                                                customClass: {
-                                                                    confirmButton: "btn btn-primary me-3",
-                                                                    cancelButton: "btn btn-label-secondary",
-                                                                },
-                                                                buttonsStyling: false,
-                                                            }).then(function(result) {
-                                                                if (result.isConfirmed) {
-                                                                    fetch('url_para_procesar_solicitud', {
-                                                                        method: 'POST',
-                                                                        headers: {
-                                                                            'Content-Type': 'application/json'
-                                                                        },
-                                                                        body: JSON.stringify({ solicitudId: idSolicitud })
-                                                                    })
-                                                                        .then(response => response.json())
-                                                                        .then(data => {
-                                                                            if (data.success) {
-                                                                                Swal.fire({
-                                                                                    icon: "success",
-                                                                                    title: "¡Hecho!",
-                                                                                    text: "La solicitud ha sido aceptada.",
-                                                                                    customClass: { confirmButton: "btn btn-success" },
-                                                                                });
-                                                                            } else {
-                                                                                Swal.fire({
-                                                                                    icon: "error",
-                                                                                    title: "Error",
-                                                                                    text: "No se pudo procesar la solicitud.",
-                                                                                    customClass: { confirmButton: "btn btn-danger" },
-                                                                                });
-                                                                            }
-                                                                        })
-                                                                        .catch(error => console.error('Error:', error));
-                                                                }
-                                                            });
-                                                        });
-                                                    });
-
-
-                                                </script>
-
-
-
-
-                                            </div>
-                                        </div>
                                     </div>
-            <!-- Paginación -->
-            <div class="card-footer d-flex justify-content-center">
-                <ul class="pagination m-0">
-                    <!-- Enlace a la página anterior, solo si la página actual es mayor a 1 -->
-                    <c:if test="${currentPage > 1}">
-                        <li class="page-item">
-                            <a class="page-link" href="?page=${currentPage - 1}&pageSize=${pageSize}">Anterior</a>
-                        </li>
-                    </c:if>
-
-                    <!-- Iterar para crear enlaces de páginas -->
-                    <c:forEach var="i" begin="1" end="${totalPages}">
-                        <li class="page-item ${i == currentPage ? 'active' : ''}">
-                            <a class="page-link" href="?page=${i}&pageSize=${pageSize}">${i}</a>
-                        </li>
-                    </c:forEach>
-
-                    <!-- Enlace a la página siguiente, solo si la página actual es menor al total de páginas -->
-                    <c:if test="${currentPage < totalPages}">
-                        <li class="page-item">
-                            <a class="page-link" href="?page=${currentPage + 1}&pageSize=${pageSize}">Siguiente</a>
-                        </li>
-                    </c:if>
-                </ul>
-            </div>
+                                </c:forEach>
 
 
-
-
-
-            <div class="content-backdrop fade"></div>
-                                </div>
-                                <!-- Content wrapper -->
                             </div>
-                            <!-- / Layout page -->
-                        </div>
+
+                        <!-- SweetAlert -->
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                        <script>
+                            document.querySelectorAll('.btn-accept').forEach(button => {
+                                button.addEventListener('click', event => {
+                                    event.preventDefault();
+                                    const temporalId = button.dataset.solicitudId; // Obtener el ID del hogar temporal
+
+                                    // Confirmación con SweetAlert
+                                    Swal.fire({
+                                        title: "¿Estás seguro?",
+                                        text: "Aceptarás la solicitud seleccionada.",
+                                        icon: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonText: "Sí, aceptar",
+                                        cancelButtonText: "Cancelar",
+                                        customClass: { confirmButton: "btn btn-success me-2", cancelButton: "btn btn-secondary" },
+                                        buttonsStyling: false
+                                    }).then(result => {
+                                        if (result.isConfirmed) {
+                                            // Realizar petición AJAX al servidor
+                                            fetch('AprobarSolicitudes?action=aprobarHogar&temporalId=' + temporalId, {
+                                                method: 'GET'
+                                            })
+                                                .then(response => response.json()) // Convertir la respuesta a JSON
+                                                .then(data => {
+                                                    if (data.success) {
+                                                        Swal.fire({
+                                                            icon: "success",
+                                                            title: "¡Hecho!",
+                                                            text: data.message,
+                                                            customClass: { confirmButton: "btn btn-success" }
+                                                        }).then(() => {
+                                                            location.reload(); // Recargar la página para actualizar la lista
+                                                        });
+                                                    } else {
+                                                        Swal.fire({
+                                                            icon: "error",
+                                                            title: "Error",
+                                                            text: data.message,
+                                                            customClass: { confirmButton: "btn btn-danger" }
+                                                        });
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error:', error);
+                                                    Swal.fire({
+                                                        icon: "error",
+                                                        title: "Error",
+                                                        text: "Ocurrió un error inesperado.",
+                                                        customClass: { confirmButton: "btn btn-danger" }
+                                                    });
+                                                });
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+
+                        <div class="layout-overlay layout-menu-toggle"></div>
+
 
                         <footer class="footer bg-footer-theme" >
                             <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3"  style="background-color: #fef8e5;">
