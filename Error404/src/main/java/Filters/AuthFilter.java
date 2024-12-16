@@ -12,7 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter({"/Dashboard", "/crearLugares", "/lugares-eventos", "/gestionUsuarios", "/gestionDonaciones", "/crearCoordinador", "/crearUsuarios", "/crearAlbergues", "/Dashboard"})
+@WebFilter({"/Dashboard", "/crearLugares", "/lugares-eventos", "/gestionUsuarios", "/gestionDonaciones", "/crearCoordinador", "/crearUsuarios", "/crearAlbergues", "/Dashboard*",
+        "/AprobarSolicitudes*", "/EventosServlet*", "/coordinador*", "/albergue*", "/UsuarioServlet", "/Publicaciones", "/Calendario*", "/AprobarPublicaciones*", "/FAQ"})
 public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

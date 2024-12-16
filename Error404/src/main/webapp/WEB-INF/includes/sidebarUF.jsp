@@ -74,7 +74,7 @@
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}/WEB-INF/UsuarioFinal/Preguntas-frecuentes.jsp"  class="menu-link">
+            <a href="${pageContext.request.contextPath}/FAQ"  class="menu-link">
                 <i class="menu-icon tf-icons bx bx-help-circle"></i>
                 <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
             </a>

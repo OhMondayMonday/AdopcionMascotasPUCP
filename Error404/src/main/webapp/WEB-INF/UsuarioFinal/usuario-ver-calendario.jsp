@@ -92,7 +92,9 @@
         <div class="layout-page">
 
             <!-- Navbar -->
-            <jsp:include page="../includes/navbarUF.jsp"/>
+            <jsp:include page="/WEB-INF/includes/navbarUF.jsp">
+                <jsp:param name="recurso" value="Alianza Animal"/>
+            </jsp:include>
             <!-- / Navbar -->
 
             <!-- Content wrapper -->

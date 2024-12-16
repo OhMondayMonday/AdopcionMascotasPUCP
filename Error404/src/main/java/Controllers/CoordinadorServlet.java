@@ -249,22 +249,12 @@ public class CoordinadorServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
 
-            // Obtener y verificar el ID del usuario
-            String idStr = request.getParameter("id");
-            if (idStr == null || idStr.isEmpty()) {
-                response.getWriter().write("Error: ID no proporcionado");
-                return;
-            }
-            int id;
-            try {
-                id = Integer.parseInt(idStr);
-            } catch (NumberFormatException e) {
-                response.getWriter().write("Error: Formato de ID no válido");
-                return;
-            }
+            HttpSession session = request.getSession(false);
+            Usuarios coordinador1= (Usuarios) session.getAttribute("usuariosession");
+            int id = coordinador1.getUserId();
 
-            System.out.println("ID Capturado en el Servlet: " + id);
             Usuarios coordinador = new Usuarios();
+            System.out.println("ID Capturado en el Servlet: " + id);
             coordinador.setUserId(id);
             coordinador.setUsername(request.getParameter("username")); // Username
             coordinador.setNombre(request.getParameter("nombre")); // Nombre de persona
@@ -300,7 +290,10 @@ public class CoordinadorServlet extends HttpServlet {
         int pageSize = 10;
         int currentPage = getCurrentPage(request);
         int offset = (currentPage - 1) * pageSize;
-        int coordinadorId = coordinador.getUserId();
+
+        HttpSession session = request.getSession(false);
+        Usuarios coordinador1 = (Usuarios) session.getAttribute("usuariosession");
+        int coordinadorId = coordinador1.getUserId();
 
         List<HogarTemporalDTO> solicitudes = coordinadorDAO.obtenerSolicitudesHogarPaginadas(offset, pageSize, coordinadorId);
 
@@ -329,8 +322,9 @@ public class CoordinadorServlet extends HttpServlet {
 
         int offset = (currentPage - 1) * pageSize;
 
-        // ID del coordinador (temporal por ahora)
-        int coordinadorId = 4; // Cambia este valor según necesites
+        HttpSession session = request.getSession(false);
+        Usuarios coordinador = (Usuarios) session.getAttribute("usuariosession");
+        int coordinadorId = coordinador.getUserId();
 
         // Llamadas al DAO con el ID del coordinador
         List<HogarTemporalDTO> solicitudes = coordinadorDAO.obtenerSolicitudesHogarPaginadas(offset, pageSize, coordinadorId);

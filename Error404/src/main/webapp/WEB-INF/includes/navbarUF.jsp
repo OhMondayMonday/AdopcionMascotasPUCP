@@ -22,7 +22,7 @@
         <div class="w-75 align-items-center me-auto">
             <div class="nav-item navbar-search-wrapper mb-0">
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-">Inicio</p>
+              <p class="mb-0 fst-normal fw-semibold ff-"><%=request.getParameter("recurso")%></p>
             </span>
             </div>
         </div>
@@ -70,7 +70,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/PublicacionesServlet?action=verTodasMisPublicaciones&user_id=<%=usuario.getUserId()%>">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Publicaciones?action=verTodasMisPublicaciones&user_id=<%=usuario.getUserId()%>">
                             <i class="bx bx-building-house"></i>
                             <span class="align-middle">Mis publicaciones</span>
                         </a>
@@ -91,7 +91,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/WEB-INF/UsuarioFinal/Preguntas-frecuentes.jsp">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/FAQ">
                             <i class="bx bx-help-circle"></i>
                             <span class="align-middle">Preguntas frecuentes</span>
                         </a>

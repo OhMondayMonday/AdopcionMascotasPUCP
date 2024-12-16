@@ -87,6 +87,10 @@
         <jsp:include page="../includes/sidebarUF.jsp" />
 
         <div class="layout-page">
+
+            <jsp:include page="/WEB-INF/includes/navbarUF.jsp">
+                <jsp:param name="recurso" value="Alianza Animal"/>
+            </jsp:include>
             <div class="content-wrapper">
                 <div class="container-xxl flex-grow-1 container-p-y">
 

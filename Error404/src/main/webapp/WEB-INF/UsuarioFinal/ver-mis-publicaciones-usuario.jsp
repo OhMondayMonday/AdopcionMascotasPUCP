@@ -87,8 +87,8 @@
     </jsp:include>
 
     <div class="layout-page">
-      <jsp:include page="${pageContext.request.contextPath}/WEB-INF/includes/navbarUF.jsp">
-        <jsp:param name="usuariosession" value=""/>
+      <jsp:include page="/WEB-INF/includes/navbarUF.jsp">
+        <jsp:param name="recurso" value="Alianza Animal"/>
       </jsp:include>
 
 
@@ -204,7 +204,7 @@
         </div>
 
 
-      </nav>
+      </div>
 
       <!-- Content wrapper -->
       <div class="content-wrapper">

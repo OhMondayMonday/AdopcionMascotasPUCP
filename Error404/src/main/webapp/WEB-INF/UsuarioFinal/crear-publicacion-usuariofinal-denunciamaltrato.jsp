@@ -94,13 +94,11 @@
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
     <!-- Navbar -->
-    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/includes/sidebarUF.jsp">
-      <jsp:param name="usuariosession" value=""/>
-    </jsp:include>
+    <jsp:include page="/WEB-INF/includes/sidebarUF.jsp" />
 
     <div class="layout-page">
-      <jsp:include page="${pageContext.request.contextPath}/WEB-INF/includes/navbarUF.jsp">
-        <jsp:param name="usuariosession" value=""/>
+      <jsp:include page="/WEB-INF/includes/navbarUF.jsp">
+        <jsp:param name="recurso" value="Crear publicacion"/>
       </jsp:include>
 
 

@@ -1,5 +1,6 @@
 package Controllers;
 
+import Beans.Usuarios;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,4 +16,5 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
+
 }

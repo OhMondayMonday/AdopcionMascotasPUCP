@@ -20,22 +20,21 @@
     <ul class="menu-inner py-1">
 
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}/Dashboard3" class="menu-link">
+            <a href="<%=request.getContextPath()%>/Dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home"></i>
                 <div class="text-truncate" data-i18n="Inicio">Inicio</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="coordinador-ver-publicaciones.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-building-house"></i>
-                <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
+            <a href="<%=request.getContextPath()%>/coordinador?action=listarSolicitudesHogar" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+                <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
             </a>
         </li>
-
         <li class="menu-item">
-            <a href="coordinador-ver-hogarestemporales.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-building-house"></i>
-                <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
+            <a href="<%=request.getContextPath()%>/Publicaciones?action=verTodasPublicaciones" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-building-house"></i>
+                <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
             </a>
         </li>
         <!-- Gestion -->
@@ -43,32 +42,32 @@
             <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
         </li>
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}/coordinador?action=listarGestionHogares&id=${usuario.user_id}" class="menu-link">
+            <a href="<%=request.getContextPath()%>/coordinador?action=listarGestionHogares&id=${usuario.user_id}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building-house"></i>
                 <div class="text-truncate" data-i18n="Todas">Todas</div>
             </a>
         </li>
-
+        <!-- Gestion -->
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text" data-i18n="Solicitudes">Solicitudes</span>
+            <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
         </li>
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}/AprobarSolicitudes" class="menu-link">
+            <a href="<%=request.getContextPath()%>/AprobarSolicitudes" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
+                <div class="text-truncate" data-i18n="Aprobar Solicitudes">Aprobar Solicitudes</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}/AprobarPublicaciones" class="menu-link">
+            <a href="<%=request.getContextPath()%>/AprobarPublicaciones" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
+                <div class="text-truncate" data-i18n="Aprobar Publicaciones">Aprobar Publicaciones</div>
             </a>
         </li>
 
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
         <li class="menu-item">
-            <a href="coordinador-Preguntas-frecuentes.html" class="menu-link">
+            <a href="<%=request.getContextPath()%>/FAQ" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-help-circle"></i>
                 <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas Frecuentes</div>
             </a>

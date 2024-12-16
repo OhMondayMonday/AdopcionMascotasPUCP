@@ -25,27 +25,27 @@
     <ul class="menu-inner py-1">
 
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}/Dashboard2" class="menu-link">
+            <a href="<%=request.getContextPath()%>/Dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home"></i>
                 <div class="text-truncate" data-i18n="Inicio">Inicio</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="albergue-ver-publicaciones.jsp" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-building-house"></i>
-                <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="EventosServlet?action=verTodosEventos" class="menu-link">
+            <a href="<%=request.getContextPath()%>/EventosServlet?action=verTodosEventos" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                 <div class="text-truncate" data-i18n="Eventos">Eventos</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="${pageContext.request.contextPath}/albergue?action=hogaresTemporales" class="menu-link">
+            <a href="<%=request.getContextPath()%>/albergue?action=hogaresTemporales" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building-house"></i>
                 <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="<%=request.getContextPath()%>/Publicaciones?action=verTodasPublicaciones" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-building-house"></i>
+                <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
             </a>
         </li>
         <!-- Gestion -->
@@ -53,13 +53,13 @@
             <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
         </li>
         <li class="menu-item">
-            <a href="albergue-ver-mispublicaciones.jsp" class="menu-link">
+            <a href="<%=request.getContextPath()%>/Publicaciones?action=verTodasMisPublicaciones" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-building-house"></i>
                 <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="EventosServlet?action=verEventosDeUsuario" class="menu-link">
+            <a href="<%=request.getContextPath()%>/EventosServlet?action=verEventosDeUsuario" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                 <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
             </a>
@@ -68,7 +68,7 @@
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
         <li class="menu-item">
-            <a href="albergue-preguntas-frecuentes.jsp" class="menu-link">
+            <a href="<%=request.getContextPath()%>/FAQ" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-help-circle"></i>
                 <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
             </a>
