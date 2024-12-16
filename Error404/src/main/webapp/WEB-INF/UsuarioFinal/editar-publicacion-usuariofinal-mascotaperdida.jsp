@@ -1,16 +1,19 @@
 <%@ page import="Beans.Razas" %>
+<%@ page import="java.util.Objects" %>
 <!DOCTYPE html>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaRazas" type="java.util.ArrayList<Beans.Razas>" scope="request"/>
 <jsp:useBean id="usuario" type="Beans.Usuarios" scope="request"/>
-<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
+<jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
+<jsp:useBean id="mascotaPerdida" type="Beans.PublicacionesMascotaPerdida" scope="request"/>
+<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="${pageContext.request.contextPath}/assets/" data-template="vertical-menu-template-semi-dark">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Crear Nueva Publicación | Mascota Perdida</title>
+  <title>Editar Publicación | Mascota Perdida</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -91,6 +94,120 @@
         <jsp:param name="usuariosession" value=""/>
       </jsp:include>
 
+
+        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-1 me-xl-0   d-xl-none ">
+          <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bx bx-menu bx-sm"></i>
+          </a>
+        </div>
+
+
+        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+
+          <div class="w-75 align-items-center me-auto">
+            <div class="nav-item navbar-search-wrapper mb-0">
+          <span class="d-inline-block justify-content-center">
+          <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Publicaciones / Editar Publicación /</span> Mascota Perdida</p>
+        </span>
+            </div>
+          </div>
+
+          <ul class="navbar-nav flex-row align-items-center ms-0">
+
+            <!-- Notification -->
+            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, Adolfo!</span>
+
+            <!--/ Notification -->
+            <!-- User -->
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                <div class="avatar avatar-online">
+                  <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                </div>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="ver-miperfil-usuario-detalles.html">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar avatar-online">
+                          <img src="https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg?t=st=1726637844~exp=1726641444~hmac=f81927ff296e19d666bcbbd27413900024f764855e07caa5d1a64d3e3d1c4f9d&w=826" alt class="w-px-40 h-auto rounded-circle">
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <span class="fw-medium d-block"> Adolfo Contreras</span>
+                        <small class="text-muted">Usuario</small>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ver-miperfil-usuario-seguridad.html">
+                    <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
+                    <span class="align-middle" style="color: #1f4397;">Seguridad</span>
+                  </a>
+                </li>
+
+
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ver-mispublicaciones-usuario.html">
+                    <i class="bx bx-building-house"></i>
+                    <span class="align-middle">Mis publicaciones</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ver-miseventos-usuario.html">
+                    <i class="bx bx-bone"></i>
+                    <span class="align-middle">Mis eventos</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="ver-calendario-usuario.html">
+                    <i class="bx bx-calendar"></i>
+                    <span class="align-middle">Mi Calendario</span>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="Preguntas-frecuentes.html">
+                    <i class="bx bx-help-circle"></i>
+                    <span class="align-middle">Preguntas frecuentes</span>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../index.html" >
+                    <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
+                    <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--/ User -->
+
+
+          </ul>
+        </div>
+
+
+        <!-- Search Small Screens -->
+        <div class="navbar-search-wrapper search-input-wrapper  d-none">
+          <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
+          <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
+        </div>
+
+
+      </nav>
       <!-- / Navbar -->
 
       <!-- Content wrapper -->
@@ -101,17 +218,17 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
           <div class="app-ecommerce">
-            <form id="form_publis" method="POST" action="PublicacionesServlet?action=guardarMascotaPerdida" enctype="multipart/form-data">
+            <form id="form_publis" method="POST" action="PublicacionesServlet?action=actualizarMascotaPerdida" enctype="multipart/form-data">
 
             <!-- Add Product -->
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
               <div class="d-flex flex-column justify-content-center">
-                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Editar Publicación</h4>
                 <p class="text-muted">Rellena los campos abajo</p>
               </div>
               <div class="d-flex align-content-center flex-wrap gap-3">
-                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Confirmar Cambios</button>
                 <button class="btn btn-danger cancel-subscription">Descartar</button>
               </div>
 
@@ -128,25 +245,27 @@
                   <div class="card-body">
                     <div class="mb-3">
                       <label class="form-label" for="titulo">Titulo</label>
-                      <input type="text" required class="form-control" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
+                      <input type="text" required class="form-control" value="<%=publicacion.getTitulo()%>" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
                       <input type="hidden" name="tipo_publicacion" value="4">
                       <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
+                      <input type="hidden" name="publicacion_id" value="<%=publicacion.getPublicacionId()%>">
+                      <input type="hidden" name="mascota_id" value="<%=mascotaPerdida.getMascota().getMascotaId()%>">
                     </div>
                     <div class="row mb-3">
                       <div class="col"><label class="form-label" for="opciones">Tipo</label>
                         <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
                           <option value="" disabled selected>Elija el tipo de publicación</option>
-                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</option>
-                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarAdopcion&user_id=1">Adopción</option>
+                          <option value="" disabled>Normal</option>
+                          <option value="" disabled>Adopción</option>
                           <option value="" selected>Mascota Perdida</option>
-                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarDenuncia&user_id=1">Denuncia por Maltrato Animal</option>
+                          <option value="" disabled>Denuncia por Maltrato Animal</option>
                         </select>
                       </div>
                     </div>
                     <!-- Description -->
                     <div>
                       <label class="form-label">Descripción <span class="text-muted"></span></label>
-                      <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion" style="resize: none;"></textarea>
+                      <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion" style="resize: none;"><%=publicacion.getDescripcion()%></textarea>
                     </div>
                   </div>
                 </div>
@@ -157,7 +276,7 @@
                     <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
                   </div>
                   <div class="card-body">
-                    <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
+                    <input disabled class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
                   </div>
                 </div>
               </div>
@@ -172,20 +291,40 @@
                     <div class="row mb-3">
                       <div class="col">
                         <label class="form-label" for="mascota_nombre">Nombre</label>
-                        <input type="text" required class="form-control" id="mascota_nombre" placeholder="Nombre del mascota" name="mascota_nombre" aria-label="Product title">
+                        <input type="text" required class="form-control" value="<%=mascotaPerdida.getMascota().getNombre()%>" id="mascota_nombre" placeholder="Nombre del mascota" name="mascota_nombre" aria-label="Product title">
                       </div>
                       <div class="col">
                         <label class="form-label" for="mascota_edad">Edad</label>
-                        <input type="text" required class="form-control" id="mascota_edad" placeholder="Indique la edad de la mascota" name="mascota_edad" aria-label="Product title">                  </div>
+                        <input type="text" required class="form-control" value="<%=mascotaPerdida.getMascota().getEdadAproximada()%>" id="mascota_edad" placeholder="Indique la edad de la mascota" name="mascota_edad" aria-label="Product title">                  </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col"><label class="form-label" for="mascota_tamanio">Tamaño</label>
                         <select class="form-control" id="mascota_tamanio" name="mascota_tamanio" required>
-                          <option value="" disabled selected>Elija el tamaño</option>
-                          <option value="pequeño">Pequeño</option>
+                          <%if(Objects.equals(mascotaPerdida.getMascota().getTamanio(), "pequeño")){%>
+                          <option value="" disabled>Elija el tamaño</option>
+                          <option value="pequeño" selected>Pequeño</option>
                           <option value="mediano">Mediano</option>
                           <option value="grande">Grande</option>
                           <option value="gigante">Gigante</option>
+                          <%} else if (Objects.equals(mascotaPerdida.getMascota().getTamanio(), "mediano")) {%>
+                          <option value="" disabled>Elija el tamaño</option>
+                          <option value="pequeño">Pequeño</option>
+                          <option value="mediano" selected>Mediano</option>
+                          <option value="grande">Grande</option>
+                          <option value="gigante">Gigante</option>
+                          <%} else if (Objects.equals(mascotaPerdida.getMascota().getTamanio(), "grande")) {%>
+                          <option value="" disabled>Elija el tamaño</option>
+                          <option value="pequeño">Pequeño</option>
+                          <option value="mediano">Mediano</option>
+                          <option value="grande" selected>Grande</option>
+                          <option value="gigante">Gigante</option>
+                          <%} else if (Objects.equals(mascotaPerdida.getMascota().getTamanio(), "gigante")) {%>
+                          <option value="" disabled>Elija el tamaño</option>
+                          <option value="pequeño">Pequeño</option>
+                          <option value="mediano">Mediano</option>
+                          <option value="grande">Grande</option>
+                          <option value="gigante" selected>Gigante</option>
+                          <%}%>
                         </select>
                       </div>
                       <div class="col">
@@ -194,7 +333,7 @@
                           <select required id="mascota_raza" name="mascota_raza_id" class="select2 form-select form-select-lg" data-allow-clear="true">
                             <option value="" disabled selected>Elija la raza</option>
                             <%for(Razas raza : listaRazas){%>
-                            <option value="<%=raza.getRazaId()%>"><%=raza.getNombreRaza()%></option>
+                            <option value="<%=raza.getRazaId()%>" <%if(mascotaPerdida.getMascota().getRaza().getRazaId() == raza.getRazaId()){%>selected<%}%>><%=raza.getNombreRaza()%></option>
                             <%}%>
                           </select>
                         </div>
@@ -203,11 +342,11 @@
                     <div class="row mb-3">
                       <div class="col">
                         <label class="form-label" for="mascota_distintivo">Distintivo</label>
-                        <input type="text" required class="form-control" id="mascota_distintivo" placeholder="Indique algún distintivo de la mascota" name="mascota_distintivo" aria-label="Product title">
+                        <input type="text" required class="form-control" value="<%=mascotaPerdida.getMascota().getDistintivo()%>" id="mascota_distintivo" placeholder="Indique algún distintivo de la mascota" name="mascota_distintivo" aria-label="Product title">
                       </div>
                       <div class="col">
                         <label class="form-label" for="informacion_adicional">Información Adicional</label>
-                        <input type="text" class="form-control" id="informacion_adicional" placeholder="Indique alguna información adicional" name="informacion_adicional" aria-label="Product title">
+                        <input type="text" class="form-control" value="<%=mascotaPerdida.getDescripcionAdicional()%>"  id="informacion_adicional" placeholder="Indique alguna información adicional" name="informacion_adicional" aria-label="Product title">
                       </div>
                     </div>
                   </div>
@@ -222,26 +361,26 @@
                     <div class="row mb-3">
                       <div class="col">
                         <label class="form-label" for="contacto_nombre">Nombre</label>
-                        <input type="text" required class="form-control" id="contacto_nombre" placeholder="Nombre de Contacto" name="contacto_nombre" aria-label="Product title">
+                        <input type="text" required class="form-control" value="<%=mascotaPerdida.getNombreContacto()%>" id="contacto_nombre" placeholder="Nombre de Contacto" name="contacto_nombre" aria-label="Product title">
                       </div>
                       <div class="col">
                         <label class="form-label" for="contacto_numero">Número de Contacto</label>
-                        <input type="text" required class="form-control" id="contacto_numero" placeholder="Indique un número de Contacto" name="contacto_numero" aria-label="Product title">
+                        <input type="text" required class="form-control" value="<%=mascotaPerdida.getTelefonoContacto()%>" id="contacto_numero" placeholder="Indique un número de Contacto" name="contacto_numero" aria-label="Product title">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col">
                         <label class="form-label" >Fecha de Pérdida</label>
-                        <input type="date" required class="form-control" id="fecha_perdida" name="fecha_perdida" aria-label="Product title">
+                        <input type="date" required class="form-control" value="<%=mascotaPerdida.getFechaPerdida()%>" id="fecha_perdida" name="fecha_perdida" aria-label="Product title">
                       </div>
                       <div class="col">
                         <label class="form-label" >Lugar de Pérdida</label>
-                        <input type="text" required class="form-control" placeholder="Indique el Lugar de Pérdida" id="lugar_perdida" name="lugar_perdida" aria-label="Product barcode">
+                        <input type="text" required class="form-control" placeholder="Indique el Lugar de Pérdida" value="<%=mascotaPerdida.getLugarPerdida()%>" id="lugar_perdida" name="lugar_perdida" aria-label="Product barcode">
                       </div>
                     </div>
                     <div class="mb-3">
                       <label class="form-label" >Recompensa</label>
-                      <input type="text" class="form-control" placeholder="Alguna Recompensa" id="recompensa" name="recompensa" aria-label="Product title">
+                      <input type="text" class="form-control" placeholder="Alguna Recompensa" value="<%=mascotaPerdida.getRecompensa()%>" id="recompensa" name="recompensa" aria-label="Product title">
                     </div>
                   </div>
 
@@ -365,6 +504,23 @@
     this.value = this.value.replace(/[^0-9]/g, '');
   });
 
+</script>
+
+<script>
+  // Función para reemplazar valores "null" en todos los inputs
+  function replaceNullInInputs() {
+    // Seleccionar todos los elementos <input> en la página
+    const inputs = document.querySelectorAll("input");
+
+    // Iterar sobre cada input y verificar su valor
+    inputs.forEach(input => {
+      if (input.value === "null") {
+        input.value = ""; // Reemplazar el valor por una cadena vacía
+      }
+    });
+  }
+  // Ejecutar la función cuando la página se haya cargado
+  document.addEventListener("DOMContentLoaded", replaceNullInInputs);
 </script>
 
 <!-- Page JS -->

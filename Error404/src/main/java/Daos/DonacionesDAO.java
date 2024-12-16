@@ -73,4 +73,25 @@ public class DonacionesDAO extends BaseDao{
             e.printStackTrace();
         }
     }
+
+    public void actualizarDonacion (PublicacionesDonaciones donacion){
+        String sql = "UPDATE publicaciones_donaciones SET punto_acopio=?, tipo_donacion_id=?, cantidad=?, marca=?, fecha_recepción_inicio=?, fecha_recepcion_fin=?, hora_recepcion=?, telefono_contacto=?, nombre_contacto=?, motivo_donacion=? WHERE publicacion_id=?";
+        try(Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, donacion.getPuntoAcopio());
+            pstmt.setInt(2, donacion.getTipoDonacion().getTipoDonacionId());
+            pstmt.setDouble(3, donacion.getCantidad());
+            pstmt.setString(4, donacion.getMarca());
+            pstmt.setDate(5, new java.sql.Date(donacion.getFechaRecepcionInicio().getTime()));
+            pstmt.setDate(6, new java.sql.Date(donacion.getFechaRecepcionFin().getTime()));
+            pstmt.setTime(7, donacion.getHoraRecepcion());
+            pstmt.setInt(8, donacion.getTelefonoContacto());
+            pstmt.setString(9, donacion.getNombreContacto());
+            pstmt.setString(10, donacion.getMotivoDonacion());
+            pstmt.setInt(11, donacion.getPublicacion_id());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

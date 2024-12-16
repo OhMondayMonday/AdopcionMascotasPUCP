@@ -1,22 +1,18 @@
-<%@ page import="Beans.Razas" %><%--
-  Created by IntelliJ IDEA.
-  User: Sebastian
-  Date: 20/11/2024
-  Time: 00:34
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Beans.Razas" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaRazas" type="java.util.ArrayList<Beans.Razas>" scope="request"/>
 <jsp:useBean id="usuario" type="Beans.Usuarios" scope="request"/>
+<jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
+<jsp:useBean id="denuncia" type="Beans.DenunciasMaltratoAnimal" scope="request"/>
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 
-<!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/app-ecommerce-product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:14:07 GMT -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Crear Nueva Publicación | Denuncia por Maltrato Animal</title>
+  <title>Editar Publicación | Denuncia por Maltrato Animal</title>
 
 
   <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -98,14 +94,11 @@
       <jsp:param name="usuariosession" value=""/>
     </jsp:include>
 
+
     <div class="layout-page">
       <jsp:include page="${pageContext.request.contextPath}/WEB-INF/includes/navbarUF.jsp">
         <jsp:param name="usuariosession" value=""/>
       </jsp:include>
-
-
-
-
 
       <!-- Content wrapper -->
       <div class="content-wrapper">
@@ -115,17 +108,17 @@
         <div class="container-xxl flex-grow-1 container-p-y">
 
           <div class="app-ecommerce">
-            <form id="formPublis" method="POST" action="PublicacionesServlet?action=guardarDenuncia" enctype="multipart/form-data">
+            <form id="formPublis" method="POST" action="PublicacionesServlet?action=actualizarDenuncia" enctype="multipart/form-data">
 
             <!-- Add Product -->
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
               <div class="d-flex flex-column justify-content-center">
-                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+                <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Editar Publicación</h4>
                 <p class="text-muted">Rellena los campos abajo</p>
               </div>
               <div class="d-flex align-content-center flex-wrap gap-3">
-                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Confirmar Cambios</button>
                 <button class="btn btn-danger cancel-subscription">Descartar</button>
               </div>
 
@@ -142,17 +135,19 @@
                   <div class="card-body">
                     <div class="mb-3">
                       <label class="form-label" for="titulo">Titulo</label>
-                      <input required type="text" class="form-control" id="titulo" name="titulo" placeholder="Título de la publicación">
+                      <input required type="text" class="form-control" value="<%=publicacion.getTitulo()%>" id="titulo" name="titulo" placeholder="Título de la publicación">
                       <input type="hidden" name="tipo_publicacion" value="5">
                       <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
+                      <input type="hidden" name="publicacion_id" value="<%=publicacion.getPublicacionId()%>">
+                      <input type="hidden" name="mascota_id" value="<%=denuncia.getMascota().getMascotaId()%>">
                     </div>
                     <div class="row mb-3">
                       <div class="col"><label class="form-label" for="opciones">Tipo</label>
                         <select class="form-control" id="opciones" onchange="cambiarPagina()" required>
                           <option value="" disabled selected>Elija el tipo de publicación</option>
-                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregar&user_id=1">Normal</option>
-                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarAdopcion&user_id=1">Adopción</option>
-                          <option value="<%=request.getContextPath()%>/PublicacionesServlet?action=agregarMascotaPerdida&user_id=1">Mascota Perdida</option>
+                          <option value="" disabled>Normal</option>
+                          <option value="" disabled>Adopción</option>
+                          <option value="" disabled>Mascota Perdida</option>
                           <option value="" selected>Denuncia por Maltrato Animal</option>
                         </select>
                       </div>
@@ -160,7 +155,7 @@
                     <!-- Description -->
                     <div>
                       <label class="form-label" for="descripcion">Descripción<span class="text-muted"></span></label>
-                      <textarea required class="form-control" name="descripcion" id="descripcion" rows="10" style="resize: none;"></textarea>
+                      <textarea required class="form-control" name="descripcion" id="descripcion" rows="10" style="resize: none;"><%=publicacion.getDescripcion()%></textarea>
                     </div>
                 </div>
                 <!-- /Second column -->
@@ -180,16 +175,36 @@
                   <div class="card-body">
                     <div class="mb-3">
                       <label class="form-label" for="mascota_nombre">Nombre</label>
-                      <input type="text" required class="form-control" id="mascota_nombre" name="mascota_nombre" placeholder="Nombre del mascota">
+                      <input type="text" required class="form-control" value="<%=denuncia.getMascota().getNombre()%>" id="mascota_nombre" name="mascota_nombre" placeholder="Nombre del mascota">
                     </div>
                     <div class="row mb-3">
                       <div class="col"><label class="form-label" for="mascota_tamanio">Tamaño</label>
                         <select class="form-control" name="mascota_tamanio" id="mascota_tamanio" required>
-                          <option value="" disabled selected>Elija el tamaño</option>
-                          <option value="pequeño">Pequeño</option>
+                          <%if(Objects.equals(denuncia.getMascota().getTamanio(), "pequeño")){%>
+                          <option value="" disabled>Elija el tamaño</option>
+                          <option value="pequeño" selected>Pequeño</option>
                           <option value="mediano">Mediano</option>
                           <option value="grande">Grande</option>
                           <option value="gigante">Gigante</option>
+                          <%} else if (Objects.equals(denuncia.getMascota().getTamanio(), "mediano")) {%>
+                          <option value="" disabled>Elija el tamaño</option>
+                          <option value="pequeño">Pequeño</option>
+                          <option value="mediano" selected>Mediano</option>
+                          <option value="grande">Grande</option>
+                          <option value="gigante">Gigante</option>
+                          <%} else if (Objects.equals(denuncia.getMascota().getTamanio(), "grande")) {%>
+                          <option value="" disabled>Elija el tamaño</option>
+                          <option value="pequeño">Pequeño</option>
+                          <option value="mediano">Mediano</option>
+                          <option value="grande" selected>Grande</option>
+                          <option value="gigante">Gigante</option>
+                          <%} else if (Objects.equals(denuncia.getMascota().getTamanio(), "gigante")) {%>
+                          <option value="" disabled>Elija el tamaño</option>
+                          <option value="pequeño">Pequeño</option>
+                          <option value="mediano">Mediano</option>
+                          <option value="grande">Grande</option>
+                          <option value="gigante" selected>Gigante</option>
+                          <%}%>
                         </select>
                       </div>
                       <div class="col"><label class="form-label" for="mascota_raza">Raza</label>
@@ -197,7 +212,7 @@
                           <select required id="mascota_raza" name="mascota_raza_id" class="select2 form-select form-select-lg" data-allow-clear="true">
                             <option value="" disabled selected>Elija la raza</option>
                             <%for(Razas raza : listaRazas){%>
-                            <option value="<%=raza.getRazaId()%>"><%=raza.getNombreRaza()%></option>
+                            <option value="<%=raza.getRazaId()%>" <%if(denuncia.getMascota().getRaza().getRazaId() == raza.getRazaId()){%>selected<%}%>><%=raza.getNombreRaza()%></option>
                             <%}%>
                           </select>
                         </div>
@@ -215,23 +230,29 @@
                     <div class="row mb-3">
                       <div class="col">
                         <label class="form-label" for="maltratador_nombre">Nombre</label>
-                        <input type="text" required class="form-control" name="maltratador_nombre" id="maltratador_nombre" placeholder="Nombre del maltratador">
+                        <input type="text" required class="form-control" name="maltratador_nombre" value="<%=denuncia.getNombreMaltratador()%>" id="maltratador_nombre" placeholder="Nombre del maltratador">
                       </div>
                       <div class="col">
                         <label class="form-label" for="maltrato_tipo">Tipo de maltrato</label>
-                        <input type="text" required class="form-control" name="maltrato_tipo" id="maltrato_tipo" placeholder="Indique el tipo de maltratato">
+                        <input type="text" required class="form-control" name="maltrato_tipo" value="<%=denuncia.getTipoMaltrato()%>" id="maltrato_tipo" placeholder="Indique el tipo de maltratato">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col"><label class="form-label" for="denuncia_policial">¿Ha realizado la denuncia policial?</label>
                         <select class="form-control" name="denuncia_policial" id="denuncia_policial" required>
+                          <%if(denuncia.isDenunciaPolicial()){%>
+                          <option value="" disabled selected>Indique</option>
+                          <option value="SI" selected>Sí</option>
+                          <option value="NO">No</option>
+                          <%} else{%>
                           <option value="" disabled selected>Indique</option>
                           <option value="SI">Sí</option>
-                          <option value="NO">No</option>
+                          <option value="NO" selected>No</option>
+                          <%}%>
                         </select>
                       </div>
                       <div class="col"><label class="form-label" for="direccion_maltrato">Dirección</label>
-                        <input required type="text" class="form-control" name="direccion_maltrato" id="direccion_maltrato" placeholder="Indique la Dirección de la mascota maltratada">
+                        <input required type="text" class="form-control" name="direccion_maltrato" value="<%=denuncia.getDireccionMaltrato()%>" id="direccion_maltrato" placeholder="Indique la Dirección de la mascota maltratada">
                       </div>
                     </div>
                   </div>
@@ -246,7 +267,7 @@
                       <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
                     </div>
                     <div class="card-body">
-                      <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
+                      <input disabled class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
                     </div>
                     </div>
                   </div>
@@ -369,7 +390,23 @@
       window.location.href = "/PublicacionesServlet"; // Cambia esta ruta según tu necesidad
     });
   });
+</script>
 
+<script>
+  // Función para reemplazar valores "null" en todos los inputs
+  function replaceNullInInputs() {
+    // Seleccionar todos los elementos <input> en la página
+    const inputs = document.querySelectorAll("input");
+
+    // Iterar sobre cada input y verificar su valor
+    inputs.forEach(input => {
+      if (input.value === "null") {
+        input.value = ""; // Reemplazar el valor por una cadena vacía
+      }
+    });
+  }
+  // Ejecutar la función cuando la página se haya cargado
+  document.addEventListener("DOMContentLoaded", replaceNullInInputs);
 </script>
 
 </body>
