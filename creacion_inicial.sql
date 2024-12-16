@@ -1,4 +1,4 @@
-use iweb_db;
+use IWEB_DB;
 INSERT INTO zonas (nombre_zona) VALUES 
 ('norte'),
 ('sur'),
