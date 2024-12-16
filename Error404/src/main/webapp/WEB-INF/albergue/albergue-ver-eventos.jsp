@@ -140,7 +140,7 @@
 
                                     </div>
                                     <!-- Fecha -->
-                                    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
+                                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                         <label for="dateRange" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Rango de fechas</label>
                                         <input type="text" id="dateRange" class="form-control form-control-sm" placeholder="Seleccionar rango de fechas"/>
                                         <input type="hidden" name="fechaInicio" id="fechaInicio" value="${filtros.fechaInicio}">
@@ -153,7 +153,7 @@
                                                             col-md-1
                                                         </c:when>
                                                         <c:otherwise>
-                                                            col-md-2
+                                                            col-md-1
                                                         </c:otherwise>
                                                     </c:choose> d-flex flex-column align-items-center btn-group p-2">
                                         <button type="submit" class="btn btn-facebook">Filtrar</button>
@@ -165,6 +165,10 @@
                                             <button type="button" class="btn btn-secondary" onclick="limpiarFiltros()">Limpiar</button>
                                         </div>
                                     </c:if>
+
+                                    <div class="col-md-2 d-flex flex-column align-items-center btn-group p-2">
+                                        <a class="btn btn-primary" type="button" id="dropdownMenuButton" href="EventosServlet?action=verFormularioEvento">Nuevo evento</a>
+                                    </div>
 
                                 </form>
                             </div>
@@ -204,9 +208,6 @@
                                                                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                                     </a>
 
-                                                                    <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="1" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
-                                                                        <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
-                                                                    </button>
 
                                                                 </div>
 

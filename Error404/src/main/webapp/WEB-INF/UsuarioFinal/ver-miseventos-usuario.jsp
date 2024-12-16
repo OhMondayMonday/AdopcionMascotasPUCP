@@ -220,7 +220,7 @@
                             <div class="card-body d-flex justify-content-center p-1">
 
                                 <form action="EventosServlet" method="GET" id="filtrosForm" class="row w-100">
-                                    <input type="hidden" name="action" value="verEventosInscritosUsuario">
+                                    <input type="hidden" name="action" value="verEventosDeUsuario">
                                     <!-- Tipo de Publicacion -->
                                     <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                         <label for="tipoEventoId" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de evento </label>
@@ -317,7 +317,6 @@
                                                                     <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="EventosServlet?action=verDetallesEvento&event_id=${eventoInscrito.eventId}">
                                                                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                                     </a>
-
                                                                 </div>
 
                                                             </div>
@@ -474,7 +473,7 @@
                             document.getElementById("fechaInicio").value = fechaInicio;
                             document.getElementById("fechaFin").value = fechaFin;
 
-                            console.log("Fecha Inicio:", fechaInicio, "Fecha Fin:", fechaFin); // Depuración
+                            console.log("Fecha Inicio:", fechaInicio, "Fecha Fin:", fechaFin);
                         },
                     });
 
@@ -483,7 +482,7 @@
                 <script>
                     function limpiarFiltros() {
                         const baseUrl = "EventosServlet";
-                        const queryParams = "?action=verEventosInscritosUsuario";
+                        const queryParams = "?action=verEventosDeUsuario";
                         window.location.href = baseUrl + queryParams;
                     }
                 </script>
@@ -492,7 +491,7 @@
         <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
 
    </div>
-</div>
+
 </body>
 
 <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->

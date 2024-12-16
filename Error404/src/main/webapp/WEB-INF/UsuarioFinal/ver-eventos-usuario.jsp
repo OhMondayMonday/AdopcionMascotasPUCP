@@ -154,7 +154,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="EventosServlet?action=verMisEventos">
+                                    <a class="dropdown-item" href="EventosServlet?action=verEventosDeUsuario">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
@@ -316,7 +316,7 @@
                                                     <div class="col-12 col-sm-6 col-md-4 col-lg-2 px-1 mb-2 d-flex justify-content-center">
                                                         <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px; border-radius: 10px;">
                                                             <div class="rounded-2 text-center flex-grow-1">
-                                                                <a data-bs-toggle="modal" href="">
+                                                                <a data-bs-toggle="modal" href="#modalEvento${evento.eventId}">
                                                                     <img class="img-fluid" src="${evento.foto.urlFoto}" alt="${evento.nombreEvento}" style="height: 200px; object-fit: cover; border-radius: 10px;"/>
                                                                 </a>
                                                             </div>
@@ -330,16 +330,108 @@
                                                                     <a class="btn btn-label-info d-flex align-items-center" style="font-size: 0.75rem;" href="EventosServlet?action=verDetallesEvento&event_id=${evento.eventId}">
                                                                         <span>Detalles</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                                     </a>
-
-                                                                    <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" data-event-id="1" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
+                                                                    <!--
+                                                                    <button type="button" class="btn btn-label-primary d-flex align-items-center btn-inscripcion" onclick="confirmarInscripcion(${evento.eventId})" data-event-id="${evento.eventId}" user-type="usuario" post-type="event" style="font-size: 0.75rem;">
                                                                         <span>Inscripción</span><i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
                                                                     </button>
+                                                                    -->
+                                                                    <a href="EventosServlet?action=inscribirEvento&event_id=${evento.eventId}"
+                                                                       class="btn btn-label-primary" style="font-size: 0.75rem;">
+                                                                        Inscripción<i class="bx bx-chevron-right lh-1 scaleX-n1-rtl"></i>
+                                                                    </a>
+
 
                                                                 </div>
 
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <!-- Modal Respectivo -->
+                                                    <div class="modal fade" id="modalEvento${evento.eventId}" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+                                                            <div class="modal-content p-3 p-md-5">
+                                                                <div class="modal-body">
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    <div class="text-center mb-4">
+                                                                        <img class="img-fluid mb-4" src="${evento.foto.urlFoto}" alt="${evento.nombreEvento}" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
+                                                                        <h3 class="text-primary">${evento.nombreEvento}</h3>
+                                                                        <span class="badge bg-label-info" style="font-size: 0.75rem;">${evento.tipoEvento.nombreTipo}</span>
+                                                                    </div>
+                                                                    <form id="editUserForm1" class="row g-3" onsubmit="return false">
+                                                                        <div class="col-12" style="text-align: justify;">
+                                                                            <p>${evento.descripcionEvento}</p>
+                                                                        </div>
+
+                                                                        <c:choose>
+                                                                            <c:when test="${evento.fechaEvento != null && evento.fechaFin != null}">
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <p class="text-nowrap"><i class='bx bx-calendar bx-sm me-2'></i>Fecha: Del ${evento.fechaEvento} al ${evento.fechaFin}</p>
+                                                                                </div>
+                                                                            </c:when>
+                                                                            <c:when test="${evento.fechaFin == null}">
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <p class="text-nowrap"><i class='bx bx-calendar bx-sm me-2'></i>Fecha Inicio: ${evento.fechaEvento}</p>
+                                                                                </div>
+                                                                            </c:when>
+                                                                        </c:choose>
+
+                                                                        <c:choose>
+                                                                            <c:when test="${evento.horaEvento != null && evento.horaFin != null}">
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <p class="text-nowrap"><i class='bx bx-time-five bx-sm me-2'></i>Hora Inicio: ${evento.horaEvento}</p>
+                                                                                </div>
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <p class="text-nowrap"><i class='bx bx-time-five bx-sm me-2'></i>Hora Fin: ${evento.horaFin}</p>
+                                                                                </div>
+                                                                            </c:when>
+                                                                            <c:when test="${evento.horaFin == null}">
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <p class="text-nowrap"><i class='bx bx-time-five bx-sm me-2'></i>Hora: ${evento.horaEvento}</p>
+                                                                                </div>
+                                                                            </c:when>
+                                                                        </c:choose>
+
+                                                                        <c:if test="${evento.lugarEvento.direccionLugar != null}">
+                                                                            <div class="col-12 col-md-6">
+                                                                                <p class="text-nowrap"><i class='bx bx-map bx-sm me-2'></i>Dirección: ${evento.lugarEvento.direccionLugar}</p>
+                                                                            </div>
+                                                                        </c:if>
+
+                                                                        <c:if test="${evento.lugarEvento.aforoMaximo != null}">
+                                                                            <div class="col-12 col-md-6">
+                                                                                <p class="text-nowrap"><i class='bx bx-group bx-sm me-2'></i>Aforo máximo: ${evento.lugarEvento.aforoMaximo} personas</p>
+                                                                            </div>
+                                                                        </c:if>
+
+                                                                        <c:if test="${evento.entrada != null}">
+                                                                            <div class="col-12 col-md-6">
+                                                                                <p class="text-nowrap"><i class='bx bx-dollar bx-sm me-2'></i>Entrada: ${evento.entrada}</p>
+                                                                            </div>
+                                                                        </c:if>
+
+                                                                        <c:if test="${evento.artistasProveedores != null}">
+                                                                            <div class="col-12 col-md-6">
+                                                                                <p class="text-nowrap"><i class='bx bx-star bx-sm me-2'></i>Artista Invitado: ${evento.artistasProveedores}</p>
+                                                                            </div>
+                                                                        </c:if>
+
+                                                                        <c:if test="${evento.estadoEvento != null}">
+                                                                            <div class="col-12 col-md-6">
+                                                                                <p class="text-nowrap"><i class='bx bx-check bx-sm me-2'></i>Estado del Evento: ${evento.estadoEvento}</p>
+                                                                            </div>
+                                                                        </c:if>
+
+                                                                        <div class="col-12 text-center">
+                                                                            <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/ Modal Respectivo -->
+
                                                 </c:forEach>
                                             </c:otherwise>
                                         </c:choose>
@@ -350,50 +442,6 @@
 
                             </div>
 
-                            <!-- Evento 1 -->
-                            <div class="modal fade" id="evento1" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
-                                    <div class="modal-content p-3 p-md-5">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            <div class="text-center mb-4">
-                                                <img class="img-fluid mb-4" src="${pageContext.request.contextPath}/assets/img/i2.jpg" alt="Imagen de publicación 1" style="height: 200px; object-fit: cover; border-radius: 5px;"/>
-                                                <h3 class="text-primary">Feria de adopción de bienestar</h3>
-                                                <span class="badge bg-label-info" style="font-size: 0.75rem;">Ferias</span>
-                                            </div>
-                                            <form id="editUserForm1" class="row g-3" onsubmit="return false">
-                                                <div class="col-12" style="text-align: justify;">
-                                                    <p>La Feria de Adopción de Bienestar es un evento dedicado a conectar a adorables mascotas con familias amorosas y responsables.
-                                                        Durante esta jornada, podrás conocer a una variedad de animales rescatados que están buscando un hogar definitivo.
-                                                        Además de la oportunidad de adoptar, el evento contará con actividades orientadas al bienestar animal, como charlas
-                                                        educativas sobre el cuidado responsable de mascotas, clínicas veterinarias gratuitas, y espacios donde podrás recibir
-                                                        asesoramiento para hacer de la adopción una experiencia positiva. Únete a nosotros y forma parte de esta noble causa
-                                                        que no solo cambia la vida de los animales, sino también la de las personas que los adoptan. ¡Ven y descubre a tu nuevo
-                                                        mejor amigo</p>
-                                                </div>
-
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-calendar-event bx-sm me-2'></i>Fecha: 07 de octubre</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-time-five bx-sm me-2'></i>Hora: 14:30</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-map bx-sm me-2'></i>Lugar: Frente a la PUCP</p>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <p class="text-nowrap" style="margin-left: 20px;"><i class='bx bx-group bx-sm me-2'></i>Inscritos: 13 personas</p>
-                                                </div>
-
-                                                <div class="col-12 text-center">
-                                                    <button type="reset" class="btn btn-label-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/ Evento 1 -->
 
                             <div class="content-backdrop fade"></div>
                             <!-- Content wrapper -->
@@ -510,12 +558,28 @@
                         const queryParams = "?action=verTodosEventos";
                         window.location.href = baseUrl + queryParams;
                     }
+
+                    function confirmarInscripcion(eventId) {
+                        Swal.fire({
+                            title: "¿Estás seguro?",
+                            text: "¿Deseas inscribirte a este evento?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Sí, inscribirme",
+                            cancelButtonText: "Cancelar",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = `EventosServlet?action=inscribirEvento&event_id=${eventId}`;
+                            }
+                        });
+                    }
+
                 </script>
 
 
-        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
     </div>
-</div>
+
 </body>
 
 
