@@ -82,9 +82,7 @@
         <!-- Layout wrapper -->
         <div class="layout-wrapper layout-content-navbar" style="background-color: #fef8e5;">
             <div class="layout-container">
-                <jsp:include page="../includes/sidebarCoordinador.jsp" />
                 <div class="layout-page">
-                    <jsp:include page="../includes/navbarCoordinador.jsp"/>
                     <div class="content-wrapper">
                         <div class="container-xxl flex-grow-1 container-p-y">
                             <div class="app-ecommerce">
@@ -153,7 +151,7 @@
                                             <div class="tab-content">
                                                 <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
                                                     <form id="miFormularioPersonal" action="coordinador?action=actualizar" method="post">
-                                                        <input type="hidden" name="id" value="4" />
+                                                        <input type="hidden" name="id" value=4>
                                                         <div class="row g-3">
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="formtabs-first-name">Nombres</label>
@@ -168,12 +166,11 @@
                                                                 <input type="text" id="formtabs-username" name="username" class="form-control" placeholder="ejemplo_usuario" value="${usuario.username}" />
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <label class="form-label" for="formtabs-email">Correo electrónico</label>
-                                                                <div class="input-group input-group-merge">
-                                                                    <input type="email" id="formtabs-email" name="email" class="form-control" placeholder="alianzaanimal" value="${usuario.email}" />
-                                                                    <span class="input-group-text" id="formtabs-email2">@ejemplo.com</span>
-                                                                </div>
+                                                                <label class="form-label" for="formtabs-email">Correo Electrónico</label>
+                                                                <input type="email" id="formtabs-email" name="email" class="form-control"
+                                                                       value="${usuario.email}" placeholder="usuario@ejemplo.com" required />
                                                             </div>
+
                                                             <div class="col-md-6">
                                                                 <label class="form-label" for="select2Basic">Zona Encargada</label>
                                                                 <select id="select2Basic" name="zona" class="select2 form-select form-select-lg" data-allow-clear="true">
@@ -183,46 +180,24 @@
                                                                     <option value="4" ${usuario.zona.getZonaId() == 4 ? 'selected' : ''}>Lima Este</option>
                                                                 </select>
                                                             </div>
-
-                                                            <div class="form-group">
-                                                                <label for="numeroYapePlin">Número de contacto:</label>
-                                                                <input type="text" id="numeroYapePlin" name="numeroYapePlin" class="form-control" value="${usuario.numeroYapePlin}">
-                                                            </div>
-
-
-                                                            <div class="form-group">
+                                                            <div class="col-md-6">
                                                                 <label for="direccion">Dirección:</label>
                                                                 <input type="text" id="direccion" name="direccion" class="form-control" value="${usuario.direccion}">
                                                             </div>
 
-                                                        </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label" for="yape-contact">Numero contacto:</label>
+                                                                <input type="text" id="yape-contact" name="numeroYapePlin" class="form-control"
+                                                                       value="${usuario.numeroYapePlin}" placeholder="999 999 999" />
+                                                            </div>
 
-                                                        <div class="mb-1">
                                                             <div class="card-body">
-                                                                <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic-1">
+                                                                <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-photo-upload">
                                                                 </form>
                                                             </div>
+
                                                         </div>
 
-                                                        <div class="card mb-1">
-                                                            <div class="card-header d-flex justify-content-between align-items-center">
-                                                                <h5 class="mb-0 card-title">Imagen</h5>
-                                                                <a href="javascript:void(0);" class="fw-medium">Añadir contenido desde un URL</a>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <form action="https://demos.themeselection.com/upload" class="dropzone needsclick" id="dropzone-basic">
-                                                                    <div class="dz-message needsclick my-2">
-                                                                        <p class="fs-3 note needsclick my-0">Arrastra una imagen</p>
-                                                                        <p class="text-muted fs-4 note needsclick my-0">o</p>
-                                                                        <p class="text-muted fs-4 note needsclick my-0">Examinar en el Dispositivo</p>
-
-                                                                    </div>
-                                                                    <div class="fallback">
-                                                                        <input name="file" type="image" accept="image/*"/>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
                                                         <div class="pt-4">
 
                                                             <button type="button" class="btn btn-success me-sm-3 me-1" id="confirm-text"><span style="font-weight: bold;">Confirmar</span></button>
@@ -272,6 +247,7 @@
         <!-- endbuild -->
 
         <!-- Vendors JS -->
+
         <script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/katex.js"></script>
         <script src="${pageContext.request.contextPath}/assets/vendor/libs/quill/quill.js"></script>
         <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
@@ -293,19 +269,6 @@
 
         <!-- Main JS -->
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-
-        <!-- Page JS -->
-        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/modal-enable-otp.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
-
-
         <script>
             function cambiarPagina() {
                 var select = document.getElementById("opciones");
@@ -317,6 +280,19 @@
                 }
             }
         </script>
+
+
+        <!-- Page JS -->
+
+        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/app-ecommerce-product-add.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-selects.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-tagify.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/forms-typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/modal-enable-otp.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/app-user-view.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/app-user-view-security.js"></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -353,7 +329,7 @@
 
                 // Botón "Cancelar"
                 document.querySelector('.cancel-subscription').addEventListener('click', function() {
-                    window.location.href = "/albergue-editar-perfil.jsp"; // Cambia esta ruta según tu necesidad
+                    window.location.href = "/usuario-editar-perfil.jsp"; // Cambia esta ruta según tu necesidad
                 });
             });
 
@@ -376,8 +352,5 @@
 
     </body>
 
-
-
-    <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->
 </html>
 

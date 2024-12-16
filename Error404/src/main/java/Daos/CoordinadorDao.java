@@ -32,6 +32,22 @@ public class CoordinadorDao extends BaseDao {
         }
         return false;
     }
+    public boolean actualizarEstadoPublicacion(int publicacionId, String nuevoEstado) {
+        String sql = "UPDATE publicaciones SET estado_publicacion = ? WHERE publicacion_id = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nuevoEstado);
+            pstmt.setInt(2, publicacionId);
+
+            int filasActualizadas = pstmt.executeUpdate();
+            return filasActualizadas > 0; // Si actualizó al menos una fila, devuelve true
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     public boolean rechazarSolicitudMascota(int solicitudId) {
         String sql = "UPDATE solicitudes SET estado_solicitud = 'rechazada', fecha_entrega = NOW() WHERE solicitud_id = ?";
@@ -73,8 +89,6 @@ public class CoordinadorDao extends BaseDao {
         }
         return false;
     }
-
-
 
 
     // 8. Baneo manual de un hogar temporal
@@ -187,41 +201,42 @@ public class CoordinadorDao extends BaseDao {
 
     public List<HogarTemporalDTO> obtenerSolicitudesHogarPaginadas(int offset, int pageSize, int coordinadorId) {
         List<HogarTemporalDTO> hogaresTemporalesDTO = new ArrayList<>();
-        String sql = "SELECT \n" +
-                "    s.solicitud_id,\n" +
-                "    ts.tipo_solicitud AS tipo_solicitud,  -- Usamos el valor directo de la tabla tipos_solicitudes\n" +
-                "    IF(ht.temporal_id IS NOT NULL, \n" +
-                "        CONCAT('Solicito hogar temporal para ', m.nombre), \n" +
-                "        CONCAT('Mascota perdida: ', m.nombre, ', Lugar: ', pmp.lugar_perdida, ', ', pmp.descripcion_adicional)\n" +
-                "    ) AS descripcion,\n" +
-                "    ht.temporal_id, ht.direccion, \n" +
-                "    d.nombre_distrito, z.nombre_zona, \n" +
-                "    u.nombre AS usuario_nombre, u.apellido AS usuario_apellido, \n" +
-                "    ht.edad, ht.genero, ht.celular, ht.estado_temporal, \n" +
-                "    s.fecha_solicitud, \n" +
-                "    GROUP_CONCAT(DISTINCT m.nombre SEPARATOR ', ') AS mascota_nombres, \n" +
-                "    pmp.lugar_perdida, pmp.fecha_perdida, pmp.descripcion_adicional, \n" +
-                "    pmp.telefono_contacto, pmp.nombre_contacto, pmp.recompensa\n" +
-                "FROM solicitudes s\n" +
-                "LEFT JOIN hogares_temporales ht ON s.temporal_id = ht.temporal_id\n" +
-                "LEFT JOIN distritos d ON ht.distrito_id = d.distrito_id\n" +
-                "LEFT JOIN zonas z ON d.zona_distrito_id = z.zona_id\n" +
-                "LEFT JOIN usuarios u ON s.solicitante_id = u.user_id\n" +
-                "LEFT JOIN tipos_solicitudes ts ON ts.tipo_solicitud_id = s.tipo_solicitud_id  -- Tabla de tipos de solicitud\n" +
-                "LEFT JOIN mascotas m ON s.mascota_id = m.mascota_id\n" +
-                "LEFT JOIN publicaciones_mascota_perdida pmp ON s.publicacion_id = pmp.publicacion_id\n" +
-                "WHERE \n" +
-                "    (z.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?) \n" +
-                "    OR u.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?))\n" +
-                "    AND s.estado_solicitud = 'pendiente'\n" +
-                "GROUP BY s.solicitud_id, ht.temporal_id, ht.direccion, \n" +
-                "         d.nombre_distrito, z.nombre_zona, u.nombre, u.apellido, \n" +
-                "         ht.edad, ht.genero, ht.celular, ht.estado_temporal, \n" +
-                "         s.fecha_solicitud, ts.tipo_solicitud, \n" +
-                "         pmp.lugar_perdida, pmp.fecha_perdida, pmp.descripcion_adicional, \n" +
-                "         pmp.telefono_contacto, pmp.nombre_contacto, pmp.recompensa\n" +
-                "ORDER BY s.fecha_solicitud DESC\n" +
-                "LIMIT ? OFFSET ?;\n";
+        String sql = "SELECT " +
+                "s.solicitud_id, " +
+                "ts.tipo_solicitud, " +
+                "IF(ht.temporal_id IS NOT NULL, " +
+                "CONCAT('Solicito hogar temporal para ', m.nombre), " +
+                "CONCAT('Mascota perdida: ', m.nombre, ', Lugar: ', pmp.lugar_perdida, ', ', pmp.descripcion_adicional)) AS descripcion, " +
+                "ht.temporal_id, ht.direccion, " +
+                "d.nombre_distrito, z.nombre_zona, " +
+                "u.nombre AS usuario_nombre, u.apellido AS usuario_apellido, " +
+                "ht.edad, ht.genero, ht.celular, ht.estado_temporal, " +
+                "s.fecha_solicitud, " +
+                "GROUP_CONCAT(DISTINCT m.nombre SEPARATOR ', ') AS mascota_nombres, " +
+                "pmp.lugar_perdida, pmp.fecha_perdida, pmp.descripcion_adicional, " +
+                "pmp.telefono_contacto, pmp.nombre_contacto, pmp.recompensa, " +
+                "p.estado_publicacion " +  // Aquí se toma de la tabla 'publicaciones'
+                "FROM solicitudes s " +
+                "LEFT JOIN hogares_temporales ht ON s.temporal_id = ht.temporal_id " +
+                "LEFT JOIN distritos d ON ht.distrito_id = d.distrito_id " +
+                "LEFT JOIN zonas z ON d.zona_distrito_id = z.zona_id " +
+                "LEFT JOIN usuarios u ON s.solicitante_id = u.user_id " +
+                "LEFT JOIN tipos_solicitudes ts ON ts.tipo_solicitud_id = s.tipo_solicitud_id " +
+                "LEFT JOIN mascotas m ON s.mascota_id = m.mascota_id " +
+                "LEFT JOIN publicaciones_mascota_perdida pmp ON s.publicacion_id = pmp.publicacion_id " +
+                "LEFT JOIN publicaciones p ON s.publicacion_id = p.publicacion_id " +  // Asegurando la unión con la tabla publicaciones
+                "WHERE " +
+                "(z.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?) " +
+                "OR u.zona_id = (SELECT zona_id FROM usuarios WHERE user_id = ?)) " +
+                "AND s.estado_solicitud = 'pendiente' " +
+                "GROUP BY s.solicitud_id, ht.temporal_id, ht.direccion, " +
+                "d.nombre_distrito, z.nombre_zona, u.nombre, u.apellido, " +
+                "ht.edad, ht.genero, ht.celular, ht.estado_temporal, " +
+                "s.fecha_solicitud, ts.tipo_solicitud, " +
+                "pmp.lugar_perdida, pmp.fecha_perdida, pmp.descripcion_adicional, " +
+                "pmp.telefono_contacto, pmp.nombre_contacto, pmp.recompensa, p.estado_publicacion " +
+                "ORDER BY s.fecha_solicitud DESC " +
+                "LIMIT ? OFFSET ?";
 
 
         System.out.println("ID de la zona: " + coordinadorId);
@@ -269,7 +284,8 @@ public class CoordinadorDao extends BaseDao {
                             resultSet.getString("descripcion_adicional"),// Descripción adicional sobre la pérdida
                             resultSet.getString("telefono_contacto"),   // Teléfono de contacto para mascota perdida
                             resultSet.getString("nombre_contacto"),     // Nombre del contacto para mascota perdida
-                            resultSet.getString("recompensa")           // Recompensa si existe
+                            resultSet.getString("recompensa"),           // Recompensa si existe
+                            resultSet.getString("estado_publicacion")
                     );
 
                     hogaresTemporalesDTO.add(hogarDTO);

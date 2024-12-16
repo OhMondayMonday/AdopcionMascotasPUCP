@@ -67,7 +67,7 @@ public class AlbergueDAO extends BaseDao {
     public Usuarios obtenerInformacionAlbergue(int albergueId) {
         String sql = "SELECT user_id, username, nombre, apellido, email, direccion, descripcion, distrito_id, " +
                 "estado_cuenta, nombre_albergue, capacidad_nuevos_animales, animales_albergados, " +
-                "anio_creacion, url_facebook, url_instagram,url_twitter, punto_acopio, direccion_donaciones, " +
+                "anio_creacion, url_facebook, url_instagram, punto_acopio, direccion_donaciones, " +
                 "nombre_contacto_donaciones, numero_contacto_donaciones, numero_yape_plin, zona_id " +
                 "FROM usuarios WHERE user_id = ? AND rol_id = ?";
 
@@ -100,7 +100,6 @@ public class AlbergueDAO extends BaseDao {
                 albergue.setAnioCreacion(rs.getDate("anio_creacion"));
                 albergue.setUrlFacebook(rs.getString("url_facebook"));
                 albergue.setUrlInstagram(rs.getString("url_instagram"));
-                albergue.setUrlTwitter(rs.getString("url_twitter"));
                 albergue.setPuntoAcopio(rs.getString("punto_acopio"));
                 albergue.setDireccionDonaciones(rs.getString("direccion_donaciones"));
                 albergue.setNombreContactoDonaciones(rs.getString("nombre_contacto_donaciones"));
@@ -125,7 +124,7 @@ public class AlbergueDAO extends BaseDao {
     // 3. Actualizar Información del Albergue
     public boolean actualizarInformacionAlbergue(Usuarios albergue) {
         String sql = "UPDATE usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, direccion = ?, distrito_id = ?, " +
-                "capacidad_nuevos_animales = ?, animales_albergados = ?, url_facebook = ?, url_instagram = ?, url_twitter = ?, " +
+                "capacidad_nuevos_animales = ?, animales_albergados = ?, url_facebook = ?, url_instagram = ? , " +
                 "punto_acopio = ?, direccion_donaciones = ?, nombre_contacto_donaciones = ?, " +
                 "numero_contacto_donaciones = ?, numero_yape_plin = ?, descripcion = ?, nombre_albergue = ? " +
                 "WHERE user_id = ? AND rol_id = ?";
@@ -162,19 +161,16 @@ public class AlbergueDAO extends BaseDao {
 
             stmt.setString(9, albergue.getUrlFacebook());
             stmt.setString(10, albergue.getUrlInstagram());
-            stmt.setString(11, albergue.getUrlTwitter()); // Twitter
-            stmt.setString(12, albergue.getPuntoAcopio());
-            stmt.setString(13, albergue.getDireccionDonaciones());
-            stmt.setString(14, albergue.getNombreContactoDonaciones());
-            stmt.setString(15, albergue.getNumeroContactoDonaciones());
-            stmt.setString(16, albergue.getNumeroYapePlin());
-            stmt.setString(17, albergue.getDescripcion());
-            stmt.setString(18, albergue.getNombreAlbergue());
+            stmt.setString(11, albergue.getPuntoAcopio());
+            stmt.setString(12, albergue.getDireccionDonaciones());
+            stmt.setString(13, albergue.getNombreContactoDonaciones());
+            stmt.setString(14, albergue.getNumeroContactoDonaciones());
+            stmt.setString(15, albergue.getNumeroYapePlin());
+            stmt.setString(16, albergue.getDescripcion());
+            stmt.setString(17, albergue.getNombreAlbergue());
 
-            stmt.setInt(19, albergue.getUserId());
-            stmt.setInt(20, 2);
-
-
+            stmt.setInt(18, albergue.getUserId());
+            stmt.setInt(19, 2);
 
 
             // Ejecutar la actualización

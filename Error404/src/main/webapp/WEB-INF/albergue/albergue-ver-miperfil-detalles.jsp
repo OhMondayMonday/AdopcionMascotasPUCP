@@ -197,10 +197,7 @@
                                                             <span class="fw-medium me-2">Instagram:</span>
                                                             <span>${usuario.urlInstagram}</span>
                                                         </li>
-                                                        <li class="mb-3">
-                                                            <span class="fw-medium me-2">Twitter:</span>
-                                                            <span>${usuario.urlTwitter}</span>
-                                                        </li>
+
                                                     </ul>
 
                                                     <!-- Sección "Aceptamos donaciones" -->

@@ -36,14 +36,12 @@ public class UsuarioFinalDAO extends BaseDao {
 
             stmt.setString(9, "pendiente"); // Estado inicial
             stmt.setInt(10, usuario.getRol().getRolId());
-            stmt.setInt(11, usuario.getCapacidadNuevosAnimales());
-            stmt.setInt(12, usuario.getAnimalesAlbergados());
-            stmt.setString(13, usuario.getNumeroYapePlin());
+            stmt.setString(11, usuario.getNumeroYapePlin());
 
             if (usuario.getZona() != null) {
-                stmt.setInt(14, usuario.getZona().getZonaId());
+                stmt.setInt(12, usuario.getZona().getZonaId());
             } else {
-                stmt.setNull(14, java.sql.Types.INTEGER);
+                stmt.setNull(12, java.sql.Types.INTEGER);
             }
 
             int affectedRows = stmt.executeUpdate();
@@ -66,15 +64,18 @@ public class UsuarioFinalDAO extends BaseDao {
 
     // 2. Obtener Información del Albergue
     public Usuarios obtenerInformacionUsuario(int usuarioId) {
-        String sql = "SELECT user_id, username, nombre, apellido, email, direccion, descripcion, distrito_id, estado_cuenta, " +
-                "anio_creacion, numero_yape_plin, zona_id, capacidad_nuevos_animales, animales_albergados, url_facebook, url_instagram " +
+        String sql = "SELECT user_id, username, nombre, apellido, email, direccion, descripcion, distrito_id, " +
+                "estado_cuenta, nombre_albergue, capacidad_nuevos_animales, animales_albergados, " +
+                "anio_creacion, url_facebook, url_instagram, punto_acopio, direccion_donaciones, " +
+                "nombre_contacto_donaciones, numero_contacto_donaciones, numero_yape_plin, zona_id " +
                 "FROM usuarios WHERE user_id = ? AND rol_id = ?";
+
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, usuarioId);
-            stmt.setInt(2, 1); // Suponiendo que el rolId de usuario final es 2
+            stmt.setInt(2, 1);
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -91,17 +92,14 @@ public class UsuarioFinalDAO extends BaseDao {
                 if (rs.getObject("distrito_id") != null) {
                     Distritos distrito = new Distritos();
                     distrito.setDistritoId(rs.getInt("distrito_id"));
+                    distrito.setNombreDistrito(rs.getString("nombre_distrito")); // Agregar nombre
                     usuario.setDistrito(distrito);
                 }
-
 
                 usuario.setEstadoCuenta(rs.getString("estado_cuenta"));
                 usuario.setAnioCreacion(rs.getDate("anio_creacion"));
                 usuario.setNumeroYapePlin(rs.getString("numero_yape_plin"));
 
-                // Campos adicionales
-                usuario.setCapacidadNuevosAnimales(rs.getInt("capacidad_nuevos_animales"));
-                usuario.setAnimalesAlbergados(rs.getInt("animales_albergados"));
                 usuario.setUrlFacebook(rs.getString("url_facebook"));
                 usuario.setUrlInstagram(rs.getString("url_instagram"));
 
@@ -117,7 +115,9 @@ public class UsuarioFinalDAO extends BaseDao {
     // 3. Actualizar Información del Albergue
     public boolean actualizarInformacionUsuario(Usuarios usuario) {
         String sql = "UPDATE usuarios SET username = ?, nombre = ?, apellido = ?, email = ?, direccion = ?, distrito_id = ?, " +
-                "numero_yape_plin = ?, descripcion = ?, zona_id = ?, capacidad_nuevos_animales = ?, animales_albergados = ?, url_facebook = ?, url_instagram = ? " +
+                "capacidad_nuevos_animales = ?, animales_albergados = ?, url_facebook = ?, url_instagram = ?, " +
+                "punto_acopio = ?, direccion_donaciones = ?, nombre_contacto_donaciones = ?, " +
+                "numero_contacto_donaciones = ?, numero_yape_plin = ?, descripcion = ?, nombre_albergue = ? " +
                 "WHERE user_id = ? AND rol_id = ?";
 
         try (Connection conn = this.getConnection();
@@ -145,13 +145,10 @@ public class UsuarioFinalDAO extends BaseDao {
                 stmt.setNull(9, java.sql.Types.INTEGER);
             }
 
-            stmt.setInt(10, usuario.getCapacidadNuevosAnimales());
-            stmt.setInt(11, usuario.getAnimalesAlbergados());
-            stmt.setString(12, usuario.getUrlFacebook());
-            stmt.setString(13, usuario.getUrlInstagram());
-
-            stmt.setInt(14, usuario.getUserId());
-            stmt.setInt(15, 1); // Suponiendo que el rolId de usuario final es 2
+            stmt.setString(10, usuario.getUrlFacebook());
+            stmt.setString(11, usuario.getUrlInstagram());
+            stmt.setInt(12, usuario.getUserId());
+            stmt.setInt(13, 1);
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {

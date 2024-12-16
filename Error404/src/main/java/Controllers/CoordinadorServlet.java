@@ -258,7 +258,6 @@ public class CoordinadorServlet extends HttpServlet {
                 response.getWriter().write("Error: ID no proporcionado");
                 return;
             }
-
             int id;
             try {
                 id = Integer.parseInt(idStr);
@@ -268,8 +267,6 @@ public class CoordinadorServlet extends HttpServlet {
             }
 
             System.out.println("ID Capturado en el Servlet: " + id);
-
-            // Crear el objeto Usuarios y establecer los datos del formulario
             Usuarios coordinador = new Usuarios();
             coordinador.setUserId(id);
             coordinador.setUsername(request.getParameter("username")); // Username
@@ -279,18 +276,15 @@ public class CoordinadorServlet extends HttpServlet {
             coordinador.setDireccion(request.getParameter("direccion"));
             coordinador.setNumeroYapePlin(request.getParameter("numeroYapePlin"));
 
-            // Obtener la zona seleccionada
             String zonaSeleccionada = request.getParameter("zona");
             if (zonaSeleccionada != null && !zonaSeleccionada.isEmpty()) {
                 Zonas zona = new Zonas();
                 zona.setZonaId(Integer.parseInt(zonaSeleccionada)); // Asignamos la zona seleccionada
                 coordinador.setZona(zona); // Establecemos la zona en el objeto coordinador
             } else {
-                // Si la zona no es seleccionada, se puede dejar en null o asignar una zona por defecto
                 coordinador.setZona(null);
             }
 
-            // Llamar al método del DAO para actualizar la información
             if (coordinadorDAO.actualizarInformacionCoordinador(coordinador)) {
                 // Redirigir al perfil con los detalles actualizados
                 response.sendRedirect("coordinador?action=verMiPerfilDetalles&id=" + id);
@@ -308,16 +302,11 @@ public class CoordinadorServlet extends HttpServlet {
     private void listarSolicitudesHogar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int pageSize = 10;
         int currentPage = getCurrentPage(request);
-
         int offset = (currentPage - 1) * pageSize;
-
-        // ID del coordinador (por ahora manual, hasta que se implemente sesión)
         int coordinadorId = 4; // Cambiar por el ID real del coordinador cuando esté disponible
 
-        // Llamadas al DAO
         List<HogarTemporalDTO> solicitudes = coordinadorDAO.obtenerSolicitudesHogarPaginadas(offset, pageSize, coordinadorId);
 
-        // **Depuración: Verificar el tamaño de la lista y sus elementos**
         System.out.println("Tamaño de la lista solicitudes: " + solicitudes.size());
         for (HogarTemporalDTO hogarDTO : solicitudes) {
             System.out.println("Hogar ID: " + hogarDTO.getTemporalId() + ", Dirección: " + hogarDTO.getDireccion());

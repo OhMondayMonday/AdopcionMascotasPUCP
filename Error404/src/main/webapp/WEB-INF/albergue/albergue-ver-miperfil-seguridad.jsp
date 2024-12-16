@@ -24,7 +24,7 @@
         <link rel="canonical" href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/">
 
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="../../assets/img/logo_Alianza_Animal_-removebg-preview.png" />
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -141,9 +141,7 @@
                                                 </ul>
 
                                                 <div class="d-flex justify-content-center pt-3">
-                                                    <a href="<c:url value='/albergue?action=verMiPerfilSeguridad'/>" class="btn btn-warning">
-                                                        <i class='bx bx-edit'></i>Editar
-                                                    </a>
+                                                    <a href="${pageContext.request.contextPath}/albergue?action=editarPerfil&id=${usuario.userId}" class="btn btn-warning"><i class='bx bx-edit'></i> Editar</a>
                                                 </div>
 
                                             </div>
@@ -168,12 +166,10 @@
 
                                         <li class="nav-item">
                                             <a class="nav-link active" href="javascript:void(0);">
-                                                <i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
+                                        <i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
                                     </ul>
-                                    <!--/ User Pills -->
-                                    <!--/ User Pills -->
 
-                                    <!-- Project table -->
+
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <form id="formChangePassword" method="GET" onsubmit="return false">

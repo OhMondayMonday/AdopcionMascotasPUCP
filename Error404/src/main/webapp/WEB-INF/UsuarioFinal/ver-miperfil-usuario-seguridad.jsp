@@ -228,22 +228,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-around flex-wrap my-4 py-3">
-                                        <div class="d-flex align-items-start me-4 mt-3 gap-3">
-                                            <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-check bx-sm'></i></span>
-                                            <div>
-                                                <h5 class="mb-0"></h5>
-                                                <span>Publicaciones</span>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-start mt-3 gap-3">
-                                            <span class="badge bg-label-primary p-2 rounded"><i class='bx bx-customize bx-sm'></i></span>
-                                            <div>
-                                                <h5 class="mb-0">12</h5>
-                                                <span>Participaciones</span>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <h5 class="pb-2 border-bottom mb-4">Detalles de la cuenta</h5>
                                     <div class="info-container">
                                         <ul class="list-unstyled">
@@ -272,7 +257,9 @@
                                         </ul>
 
                                         <div class="d-flex justify-content-center pt-3">
-                                            <a href="usuario-editar-perfil.html" class="btn btn-warning"><i class='bx bx-edit'></i>Editar</a>
+                                            <a href="<c:url value='/UsuarioFinal?action=editarPerfil&id=${usuario.userId}'/>" class="btn btn-warning">
+                                                <i class='bx bx-edit'></i>Editar
+                                            </a>
                                         </div>
 
                                     </div>
@@ -291,11 +278,16 @@
                             <!-- User Pills -->
                             <!-- User Pills -->
                             <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                                <li class="nav-item"><a class="nav-link" href="UsuarioServlet?action=verMiPerfil"><i class="bx bx-user me-1"></i>Cuenta</a></li>
-                                <li class="nav-item"><a class="nav-link active" href="UsuarioServlet?action=verMiSeguridad"><i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
+                                <li class="nav-item">
+                                    <a href="<c:url value='/UsuarioFinal?action=verMiPerfilDetalles' />" class="nav-link">
+                                        <i class="bx bx-user me-1"></i>Cuenta
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="javascript:void(0);">
+                                        <i class="bx bx-lock-alt me-1"></i>Seguridad</a></li>
                             </ul>
-                            <!--/ User Pills -->
-                            <!--/ User Pills -->
+
 
                             <!-- CAMBIAR CONTRASEÑA -->
                             <div class="card mb-4">
