@@ -205,7 +205,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="card border-0 mb-4 p-3">
                     <div class="card-body row p-0 pb-3">
-                        <div class="col-12 col-md-8 card-separator">
+                        <div class="col-12 col-md-8 ">
                             <h3 class="text-dark">¡Bienvenido, <%= nombreUsuario %>! 👋🏻</h3>
                             <p>Reporte semanal</p>
                             <div class="d-flex justify-content-between flex-wrap gap-3 me-5">
@@ -222,6 +222,8 @@
                                     <div class="content-right"><p>Eventos inscritos</p><h4 class="text-warning"><%= eventosInscritos %></h4></div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
                         </div>
                     </div>
                 </div>
