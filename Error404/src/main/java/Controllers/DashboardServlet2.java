@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "DashboardServlet", urlPatterns = "/Dashboard2")
+@WebServlet(name = "DashboardServlet2", urlPatterns = "/Dashboard2")
 public class DashboardServlet2 extends HttpServlet {
     private Dashboard2DAO dashboard2DAO; // Instancia de Dashboard2DAO
 
