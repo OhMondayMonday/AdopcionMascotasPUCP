@@ -239,4 +239,272 @@ public class AdminDAO extends BaseDao{
         return solicitudes;
     }
 
+    public List<Solicitudes> obtenerSolicitudesCreacionUsuario() {
+        List<Solicitudes> solicitudes = new ArrayList<>();
+        String query = "SELECT s.solicitud_id, s.username, s.nombre, s.apellido, s.email, s.DNI, " +
+                "s.direccion, s.distrito_id, s.fecha_solicitud, " +
+                "d.nombre_distrito AS nombre_distrito " +
+                "FROM solicitudes s " +
+                "JOIN distritos d ON s.distrito_id = d.distrito_id " +
+                "WHERE s.tipo_solicitud_id = 1 " +
+                "AND s.estado_solicitud = 'pendiente'";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Solicitudes solicitud = new Solicitudes();
+
+                // Mapeo de los campos requeridos
+                solicitud.setSolicitudId(resultSet.getInt("solicitud_id"));
+                solicitud.setUsername(resultSet.getString("username"));
+                solicitud.setNombre(resultSet.getString("nombre"));
+                solicitud.setApellido(resultSet.getString("apellido"));
+                solicitud.setEmail(resultSet.getString("email"));
+                solicitud.setDNI(resultSet.getString("DNI"));
+                solicitud.setDireccion(resultSet.getString("direccion"));
+
+                Distritos distrito = new Distritos();
+                distrito.setNombreDistrito(resultSet.getString("nombre_distrito"));
+                distrito.setDistritoId(resultSet.getInt("distrito_id"));
+                solicitud.setDistrito(distrito);
+
+                solicitud.setFechaSolicitud(resultSet.getTimestamp("fecha_solicitud"));
+
+                // Agregar la solicitud a la lista
+                solicitudes.add(solicitud);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al obtener solicitudes", e);
+        }
+
+        return solicitudes;
+    }
+
+    public List<Solicitudes> obtenerSolicitudesAlbergue() {
+        List<Solicitudes> solicitudes = new ArrayList<>();
+        String query = "SELECT s.solicitud_id, s.nombre_albergue, s.nombre_encargado, s.apellido_encargado, " +
+                "s.email_albergue, s.solicitante_id, s.fecha_solicitud, u.nombre, u.apellido, u.email " +
+                "FROM solicitudes s " +
+                "JOIN usuarios u ON s.solicitante_id = u.user_id " +
+                "WHERE s.tipo_solicitud_id = 3 " +
+                "AND s.estado_solicitud = 'pendiente'";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Solicitudes solicitud = new Solicitudes();
+
+                // Mapeo de los campos requeridos
+                Usuarios solicitante = new Usuarios();
+                solicitante.setUserId(resultSet.getInt("solicitante_id"));
+                solicitante.setNombre(resultSet.getString("nombre"));
+                solicitante.setApellido(resultSet.getString("apellido"));
+                solicitante.setEmail(resultSet.getString("email"));
+                solicitud.setSolicitante(solicitante);
+
+                solicitud.setSolicitudId(resultSet.getInt("solicitud_id"));
+                solicitud.setNombreAlbergue(resultSet.getString("nombre_albergue"));
+                solicitud.setNombreEncargado(resultSet.getString("nombre_encargado"));
+                solicitud.setApellidoEncargado(resultSet.getString("apellido_encargado"));
+                solicitud.setEmail_albergue(resultSet.getString("email_albergue"));
+                solicitud.setFechaSolicitud(resultSet.getTimestamp("fecha_solicitud"));
+
+                // Agregar la solicitud a la lista
+                solicitudes.add(solicitud);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al obtener solicitudes", e);
+        }
+
+        return solicitudes;
+    }
+
+    public boolean insertarUsuario(Solicitudes solicitud, String contrasenia) {
+        boolean enviado = true;
+        String query = "INSERT INTO usuarios (username, contrasenia, nombre, apellido, email, dni, " +
+                "direccion, distrito_id, estado_cuenta, rol_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Asignación de valores a la sentencia preparada (PreparedStatement)
+            statement.setString(1, solicitud.getUsername());  // username
+            statement.setString(2, contrasenia);
+            statement.setString(3, solicitud.getNombre());
+            statement.setString(4, solicitud.getApellido());
+            statement.setString(5, solicitud.getEmail());
+            statement.setString(6, solicitud.getDNI());
+            statement.setString(7, solicitud.getDireccion());
+            statement.setInt(8, solicitud.getDistrito().getDistritoId());
+            statement.setString(9, "activa");
+            statement.setInt(10, 1);
+
+            // Ejecutar el INSERT
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            enviado = false;
+            throw new RuntimeException("Error al insertar usuario", e);
+        }
+        return enviado;
+    }
+
+    public Solicitudes obtenerSolicitudPorId(int solicitudId) {
+        Solicitudes solicitud = null;
+        String query = "SELECT s.solicitud_id, s.username, s.nombre, s.apellido, s.email, s.DNI, s.direccion, " +
+                "s.distrito_id, s.nombre_albergue, s.nombre_encargado, s.apellido_encargado, s.email_albergue, " +
+                "s.fecha_solicitud, s.estado_solicitud, " +
+                "u.nombre AS nombre_solicitante, u.apellido AS apellido_solicitante, u.email AS email_solicitante, u.DNI AS DNI_solicitante, u.direccion AS direccion_solicitante " +
+                "FROM solicitudes s " +
+                "INNER JOIN usuarios u ON s.solicitante_id = u.user_id " +
+                "WHERE s.solicitud_id = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Asignar el valor del parámetro
+            statement.setInt(1, solicitudId);
+
+            // Ejecutar la consulta
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    solicitud = new Solicitudes();
+
+                    // Asignar los valores de la consulta a los atributos de la solicitud
+                    solicitud.setSolicitudId(resultSet.getInt("solicitud_id"));
+                    solicitud.setUsername(resultSet.getString("username"));
+                    solicitud.setNombre(resultSet.getString("nombre"));
+                    solicitud.setApellido(resultSet.getString("apellido"));
+                    solicitud.setEmail(resultSet.getString("email"));
+                    solicitud.setDNI(resultSet.getString("DNI"));
+                    solicitud.setDireccion(resultSet.getString("direccion"));
+
+                    Usuarios solicitante = new Usuarios();
+                    solicitante.setNombre(resultSet.getString("nombre_solicitante"));
+                    solicitante.setApellido(resultSet.getString("apellido_solicitante"));
+                    solicitante.setEmail(resultSet.getString("email_solicitante"));
+                    solicitud.setSolicitante(solicitante);
+
+                    // Aquí se asume que el distrito ya ha sido mapeado en otro lugar si es necesario
+                    // Y si no es necesario, podemos dejarlo como null o mapearlo también.
+
+                    Distritos distrito = new Distritos();  // Si necesitas mapear el distrito
+                    distrito.setDistritoId(resultSet.getInt("distrito_id"));
+                    solicitud.setDistrito(distrito);
+
+                    solicitud.setNombreAlbergue(resultSet.getString("nombre_albergue"));
+                    solicitud.setNombreEncargado(resultSet.getString("nombre_encargado"));
+                    solicitud.setApellidoEncargado(resultSet.getString("apellido_encargado"));
+                    solicitud.setEmail_albergue(resultSet.getString("email_albergue"));
+                    solicitud.setFechaSolicitud(resultSet.getTimestamp("fecha_solicitud"));
+                    solicitud.setEstadoSolicitud(resultSet.getString("estado_solicitud"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al obtener la solicitud", e);
+        }
+
+        return solicitud;
+    }
+
+    public boolean cambiarEstadoARechazado(int solicitudId) {
+        String query = "UPDATE solicitudes SET estado_solicitud = ? WHERE solicitud_id = ?";
+        boolean exito = true;
+        try (Connection connection = this.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Establecer el estado a 'rechazado' y el ID de la solicitud
+            statement.setString(1, "rechazada");
+            statement.setInt(2, solicitudId);
+
+            // Ejecutar la actualización
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("La solicitud ha sido rechazada con éxito.");
+            } else {
+                System.out.println("No se encontró la solicitud con ID: " + solicitudId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            exito = false;
+            throw new RuntimeException("Error al actualizar el estado de la solicitud", e);
+        }
+        return exito;
+    }
+
+    public void cambiarEstadoAAceptado(int solicitudId) {
+        String query = "UPDATE solicitudes SET estado_solicitud = ? WHERE solicitud_id = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Establecer el estado a 'rechazado' y el ID de la solicitud
+            statement.setString(1, "aprobada");
+            statement.setInt(2, solicitudId);
+
+            // Ejecutar la actualización
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("La solicitud ha sido aceptada con éxito.");
+            } else {
+                System.out.println("No se encontró la solicitud con ID: " + solicitudId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al actualizar el estado de la solicitud", e);
+        }
+    }
+
+    public boolean actualizarUsuarioPorSolicitud(Solicitudes solicitud) {
+        boolean exito = true;
+        String query = "UPDATE usuarios SET " +
+                "nombre = ?, " +
+                "apellido = ?, " +
+                "email = ?, " +
+                "nombre_albergue = ?, " +
+                "rol_id = ? " +
+                "WHERE user_id = (SELECT solicitante_id FROM solicitudes WHERE solicitud_id = ?)";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Asignación de valores a la sentencia preparada
+            statement.setString(1, solicitud.getNombreEncargado());  // Actualiza el nombre
+            statement.setString(2, solicitud.getApellidoEncargado());  // Actualiza el apellido
+            statement.setString(3, solicitud.getEmail_albergue());  // Actualiza el email
+            statement.setString(4, solicitud.getNombreAlbergue());
+            statement.setInt(5, 2);
+            statement.setInt(6, solicitud.getSolicitudId());
+
+            // Ejecutar la actualización
+            int filasAfectadas = statement.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("Los datos del usuario han sido actualizados correctamente.");
+            } else {
+                System.out.println("No se encontró el usuario asociado con la solicitud para actualizar.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            exito = false;
+            throw new RuntimeException("Error al actualizar el usuario relacionado con la solicitud", e);
+        }
+        return exito;
+    }
+
+
+
+
+
 }

@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS IWEB_DB ;
 USE IWEB_DB;
 
+DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS logs;
 DROP TABLE IF EXISTS sesiones_usuarios;
 DROP TABLE IF EXISTS denuncias_maltrato_animal;
@@ -11,7 +12,6 @@ DROP TABLE IF EXISTS tipos_eventos;
 DROP TABLE IF EXISTS lugares_eventos;
 DROP TABLE IF EXISTS solicitudes;
 DROP TABLE IF EXISTS password_reset_tokens;
-DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS tipos_solicitudes;
 DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS publicaciones_adopcion;
@@ -61,13 +61,13 @@ CREATE TABLE usuarios (
 	contrasenia VARCHAR(255) NOT NULL,
 	nombre VARCHAR(100),
 	apellido VARCHAR(100),
-	email VARCHAR(100) UNIQUE,
+	email VARCHAR(100) UNIQUE NOT NULL,
 	dni VARCHAR(8) UNIQUE,
 	descripcion TEXT,
 	direccion VARCHAR(255),
 	foto_id INT,
 	distrito_id INT,
-	estado_cuenta ENUM('activa', 'baneada', 'eliminada') DEFAULT 'pendiente',
+	estado_cuenta ENUM('activa', 'baneada', 'eliminada') DEFAULT 'activa',
 	rol_id INT NOT NULL DEFAULT 1,
 	fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- datos albergue
@@ -111,11 +111,8 @@ CREATE TABLE mascotas (
     tamanio ENUM('pequeño', 'mediano', 'grande', 'gigante') NOT NULL,
     distintivo VARCHAR(255),
     en_hogar_temporal BOOLEAN DEFAULT FALSE,
-    hogar_temporal_id INT, -- Relación opcional con hogares temporales
-    -- Relaciones
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
-    FOREIGN KEY (raza_id) REFERENCES razas(raza_id) ON DELETE CASCADE,
-    FOREIGN KEY (hogar_temporal_id) REFERENCES hogares_temporales(temporal_id) ON DELETE SET NULL
+    FOREIGN KEY (raza_id) REFERENCES razas(raza_id) ON DELETE CASCADE
 );
 
 -- Tabla de tipos de publicaciones
@@ -138,16 +135,6 @@ CREATE TABLE publicaciones (
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (tipo_publicacion_id) REFERENCES tipos_publicaciones(tipo_publicacion_id) ON DELETE CASCADE
-);
-
-CREATE TABLE comentarios (
-    comentario_id INT AUTO_INCREMENT PRIMARY KEY,
-    publicacion_id INT NOT NULL, -- ID de la publicación a la que pertenece el comentario
-    usuario_id INT NOT NULL, -- ID del usuario (coordinador o usuario final) que hizo el comentario
-    comentario TEXT NOT NULL, -- Contenido del comentario
-    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora del comentario
-    FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
 
 -- Tabla de publicaciones de adopción
@@ -207,45 +194,36 @@ CREATE TABLE tipos_solicitudes (
 CREATE TABLE solicitudes (
     solicitud_id INT AUTO_INCREMENT PRIMARY KEY,
     tipo_solicitud_id INT NOT NULL,
-    solicitante_id INT, -- Puede ser NULL si es una solicitud de creación de cuenta
-    solicitado_id INT, -- Puede ser NULL en solicitudes generales
+    solicitante_id INT, -- puede ir en null si es una solicitud de creación de cuenta
+    solicitado_id INT, -- puede ser una solicitud directa o, si es solicitud de creacion de albergue, puede ir en NULL
     fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     estado_solicitud ENUM('pendiente', 'aprobada', 'rechazada') DEFAULT 'pendiente',
-    -- Datos para solicitud de cuenta inicial
+    -- datos para solicitud de cuenta inicial
     username VARCHAR(50),
     nombre VARCHAR(100),
     apellido VARCHAR(100),
     email VARCHAR(100),
     DNI VARCHAR(8),
     direccion VARCHAR(255),
-    distrito_id INT, -- Relación con distritos
-    -- Datos para solicitud de albergue
+    distrito_id INT,
+    -- datos para solicitud de albergue
     nombre_albergue VARCHAR (255),
     nombre_encargado VARCHAR (50),
     apellido_encargado VARCHAR (50),
     email_albergue VARCHAR (100),
-    -- Solicitud de temporal o donación
+    -- solicitud de temporal o donacion
     comentario_solicitud TEXT,
-    mascota_id INT, -- En caso sea una solicitud de hogar temporal
+    mascota_id INT, -- en caso sea una solicitud de temporal 
     cantidad DECIMAL(10, 2),
     fecha_entrega DATE,
+    medio_pago VARCHAR (10), 
     punto_entrega_seleccionado VARCHAR(255),
     dinero_donado DECIMAL (10,2),
-    temporal_id INT, -- Relación con hogares temporales
-    -- Relaciones
     FOREIGN KEY (solicitante_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (solicitado_id) REFERENCES usuarios(user_id) ON DELETE CASCADE,
     FOREIGN KEY (mascota_id) REFERENCES mascotas(mascota_id) ON DELETE CASCADE,
-    FOREIGN KEY (tipo_solicitud_id) REFERENCES tipos_solicitudes(tipo_solicitud_id) ON DELETE CASCADE,
-    FOREIGN KEY (distrito_id) REFERENCES distritos(distrito_id) ON DELETE SET NULL,
-    FOREIGN KEY (temporal_id) REFERENCES hogares_temporales(temporal_id) ON DELETE SET NULL
+    FOREIGN KEY (tipo_solicitud_id) REFERENCES tipos_solicitudes(tipo_solicitud_id) ON DELETE CASCADE
 );
-
-ALTER TABLE solicitudes
-ADD COLUMN publicacion_id INT, -- Columna para solicitudes relacionadas con publicaciones
-ADD CONSTRAINT fk_solicitudes_publicaciones
-FOREIGN KEY (publicacion_id) REFERENCES publicaciones(publicacion_id) ON DELETE CASCADE;
-
 
 -- Tabla de tipos de eventos
 CREATE TABLE tipos_eventos (
@@ -307,13 +285,13 @@ CREATE TABLE inscripciones_eventos (
 -- Tabla de hogares temporales
 CREATE TABLE hogares_temporales (
     temporal_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT, -- Relación con la tabla usuarios
-    foto_id INT, -- Relación con fotos
+    user_id INT,
+    foto_id INT NOT NULL,
     edad INT NOT NULL,
     genero ENUM('masculino', 'femenino', 'otro') NOT NULL,
     celular VARCHAR(20) NOT NULL,
     direccion VARCHAR(255) NOT NULL,
-    distrito VARCHAR(100), -- Si aún deseas mantener el nombre como texto (opcional)
+    distrito VARCHAR(100) NOT NULL,
     cantidad_cuartos INT NOT NULL,
     metraje_vivienda DECIMAL(5,2) NOT NULL,
     tiene_mascotas BOOLEAN NOT NULL,
@@ -329,16 +307,9 @@ CREATE TABLE hogares_temporales (
     rango_fecha_fin DATE NOT NULL,
     estado_temporal ENUM('pendiente', 'activa', 'rechazada', 'baneada', 'eliminada') DEFAULT 'pendiente',
     fecha_aprobacion TIMESTAMP,
-    fecha_rechazo TIMESTAMP,
-    distrito_id INT NOT NULL, -- Clave foránea que referencia distritos
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
-    -- Claves foráneas
     FOREIGN KEY (foto_id) REFERENCES fotos(foto_id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE SET NULL,
-    FOREIGN KEY (distrito_id) REFERENCES distritos(distrito_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES usuarios(user_id) ON DELETE CASCADE
 );
-
 
 -- Tabla de denuncias de maltrato animal
 CREATE TABLE denuncias_maltrato_animal (
@@ -504,4 +475,3 @@ BEGIN
 END$$
 
 DELIMITER ;
-

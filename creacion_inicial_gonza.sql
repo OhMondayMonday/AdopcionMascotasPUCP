@@ -1,4 +1,3 @@
-use IWEB_DB;
 INSERT INTO zonas (nombre_zona) VALUES 
 ('norte'),
 ('sur'),
@@ -67,19 +66,18 @@ INSERT INTO roles (nombre_rol) VALUES
 
 
 INSERT INTO tipos_publicaciones (tipo_publicacion) VALUES
-('Normal'),
-('Adopcion'),
-('Donaciones'),
-('Mascota Perdida'),
-('Denuncia Maltrato');
+('adopcion'),
+('donaciones'),
+('mascota_perdida');
 
 INSERT INTO tipos_donaciones (tipo_donacion) VALUES
 ('activo'),
 ('dinero');
 
 INSERT INTO tipos_solicitudes (tipo_solicitud) VALUES
+('creacion_usuario'),
 ('temporal'),
-('creacion'),
+('creacion_albergue'),
 ('donacion_activo'),
 ('donacion_dinero');
 
@@ -143,6 +141,9 @@ INSERT INTO razas (nombre_raza, tipo_animal) VALUES
 ('Gato British Shorthair', 'gato'),
 ('Schnauzer Mediano', 'perro');
 
+INSERT INTO tipos_eventos (nombre_tipo) VALUES
+("Benefico"),
+("Caridad"),
+("Ladron");
 
-
-
+select * from distritos

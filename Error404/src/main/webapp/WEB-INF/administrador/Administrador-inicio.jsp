@@ -14,6 +14,7 @@
     double montoTotalDonaciones = (double) request.getAttribute("montoTotalDonaciones");
     double montoTotalDonacionesHoy = (double) request.getAttribute("montoTotalDonacionesHoy");  // Nuevo valor
     int alberguesRegistrados = (int) request.getAttribute("alberguesRegistrados");
+    int alberguesRegistradosHoy = (int) request.getAttribute("alberguesRegistradosHoy");
     int totalMascotasPerdidas = (int) request.getAttribute("totalMascotasPerdidas");
     int totalMascotasEncontradas = request.getAttribute("totalMascotasEncontradas") != null ? (int) request.getAttribute("totalMascotasEncontradas") : 0;
 
@@ -333,9 +334,9 @@
                                                 <div class="dropdown"></div>
                                             </div>
                                             <span>Monto total de donaciones:</span>
-                                            <h3 class="card-title text-nowrap mb-1">S/<%= request.getAttribute("montoTotalDonaciones") != null ? request.getAttribute("montoTotalDonaciones") : "1,000,000" %></h3>
+                                            <h3 class="card-title text-nowrap mb-1">S/<%= request.getAttribute("montoTotalDonaciones") != null ? request.getAttribute("montoTotalDonaciones") : "0" %></h3>
                                             <small class="text-success fw-medium">
-                                                <i class='bx bx-up-arrow-alt'></i> +S/<%= request.getAttribute("montoTotalDonacionesHoy") != null ? request.getAttribute("montoTotalDonacionesHoy") : "20,000" %> (Hoy)
+                                                <i class='bx bx-up-arrow-alt'></i> +S/<%= request.getAttribute("montoTotalDonacionesHoy") != null ? request.getAttribute("montoTotalDonacionesHoy") : "0" %> (Hoy)
                                             </small>
                                         </div>
                                     </div>
@@ -359,7 +360,11 @@
                                             <span class="d-block mb-1">Albergues registrados</span>
                                             <!-- Cargar dinámicamente el número de albergues registrados -->
                                             <h3 class="card-title text-nowrap mb-2">${alberguesRegistrados}</h3>
+                                            <small class="text-success fw-medium">
+                                                <i class='bx bx-up-arrow-alt'></i> +${alberguesRegistradosHoy != null ? alberguesRegistradosHoy : 0} (Hoy)
+                                            </small>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-7 mb-4">

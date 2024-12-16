@@ -15,7 +15,7 @@ public class Solicitudes {
     private String email;
     private String DNI;
     private String direccion;
-    private int distrito_id;
+    private Distritos distrito;
     private String nombreAlbergue;
     private String nombreEncargado;
     private String apellidoEncargado;
@@ -95,12 +95,12 @@ public class Solicitudes {
         this.direccion = direccion;
     }
 
-    public int getDistrito_id() {
-        return distrito_id;
+    public Distritos getDistrito() {
+        return distrito;
     }
 
-    public void setDistrito_id(int distrito_id) {
-        this.distrito_id = distrito_id;
+    public void setDistrito(Distritos distrito) {
+        this.distrito = distrito;
     }
 
     public int getSolicitudId() {
