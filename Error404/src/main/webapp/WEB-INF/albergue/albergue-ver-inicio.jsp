@@ -103,7 +103,7 @@
 
 
         <li class="menu-item">
-          <a href="javascript:void(0);" class="menu-link">
+          <a href="${pageContext.request.contextPath}/albergue?action=inicio" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home"></i>
             <div class="text-truncate" data-i18n="Inicio">Inicio</div>
           </a>
@@ -121,7 +121,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <a href="albergue-ver-hogarestemporales.html" class="menu-link">
+          <a href="${pageContext.request.contextPath}/albergue?action=hogaresTemporales" class="menu-link">
             <i class="menu-icon tf-icons bx bx-building-house"></i>
             <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
           </a>
@@ -297,12 +297,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
-                <h5 class="mb-2">Tiempo empleado</h5>
-                <p>Reporte semanal</p>
-                <h3>5<span class="text-muted">h</span> 14<span class="text-muted">m</span></h3>
-                <span class="badge bg-label-success">+10%</span>
               </div>
             </div>
           </div>

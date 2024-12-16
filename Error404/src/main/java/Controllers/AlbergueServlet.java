@@ -1,6 +1,7 @@
 package Controllers;
 
 import Beans.Usuarios;
+import Beans.HogaresTemporales;
 import java.sql.Date;
 import Daos.AlbergueDAO;
 import jakarta.servlet.ServletException;
@@ -9,16 +10,35 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import Beans.Distritos;
+import Beans.Mascotas;
+import Beans.Razas;
+import Beans.Fotos;
+import Daos.HogarTemporalDAO;
+import java.io.File;
+import Daos.MascotaDAO;
+import Daos.FotosDAO;
+import Daos.SolicitudDAO;
+import Daos.RazasDao;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.Part;
+import java.sql.SQLException;
 
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024, // 1MB
+        maxFileSize = 1024 * 1024 * 5,   // 5MB
+        maxRequestSize = 1024 * 1024 * 10 // 10MB
+)
 @WebServlet("/albergue")
 public class AlbergueServlet extends HttpServlet {
 
     private AlbergueDAO albergueDAO;
-
+    private HogarTemporalDAO hogarTemporalDAO;
     @Override
     public void init() throws ServletException {
         albergueDAO = new AlbergueDAO();
+        hogarTemporalDAO = new HogarTemporalDAO();
     }
 
     @Override
@@ -29,6 +49,10 @@ public class AlbergueServlet extends HttpServlet {
         }
 
         switch (action) {
+            case "inicio":
+                // Redirige al JSP del dashboard del albergue
+                request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-inicio.jsp").forward(request, response);
+                break;
             case "editarPerfil":
                 String idStr = request.getParameter("id");
                 if (idStr == null || idStr.isEmpty()) {
@@ -76,6 +100,49 @@ public class AlbergueServlet extends HttpServlet {
                 }
                 break;
 
+            case "hogaresTemporales":
+                HogarTemporalDAO hogarTemporalDAO = new HogarTemporalDAO();
+
+                // Parámetros para filtros (puedes obtenerlos del request si los estás usando)
+                String palabraClave = request.getParameter("palabraClave");
+                String tipoMascota = request.getParameter("tipoMascota");
+                String distrito = request.getParameter("distrito");
+
+                // Manejo del filtro "Todas" en distrito
+
+                if (distrito != null && "Todas".equals(distrito)) {
+                    distrito = null; // Asigna null si es "Todas"
+                }
+
+                // Valores por defecto para paginación
+                int page = 1;
+                int size = 6; // Cantidad de resultados por página
+                if (request.getParameter("page") != null) {
+                    page = Integer.parseInt(request.getParameter("page"));
+                }
+                int start = (page - 1) * size;
+
+                // Obtén la lista de hogares temporales
+                List<HogaresTemporales> hogares = hogarTemporalDAO.filtrarHogaresConPaginacion(palabraClave, tipoMascota, distrito, start, size);
+
+                // Contar total de registros para la paginación
+                int totalRegistros = hogarTemporalDAO.contarTotalPublicacionesFiltradas(palabraClave, tipoMascota, distrito);
+                int totalPages = (int) Math.ceil((double) totalRegistros / size);
+
+                // Configura atributos para el JSP
+                request.setAttribute("hogares", hogares);
+                request.setAttribute("currentPage", page);
+                request.setAttribute("totalPages", totalPages);
+
+                // Redirige a la vista JSP
+                request.getRequestDispatcher("/WEB-INF/albergue/AL-HogaresTemporales.jsp").forward(request, response);
+                break;
+
+            case "enviarSolicitud":
+                // Redirige al formulario JSP para enviar la solicitud
+                request.getRequestDispatcher("/WEB-INF/albergue/AL-EnviarSolicitud.jsp").forward(request, response);
+                break;
+
             default:
                 request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-detalles.jsp").forward(request, response);
 
@@ -92,7 +159,85 @@ public class AlbergueServlet extends HttpServlet {
             actualizarAlbergue(request, response);
         } else if ("desactivar".equals(action)) {
             desactivarAlbergue(request, response);
+        } else if ("enviarSolicitud".equals(action)) {
+            enviarSolicitudMascota(request, response); // Llama al método que implementaremos
         }
+    }
+
+    private void enviarSolicitudMascota(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        System.out.println("---- Depuración: Inicio de enviarSolicitudMascota ----");
+        System.out.println("razaId (param): " + request.getParameter("razaId"));
+        System.out.println("solicitadoId (param): " + request.getParameter("solicitadoId"));
+        System.out.println("foto (part): " + request.getPart("foto").getSubmittedFileName());
+        System.out.println("nombreMascota: " + request.getParameter("nombreMascota"));
+        System.out.println("edadAproximada: " + request.getParameter("edadAproximada"));
+        System.out.println("genero: " + request.getParameter("genero"));
+        System.out.println("tamanio: " + request.getParameter("tamanio"));
+        System.out.println("descripcion: " + request.getParameter("descripcion"));
+        System.out.println("usuarioId (session): " + request.getSession().getAttribute("usuarioId"));
+
+
+        String razaIdParam = request.getParameter("razaId");
+        String solicitadoIdParam = request.getParameter("solicitadoId");
+
+        if (razaIdParam == null || razaIdParam.isEmpty() || solicitadoIdParam == null || solicitadoIdParam.isEmpty()) {
+            System.out.println("Error: razaId o solicitadoId están vacíos o nulos");
+            request.setAttribute("error", "Debe seleccionar la raza y proporcionar un ID válido.");
+            request.getRequestDispatcher("/WEB-INF/albergue/AL-EnviarSolicitud.jsp").forward(request, response);
+            return;
+        }
+
+        int razaId = Integer.parseInt(request.getParameter("razaId"));
+        int solicitadoId = Integer.parseInt(request.getParameter("solicitadoId")); // ID del hogar temporal
+
+        // Manejo de la imagen
+        Part part = request.getPart("foto");
+        int fotoId = subirImagen(part); // Guarda la imagen en la carpeta Mascotas
+
+        // Crea el objeto mascota
+        Mascotas mascota = new Mascotas();
+        mascota.setNombre(request.getParameter("nombreMascota"));
+        mascota.setEdadAproximada(Integer.parseInt(request.getParameter("edadAproximada")));
+        mascota.setGenero(request.getParameter("genero"));
+        mascota.setTamanio(request.getParameter("tamanio"));
+        mascota.setDescripcion(request.getParameter("descripcion"));
+
+        Razas raza = new Razas();
+        raza.setRazaId(razaId);
+        mascota.setRaza(raza);
+
+        Fotos foto = new Fotos();
+        foto.setFotoId(fotoId); // Aquí usas el URL retornado por subirImagen()
+        mascota.setFoto(foto);
+
+        // Inserta la mascota en la base de datos
+        MascotaDAO mascotaDAO = new MascotaDAO();
+        int mascotaId = mascotaDAO.agregarMascota(mascota);
+
+        // Inserta la solicitud en la tabla solicitudes
+        SolicitudDAO solicitudDAO = new SolicitudDAO();
+        int solicitanteId = (int) request.getSession().getAttribute("usuarioId"); // Obtener ID del albergue de sesión
+        boolean exito = solicitudDAO.insertarSolicitudMascota(solicitanteId, solicitadoId, mascotaId);
+
+        if (exito) {
+            response.sendRedirect("albergue?action=hogaresTemporales&mensaje=exito");
+        } else {
+            request.setAttribute("error", "No se pudo enviar la solicitud. Inténtalo nuevamente.");
+            request.getRequestDispatcher("/WEB-INF/albergue/AL-EnviarSolicitud.jsp").forward(request, response);
+        }
+    }
+
+    private int subirImagen(Part part) throws IOException {
+        String nombreArchivo = part.getSubmittedFileName();
+
+        // Guardar la URL relativa
+        FotosDAO fotosDAO = new FotosDAO();
+        String urlFoto = "assets/img/Mascotas/" + nombreArchivo; // URL relativa
+        fotosDAO.agregarFotoPubli(urlFoto);
+
+        // Obtener el ID de la foto
+        return fotosDAO.obtenerIdPorUrl(urlFoto).getFotoId();
     }
 
     private void registrarAlbergue(HttpServletRequest request, HttpServletResponse response) throws IOException {

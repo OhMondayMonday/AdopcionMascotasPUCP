@@ -19,62 +19,39 @@ public class CoordinadorDao extends BaseDao {
     private static final Logger logger = LoggerFactory.getLogger(CoordinadorDao.class);
 
 
-    public boolean aprobarSolicitudMascota(int solicitudId) {
-        String sql = "UPDATE solicitudes SET estado_solicitud = 'aprobada', fecha_entrega = NOW() WHERE solicitud_id = ?";
-        try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public boolean aprobarSolicitudHogar(int solicitudId) {
+        String sql = "UPDATE solicitudes SET estado_solicitud = 'aprobada', fecha_entrega = NOW() " +
+                "WHERE solicitud_id = ? AND estado_solicitud = 'pendiente'";
 
-            pstmt.setInt(1, solicitudId);
-            int filasActualizadas = pstmt.executeUpdate();
-            return filasActualizadas > 0;
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, solicitudId);
+            int filasAfectadas = stmt.executeUpdate();
+            return filasAfectadas > 0;
         } catch (SQLException e) {
+            System.err.println("Error al aprobar la solicitud: " + e.getMessage());
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
-    public boolean rechazarSolicitudMascota(int solicitudId) {
-        String sql = "UPDATE solicitudes SET estado_solicitud = 'rechazada', fecha_entrega = NOW() WHERE solicitud_id = ?";
+    public boolean rechazarSolicitudHogar(int solicitudId) {
+        String sql = "UPDATE solicitudes SET estado_solicitud = 'rechazada'" +
+                "WHERE solicitud_id = ? AND estado_solicitud = 'pendiente'";
+
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, solicitudId);
-            int filasActualizadas = pstmt.executeUpdate();
-            return filasActualizadas > 0;
+            stmt.setInt(1, solicitudId);
+            int filasAfectadas = stmt.executeUpdate();
+            return filasAfectadas > 0;
         } catch (SQLException e) {
+            System.err.println("Error al rechazar la solicitud: " + e.getMessage());
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
-    public boolean aprobarHogarTemporal(int temporalId) {
-        String sql = "UPDATE hogares_temporales SET estado_temporal = 'activa', fecha_aprobacion = NOW() WHERE temporal_id = ?";
-        try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, temporalId);
-            int filasActualizadas = pstmt.executeUpdate();
-            return filasActualizadas > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean rechazarHogarTemporal(int temporalId) {
-        String sql = "UPDATE hogares_temporales SET estado_temporal = 'rechazada', fecha_rechazo = NOW() WHERE temporal_id = ?";
-        try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, temporalId);
-            int filasActualizadas = pstmt.executeUpdate();
-            return filasActualizadas > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
 
 
     // 8. Baneo manual de un hogar temporal
@@ -168,6 +145,9 @@ public class CoordinadorDao extends BaseDao {
                 Usuarios solicitante = new Usuarios();
                 solicitante.setNombre(rs.getString("solicitante"));
                 solicitud.setSolicitante(solicitante);
+
+
+                solicitud.setFechaSolicitud(rs.getTimestamp("fecha_solicitud"));
 
                 solicitud.setFechaSolicitud(rs.getTimestamp("fecha_solicitud"));
                 solicitud.setEstadoSolicitud(rs.getString("estado_solicitud"));

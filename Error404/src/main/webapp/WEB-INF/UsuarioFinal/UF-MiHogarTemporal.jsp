@@ -195,6 +195,12 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DDHKGP" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
 
     <div class="layout-wrapper layout-content-navbar  ">
+        <%
+            // Recuperar los objetos desde la solicitud
+            Usuarios usuario = (Usuarios) request.getAttribute("usuario");
+            List<Solicitudes> solicitudesMascotas = (List<Solicitudes>) request.getAttribute("solicitudesMascotas");
+
+        %>
         <div class="layout-container">
             <!-- Menu -->
 
@@ -303,7 +309,7 @@
                         <ul class="navbar-nav flex-row align-items-center ms-0">
 
                             <!-- Notification -->
-                            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, ${sessionScope.usuarioLogueado.nombre}!</span>
+                            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">¡Hola, <%= usuario.getNombre() %>!</span>
 
                             <!--/ Notification -->
                             <!-- User -->
@@ -408,12 +414,7 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
 
                         <div class="row">
-                            <%
-                                // Recuperar los objetos desde la solicitud
-                                Usuarios usuario = (Usuarios) request.getAttribute("usuario");
-                                List<Solicitudes> solicitudesMascotas = (List<Solicitudes>) request.getAttribute("solicitudesMascotas");
 
-                            %>
                             <!-- User Sidebar -->
                             <div class="col-md-5 mb-4 d-flex">
                                 <!-- User Card -->

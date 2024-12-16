@@ -97,82 +97,8 @@
     <div class="layout-container">
 
         <!-- Menú -->
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-            <div class="app-brand demo px-3">
-                <a href="javascript:void(0);" class="app-brand-link">
-            <span class="app-brand-logo demo">
-                <img class="h-px-50 tf-icon" src="${pageContext.request.contextPath}/assets/img/logo_Alianza_Animal_-removebg-preview.png" alt="logo">
-            </span>
-                </a>
-                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                </a>
-            </div>
+        <jsp:include page="/WEB-INF/includes/sidebarUF.jsp" />
 
-            <div class="menu-inner-shadow"></div>
-
-            <ul class="menu-inner py-1">
-                <!-- Menú principal -->
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/Dashboard" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-home"></i>
-                        <div class="text-truncate" data-i18n="Inicio">Inicio</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}WEB-INF/UsuarioFinal/ver-publicaciones-usuario.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/EventosServlet?action=verTodosEventos" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Eventos">Eventos</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UsuarioServlet?action=hogarTemporal" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
-                    </a>
-                </li>
-
-                <!-- Gestión -->
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text" data-i18n="Gestion">Gestión</span>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}WEB-INF/UsuarioFinal/ver-publicaciones-usuario.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}WEB-INF/UsuarioFinal/ver-miseventos-usuario.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
-                        <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UsuarioServlet?action=miHogarTemporal" class="menu-link">
-                        <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                        <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
-                    </a>
-                </li>
-
-                <!-- Otros -->
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text" data-i18n="Otros">Otros</span>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/WEB-INF/UsuarioFinal/preguntas-frecuentes.jsp" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-help-circle"></i>
-                        <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
-                    </a>
-                </li>
-            </ul>
-        </aside>
 
 
         <div class="layout-page">
@@ -279,7 +205,7 @@
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="card border-0 mb-4 p-3">
                     <div class="card-body row p-0 pb-3">
-                        <div class="col-12 col-md-8 card-separator">
+                        <div class="col-12 col-md-8 ">
                             <h3 class="text-dark">¡Bienvenido, <%= nombreUsuario %>! 👋🏻</h3>
                             <p>Reporte semanal</p>
                             <div class="d-flex justify-content-between flex-wrap gap-3 me-5">
@@ -298,10 +224,6 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-4 ps-md-3 ps-lg-5 pt-3 pt-md-0">
-                            <h5 class="mb-2">Tiempo empleado</h5>
-                            <p>Reporte semanal</p>
-                            <h3>5<span class="text-muted">h</span> 14<span class="text-muted">m</span></h3>
-                            <span class="badge bg-label-success">+10%</span>
                         </div>
                     </div>
                 </div>
