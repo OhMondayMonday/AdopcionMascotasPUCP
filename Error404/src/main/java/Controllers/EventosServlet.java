@@ -28,6 +28,13 @@ public class EventosServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
+        HttpSession session = request.getSession(false);
+        Usuarios user = (Usuarios)session.getAttribute("usuariosession");
+
+        if(!user.getRol().getNombreRol().equals("Usuario Final")){
+            request.getRequestDispatcher("WEB-INF/auxiliares/pagina-prohibido.jsp").forward(request, response);
+            return;
+        }
         if (action == null) {
             action = "verTodosEventos";
         }
@@ -84,11 +91,9 @@ public class EventosServlet extends HttpServlet {
             try {
                 // Obtener la sesión y el user_id
                 HttpSession session = request.getSession(false);
-                if (session == null || session.getAttribute("userID") == null) {
-                    response.sendRedirect("login");
-                    return;
-                }
-                int userId = (Integer) session.getAttribute("userID"); // Obtener el user_id de la sesión
+                Usuarios user = (Usuarios) session.getAttribute("usuariosession");
+
+                int userId = user.getUserId(); // Obtener el user_id de la sesión
 
                 // Obtener parámetros del lugar
                 int distritoId = Integer.parseInt(request.getParameter("distritoId"));

@@ -8,6 +8,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.PrintWriter;
 
 
@@ -32,19 +34,14 @@ public class CoordinadorServlet extends HttpServlet {
         }
 
         try {
-            // 1. Verifica el parámetro id para las acciones "verMiPerfilDetalles" y "editarPerfil"
-            String idStr = request.getParameter("id");
-            if ("verMiPerfilDetalles".equals(action) || "editarPerfil".equals(action)) {
-                if (idStr == null || idStr.isEmpty()) {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID no proporcionado");
-                    return;  // Termina el flujo de ejecución aquí, no se realiza más ningún forward o sendError después.
-                }
-            }
+
+            HttpSession session = request.getSession(false);
+            Usuarios coordinador = (Usuarios) session.getAttribute("usuariosession");
 
             // 2. Maneja las diferentes acciones
             switch (action) {
                 case "listarSolicitudesHogar":
-                    listarSolicitudesHogar(request, response);
+                    listarSolicitudesHogar(request, response, coordinador);
                     break;
                 case "listarGestionHogares":
                     listarGestionHogares(request, response);
@@ -54,8 +51,8 @@ public class CoordinadorServlet extends HttpServlet {
                     break;
                 case "editarPerfil":
                     try {
-                        int id = Integer.parseInt(idStr);
-                        Usuarios coordinador = coordinadorDAO.obtenerInformacionCoordinador(id);
+                        int id = coordinador.getUserId();
+                        coordinador = coordinadorDAO.obtenerInformacionCoordinador(id);
                         if (coordinador == null) {
                             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Coordinador no encontrado");
                             return; // Termina el flujo aquí
@@ -73,7 +70,7 @@ public class CoordinadorServlet extends HttpServlet {
                 // Dentro del caso para "verMiPerfilDetalles"
                 case "verMiPerfilDetalles":
                     try {
-                        int id = Integer.parseInt(idStr);
+                        int id = coordinador.getUserId();
                         Usuarios coordinadorDetalle = coordinadorDAO.obtenerInformacionCoordinador(id);
                         if (coordinadorDetalle == null) {
                             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Coordinador no encontrado");
@@ -299,11 +296,11 @@ public class CoordinadorServlet extends HttpServlet {
     }
 
     // Método para listar solicitudes de hogares temporales (paginadas)
-    private void listarSolicitudesHogar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listarSolicitudesHogar(HttpServletRequest request, HttpServletResponse response, Usuarios coordinador) throws ServletException, IOException {
         int pageSize = 10;
         int currentPage = getCurrentPage(request);
         int offset = (currentPage - 1) * pageSize;
-        int coordinadorId = 4; // Cambiar por el ID real del coordinador cuando esté disponible
+        int coordinadorId = coordinador.getUserId();
 
         List<HogarTemporalDTO> solicitudes = coordinadorDAO.obtenerSolicitudesHogarPaginadas(offset, pageSize, coordinadorId);
 

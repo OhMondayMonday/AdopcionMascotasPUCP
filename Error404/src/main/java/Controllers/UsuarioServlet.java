@@ -11,12 +11,10 @@ import Daos.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.nio.file.Paths; // Para trabajar con rutas de archivos
-import jakarta.servlet.http.Part; // Para manejar la parte del archivo en el formulario
+
 import jakarta.servlet.annotation.MultipartConfig;
 import java.io.File;
 
@@ -44,6 +42,9 @@ public class UsuarioServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "home" : request.getParameter("action");
         RequestDispatcher rd;
 
+        HttpSession session = request.getSession(false);
+        Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+
         switch (action) {
 
             case "verMiPerfilDetalles":
@@ -51,24 +52,8 @@ public class UsuarioServlet extends HttpServlet {
                 break;
 
             case "editarPerfil":
-                String idStr = request.getParameter("id");
-                if (idStr == null || idStr.isEmpty()) {
-                    response.getWriter().write("Error: ID no proporcionado");
-                    return;
-                }
-                try {
-                    int id = Integer.parseInt(idStr); // Usa la variable 'id' aquí
-                    Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(id);
-                    if (usuario == null) {
-                        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Usuario no encontrado");
-                        return;
-                    }
-
-                    request.setAttribute("usuario", usuario);
-                    request.getRequestDispatcher("/WEB-INF/UsuarioFinal/usuario-editar-perfil.jsp").forward(request, response);
-                } catch (NumberFormatException e) {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de ID no válido");
-                }
+                request.setAttribute("usuario", usuario);
+                request.getRequestDispatcher("/WEB-INF/UsuarioFinal/usuario-editar-perfil.jsp").forward(request, response);
                 break;
 
             case "verMiPerfilSeguridad":
@@ -76,14 +61,9 @@ public class UsuarioServlet extends HttpServlet {
                 break;
 
             case "miHogarTemporal":
-                Usuarios usuarioLogueado = (Usuarios) request.getSession().getAttribute("usuariosession");
-                if (usuarioLogueado == null) {
-                    response.sendRedirect("login");
-                    return;
-                }
 
                 // Usa el ID del usuario logueado para obtener las solicitudes y detalles
-                Usuarios usuario = miHogarTemporalDAO.obtenerDetallesUsuarioTemporal(usuarioLogueado.getUserId());
+                usuario = miHogarTemporalDAO.obtenerDetallesUsuarioTemporal(usuario.getUserId());
 
 
                 if (usuario == null || usuario.getHogarTemporal() == null || usuario.getHogarTemporal().getTemporalId() == 0) {
@@ -108,7 +88,7 @@ public class UsuarioServlet extends HttpServlet {
                 mostrarHogaresTemporales(request, response);
                 break;
             case "postularHogarTemporal":
-                usuarioLogueado = (Usuarios) request.getSession().getAttribute("usuariosession");
+                Usuarios usuarioLogueado = (Usuarios) request.getSession().getAttribute("usuariosession");
 
                 if (usuarioLogueado != null) {
                     // Asignar los atributos del usuario logueado
@@ -210,25 +190,13 @@ public class UsuarioServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
 
-            // Obtener y verificar el ID del usuario
-            String idStr = request.getParameter("id");
-            if (idStr == null || idStr.isEmpty()) {
-                response.getWriter().write("Error: ID no proporcionado");
-                return;
-            }
-
-            int id;
-            try {
-                id = Integer.parseInt(idStr);
-            } catch (NumberFormatException e) {
-                response.getWriter().write("Error: Formato de ID no válido");
-                return;
-            }
+            HttpSession session = request.getSession(false);
+            Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+            int id = usuario.getUserId();
 
             System.out.println("ID Capturado en el Servlet: " + id);
 
             // Crear el objeto Usuarios y establecer los datos del formulario
-            Usuarios usuario = new Usuarios();
             usuario.setUserId(id);
             usuario.setUsername(request.getParameter("username")); // Username
             usuario.setNombre(request.getParameter("nombre")); // Nombre de persona
@@ -329,10 +297,12 @@ public class UsuarioServlet extends HttpServlet {
     }
     // Metodo para obtener todos mis detalles de usuario
     private void mostrarDetallesPerfil(HttpServletRequest request, HttpServletResponse response, String view) throws ServletException, IOException {
-        int userId = 1; // ID de usuario para simulación
+        HttpSession session = request.getSession(false);
+        Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+        int userId = usuario.getUserId();
 
         // Obtener detalles del usuario desde el DAO
-        Usuarios usuario = usuarioFinalDAO.obtenerInformacionUsuario(userId);
+        usuario = usuarioFinalDAO.obtenerInformacionUsuario(userId);
 
         if (usuario != null) {
             // Pasar datos al JSP
@@ -351,7 +321,9 @@ public class UsuarioServlet extends HttpServlet {
 
     // Metodo para enviar la contraseña del formulario en perfil seguridad usuario
     private void cambiarContrasenia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = 1; // Simulación
+        HttpSession session = request.getSession(false);
+        Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+        int userId = usuario.getUserId();
         String nuevaContrasenia = request.getParameter("newPassword");
 
         if (nuevaContrasenia == null || nuevaContrasenia.isEmpty()) {
@@ -378,18 +350,10 @@ public class UsuarioServlet extends HttpServlet {
 
             MiHogarTemporalDAO miHogarTemporalDAO = new MiHogarTemporalDAO();
 
-// Recuperar el usuario logueado desde la sesión
             Usuarios usuarioLogueado = (Usuarios) request.getSession().getAttribute("usuariosession");
 
-            if (usuarioLogueado == null) {
-                response.sendRedirect("login");
-                return;
-            }
-
-// Obtener detalles del usuario usando el DAO correcto
             Usuarios usuario = miHogarTemporalDAO.obtenerDetallesUsuarioTemporal(usuarioLogueado.getUserId());
 
-// Pasar el usuario al JSP
             request.setAttribute("usuario", usuario);
             // Obtener los parámetros de filtro desde el formulario del JSP
             String tipoMascota = request.getParameter("tipoMascota");
@@ -475,11 +439,8 @@ public class UsuarioServlet extends HttpServlet {
 
 
         // Relación con el usuario
-        Usuarios usuarioLogueado = (Usuarios) request.getSession().getAttribute("usuarioLogueado");
-        if (usuarioLogueado == null) {
-            response.sendRedirect("login");
-            return;
-        }
+        HttpSession session = request.getSession(false);
+        Usuarios usuarioLogueado = (Usuarios) session.getAttribute("usuariosession");
         hogarTemporal.setUsuario(usuarioLogueado); // Asigna el usuario logueado al objeto
 
 

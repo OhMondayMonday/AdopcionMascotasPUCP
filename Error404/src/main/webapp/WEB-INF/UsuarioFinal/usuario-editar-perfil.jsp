@@ -1,3 +1,4 @@
+<%@ page import="Beans.Usuarios" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <jsp:useBean id="usuario" class="Beans.Usuarios" scope="request" />
@@ -6,6 +7,9 @@
 <jsp:setProperty name="rol" property="*" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    Usuarios usuario1 = (Usuarios) session.getAttribute("usuariosession");
+%>
 
 
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
@@ -169,7 +173,7 @@
                                             </ul>
 
                                                 <form id="miFormularioPersonal" action="${pageContext.request.contextPath}/UsuarioServlet?action=actualizar" method="post">
-                                                    <input type="hidden" name="id" value=1>
+                                                    <input type="hidden" name="id" value=<%=usuario1.getUserId()%>>
                                                     <div class="tab-content">
                                                     <div class="tab-pane fade active show" id="form-tabs-personal" role="tabpanel">
                                                         <div class="row g-3">

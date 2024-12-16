@@ -1,5 +1,9 @@
+<%@ page import="Beans.Usuarios" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%
+    Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
 
+%>
 <!-- Incluye Bootstrap CSS y JavaScript en tu JSP -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -26,7 +30,7 @@
         </div>
 
         <ul class="navbar-nav flex-row align-items-center ms-0">
-            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;">Albergue Huellas</span>
+            <span class="text-body" style="margin-left: 10px; margin-right: 2px; font-weight: bold;"><%=usuario.getNombreAlbergue()%></span>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -36,7 +40,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="albergue-ver-inicio.jsp">
+                        <a class="dropdown-item" href="<%=request.getContextPath()%>/Dashboard">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
@@ -54,7 +58,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="albergue-ver-miperfil-detalles.jsp">
+                        <a class="dropdown-item" href="<%=request.getContextPath()%>/albergue?action=verMiPerfilDetalles">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">Mi perfil</span>
                         </a>
@@ -65,13 +69,13 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="albergue-ver-mispublicaciones.jsp">
+                        <a class="dropdown-item" href="<%=request.getContextPath()%>/Publicaciones?action=verTodasMisPublicaciones">
                             <i class="bx bx-building-house"></i>
                             <span class="align-middle">Mis publicaciones</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="EventosServlet?action=verEventosDeUsuario">
+                        <a class="dropdown-item" href="<%=request.getContextPath()%>EventosServlet?action=verEventosDeUsuario">
                             <i class="bx bx-bone"></i>
                             <span class="align-middle">Mis eventos</span>
                         </a>
@@ -80,7 +84,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="../../index.jsp">
+                        <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Salir</span>
                         </a>

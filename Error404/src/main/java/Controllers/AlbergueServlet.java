@@ -6,9 +6,8 @@ import java.sql.Date;
 import Daos.AlbergueDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+
 import java.io.IOException;
 import java.util.List;
 import Beans.Distritos;
@@ -22,7 +21,7 @@ import Daos.FotosDAO;
 import Daos.SolicitudDAO;
 import Daos.RazasDao;
 import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.Part;
+
 import java.sql.SQLException;
 
 @MultipartConfig(
@@ -44,6 +43,9 @@ public class AlbergueServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        HttpSession session = request.getSession(false);
+        Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+
         if (action == null) {
             action = "editarPerfil";
         }
@@ -54,13 +56,8 @@ public class AlbergueServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-inicio.jsp").forward(request, response);
                 break;
             case "editarPerfil":
-                String idStr = request.getParameter("id");
-                if (idStr == null || idStr.isEmpty()) {
-                    response.getWriter().write("Error: ID no proporcionado");
-                    return;
-                }
                 try {
-                    int id = Integer.parseInt(idStr); // Usa la variable 'id' aquí
+                    int id = usuario.getUserId();
                     Usuarios albergue = albergueDAO.obtenerInformacionAlbergue(id);
                     if (albergue == null) {
                         response.sendError(HttpServletResponse.SC_NOT_FOUND, "Albergue no encontrado");
@@ -77,14 +74,8 @@ public class AlbergueServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/albergue/albergue-ver-miperfil-seguridad.jsp").forward(request, response);
                 break;
             case "verMiPerfilDetalles":
-                String idDetalle = request.getParameter("id");
-                if (idDetalle == null || idDetalle.isEmpty()) {
-                    System.out.println("Error: ID no proporcionado para ver detalles.");
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID no proporcionado");
-                    return;
-                }
                 try {
-                    int id = Integer.parseInt(idDetalle);
+                    int id = usuario.getUserId();
                     Usuarios albergueDetalle = albergueDAO.obtenerInformacionAlbergue(id);
                     if (albergueDetalle == null) {
                         System.out.println("Error: Albergue con ID " + id + " no encontrado.");
@@ -153,18 +144,21 @@ public class AlbergueServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+
+        HttpSession session = request.getSession(false);
+
         if ("registrar".equals(action)) {
-            registrarAlbergue(request, response);
+            registrarAlbergue(request, response,session);
         } else if ("actualizar".equals(action)) {
-            actualizarAlbergue(request, response);
+            actualizarAlbergue(request, response, session);
         } else if ("desactivar".equals(action)) {
-            desactivarAlbergue(request, response);
+            desactivarAlbergue(request, response,session);
         } else if ("enviarSolicitud".equals(action)) {
-            enviarSolicitudMascota(request, response); // Llama al método que implementaremos
+            enviarSolicitudMascota(request, response,session); // Llama al método que implementaremos
         }
     }
 
-    private void enviarSolicitudMascota(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void enviarSolicitudMascota(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
 
         System.out.println("---- Depuración: Inicio de enviarSolicitudMascota ----");
         System.out.println("razaId (param): " + request.getParameter("razaId"));
@@ -240,7 +234,7 @@ public class AlbergueServlet extends HttpServlet {
         return fotosDAO.obtenerIdPorUrl(urlFoto).getFotoId();
     }
 
-    private void registrarAlbergue(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void registrarAlbergue(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
         try {
             Usuarios albergue = new Usuarios();
             // Obtener los parámetros del formulario
@@ -280,31 +274,18 @@ public class AlbergueServlet extends HttpServlet {
         }
     }
 
-    private void actualizarAlbergue(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void actualizarAlbergue(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
         try {
             // Configuración de caracteres
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
 
-            // Obtener y verificar el ID del usuario
-            String idStr = request.getParameter("id");
-            if (idStr == null || idStr.isEmpty()) {
-                response.getWriter().write("Error: ID no proporcionado");
-                return;
-            }
-
-            int id;
-            try {
-                id = Integer.parseInt(idStr);
-            } catch (NumberFormatException e) {
-                response.getWriter().write("Error: Formato de ID no válido");
-                return;
-            }
+            Usuarios albergue = (Usuarios) session.getAttribute("usuariosession");
+            int id = albergue.getUserId();
 
             System.out.println("ID Capturado en el Servlet: " + id);
 
             // Crear el objeto Usuarios y establecer los datos del formulario
-            Usuarios albergue = new Usuarios();
             albergue.setUserId(id);
             albergue.setUsername(request.getParameter("username")); // Username
             albergue.setNombre(request.getParameter("nombre")); // Nombre de persona
@@ -381,9 +362,10 @@ public class AlbergueServlet extends HttpServlet {
 
 
 
-    private void desactivarAlbergue(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void desactivarAlbergue(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
+            Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+            int id = usuario.getUserId();
             if (albergueDAO.desactivarCuentaAlbergue(id)) {
                 response.sendRedirect("albergue?action=verMiPerfilDetalles");
             } else {
