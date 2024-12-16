@@ -2,13 +2,15 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuario" type="Beans.Usuarios" scope="request"/>
+<jsp:useBean id="publicacion" type="Beans.Publicaciones" scope="request"/>
+<jsp:useBean id="donacion" type="Beans.PublicacionesDonaciones" scope="request"/>
 <html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-semi-dark" data-assets-path="../../assets/" data-template="vertical-menu-template-semi-dark">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Crear Nueva Publicación | Donación</title>
+    <title>Editar Publicación | Donación</title>
 
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 Admin Dashboard built for developers!" />
@@ -98,17 +100,17 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
 
                     <div class="app-ecommerce">
-                        <form id="form_publis" method="POST" action="PublicacionesServlet?action=guardarDonacion" enctype="multipart/form-data">
+                        <form id="form_publis" method="POST" action="PublicacionesServlet?action=actualizarDonacion" enctype="multipart/form-data">
 
                             <!-- Add Product -->
                             <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
                                 <div class="d-flex flex-column justify-content-center">
-                                    <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Nueva Publicación</h4>
+                                    <h4 class="mb-1 mt-1" style="font-size: 24px; color: #353537dd;">Editar Publicación</h4>
                                     <p class="text-muted">Rellena los campos abajo</p>
                                 </div>
                                 <div class="d-flex align-content-center flex-wrap gap-3">
-                                    <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Publicar</button>
+                                    <button id="confirm-text" class="btn btn-success" style="font-weight: bold;">Confirmar Cambios</button>
                                     <button class="btn btn-danger cancel-subscription">Descartar</button>
                                 </div>
 
@@ -125,23 +127,30 @@
                                         <div class="card-body">
                                             <div class="mb-3">
                                                 <label class="form-label" for="titulo">Titulo</label>
-                                                <input type="text" required class="form-control" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
+                                                <input type="text" required class="form-control" value="<%=publicacion.getTitulo()%>" id="titulo" placeholder="Título de la publicación" name="titulo" aria-label="Product title">
                                                 <input type="hidden" name="tipo_publicacion" value="3">
                                                 <input type="hidden" name="user_id" value="<%=usuario.getUserId()%>">
+                                                <input type="hidden" name="publicacion_id" value="<%=publicacion.getPublicacionId()%>">
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col"><label class="form-label" for="opciones">Tipo</label>
                                                     <select class="form-control" id="opciones" name="tipo_donacion" required>
-                                                        <option value="" disabled selected>Elija el tipo de Donación</option>
-                                                        <option value="1" >Activo</option>
+                                                        <%if(donacion.getTipoDonacion().getTipoDonacionId() == 1){%>
+                                                        <option value="" disabled>Elija el tipo de Donación</option>
+                                                        <option value="1" selected>Activo</option>
                                                         <option value="2" >Dinero</option>
+                                                        <%}else {%>
+                                                        <option value="" disabled>Elija el tipo de Donación</option>
+                                                        <option value="1" >Activo</option>
+                                                        <option value="2" selected>Dinero</option>
+                                                        <%}%>
                                                     </select>
                                                 </div>
                                             </div>
                                             <!-- Description -->
                                             <div>
                                                 <label class="form-label">Descripción <span class="text-muted"></span></label>
-                                                <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion" style="resize: none;"></textarea>
+                                                <textarea required class="form-control" name="descripcion" rows="7" maxlength="500" id="descripcion" style="resize: none;"><%=publicacion.getDescripcion()%></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -152,7 +161,7 @@
                                             <h5 class="mb-0 card-title" style="color: #3318ca;">Imagen</h5>
                                         </div>
                                         <div class="card-body">
-                                            <input class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
+                                            <input disabled class="form-control" type="file" id="fotoPubli" name="foto" accept="image/*" />
                                         </div>
                                     </div>
                                 </div>
@@ -167,21 +176,21 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label class="form-label" for="punto_de_acopio">Punto de Acopio</label>
-                                                    <input type="text" required class="form-control" id="punto_de_acopio" placeholder="Indique el Punto de Acopio" name="punto_de_acopio" aria-label="Product title">
+                                                    <input type="text" required class="form-control" value="<%=donacion.getPuntoAcopio()%>" id="punto_de_acopio" placeholder="Indique el Punto de Acopio" name="punto_de_acopio" aria-label="Product title">
                                                 </div>
                                                 <div class="col">
                                                     <label class="form-label" for="motivo_donacion">Motivo Donación</label>
-                                                    <input type="text" class="form-control" id="motivo_donacion" placeholder="Indique el motivo de la Donación" name="motivo_donacion" aria-label="Product title">
+                                                    <input type="text" class="form-control" value="<%=donacion.getMotivoDonacion()%>" id="motivo_donacion" placeholder="Indique el motivo de la Donación" name="motivo_donacion" aria-label="Product title">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label class="form-label" for="cantidad">Cantidad Monetaria</label>
-                                                    <input type="text" class="form-control" id="cantidad" placeholder="Indique el Monto Objetivo" name="cantidad" aria-label="Product title">
+                                                    <input type="text" class="form-control" value="<%=donacion.getCantidad()%>" id="cantidad" placeholder="Indique el Monto Objetivo" name="cantidad" aria-label="Product title">
                                                 </div>
                                                 <div class="col">
                                                     <label class="form-label" for="marca">Marca</label>
-                                                    <input type="text" class="form-control" id="marca" placeholder="Indique la Marca de la Donacion" name="marca" aria-label="Product title">
+                                                    <input type="text" class="form-control" value="<%=donacion.getMarca()%>" id="marca" placeholder="Indique la Marca de la Donacion" name="marca" aria-label="Product title">
                                                 </div>
                                             </div>
                                         </div>
@@ -196,26 +205,26 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label class="form-label" for="contacto_nombre">Nombre</label>
-                                                    <input type="text" required class="form-control" id="contacto_nombre" placeholder="Nombre de Contacto" name="contacto_nombre" aria-label="Product title">
+                                                    <input type="text" required class="form-control" value="<%=donacion.getNombreContacto()%>" id="contacto_nombre" placeholder="Nombre de Contacto" name="contacto_nombre" aria-label="Product title">
                                                 </div>
                                                 <div class="col">
                                                     <label class="form-label" for="contacto_numero">Número de Contacto</label>
-                                                    <input type="text" required class="form-control" id="contacto_numero" placeholder="Indique un número de Contacto" name="contacto_numero" aria-label="Product title">
+                                                    <input type="text" required class="form-control" value="<%=donacion.getTelefonoContacto()%>" id="contacto_numero" placeholder="Indique un número de Contacto" name="contacto_numero" aria-label="Product title">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label class="form-label" >Fecha de Recepción Inicio</label>
-                                                    <input type="date" required class="form-control" id="fecha_recepcion_inicio" name="fecha_recepcion_inicio" aria-label="Product title">
+                                                    <input type="date" required class="form-control" value="<%=donacion.getFechaRecepcionInicio()%>" id="fecha_recepcion_inicio" name="fecha_recepcion_inicio" aria-label="Product title">
                                                 </div>
                                                 <div class="col">
                                                     <label class="form-label" >Fecha de Recepción Final</label>
-                                                    <input type="date" required class="form-control" id="fecha_recepcion_final" name="fecha_recepcion_final" aria-label="Product title">
+                                                    <input type="date" required class="form-control" value="<%=donacion.getFechaRecepcionFin()%>" id="fecha_recepcion_final" name="fecha_recepcion_final" aria-label="Product title">
                                                 </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" >Hora de Recepción</label>
-                                                <input type="time" class="form-control" id="hora_recepcion" name="hora_recepcion" aria-label="Product title">
+                                                <input type="time" class="form-control" id="hora_recepcion" value="<%=donacion.getHoraRecepcion()%>" name="hora_recepcion" aria-label="Product title">
                                             </div>
                                         </div>
 
@@ -327,7 +336,23 @@
         // Solo permite números y elimina cualquier carácter que no sea un número
         this.value = this.value.replace(/[^0-9]/g, '');
     });
+</script>
 
+<script>
+    // Función para reemplazar valores "null" en todos los inputs
+    function replaceNullInInputs() {
+        // Seleccionar todos los elementos <input> en la página
+        const inputs = document.querySelectorAll("input");
+
+        // Iterar sobre cada input y verificar su valor
+        inputs.forEach(input => {
+            if (input.value === "null") {
+                input.value = ""; // Reemplazar el valor por una cadena vacía
+            }
+        });
+    }
+    // Ejecutar la función cuando la página se haya cargado
+    document.addEventListener("DOMContentLoaded", replaceNullInInputs);
 </script>
 
 <!-- Page JS -->

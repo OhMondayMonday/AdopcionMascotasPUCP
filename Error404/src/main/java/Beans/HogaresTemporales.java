@@ -33,6 +33,7 @@ public class HogaresTemporales {
     private Mascotas mascota;
     private String descripcion;
 
+
     public String getDescripcion() {
         return descripcion;
     }

@@ -74,6 +74,24 @@ public class DenunciaMaltratoDAO extends BaseDao {
         }
     }
 
+    public void actualizarDenunciaMaltrato(DenunciasMaltratoAnimal denuncia) {
+        MascotaDAO mascotaDAO = new MascotaDAO();
+        mascotaDAO.actualizarMascota(denuncia.getMascota());
+
+        String sql = "UPDATE denuncias_maltrato_animal SET tipo_maltrato=?, nombre_maltratador=?, direccion_maltrato=?, denuncia_policial=? WHERE publicacion_id=?";
+        try (Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, denuncia.getTipoMaltrato());
+            pstmt.setString(2, denuncia.getNombreMaltratador());
+            pstmt.setString(3, denuncia.getDireccionMaltrato());
+            pstmt.setBoolean(4, denuncia.isDenunciaPolicial());
+            pstmt.setInt(5, denuncia.getReportId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // Método para descartar la denuncia de maltrato
     public void descartarDenunciaMaltrato(int denunciaId) {
         String query = "DELETE FROM denuncias_maltrato_animal WHERE report_id = ?";

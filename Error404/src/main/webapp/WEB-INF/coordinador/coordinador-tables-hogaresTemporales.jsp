@@ -76,6 +76,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <style>
             /* Controla el margen entre la tabla y la paginación */
             .dataTables_wrapper .dataTables_info,
@@ -101,6 +102,7 @@
             }
         </style>
 
+
     </head>
 
     <body>
@@ -111,6 +113,7 @@
         <!-- End Google Tag Manager (noscript) -->
 
         <div class="layout-wrapper layout-content-navbar" style="background-color: #fef8e5;">
+            <div class="layout-container">
             <jsp:include page="../includes/sidebarCoordinador.jsp" />
 
             <div class="layout-page">
@@ -130,34 +133,22 @@
                                     <div class="card mb-0" style="height: auto; padding: 5px;">
                                         <div class="card-body d-flex align-items-center justify-content-center p-1">
                                             <div class="row w-100">
-                                                <!-- Tipo de Publicacion -->
+                                                <!-- Tipo de Publicación -->
                                                 <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
-                                                    <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de gestion</label>
-                                                    <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;" onchange="navigate()">
-                                                        <option value="Todas" data-href="coordinador-gestion.jsp">Todas</option>
-                                                        <option value="MascotasPerdidas" data-href="coordinador-tablas-publicaciones.jsp">Mascotas Perdidas</option>
-                                                        <option value="HogaresTemporales" data-href="coordinador-tables-hogaresTemporales.jsp">Hogares Temporales</option>
+                                                    <label for="select2Basic" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Tipo de gestión</label>
+                                                    <select id="select2Basic" class="select2 form-select form-select-sm" data-allow-clear="true" style="font-size: 0.75rem;">
+                                                        <option value="Todas">Todas</option>
+                                                        <option value="MascotasPerdidas">Mascotas Perdidas</option>
+                                                        <option value="HogaresTemporales">Hogares Temporales</option>
                                                     </select>
                                                 </div>
-
-                                                <script>
-                                                    function navigate() {
-                                                        var select = document.getElementById("select2Basic"); // Use the correct select ID
-                                                        var selectedOption = select.options[select.selectedIndex];
-                                                        var url = selectedOption.getAttribute("data-href");
-
-                                                        if (url) {
-                                                            window.location.href = url; // Redirects to the URL of the selected option
-                                                        }
-                                                    }
-                                                </script>
-
 
                                                 <!-- Palabra clave -->
                                                 <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                                     <label for="inputPalabraClave" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Palabra clave</label>
                                                     <input type="text" id="inputPalabraClave" class="form-control form-control-sm" placeholder="Escribe palabra clave" style="font-size: 0.75rem;">
                                                 </div>
+
                                                 <!-- Fecha -->
                                                 <div class="col-md-4 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
                                                     <label for="select2Fecha" class="form-label mb-1" style="font-size: 0.75rem; margin-bottom: 2px;">Fecha</label>
@@ -172,6 +163,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="col-12">
                                     <div class="card mb-2">
@@ -235,6 +227,7 @@
                                                                             </c:when>
                                                                             <c:otherwise>pendiente</c:otherwise>
                                                                         </c:choose>
+
                                                                     </td>
 
                                                                     <!-- Fecha de solicitud -->
@@ -257,37 +250,37 @@
                                                                     </td>
 
 
-                                                                    <!-- Acciones -->
-                                                                    <!-- Acciones -->
+                                                                    <!-- Botones de Acciones -->
+                                                                    <!-- Botones Aceptar/Rechazar -->
                                                                     <td>
                                                                         <div class="d-flex gap-2">
-                                                                            <!-- Botón para Ver detalles -->
+                                                                            <!-- Ver detalles -->
                                                                             <button id="btn-detalles-${hogar.solicitudId}" class="btn btn-label-info"
-                                                                                    onclick="verDetalles(${hogar.solicitudId})">
+                                                                                    onclick="verDetalles(${hogar.solicitudId}, ${hogar.temporalId})">
                                                                                 <i class='bx bx-show'></i>
                                                                             </button>
 
-                                                                            <!-- Aceptar/Rechazar solo si el estado es 'pendiente' -->
-                                                                            <c:if test="${hogar.estadoTemporal == 'pendiente'}">
-                                                                                <button id="btn-aceptar-${hogar.solicitudId}" class="btn btn-label-success"
-                                                                                        onclick="gestionarSolicitud(${hogar.solicitudId}, 'aceptar')">
-                                                                                    <i class="bx bx-check-circle"></i>
-                                                                                </button>
+                                                                            <!-- Botones Aceptar/Rechazar -->
+                                                                            <button id="btn-aceptar-${hogar.solicitudId}" class="btn btn-label-success"
+                                                                                    data-solicitudId="${hogar.solicitudId}"
+                                                                                    data-temporalId="${hogar.temporalId}"
+                                                                                    data-tipoSolicitud="${hogar.tipoSolicitud}"
+                                                                                    onclick="gestionarSolicitud(${hogar.solicitudId}, ${hogar.temporalId}, 'aceptar', '${hogar.tipoSolicitud}')">
+                                                                                <i class="bx bx-check-circle"></i>
+                                                                            </button>
 
-                                                                                <button id="btn-rechazar-${hogar.solicitudId}" class="btn btn-label-danger"
-                                                                                        onclick="gestionarSolicitud(${hogar.solicitudId}, 'rechazar')">
-                                                                                    <i class="bx bxs-x-circle"></i>
-                                                                                </button>
-                                                                            </c:if>
 
-                                                                            <!-- Mostrar estado inmutable si no está pendiente -->
-                                                                            <c:if test="${hogar.estadoTemporal != 'pendiente'}">
-                                                                                <span class="badge badge-${hogar.estadoTemporal == 'rechazada' ? 'danger' : 'success'}">
-                                                                                        ${hogar.estadoTemporal}
-                                                                                </span>
-                                                                            </c:if>
+                                                                            <button id="btn-rechazar-${hogar.solicitudId}" class="btn btn-label-danger"
+                                                                                    data-solicitudId="${hogar.solicitudId}"
+                                                                                    data-temporalId="${hogar.temporalId}"
+                                                                                    data-tipoSolicitud="${hogar.tipoSolicitud}"
+                                                                                    onclick="gestionarSolicitud(${hogar.solicitudId}, ${hogar.temporalId}, 'rechazar', '${hogar.tipoSolicitud}')">
+                                                                                <i class="bx bxs-x-circle"></i>
+                                                                            </button>
+
                                                                         </div>
                                                                     </td>
+
 
                                                                 </tr>
                                                             </c:forEach>
@@ -317,24 +310,43 @@
                             </div>
                         </div>
                     </footer>
-                    <!-- / Layout page -->
                 </div>
             </div>
-
-
-
-            <!-- Overlay -->
             <div class="layout-overlay layout-menu-toggle"></div>
-
-
-            <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-
+        </div>
 
         </div>
         <!-- / Layout wrapper -->
 
+        <!-- Core JS -->
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
 
+        <!-- DataTables JS -->
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap5.min.js"></script>
+
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+        <!-- Main JS -->
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+
+        <script src="${pageContext.request.contextPath}/assets/js/dashboards-analytics.js"></script>
+        <!-- Page JS -->
+
+        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
 
         <!-- Core JS -->
@@ -354,26 +366,53 @@
         <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.bootstrap5.min.js"></script>
 
+        <script src="${pageContext.request.contextPath}/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+        <!-- Main JS -->
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+
+        <script src="${pageContext.request.contextPath}/assets/js/dashboards-analytics.js"></script>
+        <!-- Page JS -->
+
+        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+        <!-- Activa los tooltips -->
+
+
 
         <script>
             $(document).ready(function () {
-                $('#solicitudesTable').DataTable({
-                    paging: true,
-                    lengthChange: true,
-                    pageLength: 5,
-                    language: {
-                        lengthMenu: "Mostrar _MENU_ entradas",
-                        info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                        infoEmpty: "Mostrando 0 a 0 de 0 entradas",
-                        infoFiltered: "(filtrado de _MAX_ entradas totales)",
-                        paginate: {
-                            first: 'Primero',
-                            last: 'Último',
-                            next: 'Siguiente',
-                            previous: 'Anterior'
+                if (!$.fn.DataTable.isDataTable('#solicitudesTable')) {
+                    var table = $('#solicitudesTable').DataTable({
+                        paging: true,
+                        pagingType: "full_numbers",
+                        pageLength: 5,
+                        lengthChange: true,
+                        buttons: ['copy', 'excel', 'pdf'],
+                        dom: 'Bfrtip', // Con buscador y mostrando información
+                        language: {
+                            lengthMenu: "Mostrar _MENU_ entradas",
+                            info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                            infoEmpty: "Mostrando 0 a 0 de 0 entradas",
+                            infoFiltered: "(filtrado de _MAX_ entradas totales)",
+                            paginate: {
+                                first: '<i class="bx bx-chevrons-left"></i>',
+                                last: '<i class="bx bx-chevrons-right"></i>',
+                                next: '<i class="bx bx-chevron-right"></i>',
+                                previous: '<i class="bx bx-chevron-left"></i>'
+                            }
                         }
-                    }
-                });
+                    });
+
+                    // Ocultar manualmente el buscador
+                    $('#solicitudesTable_filter').hide();
+
+                    // Función para filtrar en tiempo real
+                    configurarFiltros(table);
+                }
             });
         </script>
 
@@ -400,11 +439,7 @@
                 })
             }
         </script>
-        <script>
-            function abrirVista() {
-                window.location.href = 'Admin_EditaPerfil.html'; // Reemplaza con la URL de la vista a la que deseas redirigir
-            }
-        </script>
+
         <script>
             function configurarFiltros(table) {
                 // Filtro de Tipo de Usuario
@@ -457,56 +492,95 @@
             }
         </script>
 
+        <!-- SweetAlert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- SweetAlert -->
         <script>
-            function gestionarSolicitud(solicitudId, accion) {
-                fetch('CoordinadorServlet', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: `action=${accion}&solicitudId=${solicitudId}`
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Actualiza el estado en la UI
-                            document.querySelector(`#estado-solicitud-${solicitudId}`).textContent = accion === 'aceptar' ? 'aprobada' : 'rechazada';
+            // Función para gestionar la solicitud (aprobar o rechazar)
+            function gestionarSolicitud(solicitudId, temporalId, accion, tipoSolicitud) {
+                // Definir la URL según la acción (aprobar o rechazar) y el tipo de solicitud
+                let url = '';
+                if (tipoSolicitud === 'temporal') {
+                    url = accion === 'aceptar'
+                        ? `/coordinador?action=aprobarHogar&temporalId=${temporalId}`
+                        : `/coordinador?action=rechazarHogar&temporalId=${temporalId}`;
+                } else if (tipoSolicitud === 'mascota_perdida') {
+                    url = accion === 'aceptar'
+                        ? `/coordinador?action=aprobarMascota&solicitudId=${solicitudId}`
+                        : `/coordinador?action=rechazarMascota&solicitudId=${solicitudId}`;
+                }
 
-                            // Deshabilita los botones para evitar más acciones
-                            document.querySelector(`#btn-aceptar-${solicitudId}`).disabled = true;
-                            document.querySelector(`#btn-rechazar-${solicitudId}`).disabled = true;
-
-                            Swal.fire('¡Éxito!', data.message, 'success');
-                        } else {
-                            Swal.fire('Error', data.message, 'error');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire('Error', 'No se pudo procesar la solicitud.', 'error');
-                    });
+                // Confirmación con SweetAlert
+                Swal.fire({
+                    title: `¿Estás seguro de ${accion == 'aceptar' ? 'aceptar' : 'rechazar'} la solicitud?`,
+                    text: "Esta acción no se puede revertir.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: `Sí, ${accion}`,
+                    cancelButtonText: "Cancelar",
+                    customClass: { confirmButton: "btn btn-success me-2", cancelButton: "btn btn-secondary" },
+                    buttonsStyling: false
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        // Realizar petición AJAX al servidor para aprobar o rechazar
+                        fetch('/coordinador?action=aprobarHogar&temporalId=${temporalId}', { method: 'GET' })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "¡Hecho!",
+                                        text: data.message,
+                                        customClass: { confirmButton: "btn btn-success" }
+                                    }).then(() => {
+                                        location.reload(); // Recargar la página para reflejar el cambio
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Error",
+                                        text: data.message,
+                                        customClass: { confirmButton: "btn btn-danger" }
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Ocurrió un error inesperado.",
+                                    customClass: { confirmButton: "btn btn-danger" }
+                                });
+                            });
+                    }
+                });
             }
+
+            // Asignar los eventos de click a los botones de aceptar y rechazar
+            document.querySelectorAll('.btn-aceptar').forEach(button => {
+                button.addEventListener('click', event => {
+                    event.preventDefault();
+                    const solicitudId = button.dataset.solicitudId; // Obtener el ID de la solicitud
+                    const temporalId = button.dataset.temporalId; // Obtener el ID del hogar temporal
+                    const tipoSolicitud = button.dataset.tipoSolicitud; // Obtener el tipo de solicitud
+                    gestionarSolicitud(solicitudId, temporalId, 'aceptar', tipoSolicitud);
+                });
+            });
+
+            document.querySelectorAll('.btn-rechazar').forEach(button => {
+                button.addEventListener('click', event => {
+                    event.preventDefault();
+                    const solicitudId = button.dataset.solicitudId; // Obtener el ID de la solicitud
+                    const temporalId = button.dataset.temporalId; // Obtener el ID del hogar temporal
+                    const tipoSolicitud = button.dataset.tipoSolicitud; // Obtener el tipo de solicitud
+                    gestionarSolicitud(solicitudId, temporalId, 'rechazar', tipoSolicitud);
+                });
+            });
         </script>
 
 
-        <script src="${pageContext.request.contextPath}/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-        <!-- Main JS -->
-        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-
-        <script src="${pageContext.request.contextPath}/assets/js/dashboards-analytics.js"></script>
-        <!-- Page JS -->
-
-        <script src="${pageContext.request.contextPath}/assets/js/extended-ui-sweetalert2.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
-        <!-- Activa los tooltips -->
-
-
     </body>
-
 
 
     <!-- Mirrored from demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template-semi-dark/tables-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Apr 2024 23:16:07 GMT -->

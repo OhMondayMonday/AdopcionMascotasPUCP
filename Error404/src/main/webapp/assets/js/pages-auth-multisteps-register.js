@@ -9,6 +9,7 @@ $(function () {
         })
     })
 }), document.addEventListener("DOMContentLoaded", function (e) {
+    e.preventDefault();
     var n = document.querySelector("#multiStepsValidation");
     if (null !== n) {
         var a = n.querySelector("#multiStepsForm");
@@ -219,7 +220,7 @@ $(function () {
                                     buttonsStyling: false
                                 }).then((result) => {
                                     if (result.isConfirmed) {
-                                        window.location.href = "/";
+                                        window.location.href = contextPath + "/";
                                     }
                                 });
                             } else {
