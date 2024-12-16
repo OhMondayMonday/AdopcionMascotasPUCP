@@ -117,7 +117,7 @@ public class LoginServlet extends HttpServlet {
                     if (redirect == null || redirect.isEmpty()) {
                         redirect = request.getContextPath();
                     }
-                    redirect = request.getContextPath() + redirect;
+
                     System.out.println(redirect);
 
                     // Responder con JSON

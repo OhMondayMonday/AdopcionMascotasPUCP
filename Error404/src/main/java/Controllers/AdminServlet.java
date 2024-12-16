@@ -30,9 +30,11 @@ public class AdminServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
         HttpSession session = request.getSession(false);
-        Usuarios usuario = (Usuarios)session.getAttribute("usuariosession");
+        Usuarios usuario = (Usuarios) session.getAttribute("usuariosession");
+        System.out.println(usuario.getRol().getNombreRol());
         if(!usuario.getRol().getNombreRol().equals("Administrador")){
-            request.getRequestDispatcher("/WEB-INF/auxiliares/pagina-error.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/auxiliares/pagina-prohibido.jsp").forward(request, response);
+            return;
         }
 
         switch(request.getServletPath()){
