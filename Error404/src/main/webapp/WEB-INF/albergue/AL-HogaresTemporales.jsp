@@ -162,7 +162,7 @@
     </style>
 </head>
 
-<body style="background-color: #d4e1ffa9;">
+<body style="background-color: #fdece6;">
 
 
 <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
@@ -196,25 +196,25 @@
             <ul class="menu-inner py-1">
 
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UsuarioServlet?action=home"  class="menu-link">
+                    <a href="${pageContext.request.contextPath}/albergue?action=inicio" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home"></i>
                         <div class="text-truncate" data-i18n="Inicio">Inicio</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-publicaciones-usuario.html"  class="menu-link">
+                    <a href="albergue-ver-publicaciones.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Publicaciones">Publicaciones</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-eventos-usuario.html"  class="menu-link">
+                    <a href="albergue-ver-eventos.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                         <div class="text-truncate" data-i18n="Eventos">Eventos</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UsuarioServlet?action=hogarTemporal"  class="menu-link">
+                    <a href="${pageContext.request.contextPath}/albergue?action=hogaresTemporales" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Hogares temporales">Hogares temporales</div>
                     </a>
@@ -224,28 +224,22 @@
                     <span class="menu-header-text" data-i18n="Gestion">Gestion</span>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-mispublicaciones-usuario.html" class="menu-link">
+                    <a href="albergue-ver-mispublicaciones.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
                         <div class="text-truncate" data-i18n="Mis publicaciones">Mis publicaciones</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="ver-miseventos-usuario.html" class="menu-link">
+                    <a href="albergue-ver-miseventos.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                         <div class="text-truncate" data-i18n="Mis eventos">Mis eventos</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/UsuarioServlet?action=miHogarTemporal" class="menu-link">
-                        <i class="menu-icon tf-icons bx bxs-building-house"></i>
-                        <div class="text-truncate" data-i18n="Mi Hogar Temporal">Mi Hogar Temporal</div>
                     </a>
                 </li>
 
                 <!-- Misc -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Otros">Otros</span></li>
                 <li class="menu-item">
-                    <a href="Preguntas-frecuentes.html"  class="menu-link">
+                    <a href="albergue-preguntas-frecuentes.html" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-help-circle"></i>
                         <div class="text-truncate" data-i18n="Preguntas frecuentes">Preguntas frecuentes</div>
                     </a>
@@ -272,14 +266,14 @@
                     <div class="w-75 align-items-center me-auto">
                         <div class="nav-item navbar-search-wrapper mb-0">
               <span class="d-inline-block justify-content-center">
-              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Usuario /</span> Hogares Temporales</p>
+              <p class="mb-0 fst-normal fw-semibold ff-"><span class="text-muted">Albergue /</span> Hogares Temporales</p>
             </span>
                         </div>
                     </div>
 
                     <ul class="navbar-nav flex-row align-items-center ms-0">
                         <span class="text-body" style="font-weight: bold;">
-                            ¡Hola, <%= (usuario != null && usuario.getNombre() != null) ? usuario.getNombre() : "Invitado" %>!
+                            ¡Hola, <%= (usuario != null && usuario.getNombreAlbergue() != null) ? usuario.getNombreAlbergue() : "Invitado" %>!
                         </span>
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -291,17 +285,16 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMiPerfil">
+                                    <a class="dropdown-item" href="albergue-ver-inicio.html">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="${sessionScope.usuarioLogueado.foto != null ? sessionScope.usuarioLogueado.foto.urlFoto : 'https://img.freepik.com/vector-gratis/diseno-plantilla-imagen-perfil_742173-22027.jpg'}"
-                                                         alt="Foto de usuario" class="w-px-40 h-auto rounded-circle">
+                                                    <img src="../../assets/img/huella.jpg" alt class="w-px-40 h-auto rounded-circle">
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-medium d-block">${sessionScope.usuarioLogueado.nombre} ${sessionScope.usuarioLogueado.apellido}</span>
-                                                <small class="text-muted">${sessionScope.usuarioLogueado.rol}</small>
+                                                <span class="fw-medium d-block"> Huellas </span>
+                                                <small class="text-muted">Albergue</small>
                                             </div>
                                         </div>
                                     </a>
@@ -310,48 +303,35 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMiSeguridad">
-                                        <i class="bx bx-lock me-2" style="color: #1f4397;"></i>
-                                        <span class="align-middle" style="color: #1f4397;">Seguridad</span>
+                                    <a class="dropdown-item" href="albergue-ver-miperfil-detalles.html">
+                                        <i class="bx bx-user me-2"></i>
+                                        <span class="align-middle">Mi perfil</span>
                                     </a>
                                 </li>
+
+
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMisPublicaciones">
+                                    <a class="dropdown-item" href="albergue-ver-mispublicaciones.html">
                                         <i class="bx bx-building-house"></i>
                                         <span class="align-middle">Mis publicaciones</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verMisEventos">
+                                    <a class="dropdown-item" href="albergue-ver-miseventos.html">
                                         <i class="bx bx-bone"></i>
                                         <span class="align-middle">Mis eventos</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=verCalendario">
-                                        <i class="bx bx-calendar"></i>
-                                        <span class="align-middle">Mi Calendario</span>
-                                    </a>
-                                </li>
-                                <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/UsuarioServlet?action=preguntasFrecuentes">
-                                        <i class="bx bx-help-circle"></i>
-                                        <span class="align-middle">Preguntas frecuentes</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
-                                        <i class="bx bx-power-off me-2" style="color: rgb(231, 0, 0);"></i>
-                                        <span class="align-middle" style="color: rgb(231, 0, 0);">Salir</span>
+                                    <a class="dropdown-item" href="../index.html">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Salir</span>
                                     </a>
                                 </li>
                             </ul>
@@ -385,8 +365,8 @@
                         <!-- Select2 -->
                         <div class="col-12">
                             <div class="card-filters mb-0" style="padding: 5px;">
-                                <form method="GET" action="${pageContext.request.contextPath}/UsuarioServlet" class="card-body d-flex align-items-center justify-content-center p-1">
-                                    <input type="hidden" name="action" value="hogarTemporal"> <!-- Acción para el servlet -->
+                                <form method="GET" action="${pageContext.request.contextPath}/albergue" class="card-body d-flex align-items-center justify-content-center p-1">
+                                    <input type="hidden" name="action" value="hogaresTemporal"> <!-- Acción para el servlet -->
                                     <div class="row w-100">
                                         <!-- Tipo de Mascota -->
                                         <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mb-0 mt-0">
@@ -432,10 +412,11 @@
                                                 <span>Buscar</span>
                                                 <i class="bx bx-search"></i>
                                             </button>
-                                            <a href="${pageContext.request.contextPath}/UsuarioServlet?action=postularHogarTemporal" class="btn custom-btn">
-                                                <span>Quiero postular</span>
+                                            <a href="${pageContext.request.contextPath}/albergue?action=enviarSolicitud" class="btn custom-btn">
+                                                <span>Enviar solicitud</span>
                                                 <i class="bx bx-chevron-right"></i>
                                             </a>
+
                                         </div>
                                     </div>
                                 </form>
@@ -457,7 +438,7 @@
                                             <div class="card d-flex flex-column" style="border: 1px solid #ddd; box-shadow: none; width: 100%; max-width: 250px;">
                                                 <div class="rounded-2 text-center flex-grow-1">
                                                     <a href="#">
-                                                         <img class="card-img-top" src="<%= hogar.getFoto().getUrlFoto() %>" alt="Imagen de publicación <%= hogar.getTemporalId() %>"
+                                                        <img class="card-img-top" src="<%= hogar.getFoto().getUrlFoto() %>" alt="Imagen de publicación <%= hogar.getTemporalId() %>"
                                                              style="height: 200px; object-fit: cover; border-radius: 3px;"/>
                                                     </a>
                                                 </div>
@@ -542,7 +523,7 @@
                                     <!-- Botón "Anterior" -->
                                     <% if (currentPage > 1) { %>
                                     <li class="page-item">
-                                        <a class="page-link" href="UsuarioServlet?action=hogarTemporal&page=<%= currentPage - 1 %>">Anterior</a>
+                                        <a class="page-link" href="albergue?action=hogarTemporal&page=<%= currentPage - 1 %>">Anterior</a>
                                     </li>
                                     <% } else { %>
                                     <li class="page-item disabled">
@@ -553,14 +534,14 @@
                                     <!-- Números de página -->
                                     <% for (int pageNum = 1; pageNum <= totalPages; pageNum++) { %>
                                     <li class="page-item <%= (pageNum == currentPage) ? "active" : "" %>">
-                                        <a class="page-link" href="UsuarioServlet?action=hogarTemporal&page=<%= pageNum %>"><%= pageNum %></a>
+                                        <a class="page-link" href="albergue?action=hogarTemporal&page=<%= pageNum %>"><%= pageNum %></a>
                                     </li>
                                     <% } %>
 
                                     <!-- Botón "Siguiente" -->
                                     <% if (currentPage < totalPages) { %>
                                     <li class="page-item">
-                                        <a class="page-link" href="UsuarioServlet?action=hogarTemporal&page=<%= currentPage + 1 %>">Siguiente</a>
+                                        <a class="page-link" href="albergue?action=hogarTemporal&page=<%= currentPage + 1 %>">Siguiente</a>
                                     </li>
                                     <% } else { %>
                                     <li class="page-item disabled">
@@ -604,52 +585,52 @@
     </div>z
 </div>
 
-            <!-- Core JS -->
-            <!-- build:js assets/vendor/js/core.js -->
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
 
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/popper/popper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/hammer/hammer.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/i18n/i18n.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/js/menu.js"></script>
 
-            <!-- endbuild -->
+<!-- endbuild -->
 
-            <!-- Vendors JS -->
+<!-- Vendors JS -->
 
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/select2/select2.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/popular.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/%40form-validation/auto-focus.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
 
-            <!-- Main JS -->
-            <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<!-- Main JS -->
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
 
-            <!-- Page JS -->
-            <script src="${pageContext.request.contextPath}/assets/js/pages-pricing.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
+<!-- Page JS -->
+<script src="${pageContext.request.contextPath}/assets/js/pages-pricing.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-edit-user.js"></script>
 
-            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    $('#tarjetasContainer').DataTable({
-                        "pageLength": 6, // Muestra 6 tarjetas por página
-                        "pagingType": "simple", // Tipo de paginación simple
-                        "language": {
-                            "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                        }
-                    });
-                });
-            </script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tarjetasContainer').DataTable({
+            "pageLength": 6, // Muestra 6 tarjetas por página
+            "pagingType": "simple", // Tipo de paginación simple
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
 </body>
 
 
