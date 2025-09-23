@@ -12,7 +12,7 @@ public abstract class BaseDao {
         }
         String user = "root";
         String pass = "Iweb_Proyecto2024";
-        String url = "jdbc:mysql://34.27.46.244:3306/IWEB_DB";
+        String url = "jdbc:mysql://34.27.46.244:3306/IWEB_DB"; // Base de datos en la nube
         return DriverManager.getConnection(url, user, pass);
     }
 }
