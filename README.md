@@ -97,24 +97,6 @@ Usuario: admin.test@plataforma.com
 Contraseña: AdminSecure#2024
 ```
 
-## 📱 Capturas de Pantalla
-
-### Dashboard Principal
-![Dashboard Principal](docs/images/dashboard.png)
-*Vista principal del dashboard con estadísticas del sistema*
-
-### Gestión de Mascotas
-![Gestión de Mascotas](docs/images/mascotas.png)
-*Interfaz para registrar y gestionar mascotas en adopción*
-
-### Eventos Benéficos
-![Eventos Benéficos](docs/images/eventos.png)
-*Página de eventos benéficos y participación*
-
-### Panel de Administración
-![Panel Admin](docs/images/admin-panel.png)
-*Panel de control para administradores del sistema*
-
 ## 🏗️ Arquitectura del Sistema
 
 ![Diagrama de Arquitectura](docs/images/arquitectura-sistema.png)
